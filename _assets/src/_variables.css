@@ -3,15 +3,18 @@
 */
 
 :root {
-  --spacer: 1.7778rem;
-  --site-color: #159570;
+  --spacer: 1.6875rem;
+  --horizontal: 80px;
+  --horizontal-half: calc(var(--horizontal) / 2);
+  --horizontal-double: calc(var(--horizontal) * 2);
+  --site-color: #00baff;
   --font-color: #222;
   --meta-color: #999;
   --main-color: #fafafa;
 
   --sans-serif-fallback: "BlinkMacSystemFont", -apple-system, "Helvetica Neue", Helvetica, sans-serif;
-  --sans-serif: GT America, var(--sans-serif-fallback);
+  --sans-serif: National, var(--sans-serif-fallback);
 
   --serif-fallback: Georgia, serif;
-  --serif: Tiempos Text, var(--serif-fallback);
+  --serif: var(--sans-serif),Tiempos Text, var(--serif-fallback);
 }

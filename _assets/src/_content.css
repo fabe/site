@@ -1,4 +1,52 @@
 img.full {
   width: calc(100% + 160px);
-  margin-left: -80px;
+  margin-left: calc(var(--horizontal) * -1);
+}
+
+hr {
+  width: 20%;
+  height: 2px;
+  margin-top: calc(var(--spacer) * 2);
+  margin-bottom: calc(var(--spacer) * 2);
+  margin-left: auto;
+  margin-right: auto;
+  border: none;
+  background-color: #ccc;
+}
+
+blockquote {
+  padding-left: var(--spacer);
+  border-left: var(--site-color) solid 2px;
+  font-style: italic;
+}
+
+figure {
+  margin: var(--horizontal-half) 0;
+}
+
+figure img {
+  display: block;
+  max-width: none;
+  width: calc(100% + var(--horizontal-double));
+  margin-left: calc(var(--horizontal) * -1);
+}
+
+figure.left {
+  float: left;
+  width: 50%;
+  margin-top: 0;
+  margin-bottom: var(--spacer);
+  margin-right: var(--spacer);
+}
+
+figure.left img {
+  width: calc(100% + var(--horizontal));
+}
+
+
+figcaption p {
+  margin-top: 0.5rem;
+  color: var(--meta-color);
+  font-size: 80%;
+  font-family: var(--sans-serif);
 }

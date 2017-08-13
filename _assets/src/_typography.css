@@ -1,11 +1,53 @@
 p {
   font-family: var(--serif);
-  margin-bottom: 16px;
+}
+
+article p:last-of-type {
+  margin-bottom: 0;
+}
+
+ul,
+ol {
+  font-family: var(--serif);
+  padding-left: var(--spacer);
 }
 
 h1 {
   font-weight: normal;
-  font-size: 24px;
+  font-size: 135%;
   margin: 0;
   line-height: 1;
+}
+
+h2 {
+  font-size: 110%;
+  font-weight: normal;
+}
+
+h3 {
+  font-family: var(--serif);
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: uppercase;
+  font-feature-settings: 'smcp', 'c2sc', 'lnum';
+  letter-spacing: .05em;
+}
+
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-skip: ink;
+}
+
+a:hover {
+  color: var(--site-color);
+}
+
+mark {
+  background-color: rgba(0,0,0,.5);
+}
+
+.caps {
+  font-feature-settings: 'smcp', 'c2sc', 'lnum';
+  letter-spacing: .05em;
 }

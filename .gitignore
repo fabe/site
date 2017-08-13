@@ -6,3 +6,4 @@ node_modules
 _assets/css/
 Gemfile.lock
 bundle.js
+*.log

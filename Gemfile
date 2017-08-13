@@ -6,4 +6,5 @@ group :jekyll_plugins do
   gem "jekyll-assets"
   gem "jekyll-typogrify"
   gem "jekyll-livereload"
+  gem "octopress-minify-html"
 end
