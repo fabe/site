@@ -1,0 +1,4 @@
+img.full {
+  width: calc(100% + 160px);
+  margin-left: -80px;
+}

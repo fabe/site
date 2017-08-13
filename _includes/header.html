@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ page.title }} &mdash; {{ site.title }}</title>
+  <meta name="viewport" content="initial-scale=1" />
+
+  <style>
+    {% asset 'style' %}
+  </style>
+</head>
+<body>
+
+<aside>
+  <dl>
+    <dt>Fabian Schultz</dt>
+    <dd>Designer, Developer</dd>
+  </dl>
+  <nav>
+    <ul class="nav">
+      <li><a class="active" href="#">About</a></li>
+      <li><a href="#">Portfolio</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+</aside>
+
+<main>
+  <article>
+    <header>
+      <h1>{{ page.title }}</h1>
+    </header>

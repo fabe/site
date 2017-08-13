@@ -1,4 +1,9 @@
-@charset "UTF-8";
+@charset 'UTF-8';
 
-@import 'variables.css';
-@import 'reset.css';
+@import '_variables.css';
+@import '_reset.css';
+
+@import '_base.css';
+
+@import '_typography.css';
+@import '_content.css';

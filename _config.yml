@@ -10,9 +10,6 @@ plugins: [jekyll-typogrify, jekyll-assets]
 assets:
   digest: true
   debug: true
-  compress:
-    css: false
-    js: true
   sources:
     - "_assets/css"
     - "_assets/js"

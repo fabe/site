@@ -1,0 +1,17 @@
+/* 
+  Variables
+*/
+
+:root {
+  --spacer: 1.7778rem;
+  --site-color: #159570;
+  --font-color: #222;
+  --meta-color: #999;
+  --main-color: #fafafa;
+
+  --sans-serif-fallback: "BlinkMacSystemFont", -apple-system, "Helvetica Neue", Helvetica, sans-serif;
+  --sans-serif: GT America, var(--sans-serif-fallback);
+
+  --serif-fallback: Georgia, serif;
+  --serif: Tiempos Text, var(--serif-fallback);
+}

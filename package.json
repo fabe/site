@@ -4,11 +4,13 @@
   "description": "My new site!",
   "scripts": {
     "watch:css": "postcss _assets/src/style.css -o _assets/css/style.css -w",
-    "watch:jekyll": "bundle exec jekyll server",
+    "watch:scripts": "webpack -d -w --module-bind 'js=babel-loader' --output-filename _assets/js/bundle.js _assets/js/app.js",
+    "watch:jekyll": "bundle exec jekyll server -L",
     "build:css": "postcss _assets/src/style.css -o _assets/css/style.css",
+    "build:scripts": "webpack -p --module-bind 'js=babel-loader' --output-filename _assets/js/bundle.js _assets/js/app.js",
     "build:jekyll": "bundle exec jekyll build",
-    "build": "npm run build:css && npm run build:jekyll",
-    "dev": "npm run watch:css & npm run watch:jekyll"
+    "build": "npm run build:css && npm run build:scripts && npm run build:jekyll",
+    "dev": "npm run watch:css & npm run watch:scripts & npm run watch:jekyll"
   },
   "repository": {
     "type": "git",
@@ -23,8 +25,14 @@
   "license": "MIT",
   "devDependencies": {
     "autoprefixer": "^7.1.2",
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
     "postcss-cli": "^4.1.0",
     "postcss-csso": "^2.0.0",
-    "postcss-import": "^10.0.0"
+    "postcss-import": "^10.0.0",
+    "webpack": "^3.5.4"
+  },
+  "dependencies": {
+    "stickybits": "^1.5.3"
   }
 }
