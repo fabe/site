@@ -1,0 +1,22 @@
+# Site settings
+title: Fabian Schultz – Designer, Developer
+description: My new site!
+url: ""
+permalink: pretty
+
+# Plugins
+plugins: [jekyll-typogrify, jekyll-assets]
+
+assets:
+  digest: true
+  debug: true
+  compress:
+    css: false
+    js: true
+  sources:
+    - "_assets/css"
+    - "_assets/js"
+
+# Build settings
+markdown: kramdown
+exclude: ["node_modules", "Gemfile", "Gemfile.lock", "package.json", "scripts"]

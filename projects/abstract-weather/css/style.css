@@ -1,0 +1,26 @@
+body {
+	background: RGB(243, 243, 243);
+	-webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+canvas {
+	margin: 0 auto;
+	display: block;
+	position: relative;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+#city {
+	color: RGB(26, 27, 29);
+	font-family: "Apercu", "Helvetica Neue", Helvetica;
+	font-weight: 700;
+	font-size: 54px;
+	top: 80px;
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	-ms-transform: translateX(-50%);
+	transform: translateX(-50%);
+	position: absolute;
+}

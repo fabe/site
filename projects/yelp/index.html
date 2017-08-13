@@ -1,0 +1,216 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Yelp Datavis</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="left">
+        <div id="logo"></div>
+        <h1>Visualizing Yelp&reg; Data of Berlin</h1>
+        <p>In January 2017, I scraped all public available data from the Yelp&reg; API in the Berlin area. This resulted in a dataset consisting of over 51.000 buisinesses with their respective ratings, review counts, price ranges, categories and coordinates.</p>
+        <p>Below you can find some of the results that were created while playing around with this collection.</p>
+      </div>
+    </div>
+  </header>
+  <section>
+    <div class="container">
+      <div class="left">
+        <h6>The "best" places and businesses in Berlin</h6>
+        <p>While the average amount of reviews per business is <strong>6.1</strong>, some stand out. Here are the "best" and most popular places in Berlin.</p>
+      </div>
+      <div class="right">
+        <ol>
+          <li>
+            Mustafas Gemüsesedöner
+            <span>685 Reviews, 4&#189; ⭐️</span>
+          </li>
+          <li>
+            Curry 36
+            <span>706 Reviews, 3&#189; ⭐️</span>
+          </li>
+          <li>
+            The Bird (Steakhouse)
+            <span>621 Reviews, 4 ⭐️</span>
+          </li>
+          <li>
+            Burgermeister
+            <span>592 Reviews, 4 ⭐️</span>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="container">
+      <div class="left">
+        <h6>The "worst" places and businesses in Berlin</h6>
+        <p>Maybe even more exciting: the worst rated places in Berlin. Notice that these places usually don't have a lot of reviews, so with only a couple negative reviews they can be publicly considered... a terrible business.</p>
+      </div>
+      <div class="right">
+        <ol>
+          <li>
+            Kabel Deutschland
+            <span>26 Reviews, 1 ⭐️</span>
+          </li>
+          <li>
+            Flughafen Schönefeld
+            <span>271 Reviews, 2&#189; ⭐️</span>
+          </li>
+          <li>
+            Vapiano (Europacenter)
+            <span>22 Reviews, 1&#189; ⭐️</span>
+          </li>
+          <li>
+            Carambar (Alexanderplatz)
+            <span>83 Reviews, 2 ⭐️</span>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="container">
+      <div class="left">
+        <h6>Not to forget: Reviews are highly opinionated</h6>
+        <p>There's two sides to a coin. This also goes for Yelp reviews! Here are two example reviews from one of the most popular places in Berlin&mdash;Mustafas Gemüsedöner&mdash;that state pretty much the exact opposite of each other.</p>
+      </div>
+      <div class="right">
+        <blockquote>
+          <span>⭐️</span>
+          <p>I eat kebap quite often, and this was one of the worst one's I've ever had. I wouldn't even eat it if it was free.</p>
+        </blockquote>
+        <blockquote>
+          <span>⭐️⭐️⭐️⭐️⭐️</span>
+          <p>I've eaten a lot of kebap in my life, and without exaggerating: this was the best one I had so far!</p>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="container">
+      <div class="left">
+        <h6>The more reviews, the better the place?</h6>
+        <p>Places with bad ratings usually don’t have a lot of reviews. That might very well because of popularity: Better rated places attract more people and are more successful. This again results in more reviews.</p>
+        <p>Maintaining a perfect rating with a growing number of visitors/customers gets increasingly difficult: A perfect 5 star score exists only with about 50  ratings in total (with the exception of a handful of places in all of Berlin).</p>
+      </div>
+      <div class="right">
+        <div id="reviewScatter"></div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="container">
+      <div class="left">
+        <h6>Unsurprisingly, Berlin Mitte is busy</h6>
+        <p>When we look at the amount of reviews in the postal codes of Berlin, we can see that Mitte is, unsurprisingly, the busiest area. Outcasts are the areas in which you can find the Olympiastadion or the Berlin Tegel airport.</p>
+      </div>
+      <div class="right">
+        <div id="postalReview"></div>
+        <div class="legend top">
+          <span class="title">Average number of reviews</span>
+          <span class="bar"></span>
+          <span class="min">1</span>
+          <span class="max">20</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="container">
+      <div class="left">
+        <h6>Are expensive places considered better?</h6>
+        <p>A pricey place is more controversial than cheaper place: While places marked as <strong>$-$$$</strong> are quite evenly distributed through positive ratings, places marked as <strong>$$$$</strong> are more likely to get the perfect rating.</p>
+        <p>Also notice that it’s more likely that an expensive place has a bad rating than a cheap one. This possibly comes from higher expectations.</p>
+      </div>
+      <div class="right">
+        <div id="priceScatter"></div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="container">
+      <div class="left">
+        <h6>People like to give a perfect score</h6>
+        <p>Although the largest group of places has a perfect score of 5 stars, they also have the second lowest amount of reviews on average.</p>
+      </div>
+      <div class="right">
+        <div id="ratingBar"></div>
+        <div class="legend">
+          <span class="title">Average number of reviews</span>
+          <span class="bar"></span>
+          <span class="min">1</span>
+          <span class="max">18</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="container">
+      <div class="left">
+        <h6>Charlottenburg has the most expensive places</h6>
+        <p>Charlottenburg-Wilmersdorf and Mitte have the most expensive places, followed closely by Friedrichshain-Kreuzberg and Pankow. Lichtenberg has the cheapest places.</p>
+      </div>
+      <div class="right">
+        <div id="bezirkePrice"></div>
+        <div class="legend top">
+          <span class="title">Average price</span>
+          <span class="bar"></span>
+          <span class="min">Cheap</span>
+          <span class="max">Expensive</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="container">
+      <div class="left">
+        <h6>Looking for patterns in the location distribution</h6>
+        <p>I tried to find some interesting patterns in the distribution of certain categories of places.</p>
+        <p>Comparing the distribution of supermarkets/grocery stores vs. hotels shows that hotels are very cramped around Charlottenburg and Mitte, while supermarkets are much more evenly distributed.</p>
+        <p>Note: blue dots indicate overlapping of the two categories.</p>
+      </div>
+      <div class="right">
+        <div id="compare">
+          <div data-id="1" class="compare-item" style="background-image: url('img/hotels-supermarkets.png');"></div>
+          <div data-id="2" class="compare-item" style="background-image: url('img/german-italian.png');"></div>
+          <div data-id="3" class="compare-item" style="background-image: url('img/cafes-sushi.png');"></div>
+          <ul class="controls">
+            <li data-id="1" class="active"><a href="#"><em>Supermarkets</em> <span>VS</span> <em>Hotels</em></a></li>
+            <li data-id="2"><a href="#"><em>German Food</em> <span>VS</span> <em>Pizza</em></a></li>
+            <li data-id="3"><a href="#"><em>Cafes</em> <span>VS</span> <em>Sushi</em></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="center">
+    <div class="container">
+      <div class="preview-container">
+        <a href="explore">
+          <div class="preview" style="background-image: url('img/preview.jpg');"></div>
+        </a>
+      </div>
+      <h2>Explore the data further.</h2>
+      <a href="explore" class="button">Open map</a>
+      <a href="data/yelp_berlin_publicdata_fabianschultz.json.zip" class="button secondary">or download the data</a>
+    </div>
+  </section>
+  <footer>
+    <div class="container">
+      <p>
+        Made at and for the course "Information Visualization" at the University of Applied Sciences Potsdam.<br>
+        Supervised by <a href="//mariandoerk.de">Prof. Dr. Marian Dörk</a>.<br>
+        Built by <a href="//fabianschultz.com">Fabian Schultz</a> in winter 2016/17.<br>
+        <a href="https://github.com/fabe/yelp-thief">Source of the data collecting bot</a>.
+      </p>
+      <a href="//www.fh-potsdam.de"><div class="fhp"></div></a>
+    </div>
+  </footer>
+  <script defer src="bundle.js"></script>
+</body>
+</html>

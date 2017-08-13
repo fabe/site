@@ -1,0 +1,30 @@
+{
+  "name": "fabe.github.io",
+  "version": "1.0.0",
+  "description": "My new site!",
+  "scripts": {
+    "watch:css": "postcss _assets/src/style.css -o _assets/css/style.css -w",
+    "watch:jekyll": "bundle exec jekyll server",
+    "build:css": "postcss _assets/src/style.css -o _assets/css/style.css",
+    "build:jekyll": "bundle exec jekyll build",
+    "build": "npm run build:css && npm run build:jekyll",
+    "dev": "npm run watch:css & npm run watch:jekyll"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fabe/fabe.github.io.git"
+  },
+  "authors": [
+    {
+      "name": "Fabian Schultz",
+      "email": "desk@fabianschultz.com"
+    }
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "autoprefixer": "^7.1.2",
+    "postcss-cli": "^4.1.0",
+    "postcss-csso": "^2.0.0",
+    "postcss-import": "^10.0.0"
+  }
+}
