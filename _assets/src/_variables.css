@@ -2,9 +2,14 @@
   Variables
 */
 
+@custom-media --medium-viewport (max-width: 900px);
+@custom-media --small-viewport (max-width: 600px);
+
 :root {
   --spacer: 1.6875rem;
   --horizontal: 80px;
+  --bp-medium: 900px;
+  --bp-small: 600px;
   --horizontal-half: calc(var(--horizontal) / 2);
   --horizontal-double: calc(var(--horizontal) * 2);
   --site-color: #00baff;
@@ -12,9 +17,23 @@
   --meta-color: #999;
   --main-color: #fafafa;
 
-  --sans-serif-fallback: "BlinkMacSystemFont", -apple-system, "Helvetica Neue", Helvetica, sans-serif;
+  --sans-serif-fallback: system-ui;
   --sans-serif: National, var(--sans-serif-fallback);
 
   --serif-fallback: Georgia, serif;
-  --serif: var(--sans-serif),Tiempos Text, var(--serif-fallback);
+  --serif: Tiempos Text, var(--serif-fallback);
+}
+
+@media (--medium-viewport) {
+  :root {
+    --horizontal: 40px;
+    --spacer: 1.2rem;
+  }
+}
+
+@media (--small-viewport) {
+  :root {
+    --horizontal: 20px;
+    --spacer: 1rem;
+  }
 }

@@ -1,41 +1,62 @@
 /* 
-  Reset
+  Base
 */
 
+html {
+  height: 100%;
+  overflow: hidden;
+}
+
 body {
-  max-width: 68rem;
-  margin: 0 auto;
+  height: 100%;
   font-family: var(--sans-serif);
-  font-size: 120%;
+  font-size: 125%;
   line-height: 1.6875;
   color: var(--font-color);
   background-color: var(--main-color);
-
-  display: grid;
-  grid-template-columns: 25% 75%;
+  overflow: auto;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   font-feature-settings: "liga", "hist", "onum";
+
+  @media (--medium-viewport) {
+    font-size: 112.5%;
+  }
+
+  @media (--small-viewport) {
+    font-size: 100%;
+  }
 }
 
 main {
-  padding: 0 var(--horizontal) var(--horizontal);
-  background-color: #fff;
+  max-width: 68rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 25% 75%;
+
+  @media (--medium-viewport) {
+    display: block;
+  }
 }
 
-main:before {
-  position: absolute;
-  top: -45vh;
-  left: 0;
-  width: 100%;
-  height: 50vh;
+article {
+  padding: 0 var(--horizontal) var(--horizontal);
   background-color: #fff;
-  content: ' ';
 }
 
 aside {
   padding: 0 var(--horizontal-half);
   height: 100vh;
   text-align: right;
+
+  @media (--medium-viewport) {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: var(--horizontal) var(--horizontal);
+    height: auto;
+    text-align: left;
+  }
 }
 
 header,
@@ -46,6 +67,19 @@ dl {
   align-content: flex-end;
   height: 8rem;
   margin-bottom: var(--horizontal-half);
+
+  @media (--medium-viewport) {
+    display: block;
+    height: auto;
+    margin-bottom: 0;
+  }
+}
+
+header {
+  @media (--medium-viewport) {
+    padding-top: var(--horizontal);
+    margin-bottom: var(--horizontal-half);
+  }
 }
 
 dl {
@@ -61,13 +95,13 @@ dl a:hover {
   color: inherit;
 }
 
-dt {
-  color: var(--site-color);
-}
-
 dd {
   margin-top: 0.5rem;
   color: var(--meta-color);
+
+  @media (--medium-viewport) {
+    margin-top: 0.3rem;
+  }
 }
 
 ul.nav {
@@ -75,19 +109,38 @@ ul.nav {
   padding: 0;
   font-family: var(--sans-serif);
   list-style: none;
+
+  @media (--medium-viewport) {
+    line-height: 1;
+  }
 }
 
-ul.nav li a {
+ul.nav li {
+  @media (--medium-viewport) {
+    display: inline-block;
+    margin-right: 2rem;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  @media (--medium-viewport) {
+    margin-right: 1rem;
+  }
+}
+
+ul.nav :any-link {
   color: var(--meta-color);
   text-decoration: none;
 }
 
-ul.nav li a.active {
-  color: var(--text-color);
+ul.nav :any-link.active {
+  color: var(--font-color);
 }
 
-ul.nav li a:not(.active):hover {
-  color: var(--text-color);
+ul.nav :any-link:hover {
+  color: var(--font-color);
 }
 
 footer {

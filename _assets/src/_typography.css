@@ -1,15 +1,19 @@
-p {
-  font-family: var(--serif);
-}
+article {
+  & p,
+  & ul,
+  & ol {
+    font-family: var(--serif);
+    font-size: 90%;
+  }
 
-article p:last-of-type {
-  margin-bottom: 0;
-}
+  & p:last-of-type {
+    margin-bottom: 0;
+  }
 
-ul,
-ol {
-  font-family: var(--serif);
-  padding-left: var(--spacer);
+  & ul,
+  & ol {
+    padding-left: var(--spacer);
+  }
 }
 
 h1 {
@@ -25,8 +29,7 @@ h2 {
 }
 
 h3 {
-  font-family: var(--serif);
-  font-size: 100%;
+  font-size: 110%;
   font-weight: normal;
   text-transform: uppercase;
   font-feature-settings: 'smcp', 'c2sc', 'lnum';
@@ -44,7 +47,7 @@ a:hover {
 }
 
 mark {
-  background-color: rgba(0,0,0,.5);
+  background-color: rgba(0, 0, 0, .5);
 }
 
 .caps {

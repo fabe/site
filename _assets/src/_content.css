@@ -1,8 +1,3 @@
-img.full {
-  width: calc(100% + 160px);
-  margin-left: calc(var(--horizontal) * -1);
-}
-
 hr {
   width: 20%;
   height: 2px;
@@ -37,12 +32,21 @@ figure.left {
   margin-top: 0;
   margin-bottom: var(--spacer);
   margin-right: var(--spacer);
+
+  @media (--small-viewport) {
+    float: none;
+    width: 100%;
+  }
 }
 
 figure.left img {
   width: calc(100% + var(--horizontal));
-}
 
+  @media (--small-viewport) {
+    width: 100%;
+    margin-left: 0;
+  }
+}
 
 figcaption p {
   margin-top: 0.5rem;

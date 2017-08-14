@@ -12,19 +12,19 @@
 </head>
 <body>
 
-<aside>
-  <dl>
-    <a href="/">
-      <dt>Fabian Schultz</dt>
-      <dd>Designer, Developer</dd>
-    </a>
-  </dl>
+<main role="main">
+  <aside role="banner">
+    <dl>
+      <a href="/">
+        <dt>Fabian Schultz</dt>
+        <dd>Designer, Developer</dd>
+      </a>
+    </dl>
 
-  {% include nav.html %}
-</aside>
+    {% include nav.html %}
+  </aside>
 
-<main>
-  <article>
+  <article itemtype="http://schema.org/Article">
     <header>
-      <h1>{{ page.title }}</h1>
+      <h1 itemprop="name headline">{{ page.title }}</h1>
     </header>
