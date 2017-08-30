@@ -41,6 +41,11 @@ app.prepare().then(() => {
   // Use compression.
   server.use(compression());
 
+  server.get('/projects/:id', (req, res) => {
+    const params = { id: req.params.id };
+    app.render(req, res, '/project', params);
+  });
+
   // For all other routes, use next.js.
   server.get('*', (req, res) => {
     return handle(req, res);

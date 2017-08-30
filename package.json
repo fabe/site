@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "nodemon -w server/index.js server/index.js",
     "build": "next build",
+    "build:content": "processmd content/**/*.md --outputDir content --preview 110 --summaryOutput content/summary.json",
     "prestart": "NODE_ENV=production next build",
     "start": "NODE_ENV=production node server/index.js"
   },
@@ -45,5 +46,8 @@
     "node": ">=6.9.2"
   },
   "author": "Fabian Schultz",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "processmd": "^3.1.5"
+  }
 }

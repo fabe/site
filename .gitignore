@@ -18,3 +18,5 @@ coverage
 .DS_Store
 
 *.sketch
+
+/content/*.json
