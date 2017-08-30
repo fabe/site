@@ -1,9 +1,20 @@
-_site
-.sass-cache
-.asset-cache
-.jekyll-metadata
+# security
+.env
+
+# build output
+dist
+.next
+
+# dependencies
 node_modules
-_assets/css/
-Gemfile.lock
-bundle.js
-*.log
+
+# logs
+npm-debug.log
+
+# coverage
+.nyc_output
+coverage
+
+.DS_Store
+
+*.sketch

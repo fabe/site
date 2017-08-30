@@ -1,0 +1,7 @@
+@import "variables.css";
+@import "base.css";
+
+.container {
+  max-width: $container-width;
+  margin: 0 auto;
+}

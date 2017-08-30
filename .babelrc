@@ -1,3 +1,11 @@
 {
-  "presets": ["es2017", "es2015"]
+  "presets": [
+    "next/babel",
+    "stage-0"
+  ],
+  "plugins": [
+    "transform-decorators-legacy", "babel-plugin-root-import", ["styled-modules/babel", {
+      "pattern": "\\.css$"
+    }]
+  ]
 }
