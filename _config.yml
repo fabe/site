@@ -4,6 +4,11 @@ description: My new site!
 url: ""
 permalink: pretty
 
+collections:
+  portfolio:
+    output: true
+    permalink: /portfolio/:path
+
 # Plugins
 plugins: [jekyll-typogrify, jekyll-assets]
 
@@ -16,4 +21,4 @@ assets:
 
 # Build settings
 markdown: kramdown
-exclude: ["node_modules", "Gemfile", "Gemfile.lock", "package.json", "scripts"]
+exclude: ["node_modules", "Gemfile", "Gemfile.lock", "package.json", "scripts", "postcss.config.js", "CNAME"]

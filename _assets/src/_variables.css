@@ -7,6 +7,7 @@
 
 :root {
   --spacer: 1.6875rem;
+  --spacer-half: calc(var(--spacer) / 2);
   --horizontal: 80px;
   --bp-medium: 900px;
   --bp-small: 600px;

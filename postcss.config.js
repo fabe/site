@@ -10,6 +10,6 @@ module.exports = {
         },
       },
     }),
-    require('postcss-csso')(),
+    // require('postcss-csso')(),
   ],
 };

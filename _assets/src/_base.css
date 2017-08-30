@@ -17,6 +17,7 @@ body {
   overflow: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-overflow-scrolling: touch;
   font-feature-settings: "liga", "hist", "onum";
 
   @media (--medium-viewport) {
@@ -78,7 +79,7 @@ dl {
 header {
   @media (--medium-viewport) {
     padding-top: var(--horizontal);
-    margin-bottom: var(--horizontal-half);
+    margin-bottom: var(--horizontal);
   }
 }
 

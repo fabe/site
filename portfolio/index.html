@@ -1,0 +1,29 @@
+---
+layout: default
+title: Portfolio
+listed: true
+---
+{% assign entries = site.pages | sort: "path" %}
+
+<!-- We'll split the url and check if the first element is the title of the page, then show it. -->
+{% for entry in entries %}
+  {% assign slug = entry.url | split: "/" %}
+  {% assign parentSlug = page.title | slugify %}
+
+  {% if slug[1] contains parentSlug and slug[2]  %}
+    <div class="portfolio-item">
+      <div class="portfolio-item__header">
+        <h2>{{ entry.title }}</h2>
+        <a href="{{ site.baseurl }}{{ entry.url }}">View case study</a>
+      </div>
+      {% if entry.cover %}
+        <figure>
+          <img src="{{ site.baseurl }}{{ entry.url }}/{{ entry.cover }}" alt="{{ entry.title }}" />
+          {% if entry.summary %}
+          <figcaption><p>{{ entry.summary }}</p></figcaption>
+        {% endif %}
+        </figure>
+      {% endif %}
+    </div>
+  {% endif %}
+{% endfor %}

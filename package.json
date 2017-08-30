@@ -9,8 +9,9 @@
     "build:css": "postcss _assets/src/style.css -o _assets/css/style.css",
     "build:scripts": "webpack -p --module-bind 'js=babel-loader' --output-filename _assets/js/bundle.js _assets/js/app.js",
     "build:jekyll": "bundle exec jekyll build",
-    "build": "npm run build:css && npm run build:scripts && npm run build:jekyll",
-    "dev": "npm run watch:css & npm run watch:scripts & npm run watch:jekyll"
+    "build": "npm run clean && npm run build:css && npm run build:scripts && npm run build:jekyll",
+    "dev": "npm run clean && npm run watch:css & npm run watch:scripts & npm run watch:jekyll",
+    "clean": "rm -rf _site"
   },
   "repository": {
     "type": "git",
