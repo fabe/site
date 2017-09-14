@@ -1,0 +1,17 @@
+@import "variables.css";
+
+.nav {
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      display: inline-block;
+
+      & + li {
+        margin-left: 2rem;
+      }
+    }
+  }
+}

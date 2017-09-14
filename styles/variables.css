@@ -1,2 +1,12 @@
-$font-color: red;
-$container-width: 1000px;
+$font-color: #000;
+$bg-color: #fff;
+$site-color: #00baff;
+$opacity-meta: 0.4;
+
+$sans-serif: 'Colfax';
+$serif: 'Colfax';
+$fw-normal: 400;
+$fw-medium: 500;
+$fw-bold: 600;
+
+$container-width: 1100px;

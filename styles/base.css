@@ -1,5 +1,57 @@
 @import "variables.css";
+@import "typography.css";
+@import "keyframes.css";
+
+* {
+  box-sizing: border-box;
+}
 
 body {
-  font-family: sans-serif;
+  position: relative;
+  margin: 0 4rem;
+  padding-top: 4rem;
+  font-family: $sans-serif;
+  font-size: 1rem;
+  font-weight: $fw-medium;
+  color: $font-color;
+  background-color: $bg-color;
+  line-height: 1.7778;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "liga", "onum";
+  perspective: 1000px;
+
+  &:before {
+    position: absolute;
+    width: 60vw;
+    height: 60vw;
+    border-radius: 1000px;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    animation: simple .5s .5s ease-in-out forwards;
+    /* content: ''; */
+    /* background: linear-gradient(0deg, #b7ebff, #fff 50%); */
+    /* background: linear-gradient(0deg, #eee, #fff 40%); */
+    background: linear-gradient(0deg, #dcf0f2, #fdf4f3 50%);
+    /* background: linear-gradient(0deg, #edeae6, #fff 40%); */
+    z-index: -10;
+  }
+}
+
+html:global {
+  /* background-color: #F6F6F7; */
+
+  &.nprogress-busy {
+    * {
+      cursor: progress;
+    }
+  }
+}
+
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-skip: ink;
 }

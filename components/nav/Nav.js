@@ -1,23 +1,17 @@
 import React, { Component } from 'react';
 import Link from 'next/link';
+import s from './Nav.css';
 
-class Page extends Component {
-  render() {
-    return (
-      <ul>
-        <li>
-          <Link href="/" prefetch>
-            <a>Home</a>
-          </Link>
-        </li>
-        <li>
-          <Link href="/about" prefetch>
-            <a>About</a>
-          </Link>
-        </li>
-      </ul>
-    );
-  }
-}
-
-export default Page;
+export default () =>
+  <nav className={s.nav} role="navigation">
+    <ul>
+      <li>
+        <Link prefetch href="/about">
+          <a>About</a>
+        </Link>
+      </li>
+      <li>
+        <a href="mailto:desk@fabianschultz.com">Contact</a>
+      </li>
+    </ul>
+  </nav>;

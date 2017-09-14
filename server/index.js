@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require('path');
 const hpp = require('hpp');
 const helmet = require('helmet');
 const compression = require('compression');
@@ -41,10 +42,10 @@ app.prepare().then(() => {
   // Use compression.
   server.use(compression());
 
-  server.get('/projects/:id', (req, res) => {
-    const params = { id: req.params.id };
-    app.render(req, res, '/project', params);
-  });
+  server.use(express.static('static'));
+
+  const staticDir = path.resolve(__dirname, '..', '.next/static');
+  server.use('/_next/static', express.static(staticDir));
 
   // For all other routes, use next.js.
   server.get('*', (req, res) => {

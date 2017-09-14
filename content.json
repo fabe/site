@@ -1,0 +1,28 @@
+{
+  "projects": [
+    {
+      "id": "delivery",
+      "title": "Delivery",
+      "subtitle": "Present your design work, clutter-free.",
+      "image": {
+        "front": "/img/delivery-front.png",
+        "frontSize": "85%",
+        "back": "/img/delivery-back.png",
+        "height": 400,
+        "position": "center"
+      }
+    },
+    {
+      "id": "dsk-companion",
+      "title": "DSK Companion",
+      "subtitle": "Helping athlethes to cope with injuries",
+      "image": {
+        "front": "/img/dsk-companion-front.png",
+        "frontSize": "70%",
+        "back": "/img/dsk-companion-back.png",
+        "height": 600,
+        "position": "bottom center"
+      }
+    }
+  ]
+}

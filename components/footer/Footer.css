@@ -1,0 +1,10 @@
+@import "variables.css";
+
+.footer {
+  margin-top: 6rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  background-color: $font-color;
+  color: $bg-color;
+  text-align: center;
+}

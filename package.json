@@ -27,20 +27,25 @@
     "glob": "^7.1.2",
     "helmet": "^3.6.1",
     "hpp": "^0.2.2",
+    "image-webpack-loader": "^3.4.0",
     "mobx": "^2.7.0",
     "mobx-react": "^4.0.4",
     "mobx-react-devtools": "^4.2.11",
     "mongoose": "^4.9.4",
     "next": "latest",
     "node-sass": "^4.5.3",
+    "nprogress": "^0.2.0",
     "postcss-cssnext": "^3.0.2",
     "postcss-csso": "^2.0.0",
     "postcss-import": "^10.0.0",
     "postcss-loader": "^2.0.6",
+    "postcss-nested": "^2.1.2",
+    "postcss-nesting": "^4.1.0",
     "postcss-simple-vars": "^4.1.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "styled-modules": "^0.2.2"
+    "styled-modules": "^0.2.2",
+    "url-loader": "^0.5.9"
   },
   "engines": {
     "node": ">=6.9.2"

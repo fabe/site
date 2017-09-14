@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Head from 'next/head';
 import config from '~/config';
-import Page from '~/components/page';
+import Page from '~/layouts/page';
 
 export default class Error extends Component {
   static getInitialProps({ res, jsonPageRes }) {
