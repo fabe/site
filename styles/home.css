@@ -1,35 +1,21 @@
-@import "variables.css";
-@import "keyframes.css";
+@import 'variables.css';
+@import 'keyframes.css';
 
-.overview {
-  margin: 0;
-  padding: 0;
-  column-count: 2;
-  column-gap: 5rem;
-  column-width: 50%;
-  list-style: none;
-
-  li {
-    break-inside: avoid-column;
-
-    img {
-      width: 100%;
-    }
-  }
+.home {
 }
 
-.intro {
-  margin-top: 3rem;
-  margin-bottom: 6rem;
-  opacity: 0;
-  animation: fadein .8s .5s ease-in-out forwards;
-  transform-style: preserve-3d;
+.projects {
+  display: flex;
+  max-width: $wide-width;
+  margin: 0 auto;
 
-  h1 {
-    margin-bottom: 1rem;
-  }
+  & > div {
+    flex: 1 1 auto;
+    width: 50%;
+    margin-right: 1.5rem;
 
-  p {
-    opacity: $opacity-meta;
+    &:nth-child(even) {
+      margin-right: 0;
+    }
   }
 }

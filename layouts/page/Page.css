@@ -5,3 +5,9 @@
   max-width: $container-width;
   margin: 0 auto;
 }
+
+.article {
+  font-family: $sans-serif;
+  font-weight: $fw-normal;
+  line-height: 1.625;
+}

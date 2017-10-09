@@ -1,10 +1,51 @@
-@import "variables.css";
+@import 'variables.css';
 
 .footer {
-  margin-top: 6rem;
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-  background-color: $font-color;
-  color: $bg-color;
-  text-align: center;
+  display: flex;
+  max-width: $container-width;
+  margin: 0 auto;
+  padding: 4rem 0 2rem;
+  font-size: 0.75rem;
+  justify-content: space-between;
+  align-items: center;
+
+  p {
+    opacity: $opacity-meta;
+    margin-bottom: 0;
+  }
+}
+
+.nav {
+  list-style: none;
+  display: flex;
+
+  li {
+    display: flex;
+    line-height: 1;
+    align-items: center;
+
+    a {
+      opacity: $opacity-meta;
+      transition: opacity 0.2s cubic-bezier(0.64, 0.04, 0.35, 1);
+      text-decoration: none;
+      line-height: 0;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    & + li {
+      &:before {
+        display: inline-block;
+        position: relative;
+        width: 1px;
+        height: 20px;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        background-color: $border-color;
+        content: '';
+      }
+    }
+  }
 }

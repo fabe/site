@@ -1,39 +1,26 @@
-@import "variables.css";
-@import "keyframes.css";
+@import 'variables.css';
+@import 'keyframes.css';
 
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 6rem;
-  overflow: auto;
-  opacity: 0;
-  animation: fadein .5s .5s ease-in-out forwards;
+  max-width: $wide-width;
+  margin: 0 auto;
+  margin-bottom: 4rem;
+  text-align: center;
 
-  a {
-    text-decoration: none;
-    display: inline-block;
-    position: relative;
-    line-height: 1;
+  h1 {
+    animation: fadein 0.5s 0.4s ease-in-out backwards;
+  }
+}
 
-    &:hover:after {
-      transform: scaleX(1);
-      transform-origin: left center;
-    }
+.portrait {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 1.2rem;
+  border-radius: 60px;
+  transition: transform 0.2s ease-in-out;
+  animation: fadein 0.5s 0.4s ease-in-out backwards;
 
-    &:after {
-      display: block;
-      position: absolute;
-      background: #7BDBC0;
-      content: '';
-      top: 110%;
-      width: 100%;
-      left: 0;
-      height: 2px;
-      transform: scaleX(0);
-      transform-origin: right center;
-      transition: .4s transform cubic-bezier(.19, 1, .22, 1);
-      z-index: -2;
-    }
+  &:active {
+    transform: scale(0.8);
   }
 }

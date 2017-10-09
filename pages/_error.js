@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import Head from 'next/head';
-import config from '~/config';
 import Page from '~/layouts/page';
 
 export default class Error extends Component {
@@ -14,12 +12,10 @@ export default class Error extends Component {
   renderErrorMessage(statusCode) {
     switch (statusCode) {
       case 404:
-        return <p>The page you requested wasn't found!</p>;
+        return "The page you requested wasn't found!";
         break;
       default:
-        return (
-          <p>There was an error processing your request. Try reloading!</p>
-        );
+        return 'There was an error processing your request. Try reloading!';
         break;
     }
   }
@@ -28,19 +24,8 @@ export default class Error extends Component {
     const { statusCode } = this.props;
 
     return (
-      <Page>
-        <Head>
-          <title>
-            {config.app.name} — {statusCode}
-          </title>
-        </Head>
-
-        {statusCode
-          ? <h1>
-              {statusCode}
-            </h1>
-          : <h1>Oh no!</h1>}
-        {this.renderErrorMessage(statusCode)}
+      <Page title={this.renderErrorMessage(statusCode)}>
+        <video src="/static/404.mp4" loop autoPlay />
       </Page>
     );
   }

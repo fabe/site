@@ -1,11 +1,14 @@
 {
-  "presets": [
-    "next/babel",
-    "stage-0"
-  ],
+  "presets": ["next/babel", "stage-0"],
   "plugins": [
-    "transform-decorators-legacy", "babel-plugin-root-import", ["styled-modules/babel", {
-      "pattern": "\\.css$"
-    }]
+    "transform-decorators-legacy",
+    "babel-plugin-root-import",
+    "inline-react-svg",
+    [
+      "styled-modules/babel",
+      {
+        "pattern": "\\.css$"
+      }
+    ]
   ]
 }

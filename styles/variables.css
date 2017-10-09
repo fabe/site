@@ -1,12 +1,22 @@
+/* Colors */
 $font-color: #000;
 $bg-color: #fff;
-$site-color: #00baff;
+$site-color: #2a3ebf;
+$border-color: #d9d9d9;
+$fade-color: #fafafa;
+$meta-color: #999;
 $opacity-meta: 0.4;
 
-$sans-serif: 'Colfax';
-$serif: 'Colfax';
+/* Fonts */
+$sans-serif: Retina Book,Fabriga,-apple-system, BlinkMacSystemFont, San Francisco, Helvetica Neue,
+  Helvetica, Ubuntu, Roboto, Noto, Segoe UI, Arial, sans-serif;
+$serif: Gauthier FY, Garamond Premier Pro, 'Libre Baskerville', Georgia;
+$head: Retina Bold,Fabriga,$sans-serif, Retina Bold;
 $fw-normal: 400;
 $fw-medium: 500;
-$fw-bold: 600;
+$fw-semi: 600;
+$fw-bold: 700;
 
-$container-width: 1100px;
+/* Boxes */
+$container-width: 670px;
+$wide-width: 1400px;

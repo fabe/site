@@ -1,6 +1,6 @@
-@import "variables.css";
-@import "typography.css";
-@import "keyframes.css";
+@import 'variables.css';
+@import 'typography.css';
+@import 'keyframes.css';
 
 * {
   box-sizing: border-box;
@@ -8,40 +8,21 @@
 
 body {
   position: relative;
-  margin: 0 4rem;
+  margin: 1rem;
   padding-top: 4rem;
   font-family: $sans-serif;
-  font-size: 1rem;
-  font-weight: $fw-medium;
+  font-size: 1.15rem;
   color: $font-color;
   background-color: $bg-color;
   line-height: 1.7778;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-feature-settings: "liga", "onum";
-  perspective: 1000px;
-
-  &:before {
-    position: absolute;
-    width: 60vw;
-    height: 60vw;
-    border-radius: 1000px;
-    left: 50%;
-    top: 0;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    animation: simple .5s .5s ease-in-out forwards;
-    /* content: ''; */
-    /* background: linear-gradient(0deg, #b7ebff, #fff 50%); */
-    /* background: linear-gradient(0deg, #eee, #fff 40%); */
-    background: linear-gradient(0deg, #dcf0f2, #fdf4f3 50%);
-    /* background: linear-gradient(0deg, #edeae6, #fff 40%); */
-    z-index: -10;
-  }
+  font-feature-settings: 'liga', 'onum';
+  text-rendering: optimizeLegibility;
 }
 
 html:global {
-  /* background-color: #F6F6F7; */
+  background-color: #fff;
 
   &.nprogress-busy {
     * {
@@ -54,4 +35,50 @@ a {
   color: inherit;
   text-decoration: underline;
   text-decoration-skip: ink;
+}
+
+img {
+  max-width: 100%;
+  filter: blur(0px);
+}
+
+video {
+  width: 100%;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 2rem;
+}
+
+:global {
+  .caps {
+    font-feature-settings: 'smcp', 'c2sc', 'lnum';
+    letter-spacing: 0.05em;
+  }
+
+  .button {
+    display: inline-block;
+    font-size: 0.85rem;
+    text-decoration: none;
+    font-weight: $fw-medium;
+    border-radius: 6px;
+    padding: 12px 18px;
+    color: #fff;
+    background-color: $font-color;
+    transition: opacity 0.2s cubic-bezier(0.64, 0.04, 0.35, 1);
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    & + .button {
+      margin-left: 1rem;
+    }
+
+    svg {
+      display: none;
+      margin-right: 0.5rem;
+    }
+  }
 }

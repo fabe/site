@@ -1,10 +1,10 @@
 @keyframes fadein {
   from {
-    transform: translateY(15%) rotate3d(1, 0, 0, -10deg);
+    transform: translateY(15%);
     opacity: 0;
   }
   to {
-    transform: translateY(0) rotate3d(0, 0, 0, 0);
+    transform: translateY(0);
     opacity: 1;
   }
 }

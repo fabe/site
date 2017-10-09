@@ -1,23 +1,30 @@
-@import "variables.css";
+@import 'variables.css';
 
 h1,
 h2,
 h3,
 h4 {
   margin-top: 0;
-  font-family: $serif;
-  font-weight: $fw-normal;
-  line-height: 1.222;
-  letter-spacing: -0.008em;
+  font-weight: $fw-bold;
+  font-family: $head;
+  line-height: 1.25;
 }
 
 h1 {
-  font-size: 3.3rem;
-  font-weight: 300;
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
 }
 
 h2 {
   font-size: 2.2rem;
-  font-weight: 400;
+  margin-bottom: 0.6rem;
 }
 
+h3:global {
+  font-size: 1em;
+  font-family: $sans-serif;
+  font-weight: $fw-normal;
+  /* letter-spacing: -.01em; */
+  margin-bottom: 0;
+  color: $meta-color;
+}

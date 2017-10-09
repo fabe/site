@@ -4,18 +4,34 @@ import Project from '~/components/project';
 import { projects } from '~/content.json';
 import s from '~/styles/home.css';
 
-export default () =>
-  <Page title="Home">
-    <ul className={s.overview}>
-      <li className={s.intro}>
-        <h1>
-          Product Designer &<br />
-          Frontend Developer<br />
-          from Germany.
-        </h1>
-        <p>Currently studying Interface Design at FH Potsdam.</p>
-      </li>
+const prepareProjects = projects => {
+  let col1 = [];
+  let col2 = [];
 
-      {projects.map(project => <Project key={project.id} {...project} />)}
-    </ul>
-  </Page>;
+  projects.forEach((project, i) => {
+    const node = <Project key={project.id} {...project} />;
+    if (i % 2 === 0) {
+      col1.push(node);
+    } else {
+      col2.push(node);
+    }
+  });
+
+  return (
+    <div className={s.projects}>
+      <div>{col1}</div>
+      <div>{col2}</div>
+    </div>
+  );
+};
+
+export default () => (
+  <Page
+    title="Home"
+    displayTitle="Hello, I’m Fabian — a product designer<br/> and developer from Potsdam, Germany."
+    className={s.home}
+    fullWidth
+  >
+    {prepareProjects(projects)}
+  </Page>
+);

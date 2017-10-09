@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="10px" height="10px" viewBox="0 0 10 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>Group-7</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-Copy-25" transform="translate(-308.000000, -1204.000000)">
+            <g id="Group-2" transform="translate(-62.000000, 398.000000)">
+                <g id="Group-5" transform="translate(181.000000, 795.000000)">
+                    <g id="Group-7" transform="translate(189.000000, 8.000000)">
+                        <g transform="translate(0.000000, 3.000000)">
+                            <path d="M9.5,6 C9.224,6 9,6.224 9,6.5 L9,8 C9,8.551 8.551,9 8,9 L2,9 C1.449,9 1,8.551 1,8 L1,2 C1,1.449 1.449,1 2,1 L3.5,1 C3.776,1 4,0.776 4,0.5 C4,0.224 3.776,0 3.5,0 L2,0 C0.895,0 0,0.895 0,2 L0,8 C0,9.105 0.895,10 2,10 L8,10 C9.105,10 10,9.105 10,8 L10,6.5 C10,6.224 9.776,6 9.5,6" id="Fill-3" fill="#FFFFFF" fill-rule="nonzero"></path>
+                            <polyline id="Stroke-5" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" points="9.5 4 9.5 0.5 6 0.5"></polyline>
+                            <path d="M9,1 L5.5,4.5" id="Stroke-2" stroke="#FFFFFF" stroke-linecap="round"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
