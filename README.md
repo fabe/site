@@ -1,22 +1,32 @@
-<h1><img src="https://i.imgur.com/HvgQgik.jpg" alt="www" width="100"></h1>
+# gatsby-starter-blog-no-styles
+[Gatsby](https://www.gatsbyjs.org/) starter for creating a blog, without the CSS and typography included in the official [gatsby-starter-blog](https://github.com/gatsbyjs/gatsby-starter-blog).
 
-A personal, opinionated boilerplate for world wide web applications.
+The gatsby-starter-blog makes some decisions about styling that you might not want (inline css, react-responsive-grid, gatsby-plugin-typography/compass-vertical-rhythm). 
 
-## Features
+In my case, I want to use [Styled Components](https://www.styled-components.com/) (which Gatsby also has a [plugin](https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-plugin-styled-components) for), so I ousted the aforementioned libraries and styles first and thought this no-styles starter could be useful to others.
 
-- ⚛️ React as the view.
-- 📦 MobX as state.
-- 🌍 Next.js + Express server (SSR).
-- 🛢 MongoDB & Mongoose as a database.
-- 🌐 Axios as the http client.
-- 💅 CSS Modules & PostCSS.
-- ✨ Prettier as a code style.
-- 🐜 GZIP by `compression`.
-- 🔒 `hpp` & `helmet` for security.
+## Get Blogging
 
-## Development
+1) Install Gatsby-CLI
 
-    git clone git@github.com:fabe/www.git my-project
-    cd my-project
-    yarn install
-    yarn run dev
+    `npm install --global gatsby-cli`
+
+2) Create new Gatsby project using this starter
+
+    `gatsby new my-gatsby-blog https://github.com/noahg/gatsby-starter-blog-no-styles`
+
+3) Run Development Server
+
+    `gatsby develop`
+
+4) Add Posts
+    
+    See the example posts in the folder `src/pages` and use the same naming convention. e.g. `/2017-09-13-post-title/index.md`
+
+5) Deploy
+
+    Follow [the Gatsby docs](https://www.gatsbyjs.org/tutorial/part-one/#deploying-gatsbyjs-websites-on-the-web) for a super easy way to deploy using surge.sh  
+
+
+
+
