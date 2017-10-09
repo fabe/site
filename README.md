@@ -5,6 +5,7 @@ This is the source code of [my website](https://fabianschultz.com).
 
 ## Installation
     $ git clone git@github.com:fabe/site.git
-    $ cd fabianschultz.com
+    $ cd site
+    $ yarn
     $ gatsby develop
     $ open http://localhost:8000
