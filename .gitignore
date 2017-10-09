@@ -1,22 +1,7 @@
-# security
-.env
-
-# build output
-dist
-.next
-
-# dependencies
-node_modules
-
-# logs
-npm-debug.log
-
-# coverage
-.nyc_output
-coverage
-
+node_modules/
+public
+.gatsby-context.js
 .DS_Store
-
-*.sketch
-
-/content/*.json
+.intermediate-representation/
+.cache/
+yarn.lock

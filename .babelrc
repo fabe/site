@@ -1,14 +1,4 @@
 {
-  "presets": ["next/babel", "stage-0"],
-  "plugins": [
-    "transform-decorators-legacy",
-    "babel-plugin-root-import",
-    "inline-react-svg",
-    [
-      "styled-modules/babel",
-      {
-        "pattern": "\\.css$"
-      }
-    ]
-  ]
+  "presets": ['react', 'es2015', 'stage-1'],
+  "plugins": ['add-module-exports', 'babel-plugin-root-import']
 }
