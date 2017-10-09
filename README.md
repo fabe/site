@@ -9,3 +9,5 @@ This is the source code of [my website](https://fabianschultz.com).
     $ yarn
     $ gatsby develop
     $ open http://localhost:8000
+
+[![Deploys by Netlify](https://www.netlify.comhttps://res.cloudinary.com/netlify/image/upload/w_auto,c_scale/global/badges/netlify-dark.svg)](https://www.netlify.com)
