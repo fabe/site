@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Link from 'gatsby-link';
 
 import Footer from '../components/Footer';
 
-import './index.css';
+import './index.scss';
 
 class Template extends React.Component {
   constructor() {
@@ -73,9 +74,9 @@ class Template extends React.Component {
 }
 
 Template.propTypes = {
-  children: React.PropTypes.func,
-  location: React.PropTypes.object,
-  route: React.PropTypes.object,
+  children: PropTypes.func,
+  location: PropTypes.object,
+  route: PropTypes.object,
 };
 
 export default Template;

@@ -1,3 +1,6 @@
+var csso = require('postcss-csso');
+var autoprefixer = require('autoprefixer');
+
 module.exports = {
   siteMetadata: {
     title: 'Fabian W. Schultz',
@@ -54,5 +57,12 @@ module.exports = {
     },
     `gatsby-plugin-offline`,
     `gatsby-plugin-react-helmet`,
+    {
+      resolve: `gatsby-plugin-postcss-sass`,
+      options: {
+        postCssPlugins: [autoprefixer(), csso()],
+        precision: 5, // SASS default: 5
+      },
+    },
   ],
 };
