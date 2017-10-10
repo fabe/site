@@ -1,5 +1,6 @@
 # site
-[![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier) 
+[![deploys by netlify](https://img.shields.io/badge/deploys%20by-netlify-00c7b7.svg)](https://www.netlify.com)
 
 This is the source code of [my website](https://fabianschultz.com).
 
@@ -11,5 +12,3 @@ This is the source code of [my website](https://fabianschultz.com).
     $ open http://localhost:8000
 
 ****
-
-[![Deploys by Netlify](https://res.cloudinary.com/netlify/image/upload/w_auto,c_scale/global/badges/netlify-dark.svg)](https://www.netlify.com)
