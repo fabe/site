@@ -1,6 +1,51 @@
+$small-width: 480px;
+$medium-width: 1024px;
+$large-width: 1240px;
+
+@font-face {
+  font-family: 'Nitti Grotesk';
+  font-weight: normal;
+  src: url('/fonts/NittiGrotesk-Normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Nitti Grotesk';
+  font-weight: bold;
+  src: url('/fonts/NittiGrotesk-Bold.woff2') format('woff2');
+}
+
+@mixin small {
+  @media (max-width: #{$small-width}) {
+    @content;
+  }
+}
+
+@mixin medium {
+  @media (max-width: #{$medium-width}) {
+    @content;
+  }
+}
+
+@mixin medium-only {
+  @media (max-width: #{$medium-width}) and (min-width: #{$small-width}) {
+    @content;
+  }
+}
+
+@mixin large {
+  @media (max-width: #{$large-width}) {
+    @content;
+  }
+}
+
 :root {
+  --sans-serif: 'Nitti Grotesk', Graphik, Isidora Sans, Tofino, -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   --text-color: #191c1e;
+  --text-color: #000;
   --meta-color: #a0a6ad;
+  --meta-color: #808080;
   --fade-color: #f8f8f9;
   --backdrop: rgba(26, 28, 70, 0.1);
   --unit: 6rem;
@@ -15,20 +60,13 @@
   --h1-max: 54px;
   --viewport-min: 480;
   --viewport-max: 1400;
-}
 
-$small-width: 768px;
-$large-width: 1024px;
-
-@mixin small {
-  @media (max-width: #{$small-width}) {
-    @content;
+  @include medium {
+    --unit: 4rem;
   }
-}
 
-@mixin large {
-  @media (max-width: #{$large-width}) {
-    @content;
+  @include small {
+    --unit: 2rem;
   }
 }
 
@@ -36,6 +74,7 @@ $large-width: 1024px;
 
 * {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 html {
@@ -43,26 +82,37 @@ html {
 }
 
 body {
+  position: relative;
   max-width: var(--outer-rim);
   margin: 0 auto;
   padding: 0;
-  font-size: 1.4rem;
-  line-height: 1.4;
+  font: 140%/1.444 var(--sans-serif);
   font-weight: normal;
-  font-family: Nitti Grotesk, Graphik, Isidora Sans, Tofino, -apple-system,
-    BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   background-color: #fff;
   color: var(--text-color);
-  /* -webkit-font-smoothing: antialiased; */
+  -webkit-font-smoothing: antialiased;
   font-feature-settings: 'liga', 'onum';
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
+
+  @include large {
+    font-size: 120%;
+  }
+
+  @include medium {
+    font-size: 110%;
+  }
+
+  @include small {
+    font-size: 100%;
+  }
 }
 
 p {
-  margin-top: var(--unit-quarter);
-  margin-bottom: var(--unit-quarter);
+  margin-top: 31px;
+  margin-bottom: 31px;
+  // font-family: Adobe Garamond Pro;
+  // line-height: 1.5;
 }
 
 ul p,
@@ -105,44 +155,57 @@ blockquote {
 }
 
 h1 {
-  /* font-size: 3rem; */
-  font-size: calc(30px + (48 - 20) * ((100vw - 480px) / (2000 - 480)));
+  font-size: 2.2em;
+  // font-size: calc(35px + (58 - 30) * ((100vw - 480px) / (2000 - 480)));
   line-height: 1.1;
   letter-spacing: -0.02em;
   font-weight: bold;
-  /* font-family: 'SachsenwaldW04-Regular', Teutura Display; */
+  // font-family: 'SachsenwaldW04-Regular', Teutura Display;
+
+  @include medium {
+    font-size: 3.2em;
+  }
+
+  @include small {
+    font-size: 2.2em;
+  }
 
   em {
     font-style: normal;
     display: inline;
     transform: none;
-    box-shadow: inset 0 -0.1em 0 #fff, inset 0 -0.5em 0 var(--backdrop);
+    // box-shadow: inset 0 -0.1em 0 #fff, inset 0 -0.5em 0 var(--backdrop);
   }
 }
 
-h2 {
-  margin: 0.5rem 0 0;
-  font-size: 2.8rem;
+h2,
+.h2 {
+  margin: 0.3em 0 0;
+  font-size: 1.8em;
   letter-spacing: -0.02em;
-  line-height: 1.1;
+  line-height: 1;
 }
 
-h3 {
+h3,
+.h3 {
   margin: 0.6rem 0 0;
-  font-size: 2.5rem;
+  font-size: 1.6rem;
   letter-spacing: -0.02em;
   line-height: 1;
 }
 
 h6 {
   margin: 3rem 0 0;
-  padding-left: 0.1em;
-  font-size: 1rem;
+  font-size: 0.8em;
   letter-spacing: 0.03em;
   line-height: 1.1;
   font-weight: normal;
   color: var(--meta-color);
   text-transform: uppercase;
+
+  @include small {
+    margin: var(--unit-half) 0 0;
+  }
 }
 
 h1,
@@ -175,13 +238,17 @@ a.external {
   }
 }
 
-img {
+img,
+video {
   max-width: 100%;
+}
+
+video {
+  width: 100%;
 }
 
 figure {
   position: relative;
-  font-size: 1.1rem;
   text-align: center;
   margin: 0 0 var(--unit);
   color: var(--meta-color);
@@ -235,6 +302,36 @@ figcaption {
 
 /* TOPBAR */
 
+@mixin scrolled {
+  position: fixed;
+  top: 0;
+  margin-top: 0;
+  color: var(--text-color);
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(5px);
+}
+
+@keyframes fadeup {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bg {
+  0% {
+    background-color: transparent;
+  }
+  100% {
+    background-color: rgba(0, 0, 0, 0.95);
+  }
+}
+
 .topbar {
   position: absolute;
   width: 100%;
@@ -245,6 +342,23 @@ figcaption {
   transition: background-color 0.13s ease-in-out, box-shadow 0.13s ease-in-out;
   z-index: 2;
 
+  @include medium {
+    @include scrolled;
+    height: 48px;
+  }
+
+  @include small {
+    &:after {
+      position: absolute;
+      top: 48px;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: rgba(#fff, 0.1);
+      content: '';
+    }
+  }
+
   &:before {
     position: absolute;
     top: -100px;
@@ -254,39 +368,130 @@ figcaption {
     opacity: 0;
     transition: opacity 0.13s ease-in-out;
     content: '';
+
+    @include small {
+      display: none;
+    }
   }
 
   &.scrolled {
-    position: fixed;
-    top: 0;
-    margin-top: 0;
-    color: var(--text-color);
-    background-color: rgba(255, 255, 255, 1);
-    box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.15);
-    backdrop-filter: blur(5px);
+    @include scrolled;
   }
 
   &.scrolled:before {
     opacity: 1;
   }
 
+  .name {
+    position: relative;
+    z-index: 1;
+    transition: 0.5s color cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  nav {
+    @include small {
+      display: none;
+    }
+  }
+
+  .menuicon {
+    display: none;
+    position: relative;
+    z-index: 1;
+    height: 48px;
+    width: 48px;
+    margin-right: calc((48px - 21px) / -2);
+    justify-content: center;
+    align-items: center;
+    flex-flow: column wrap;
+
+    @include small {
+      display: flex;
+    }
+
+    .top,
+    .bottom {
+      position: relative;
+      display: block;
+      width: 21px;
+      height: 1px;
+      transition: 0.5s transform cubic-bezier(0.19, 1, 0.22, 1),
+        0.5s color ease-in-out;
+      background-color: #000;
+      border-radius: 2px;
+    }
+
+    .bottom {
+      margin-top: 6px;
+    }
+  }
+
+  .showMenu {
+    .name {
+      color: #fff;
+    }
+    nav {
+      position: fixed;
+      left: 0;
+      top: 0;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.95);
+      color: #fff;
+      font-size: 2em;
+      text-align: center;
+      animation: bg 0.2s ease-out backwards;
+    }
+    .top,
+    .bottom {
+      background-color: #fff;
+    }
+    .top {
+      transform: rotate(-45deg);
+    }
+    .bottom {
+      margin-top: -1px;
+      transform: rotate(45deg);
+    }
+  }
+
   ul {
     list-style: none;
     padding: 0;
     margin: 0;
+
+    @include small {
+      width: 100%;
+    }
   }
 
   li {
     position: relative;
     display: inline-block;
     overflow: visible;
+
     & + li {
       margin-left: var(--unit-half);
+
+      @include small {
+        margin-left: 0;
+        margin-top: var(--unit-half);
+      }
+    }
+
+    @include small {
+      display: block;
+      animation: fadeup 0.5s ease-in-out backwards;
     }
   }
+
   & > .container {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    height: 100%;
   }
 }
 
@@ -331,6 +536,11 @@ header {
     min-height: 100vh;
   }
 
+  @include medium {
+    align-items: flex-end;
+    flex-flow: wrap;
+  }
+
   .dark span {
     color: rgba(0, 0, 0, 0.75);
     text-shadow: none;
@@ -351,13 +561,28 @@ header {
   justify-content: space-between;
   z-index: 1;
 
+  @include medium {
+    padding-top: 0;
+    margin-bottom: 0;
+    height: 100vh;
+  }
+
+  @include medium-only {
+    max-height: 50vh;
+  }
+
   hgroup {
     max-width: calc(50% - var(--unit));
+
+    @include medium {
+      max-width: 100%;
+      margin-bottom: var(--unit);
+    }
   }
 
   h1 {
     margin-top: 1rem;
-    margin-bottom: 0;
+    margin-bottom: 0.5rem;
   }
 
   span {
@@ -365,6 +590,10 @@ header {
     line-height: 1;
     color: rgba(255, 255, 255, 0.75);
     text-shadow: 0 2px 2px rgba(0, 0, 0, 0.15);
+
+    @include medium {
+      display: none;
+    }
 
     img {
       margin-right: 0.5rem;
@@ -381,6 +610,26 @@ header {
   width: 50%;
   height: 100%;
   background-color: var(--text-color);
+  overflow: hidden;
+
+  @include medium {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    left: 0;
+    right: auto;
+  }
+
+  @include medium-only {
+    max-height: 50vh;
+  }
+
+  video {
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
+  }
 }
 
 .bg {
@@ -389,6 +638,10 @@ header {
   height: 100%;
   background-size: cover;
   background-position: 60% center;
+
+  @include medium {
+    background-position: center center;
+  }
 }
 
 /* POSTS */
@@ -408,6 +661,10 @@ header {
 
     &:nth-child(2) {
       margin-right: 0;
+    }
+
+    @include small {
+      flex: 0 0 100%;
     }
   }
 }
@@ -441,7 +698,11 @@ header {
 .post {
   margin-bottom: var(--unit);
 
-  :hover .cover img {
+  @include small {
+    margin-bottom: var(--unit);
+  }
+
+  &:hover .cover img {
     transform: scale(1.05);
   }
 
@@ -472,23 +733,42 @@ article {
 
   & > div {
     width: calc(50% - var(--unit-half));
-    margin-bottom: var(--unit);
+    margin-bottom: var(--unit-double);
     padding-bottom: var(--unit-half);
     padding-right: var(--unit-half);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+    @include small {
+      width: 100%;
+    }
+
     & + div {
       margin-left: auto;
     }
   }
+
+  p {
+    margin-top: 0;
+  }
+
   h6 + p {
-    margin-top: 0.2rem;
+    margin-top: 0.4rem;
     margin-bottom: 1rem;
   }
 }
 
 .block {
   max-width: calc(50% - var(--unit));
-  margin-bottom: var(--unit);
+  margin-bottom: var(--unit-double);
+
+  @include small {
+    max-width: 100%;
+    flex-shrink: 0;
+  }
+
+  &.pull {
+    margin-bottom: var(--unit);
+  }
 
   &.center {
     flex-shrink: 0;
@@ -498,17 +778,32 @@ article {
     margin-right: auto;
     text-align: center;
   }
+
   &.right {
     margin-left: auto;
     margin-right: var(--unit-half);
   }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
 }
 
-article h2 + p,
-article h3 + p,
-article h4 + p {
-  margin-top: 0.5em;
+article h2 + p {
+  margin-top: 1em;
   margin-bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: calc(50% - var(--unit));
+
+  @include medium {
+    max-width: 100%;
+  }
+}
+
+h3 + p,
+article h4 + p {
+  margin-top: var(--unit-half);
 }
 
 article h2,
@@ -564,10 +859,24 @@ footer {
   & > .container {
     display: flex;
     justify-content: space-between;
+
+    @include small {
+      justify-content: center;
+      flex-flow: row wrap;
+    }
   }
 
   span {
+    line-height: 1;
     opacity: 0.5;
+
+    @include small {
+      width: 100%;
+      text-align: center;
+      margin-top: var(--unit);
+      opacity: 0.25;
+      font-size: 1rem;
+    }
   }
 
   ul {
@@ -575,12 +884,20 @@ footer {
     list-style: none;
     padding: 0;
     margin: 0;
+
+    @include small {
+      display: block;
+    }
   }
 
   a {
     opacity: 0.5;
     transition: opacity 0.2s cubic-bezier(0.64, 0.04, 0.35, 1);
     text-decoration: none;
+
+    @include small {
+      display: inline-block;
+    }
 
     &:hover {
       opacity: 1;
@@ -591,6 +908,10 @@ footer {
       /* Don't want anything to be cut off. */
       padding: 1px;
       display: block;
+
+      @include small {
+        width: 32px;
+      }
     }
   }
 
@@ -598,6 +919,15 @@ footer {
     display: flex;
     line-height: 1;
     align-items: center;
+
+    @include small {
+      display: inline-block;
+      margin-right: var(--unit);
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
 
     & + li:before {
       display: inline-block;
@@ -608,6 +938,19 @@ footer {
       margin-right: 1.5rem;
       background-color: rgba(0, 0, 0, 0.1);
       content: '';
+
+      @include small {
+        display: none;
+      }
+    }
+  }
+
+  .email {
+    @include small {
+      display: block;
+      margin-right: 0;
+      margin-bottom: var(--unit);
+      text-align: center;
     }
   }
 }

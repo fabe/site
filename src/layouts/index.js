@@ -12,9 +12,11 @@ class Template extends React.Component {
 
     this.state = {
       scrollTop: 0,
+      showMenu: false,
     };
     this.bar = {};
     this.handleScroll = this.handleScroll.bind(this);
+    this.handleMenuToggle = this.handleMenuToggle.bind(this);
   }
   componentDidMount() {
     this.handleScroll();
@@ -25,6 +27,11 @@ class Template extends React.Component {
   }
   handleScroll() {
     this.setState({ scrollTop: window.scrollY });
+  }
+  handleMenuToggle() {
+    if (window.innerWidth <= 480) {
+      this.setState({ showMenu: !this.state.showMenu });
+    }
   }
   render() {
     const { location, children } = this.props;
@@ -38,21 +45,17 @@ class Template extends React.Component {
             ? 'scrolled'
             : ''}`}
         >
-          <div className="container">
-            <span>
+          <div className={`container${this.state.showMenu ? ' showMenu' : ''}`}>
+            <span className="name">
               <Link to="/">Fabian W. Schultz</Link>
             </span>
-            <nav>
+            <nav onClick={this.handleMenuToggle}>
               <ul>
                 <li>
-                  <Link to="/#work" exact activeClassName="active">
-                    Work
-                  </Link>
+                  <Link to="/#work">Work</Link>
                 </li>
                 <li>
-                  <Link to="/about" activeClassName="active">
-                    About
-                  </Link>
+                  <Link to="/about">About</Link>
                 </li>
                 <li>
                   <a
@@ -64,6 +67,10 @@ class Template extends React.Component {
                 </li>
               </ul>
             </nav>
+            <div className="menuicon" onClick={this.handleMenuToggle}>
+              <span className="top" />
+              <span className="bottom" />
+            </div>
           </div>
         </div>
         {children()}

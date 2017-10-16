@@ -3,6 +3,7 @@ import React from 'react';
 export default ({ children, details }) => (
   <div className="intro">
     <div>
+      <h6>&nbsp;</h6>
       <p>{children}</p>
     </div>
     <div>

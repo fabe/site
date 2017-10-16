@@ -3,37 +3,80 @@ import React from 'react';
 import hero from './hero-v.jpg';
 import location from './icons/location.svg';
 
-export default ({
-  readOn,
-  children,
-  isLocation,
-  scrollTop,
-  caption,
-  cover,
-  slim,
-  dark,
-}) => (
-  <header className={`${slim && 'slim'} ${dark && 'dark'}`}>
-    <div className="meta container">
-      <hgroup>
-        {children}
-        {readOn && (
-          <a className="link read-on" href="#content">
-            Read on
-          </a>
-        )}
-      </hgroup>
-      <span>
-        {isLocation == 'jesus' ? <img src={location} alt="" /> : null}
-        {caption}
-      </span>
-    </div>
+class Header extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      height: '',
+    };
+    this.windowHeight = 0;
+    this.calculateViewportHeight = this.calculateViewportHeight.bind(this);
+  }
+  componentDidMount() {
+    this.windowHeight = window.innerHeight;
+    this.calculateViewportHeight();
+    window.addEventListener('resize', this.calculateViewportHeight);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.calculateViewportHeight);
+  }
+  calculateViewportHeight() {
+    if (this.windowHeight === window.innerHeight) {
+      if (window.innerWidth < 480) {
+        this.setState({
+          height: window.innerHeight,
+        });
+      } else {
+        this.setState({
+          height: '',
+        });
+      }
+    }
 
-    <div className="bg-box">
-      <div
-        className="bg"
-        style={{ backgroundImage: `url(${cover || hero})` }}
-      />
-    </div>
-  </header>
-);
+    this.windowHeight = window.innerHeight;
+  }
+  render() {
+    const {
+      readOn,
+      children,
+      isLocation,
+      scrollTop,
+      caption,
+      cover,
+      slim,
+      dark,
+      video,
+    } = this.props;
+
+    return (
+      <header className={`${slim && 'slim'} ${dark && 'dark'}`}>
+        <div className="meta container" style={{ height: this.state.height }}>
+          <hgroup>
+            {children}
+            {readOn && (
+              <a className="link read-on" href="#content">
+                Read on
+              </a>
+            )}
+          </hgroup>
+          <span>
+            {isLocation == 'jesus' ? <img src={location} alt="" /> : null}
+            {caption}
+          </span>
+        </div>
+        <div className="bg-box" style={{ height: this.state.height }}>
+          {!video ? (
+            <div
+              className="bg"
+              style={{ backgroundImage: `url(${cover || hero})` }}
+            />
+          ) : (
+            <video src={video} autoPlay loop />
+          )}
+        </div>
+      </header>
+    );
+  }
+}
+
+export default Header;

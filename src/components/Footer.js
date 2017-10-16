@@ -9,7 +9,7 @@ export default ({ scrollTop }) => (
     <div className="container">
       <nav>
         <ul>
-          <li>
+          <li className="email">
             <a href="mailto:desk@fabianschultz.com?subject=Inquiry">
               desk@fabianschultz.com
             </a>

@@ -7,6 +7,7 @@ import Block from '~/src/components/Block';
 import Figure from '~/src/components/Figure';
 
 import landing from './landing.png';
+import video from './delivery.mp4';
 
 export const data = {
   isWork: true,
@@ -17,8 +18,14 @@ export const data = {
   cover: '/covers/delivery.png',
   caption: 'An Emoji™ Product',
   dark: true,
-  intro:
-    'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia.',
+  intro: (
+    <span>
+      Around Easter 2017 I decided to work on a simple webapp called{' '}
+      <a href="//use.delivery">Delivery</a> to help designers share their work
+      in progress. I wanted a simple solution, which is reduced to the bare
+      minimum of features and requires neither sign-up nor a credit card.
+    </span>
+  ),
   details: [
     {
       title: 'Responsibility',
@@ -37,39 +44,41 @@ export const data = {
 
 export default () => (
   <Article {...data}>
-    <Figure src={landing} caption="Landing Page" fullWidth background link />
-    <Block align="center">
-      <h2>The Landing Page</h2>
+    <Block align="center" pull>
+      <h2>Features</h2>
       <p>
-        Far far away, behind the word mountains, far from the countries Vokalia.
+        Type in your company/client, upload and describe your screens, then
+        share with collegues. Simple.
       </p>
     </Block>
-    <Figure src={landing} caption="Landing Page" fullWidth background slim />
-    <Figure
-      src={landing}
-      caption="Landing Page"
-      fullWidth
-      background
-      slim
-      align="right"
-    />
+    <Block align="center">
+      <video src={video} autoPlay loop muted />
+    </Block>
+
     <Block>
+      <h3>Goals</h3>
       <p>
-        Far far away, behind the word mountains, far from the countries Vokalia
-        and Consonantia, there live the blind texts. Separated they live in
-        Bookmarksgrove right at the coast of the Semantics, a large language
-        ocean. A small river named Duden flows by their place and supplies it
-        with the necessary regelialia.
+        I created Delivery mainly to sharpen my React & MobX skills. Building a
+        simple, yet full webapp from the first line of code to deployment in a
+        matter of roughly 3 days was a great experience. I drew inspiration from
+        makers like <a href="//twitter.com/levelsio">Pieter Levels</a> and their
+        no-nonsense approach to launching new products & experiments early and
+        often.
       </p>
     </Block>
 
     <Block align="right">
+      <h3>Technology</h3>
       <p>
-        Far far away, behind the word mountains, far from the countries Vokalia
-        and Consonantia, there live the blind texts. Separated they live in
-        Bookmarksgrove right at the coast of the Semantics, a large language
-        ocean. A small river named Duden flows by their place and supplies it
-        with the necessary regelialia.
+        The project is built on top of my{' '}
+        <a href="//github.com/fabe/www">personal boilerplate</a>, featuring
+        React, MobX, Next.js and MongoDB. I am hosting the images on{' '}
+        <span className="caps">AWS</span>, and run the backend on a{' '}
+        <a href="//linode.com">Linode</a> server.
+      </p>
+      <p>
+        The full source code is{' '}
+        <a href="//github.com/fabe/delivery">available on GitHub</a>.
       </p>
     </Block>
   </Article>

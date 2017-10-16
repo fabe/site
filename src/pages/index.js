@@ -18,7 +18,7 @@ class BlogIndex extends React.Component {
         <Header caption="Portofino, Italy" isLocation>
           <h1>
             Hello, I'm Fabian &mdash; a <em>product designer and developer</em>{' '}
-            based in Potsdam,&nbsp;Germany.
+            based in Potsdam, Germany.
           </h1>
         </Header>
         <Posts posts={work} />

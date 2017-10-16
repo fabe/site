@@ -8,7 +8,7 @@ export default ({ post }) => (
         <img src={post.node.data.cover} alt={post.node.data.title} />
       </div>
       <h6>{post.node.data.subtitle}</h6>
-      <h3>{post.node.data.title}</h3>
+      <h2>{post.node.data.title}</h2>
     </Link>
   </div>
 );

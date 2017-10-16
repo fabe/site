@@ -4,7 +4,7 @@ import Header from '../components/Header';
 export default ({ posts }) => (
   <div>
     <Header slim caption="Portofino, Italy">
-      <h1>About</h1>
+      <h1 className="h3">About</h1>
       <p>
         As a designer, I like to focus on projects in the travel and leisure
         industry. I work both as a product designer and a frontend developer.
