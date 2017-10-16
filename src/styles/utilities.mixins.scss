@@ -1,0 +1,35 @@
+/*
+ * Mixins
+ * ======
+ *
+ */
+
+@mixin small {
+  @media (max-width: #{$small-width}) {
+    @content;
+  }
+}
+
+@mixin smedium {
+  @media (max-width: #{$smedium-width}) {
+    @content;
+  }
+}
+
+@mixin medium {
+  @media (max-width: #{$medium-width}) {
+    @content;
+  }
+}
+
+@mixin medium-only {
+  @media (max-width: #{$medium-width}) and (min-width: #{$small-width}) {
+    @content;
+  }
+}
+
+@mixin large {
+  @media (max-width: #{$large-width}) {
+    @content;
+  }
+}

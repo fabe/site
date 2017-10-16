@@ -1,0 +1,27 @@
+/*
+ * Keyframes
+ * =========
+ *
+ */
+
+@keyframes fadeup {
+  0% {
+    transform: translateY(15px);
+
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+
+    opacity: 1;
+  }
+}
+
+@keyframes bg {
+  0% {
+    background-color: transparent;
+  }
+  100% {
+    background-color: rgba(0, 0, 0, 0.95);
+  }
+}

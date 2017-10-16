@@ -1,0 +1,41 @@
+/*
+ * Reset
+ * =====
+ *
+ */
+
+img,
+video {
+  max-width: 100%;
+}
+
+video {
+  width: 100%;
+}
+
+ul p,
+ol p {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+
+  list-style-position: outside;
+}
+
+ul ul,
+ul ol,
+ol ol {
+  padding-left: var(--unit-quarter);
+}
+
+hr {
+  height: 1px;
+  margin-top: 0;
+  margin-bottom: var(--unit);
+
+  border: none;
+  background-color: rgba(0, 0, 0, 0.1);
+}

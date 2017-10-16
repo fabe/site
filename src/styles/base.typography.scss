@@ -1,0 +1,123 @@
+/*
+ * Typography
+ * ==========
+ *
+ */
+
+h1 {
+  font-size: 3vw;
+  font-weight: bold;
+  line-height: 1.1;
+
+  letter-spacing: -0.02em;
+
+  @include large {
+    font-size: 2.2em;
+  }
+  @include medium {
+    font-size: 3em;
+  }
+  @include small {
+    font-size: 2.2em;
+  }
+
+  em {
+    font-style: normal;
+
+    display: inline;
+
+    transform: none;
+    // box-shadow: inset 0 -0.1em 0 #fff, inset 0 -0.5em 0 var(--backdrop);
+  }
+}
+
+h2,
+.h2 {
+  font-size: 1.8em;
+  line-height: 1;
+
+  margin: 0.3em 0 0;
+
+  letter-spacing: -0.02em;
+}
+
+h3,
+.h3 {
+  font-size: 1.6rem;
+  line-height: 1;
+
+  margin: 0.6rem 0 0;
+
+  letter-spacing: -0.02em;
+}
+
+h6 {
+  font-size: 0.8em;
+  font-weight: normal;
+  line-height: 1.1;
+
+  margin: 3rem 0 0;
+
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+
+  color: var(--meta-color);
+
+  @include small {
+    margin: var(--unit) 0 0;
+  }
+}
+
+a {
+  text-decoration: underline;
+
+  color: inherit;
+
+  text-decoration-skip: ink;
+}
+
+a.external {
+  position: relative;
+
+  margin-right: 0.8em;
+
+  &:before {
+    position: absolute;
+    right: -0.8em;
+
+    display: block;
+
+    padding-left: 0.8em;
+
+    content: '\2197';
+    text-align: right;
+  }
+}
+
+p {
+  margin-top: 31px;
+  margin-bottom: 31px;
+}
+
+em {
+  font-style: normal;
+
+  display: inline-block;
+
+  transform: skewX(-8deg);
+}
+
+blockquote {
+  margin: 0;
+  padding-left: 2em;
+
+  p {
+    color: var(--meta-color);
+  }
+}
+
+.caps {
+  font-feature-settings: 'smcp', 'c2sc', 'lnum';
+
+  letter-spacing: 0.05em;
+}

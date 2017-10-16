@@ -1,0 +1,127 @@
+/*
+ * Footer
+ * ======
+ *
+ */
+
+footer {
+  padding: var(--unit) 0;
+
+  background-color: var(--fade-color);
+
+  & > .container {
+    display: flex;
+
+    @include small {
+      justify-content: center;
+      flex-flow: row wrap;
+    }
+
+    justify-content: space-between;
+  }
+
+  span {
+    line-height: 1;
+
+    opacity: 0.5;
+
+    @include small {
+      font-size: 1rem;
+
+      width: 100%;
+      margin-top: var(--unit);
+
+      text-align: center;
+
+      opacity: 0.25;
+    }
+  }
+
+  ul {
+    display: flex;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+
+    @include small {
+      display: block;
+    }
+  }
+
+  a {
+    transition: opacity 0.2s cubic-bezier(0.64, 0.04, 0.35, 1);
+    text-decoration: none;
+
+    opacity: 0.5;
+
+    @include small {
+      display: inline-block;
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+
+    img {
+      display: block;
+
+      width: 16px;
+      /* Don't want anything to be cut off. */
+      padding: 1px;
+
+      @include small {
+        width: 32px;
+      }
+    }
+  }
+
+  li {
+    line-height: 1;
+
+    display: flex;
+
+    @include small {
+      display: inline-block;
+
+      margin-right: var(--unit);
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    align-items: center;
+
+    & + li:before {
+      position: relative;
+
+      display: inline-block;
+
+      width: 1px;
+      height: 24px;
+      margin-right: 1.5rem;
+      margin-left: 1.5rem;
+
+      content: '';
+
+      background-color: rgba(0, 0, 0, 0.1);
+
+      @include small {
+        display: none;
+      }
+    }
+  }
+
+  .email {
+    @include small {
+      display: block;
+
+      margin-right: 0;
+      margin-bottom: var(--unit);
+
+      text-align: center;
+    }
+  }
+}

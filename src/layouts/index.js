@@ -4,7 +4,7 @@ import Link from 'gatsby-link';
 
 import Footer from '../components/Footer';
 
-import './index.scss';
+import '~/src/styles/style.scss';
 
 class Template extends React.Component {
   constructor() {

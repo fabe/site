@@ -1,0 +1,51 @@
+/*
+ * Base
+ * ====
+ *
+ */
+
+* {
+  box-sizing: border-box;
+
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+html {
+  background-color: var(--fade-color);
+}
+
+body {
+  font: 140%/1.444 var(--sans-serif);
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'liga', 'onum';
+  text-rendering: optimizeLegibility;
+
+  position: relative;
+
+  overflow-x: hidden;
+
+  max-width: var(--outer-rim);
+  margin: 0 auto;
+  padding: 0;
+
+  color: var(--text-color);
+  background-color: #fff;
+
+  @include large {
+    font-size: 120%;
+  }
+  @include medium {
+    font-size: 110%;
+  }
+  @include small {
+    font-size: 100%;
+  }
+}
+
+.container {
+  position: relative;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 var(--unit-half);
+}

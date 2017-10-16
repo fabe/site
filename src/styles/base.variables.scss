@@ -1,0 +1,42 @@
+/*
+ * Variables
+ * =========
+ *
+ */
+
+$small-width: 480px;
+$smedium-width: 770px;
+$medium-width: 1024px;
+$large-width: 1240px;
+
+:root {
+  --sans-serif: 'Nitti Grotesk', Graphik, Isidora Sans, Tofino, -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  --text-color: #191c1e;
+  --text-color: #000;
+  --meta-color: #a0a6ad;
+  --meta-color: #808080;
+  --fade-color: #f8f8f9;
+  --backdrop: rgba(26, 28, 70, 0.1);
+  --unit: 6rem;
+  --unit-half: calc(var(--unit) / 2);
+  --unit-quarter: calc(var(--unit) / 4);
+  --unit-double: calc(var(--unit) * 2);
+
+  --content-width: calc(100vw - var(--unit));
+  --outer-rim: 2000px;
+
+  --h1-min: 20px;
+  --h1-max: 54px;
+  --viewport-min: 480;
+  --viewport-max: 1400;
+
+  @include medium {
+    --unit: 4rem;
+  }
+
+  @include small {
+    --unit: 2rem;
+  }
+}

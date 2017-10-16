@@ -1,0 +1,19 @@
+/*
+ * Fonts
+ * =====
+ *
+ */
+
+@font-face {
+  font-family: 'Nitti Grotesk';
+  font-weight: normal;
+
+  src: url('/fonts/NittiGrotesk-Normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Nitti Grotesk';
+  font-weight: bold;
+
+  src: url('/fonts/NittiGrotesk-Bold.woff2') format('woff2');
+}
