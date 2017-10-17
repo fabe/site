@@ -46,6 +46,7 @@ class Header extends React.Component {
       dark,
       video,
       external,
+      caption,
     } = this.props;
 
     return (
@@ -64,6 +65,7 @@ class Header extends React.Component {
                 Visit website
               </a>
             ) : null}
+            {caption}
           </span>
         </div>
         <div className="bg-box" style={{ height: this.state.height }}>

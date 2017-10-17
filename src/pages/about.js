@@ -1,8 +1,10 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 import Header from '../components/Header';
 
 export default ({ posts }) => (
   <div>
+    <Helmet title="About | Fabian W. Schultz" />
     <Header caption="Portofino, Italy">
       <h1 className="h3">About</h1>
       <p>

@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Helmet from 'react-helmet';
 import Link from 'gatsby-link';
 
 import Footer from '../components/Footer';
 
 import '~/src/styles/style.scss';
+import favicon16 from '~/static/favicon-16x16.png';
+import favicon32 from '~/static/favicon-32x32.png';
 
 class Template extends React.Component {
   constructor() {
@@ -14,31 +17,58 @@ class Template extends React.Component {
       scrollTop: 0,
       showMenu: false,
     };
+
     this.bar = {};
     this.handleScroll = this.handleScroll.bind(this);
     this.handleMenuToggle = this.handleMenuToggle.bind(this);
   }
+
   componentDidMount() {
     this.handleScroll();
     window.addEventListener('scroll', this.handleScroll);
   }
+
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
   }
+
   handleScroll() {
     this.setState({ scrollTop: window.scrollY });
   }
+
   handleMenuToggle() {
     if (window.innerWidth <= 480) {
       this.setState({ showMenu: !this.state.showMenu });
     }
   }
+
   render() {
     const { location, children } = this.props;
     const { scrollTop } = this.state;
     let header;
+
     return (
       <div>
+        <Helmet>
+          <link rel="icon" type="image/png" href={favicon32} sizes="32x32" />
+          <link
+            rel="icon"
+            type="image/png"
+            href="/static/favicon-16x16.png"
+            sizes={favicon16}
+          />
+          <meta
+            property="og:description"
+            content="Hello, I'm Fabian — a product designer and developer based in Potsdam, Germany."
+          />
+          <meta
+            property="og:image:url"
+            content="https://fabianschultz.com/static/thumbnail.jpg"
+          />
+          <meta property="og:image:type" content="image/jpeg" />
+          <meta property="og:url" content="https://fabianschultz.com" />
+          <meta property="og:title" content="Fabian W. Schultz" />
+        </Helmet>
         <div
           ref={bar => (this.bar = bar)}
           className={`topbar ${scrollTop > this.bar.offsetHeight

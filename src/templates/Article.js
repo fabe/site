@@ -13,6 +13,7 @@ export default ({
   intro,
   details,
   external,
+  path,
 }) => (
   <div>
     <Header slim readOn cover={cover} dark={dark} external={external}>
@@ -20,7 +21,12 @@ export default ({
       <h1>{title}</h1>
     </Header>
     <article id="content">
-      <Helmet title={`${title} |ddd`} />
+      <Helmet title={`${title} | Fabian W. Schultz`}>
+        <meta property="og:image:url" content={cover} />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:url" content={`https://fabianschultz.com${path}`} />
+        <meta property="og:title" content={`${title} | Fabian W. Schultz`} />
+      </Helmet>
       <div className="container">
         <Intro details={details}>{intro}</Intro>
         {children}
