@@ -41,7 +41,6 @@ class Header extends React.Component {
       children,
       isLocation,
       scrollTop,
-      caption,
       cover,
       slim,
       dark,
@@ -52,22 +51,19 @@ class Header extends React.Component {
     return (
       <header className={`${slim && 'slim'} ${dark && 'dark'}`}>
         <div className="meta container" style={{ height: this.state.height }}>
-          <hgroup>
-            {children}
+          <hgroup>{children}</hgroup>
+          <span>
+            {isLocation == 'jesus' ? <img src={location} alt="" /> : null}
             {readOn && (
-              <a className="link read-on" href="#content">
+              <a className="button secondary" href="#content">
                 Read on
               </a>
             )}
-          </hgroup>
-          <span>
-            {isLocation == 'jesus' ? <img src={location} alt="" /> : null}
             {external ? (
               <a href={external} className="button">
                 Visit website
               </a>
             ) : null}
-            {caption}
           </span>
         </div>
         <div className="bg-box" style={{ height: this.state.height }}>

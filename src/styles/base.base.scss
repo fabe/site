@@ -69,4 +69,12 @@ body {
   &:hover {
     transform: scale(1.1);
   }
+
+  &.secondary {
+    background-color: var(--meta-color);
+  }
+
+  & + .button {
+    margin-left: 1rem;
+  }
 }

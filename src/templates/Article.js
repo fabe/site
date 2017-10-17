@@ -7,7 +7,6 @@ import Intro from '../components/Intro';
 export default ({
   children,
   cover,
-  caption,
   dark,
   subtitle,
   title,
@@ -16,13 +15,7 @@ export default ({
   external,
 }) => (
   <div>
-    <Header
-      slim
-      cover={cover}
-      caption={caption}
-      dark={dark}
-      external={external}
-    >
+    <Header slim readOn cover={cover} dark={dark} external={external}>
       <h6>{subtitle}</h6>
       <h1>{title}</h1>
     </Header>

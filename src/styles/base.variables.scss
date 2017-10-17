@@ -4,6 +4,7 @@
  *
  */
 
+// For breakpoint mixins.
 $small-width: 600px;
 $smedium-width: 770px;
 $medium-width: 1024px;
@@ -18,7 +19,7 @@ $large-width: 1240px;
   --meta-color: #a0a6ad;
   --meta-color: #808080;
   --fade-color: #f8f8f9;
-  --accent-color: #4bbbec;
+  --accent-color: #13ba6c;
   --backdrop: rgba(26, 28, 70, 0.1);
   --unit: 6rem;
   --unit-half: calc(var(--unit) / 2);
