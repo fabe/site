@@ -1,6 +1,6 @@
 import React from 'react';
 
-import hero from './hero-v.jpg';
+import hero from '~/static/covers/default.jpg';
 import location from './icons/location.svg';
 
 class Header extends React.Component {
@@ -46,6 +46,7 @@ class Header extends React.Component {
       slim,
       dark,
       video,
+      external,
     } = this.props;
 
     return (
@@ -61,6 +62,11 @@ class Header extends React.Component {
           </hgroup>
           <span>
             {isLocation == 'jesus' ? <img src={location} alt="" /> : null}
+            {external ? (
+              <a href={external} className="button">
+                Visit website
+              </a>
+            ) : null}
             {caption}
           </span>
         </div>

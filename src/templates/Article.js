@@ -13,9 +13,16 @@ export default ({
   title,
   intro,
   details,
+  external,
 }) => (
   <div>
-    <Header slim cover={cover} caption={caption} dark={dark}>
+    <Header
+      slim
+      cover={cover}
+      caption={caption}
+      dark={dark}
+      external={external}
+    >
       <h6>{subtitle}</h6>
       <h1>{title}</h1>
     </Header>

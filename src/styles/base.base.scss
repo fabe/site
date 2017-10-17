@@ -45,7 +45,28 @@ body {
 
 .container {
   position: relative;
+
   max-width: var(--content-width);
   margin: 0 auto;
   padding: 0 var(--unit-half);
+}
+
+.button {
+  font-size: 1.1rem;
+  font-weight: bold;
+
+  display: inline-block;
+
+  padding: 0.8rem 1.2rem;
+
+  transition: 0.2s transform cubic-bezier(0, 0.405, 0, 1.285);
+  text-decoration: none;
+
+  color: #fff;
+  border-radius: 5px;
+  background-color: var(--accent-color);
+
+  &:hover {
+    transform: scale(1.1);
+  }
 }

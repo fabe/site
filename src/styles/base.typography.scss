@@ -27,7 +27,8 @@ h1 {
     display: inline;
 
     transform: none;
-    // box-shadow: inset 0 -0.1em 0 #fff, inset 0 -0.5em 0 var(--backdrop);
+
+    box-shadow: inset 0 -0.1em 0 #fff, inset 0 -0.5em 0 var(--backdrop);
   }
 }
 

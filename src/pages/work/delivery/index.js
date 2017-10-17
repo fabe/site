@@ -16,8 +16,7 @@ export const data = {
   date: '2015-05-28T22:40:32.169Z',
   path: '/work/delivery',
   cover: '/covers/delivery.png',
-  caption: 'An Emoji™ Product',
-  dark: true,
+  external: 'https://use.delivery',
   intro: (
     <span>
       Around Easter 2017 I decided to work on a simple webapp called{' '}

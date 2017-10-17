@@ -12,14 +12,16 @@ header {
   min-height: 100vh;
 
   @include medium {
+    animation: none;
+
     align-items: flex-end;
     flex-flow: wrap;
   }
 
   align-items: flex-end;
 
-  .slim {
-    min-height: 100vh;
+  &.slim {
+    animation: shrink 0.8s 1s cubic-bezier(0.19, 1, 0.22, 1) forwards;
   }
 
   .dark span {
@@ -39,6 +41,7 @@ header {
   display: flex;
 
   width: 100%;
+  min-height: 300px;
   margin-bottom: var(--unit);
   padding-top: var(--unit-double);
 
@@ -48,7 +51,8 @@ header {
     padding-top: 0;
   }
   @include medium-only {
-    max-height: 50vh;
+    max-height: calc(50vh - 48px);
+    margin-top: 48px;
   }
 
   align-items: flex-end;
@@ -98,6 +102,7 @@ header {
 
   width: 50%;
   height: 100%;
+  min-height: 300px;
 
   background-color: var(--text-color);
 
