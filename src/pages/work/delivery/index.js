@@ -6,7 +6,6 @@ import Article from '~/src/templates/Article';
 import Block from '~/src/components/Block';
 import Figure from '~/src/components/Figure';
 
-import landing from './landing.png';
 import video from './delivery.mp4';
 
 export const data = {
@@ -15,7 +14,7 @@ export const data = {
   subtitle: 'Delivery',
   date: '2015-05-28T22:40:32.169Z',
   path: '/work/delivery',
-  cover: '/covers/delivery.png',
+  cover: '/covers/webp/delivery.webp',
   external: 'https://use.delivery',
   intro: (
     <span>

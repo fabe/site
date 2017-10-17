@@ -1,6 +1,6 @@
 import React from 'react';
 
-import hero from '~/static/covers/default.jpg';
+import hero from '~/static/covers/webp/default.webp';
 import location from './icons/location.svg';
 
 class Header extends React.Component {
