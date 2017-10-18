@@ -15,25 +15,34 @@ class Template extends React.Component {
 
     this.state = {
       scrollTop: 0,
+      offsetTop: 80,
       showMenu: false,
     };
 
     this.bar = {};
     this.handleScroll = this.handleScroll.bind(this);
+    this.handleResize = this.handleResize.bind(this);
     this.handleMenuToggle = this.handleMenuToggle.bind(this);
   }
 
   componentDidMount() {
     this.handleScroll();
+    this.handleResize();
     window.addEventListener('scroll', this.handleScroll);
+    window.addEventListener('resize', this.handleResize);
   }
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
+    window.removeEventListener('resize', this.handleResize);
   }
 
   handleScroll() {
     this.setState({ scrollTop: window.scrollY });
+  }
+
+  handleResize() {
+    this.setState({ offsetTop: this.bar.offsetTop });
   }
 
   handleMenuToggle() {
@@ -46,6 +55,7 @@ class Template extends React.Component {
     const { location, children } = this.props;
     const { scrollTop } = this.state;
     let header;
+    console.log(this.bar.offsetHeight);
 
     return (
       <div>
@@ -71,7 +81,7 @@ class Template extends React.Component {
         </Helmet>
         <div
           ref={bar => (this.bar = bar)}
-          className={`topbar ${scrollTop > this.bar.offsetHeight
+          className={`topbar ${scrollTop > this.state.offsetTop
             ? 'scrolled'
             : ''}`}
         >

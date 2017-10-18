@@ -6,20 +6,25 @@ import location from './icons/location.svg';
 class Header extends React.Component {
   constructor() {
     super();
+
     this.state = {
       height: '',
     };
+
     this.windowHeight = 0;
     this.calculateViewportHeight = this.calculateViewportHeight.bind(this);
   }
+
   componentDidMount() {
     this.windowHeight = window.innerHeight;
     this.calculateViewportHeight();
     window.addEventListener('resize', this.calculateViewportHeight);
   }
+
   componentWillUnmount() {
     window.removeEventListener('resize', this.calculateViewportHeight);
   }
+
   calculateViewportHeight() {
     if (this.windowHeight === window.innerHeight) {
       if (window.innerWidth < 480) {
@@ -35,6 +40,7 @@ class Header extends React.Component {
 
     this.windowHeight = window.innerHeight;
   }
+
   render() {
     const {
       readOn,
