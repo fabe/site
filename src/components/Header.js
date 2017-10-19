@@ -1,7 +1,7 @@
 import React from 'react';
 
 import hero from '~/static/covers/webp/default.webp';
-import location from './icons/location.svg';
+import location from '~/static/icons/location.svg';
 
 class Header extends React.Component {
   constructor() {
@@ -45,8 +45,6 @@ class Header extends React.Component {
     const {
       readOn,
       children,
-      isLocation,
-      scrollTop,
       cover,
       slim,
       dark,
@@ -56,11 +54,10 @@ class Header extends React.Component {
     } = this.props;
 
     return (
-      <header className={`${slim && 'slim'} ${dark && 'dark'}`}>
+      <header className={`${slim ? 'slim' : ''}${dark ? ' dark' : ''}`}>
         <div className="meta container" style={{ height: this.state.height }}>
           <hgroup>{children}</hgroup>
           <span>
-            {isLocation == 'jesus' ? <img src={location} alt="" /> : null}
             {readOn && (
               <a className="button secondary" href="#content">
                 Read on

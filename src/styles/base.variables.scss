@@ -11,13 +11,14 @@ $medium-width: 1024px;
 $large-width: 1240px;
 
 :root {
-  --sans-serif: 'Nitti Grotesk', Graphik, Isidora Sans, Tofino, -apple-system,
-    BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  --sans-serif-fallback: -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol';
+  --sans-serif: 'Nitti Grotesk', Graphik, Isidora Sans, Tofino,
+    var(--sans-serif-fallback);
   --text-color: #191c1e;
-  --text-color: #000;
   --meta-color: #a0a6ad;
-  --meta-color: #808080;
+  --meta-color: #777;
   --fade-color: #f8f8f9;
   --accent-color: #13ba6c;
   --backdrop: rgba(26, 28, 70, 0.1);

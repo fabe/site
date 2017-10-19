@@ -12,7 +12,7 @@ export const data = {
   isWork: true,
   title: 'Share your design work, clutter-free',
   subtitle: 'Delivery',
-  date: '2015-05-28T22:40:32.169Z',
+  date: '2017-04-01T10:00:00.284Z',
   path: '/work/delivery',
   cover: '/covers/webp/delivery.webp',
   external: 'https://use.delivery',

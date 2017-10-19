@@ -10,7 +10,7 @@ export const data = {
   isWork: true,
   title: 'Helping athletes to cope with injuries',
   subtitle: 'DSK Companion',
-  date: '2015-05-28T22:40:32.169Z',
+  date: '2017-07-01T10:00:00.284Z',
   path: '/work/dsk-companion',
   cover: '/covers/dsk.png',
   caption: 'A Google Design Sprint',

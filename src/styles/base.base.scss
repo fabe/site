@@ -14,6 +14,12 @@ html {
   background-color: var(--fade-color);
 }
 
+html.wf-loading {
+  body {
+    font: 120%/1.444 var(--sans-serif-fallback);
+  }
+}
+
 body {
   font: 140%/1.444 var(--sans-serif);
   font-weight: normal;
