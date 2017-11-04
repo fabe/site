@@ -50,8 +50,10 @@ export default props => (
       </p>
     </Block>
     <hr />
-    <Block align="center" pull>
+    <Block pull>
       <h2>See it live</h2>
+    </Block>
+    <Block align="right" pull>
       <a href="http://metroc.ca" className="button">
         Visit metroc.ca
       </a>

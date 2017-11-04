@@ -66,23 +66,20 @@ export default props => (
     </Block>
 
     <Block align="center">
-      <Figure video src={homepage} />
+      <Figure video src={homepage} background />
+    </Block>
+
+    <Block align="center" pull>
+      <h2>Momenta for the Web</h2>
+      <p>
+        Sharing and embedding{' '}
+        <a href="http://www.momenta.io/m/Hfyb0pHLXt1wlVBSepvZ">moments</a>{' '}
+        outside of the App.
+      </p>
     </Block>
 
     <Block align="center">
-      <Figure
-        src={share1}
-        caption={
-          <p>
-            We launched Momenta for the web, which enabled{' '}
-            <a href="http://www.momenta.io/m/Hfyb0pHLXt1wlVBSepvZ">
-              sharing and embedding moments
-            </a>{' '}
-            outside of the App.
-          </p>
-        }
-        background
-      />
+      <Figure src={share1} background />
     </Block>
 
     <Block vc>

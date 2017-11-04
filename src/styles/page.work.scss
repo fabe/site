@@ -87,7 +87,7 @@ article {
 
       &:after {
         width: var(--unit);
-        height: 1px;
+        height: 2px;
         margin-left: 0.85rem;
 
         content: '';
@@ -99,7 +99,7 @@ article {
 }
 
 .block {
-  max-width: calc(50% - var(--unit));
+  max-width: calc(50% - var(--unit-half));
   margin-bottom: var(--unit-double);
 
   @include small {
@@ -123,8 +123,16 @@ article {
     flex-shrink: 0;
   }
 
+  &.full {
+    width: 100%;
+    max-width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
   &.right {
-    margin-right: var(--unit-half);
+    flex: 1 1 100%;
     margin-left: auto;
   }
 
@@ -136,7 +144,39 @@ article {
     flex-flow: row wrap;
   }
 
+  p {
+    padding-right: var(--unit-half);
+  }
+
   p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.pagination {
+  header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--unit-double);
+  }
+
+  a {
+    color: var(--meta-color);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--accent-color);
+    }
+  }
+
+  h2 {
+    margin: 0;
+  }
+
+  .block,
+  .post {
     margin-bottom: 0;
   }
 }

@@ -5,6 +5,8 @@ import { observer, inject } from 'mobx-react';
 
 import Header from './Header';
 import Intro from './Intro';
+import Post from './Post';
+import Block from './Block';
 import HGroup from './HGroup';
 
 @inject('store')
@@ -24,6 +26,24 @@ class Article extends React.Component {
       transition,
       store,
     } = this.props;
+
+    const index = store.articles.findIndex(
+      article => article.node.data.path == path
+    );
+
+    let nextIndex = index + 1;
+    if (nextIndex === store.articles.length) {
+      nextIndex = 0;
+    }
+
+    let prevIndex = index - 1;
+    if (prevIndex < 0) {
+      prevIndex = store.articles.length - 1;
+    }
+
+    const nextArticle = store.articles[nextIndex];
+    const prevArticle = store.articles[prevIndex];
+    console.log(nextArticle);
 
     return (
       <div style={transition && transition.style}>
@@ -47,6 +67,19 @@ class Article extends React.Component {
             />
           </Helmet>
           <div>{children}</div>
+          <hr />
+          <div className="pagination">
+            <header>
+              <h2>Browse more work</h2>
+              <Link to="/#work">View all</Link>
+            </header>
+            <Block pull>
+              <Post post={prevArticle} />
+            </Block>
+            <Block align="right" pull>
+              <Post post={nextArticle} />
+            </Block>
+          </div>
         </article>
       </div>
     );

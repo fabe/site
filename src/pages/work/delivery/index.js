@@ -10,7 +10,11 @@ import video from './delivery.mp4';
 
 export const data = {
   isWork: true,
-  title: 'Share your design work, clutter-free.',
+  title: (
+    <span>
+      Share your design work,<br />clutter-free.
+    </span>
+  ),
   subtitle: 'Delivery',
   date: '2017-04-01',
   path: '/work/delivery',
@@ -36,13 +40,17 @@ export default props => (
   <Article {...data} {...props}>
     {JSON.stringify(props.data)}
     <Block>
-      Around Easter 2017 I decided to work on a simple webapp called{' '}
-      <a href="//use.delivery">Delivery</a> to help designers share their work
-      in progress.
+      <p>
+        Around Easter 2017 I decided to work on a simple webapp called{' '}
+        <a href="//use.delivery">Delivery</a> to help designers share their work
+        in progress.
+      </p>
     </Block>
     <Block align="right">
-      I wanted a simple solution, which is reduced to the bare minimum of
-      features and requires neither sign-up nor a credit card.
+      <p>
+        I wanted to create a hassle–free solution, which is reduced to the bare
+        minimum of features and requires neither sign-up nor a credit card.
+      </p>
     </Block>
     <hr />
     <Block align="center" pull>
@@ -61,10 +69,12 @@ export default props => (
       <p>
         I created Delivery mainly to sharpen my React & MobX skills. Building a
         simple, yet full webapp from the first line of code to deployment in a
-        matter of roughly 3 days was a great experience. I drew inspiration from
-        makers like <a href="//twitter.com/levelsio">Pieter Levels</a> and their
-        no-nonsense approach to launching new products & experiments early and
-        often.
+        matter of roughly 3 days was a great experience.
+      </p>
+      <p>
+        I drew inspiration from makers like{' '}
+        <a href="//twitter.com/levelsio">Pieter Levels</a> and their no-nonsense
+        approach to launching new products & experiments early and often.
       </p>
     </Block>
 
