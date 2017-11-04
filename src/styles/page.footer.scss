@@ -79,7 +79,6 @@ footer {
     line-height: 1;
 
     display: flex;
-    align-items: center;
 
     @include smedium {
       display: inline-block;
@@ -90,6 +89,8 @@ footer {
         margin-right: 0;
       }
     }
+
+    align-items: center;
 
     a {
       padding: 0 1.5rem;
@@ -116,10 +117,6 @@ footer {
   .email {
     margin-right: 1.5rem;
 
-    a {
-      padding: 0;
-    }
-
     @include smedium {
       display: block;
 
@@ -127,6 +124,10 @@ footer {
       margin-bottom: var(--unit);
 
       text-align: center;
+    }
+
+    a {
+      padding: 0;
     }
   }
 }

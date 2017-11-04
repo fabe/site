@@ -10,8 +10,9 @@
 }
 
 .post:hover h2 {
-  opacity: 1;
   transform: translateY(0);
+
+  opacity: 1;
 }
 
 .cover {
@@ -23,18 +24,23 @@
 
   h2 {
     position: absolute;
+    z-index: 2;
+
+    display: flex;
+
     width: 100%;
     height: 100%;
-    z-index: 2;
-    display: flex;
-    opacity: 0;
-    justify-content: center;
-    transform: translateY(20px);
+
     transition: 1s transform cubic-bezier(0.19, 1, 0.22, 1),
       1s opacity cubic-bezier(0.19, 1, 0.22, 1);
-    align-items: center;
-    text-shadow: 0 0 40px rgba(#000, 0.1);
+    transform: translateY(20px);
+
+    opacity: 0;
     color: #fff;
+    text-shadow: 0 0 40px rgba(#000, 0.1);
+
+    justify-content: center;
+    align-items: center;
   }
 
   &:after {
@@ -49,8 +55,8 @@
     content: '';
     transition: 1s box-shadow cubic-bezier(0.19, 1, 0.22, 1),
       1s background-color cubic-bezier(0.19, 1, 0.22, 1);
-    background-color: rgba(0, 0, 0, 0);
 
+    background-color: rgba(0, 0, 0, 0);
     box-shadow: inset 0 0 0 0 #fff;
   }
 

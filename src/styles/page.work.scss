@@ -67,13 +67,16 @@ article {
   color: var(--meta-color);
 
   ul {
-    padding: 0;
     margin: 0;
+    padding: 0;
+
     list-style: none;
 
     li {
       position: relative;
+
       display: flex;
+
       align-items: center;
 
       & + li {
@@ -84,8 +87,10 @@ article {
         width: var(--unit);
         height: 1px;
         margin-left: 0.85rem;
-        background-color: var(--border-color);
+
         content: '';
+
+        background-color: var(--border-color);
       }
     }
   }
@@ -123,6 +128,7 @@ article {
 
   &.vc {
     display: flex;
+
     align-items: center;
   }
 

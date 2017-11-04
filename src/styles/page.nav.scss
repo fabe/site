@@ -19,8 +19,8 @@
 
 .topbar {
   width: 100%;
-  padding: var(--unit) 0 0;
   margin-bottom: var(--unit-double);
+  padding: var(--unit) 0 0;
 
   transition: background-color 0.13s ease-in-out, box-shadow 0.13s ease-in-out;
 
@@ -89,12 +89,14 @@
 
   li {
     position: relative;
+    z-index: 0;
 
     display: inline-block;
     overflow: visible;
-    z-index: 0;
-    color: var(--meta-color);
+
     transition: color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+    color: var(--meta-color);
 
     @include small {
       display: block;
@@ -129,9 +131,10 @@
 .name {
   position: relative;
   z-index: 1;
-  color: var(--meta-color);
 
   transition: 0.5s color cubic-bezier(0.19, 1, 0.22, 1);
+
+  color: var(--meta-color);
 
   a {
     color: var(--text-color);
