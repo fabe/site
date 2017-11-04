@@ -5,13 +5,13 @@
  */
 
 h1 {
-  font-size: 2.5rem;
-  font-weight: normal;
+  font-size: 2rem;
+  font-family: Dia-Black;
   line-height: 1.2;
 
   margin: 0;
 
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
 
   @include large {
     font-size: 2.2em;
@@ -36,19 +36,18 @@ h1 {
 
 h2,
 .h2 {
-  font-size: 1.8em;
-  font-weight: normal;
+  font-size: 1.5em;
+  font-family: Dia-Black;
   line-height: 1.1;
+  margin-bottom: var(--unit);
 
-  margin: 5px 0 0;
-
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
 }
 
 h3,
 .h3 {
-  font-size: 1.6rem;
-  font-weight: normal;
+  font-size: 1.5rem;
+  font-family: Dia-Black;
   line-height: 1.37;
 
   margin: 0.6rem 0 0;
@@ -58,25 +57,21 @@ h3,
 
 h6 {
   font-size: inherit;
-  font-size: 16px;
+  font-size: inherit;
   font-weight: normal;
   font-feature-settings: 'smcp', 'c2sc', 'lnum';
   line-height: 1;
 
-  display: flex;
+  margin: 1.5em 0 1em;
 
-  margin: 1.5em 0 0.5em;
-
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  // letter-spacing: 1px;
+  // text-transform: uppercase;
 
   color: var(--meta-color);
 
   @include small {
     margin: var(--unit) 0 0;
   }
-
-  align-items: center;
 
   &:after {
     width: var(--unit);
@@ -121,7 +116,7 @@ a.external {
 }
 
 p {
-  margin-top: 28px;
+  margin-top: 0;
   margin-bottom: 28px;
 }
 

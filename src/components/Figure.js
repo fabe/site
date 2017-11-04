@@ -11,9 +11,15 @@ export default ({
   align,
   slim,
   video,
+  marginTop,
+  marginBottom,
 }) => (
   <figure
     className={`${background && 'background'} ${slim && 'slim'} ${align}`}
+    style={{
+      marginTop: marginTop ? '4rem' : '',
+      marginBottom: marginBottom ? '4rem' : 0,
+    }}
   >
     {!video ? (
       <img

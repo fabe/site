@@ -6,7 +6,7 @@
 
 .post:hover .cover:after {
   // box-shadow: inset 0 0 0 10px #fff;
-  background-color: rgba(#191c1e, 0.5);
+  background-color: rgba(#191c1e, 0.75);
 }
 
 .post:hover h2 {
@@ -30,6 +30,7 @@
 
     width: 100%;
     height: 100%;
+    padding: var(--unit);
 
     transition: 1s transform cubic-bezier(0.19, 1, 0.22, 1),
       1s opacity cubic-bezier(0.19, 1, 0.22, 1);
@@ -37,6 +38,7 @@
 
     opacity: 0;
     color: #fff;
+    text-align: center;
     text-shadow: 0 0 40px rgba(#000, 0.1);
 
     justify-content: center;
@@ -76,6 +78,10 @@
 
   &:hover .cover img {
     transform: scale(1.05);
+  }
+
+  h2 {
+    margin: 0;
   }
 
   a {

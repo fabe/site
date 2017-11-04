@@ -16,14 +16,6 @@ export const data = {
   path: '/work/delivery',
   cover: '/covers/webp/delivery.webp',
   external: 'https://use.delivery',
-  intro: (
-    <span>
-      Around Easter 2017 I decided to work on a simple webapp called{' '}
-      <a href="//use.delivery">Delivery</a> to help designers share their work
-      in progress. I wanted a simple solution, which is reduced to the bare
-      minimum of features and requires neither sign-up nor a credit card.
-    </span>
-  ),
   details: [
     {
       title: 'Responsibility',
@@ -46,8 +38,11 @@ export default props => (
     <Block>
       Around Easter 2017 I decided to work on a simple webapp called{' '}
       <a href="//use.delivery">Delivery</a> to help designers share their work
-      in progress. I wanted a simple solution, which is reduced to the bare
-      minimum of features and requires neither sign-up nor a credit card.
+      in progress.
+    </Block>
+    <Block align="right">
+      I wanted a simple solution, which is reduced to the bare minimum of
+      features and requires neither sign-up nor a credit card.
     </Block>
     <hr />
     <Block align="center" pull>
@@ -89,4 +84,3 @@ export default props => (
     </Block>
   </Article>
 );
-

@@ -6,6 +6,8 @@ import Article from '~/src/components/Article';
 import Block from '~/src/components/Block';
 import Figure from '~/src/components/Figure';
 
+import screens from './screens.webp';
+
 export const data = {
   isWork: true,
   title: 'Developing the website for a Toronto-based college',
@@ -22,9 +24,40 @@ export const data = {
     },
     {
       title: 'Date',
-      description: 'Winter 2015',
+      description: 'Mid 2016',
     },
   ],
 };
 
-export default () => <Article {...data}>Yello!</Article>;
+export default () => (
+  <Article {...data}>
+    <Block>
+      <p>
+        Metro College of Technology is a career college, founded in 1992 and
+        located in the dynamic city of Toronto, Ontario. Their mission is to
+        prepare students for today’s competitive job market and develop their
+        long-term career perspectives. (Source:{' '}
+        <a href="http://metroc.ca/about-us">metroc.ca</a>)
+      </p>
+    </Block>
+    <Block align="right">
+      <p>
+        In Mid 2016 I was asked to develop their new website (designed by{' '}
+        <a href="http://killnicole.github.io/">Victoria Leontieva</a>) and help
+        them scale their online enrollment business. Required by the client was
+        a swift transition from their old website, while using the same
+        Wordpress-powered stack.
+      </p>
+    </Block>
+    <hr />
+    <Block align="center" pull>
+      <h2>See it live</h2>
+      <a href="http://metroc.ca" className="button">
+        Visit metroc.ca
+      </a>
+    </Block>
+    <Block align="center">
+      <Figure background src={screens} />
+    </Block>
+  </Article>
+);

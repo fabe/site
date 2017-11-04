@@ -1,6 +1,9 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import Header from '../components/Header';
+import Block from '~/src/components/Block';
+import Figure from '~/src/components/Figure';
+import clients from '~/static/clients.svg';
 
 export default ({ posts }) => (
   <div>
@@ -21,5 +24,15 @@ export default ({ posts }) => (
         </p>
       </div>
     </Header>
+    <article id="content">
+      <div>
+        <hr />
+        <Block align="center">
+          <h6>Some of the companies I've worked with:</h6>
+          <Figure marginTop src={clients} />
+        </Block>
+        <hr />
+      </div>
+    </article>
   </div>
 );

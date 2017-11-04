@@ -7,7 +7,7 @@
 figure {
   position: relative;
 
-  margin: 0 0 var(--unit);
+  margin: 0;
 
   text-align: center;
 
@@ -88,7 +88,7 @@ article {
         height: 1px;
         margin-left: 0.85rem;
 
-        content: '';
+        // content: '';
 
         background-color: var(--border-color);
       }
@@ -130,6 +130,8 @@ article {
     display: flex;
 
     align-items: center;
+    align-content: center;
+    flex-flow: row wrap;
   }
 
   p:last-child {
@@ -139,7 +141,6 @@ article {
 
 article h2 + p {
   max-width: calc(50% - var(--unit));
-  margin-top: 1em;
   margin-right: auto;
   margin-bottom: 0;
   margin-left: auto;
@@ -149,16 +150,11 @@ article h2 + p {
   }
 }
 
-h3 + p,
-article h4 + p {
-  margin-top: var(--unit-half);
-}
-
 article h2,
 article h3,
 article h4,
 article h5,
 article h6 {
   margin-top: 0;
-  margin-bottom: 0;
+  margin-bottom: var(--unit-half);
 }

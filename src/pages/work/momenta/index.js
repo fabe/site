@@ -8,6 +8,7 @@ import Block from '~/src/components/Block';
 import Figure from '~/src/components/Figure';
 
 import share1 from './share-1.webp';
+import action from './action.webp';
 import homepage from './homepage.webm';
 
 export const data = {
@@ -95,6 +96,26 @@ export default () => (
 
     <Block align="right">
       <TweetEmbed id="641689604815462400" align="center" />
+    </Block>
+
+    <hr />
+
+    <Block>
+      <Figure src={action} />
+    </Block>
+
+    <Block align="right" vc>
+      <h3>Goodbye</h3>
+      <p>
+        We eventually sunsetted Momenta to move on to other projects.
+        Nonetheless I've learned a tremendous amount about community building
+        and working remotely in a team.
+      </p>
+      <p>
+        Being 17 years old at the time, I was able to gain a huge amount of
+        insight from my teammates on designing products, building them, and
+        eventually exposing them to the real world.
+      </p>
     </Block>
   </Article>
 );
