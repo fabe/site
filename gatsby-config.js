@@ -16,6 +16,7 @@ module.exports = {
         showSpinner: false,
       },
     },
+    `gatsby-transformer-javascript-static-exports`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -47,7 +48,6 @@ module.exports = {
       },
     },
     `gatsby-transformer-sharp`,
-    `gatsby-transformer-javascript-static-exports`,
     `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-google-analytics`,
@@ -57,6 +57,7 @@ module.exports = {
     },
     `gatsby-plugin-offline`,
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-react-next`,
     {
       resolve: `gatsby-plugin-postcss-sass`,
       options: {

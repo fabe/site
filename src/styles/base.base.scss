@@ -21,10 +21,10 @@ html.wf-loading {
 }
 
 body {
-  font: 140%/1.444 var(--sans-serif);
+  font: 120%/1.444 var(--sans-serif);
   font-weight: normal;
   -webkit-font-smoothing: antialiased;
-  font-feature-settings: 'liga', 'onum';
+  font-feature-settings: 'calt', 'liga', 'hist', 'onum', 'pnum';
   text-rendering: optimizeLegibility;
 
   position: relative;
@@ -55,6 +55,10 @@ body {
   max-width: var(--content-width);
   margin: 0 auto;
   padding: 0 var(--unit-half);
+
+  &.slim {
+    max-width: 650px;
+  }
 }
 
 .button {
@@ -82,5 +86,25 @@ body {
 
   & + .button {
     margin-left: 1rem;
+  }
+}
+
+.grid {
+  display: flex;
+
+  flex-flow: wrap;
+}
+
+.col {
+  margin-right: var(--unit);
+
+  @include smedium {
+    flex: 0 0 100%;
+  }
+
+  flex: 0 0 calc(50% - var(--unit-half));
+
+  &:nth-child(2) {
+    margin-right: 0;
   }
 }

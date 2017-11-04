@@ -1,18 +1,20 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import Link from 'gatsby-link';
-import Article from '~/src/templates/Article';
+import Article from '~/src/components/Article';
 
 import Block from '~/src/components/Block';
 import Figure from '~/src/components/Figure';
 
 export const data = {
   isWork: true,
-  title: 'New website for the privacy‑focused startup Least Authority',
+  title: 'New website for the privacy–focused startup Least Authority',
   subtitle: 'Least Authority',
   date: '2016-09-01T10:00:00.284Z',
   path: '/work/least-authority',
-  cover: '/covers/least-authority.png',
+  cover: '/covers/webp/least-authority.webp',
+  contain: true,
+  background: '#333',
   caption: 'For developers',
   dark: true,
   intro:

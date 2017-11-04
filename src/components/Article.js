@@ -1,8 +1,9 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import Link from 'gatsby-link';
-import Header from '../components/Header';
-import Intro from '../components/Intro';
+import Header from './Header';
+import Intro from './Intro';
+import HGroup from './HGroup';
 
 class Article extends React.Component {
   render() {
@@ -17,15 +18,24 @@ class Article extends React.Component {
       external,
       path,
       data,
+      contain,
+      background,
     } = this.props;
 
     console.log(data);
 
     return (
       <div>
-        <Header cover={cover} external={external}>
-          <h1>{title}</h1>
-          <h6>{subtitle}</h6>
+        <Header
+          cover={cover}
+          external={external}
+          contain={contain}
+          background={background}
+        >
+          <div className="title">
+            <HGroup large title={title} subtitle={subtitle} />
+          </div>
+          <Intro details={details}>{intro}</Intro>
         </Header>
         <article id="content">
           <Helmet title={`${title} | Fabian W. Schultz`}>
@@ -40,10 +50,7 @@ class Article extends React.Component {
               content={`${title} | Fabian W. Schultz`}
             />
           </Helmet>
-          <div className="container">
-            <Intro details={details}>{intro}</Intro>
-            {children}
-          </div>
+          <div>{children}</div>
         </article>
       </div>
     );

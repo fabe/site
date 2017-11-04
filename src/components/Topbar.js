@@ -6,35 +6,11 @@ class Topbar extends React.Component {
     super();
 
     this.state = {
-      scrollTop: 0,
-      offsetTop: 80,
       showMenu: false,
     };
 
     this.topbar = {};
-    this.handleScroll = this.handleScroll.bind(this);
-    this.handleResize = this.handleResize.bind(this);
     this.handleMenuToggle = this.handleMenuToggle.bind(this);
-  }
-
-  componentDidMount() {
-    this.handleScroll();
-    this.handleResize();
-    window.addEventListener('scroll', this.handleScroll);
-    window.addEventListener('resize', this.handleResize);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll);
-    window.removeEventListener('resize', this.handleResize);
-  }
-
-  handleScroll() {
-    this.setState({ scrollTop: window.scrollY });
-  }
-
-  handleResize() {
-    this.setState({ offsetTop: this.topbar.offsetTop });
   }
 
   handleMenuToggle() {
@@ -47,34 +23,39 @@ class Topbar extends React.Component {
     const { scrollTop } = this.state;
 
     return (
-      <div
-        ref={topbar => (this.topbar = topbar)}
-        className={`topbar ${scrollTop > this.state.offsetTop
-          ? 'scrolled'
-          : ''}`}
-      >
-        <div className={`container${this.state.showMenu ? ' showMenu' : ''}`}>
-          <span className="name">
-            <Link to="/">Fabian W. Schultz</Link>
-          </span>
-          <nav onClick={this.handleMenuToggle}>
-            <ul>
-              <li>
-                <Link to="/#work">Work</Link>
-              </li>
-              <li>
-                <Link to="/about">About</Link>
-              </li>
-              <li>
-                <a
-                  className="external"
-                  href="mailto:desk@fabianschultz.com?subject=Inquiry"
-                >
-                  Contact
-                </a>
-              </li>
-            </ul>
-          </nav>
+      <div className="topbar">
+        <div
+          className={`sans-serif grid container${this.state.showMenu
+            ? ' showMenu'
+            : ''}`}
+        >
+          <div className="col">
+            <span className="name">
+              <Link to="/" className="link">
+                Fabian W. Schultz
+              </Link>
+            </span>
+          </div>
+          <div className="col">
+            <nav onClick={this.handleMenuToggle}>
+              <ul>
+                <li>
+                  <Link to="/#work">Work</Link>
+                </li>
+                <li>
+                  <Link to="/about">About</Link>
+                </li>
+                <li>
+                  <a
+                    className="external"
+                    href="mailto:desk@fabianschultz.com?subject=Inquiry"
+                  >
+                    Contact
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
           <div className="menuicon" onClick={this.handleMenuToggle}>
             <span className="top" />
             <span className="bottom" />

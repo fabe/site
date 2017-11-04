@@ -1,7 +1,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import Link from 'gatsby-link';
-import Article from '~/src/templates/Article';
+import Article from '~/src/components/Article';
 
 import Block from '~/src/components/Block';
 import Figure from '~/src/components/Figure';
@@ -12,7 +12,7 @@ export const data = {
   subtitle: 'DSK Companion',
   date: '2017-07-01T10:00:00.284Z',
   path: '/work/dsk-companion',
-  cover: '/covers/dsk.png',
+  cover: '/covers/webp/dsk.webp',
   caption: 'A Google Design Sprint',
   dark: true,
   intro:

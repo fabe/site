@@ -15,7 +15,7 @@ const split = items => {
   });
 
   return (
-    <div className="container">
+    <div className="grid">
       <div className="col">{col1}</div>
       <div className="col">{col2}</div>
     </div>

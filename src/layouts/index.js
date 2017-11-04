@@ -13,7 +13,9 @@ class Template extends React.Component {
     return (
       <div>
         <Topbar />
+        <main className="container">
         {children()}
+        </main>
         <Footer />
       </div>
     );

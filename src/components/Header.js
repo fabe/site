@@ -1,6 +1,6 @@
 import React from 'react';
 
-import hero from '~/static/covers/webp/default.webp';
+import hero from '~/static/covers/hero-bw.jpg';
 import location from '~/static/icons/location.svg';
 
 class Header extends React.Component {
@@ -42,44 +42,28 @@ class Header extends React.Component {
   }
 
   render() {
-    const {
-      readOn,
-      children,
-      cover,
-      slim,
-      dark,
-      video,
-      external,
-      caption,
-    } = this.props;
+    const { children, cover, video, title, contain, background } = this.props;
 
     return (
-      <header className={`${slim ? 'slim' : ''}${dark ? ' dark' : ''}`}>
-        <div className="meta container" style={{ height: this.state.height }}>
-          <hgroup>{children}</hgroup>
-          <span>
-            {readOn && (
-              <a className="button secondary" href="#content">
-                Read on
-              </a>
+      <header className="grid">
+        <div className="col">
+          <div className="figure">
+            {!video ? (
+              <div
+                className="img"
+                style={{
+                  backgroundImage: `url(${cover || hero})`,
+                  backgroundSize: contain ? 'contain' : 'cover',
+                  backgroundColor: background,
+                }}
+              />
+            ) : (
+              <video src={video} autoPlay loop />
             )}
-            {external ? (
-              <a href={external} className="button">
-                Visit website
-              </a>
-            ) : null}
-            {caption}
-          </span>
+          </div>
         </div>
-        <div className="bg-box" style={{ height: this.state.height }}>
-          {!video ? (
-            <div
-              className="bg"
-              style={{ backgroundImage: `url(${cover || hero})` }}
-            />
-          ) : (
-            <video src={video} autoPlay loop />
-          )}
+        <div className="col">
+          <div className="meta">{children}</div>
         </div>
       </header>
     );

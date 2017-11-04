@@ -15,11 +15,21 @@ class BlogIndex extends React.Component {
     return (
       <div>
         <Helmet title={get(this, 'props.data.site.siteMetadata.title')} />
-        <Header caption="Portofino, Italy" isLocation>
-          <h1>
-            Hello, I'm Fabian &mdash; a <em>product designer and developer</em>{' '}
-            based in Potsdam, Germany.
-          </h1>
+        <Header>
+          <div className="title">
+            <h1>
+              Hello, I'm Fabian &mdash; a{' '}
+              <em>product designer and developer</em> based in Potsdam, Germany.
+            </h1>
+          </div>
+          <div className="summary">
+            <p>
+              As a designer, I like to focus on projects in the travel and
+              leisure industry. I work both as a product designer and a frontend
+              developer. Take a look at my work here, or browse my side
+              projects.
+            </p>
+          </div>
         </Header>
         <Posts posts={work} />
       </div>

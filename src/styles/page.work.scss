@@ -43,7 +43,7 @@ figure {
   }
 
   img {
-    max-width: calc(50% - var(--unit));
+    // max-width: calc(50% - var(--unit));
   }
 }
 
@@ -52,15 +52,11 @@ figcaption {
 }
 
 article {
-  line-height: 1.4;
-
   position: relative;
 
   overflow: auto;
 
-  padding-top: var(--unit);
-
-  & > .container {
+  & > div {
     display: flex;
 
     flex-flow: row wrap;
@@ -68,36 +64,30 @@ article {
 }
 
 .intro {
-  display: flex;
+  color: var(--meta-color);
 
-  width: 100%;
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
 
-  flex-flow: row wrap;
+    li {
+      position: relative;
+      display: flex;
+      align-items: center;
 
-  & > div {
-    width: calc(50% - var(--unit-half));
-    margin-bottom: var(--unit-double);
-    padding-right: var(--unit-half);
-    padding-bottom: var(--unit-half);
+      & + li {
+        margin-top: 0.5rem;
+      }
 
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-
-    @include small {
-      width: 100%;
+      &:after {
+        width: var(--unit);
+        height: 1px;
+        margin-left: 0.85rem;
+        background-color: var(--border-color);
+        content: '';
+      }
     }
-
-    & + div {
-      margin-left: auto;
-    }
-  }
-
-  p {
-    margin-top: 0;
-  }
-
-  h6 + p {
-    margin-top: 0.4rem;
-    margin-bottom: 1rem;
   }
 }
 
@@ -129,6 +119,11 @@ article {
   &.right {
     margin-right: var(--unit-half);
     margin-left: auto;
+  }
+
+  &.vc {
+    display: flex;
+    align-items: center;
   }
 
   p:last-child {

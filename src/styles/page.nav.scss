@@ -18,14 +18,9 @@
 }
 
 .topbar {
-  position: absolute;
-  z-index: 2;
-  top: 0;
-
   width: 100%;
-  max-width: var(--outer-rim);
-  margin-top: calc(var(--unit) - var(--unit-quarter));
-  padding: var(--unit-quarter) 0;
+  padding: var(--unit) 0 0;
+  margin-bottom: var(--unit-double);
 
   transition: background-color 0.13s ease-in-out, box-shadow 0.13s ease-in-out;
 
@@ -97,6 +92,9 @@
 
     display: inline-block;
     overflow: visible;
+    z-index: 0;
+    color: var(--meta-color);
+    transition: color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 
     @include small {
       display: block;
@@ -104,8 +102,12 @@
       animation: fadeup 0.5s ease-in-out backwards;
     }
 
+    &:hover {
+      color: var(--text-color);
+    }
+
     & + li {
-      margin-left: var(--unit-half);
+      margin-left: var(--unit);
 
       @include small {
         margin-top: var(--unit-half);
@@ -127,8 +129,13 @@
 .name {
   position: relative;
   z-index: 1;
+  color: var(--meta-color);
 
   transition: 0.5s color cubic-bezier(0.19, 1, 0.22, 1);
+
+  a {
+    color: var(--text-color);
+  }
 }
 
 .menuicon {
@@ -215,11 +222,10 @@
   text-decoration: none;
 }
 
-.topbar a:after,
 .link:after {
   position: absolute;
   z-index: -1;
-  bottom: 10%;
+  bottom: 5%;
   left: 0;
 
   width: 100%;
@@ -235,9 +241,7 @@
   will-change: transform;
 }
 
-.topbar a:hover:after,
-.link:hover:after,
-.topbar a.active:after {
+.link:hover:after {
   transform: scaleX(1);
   transform-origin: left center;
 }

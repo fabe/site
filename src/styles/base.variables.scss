@@ -14,21 +14,23 @@ $large-width: 1240px;
   --sans-serif-fallback: -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
     'Segoe UI Symbol';
-  --sans-serif: 'Nitti Grotesk', Graphik, Isidora Sans, Tofino,
+  --sans-serif: Dia, 'Nitti Grotesk', Graphik, Isidora Sans, Tofino,
     var(--sans-serif-fallback);
   --text-color: #191c1e;
   --meta-color: #a0a6ad;
-  --meta-color: #777;
+  --meta-color: #8e8e8e;
   --fade-color: #f8f8f9;
+  --border-color: rgba(0, 0, 0, 0.1);
   --accent-color: #13ba6c;
   --backdrop: rgba(26, 28, 70, 0.1);
-  --unit: 6rem;
+  --unit: 3rem;
   --unit-half: calc(var(--unit) / 2);
   --unit-quarter: calc(var(--unit) / 4);
   --unit-double: calc(var(--unit) * 2);
 
-  --content-width: calc(100vw - var(--unit));
+  --content-width: 1140px;
   --outer-rim: 2000px;
+  --col-half: calc(50% - var(--unit-half));
 
   --h1-min: 20px;
   --h1-max: 54px;

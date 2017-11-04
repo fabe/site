@@ -6,10 +6,11 @@
 
 header {
   position: relative;
+  margin-bottom: var(--unit-double);
+  height: 100%;
 
   display: flex;
-
-  min-height: 100vh;
+  flex-flow: wrap;
 
   @include medium {
     animation: none;
@@ -18,15 +19,8 @@ header {
     flex-flow: wrap;
   }
 
-  align-items: flex-end;
-
-  &.slim {
-    // animation: shrink 0.8s 1s cubic-bezier(0.19, 1, 0.22, 1) forwards;
-  }
-
-  .dark span {
-    color: rgba(0, 0, 0, 0.75);
-    text-shadow: none;
+  h6 {
+    margin-top: 0;
   }
 
   p:last-child {
@@ -35,73 +29,18 @@ header {
 }
 
 .meta {
-  position: relative;
-  z-index: 1;
-
+  z-index: 3;
   display: flex;
-
-  width: 100%;
-  min-height: 300px;
-  margin-bottom: var(--unit);
-  padding-top: var(--unit-double);
-
-  @include medium {
-    height: 100vh;
-    margin-bottom: 0;
-    padding-top: 0;
-  }
-  @include medium-only {
-    max-height: calc(50vh - 48px);
-    margin-top: 48px;
-  }
-
-  align-items: flex-end;
-  justify-content: space-between;
-
-  hgroup {
-    max-width: calc(50% - var(--unit));
-
-    @include medium {
-      max-width: 100%;
-      margin-bottom: var(--unit);
-    }
-  }
-
-  h1 {
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
-  }
-
-  span {
-    line-height: 1;
-
-    margin-left: auto;
-
-    color: rgba(255, 255, 255, 0.75);
-    // text-shadow: 0 2px 2px rgba(0, 0, 0, 0.15);
-
-    @include medium {
-      display: none;
-    }
-
-    img {
-      height: 24px;
-      margin-right: 0.5rem;
-
-      vertical-align: middle;
-    }
-  }
+  flex-flow: wrap;
+  height: 100%;
+  align-content: space-between;
 }
 
-.bg-box {
-  position: absolute;
-  top: 0;
-  right: 0;
-
+.figure {
+  position: relative;
   overflow: hidden;
 
-  width: 50%;
-  height: 100%;
+  height: 600px;
   min-height: 300px;
 
   background-color: var(--text-color);
@@ -128,13 +67,17 @@ header {
   }
 }
 
-.bg {
+.img {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
 
   opacity: 1;
-  background-position: 60% center;
+  background-position: center;
   background-size: cover;
+  background-repeat: no-repeat;
 
   @include medium {
     background-position: center center;

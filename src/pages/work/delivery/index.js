@@ -1,7 +1,8 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import Link from 'gatsby-link';
-import Article from '~/src/templates/Article';
+import Article from '~/src/components/Article';
+import q from '~/src/articles';
 
 import Block from '~/src/components/Block';
 import Figure from '~/src/components/Figure';
@@ -10,7 +11,7 @@ import video from './delivery.mp4';
 
 export const data = {
   isWork: true,
-  title: 'Share your design work, clutter-free',
+  title: 'Share your design work, clutter-free.',
   subtitle: 'Delivery',
   date: '2017-04-01T10:00:00.284Z',
   path: '/work/delivery',
@@ -40,8 +41,16 @@ export const data = {
   ],
 };
 
-export default () => (
+export default props => (
   <Article {...data}>
+    {JSON.stringify(props.data)}
+    <Block>
+      Around Easter 2017 I decided to work on a simple webapp called{' '}
+      <a href="//use.delivery">Delivery</a> to help designers share their work
+      in progress. I wanted a simple solution, which is reduced to the bare
+      minimum of features and requires neither sign-up nor a credit card.
+    </Block>
+    <hr />
     <Block align="center" pull>
       <h2>Features</h2>
       <p>
@@ -81,3 +90,5 @@ export default () => (
     </Block>
   </Article>
 );
+
+export const query = q;
