@@ -64,9 +64,11 @@ article {
 }
 
 .intro {
+  width: 100%;
   color: var(--meta-color);
 
   ul {
+    width: 100%;
     margin: 0;
     padding: 0;
 
@@ -88,7 +90,7 @@ article {
         height: 1px;
         margin-left: 0.85rem;
 
-        // content: '';
+        content: '';
 
         background-color: var(--border-color);
       }

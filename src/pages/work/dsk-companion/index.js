@@ -6,11 +6,13 @@ import Article from '~/src/components/Article';
 import Block from '~/src/components/Block';
 import Figure from '~/src/components/Figure';
 
+import articleFragment from '~/src/pages';
+
 export const data = {
   isWork: true,
   title: 'Helping athletes to cope with injuries',
   subtitle: 'DSK Companion',
-  date: '2017-07-01T10:00:00.284Z',
+  date: '2017-07-01',
   path: '/work/dsk-companion',
   cover: '/covers/webp/dsk.webp',
   caption: 'A Google Design Sprint',
@@ -29,4 +31,8 @@ export const data = {
   ],
 };
 
-export default () => <Article {...data}>Yello!</Article>;
+export default props => (
+  <Article {...data} {...props}>
+    Yello!
+  </Article>
+);

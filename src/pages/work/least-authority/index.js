@@ -10,7 +10,7 @@ export const data = {
   isWork: true,
   title: 'New website for the privacy–focused startup Least Authority',
   subtitle: 'Least Authority',
-  date: '2016-09-01T10:00:00.284Z',
+  date: '2017-02-01',
   path: '/work/least-authority',
   cover: '/covers/webp/least-authority.webp',
   contain: true,
@@ -35,4 +35,10 @@ export const data = {
   ],
 };
 
-export default () => <Article {...data}>Hello!</Article>;
+export default props => (
+  <Article {...data} {...props}>
+    Hello!
+  </Article>
+);
+
+

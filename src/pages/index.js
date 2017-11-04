@@ -2,19 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import get from 'lodash/get';
 import Helmet from 'react-helmet';
+import { observer, inject } from 'mobx-react';
 
 import Header from '../components/Header';
 import Bio from '../components/Bio';
 import Posts from '../components/Posts';
 
+@inject('store')
+@observer
 class BlogIndex extends React.Component {
   render() {
-    const siteTitle = get(this, 'props.data.site.siteMetadata.title');
-    const work = get(this, 'props.data.allJsFrontmatter.edges');
+    const siteTitle = get(this, 'props.store.site.siteMetadata.title');
+    const articles = get(this, 'props.store.articles');
+    const { transition } = this.props;
 
     return (
-      <div>
-        <Helmet title={get(this, 'props.data.site.siteMetadata.title')} />
+      <div style={transition && transition.style}>
+        <Helmet title={get(this, 'props.store.site.siteMetadata.title')} />
         <Header>
           <div className="title">
             <h1>
@@ -31,7 +35,7 @@ class BlogIndex extends React.Component {
             </p>
           </div>
         </Header>
-        <Posts posts={work} />
+        <Posts posts={articles} />
       </div>
     );
   }
@@ -42,27 +46,3 @@ BlogIndex.propTypes = {
 };
 
 export default BlogIndex;
-
-export const pageQuery = graphql`
-  query IndexQuery {
-    site {
-      siteMetadata {
-        title
-      }
-    }
-    allJsFrontmatter(filter: { data: { isWork: { eq: true } } }) {
-      edges {
-        node {
-          data {
-            error
-            title
-            path
-            cover
-            subtitle
-            isWork
-          }
-        }
-      }
-    }
-  }
-`;

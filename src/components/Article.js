@@ -1,44 +1,40 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import Link from 'gatsby-link';
+import { observer, inject } from 'mobx-react';
+
 import Header from './Header';
 import Intro from './Intro';
 import HGroup from './HGroup';
 
+@inject('store')
+@observer
 class Article extends React.Component {
   render() {
     const {
       children,
       cover,
-      dark,
       subtitle,
       title,
-      intro,
       details,
-      external,
       path,
       data,
       contain,
       background,
+      transition,
+      store,
     } = this.props;
 
-    console.log(data);
-
     return (
-      <div>
-        <Header
-          cover={cover}
-          external={external}
-          contain={contain}
-          background={background}
-        >
+      <div style={transition && transition.style}>
+        <Header cover={cover} contain={contain} background={background}>
           <div className="title">
             <HGroup large title={title} subtitle={subtitle} />
           </div>
-          <Intro details={details}>{intro}</Intro>
+          <Intro details={details} />
         </Header>
         <article id="content">
-          <Helmet title={`${title} | Fabian W. Schultz`}>
+          <Helmet title={`Fabian W. Schultz | ${subtitle}`}>
             <meta property="og:image:url" content={cover} />
             <meta property="og:image:type" content="image/png" />
             <meta
@@ -47,7 +43,7 @@ class Article extends React.Component {
             />
             <meta
               property="og:title"
-              content={`${title} | Fabian W. Schultz`}
+              content={`Fabian W. Schultz | ${subtitle}`}
             />
           </Helmet>
           <div>{children}</div>

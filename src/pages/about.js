@@ -5,9 +5,9 @@ import Block from '~/src/components/Block';
 import Figure from '~/src/components/Figure';
 import clients from '~/static/clients.svg';
 
-export default ({ posts }) => (
-  <div>
-    <Helmet title="About | Fabian W. Schultz" />
+export default ({ posts, transition }) => (
+  <div style={transition && transition.style}>
+    <Helmet title="Fabian W. Schultz | About" />
     <Header>
       <div className="title">
         <h1>About</h1>

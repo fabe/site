@@ -23,7 +23,6 @@ const split = items => {
 };
 
 const preparePosts = posts => {
-  console.log(posts);
   const nodes = posts.map(post => {
     if (post.node.path !== '/404/') {
       return <Post key={post.node.data.path} post={post} />;

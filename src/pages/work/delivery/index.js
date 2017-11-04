@@ -12,7 +12,7 @@ export const data = {
   isWork: true,
   title: 'Share your design work, clutter-free.',
   subtitle: 'Delivery',
-  date: '2017-04-01T10:00:00.284Z',
+  date: '2017-04-01',
   path: '/work/delivery',
   cover: '/covers/webp/delivery.webp',
   external: 'https://use.delivery',
@@ -33,7 +33,7 @@ export const data = {
 };
 
 export default props => (
-  <Article {...data}>
+  <Article {...data} {...props}>
     {JSON.stringify(props.data)}
     <Block>
       Around Easter 2017 I decided to work on a simple webapp called{' '}

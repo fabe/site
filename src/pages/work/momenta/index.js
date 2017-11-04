@@ -15,7 +15,7 @@ export const data = {
   isWork: true,
   title: 'Capture your moments as pictures with sound.',
   subtitle: 'Momenta',
-  date: '2017-07-01T10:00:00.284Z',
+  date: '2013-12-31',
   path: '/work/momenta',
   cover: '/covers/webp/momenta.webp',
   contain: false,
@@ -32,8 +32,8 @@ export const data = {
   ],
 };
 
-export default () => (
-  <Article {...data}>
+export default props => (
+  <Article {...data} {...props}>
     <Block>
       <p>
         During my internship at{' '}
