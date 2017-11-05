@@ -42,7 +42,7 @@ export const query = graphql`
     hero: file(relativePath: { eq: "hero-bw.jpg" }) {
       childImageSharp {
         sizes(maxWidth: 1400, quality: 90) {
-          ...GatsbyImageSharpSizes
+          ...GatsbyImageSharpSizes_withWebp
         }
       }
     }

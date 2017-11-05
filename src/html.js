@@ -45,18 +45,6 @@ module.exports = class HTML extends React.Component {
           <meta property="og:url" content="https://fabianschultz.com" />
           <meta property="og:title" content="Fabian W. Schultz" />
           <meta name="theme-color" content="#13ba6c" />
-          <script src="/vendor/webfont.js" />
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-                WebFont.load({
-                  custom: {
-                    families: ['Nitti Grotesk'],
-                  },
-                });
-          `,
-            }}
-          />
           {this.props.headComponents}
           {css}
         </head>

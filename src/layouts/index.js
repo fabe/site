@@ -81,8 +81,8 @@ export const pageQuery = graphql`
               childImageSharp {
                 # Specify the image processing steps right in the query
                 # Makes it trivial to update as your page's design changes.
-                sizes(maxWidth: 1400, quality: 90) {
-                  ...GatsbyImageSharpSizes
+                sizes(maxWidth: 1400, quality: 95) {
+                  ...GatsbyImageSharpSizes_withWebp
                 }
               }
             }
