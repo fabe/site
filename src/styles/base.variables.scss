@@ -6,9 +6,8 @@
 
 // For breakpoint mixins.
 $small-width: 600px;
-$smedium-width: 770px;
 $medium-width: 1024px;
-$large-width: 1240px;
+$large-width: 1140px;
 
 :root {
   --sans-serif-fallback: -apple-system, BlinkMacSystemFont, 'Segoe UI',
@@ -38,10 +37,10 @@ $large-width: 1240px;
   --viewport-max: 1400;
 
   @include medium {
-    --unit: 4rem;
+    --unit: 2rem;
   }
 
   @include small {
-    --unit: 2rem;
+    --unit: 1.5rem;
   }
 }

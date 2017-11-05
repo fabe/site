@@ -15,7 +15,7 @@ class Header extends React.Component {
     const { children, cover, video, title, contain, background } = this.props;
 
     return (
-      <header className="grid">
+      <header className="header grid">
         <div className="col">
           <div className="figure">
             {cover && !video ? (

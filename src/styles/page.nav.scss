@@ -4,19 +4,6 @@
  *
  */
 
-@mixin scrolled {
-  position: fixed;
-  top: 0;
-
-  margin-top: 0;
-
-  color: var(--text-color);
-  background-color: rgba(255, 255, 255, 1);
-  box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.15);
-
-  backdrop-filter: blur(5px);
-}
-
 .topbar {
   width: 100%;
   margin-bottom: var(--unit-double);
@@ -24,50 +11,26 @@
 
   transition: background-color 0.13s ease-in-out, box-shadow 0.13s ease-in-out;
 
-  @include medium {
-    height: 48px;
-
-    @include scrolled;
-  }
   @include small {
-    &:after {
-      position: absolute;
-      top: 48px;
-      left: 0;
+    position: fixed;
+    z-index: 10;
+    top: 0;
 
-      width: 100%;
-      height: 1px;
+    height: 48px;
+    margin-top: 0;
+    padding: 0;
 
-      content: '';
+    color: var(--text-color);
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.15);
 
-      background-color: rgba(#fff, 0.1);
-    }
+    backdrop-filter: blur(5px);
   }
 
-  &:before {
-    position: absolute;
-    top: -100px;
-
-    width: 100%;
-    height: 100px;
-
-    content: '';
-    transition: opacity 0.13s ease-in-out;
-
-    opacity: 0;
-    background-color: #fff;
-
+  .col {
     @include small {
-      display: none;
+      flex: 1;
     }
-  }
-
-  &.scrolled {
-    @include scrolled;
-  }
-
-  &.scrolled:before {
-    opacity: 1;
   }
 
   a {
@@ -120,11 +83,10 @@
 
   & > .container {
     display: flex;
-
-    height: 100%;
-
     justify-content: space-between;
     align-items: center;
+
+    height: 100%;
   }
 }
 
@@ -146,6 +108,9 @@
   z-index: 1;
 
   display: none;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column wrap;
 
   width: 48px;
   height: 48px;
@@ -154,10 +119,6 @@
   @include small {
     display: flex;
   }
-
-  justify-content: center;
-  align-items: center;
-  flex-flow: column wrap;
 
   .top,
   .bottom {
@@ -185,6 +146,7 @@
     color: #fff;
   }
   nav {
+    font-family: Dia-Black;
     font-size: 2em;
 
     position: fixed;
@@ -192,6 +154,7 @@
     left: 0;
 
     display: flex;
+    align-items: center;
 
     width: 100%;
     height: 100%;
@@ -201,8 +164,6 @@
 
     color: #fff;
     background-color: rgba(0, 0, 0, 0.95);
-
-    align-items: center;
   }
   .top,
   .bottom {

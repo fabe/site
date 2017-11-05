@@ -7,15 +7,21 @@
 footer {
   padding: var(--unit-double) 0;
 
+  @include medium {
+    margin-top: var(--unit);
+  }
+  @include small {
+    margin-top: 0;
+  }
+
   & > .container {
     display: flex;
+    justify-content: space-between;
 
-    @include smedium {
+    @include medium {
       justify-content: center;
       flex-flow: row wrap;
     }
-
-    justify-content: space-between;
   }
 
   span {
@@ -23,15 +29,15 @@ footer {
 
     color: var(--meta-color);
 
-    @include smedium {
-      font-size: 1rem;
+    @include medium {
+      font-size: 80%;
+
+      display: block;
 
       width: 100%;
       margin-top: var(--unit);
 
       text-align: center;
-
-      opacity: 0.25;
     }
   }
 
@@ -43,7 +49,7 @@ footer {
 
     list-style: none;
 
-    @include smedium {
+    @include medium {
       display: block;
     }
   }
@@ -53,7 +59,7 @@ footer {
 
     color: var(--meta-color);
 
-    @include smedium {
+    @include medium {
       display: inline-block;
     }
 
@@ -64,7 +70,7 @@ footer {
       /* Don't want anything to be cut off. */
       padding: 1px;
 
-      @include smedium {
+      @include medium {
         width: 32px;
       }
     }
@@ -74,17 +80,9 @@ footer {
     line-height: 1;
 
     display: flex;
+    align-items: center;
 
-    &:not(.email) {
-      opacity: 0.5;
-      transition: opacity 0.2s cubic-bezier(0.64, 0.04, 0.35, 1);
-
-      &:hover {
-        opacity: 1;
-      }
-    }
-
-    @include smedium {
+    @include medium {
       display: inline-block;
 
       margin-right: var(--unit);
@@ -94,10 +92,22 @@ footer {
       }
     }
 
-    align-items: center;
+    &:not(.email) {
+      transition: opacity 0.2s cubic-bezier(0.64, 0.04, 0.35, 1);
+
+      opacity: 0.5;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
 
     a {
       padding: 0 1.5rem;
+
+      @include small {
+        padding: 0 0.5rem;
+      }
     }
 
     & + li:before {
@@ -112,7 +122,7 @@ footer {
 
       background-color: rgba(0, 0, 0, 0.1);
 
-      @include smedium {
+      @include medium {
         display: none;
       }
     }
@@ -121,7 +131,7 @@ footer {
   .email {
     margin-right: 1.5rem;
 
-    @include smedium {
+    @include medium {
       display: block;
 
       margin-right: 0;
@@ -132,6 +142,16 @@ footer {
 
     a {
       padding: 0;
+    }
+  }
+
+  .col {
+    @include medium {
+      margin-right: 0;
+
+      text-align: center;
+
+      flex: 1 1 100%;
     }
   }
 }

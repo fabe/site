@@ -31,6 +31,14 @@ figure {
     margin-left: auto;
   }
 
+  &.mt {
+    margin-top: var(--unit);
+  }
+
+  &.mb {
+    margin-bottom: var(--unit);
+  }
+
   .link {
     position: absolute;
     z-index: 1;
@@ -58,14 +66,18 @@ article {
 
   & > div {
     display: flex;
-
     flex-flow: row wrap;
   }
 }
 
 .intro {
   width: 100%;
+
   color: var(--meta-color);
+
+  @include small {
+    margin-top: var(--unit);
+  }
 
   ul {
     width: 100%;
@@ -78,7 +90,6 @@ article {
       position: relative;
 
       display: flex;
-
       align-items: center;
 
       & + li {
@@ -99,7 +110,6 @@ article {
 }
 
 .block {
-  flex: 1 1 100%;
   max-width: calc(50% - var(--unit-half));
   margin-bottom: var(--unit-double);
 
@@ -108,6 +118,8 @@ article {
 
     flex-shrink: 0;
   }
+
+  flex: 1 1 100%;
 
   &.pull {
     margin-bottom: var(--unit);
@@ -129,6 +141,7 @@ article {
     max-width: 100%;
     margin-right: auto;
     margin-left: auto;
+
     flex-shrink: 0;
   }
 
@@ -138,7 +151,6 @@ article {
 
   &.vc {
     display: flex;
-
     align-items: center;
     align-content: center;
     flex-flow: row wrap;
@@ -155,29 +167,35 @@ article {
 
 .pagination {
   header {
-    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    width: 100%;
     margin-bottom: var(--unit-double);
+
+    h2 {
+      margin: 0;
+    }
   }
 
   a {
-    color: var(--meta-color);
     text-decoration: none;
+
+    color: var(--meta-color);
 
     &:hover {
       color: var(--accent-color);
     }
   }
 
-  h2 {
-    margin: 0;
-  }
-
   .block,
   .post {
     margin-bottom: 0;
+
+    @include small {
+      margin-bottom: var(--unit-half);
+    }
   }
 }
 

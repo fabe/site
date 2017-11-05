@@ -14,7 +14,7 @@ class Topbar extends React.Component {
   }
 
   handleMenuToggle() {
-    if (window.innerWidth <= 480) {
+    if (window.innerWidth <= 600) {
       this.setState({ showMenu: !this.state.showMenu });
     }
   }

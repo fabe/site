@@ -4,24 +4,32 @@
  *
  */
 
-header {
+header.header {
   position: relative;
 
   display: flex;
+  flex-flow: wrap;
 
   height: 100%;
   margin-bottom: var(--unit-double);
 
-  @include medium {
-    animation: none;
+  @include small {
+    padding-top: calc(48px + var(--unit-double));
+  }
+  @include small {
+    margin-bottom: var(--unit);
+    padding-top: calc(48px + var(--unit));
 
-    align-items: flex-end;
-    flex-flow: wrap;
+    &.grid {
+      flex-flow: column-reverse;
+    }
   }
 
-  flex-flow: wrap;
-
   .title {
+    @include small {
+      margin-bottom: var(--unit-half);
+    }
+
     flex: 1 1 100%;
   }
 
@@ -38,44 +46,36 @@ header {
   z-index: 3;
 
   display: flex;
+  align-content: space-between;
+  flex-flow: wrap;
 
   height: 100%;
-
-  flex-flow: wrap;
-  align-content: space-between;
 }
 
 .figure {
   position: relative;
 
   overflow: hidden;
-
   // height: 600px;
+
   min-height: 350px;
 
   background-color: var(--text-color);
 
-  @include medium {
-    position: relative;
-    right: auto;
-    left: 0;
-
-    display: block;
-
-    width: 100%;
-    height: 100vh;
-  }
-  @include medium-only {
-    max-height: 50vh;
+  @include small {
+    min-height: 150px;
+    margin-top: var(--unit);
   }
 
   video {
+    position: absolute;
+    top: 0;
+    left: 0;
+
     display: block;
+
     min-width: 100%;
     min-height: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
 
     object-fit: cover;
     object-position: 50% 50%;

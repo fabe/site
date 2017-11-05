@@ -62,8 +62,8 @@ body {
 }
 
 .button {
-  font-size: 80%;
   font-family: Dia-Black;
+  font-size: 80%;
 
   display: inline-block;
 
@@ -91,14 +91,15 @@ body {
 
 .grid {
   display: flex;
-
   flex-flow: wrap;
 }
 
 .col {
   margin-right: var(--unit);
 
-  @include smedium {
+  @include small {
+    margin-right: 0;
+
     flex: 0 0 100%;
   }
 
