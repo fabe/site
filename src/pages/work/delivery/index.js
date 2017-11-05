@@ -57,7 +57,7 @@ export default props => (
       </p>
     </Block>
     <Block align="center">
-      <video src={video} autoPlay loop muted />
+      <video src={video} playsInline autoPlay loop muted />
     </Block>
 
     <Block>
