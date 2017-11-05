@@ -9,7 +9,7 @@ import '~/src/styles/style.scss';
 import Topbar from '../components/Topbar';
 import Footer from '../components/Footer';
 
-import Store from '../stores/store';
+import Store from '../stores/Store';
 
 const store = new Store();
 

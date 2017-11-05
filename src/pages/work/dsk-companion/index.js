@@ -10,7 +10,7 @@ import articleFragment from '~/src/pages';
 
 export const data = {
   isWork: true,
-  title: 'Helping athletes to cope with injuries',
+  title: 'Helping athletes<br/>to cope with injuries',
   subtitle: 'DSK Companion',
   date: '2017-07-01',
   path: '/work/dsk-companion',

@@ -49,17 +49,12 @@ footer {
   }
 
   a {
-    transition: opacity 0.2s cubic-bezier(0.64, 0.04, 0.35, 1);
     text-decoration: none;
 
-    opacity: 0.5;
+    color: var(--meta-color);
 
     @include smedium {
       display: inline-block;
-    }
-
-    &:hover {
-      opacity: 1;
     }
 
     img {
@@ -79,6 +74,15 @@ footer {
     line-height: 1;
 
     display: flex;
+
+    &:not(.email) {
+      opacity: 0.5;
+      transition: opacity 0.2s cubic-bezier(0.64, 0.04, 0.35, 1);
+
+      &:hover {
+        opacity: 1;
+      }
+    }
 
     @include smedium {
       display: inline-block;

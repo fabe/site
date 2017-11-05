@@ -11,7 +11,7 @@ import video from './delivery.mp4';
 export const data = {
   isWork: true,
   subtitle: 'Delivery',
-  title: 'Share your design work, clutter-free.',
+  title: 'Share your design work,<br/>clutter-free.',
   date: '2017-04-01',
   path: '/work/delivery',
   cover: './delivery.png',
