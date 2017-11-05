@@ -44,7 +44,24 @@ module.exports = class HTML extends React.Component {
           <meta property="og:image:type" content="image/jpeg" />
           <meta property="og:url" content="https://fabianschultz.com" />
           <meta property="og:title" content="Fabian W. Schultz" />
+
+          <link rel="manifest" href="manifest.json" />
+          <meta name="mobile-web-app-capable" content="yes" />
+          <meta name="apple-mobile-web-app-capable" content="yes" />
+          <meta name="application-name" content="fschultz" />
+          <meta name="apple-mobile-web-app-title" content="fschultz" />
           <meta name="theme-color" content="#13ba6c" />
+          <meta name="msapplication-navbutton-color" content="#13ba6c" />
+          <meta
+            name="apple-mobile-web-app-status-bar-style"
+            content="black-translucent"
+          />
+          <meta name="msapplication-starturl" content="/" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+          />
+
           {this.props.headComponents}
           {css}
         </head>

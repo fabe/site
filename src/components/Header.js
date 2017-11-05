@@ -19,11 +19,11 @@ class Header extends React.Component {
       <header className="grid">
         <div className="col">
           <div className="figure">
-            {cover ? (
+            {cover && !video ? (
               <Img sizes={cover.childImageSharp.sizes} />
-            ) : (
-              <img src={hero} alt={title} />
-            )}
+            ) : null}
+            {!cover && !video ? <img src={hero} alt={title} /> : null}
+            {!cover && video ? <video autoPlay loop src={video} /> : null}
           </div>
         </div>
         <div className="col">
@@ -35,4 +35,3 @@ class Header extends React.Component {
 }
 
 export default Header;
-

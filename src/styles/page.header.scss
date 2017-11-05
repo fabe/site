@@ -21,6 +21,10 @@ header {
 
   flex-flow: wrap;
 
+  .title {
+    flex: 1 1 100%;
+  }
+
   h6 {
     margin-top: 0;
   }
@@ -47,7 +51,7 @@ header {
   overflow: hidden;
 
   // height: 600px;
-  min-height: 300px;
+  min-height: 350px;
 
   background-color: var(--text-color);
 
@@ -66,7 +70,12 @@ header {
   }
 
   video {
-    height: 100%;
+    display: block;
+    min-width: 100%;
+    min-height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
 
     object-fit: cover;
     object-position: 50% 50%;
