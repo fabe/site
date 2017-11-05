@@ -10,17 +10,13 @@ import articleFragment from '~/src/pages';
 
 export const data = {
   isWork: true,
-  title: (
-    <span>
-      Helping athletes <br />to cope with injuries
-    </span>
-  ),
+  title: 'Helping athletes to cope with injuries',
   subtitle: 'DSK Companion',
   date: '2017-07-01',
   path: '/work/dsk-companion',
-  cover: '/covers/webp/dsk.webp',
+  cover: './dsk.png',
   caption: 'A Google Design Sprint',
-  dark: true,
+  background: '#EBEEF1',
   intro:
     'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia.',
   details: [
@@ -36,7 +32,7 @@ export const data = {
 };
 
 export default props => (
-  <Article {...data} {...props}>
+  <Article path={data.path} {...props}>
     Yello!
   </Article>
 );

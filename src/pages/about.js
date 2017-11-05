@@ -5,10 +5,10 @@ import Block from '~/src/components/Block';
 import Figure from '~/src/components/Figure';
 import clients from '~/static/clients.svg';
 
-export default ({ posts, transition }) => (
+export default ({ posts, transition, data }) => (
   <div style={transition && transition.style}>
     <Helmet title="Fabian W. Schultz | About" />
-    <Header>
+    <Header cover={data.hero}>
       <div className="title">
         <h1>About</h1>
       </div>
@@ -36,3 +36,15 @@ export default ({ posts, transition }) => (
     </article>
   </div>
 );
+
+export const query = graphql`
+  query GatsbyImageHeroAboutQuery {
+    hero: file(relativePath: { eq: "hero-bw.jpg" }) {
+      childImageSharp {
+        sizes(maxWidth: 1400, quality: 90) {
+          ...GatsbyImageSharpSizes
+        }
+      }
+    }
+  }
+`;

@@ -17,7 +17,7 @@ export const data = {
   subtitle: 'Momenta',
   date: '2013-12-31',
   path: '/work/momenta',
-  cover: '/covers/webp/momenta.webp',
+  cover: './momenta.png',
   contain: false,
   background: '#6B476B',
   details: [
@@ -33,7 +33,7 @@ export const data = {
 };
 
 export default props => (
-  <Article {...data} {...props}>
+  <Article path={data.path} {...props}>
     <Block>
       <p>
         During my internship at{' '}

@@ -10,15 +10,11 @@ import video from './delivery.mp4';
 
 export const data = {
   isWork: true,
-  title: (
-    <span>
-      Share your design work,<br />clutter-free.
-    </span>
-  ),
   subtitle: 'Delivery',
+  title: 'Share your design work, clutter-free.',
   date: '2017-04-01',
   path: '/work/delivery',
-  cover: '/covers/webp/delivery.webp',
+  cover: './delivery.png',
   external: 'https://use.delivery',
   details: [
     {
@@ -37,7 +33,7 @@ export const data = {
 };
 
 export default props => (
-  <Article {...data} {...props}>
+  <Article path={data.path} {...props}>
     {JSON.stringify(props.data)}
     <Block>
       <p>

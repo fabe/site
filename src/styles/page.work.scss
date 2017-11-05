@@ -99,6 +99,7 @@ article {
 }
 
 .block {
+  flex: 1 1 100%;
   max-width: calc(50% - var(--unit-half));
   margin-bottom: var(--unit-double);
 
@@ -132,7 +133,6 @@ article {
   }
 
   &.right {
-    flex: 1 1 100%;
     margin-left: auto;
   }
 

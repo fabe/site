@@ -13,19 +13,19 @@ import HGroup from './HGroup';
 @observer
 class Article extends React.Component {
   render() {
+    const { children, transition, store } = this.props;
+    const article = store.getArticleByPath(this.props.path);
+    console.log(article);
+
     const {
-      children,
       cover,
       subtitle,
       title,
       details,
       path,
-      data,
       contain,
       background,
-      transition,
-      store,
-    } = this.props;
+    } = article;
 
     const index = store.articles.findIndex(
       article => article.node.data.path == path
@@ -43,7 +43,6 @@ class Article extends React.Component {
 
     const nextArticle = store.articles[nextIndex];
     const prevArticle = store.articles[prevIndex];
-    console.log(nextArticle);
 
     return (
       <div style={transition && transition.style}>
@@ -55,7 +54,10 @@ class Article extends React.Component {
         </Header>
         <article id="content">
           <Helmet title={`Fabian W. Schultz | ${subtitle}`}>
-            <meta property="og:image:url" content={cover} />
+            <meta
+              property="og:image:url"
+              content={cover.childImageSharp.sizes.src}
+            />
             <meta property="og:image:type" content="image/png" />
             <meta
               property="og:url"

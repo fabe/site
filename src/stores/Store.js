@@ -19,4 +19,10 @@ export default class Store {
   setSite(site) {
     this.site = site;
   }
+
+  @action
+  getArticleByPath(path) {
+    return this.articles.find(article => article.node.data.path === path).node
+      .data;
+  }
 }

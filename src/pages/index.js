@@ -15,11 +15,12 @@ class BlogIndex extends React.Component {
     const siteTitle = get(this, 'props.store.site.siteMetadata.title');
     const articles = get(this, 'props.store.articles');
     const { transition } = this.props;
+    console.log(this.props);
 
     return (
       <div style={transition && transition.style}>
         <Helmet title={get(this, 'props.store.site.siteMetadata.title')} />
-        <Header>
+        <Header cover={this.props.data.hero}>
           <div className="title">
             <h1>
               Hello, I'm Fabian &mdash; a{' '}
@@ -46,3 +47,15 @@ BlogIndex.propTypes = {
 };
 
 export default BlogIndex;
+
+export const query = graphql`
+  query GatsbyImageHeroIndexQuery {
+    hero: file(relativePath: { eq: "hero-bw.jpg" }) {
+      childImageSharp {
+        sizes(maxWidth: 1400, quality: 90) {
+          ...GatsbyImageSharpSizes
+        }
+      }
+    }
+  }
+`;

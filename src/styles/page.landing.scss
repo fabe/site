@@ -21,6 +21,7 @@
   overflow: hidden;
 
   transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
 
   h2 {
     position: absolute;
@@ -62,9 +63,7 @@
     box-shadow: inset 0 0 0 0 #fff;
   }
 
-  img {
-    display: block;
-
+  .gatsby-image-outer-wrapper {
     transition: 1s transform cubic-bezier(0.19, 1, 0.22, 1);
   }
 }
@@ -76,7 +75,7 @@
     margin-bottom: var(--unit-double);
   }
 
-  &:hover .cover img {
+  &:hover .cover .gatsby-image-outer-wrapper {
     transform: scale(1.05);
   }
 

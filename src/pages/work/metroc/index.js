@@ -14,7 +14,7 @@ export const data = {
   subtitle: 'Metro College of Technology',
   date: '2016-08-01',
   path: '/work/metroc',
-  cover: '/covers/webp/metroc.webp',
+  cover: './metroc.png',
   contain: true,
   background: '#26272C',
   details: [
@@ -30,7 +30,7 @@ export const data = {
 };
 
 export default props => (
-  <Article {...data} {...props}>
+  <Article path={data.path} {...props}>
     <Block>
       <p>
         Metro College of Technology is a career college, founded in 1992 and

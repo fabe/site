@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { observer, Provider } from 'mobx-react';
 import { create } from 'mobx-persist';
+import Img from 'gatsby-image';
 
 import '~/src/styles/style.scss';
 
@@ -12,21 +13,27 @@ import Store from '../stores/store';
 
 const store = new Store();
 
-const hydrate = create();
+if (typeof window !== `undefined`) {
+  const hydrate = create();
 
-hydrate('site', store).then(args => {
-  console.log('hydrated!', args);
-});
+  hydrate('site', store).then(args => {
+    console.log('hydrated!', args);
+  });
 
-hydrate('articles', store).then(args => {
-  console.log('hydrated!', args);
-});
+  hydrate('articles', store).then(args => {
+    console.log('hydrated!', args);
+  });
+}
 
 @observer
 class Template extends React.Component {
+  constructor(props) {
+    super(props);
+    store.setArticles(props.data.allJsFrontmatter.edges);
+    store.setSite(props.data.site);
+  }
   componentDidMount() {
-    store.setArticles(this.props.data.allJsFrontmatter.edges);
-    store.setSite(this.props.data.site);
+    console.log(this.props);
   }
 
   render() {
@@ -70,7 +77,21 @@ export const pageQuery = graphql`
             error
             title
             path
-            cover
+            cover {
+              childImageSharp {
+                # Specify the image processing steps right in the query
+                # Makes it trivial to update as your page's design changes.
+                sizes(maxWidth: 1400, quality: 90) {
+                  ...GatsbyImageSharpSizes
+                }
+              }
+            }
+            details {
+              title
+              description
+            }
+            contain
+            background
             subtitle
             isWork
           }

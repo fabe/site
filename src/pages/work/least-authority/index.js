@@ -12,7 +12,7 @@ export const data = {
   subtitle: 'Least Authority',
   date: '2017-02-01',
   path: '/work/least-authority',
-  cover: '/covers/webp/least-authority.webp',
+  cover: './least-authority.png',
   contain: true,
   background: '#333',
   caption: 'For developers',
@@ -36,7 +36,7 @@ export const data = {
 };
 
 export default props => (
-  <Article {...data} {...props}>
+  <Article path={data.path} {...props}>
     Hello!
   </Article>
 );
