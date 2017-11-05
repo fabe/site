@@ -21,7 +21,7 @@ footer {
   span {
     line-height: 1;
 
-    opacity: 0.5;
+    color: var(--meta-color);
 
     @include smedium {
       font-size: 1rem;

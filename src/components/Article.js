@@ -12,23 +12,12 @@ import HGroup from './HGroup';
 @inject('store')
 @observer
 class Article extends React.Component {
-  render() {
-    const { children, transition, store } = this.props;
+  componentWillMount() {
+    const { store } = this.props;
     const article = store.getArticleByPath(this.props.path);
-    console.log(article);
-
-    const {
-      cover,
-      subtitle,
-      title,
-      details,
-      path,
-      contain,
-      background,
-    } = article;
 
     const index = store.articles.findIndex(
-      article => article.node.data.path == path
+      a => a.node.data.path == article.path
     );
 
     let nextIndex = index + 1;
@@ -44,6 +33,24 @@ class Article extends React.Component {
     const nextArticle = store.articles[nextIndex];
     const prevArticle = store.articles[prevIndex];
 
+    this.setState({
+      nextArticle,
+      prevArticle,
+      article,
+    });
+  }
+  render() {
+    const { children, transition } = this.props;
+    const {
+      cover,
+      subtitle,
+      title,
+      details,
+      path,
+      contain,
+      background,
+    } = this.state.article;
+
     return (
       <div style={transition && transition.style}>
         <Header cover={cover} contain={contain} background={background}>
@@ -56,7 +63,7 @@ class Article extends React.Component {
           <Helmet title={`Fabian W. Schultz | ${subtitle}`}>
             <meta
               property="og:image:url"
-              content={cover.childImageSharp.sizes.src}
+              content={cover.childImageSharp.sizes.base64}
             />
             <meta property="og:image:type" content="image/png" />
             <meta
@@ -76,10 +83,10 @@ class Article extends React.Component {
               <Link to="/#work">View all</Link>
             </header>
             <Block pull>
-              <Post post={prevArticle} />
+              <Post post={this.state.prevArticle} />
             </Block>
             <Block align="right" pull>
-              <Post post={nextArticle} />
+              <Post post={this.state.nextArticle} />
             </Block>
           </div>
         </article>

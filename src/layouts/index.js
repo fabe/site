@@ -27,13 +27,9 @@ if (typeof window !== `undefined`) {
 
 @observer
 class Template extends React.Component {
-  constructor(props) {
-    super(props);
-    store.setArticles(props.data.allJsFrontmatter.edges);
-    store.setSite(props.data.site);
-  }
-  componentDidMount() {
-    console.log(this.props);
+  componentWillMount() {
+    store.setArticles(this.props.data.allJsFrontmatter.edges);
+    store.setSite(this.props.data.site);
   }
 
   render() {

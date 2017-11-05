@@ -6,8 +6,6 @@ import Article from '~/src/components/Article';
 import Block from '~/src/components/Block';
 import Figure from '~/src/components/Figure';
 
-import screens from './screens.webp';
-
 export const data = {
   isWork: true,
   title: 'Developing the website for a Toronto-based college',
@@ -59,7 +57,19 @@ export default props => (
       </a>
     </Block>
     <Block align="center">
-      <Figure background src={screens} />
+      <Figure background sizes={props.data.screens} />
     </Block>
   </Article>
 );
+
+export const query = graphql`
+  query GatsbyImageMetro {
+    screens: file(relativePath: { eq: "work/metroc/screens.png" }) {
+      childImageSharp {
+        sizes(maxWidth: 1400, quality: 90) {
+          ...GatsbyImageSharpSizes_withWebp
+        }
+      }
+    }
+  }
+`;

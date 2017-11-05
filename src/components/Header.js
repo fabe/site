@@ -13,7 +13,6 @@ class Header extends React.Component {
 
   render() {
     const { children, cover, video, title, contain, background } = this.props;
-    console.log(this.props);
 
     return (
       <header className="grid">

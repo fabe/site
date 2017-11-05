@@ -3,6 +3,6 @@
   "short_name": "fschultz",
   "lang": "en-US",
   "start_url": "/",
-  "display": "browser",
+  "display": " minimal-ui",
   "theme_color": "#13ba6c"
 }

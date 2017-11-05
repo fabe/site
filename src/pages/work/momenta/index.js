@@ -7,9 +7,8 @@ import Article from '~/src/components/Article';
 import Block from '~/src/components/Block';
 import Figure from '~/src/components/Figure';
 
-import share1 from './share-1.webp';
-import action from './action.webp';
-import homepage from './homepage.webm';
+import homepageMp4 from './homepage.mp4';
+import homepageWebm from './homepage.webm';
 
 export const data = {
   isWork: true,
@@ -66,7 +65,7 @@ export default props => (
     </Block>
 
     <Block align="center">
-      <Figure video src={homepage} background />
+      <Figure video mp4={homepageMp4} webm={homepageWebm} background />
     </Block>
 
     <Block align="center" pull>
@@ -79,7 +78,7 @@ export default props => (
     </Block>
 
     <Block align="center">
-      <Figure src={share1} background />
+      <Figure sizes={props.data.share} background />
     </Block>
 
     <Block vc>
@@ -98,7 +97,7 @@ export default props => (
     <hr />
 
     <Block>
-      <Figure src={action} />
+      <Figure sizes={props.data.sunset} />
     </Block>
 
     <Block align="right" vc>
@@ -116,3 +115,22 @@ export default props => (
     </Block>
   </Article>
 );
+
+export const query = graphql`
+  query GatsbyImageMomenta {
+    sunset: file(relativePath: { eq: "work/momenta/sunset.jpg" }) {
+      childImageSharp {
+        sizes(maxWidth: 1400, quality: 90) {
+          ...GatsbyImageSharpSizes_withWebp
+        }
+      }
+    }
+    share: file(relativePath: { eq: "work/momenta/share.png" }) {
+      childImageSharp {
+        sizes(maxWidth: 1400, quality: 90) {
+          ...GatsbyImageSharpSizes_withWebp
+        }
+      }
+    }
+  }
+`;
