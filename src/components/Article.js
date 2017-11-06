@@ -12,9 +12,11 @@ import HGroup from './HGroup';
 @inject('store')
 @observer
 class Article extends React.Component {
-  componentWillMount() {
-    const { store } = this.props;
-    const article = store.getArticleByPath(this.props.path);
+  constructor(props) {
+    super(props);
+
+    const { store } = props;
+    const article = store.getArticleByPath(props.path);
 
     const index = store.articles.findIndex(
       a => a.node.data.path == article.path
@@ -33,11 +35,11 @@ class Article extends React.Component {
     const nextArticle = store.articles[nextIndex];
     const prevArticle = store.articles[prevIndex];
 
-    this.setState({
+    this.state = {
       nextArticle,
       prevArticle,
       article,
-    });
+    };
   }
   render() {
     const { children, transition } = this.props;
