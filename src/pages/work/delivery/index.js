@@ -34,7 +34,6 @@ export const data = {
 
 export default props => (
   <Article path={data.path} {...props}>
-    {JSON.stringify(props.data)}
     <Block>
       <p>
         Around Easter 2017 I decided to work on a simple webapp called{' '}
