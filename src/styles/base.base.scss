@@ -14,14 +14,8 @@ html {
   background-color: var(--fade-color);
 }
 
-html.wf-loading {
-  body {
-    font: 120%/1.444 var(--sans-serif-fallback);
-  }
-}
-
 body {
-  font: 125%/1.444 var(--sans-serif);
+  font: 130%/1.444 var(--sans-serif);
   font-weight: normal;
   -webkit-font-smoothing: antialiased;
   font-feature-settings: 'calt', 'liga', 'hist', 'onum', 'pnum';
