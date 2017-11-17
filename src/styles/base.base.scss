@@ -56,7 +56,7 @@ body {
 }
 
 .button {
-  font-family: Dia-Black;
+  font-weight: 800;
   font-size: 80%;
 
   display: inline-block;
@@ -72,6 +72,7 @@ body {
 
   &:hover {
     transform: scale(1.1);
+    color: #fff;
   }
 
   &.secondary {

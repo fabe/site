@@ -17,13 +17,15 @@ export default ({
   marginTop,
   marginBottom,
   sizes,
+  frame,
 }) => (
   <figure
     className={`
       ${background ? 'background' : ''}
       ${slim ? 'slim' : ''} 
       ${marginTop ? 'mt' : ''} 
-      ${marginBottom ? 'mb' : ''} 
+      ${marginBottom ? 'mb' : ''}
+      ${frame ? 'frame' : ''} 
       ${align}`}
   >
     {!video && !sizes ? (

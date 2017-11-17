@@ -12,24 +12,40 @@ class Header extends React.Component {
   }
 
   render() {
-    const { children, cover, video, title, contain, background } = this.props;
+    const {
+      children,
+      cover,
+      video,
+      title,
+      contain,
+      background,
+      simple,
+    } = this.props;
 
-    return (
-      <header className="header grid">
-        <div className="col">
-          <div className="figure">
-            {cover && !video ? (
-              <Img sizes={cover.childImageSharp.sizes} />
-            ) : null}
-            {!cover && !video ? <img src={hero} alt={title} /> : null}
-            {!cover && video ? <video autoPlay loop src={video} /> : null}
+    if (!simple) {
+      return (
+        <header className="header grid">
+          <div className="col">
+            <div className="figure">
+              {cover && !video ? (
+                <Img sizes={cover.childImageSharp.sizes} />
+              ) : null}
+              {!cover && !video ? <img src={hero} alt={title} /> : null}
+              {!cover && video ? <video autoPlay loop src={video} /> : null}
+            </div>
           </div>
-        </div>
-        <div className="col">
-          <div className="meta">{children}</div>
-        </div>
-      </header>
-    );
+          <div className="col">
+            <div className="meta">{children}</div>
+          </div>
+        </header>
+      );
+    } else {
+      return (
+        <header className="header grid">
+          <div>{children}</div>
+        </header>
+      );
+    }
   }
 }
 
