@@ -9,14 +9,15 @@ import Figure from '~/src/components/Figure';
 
 import homepageMp4 from './homepage.mp4';
 import homepageWebm from './homepage.webm';
+import cover from './momenta.png';
 
 export const data = {
+  id: 'momenta',
   isWork: true,
   title: 'Capture your moments as pictures with sound.',
   subtitle: 'Momenta',
   date: '2013-12-31',
   path: '/work/momenta',
-  cover: './momenta.png',
   contain: false,
   background: '#6B476B',
   details: [

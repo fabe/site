@@ -9,12 +9,12 @@ import Figure from '~/src/components/Figure';
 import video from './delivery.mp4';
 
 export const data = {
+  id: 'delivery',
   isWork: true,
   subtitle: 'Delivery',
   title: 'Share your design work,<br/>clutter-free.',
   date: '2017-04-01',
   path: '/work/delivery',
-  cover: './delivery.png',
   external: 'https://use.delivery',
   details: [
     {

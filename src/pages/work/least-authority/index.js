@@ -7,12 +7,12 @@ import Block from '~/src/components/Block';
 import Figure from '~/src/components/Figure';
 
 export const data = {
+  id: 'leastauthority',
   isWork: true,
   title: 'New website for the<br/>privacy–focused startup Least Authority',
   subtitle: 'Least Authority',
   date: '2017-02-01',
   path: '/work/least-authority',
-  cover: './least-authority.png',
   contain: true,
   background: '#333',
   caption: 'For developers',

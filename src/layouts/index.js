@@ -27,9 +27,17 @@ if (typeof window !== `undefined`) {
 
 @observer
 class Template extends React.Component {
-  componentWillMount() {
-    store.setArticles(this.props.data.allJsFrontmatter.edges);
-    store.setSite(this.props.data.site);
+  constructor(props) {
+    super();
+
+    // Have to manually set the covers because github.com/gatsbyjs/gatsby/issues/2929
+    let articles = props.data.allJsFrontmatter.edges.map(item => {
+      item.node.data.cover = props.data[item.node.data.id];
+      return item;
+    });
+
+    store.setArticles(articles);
+    store.setSite(props.data.site);
   }
 
   render() {
@@ -70,16 +78,10 @@ export const pageQuery = graphql`
       edges {
         node {
           data {
+            id
             error
             title
             path
-            cover {
-              childImageSharp {
-                sizes(maxWidth: 1100, quality: 90) {
-                  ...GatsbyImageSharpSizes_withWebp
-                }
-              }
-            }
             details {
               title
               description
@@ -90,6 +92,34 @@ export const pageQuery = graphql`
             isWork
           }
         }
+      }
+    }
+    # Covers for /work
+    # Really nasty workaround, thanks to \`gatsby-transformer-javascript-static-exports\` taking
+    # issue working together with \`gatsby-image\`. Issue for this: github.com/gatsbyjs/gatsby/issues/2929
+    momenta: file(relativePath: { eq: "work/momenta/momenta.png" }) {
+      ...Cover
+    }
+    dsk: file(relativePath: { eq: "work/dsk-companion/dsk.png" }) {
+      ...Cover
+    }
+    delivery: file(relativePath: { eq: "work/delivery/delivery.png" }) {
+      ...Cover
+    }
+    metroc: file(relativePath: { eq: "work/metroc/metroc.png" }) {
+      ...Cover
+    }
+    leastauthority: file(
+      relativePath: { eq: "work/least-authority/least-authority.png" }
+    ) {
+      ...Cover
+    }
+  }
+
+  fragment Cover on File {
+    childImageSharp {
+      sizes(maxWidth: 1100, quality: 90) {
+        ...GatsbyImageSharpSizes_withWebp
       }
     }
   }

@@ -9,12 +9,12 @@ import Figure from '~/src/components/Figure';
 import articleFragment from '~/src/pages';
 
 export const data = {
+  id: 'dsk',
   isWork: true,
   title: 'Helping athletes to cope with injuries',
   subtitle: 'DSK Companion',
   date: '2017-07-01',
   path: '/work/dsk-companion',
-  cover: './dsk.png',
   caption: 'A Google Design Sprint',
   background: '#EBEEF1',
   intro:
