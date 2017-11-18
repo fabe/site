@@ -43,8 +43,8 @@ export default props => (
         <a href="https://zcashminers.org/">
           Zcash Open Source Miner Challenge
         </a>, which was operated by Least Authority. After the launch, I helped
-        Least Authority redesign their website, taking care of both development
-        and design.
+        Least Authority redesign their own website, taking care of both
+        development and design.
       </p>
     </Block>
     <Block align="right">
@@ -70,7 +70,7 @@ export default props => (
     </Block>
 
     <Block full align="center" pull>
-      <h2>Landing</h2>
+      <h2>Landing Page</h2>
       <p>Featuring an animated terminal to demo their product.</p>
     </Block>
     <Block full>
@@ -94,6 +94,20 @@ export default props => (
     </Block>
     <Block full>
       <Figure background frame sizes={props.data.products} />
+    </Block>
+
+    <Block vc>
+      <h3>Technology</h3>
+      <p>
+        The website was coded on top of the static content management system{' '}
+        <a href="https://www.getlektor.com/">Lektor</a>, to provide a familiar
+        Python API for Least Authority's developers. It is fully customizable
+        through an admin panel, changes are pushed continuously through their
+        GitHub repository.
+      </p>
+    </Block>
+    <Block align="right">
+      <Figure background sizes={props.data.cms} />
     </Block>
   </Article>
 );
@@ -126,6 +140,13 @@ export const query = graphql`
       }
     }
     products: file(relativePath: { eq: "work/least-authority/products.png" }) {
+      childImageSharp {
+        sizes(maxWidth: 800, quality: 90) {
+          ...GatsbyImageSharpSizes_withWebp
+        }
+      }
+    }
+    cms: file(relativePath: { eq: "work/least-authority/cms.png" }) {
       childImageSharp {
         sizes(maxWidth: 800, quality: 90) {
           ...GatsbyImageSharpSizes_withWebp
