@@ -3,3 +3,19 @@
  * =====
  *
  */
+
+@font-face {
+  font-family: 'Dia';
+  src: url('/fonts/Dia-Regular.woff2') format('woff2'),
+    url('/fonts/Dia-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Dia';
+  src: url('/fonts/Dia-Black.woff2') format('woff2'),
+    url('/fonts/Dia-Black.woff') format('woff');
+  font-weight: 800;
+  font-style: normal;
+}

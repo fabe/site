@@ -56,14 +56,15 @@ body {
 }
 
 .button {
-  font-weight: 800;
+  font-weight: var(--bold);
   font-size: 80%;
 
   display: inline-block;
 
   padding: 0.8rem 1.2rem;
 
-  transition: 0.2s transform cubic-bezier(0, 0.405, 0, 1.285);
+  transition: 0.2s opacity cubic-bezier(0, 0.405, 0, 1.285),
+    0.2s transform cubic-bezier(0, 0.405, 0, 1.285);
   text-decoration: none;
 
   color: #fff;
@@ -71,8 +72,12 @@ body {
   background-color: var(--accent-color);
 
   &:hover {
-    transform: scale(1.1);
+    opacity: 0.8;
     color: #fff;
+  }
+
+  &:active {
+    transform: scale(0.95);
   }
 
   &.secondary {

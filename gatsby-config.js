@@ -1,5 +1,7 @@
 var csso = require('postcss-csso');
 var autoprefixer = require('autoprefixer');
+var colorFunction = require('postcss-color-function');
+var customProperties = require('postcss-custom-properties');
 
 module.exports = {
   siteMetadata: {
@@ -11,7 +13,7 @@ module.exports = {
       resolve: `gatsby-plugin-nprogress`,
       options: {
         // Setting a color is optional.
-        color: `tomato`,
+        color: `black`,
         // Disable the loading spinner.
         showSpinner: false,
       },

@@ -9,6 +9,7 @@ import Figure from '~/src/components/Figure';
 export const data = {
   id: 'metroc',
   isWork: true,
+  devOnly: true,
   title: 'Developing the website for a Toronto-based college',
   subtitle: 'Metro College of Technology',
   date: '2016-08-01',

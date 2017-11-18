@@ -82,6 +82,7 @@ export const pageQuery = graphql`
             error
             title
             path
+            devOnly
             details {
               title
               description
