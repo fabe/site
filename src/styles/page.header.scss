@@ -14,11 +14,8 @@ header.header {
   margin-bottom: var(--unit-double);
 
   @include small {
-    padding-top: calc(48px + var(--unit-double));
-  }
-  @include small {
     margin-bottom: var(--unit);
-    padding-top: calc(48px + var(--unit));
+    padding-top: calc(48px + var(--unit-double));
 
     &.grid {
       flex-flow: column-reverse;
