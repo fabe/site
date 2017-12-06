@@ -91,10 +91,6 @@ article {
 
   color: var(--meta-color);
 
-  @include small {
-    margin-top: var(--unit);
-  }
-
   ul {
     width: 100%;
     margin: 0;
@@ -110,6 +106,10 @@ article {
 
       & + li {
         margin-top: 0.5rem;
+
+        @include small {
+          margin-top: 0;
+        }
       }
 
       &:after {
@@ -141,6 +141,12 @@ article {
     margin-bottom: var(--unit);
   }
 
+  &.mobile-pull {
+    @include small {
+      margin-bottom: var(--unit);
+    }
+  }
+
   &.center {
     width: 100%;
     max-width: 100%;
@@ -150,6 +156,10 @@ article {
     text-align: center;
 
     flex-shrink: 0;
+
+    @include small {
+      text-align: left;
+    }
   }
 
   &.full {

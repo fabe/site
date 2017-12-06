@@ -37,7 +37,7 @@ export const data = {
 
 export default props => (
   <Article path={data.path} {...props}>
-    <Block>
+    <Block mobilePull>
       <p>
         Late 2016 I was asked to design and develop a website for the{' '}
         <a href="https://zcashminers.org/">

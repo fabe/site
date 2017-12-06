@@ -15,6 +15,13 @@ export default ({ posts, transition, data, pathContext }) => (
           <h1>Side Projects</h1>
         </Header>
         <Block align="right" style={{ marginTop: '1%' }}>
+          <h3>gatsby-starter-deck</h3>
+          <p>Create presentations using GatsbyJS & ReactJS.</p>
+          <p>
+            <a href="https://github.com/fabe/gatsby-starter-deck">
+              Check it out
+            </a>
+          </p>
           <h3>NPR Player</h3>
           <p>
             A chrome extension to stream NPR.<br />Actively used by{' '}
@@ -29,7 +36,7 @@ export default ({ posts, transition, data, pathContext }) => (
           <h3>Delivery</h3>
           <p>Share your design work, clutter–free.</p>
           <p>
-            <a href="https://github.com/fabe/wepp">Check it out</a> or{' '}
+            <a href="https://use.delivery">Check it out</a> or{' '}
             <Link to="/work/delivery">read case</Link>.
           </p>
 
@@ -37,6 +44,14 @@ export default ({ posts, transition, data, pathContext }) => (
           <p>A small macOS app that converts images to WebP.</p>
           <p>
             <a href="https://github.com/fabe/wepp">Check it out</a>
+          </p>
+
+          <h3>interval</h3>
+          <p>
+            I built a sleep tracker with a Raspberry Pi and an accelerometer.
+          </p>
+          <p>
+            <a href="https://github.com/fabe/interval">Check it out</a>
           </p>
         </Block>
       </div>

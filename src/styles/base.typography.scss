@@ -19,6 +19,7 @@ h1,
   }
   @include small {
     font-size: 1.4rem;
+    margin-bottom: var(--unit);
   }
 
   em {
@@ -35,7 +36,7 @@ h1,
 h2,
 .h2 {
   font-weight: var(--bold);
-  font-size: 1.5em;
+  font-size: 1.6em;
   line-height: 1.1;
 
   margin-bottom: var(--unit);
@@ -50,7 +51,7 @@ h2,
 h3,
 .h3 {
   font-weight: var(--bold);
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   line-height: 1.37;
 
   margin: 0.6rem 0 0;
@@ -63,8 +64,6 @@ h3,
 }
 
 h6 {
-  font-size: inherit;
-  font-size: inherit;
   font-size: 80%;
   font-weight: normal;
   font-feature-settings: 'smcp', 'c2sc', 'lnum';
@@ -78,7 +77,7 @@ h6 {
   color: var(--meta-color);
 
   @include small {
-    margin: var(--unit) 0 0.5em;
+    margin: var(--unit) 0 var(--unit-quarter);
   }
 
   &:after {
@@ -103,10 +102,6 @@ a {
   color: inherit;
 
   text-decoration-skip: ink;
-
-  &:hover {
-    color: var(--accent-color);
-  }
 }
 
 a.external {
@@ -116,6 +111,8 @@ a.external {
 
   &:before {
     position: absolute;
+    top: 0;
+    line-height: 1;
     right: -0.85em;
 
     display: block;
@@ -129,12 +126,20 @@ a.external {
 
 p {
   margin-top: 0;
-  margin-bottom: var(--unit-half);
-  color: #404040;
+  margin-bottom: 30px;
+  color: var(--paragraph-color);
+  font-family: var(--serif);
+  font-size: 90%;
+  hyphens: auto;
 
   a {
-    box-shadow: inset 0 -6px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: inset 0 -0.4em 0 rgba(0, 0, 0, 0.1);
     text-decoration: none;
+    transition: 0.15s box-shadow cubic-bezier(0.645, 0.045, 0.355, 1);
+
+    &:hover {
+      box-shadow: inset 0 -1.2em 0 rgba(0, 0, 0, 0.1);
+    }
   }
 
   @include small {
@@ -142,13 +147,13 @@ p {
   }
 }
 
-em {
-  font-style: normal;
+// em {
+//   font-style: normal;
 
-  display: inline-block;
+//   display: inline-block;
 
-  transform: skewX(-8deg);
-}
+//   transform: skewX(-8deg);
+// }
 
 blockquote {
   margin: 0;

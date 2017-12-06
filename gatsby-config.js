@@ -1,7 +1,7 @@
 var csso = require('postcss-csso');
 var autoprefixer = require('autoprefixer');
-var colorFunction = require('postcss-color-function');
-var customProperties = require('postcss-custom-properties');
+var cssvariables = require('postcss-css-variables');
+var flexbugs = require('postcss-flexbugs-fixes');
 
 module.exports = {
   siteMetadata: {
@@ -63,7 +63,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-postcss-sass`,
       options: {
-        postCssPlugins: [autoprefixer(), csso()],
+        postCssPlugins: [autoprefixer(), cssvariables(), csso()],
         precision: 5, // SASS default: 5
       },
     },

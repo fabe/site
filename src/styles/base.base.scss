@@ -15,10 +15,11 @@ html {
 }
 
 body {
-  font: 130%/1.444 var(--sans-serif);
+  font: 130%/1.625 var(--sans-serif);
   font-weight: normal;
   -webkit-font-smoothing: antialiased;
-  font-feature-settings: 'calt', 'liga', 'hist', 'onum', 'pnum';
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'calt', 'liga', 'onum', 'pnum';
   text-rendering: optimizeLegibility;
 
   position: relative;
@@ -33,13 +34,13 @@ body {
   background-color: #fff;
 
   @include large {
-    font-size: 120%;
+    font-size: 130%;
   }
   @include medium {
-    font-size: 110%;
+    font-size: 100%;
   }
   @include small {
-    font-size: 100%;
+    font-size: 90%;
   }
 }
 
@@ -62,13 +63,15 @@ body {
   display: inline-block;
 
   padding: 0.8rem 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 
   transition: 0.2s opacity cubic-bezier(0, 0.405, 0, 1.285),
     0.2s transform cubic-bezier(0, 0.405, 0, 1.285);
   text-decoration: none;
 
   color: #fff;
-  border-radius: 5px;
+  border-radius: 4px;
   background-color: var(--accent-color);
 
   &:hover {

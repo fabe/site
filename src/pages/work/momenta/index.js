@@ -34,7 +34,7 @@ export const data = {
 
 export default props => (
   <Article path={data.path} {...props}>
-    <Block>
+    <Block mobilePull>
       <p>
         During my internship at{' '}
         <a href="https://www.door2door.io/">Door2Door</a> in Berlin, I joined{' '}

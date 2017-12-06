@@ -183,6 +183,7 @@
   position: relative;
 
   text-decoration: none;
+  transition: 0.5s color cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .link:after {
@@ -199,9 +200,13 @@
   transform: scaleX(0);
   transform-origin: right center;
 
-  background-color: var(--backdrop);
+  background-color: rgba(0, 0, 0, 0.1);
 
   will-change: transform;
+}
+
+.link:hover {
+  color: var(--text-color);
 }
 
 .link:hover:after {

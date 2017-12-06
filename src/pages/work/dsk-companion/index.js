@@ -11,7 +11,7 @@ import articleFragment from '~/src/pages';
 export const data = {
   id: 'dsk',
   isWork: true,
-  title: 'Helping athletes to cope with injuries',
+  title: 'Helping athletes to cope with injuries',
   subtitle: 'DSK Companion',
   date: '2017-07-01',
   path: '/work/dsk-companion',
@@ -25,6 +25,10 @@ export const data = {
       description: 'Service Design, Visual Design, Design Sprint',
     },
     {
+      title: 'Context',
+      description: 'University of Applied Sciences Potsdam',
+    },
+    {
       title: 'Date',
       description: 'Summer 2017',
     },
@@ -33,7 +37,7 @@ export const data = {
 
 export default props => (
   <Article path={data.path} {...props}>
-    <Block>
+    <Block mobilePull>
       <p>
         In the spring semester 2017 at FH Potsdam, I teamed up with{' '}
         <a href="//kevinschiffer.com">Kevin</a>,{' '}

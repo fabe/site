@@ -40,14 +40,18 @@ class Topbar extends React.Component {
             <nav onClick={this.handleMenuToggle}>
               <ul>
                 <li>
-                  <Link to="/#work">Work</Link>
+                  <Link className="link" to="/#work">
+                    Work
+                  </Link>
                 </li>
                 <li>
-                  <Link to="/about">About</Link>
+                  <Link className="link" to="/about">
+                    About
+                  </Link>
                 </li>
                 <li>
                   <a
-                    className="external"
+                    className="external link"
                     href="mailto:desk@fabianschultz.com?subject=Inquiry"
                   >
                     Contact

@@ -14,24 +14,38 @@ export default ({ posts, transition, data }) => (
       </div>
       <div className="summary">
         <p>
-          As a designer, I like to focus on projects in the travel and leisure
-          industry. I work both as a product designer and a frontend developer.
-          Take a look at my work here, or browse my side projects.
-        </p>
-        <p>
-          Right now, I study Interface Design at the University of Applied
-          Sciences in Potsdam and work as a freelancer.
+          Looking out the window,<br />probably thinking about grids.
         </p>
       </div>
     </Header>
     <article id="content">
       <div>
-        <hr />
-        <Block align="center">
-          <h6>Some of the companies I've worked with:</h6>
-          <Figure marginTop src={clients} />
+        <Block mobilePull>
+          <Figure
+            src={clients}
+            captionLeft
+            caption="Some of the companies I’ve worked with."
+          />
         </Block>
-        <hr />
+        <Block align="right">
+          <p>
+            Hello, I’m Fabian &mdash; a product designer and developer based in
+            Potsdam, Germany.
+          </p>
+          <p>
+            I’ve been working both as a product designer and frontend developer
+            for over 5 years now. I particularly enjoy working with companies
+            that build products for the travel and leisure industry.
+          </p>
+          <p>
+            Using the power of design, I want to help make technology usable and
+            accessible for everyone — hence my fondness for the web.
+          </p>
+          <p>
+            I’m into working <em>iteratively</em> on projects, owning problems
+            and solving them through interdisciplinary work and teams.
+          </p>
+        </Block>
       </div>
     </article>
   </div>
@@ -39,9 +53,9 @@ export default ({ posts, transition, data }) => (
 
 export const query = graphql`
   query GatsbyImageHeroAboutQuery {
-    hero: file(relativePath: { eq: "hero-bw.jpg" }) {
+    hero: file(relativePath: { eq: "hero-about-slim.jpg" }) {
       childImageSharp {
-        sizes(maxWidth: 1400, quality: 90) {
+        sizes(maxWidth: 700, quality: 90) {
           ...GatsbyImageSharpSizes_withWebp
         }
       }

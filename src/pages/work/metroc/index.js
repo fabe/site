@@ -19,7 +19,11 @@ export const data = {
   details: [
     {
       title: 'Responsibility',
-      description: 'Web Development, Wordpress',
+      description: 'Frontend Development, CMS',
+    },
+    {
+      title: 'Responsibility',
+      description: 'Wordpress, Responsive',
     },
     {
       title: 'Date',
@@ -30,7 +34,7 @@ export const data = {
 
 export default props => (
   <Article path={data.path} {...props}>
-    <Block>
+    <Block mobilePull>
       <p>
         Metro College of Technology is a career college, founded in 1992 and
         located in the dynamic city of Toronto, Ontario. Their mission is to

@@ -7,11 +7,21 @@
 .post:hover .cover:after {
   // box-shadow: inset 0 0 0 10px #fff;
   background-color: rgba(#191c1e, 0.85);
+
+  @include small {
+    background-color: rgba(#000, 0);
+  }
 }
 
 .post:active .cover:after {
-  box-shadow: inset 0 0 0 10px #fff;
+  @include small {
+    background-color: rgba(#000, 0.3);
+  }
 }
+
+// .post:active .cover:after {
+//   box-shadow: inset 0 0 0 10px #fff;
+// }
 
 .post:hover h2 {
   transform: translateY(0);
@@ -70,10 +80,6 @@
 
     background-color: rgba(0, 0, 0, 0);
     box-shadow: inset 0 0 0 0 #fff;
-
-    @include small {
-      display: none;
-    }
   }
 
   .gatsby-image-outer-wrapper {
@@ -107,7 +113,7 @@
   line-height: 1;
   background-color: var(--accent-color);
   color: #fff;
-  font-weight: 800;
+  font-weight: var(--bold);
   text-transform: uppercase;
   letter-spacing: 0.03em;
   border-radius: 4px;

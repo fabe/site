@@ -23,16 +23,19 @@ class BlogIndex extends React.Component {
         <Header cover={this.props.data.hero}>
           <div className="title">
             <h1>
-              Hello, I'm Fabian &mdash; a{' '}
+              Hello, I’m Fabian &mdash; a{' '}
               <em>product designer and developer</em> based in Potsdam, Germany.
             </h1>
           </div>
           <div className="summary">
             <p>
-              As a designer, I like to focus on projects in the travel and
-              leisure industry. I work both as a product designer and a frontend
-              developer. Take a look at my work here, or browse my side
-              projects.
+              I’ve been working both as a product designer and frontend
+              developer for over 5 years now. I particularly enjoy working with
+              companies that build products for the travel and leisure industry.
+            </p>
+            <p>
+              Currently, I study Interface Design at the University of Applied
+              Sciences in Potsdam, Germany.
             </p>
           </div>
         </Header>
