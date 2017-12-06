@@ -85,7 +85,7 @@ export default props => (
       <p>
         Apple ended up adding a similar feature to iOS in September 2015:{' '}
         <a href="http://tcrn.ch/1Mc1L7u">Live Photos</a>. It was &mdash;
-        together with our growing userbase &mdash; a welcome validation of our
+        together with our growing user-base &mdash; a welcome validation of our
         concept.
       </p>
     </Block>
