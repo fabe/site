@@ -49,7 +49,7 @@ export default props => (
         <a href="http://killnicole.github.io/">Victoria Leontieva</a>) and help
         them scale their online enrollment business. Required by the client was
         a swift transition from their old website, while using the same
-        Wordpress-powered stack.
+        Wordpress–powered stack.
       </p>
     </Block>
     <hr />

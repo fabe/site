@@ -9,7 +9,6 @@ import Figure from '~/src/components/Figure';
 
 import homepageMp4 from './homepage.mp4';
 import homepageWebm from './homepage.webm';
-import cover from './momenta.png';
 
 export const data = {
   id: 'momenta',
@@ -61,7 +60,7 @@ export default props => (
       <h2>Landing Page</h2>
       <p>
         Previously to the launch of the iPhone App, I designed and coded the{' '}
-        <a href="http://www.momenta.io/">landing page</a> for Momenta.
+        <a href="http://www.momenta.io/">landing page</a> for&nbsp;Momenta.
       </p>
     </Block>
 
@@ -74,7 +73,7 @@ export default props => (
       <p>
         Sharing and embedding{' '}
         <a href="http://www.momenta.io/m/Hfyb0pHLXt1wlVBSepvZ">moments</a>{' '}
-        outside of the App.
+        outside of the&nbsp;App.
       </p>
     </Block>
 
@@ -105,7 +104,7 @@ export default props => (
       <h3>Goodbye</h3>
       <p>
         We eventually sunsetted Momenta to move on to other projects.
-        Nonetheless I've learned a tremendous amount about community building
+        Nonetheless I’ve learned a tremendous amount about community building
         and working remotely in a team.
       </p>
       <p>

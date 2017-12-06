@@ -64,14 +64,15 @@ export default props => (
       <p>
         As the branding already existed, I only made small tweaks to the visual
         appearance of the company. After researching about Least Authority and
-        its products, I decided to go with DIN Next Pro as a typeface. A strong
-        red was used as the accent color, together with several shades of grey.
+        its products, I decided to go with <em>DIN Next Pro</em> as a typeface.
+        A strong red was used as the accent color, together with several shades
+        of grey.
       </p>
     </Block>
 
     <Block full align="center" pull>
       <h2>Landing Page</h2>
-      <p>Featuring an animated terminal to demo their product.</p>
+      <p>Featuring an animated terminal to demo their&nbsp;product.</p>
     </Block>
     <Block full>
       <Figure background frame sizes={props.data.landing} />
@@ -90,7 +91,7 @@ export default props => (
 
     <Block full align="center" pull>
       <h2>Products</h2>
-      <p>Comparing Least Authority's products.</p>
+      <p>Comparing Least Authority's&nbsp;products.</p>
     </Block>
     <Block full>
       <Figure background frame sizes={props.data.products} />
@@ -101,9 +102,9 @@ export default props => (
       <p>
         The website was coded on top of the static content management system{' '}
         <a href="https://www.getlektor.com/">Lektor</a>, to provide a familiar
-        Python API for Least Authority's developers. It is fully customizable
-        through an admin panel, changes are pushed continuously through their
-        GitHub repository.
+        Python <span className="caps">API</span> for Least Authority’s
+        developers. It is fully customizable through an admin panel, changes are
+        pushed continuously through their GitHub repository.
       </p>
     </Block>
     <Block align="right">

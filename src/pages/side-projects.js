@@ -22,6 +22,20 @@ export default ({ posts, transition, data, pathContext }) => (
               Check it out
             </a>
           </p>
+
+          <h3>ReactJS Workshop</h3>
+          <p>
+            I gave a workshop on ReactJS at my university and published the
+            tutorial on GitHub.
+          </p>
+          <p>
+            <a href="https://speakerdeck.com/fabe/i-heard-react-was-good-an-introduction-to-reactjs">
+              Check out the slides
+            </a>{' '}
+            or{' '}
+            <a href="https://github.com/fabe/react-portfolio">view the code</a>.
+          </p>
+
           <h3>NPR Player</h3>
           <p>
             A chrome extension to stream NPR.<br />Actively used by{' '}
@@ -38,6 +52,12 @@ export default ({ posts, transition, data, pathContext }) => (
           <p>
             <a href="https://use.delivery">Check it out</a> or{' '}
             <Link to="/work/delivery">read case</Link>.
+          </p>
+
+          <h3>Geofilters.co</h3>
+          <p>
+            I started a small side-hustle to help people get well designed
+            Snapchat Geofilters. Sold it after a while.
           </p>
 
           <h3>wepp</h3>

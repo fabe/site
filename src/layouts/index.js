@@ -115,6 +115,11 @@ export const pageQuery = graphql`
     ) {
       ...Cover
     }
+    wimdu: file(
+      relativePath: { eq: "work/wimdu-help-center/wimdu-help-center.png" }
+    ) {
+      ...Cover
+    }
   }
 
   fragment Cover on File {

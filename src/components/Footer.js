@@ -11,7 +11,10 @@ export default ({ scrollTop }) => (
         <nav>
           <ul>
             <li className="email">
-              <a href="mailto:desk@fabianschultz.com?subject=Inquiry">
+              <a
+                className="link"
+                href="mailto:desk@fabianschultz.com?subject=Inquiry"
+              >
                 desk@fabianschultz.com
               </a>
             </li>

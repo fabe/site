@@ -1,5 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
+import Link from 'gatsby-link';
 import Header from '../components/Header';
 import Block from '~/src/components/Block';
 import Figure from '~/src/components/Figure';
@@ -12,10 +13,12 @@ export default ({ posts, transition, data }) => (
       <div className="title">
         <h1>About</h1>
       </div>
-      <div className="summary">
-        <p>
-          Looking out the window,<br />probably thinking about grids.
-        </p>
+      <div className="intro">
+        <ul>
+          <li>Professional early adopter.</li>
+          <li>Open Source on default.</li>
+          <li>Reads fiction, listens to non-fiction.</li>
+        </ul>
       </div>
     </Header>
     <article id="content">
@@ -38,12 +41,18 @@ export default ({ posts, transition, data }) => (
             that build products for the travel and leisure industry.
           </p>
           <p>
+            Outside of working as a freelancer, I try to push out{' '}
+            <Link to="/side-projects">Side Projects</Link> regularly.
+          </p>
+          <p>
             Using the power of design, I want to help make technology usable and
             accessible for everyone — hence my fondness for the web.
           </p>
           <p>
-            I’m into working <em>iteratively</em> on projects, owning problems
-            and solving them through interdisciplinary work and teams.
+            I’m into working iteratively on projects, owning problems and
+            solving them through interdisciplinary work and teams. For me it’s
+            crucial to act at the intersection of design & code, sharpening my
+            skills continuously in every direction.
           </p>
         </Block>
       </div>
@@ -53,7 +62,7 @@ export default ({ posts, transition, data }) => (
 
 export const query = graphql`
   query GatsbyImageHeroAboutQuery {
-    hero: file(relativePath: { eq: "hero-about-slim.jpg" }) {
+    hero: file(relativePath: { eq: "hero-about.jpg" }) {
       childImageSharp {
         sizes(maxWidth: 700, quality: 90) {
           ...GatsbyImageSharpSizes_withWebp

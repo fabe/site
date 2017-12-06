@@ -63,10 +63,10 @@ export default props => (
     <Block vc>
       <h3>Persona & Scenario</h3>
       <p>
-        We created a persona as the first step in our Google Design Sprint
-        process: Max, a 23 year old amateur soccer player, who suffered a
+        We created a persona as one of our first steps in our Google Design
+        Sprint process: Max, a 23 year old amateur soccer player, who suffered a
         ligament rupture during a game. He has to undergo surgery and
-        rehabilitation. We've documented his journey in a user story.
+        rehabilitation. We documented his journey in a user story.
       </p>
     </Block>
     <Block align="right">
@@ -79,8 +79,8 @@ export default props => (
     <Block vc align="right">
       <h3>Value Proposition Canvas</h3>
       <p>
-        After that we moved on to create a Value Proposition Canvas, consisting
-        of "Jobs", "Pains" and "Gains" of our persona. We then took a vote to
+        After that, we moved on to create a Value Proposition Canvas consisting
+        of “Jobs”, “Pains” and “Gains” of our persona. We then took a vote to
         see which aspects are most important to us.
       </p>
     </Block>
@@ -89,7 +89,7 @@ export default props => (
       <h3>Ideation</h3>
       <p>
         Going forward from the Value Proposition Canvas, we were able to ask
-        "How might we..." questions and generate ideas/solutions for those
+        “How might we...” questions and generate ideas/solutions for those
         questions.
       </p>
       <p>
@@ -106,7 +106,7 @@ export default props => (
       <h2>Wireframing</h2>
       <p>
         We created the initial wireframes together on a whiteboard, then moved
-        on to Figma.
+        on to&nbsp;Figma.
       </p>
     </Block>
     <Block full>

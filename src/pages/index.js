@@ -15,7 +15,6 @@ class BlogIndex extends React.Component {
     const siteTitle = get(this, 'props.store.site.siteMetadata.title');
     const articles = get(this, 'props.store.articles');
     const { transition } = this.props;
-    console.log(this.props);
 
     return (
       <div style={transition && transition.style}>

@@ -52,7 +52,7 @@ export default props => (
       <h2>Features</h2>
       <p>
         Type in your company/client, upload and describe your screens, then
-        share with collegues. Simple.
+        share with collegues.&nbsp;Simple.
       </p>
     </Block>
     <Block align="center">
