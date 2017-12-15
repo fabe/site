@@ -30,7 +30,7 @@ class BlogIndex extends React.Component {
             <p>
               I’ve been working both as a product designer and frontend
               developer for over 5 years now. I particularly enjoy working with
-              companies that build products for the travel and leisure industry.
+              companies that try to meet broad and unique user&nbsp;needs.
             </p>
             <p>
               Currently, I study Interface Design at the University of Applied

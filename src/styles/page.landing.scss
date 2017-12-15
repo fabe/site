@@ -19,9 +19,9 @@
   }
 }
 
-// .post:active .cover:after {
-//   box-shadow: inset 0 0 0 10px #fff;
-// }
+.post:active {
+  transform: scale(0.95);
+}
 
 .post:hover h2 {
   transform: translateY(0);
@@ -89,6 +89,7 @@
 
 .post {
   position: relative;
+  transition: 0.2s transform cubic-bezier(0.19, 1, 0.22, 1);
   margin-bottom: var(--unit);
 
   &:hover .cover .gatsby-image-outer-wrapper {

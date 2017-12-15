@@ -17,20 +17,20 @@ export default ({ posts, transition, data }) => (
         <ul>
           <li>Professional early adopter.</li>
           <li>Open Source on default.</li>
-          <li>Reads fiction, listens to non-fiction.</li>
+          <li>Didn’t buy Bitcoin in 2011.</li>
         </ul>
       </div>
     </Header>
     <article id="content">
       <div>
-        <Block mobilePull>
+        <Block pull mobilePull>
           <Figure
             src={clients}
             captionLeft
             caption="Some of the companies I’ve worked with."
           />
         </Block>
-        <Block align="right">
+        <Block align="right" pull mobilePull>
           <p>
             Hello, I’m Fabian &mdash; a product designer and developer based in
             Potsdam, Germany.
@@ -38,10 +38,13 @@ export default ({ posts, transition, data }) => (
           <p>
             I’ve been working both as a product designer and frontend developer
             for over 5 years now. I particularly enjoy working with companies
-            that build products for the travel and leisure industry.
+            that try to meet broad and unique user needs.
           </p>
           <p>
-            Outside of working as a freelancer, I try to push out{' '}
+            Outside of working as a freelancer and studying at{' '}
+            <a className="caps" href="//www.en.fh-potsdam.de">
+              FHP
+            </a>, I try to push out{' '}
             <Link to="/side-projects">Side Projects</Link> regularly.
           </p>
           <p>
