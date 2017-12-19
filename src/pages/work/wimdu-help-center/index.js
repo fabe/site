@@ -69,7 +69,7 @@ export const query = graphql`
     screens: file(relativePath: { eq: "work/wimdu-help-center/screens.png" }) {
       childImageSharp {
         sizes(maxWidth: 700, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp_tracedSVG
+          ...GatsbyImageSharpSizes_withWebp
         }
       }
     }

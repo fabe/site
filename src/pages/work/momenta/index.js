@@ -121,14 +121,14 @@ export const query = graphql`
     sunset: file(relativePath: { eq: "work/momenta/sunset.jpg" }) {
       childImageSharp {
         sizes(maxWidth: 1400, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp_tracedSVG
+          ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
     share: file(relativePath: { eq: "work/momenta/share.png" }) {
       childImageSharp {
         sizes(maxWidth: 1400, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp_tracedSVG
+          ...GatsbyImageSharpSizes_withWebp
         }
       }
     }

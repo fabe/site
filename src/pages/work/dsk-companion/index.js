@@ -173,28 +173,28 @@ export const query = graphql`
     intro: file(relativePath: { eq: "work/dsk-companion/intro.jpg" }) {
       childImageSharp {
         sizes(maxWidth: 1100, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp_tracedSVG
+          ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
     persona: file(relativePath: { eq: "work/dsk-companion/persona.jpg" }) {
       childImageSharp {
         sizes(maxWidth: 800, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp_tracedSVG
+          ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
     vpc: file(relativePath: { eq: "work/dsk-companion/vpc.jpg" }) {
       childImageSharp {
         sizes(maxWidth: 800, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp_tracedSVG
+          ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
     ideation: file(relativePath: { eq: "work/dsk-companion/ideation.jpg" }) {
       childImageSharp {
         sizes(maxWidth: 800, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp_tracedSVG
+          ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
@@ -203,42 +203,42 @@ export const query = graphql`
     ) {
       childImageSharp {
         sizes(maxWidth: 800, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp_tracedSVG
+          ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
     usertest: file(relativePath: { eq: "work/dsk-companion/usertest.jpg" }) {
       childImageSharp {
         sizes(maxWidth: 800, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp_tracedSVG
+          ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
     screen1: file(relativePath: { eq: "work/dsk-companion/screens/1.png" }) {
       childImageSharp {
         sizes(maxWidth: 800, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp_tracedSVG
+          ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
     screen2: file(relativePath: { eq: "work/dsk-companion/screens/2.png" }) {
       childImageSharp {
         sizes(maxWidth: 800, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp_tracedSVG
+          ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
     screen3: file(relativePath: { eq: "work/dsk-companion/screens/3.png" }) {
       childImageSharp {
         sizes(maxWidth: 800, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp_tracedSVG
+          ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
     screen4: file(relativePath: { eq: "work/dsk-companion/screens/4.png" }) {
       childImageSharp {
         sizes(maxWidth: 800, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp_tracedSVG
+          ...GatsbyImageSharpSizes_withWebp
         }
       }
     }

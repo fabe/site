@@ -119,7 +119,7 @@ export const query = graphql`
     ) {
       childImageSharp {
         sizes(maxWidth: 800, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp_tracedSVG
+          ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
@@ -128,28 +128,28 @@ export const query = graphql`
     ) {
       childImageSharp {
         sizes(maxWidth: 1400, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp_tracedSVG
+          ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
     landing: file(relativePath: { eq: "work/least-authority/landing.png" }) {
       childImageSharp {
         sizes(maxWidth: 800, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp_tracedSVG
+          ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
     products: file(relativePath: { eq: "work/least-authority/products.png" }) {
       childImageSharp {
         sizes(maxWidth: 800, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp_tracedSVG
+          ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
     cms: file(relativePath: { eq: "work/least-authority/cms.png" }) {
       childImageSharp {
         sizes(maxWidth: 800, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp_tracedSVG
+          ...GatsbyImageSharpSizes_withWebp
         }
       }
     }

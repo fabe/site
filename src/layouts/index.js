@@ -125,7 +125,7 @@ export const pageQuery = graphql`
   fragment Cover on File {
     childImageSharp {
       sizes(maxWidth: 1100, quality: 90) {
-        ...GatsbyImageSharpSizes_withWebp_tracedSVG
+        ...GatsbyImageSharpSizes_withWebp
       }
     }
   }
