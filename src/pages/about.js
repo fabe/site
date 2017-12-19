@@ -68,7 +68,7 @@ export const query = graphql`
     hero: file(relativePath: { eq: "hero-about.jpg" }) {
       childImageSharp {
         sizes(maxWidth: 700, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp
+          ...GatsbyImageSharpSizes_withWebp_tracedSVG
         }
       }
     }

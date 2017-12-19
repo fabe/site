@@ -40,11 +40,10 @@ export default props => (
     <Block mobilePull>
       <p>
         Late 2016 I was asked to design and develop a website for the{' '}
-        <a href="https://zcashminers.org/">
-          Zcash Open Source Miner Challenge
-        </a>, which was operated by Least Authority. After the launch, I helped
-        Least Authority redesign their own website, taking care of both
-        development and design.
+        <a href="https://zcashminers.org/">Zcash Open Source Miner Challenge</a>,
+        which was operated by Least Authority. After the launch, I helped Least
+        Authority redesign their own website, taking care of both development
+        and design.
       </p>
     </Block>
     <Block align="right">
@@ -120,7 +119,7 @@ export const query = graphql`
     ) {
       childImageSharp {
         sizes(maxWidth: 800, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp
+          ...GatsbyImageSharpSizes_withWebp_tracedSVG
         }
       }
     }
@@ -129,28 +128,28 @@ export const query = graphql`
     ) {
       childImageSharp {
         sizes(maxWidth: 1400, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp
+          ...GatsbyImageSharpSizes_withWebp_tracedSVG
         }
       }
     }
     landing: file(relativePath: { eq: "work/least-authority/landing.png" }) {
       childImageSharp {
         sizes(maxWidth: 800, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp
+          ...GatsbyImageSharpSizes_withWebp_tracedSVG
         }
       }
     }
     products: file(relativePath: { eq: "work/least-authority/products.png" }) {
       childImageSharp {
         sizes(maxWidth: 800, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp
+          ...GatsbyImageSharpSizes_withWebp_tracedSVG
         }
       }
     }
     cms: file(relativePath: { eq: "work/least-authority/cms.png" }) {
       childImageSharp {
         sizes(maxWidth: 800, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp
+          ...GatsbyImageSharpSizes_withWebp_tracedSVG
         }
       }
     }
