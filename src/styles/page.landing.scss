@@ -89,8 +89,10 @@
 
 .post {
   position: relative;
-  transition: 0.2s transform cubic-bezier(0.19, 1, 0.22, 1);
+
   margin-bottom: var(--unit);
+
+  transition: 0.2s transform cubic-bezier(0.19, 1, 0.22, 1);
 
   &:hover .cover .gatsby-image-outer-wrapper {
     transform: scale(1.05);
@@ -106,16 +108,20 @@
 }
 
 .dev-only {
+  font-size: 60%;
+  font-weight: var(--bold);
+  line-height: 1;
+
   position: absolute;
   top: var(--unit-half);
   right: var(--unit-half);
+
   padding: 0.5em;
-  font-size: 60%;
-  line-height: 1;
-  background-color: var(--accent-color);
-  color: #fff;
-  font-weight: var(--bold);
-  text-transform: uppercase;
+
   letter-spacing: 0.03em;
+  text-transform: uppercase;
+
+  color: #fff;
   border-radius: 4px;
+  background-color: var(--accent-color);
 }

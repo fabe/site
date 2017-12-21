@@ -7,25 +7,28 @@
 // Dia by Schick-Toikka
 @font-face {
   font-family: 'Dia';
-  src: url('/fonts/Dia-Regular.woff2') format('woff2'),
-    url('/fonts/Dia-Regular.woff') format('woff');
   font-weight: normal;
   font-style: normal;
+
+  src: url('/fonts/Dia-Regular.woff2') format('woff2'),
+    url('/fonts/Dia-Regular.woff') format('woff');
 }
 
 @font-face {
   font-family: 'Dia';
-  src: url('/fonts/Dia-Black.woff2') format('woff2'),
-    url('/fonts/Dia-Black.woff') format('woff');
   font-weight: 800;
   font-style: normal;
+
+  src: url('/fonts/Dia-Black.woff2') format('woff2'),
+    url('/fonts/Dia-Black.woff') format('woff');
 }
 
 // IBM Plex Serif by IBM
 @font-face {
   font-family: 'IBM Plex Serif';
-  font-style: normal;
   font-weight: 400;
+  font-style: normal;
+
   src: local('IBM Plex Serif'), local('IBMPlexSerif'),
     url('/fonts/IBMPlexSerif-Regular-Pi.woff2') format('woff2'),
     url('/fonts/IBMPlexSerif-Regular-Pi.woff') format('woff');
@@ -34,8 +37,9 @@
 
 @font-face {
   font-family: 'IBM Plex Serif';
-  font-style: normal;
   font-weight: 400;
+  font-style: normal;
+
   src: local('IBM Plex Serif'), local('IBMPlexSerif'),
     url('/fonts/IBMPlexSerif-Regular-Latin3.woff2') format('woff2'),
     url('/fonts/IBMPlexSerif-Regular-Latin3.woff') format('woff');
@@ -44,8 +48,9 @@
 
 @font-face {
   font-family: 'IBM Plex Serif';
-  font-style: normal;
   font-weight: 400;
+  font-style: normal;
+
   src: local('IBM Plex Serif'), local('IBMPlexSerif'),
     url('/fonts/IBMPlexSerif-Regular-Latin2.woff2') format('woff2'),
     url('/fonts/IBMPlexSerif-Regular-Latin2.woff') format('woff');
@@ -54,8 +59,9 @@
 
 @font-face {
   font-family: 'IBM Plex Serif';
-  font-style: normal;
   font-weight: 400;
+  font-style: normal;
+
   src: local('IBM Plex Serif'), local('IBMPlexSerif'),
     url('/fonts/IBMPlexSerif-Regular-Latin1.woff2') format('woff2'),
     url('/fonts/IBMPlexSerif-Regular-Latin1.woff') format('woff');
@@ -64,8 +70,9 @@
 
 @font-face {
   font-family: 'IBM Plex Serif';
-  font-style: italic;
   font-weight: 400;
+  font-style: italic;
+
   src: local('IBM Plex Serif Italic'), local('IBMPlexSerif-Italic'),
     url('/fonts/IBMPlexSerif-Italic-Pi.woff2') format('woff2'),
     url('/fonts/IBMPlexSerif-Italic-Pi.woff') format('woff');
@@ -74,8 +81,9 @@
 
 @font-face {
   font-family: 'IBM Plex Serif';
-  font-style: italic;
   font-weight: 400;
+  font-style: italic;
+
   src: local('IBM Plex Serif Italic'), local('IBMPlexSerif-Italic'),
     url('/fonts/IBMPlexSerif-Italic-Latin3.woff2') format('woff2'),
     url('/fonts/IBMPlexSerif-Italic-Latin3.woff') format('woff');
@@ -84,8 +92,9 @@
 
 @font-face {
   font-family: 'IBM Plex Serif';
-  font-style: italic;
   font-weight: 400;
+  font-style: italic;
+
   src: local('IBM Plex Serif Italic'), local('IBMPlexSerif-Italic'),
     url('/fonts/IBMPlexSerif-Italic-Latin2.woff2') format('woff2'),
     url('/fonts/IBMPlexSerif-Italic-Latin2.woff') format('woff');
@@ -94,8 +103,9 @@
 
 @font-face {
   font-family: 'IBM Plex Serif';
-  font-style: italic;
   font-weight: 400;
+  font-style: italic;
+
   src: local('IBM Plex Serif Italic'), local('IBMPlexSerif-Italic'),
     url('/fonts/IBMPlexSerif-Italic-Latin1.woff2') format('woff2'),
     url('/fonts/IBMPlexSerif-Italic-Latin1.woff') format('woff');

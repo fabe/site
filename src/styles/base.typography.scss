@@ -6,8 +6,8 @@
 
 h1,
 .h1 {
-  font-weight: var(--bold);
   font-size: 2rem;
+  font-weight: var(--bold);
   line-height: 1.3;
 
   margin: 0;
@@ -19,6 +19,7 @@ h1,
   }
   @include small {
     font-size: 1.4rem;
+
     margin-bottom: var(--unit);
   }
 
@@ -35,8 +36,8 @@ h1,
 
 h2,
 .h2 {
-  font-weight: var(--bold);
   font-size: 1.6em;
+  font-weight: var(--bold);
   line-height: 1.1;
 
   margin-bottom: var(--unit);
@@ -50,8 +51,8 @@ h2,
 
 h3,
 .h3 {
-  font-weight: var(--bold);
   font-size: 1.6rem;
+  font-weight: var(--bold);
   line-height: 1.37;
 
   margin: 0.6rem 0 0;
@@ -110,9 +111,10 @@ a.external {
   margin-right: 0.85em;
 
   &:before {
+    line-height: 1;
+
     position: absolute;
     top: 0;
-    line-height: 1;
     right: -0.85em;
 
     display: block;
@@ -125,25 +127,29 @@ a.external {
 }
 
 p {
-  margin-top: 0;
-  margin-bottom: 30px;
-  color: var(--paragraph-color);
   font-family: var(--serif);
   font-size: 90%;
+
+  margin-top: 0;
+  margin-bottom: 30px;
+
   hyphens: auto;
 
+  color: var(--paragraph-color);
+
+  @include small {
+    margin-bottom: 1em;
+  }
+
   a {
-    box-shadow: inset 0 -0.4em 0 rgba(0, 0, 0, 0.1);
-    text-decoration: none;
     transition: 0.15s box-shadow cubic-bezier(0.645, 0.045, 0.355, 1);
+    text-decoration: none;
+
+    box-shadow: inset 0 -0.4em 0 rgba(0, 0, 0, 0.1);
 
     &:hover {
       box-shadow: inset 0 -1.2em 0 rgba(0, 0, 0, 0.1);
     }
-  }
-
-  @include small {
-    margin-bottom: 1em;
   }
 }
 

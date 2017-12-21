@@ -57,18 +57,18 @@ body {
 }
 
 .button {
-  font-weight: var(--bold);
   font-size: 80%;
+  font-weight: var(--bold);
 
   display: inline-block;
 
   padding: 0.8rem 1.2rem;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
 
   transition: 0.2s opacity cubic-bezier(0, 0.405, 0, 1.285),
     0.2s transform cubic-bezier(0, 0.405, 0, 1.285);
   text-decoration: none;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
 
   color: #fff;
   border-radius: 4px;
