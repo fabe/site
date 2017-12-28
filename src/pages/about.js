@@ -57,6 +57,16 @@ export default ({ posts, transition, data }) => (
             crucial to act at the intersection of design & code, sharpening my
             skills continuously in every direction.
           </p>
+          <p>
+            View my{' '}
+            <a href="https://drive.google.com/open?id=19nybcDoTKPWsYAmq5nRmx23NwqYD32er">
+              Résumé
+            </a>{' '}
+            or my{' '}
+            <a href="https://www.linkedin.com/in/fabian-schultz">
+              LinkedIn profile
+            </a>.
+          </p>
         </Block>
       </div>
     </article>
