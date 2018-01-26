@@ -120,6 +120,11 @@ export const pageQuery = graphql`
     ) {
       ...Cover
     }
+    digitalmenu: file(
+      relativePath: { eq: "work/digital-menu/digital-menu.png" }
+    ) {
+      ...Cover
+    }
   }
 
   fragment Cover on File {

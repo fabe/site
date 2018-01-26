@@ -175,3 +175,10 @@ blockquote {
 
   letter-spacing: 0.05em;
 }
+
+.small {
+  font-size: 80%;
+  font-family: var(--sans-serif);
+  color: var(--meta-color);
+  hyphens: none;
+}
