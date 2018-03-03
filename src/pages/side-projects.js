@@ -7,7 +7,7 @@ import Figure from '~/src/components/Figure';
 import clients from '~/static/clients.svg';
 
 export default ({ posts, transition, data, pathContext }) => (
-  <div style={transition && transition.style}>
+  <div style={transition ? transition.style : { opacity: 0 }}>
     <Helmet title="Fabian W. Schultz | Side Projects" />
     <article id="content">
       <div>

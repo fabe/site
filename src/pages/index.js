@@ -17,7 +17,7 @@ class BlogIndex extends React.Component {
     const { transition } = this.props;
 
     return (
-      <div style={transition && transition.style}>
+      <div style={transition ? transition.style : { opacity: 0 }}>
         <Helmet title={get(this, 'props.store.site.siteMetadata.title')} />
         <Header cover={this.props.data.hero}>
           <div className="title">

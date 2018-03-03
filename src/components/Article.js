@@ -54,7 +54,7 @@ class Article extends React.Component {
     } = this.state.article;
 
     return (
-      <div style={transition && transition.style}>
+      <div style={transition ? transition.style : { opacity: 0 }}>
         <Header cover={cover} contain={contain} background={background}>
           <div className="title">
             <HGroup large title={title} subtitle={subtitle} />
