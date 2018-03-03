@@ -28,6 +28,13 @@ header.header {
     }
 
     flex: 1 1 100%;
+    animation: fadeInBottom 1s .25s cubic-bezier(0.19, 1, 0.22, 1) backwards;
+    display: inline-block;
+  }
+
+  .summary,
+  .intro {
+    animation: fadeInBottom 1s .5s cubic-bezier(0.19, 1, 0.22, 1) backwards;
   }
 
   h6 {
@@ -94,5 +101,17 @@ header.header {
 
   @include medium {
     background-position: center center;
+  }
+}
+
+@keyframes fadeInBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
