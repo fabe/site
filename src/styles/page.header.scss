@@ -28,13 +28,13 @@ header.header {
     }
 
     flex: 1 1 100%;
-    animation: fadeInBottom 1s .25s cubic-bezier(0.19, 1, 0.22, 1) backwards;
+    animation: fadeInBottom 1s 0.5s cubic-bezier(0.19, 1, 0.22, 1) backwards;
     display: inline-block;
   }
 
   .summary,
   .intro {
-    animation: fadeInBottom 1s .5s cubic-bezier(0.19, 1, 0.22, 1) backwards;
+    animation: fadeInBottom 1s 0.75s cubic-bezier(0.19, 1, 0.22, 1) backwards;
   }
 
   h6 {
