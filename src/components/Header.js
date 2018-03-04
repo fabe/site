@@ -16,6 +16,24 @@ class Header extends React.Component {
     this.setState({ loaded: true });
   }
 
+  renderNoScript() {
+    return (
+      <noscript>
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+              .title,
+              .summary,
+              .intro {
+                opacity: 1 !important;
+              }
+        `,
+          }}
+        />
+      </noscript>
+    );
+  }
+
   render() {
     const {
       children,
@@ -43,12 +61,14 @@ class Header extends React.Component {
           <div className="col">
             <div className="meta">{children}</div>
           </div>
+          {this.renderNoScript()}
         </header>
       );
     } else {
       return (
         <header className="header grid">
           <div>{children}</div>
+          {this.renderNoScript()}
         </header>
       );
     }
