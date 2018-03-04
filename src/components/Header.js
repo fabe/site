@@ -9,6 +9,11 @@ class Header extends React.Component {
     super();
 
     this.windowHeight = 0;
+    this.state = { loaded: false };
+  }
+
+  componentDidMount() {
+    this.setState({ loaded: true });
   }
 
   render() {
@@ -21,10 +26,11 @@ class Header extends React.Component {
       background,
       simple,
     } = this.props;
+    const { loaded } = this.state;
 
     if (!simple) {
       return (
-        <header className="header grid">
+        <header className={`header grid${loaded ? ' loaded' : ''}`}>
           <div className="col">
             <div className="figure">
               {cover && !video ? (
