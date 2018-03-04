@@ -4,7 +4,7 @@
   "lang": "en-US",
   "start_url": "/",
   "Scope": "/",
-  "display": "browser",
+  "display": "minimal-ui",
   "theme_color": "#13ba6c",
   "background_color": "#ffffff",
   "icons": [

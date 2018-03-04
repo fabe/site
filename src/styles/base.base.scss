@@ -39,6 +39,9 @@ body {
   @include medium {
     font-size: 100%;
   }
+  @include small {
+    font-size: 110%;
+  }
 }
 
 .container {
