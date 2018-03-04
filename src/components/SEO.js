@@ -14,14 +14,14 @@ const config = {
 
 class SEO extends Component {
   render() {
-    const { postNode, postPath, postSEO } = this.props;
+    const { postNode, postPath, postSEO, pageSEO } = this.props;
     const { siteTitle, siteUrl, siteDescription, userTwitter, author } = config;
     let title;
     let description;
     let image;
     let postURL;
 
-    if (postSEO) {
+    if (postSEO || pageSEO) {
       const postMeta = postNode;
       title = `${siteTitle} | ${postMeta.subtitle}`;
       description = postMeta.excerpt ? postMeta.excerpt : postNode.title;
@@ -52,6 +52,14 @@ class SEO extends Component {
             '@type': 'ListItem',
             position: 1,
             item: {
+              '@id': `${siteUrl}/work`,
+              name: 'Work',
+            },
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            item: {
               '@id': postURL,
               name: title,
               image,
@@ -59,6 +67,7 @@ class SEO extends Component {
           },
         ],
       });
+
       schemaOrgJSONLD.push({
         '@context': 'http://schema.org',
         '@type': 'BlogPosting',
@@ -86,6 +95,25 @@ class SEO extends Component {
         description,
       });
     }
+
+    if (pageSEO) {
+      schemaOrgJSONLD.push({
+        '@context': 'http://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            item: {
+              '@id': postURL,
+              name: title,
+              image,
+            },
+          },
+        ],
+      });
+    }
+
     return (
       <Helmet>
         {/* General tags */}

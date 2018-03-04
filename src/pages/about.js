@@ -17,7 +17,7 @@ export default ({ posts, transition, data }) => (
         excerpt: `I’ve been working both as a product designer and frontend developer for over 5 years now. I particularly enjoy working with companies that try to meet broad and unique user needs.`,
         cover: data.hero,
       }}
-      postSEO
+      pageSEO
     />
     <Header cover={data.hero}>
       <div className="title">
