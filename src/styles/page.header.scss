@@ -40,6 +40,18 @@ header.header {
     .intro {
       animation: fadeInBottom 1s 0.75s cubic-bezier(0.19, 1, 0.22, 1) backwards;
     }
+
+    .title,
+    .summary,
+    .intro {
+      opacity: 1;
+    }
+  }
+
+  .title,
+  .summary,
+  .intro {
+    opacity: 0;
   }
 
   h6 {
