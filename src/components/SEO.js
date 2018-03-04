@@ -5,7 +5,7 @@ import Helmet from 'react-helmet';
 
 const config = {
   siteTitle: 'Fabian W. Schultz',
-  siteDescription: `Hello, I'm Fabian — a product designer and developer based in Potsdam, Germany. I’ve been working both as a product designer and frontend developer for over 5 years now. I particularly enjoy working with companies that try to meet broad and unique user needs. Currently, I study Interface Design at the University of Applied Sciences in Potsdam, Germany.`,
+  siteDescription: `Hello, I'm Fabian Schultz — a product designer and developer based in Potsdam, Germany.`,
   siteUrl: 'https://fabianschultz.com',
   pathPrefix: '/work',
   userTwitter: 'fschultz_',
@@ -80,6 +80,7 @@ class SEO extends Component {
         {/* General tags */}
         <meta name="description" content={description} />
         <meta name="image" content={image} />
+        <link rel="canonical" href={postSEO ? postURL : siteUrl} />
 
         {/* Schema.org tags */}
         <script type="application/ld+json">
