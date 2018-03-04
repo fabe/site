@@ -4,11 +4,21 @@ import Link from 'gatsby-link';
 import Header from '../components/Header';
 import Block from '~/src/components/Block';
 import Figure from '~/src/components/Figure';
+import SEO from '~/src/components/SEO';
 import clients from '~/static/clients.svg';
 
 export default ({ posts, transition, data }) => (
   <div style={transition ? transition.style : { opacity: 0 }}>
     <Helmet title="Fabian W. Schultz | About" />
+    <SEO
+      postPath="/about"
+      postNode={{
+        subtitle: 'About',
+        excerpt: `I’ve been working both as a product designer and frontend developer for over 5 years now. I particularly enjoy working with companies that try to meet broad and unique user needs.`,
+        cover: data.hero,
+      }}
+      postSEO
+    />
     <Header cover={data.hero}>
       <div className="title">
         <h1>About</h1>

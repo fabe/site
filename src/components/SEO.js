@@ -21,7 +21,6 @@ class SEO extends Component {
     let postURL;
 
     if (postSEO) {
-      console.log(postNode);
       const postMeta = postNode;
       title = `${siteTitle} | ${postMeta.subtitle}`;
       description = postMeta.excerpt ? postMeta.excerpt : postNode.title;
