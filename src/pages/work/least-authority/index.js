@@ -17,8 +17,7 @@ export const data = {
   background: '#333',
   caption: 'For developers',
   dark: true,
-  intro:
-    'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia.',
+  excerpt: `Late 2016 I was asked to design and develop a website for the Zcash Open Source Miner Challenge, which was operated by Least Authority. After the launch, I helped Least Authority redesign their own website, taking care of both development and design.`,
   details: [
     {
       title: 'Responsibility',
@@ -40,10 +39,11 @@ export default props => (
     <Block mobilePull>
       <p>
         Late 2016 I was asked to design and develop a website for the{' '}
-        <a href="https://zcashminers.org/">Zcash Open Source Miner Challenge</a>,
-        which was operated by Least Authority. After the launch, I helped Least
-        Authority redesign their own website, taking care of both development
-        and design.
+        <a href="https://zcashminers.org/">
+          Zcash Open Source Miner Challenge
+        </a>, which was operated by Least Authority. After the launch, I helped
+        Least Authority redesign their own website, taking care of both
+        development and design.
       </p>
     </Block>
     <Block align="right">

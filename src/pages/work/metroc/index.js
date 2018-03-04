@@ -16,6 +16,7 @@ export const data = {
   path: '/work/metroc',
   contain: true,
   background: '#26272C',
+  excerpt: `In Mid 2016 I was asked to develop their new website (designed by Victoria Leontieva) and help them scale their online enrollment business. Required by the client was a swift transition from their old website, while using the same Wordpress–powered stack.`,
   details: [
     {
       title: 'Responsibility',

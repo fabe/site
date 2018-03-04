@@ -7,6 +7,7 @@ import { observer, inject } from 'mobx-react';
 import Header from '../components/Header';
 import Bio from '../components/Bio';
 import Posts from '../components/Posts';
+import SEO from '../components/SEO';
 
 @inject('store')
 @observer
@@ -19,6 +20,7 @@ class BlogIndex extends React.Component {
     return (
       <div style={transition ? transition.style : { opacity: 0 }}>
         <Helmet title={get(this, 'props.store.site.siteMetadata.title')} />
+        <SEO postEdges={articles} />
         <Header cover={this.props.data.hero}>
           <div className="title">
             <h1>

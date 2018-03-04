@@ -13,6 +13,7 @@ export const data = {
   subtitle: 'Wimdu Help Center',
   date: '2015-06-01',
   path: '/work/wimdu-help-center',
+  excerpt: `In Mid 2015 I was asked to design and develop a new support center for Wimdu and help them bring their recenly redesigned brand to all channels of communication. I worked closely with their team as a contractor and launched the site on top of their existing support system, Zendesk.`,
   details: [
     {
       title: 'Responsibility',

@@ -33,17 +33,6 @@ module.exports = class HTML extends React.Component {
           />
           <link rel="icon" type="image/png" href={favicon32} sizes="32x32" />
           <link rel="icon" type="image/png" href={favicon16} sizes="16x16" />
-          <meta
-            property="og:description"
-            content="Hello, I'm Fabian — a product designer and developer based in Potsdam, Germany."
-          />
-          <meta
-            property="og:image:url"
-            content="https://fabianschultz.com/static/thumbnail.jpg"
-          />
-          <meta property="og:image:type" content="image/jpeg" />
-          <meta property="og:url" content="https://fabianschultz.com" />
-          <meta property="og:title" content="Fabian W. Schultz" />
 
           <link rel="manifest" href="/manifest.json" />
           <meta name="mobile-web-app-capable" content="yes" />

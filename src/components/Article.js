@@ -8,6 +8,7 @@ import Intro from './Intro';
 import Post from './Post';
 import Block from './Block';
 import HGroup from './HGroup';
+import SEO from './SEO';
 
 @inject('store')
 @observer
@@ -62,21 +63,8 @@ class Article extends React.Component {
           <Intro details={details} />
         </Header>
         <article id="content">
-          <Helmet title={`Fabian W. Schultz | ${subtitle}`}>
-            <meta
-              property="og:image:url"
-              content={cover.childImageSharp.sizes.base64}
-            />
-            <meta property="og:image:type" content="image/png" />
-            <meta
-              property="og:url"
-              content={`https://fabianschultz.com${path}`}
-            />
-            <meta
-              property="og:title"
-              content={`Fabian W. Schultz | ${subtitle}`}
-            />
-          </Helmet>
+          <Helmet title={`Fabian W. Schultz | ${subtitle}`} />
+          <SEO postPath={path} postNode={this.state.article} postSEO />
           <div>{children}</div>
           <hr />
           <div className="pagination">

@@ -19,6 +19,7 @@ export const data = {
   path: '/work/momenta',
   contain: false,
   background: '#6B476B',
+  excerpt: `During my internship at Door2Door in Berlin, I joined Alex, Jose and Kirsty as a co-founder of Momenta. My focus was on all things web, allowing me to work on both the design and development of the product.`,
   details: [
     {
       title: 'Responsibility',

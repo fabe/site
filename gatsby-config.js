@@ -7,6 +7,7 @@ module.exports = {
   siteMetadata: {
     title: 'Fabian W. Schultz',
     author: 'Fabian W. Schultz',
+    siteUrl: `https://fabianschultz.com`,
   },
   plugins: [
     {
@@ -58,6 +59,7 @@ module.exports = {
       },
     },
     `gatsby-plugin-offline`,
+    `gatsby-plugin-sitemap`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-react-next`,
     {

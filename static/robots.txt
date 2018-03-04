@@ -1,2 +1,5 @@
 User-agent: *
-Disallow:
+Disallow: */fonts/
+Disallow: */covers/
+
+sitemap: https://fabianschultz.com/sitemap.xml

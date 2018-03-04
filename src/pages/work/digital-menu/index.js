@@ -14,6 +14,7 @@ export const data = {
   subtitle: 'Digital Menu',
   date: '2015-04-01',
   path: '/work/digital-menu',
+  excerpt: `In the summer of 2015, together with Edmundo Galindo, I worked on a digital menu for a fictional burger restaurant. The project was envisioned during the class “Human-Computer Interaction Design”, supervised by Prof. Dr. Frank Heidmann.`,
   contain: false,
   background: '#111',
   details: [

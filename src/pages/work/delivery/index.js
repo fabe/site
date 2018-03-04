@@ -16,6 +16,7 @@ export const data = {
   date: '2017-04-01',
   path: '/work/delivery',
   external: 'https://use.delivery',
+  excerpt: `Around Easter 2017 I decided to work on a simple webapp called Delivery to help designers share their work in progress. I wanted to create a hassle–free solution, which is reduced to the bare minimum of features and requires neither sign-up nor a credit card.`,
   details: [
     {
       title: 'Responsibility',
