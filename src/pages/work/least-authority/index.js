@@ -11,7 +11,7 @@ export const data = {
   isWork: true,
   title: 'New website for the<br/>privacy–focused startup Least Authority',
   subtitle: 'Least Authority',
-  date: '2017-02-01',
+  date: '2017-12-22',
   path: '/work/least-authority',
   contain: true,
   background: '#333',

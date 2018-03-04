@@ -87,6 +87,7 @@ export const pageQuery = graphql`
               title
               description
             }
+            date
             excerpt
             contain
             background

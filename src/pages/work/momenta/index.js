@@ -15,7 +15,7 @@ export const data = {
   isWork: true,
   title: 'Capture your moments as pictures with sound.',
   subtitle: 'Momenta',
-  date: '2013-12-31',
+  date: '2017-12-22',
   path: '/work/momenta',
   contain: false,
   background: '#6B476B',

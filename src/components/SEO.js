@@ -5,6 +5,7 @@ import Helmet from 'react-helmet';
 
 const config = {
   siteTitle: 'Fabian W. Schultz',
+  author: 'Fabian Schultz',
   siteDescription: `Hello, I'm Fabian Schultz — a product designer and developer based in Potsdam, Germany.`,
   siteUrl: 'https://fabianschultz.com',
   pathPrefix: '/work',
@@ -14,7 +15,7 @@ const config = {
 class SEO extends Component {
   render() {
     const { postNode, postPath, postSEO } = this.props;
-    const { siteTitle, siteUrl, siteDescription, userTwitter } = config;
+    const { siteTitle, siteUrl, siteDescription, userTwitter, author } = config;
     let title;
     let description;
     let image;
@@ -43,36 +44,47 @@ class SEO extends Component {
       },
     ];
     if (postSEO) {
-      schemaOrgJSONLD.push([
-        {
-          '@context': 'http://schema.org',
-          '@type': 'BreadcrumbList',
-          itemListElement: [
-            {
-              '@type': 'ListItem',
-              position: 1,
-              item: {
-                '@id': postURL,
-                name: title,
-                image,
-              },
+      schemaOrgJSONLD.push({
+        '@context': 'http://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            item: {
+              '@id': postURL,
+              name: title,
+              image,
             },
-          ],
-        },
-        {
-          '@context': 'http://schema.org',
-          '@type': 'BlogPosting',
-          url: siteUrl,
-          name: title,
-          alternateName: '',
-          headline: title,
-          image: {
-            '@type': 'ImageObject',
-            url: image,
           },
-          description,
+        ],
+      });
+      schemaOrgJSONLD.push({
+        '@context': 'http://schema.org',
+        '@type': 'BlogPosting',
+        url: postURL,
+        name: title,
+        author: {
+          '@type': 'Person',
+          name: author,
         },
-      ]);
+        publisher: {
+          '@type': 'Organization',
+          name: siteTitle,
+          logo: {
+            '@type': 'ImageObject',
+            url: 'https://fabianschultz.com/publisher.jpg',
+          },
+        },
+        datePublished: postNode.date,
+        alternateName: '',
+        headline: postNode.subtitle,
+        image: {
+          '@type': 'ImageObject',
+          url: image,
+        },
+        description,
+      });
     }
     return (
       <Helmet>
