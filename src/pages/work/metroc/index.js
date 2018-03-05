@@ -12,7 +12,7 @@ export const data = {
   devOnly: true,
   title: 'Developing the website for a Toronto-based college',
   subtitle: 'Metro College of Technology',
-  date: '2017-12-22',
+  date: '2016-08-01',
   path: '/work/metroc',
   contain: true,
   background: '#26272C',
