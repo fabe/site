@@ -64,12 +64,9 @@
     "url": "git+https://github.com/fabe/site.git"
   },
   "scripts": {
-    "dev": "npm run fonts:build && gatsby develop",
-    "build": "npm run fonts:build && gatsby build",
-    "fonts:encrypt": "7z -mhc=on -mhe=on -p$PW a ./static/fonts/Dia ./static/fonts/Dia",
-    "fonts:decrypt": "7z x ./static/fonts/Dia.7z -o./static/fonts -p$PW",
-    "fonts:clean": "rm -rf ./static/fonts/Dia",
-    "fonts:build": "npm run fonts:clean && npm run fonts:decrypt",
+    "dev": "gatsby develop",
+    "build": "npm run fonts:fetch && gatsby build",
+    "fonts:fetch": "wget -O Dia.zip $SECRET_FONTS_URL; unzip Dia.zip -d ./static/fonts; rm Dia.zip",
     "test": "echo \"Error: no test specified\" && exit 1"
   }
 }

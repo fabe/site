@@ -8,3 +8,5 @@ yarn.lock
 
 # Fonts
 Dia
+.zip
+.env
