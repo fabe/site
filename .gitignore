@@ -5,3 +5,6 @@ public
 .intermediate-representation/
 .cache/
 yarn.lock
+
+# Fonts
+Dia
