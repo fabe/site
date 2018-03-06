@@ -19,7 +19,12 @@ class BlogIndex extends React.Component {
 
     return (
       <div style={transition ? transition.style : { opacity: 0 }}>
-        <Helmet title={get(this, 'props.store.site.siteMetadata.title')} />
+        <Helmet
+          title={`${get(
+            this,
+            'props.store.site.siteMetadata.title'
+          )}, Designer and Frontend Developer`}
+        />
         <SEO postEdges={articles} />
         <Header cover={this.props.data.hero}>
           <div className="title">
