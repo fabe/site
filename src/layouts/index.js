@@ -41,15 +41,15 @@ class Template extends React.Component {
   }
 
   render() {
-    const { location, children } = this.props;
+    const { location, children, data } = this.props;
 
     return (
       <div>
-        <Topbar />
+        <Topbar title={data.site.siteMetadata.title} />
         <Provider store={store}>
           <main className="container">{children()}</main>
         </Provider>
-        <Footer />
+        <Footer title={data.site.siteMetadata.title} />
       </div>
     );
   }

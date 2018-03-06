@@ -32,7 +32,7 @@ class Topbar extends React.Component {
           <div className="col">
             <span className="name">
               <Link to="/" className="link">
-                Fabian W. Schultz
+                {this.props.title}
               </Link>
             </span>
           </div>

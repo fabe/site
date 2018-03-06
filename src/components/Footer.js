@@ -4,7 +4,7 @@ import stacko from '~/static/icons/stacko.svg';
 import twitter from '~/static/icons/twitter.svg';
 import dribbble from '~/static/icons/dribbble.svg';
 
-export default ({ scrollTop }) => (
+export default ({ scrollTop, title }) => (
   <footer>
     <div className="container grid">
       <div className="col">
@@ -46,7 +46,7 @@ export default ({ scrollTop }) => (
         </nav>
       </div>
       <div className="col">
-        <span>&copy; {new Date().getFullYear()} Fabian W. Schultz</span>
+        <span>&copy; {new Date().getFullYear()} {title}</span>
       </div>
     </div>
   </footer>
