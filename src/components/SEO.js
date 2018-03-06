@@ -4,11 +4,10 @@ import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 
 const config = {
-  siteTitle: 'Fabian W. Schultz',
+  siteTitle: 'Fabian Schultz',
   author: 'Fabian Schultz',
   siteDescription: `Hello, I'm Fabian Schultz — a product designer and developer based in Potsdam, Germany.`,
   siteUrl: 'https://fabianschultz.com',
-  pathPrefix: '/work',
   userTwitter: 'fschultz_',
 };
 
