@@ -26,9 +26,6 @@ header.header {
     @include small {
       margin-bottom: var(--unit-half);
     }
-
-    flex: 1 1 100%;
-    display: inline-block;
   }
 
   &.loaded {
@@ -68,6 +65,7 @@ header.header {
 
   display: flex;
   align-content: space-between;
+  flex-direction: column;
   flex-flow: wrap;
 
   height: 100%;
@@ -123,12 +121,14 @@ header.header {
 
 @keyframes fadeInBottom {
   0% {
-    opacity: 0;
     transform: translateY(20px);
+
+    opacity: 0;
   }
 
   100% {
-    opacity: 1;
     transform: translateY(0);
+
+    opacity: 1;
   }
 }
