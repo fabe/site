@@ -85,7 +85,7 @@ export default ({ posts, transition, data }) => (
 
 export const query = graphql`
   query GatsbyImageHeroAboutQuery {
-    hero: file(relativePath: { eq: "hero-about.jpg" }) {
+    hero: file(relativePath: { eq: "fabian-schultz.jpg" }) {
       childImageSharp {
         sizes(maxWidth: 700, quality: 90) {
           ...GatsbyImageSharpSizes_withWebp
