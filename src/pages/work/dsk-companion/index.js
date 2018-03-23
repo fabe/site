@@ -48,7 +48,7 @@ export default props => (
     </Block>
     <Block align="right">
       <p>
-        We asked outselves how we can support amateur and professional athletes
+        We asked ourselves how we can support amateur and professional athletes
         during uncertain times of injury and recovery. Together, we came up with
         DSK Companion — a service design concept for insurance companies.
       </p>
