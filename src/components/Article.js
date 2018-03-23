@@ -1,7 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import Link from 'gatsby-link';
-import { observer, inject } from 'mobx-react';
 
 import Header from './Header';
 import Intro from './Intro';
@@ -10,49 +9,19 @@ import Block from './Block';
 import HGroup from './HGroup';
 import SEO from './SEO';
 
-@inject('store')
-@observer
 class Article extends React.Component {
-  constructor(props) {
-    super(props);
-
-    const { store } = props;
-    const article = store.getArticleByPath(props.path);
-
-    const index = store.articles.findIndex(
-      a => a.node.data.path == article.path
-    );
-
-    let nextIndex = index + 1;
-    if (nextIndex === store.articles.length) {
-      nextIndex = 0;
-    }
-
-    let prevIndex = index - 1;
-    if (prevIndex < 0) {
-      prevIndex = store.articles.length - 1;
-    }
-
-    const nextArticle = store.articles[nextIndex];
-    const prevArticle = store.articles[prevIndex];
-
-    this.state = {
-      nextArticle,
-      prevArticle,
-      article,
-    };
-  }
   render() {
-    const { children, transition } = this.props;
+    const { children, transition, pathContext } = this.props;
+    const { frontmatter } = pathContext;
     const {
-      cover,
       subtitle,
       title,
       details,
       path,
+      cover,
       contain,
       background,
-    } = this.state.article;
+    } = frontmatter;
 
     return (
       <div style={transition ? transition.style : { opacity: 0 }}>
@@ -64,7 +33,7 @@ class Article extends React.Component {
         </Header>
         <article id="content">
           <Helmet title={`Fabian W. Schultz | ${subtitle}`} />
-          <SEO postPath={path} postNode={this.state.article} postSEO />
+          <SEO postPath={path} postNode={frontmatter} postSEO />
           <div>{children}</div>
           <hr />
           <div className="pagination">
@@ -73,10 +42,10 @@ class Article extends React.Component {
               <Link to="/#work">View all</Link>
             </header>
             <Block pull>
-              <Post post={this.state.prevArticle} />
+              <Post post={pathContext.prevArticle} />
             </Block>
             <Block align="right" pull>
-              <Post post={this.state.nextArticle} />
+              <Post post={pathContext.nextArticle} />
             </Block>
           </div>
         </article>

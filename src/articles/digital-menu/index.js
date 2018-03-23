@@ -6,13 +6,13 @@ import Article from '~/src/components/Article';
 import Block from '~/src/components/Block';
 import Figure from '~/src/components/Figure';
 
-export const data = {
+export const frontmatter = {
   id: 'digitalmenu',
   isWork: true,
-  devOnly: false,
   title: 'Creating a digital experience for restaurants',
   subtitle: 'Digital Menu',
   date: '2015-04-01',
+  cover: './digital-menu.png',
   path: '/work/digital-menu',
   excerpt: `In the summer of 2015, together with Edmundo Galindo, I worked on a digital menu for a fictional burger restaurant. The project was envisioned during the class “Human-Computer Interaction Design”, supervised by Prof. Dr. Frank Heidmann.`,
   contain: false,
@@ -30,7 +30,7 @@ export const data = {
 };
 
 export default props => (
-  <Article path={data.path} {...props}>
+  <Article {...props}>
     <Block mobilePull>
       <p>
         In the summer of 2015, together with{' '}
@@ -92,7 +92,7 @@ export default props => (
     <Block align="right">
       <p className="small">
         Photos &copy; by <a href="https://pech-sapel.de/">Pech und Sapel</a>,{' '}
-        <a href="http://halfbakedharvest.com">halfbakedharvest.com</a>, {' '}
+        <a href="http://halfbakedharvest.com">halfbakedharvest.com</a>,{' '}
         <a href="http://theawesomegreen.com">theawesomegreen.com</a>,{' '}
         <a href="http://bojongourmet.com">bojongourmet.com</a>,{' '}
         <a href="http://ladyandpups.com">ladyandpups.com</a> and{' '}
@@ -104,37 +104,35 @@ export default props => (
 
 export const query = graphql`
   query GatsbyImageMenu {
-    intro: file(relativePath: { eq: "work/digital-menu/intro.jpg" }) {
+    intro: file(relativePath: { eq: "digital-menu/intro.jpg" }) {
       childImageSharp {
         sizes(maxWidth: 1400, quality: 90) {
           ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
-    proto: file(relativePath: { eq: "work/digital-menu/prototype.jpg" }) {
+    proto: file(relativePath: { eq: "digital-menu/prototype.jpg" }) {
       childImageSharp {
         sizes(maxWidth: 1400, quality: 90) {
           ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
-    overview: file(relativePath: { eq: "work/digital-menu/overview.png" }) {
+    overview: file(relativePath: { eq: "digital-menu/overview.png" }) {
       childImageSharp {
         sizes(maxWidth: 1000, quality: 90) {
           ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
-    description: file(
-      relativePath: { eq: "work/digital-menu/description.png" }
-    ) {
+    description: file(relativePath: { eq: "digital-menu/description.png" }) {
       childImageSharp {
         sizes(maxWidth: 1000, quality: 90) {
           ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
-    order: file(relativePath: { eq: "work/digital-menu/order.png" }) {
+    order: file(relativePath: { eq: "digital-menu/order.png" }) {
       childImageSharp {
         sizes(maxWidth: 1000, quality: 90) {
           ...GatsbyImageSharpSizes_withWebp

@@ -1,7 +1,6 @@
 var csso = require('postcss-csso');
 var autoprefixer = require('autoprefixer');
 var cssvariables = require('postcss-css-variables');
-var flexbugs = require('postcss-flexbugs-fixes');
 
 module.exports = {
   siteMetadata: {
@@ -11,45 +10,20 @@ module.exports = {
   },
   plugins: [
     {
-      resolve: `gatsby-plugin-nprogress`,
+      resolve: `gatsby-source-filesystem`,
       options: {
-        // Setting a color is optional.
-        color: `black`,
-        // Disable the loading spinner.
-        showSpinner: false,
+        name: `pages`,
+        path: `${__dirname}/src/pages`,
       },
     },
-    `gatsby-transformer-javascript-static-exports`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        path: `${__dirname}/src/pages`,
-        name: 'pages',
+        name: `articles`,
+        path: `${__dirname}/src/articles`,
       },
     },
-    {
-      resolve: `gatsby-transformer-remark`,
-      options: {
-        plugins: [
-          'gatsby-remark-copy-linked-files',
-          // {
-          //   resolve: `gatsby-remark-images`,
-          //   options: {
-          //     maxWidth: 2000,
-          //     linkImagesToOriginal: false,
-          //   },
-          // },
-          {
-            resolve: `gatsby-remark-responsive-iframe`,
-            options: {
-              wrapperStyle: `margin-bottom: 1.0725rem`,
-            },
-          },
-          'gatsby-remark-prismjs',
-          'gatsby-remark-smartypants',
-        ],
-      },
-    },
+    `gatsby-transformer-javascript-frontmatter`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
@@ -62,6 +36,13 @@ module.exports = {
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-react-next`,
+    {
+      resolve: `gatsby-plugin-nprogress`,
+      options: {
+        color: `black`,
+        showSpinner: false,
+      },
+    },
     {
       resolve: `gatsby-plugin-postcss-sass`,
       options: {

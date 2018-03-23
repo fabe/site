@@ -1,29 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import get from 'lodash/get';
 import Helmet from 'react-helmet';
-import { observer, inject } from 'mobx-react';
 
 import Header from '../components/Header';
 import Bio from '../components/Bio';
 import Posts from '../components/Posts';
 import SEO from '../components/SEO';
 
-@inject('store')
-@observer
-class BlogIndex extends React.Component {
+class Index extends React.Component {
   render() {
-    const siteTitle = get(this, 'props.store.site.siteMetadata.title');
-    const articles = get(this, 'props.store.articles');
-    const { transition } = this.props;
+    const { transition, data } = this.props;
+    const { site, allJavascriptFrontmatter } = data;
+    const articles = allJavascriptFrontmatter.edges;
 
     return (
       <div style={transition ? transition.style : { opacity: 0 }}>
         <Helmet
-          title={`${get(
-            this,
-            'props.store.site.siteMetadata.title'
-          )}, Designer and Frontend Developer`}
+          title={`${site.siteMetadata.title}, Designer and Frontend Developer`}
         />
         <SEO postEdges={articles} />
         <Header cover={this.props.data.hero}>
@@ -51,14 +44,41 @@ class BlogIndex extends React.Component {
   }
 }
 
-BlogIndex.propTypes = {
+Index.propTypes = {
   route: PropTypes.object,
 };
 
-export default BlogIndex;
+export default Index;
 
 export const query = graphql`
-  query GatsbyImageHeroIndexQuery {
+  query IndexQuery {
+    site {
+      siteMetadata {
+        title
+      }
+    }
+    allJavascriptFrontmatter(
+      filter: { frontmatter: { isWork: { eq: true } } }
+      sort: { fields: [frontmatter___date], order: DESC }
+    ) {
+      edges {
+        node {
+          frontmatter {
+            path
+            devOnly
+            background
+            subtitle
+            cover {
+              childImageSharp {
+                sizes(maxWidth: 1100, quality: 95) {
+                  ...GatsbyImageSharpSizes_withWebp
+                }
+              }
+            }
+          }
+        }
+      }
+    }
     hero: file(relativePath: { eq: "hero-bw.jpg" }) {
       childImageSharp {
         sizes(maxWidth: 1400, quality: 90) {

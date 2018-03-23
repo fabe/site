@@ -1,3 +1,4 @@
+const path = require(`path`);
 var scrape = require('html-metadata');
 
 exports.onCreatePage = ({ page, boundActionCreators }) => {
@@ -22,5 +23,111 @@ exports.onCreatePage = ({ page, boundActionCreators }) => {
     }
 
     resolve();
+  });
+};
+
+function getPagination(articles, article) {
+  const index = articles.findIndex(
+    a => a.node.frontmatter.path == article.node.frontmatter.path
+  );
+
+  let nextIndex = index + 1;
+  if (nextIndex === articles.length) {
+    nextIndex = 0;
+  }
+
+  let prevIndex = index - 1;
+  if (prevIndex < 0) {
+    prevIndex = articles.length - 1;
+  }
+
+  const nextArticle = articles[nextIndex];
+  const prevArticle = articles[prevIndex];
+
+  return {
+    nextArticle,
+    prevArticle,
+  };
+}
+
+exports.createPages = ({ graphql, boundActionCreators }) => {
+  const { createPage } = boundActionCreators;
+
+  return new Promise((resolve, reject) => {
+    // Query for all markdown "nodes" and for the slug we previously created.
+    resolve(
+      graphql(
+        `
+          {
+            allJavascriptFrontmatter(
+              filter: { frontmatter: { isWork: { eq: true } } }
+              sort: { fields: [frontmatter___date], order: DESC }
+            ) {
+              edges {
+                node {
+                  fileAbsolutePath
+                  frontmatter {
+                    path
+                    subtitle
+                    id
+                    title
+                    details {
+                      title
+                      description
+                    }
+                    date
+                    excerpt
+                    contain
+                    background
+                    subtitle
+                    cover {
+                      childImageSharp {
+                        sizes(maxWidth: 1100, quality: 90) {
+                          ...GatsbyImageSharpSizes_withWebp
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          fragment GatsbyImageSharpSizes_withWebp on ImageSharpSizes {
+            base64
+            aspectRatio
+            src
+            srcSet
+            srcWebp
+            srcSetWebp
+            sizes
+          }
+        `
+      ).then(result => {
+        if (result.errors) {
+          console.log(result.errors);
+          console.log(result);
+          reject(result.errors);
+        }
+
+        const articles = result.data.allJavascriptFrontmatter.edges;
+
+        articles.forEach(edge => {
+          let { frontmatter } = edge.node;
+          const pagination = getPagination(articles, edge);
+
+          createPage({
+            path: frontmatter.path, // required
+            component: path.resolve(edge.node.fileAbsolutePath),
+            context: {
+              frontmatter,
+              ...pagination,
+            },
+          });
+        });
+
+        return;
+      })
+    );
   });
 };

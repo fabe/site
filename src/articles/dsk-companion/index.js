@@ -8,13 +8,14 @@ import Figure from '~/src/components/Figure';
 
 import articleFragment from '~/src/pages';
 
-export const data = {
+export const frontmatter = {
   id: 'dsk',
   isWork: true,
   title: 'Helping athletes to cope with injuries',
   subtitle: 'DSK Companion',
   date: '2017-07-01',
   path: '/work/dsk-companion',
+  cover: './dsk.png',
   caption: 'A Google Design Sprint',
   background: '#EBEEF1',
   excerpt: `In the spring semester 2017 at FH Potsdam, I teamed up with Kevin, Isabell and Caspar to work on a project during a class supervised by Marian Gunkel (SAP). The class focused on Lean Startups, Design Sprints and User Testing.`,
@@ -35,7 +36,7 @@ export const data = {
 };
 
 export default props => (
-  <Article path={data.path} {...props}>
+  <Article {...props}>
     <Block mobilePull>
       <p>
         In the spring semester 2017 at FH Potsdam, I teamed up with{' '}
@@ -169,72 +170,70 @@ export default props => (
 
 export const query = graphql`
   query GatsbyImageDSK {
-    intro: file(relativePath: { eq: "work/dsk-companion/intro.jpg" }) {
+    intro: file(relativePath: { eq: "dsk-companion/intro.jpg" }) {
       childImageSharp {
         sizes(maxWidth: 1100, quality: 90) {
           ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
-    persona: file(relativePath: { eq: "work/dsk-companion/persona.jpg" }) {
+    persona: file(relativePath: { eq: "dsk-companion/persona.jpg" }) {
       childImageSharp {
         sizes(maxWidth: 800, quality: 90) {
           ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
-    vpc: file(relativePath: { eq: "work/dsk-companion/vpc.jpg" }) {
+    vpc: file(relativePath: { eq: "dsk-companion/vpc.jpg" }) {
       childImageSharp {
         sizes(maxWidth: 800, quality: 90) {
           ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
-    ideation: file(relativePath: { eq: "work/dsk-companion/ideation.jpg" }) {
+    ideation: file(relativePath: { eq: "dsk-companion/ideation.jpg" }) {
       childImageSharp {
         sizes(maxWidth: 800, quality: 90) {
           ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
-    wireframes: file(
-      relativePath: { eq: "work/dsk-companion/wireframes.jpg" }
-    ) {
+    wireframes: file(relativePath: { eq: "dsk-companion/wireframes.jpg" }) {
       childImageSharp {
         sizes(maxWidth: 800, quality: 90) {
           ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
-    usertest: file(relativePath: { eq: "work/dsk-companion/usertest.jpg" }) {
+    usertest: file(relativePath: { eq: "dsk-companion/usertest.jpg" }) {
       childImageSharp {
         sizes(maxWidth: 800, quality: 90) {
           ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
-    screen1: file(relativePath: { eq: "work/dsk-companion/screens/1.png" }) {
+    screen1: file(relativePath: { eq: "dsk-companion/screens/1.png" }) {
       childImageSharp {
         sizes(maxWidth: 800, quality: 90) {
           ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
-    screen2: file(relativePath: { eq: "work/dsk-companion/screens/2.png" }) {
+    screen2: file(relativePath: { eq: "dsk-companion/screens/2.png" }) {
       childImageSharp {
         sizes(maxWidth: 800, quality: 90) {
           ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
-    screen3: file(relativePath: { eq: "work/dsk-companion/screens/3.png" }) {
+    screen3: file(relativePath: { eq: "dsk-companion/screens/3.png" }) {
       childImageSharp {
         sizes(maxWidth: 800, quality: 90) {
           ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
-    screen4: file(relativePath: { eq: "work/dsk-companion/screens/4.png" }) {
+    screen4: file(relativePath: { eq: "dsk-companion/screens/4.png" }) {
       childImageSharp {
         sizes(maxWidth: 800, quality: 90) {
           ...GatsbyImageSharpSizes_withWebp

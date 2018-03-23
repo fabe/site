@@ -51,6 +51,12 @@ header.header {
     opacity: 0;
   }
 
+  .summary,
+  .intro {
+    margin-top: auto;
+    align-self: flex-end;
+  }
+
   h6 {
     margin-top: 0;
   }
@@ -65,7 +71,6 @@ header.header {
 
   display: flex;
   align-content: space-between;
-  flex-direction: column;
   flex-flow: wrap;
 
   height: 100%;

@@ -15,11 +15,11 @@ export default ({ posts, transition, data }) => (
       postNode={{
         subtitle: 'About',
         excerpt: `I’ve been working both as a product designer and frontend developer for over 5 years now. I particularly enjoy working with companies that try to meet broad and unique user needs.`,
-        cover: data.hero,
+        cover: data.cover,
       }}
       pageSEO
     />
-    <Header cover={data.hero}>
+    <Header cover={data.cover}>
       <div className="title">
         <h1>About</h1>
       </div>
@@ -85,7 +85,7 @@ export default ({ posts, transition, data }) => (
 
 export const query = graphql`
   query GatsbyImageHeroAboutQuery {
-    hero: file(relativePath: { eq: "fabian-schultz.jpg" }) {
+    cover: file(relativePath: { eq: "fabian-schultz.jpg" }) {
       childImageSharp {
         sizes(maxWidth: 700, quality: 90) {
           ...GatsbyImageSharpSizes_withWebp

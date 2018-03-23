@@ -6,17 +6,16 @@ import Article from '~/src/components/Article';
 import Block from '~/src/components/Block';
 import Figure from '~/src/components/Figure';
 
-export const data = {
+export const frontmatter = {
   id: 'leastauthority',
   isWork: true,
   title: 'New website for the<br/>privacy–focused startup Least Authority',
   subtitle: 'Least Authority',
   date: '2017-02-01',
+  cover: './least-authority.png',
   path: '/work/least-authority',
   contain: true,
   background: '#333',
-  caption: 'For developers',
-  dark: true,
   excerpt: `Late 2016 I was asked to design and develop a website for the Zcash Open Source Miner Challenge, which was operated by Least Authority. After the launch, I helped Least Authority redesign their own website, taking care of both development and design.`,
   details: [
     {
@@ -35,15 +34,14 @@ export const data = {
 };
 
 export default props => (
-  <Article path={data.path} {...props}>
+  <Article {...props}>
     <Block mobilePull>
       <p>
         Late 2016 I was asked to design and develop a website for the{' '}
-        <a href="https://zcashminers.org/">
-          Zcash Open Source Miner Challenge
-        </a>, which was operated by Least Authority. After the launch, I helped
-        Least Authority redesign their own website, taking care of both
-        development and design.
+        <a href="https://zcashminers.org/">Zcash Open Source Miner Challenge</a>,
+        which was operated by Least Authority. After the launch, I helped Least
+        Authority redesign their own website, taking care of both development
+        and design.
       </p>
     </Block>
     <Block align="right">
@@ -114,39 +112,35 @@ export default props => (
 
 export const query = graphql`
   query GatsbyImageLA {
-    variables: file(
-      relativePath: { eq: "work/least-authority/variables.png" }
-    ) {
+    variables: file(relativePath: { eq: "least-authority/variables.png" }) {
       childImageSharp {
         sizes(maxWidth: 800, quality: 90) {
           ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
-    infographic: file(
-      relativePath: { eq: "work/least-authority/infographic.png" }
-    ) {
+    infographic: file(relativePath: { eq: "least-authority/infographic.png" }) {
       childImageSharp {
         sizes(maxWidth: 1400, quality: 90) {
           ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
-    landing: file(relativePath: { eq: "work/least-authority/landing.png" }) {
+    landing: file(relativePath: { eq: "least-authority/landing.png" }) {
       childImageSharp {
         sizes(maxWidth: 800, quality: 90) {
           ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
-    products: file(relativePath: { eq: "work/least-authority/products.png" }) {
+    products: file(relativePath: { eq: "least-authority/products.png" }) {
       childImageSharp {
         sizes(maxWidth: 800, quality: 90) {
           ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
-    cms: file(relativePath: { eq: "work/least-authority/cms.png" }) {
+    cms: file(relativePath: { eq: "least-authority/cms.png" }) {
       childImageSharp {
         sizes(maxWidth: 800, quality: 90) {
           ...GatsbyImageSharpSizes_withWebp

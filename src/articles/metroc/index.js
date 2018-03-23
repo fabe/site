@@ -6,13 +6,14 @@ import Article from '~/src/components/Article';
 import Block from '~/src/components/Block';
 import Figure from '~/src/components/Figure';
 
-export const data = {
+export const frontmatter = {
   id: 'metroc',
   isWork: true,
   devOnly: true,
   title: 'Developing the website for a Toronto-based college',
   subtitle: 'Metro College of Technology',
   date: '2016-08-01',
+  cover: './metroc.png',
   path: '/work/metroc',
   contain: true,
   background: '#26272C',
@@ -34,7 +35,7 @@ export const data = {
 };
 
 export default props => (
-  <Article path={data.path} {...props}>
+  <Article {...props}>
     <Block mobilePull>
       <p>
         Metro College of Technology is a career college, founded in 1992 and
@@ -70,7 +71,7 @@ export default props => (
 
 export const query = graphql`
   query GatsbyImageMetro {
-    screens: file(relativePath: { eq: "work/metroc/screens.png" }) {
+    screens: file(relativePath: { eq: "metroc/screens.png" }) {
       childImageSharp {
         sizes(maxWidth: 1400, quality: 90) {
           ...GatsbyImageSharpSizes_withWebp

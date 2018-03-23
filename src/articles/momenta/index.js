@@ -10,12 +10,13 @@ import Figure from '~/src/components/Figure';
 import homepageMp4 from './homepage.mp4';
 import homepageWebm from './homepage.webm';
 
-export const data = {
+export const frontmatter = {
   id: 'momenta',
   isWork: true,
   title: 'Capture your moments as pictures with sound.',
   subtitle: 'Momenta',
   date: '2013-12-31',
+  cover: './momenta.png',
   path: '/work/momenta',
   contain: false,
   background: '#6B476B',
@@ -33,7 +34,7 @@ export const data = {
 };
 
 export default props => (
-  <Article path={data.path} {...props}>
+  <Article {...props}>
     <Block mobilePull>
       <p>
         During my internship at{' '}
@@ -119,14 +120,14 @@ export default props => (
 
 export const query = graphql`
   query GatsbyImageMomenta {
-    sunset: file(relativePath: { eq: "work/momenta/sunset.jpg" }) {
+    sunset: file(relativePath: { eq: "momenta/sunset.jpg" }) {
       childImageSharp {
         sizes(maxWidth: 1400, quality: 90) {
           ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
-    share: file(relativePath: { eq: "work/momenta/share.png" }) {
+    share: file(relativePath: { eq: "momenta/share.png" }) {
       childImageSharp {
         sizes(maxWidth: 1400, quality: 90) {
           ...GatsbyImageSharpSizes_withWebp

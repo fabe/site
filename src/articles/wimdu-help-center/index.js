@@ -6,12 +6,13 @@ import Article from '~/src/components/Article';
 import Block from '~/src/components/Block';
 import Figure from '~/src/components/Figure';
 
-export const data = {
+export const frontmatter = {
   id: 'wimdu',
   isWork: true,
   title: 'Building a support center for Wimdu’s 2.5MM users.',
   subtitle: 'Wimdu Help Center',
   date: '2015-06-01',
+  cover: './wimdu-help-center.png',
   path: '/work/wimdu-help-center',
   excerpt: `In Mid 2015 I was asked to design and develop a new support center for Wimdu and help them bring their recenly redesigned brand to all channels of communication. I worked closely with their team as a contractor and launched the site on top of their existing support system, Zendesk.`,
   details: [
@@ -31,7 +32,7 @@ export const data = {
 };
 
 export default props => (
-  <Article path={data.path} {...props}>
+  <Article {...props}>
     <Block mobilePull>
       <p>
         Wimdu is one of the world’s leading online marketplaces for private
@@ -67,7 +68,7 @@ export default props => (
 
 export const query = graphql`
   query GatsbyImageWimdu {
-    screens: file(relativePath: { eq: "work/wimdu-help-center/screens.png" }) {
+    screens: file(relativePath: { eq: "wimdu-help-center/screens.png" }) {
       childImageSharp {
         sizes(maxWidth: 700, quality: 90) {
           ...GatsbyImageSharpSizes_withWebp

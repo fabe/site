@@ -1,5 +1,4 @@
 import React from 'react';
-import get from 'lodash/get';
 import Post from './Post';
 
 const split = items => {
@@ -25,7 +24,7 @@ const split = items => {
 const preparePosts = posts => {
   const nodes = posts.map(post => {
     if (post.node.path !== '/404/') {
-      return <Post key={post.node.data.path} post={post} />;
+      return <Post key={post.node.frontmatter.path} post={post} />;
     }
   });
 

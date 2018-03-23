@@ -8,14 +8,14 @@ import Figure from '~/src/components/Figure';
 
 import video from './delivery.mp4';
 
-export const data = {
+export const frontmatter = {
   id: 'delivery',
   isWork: true,
   subtitle: 'Delivery',
   title: 'Share your design work,<br/>clutter-free.',
   date: '2017-04-01',
+  cover: './delivery.png',
   path: '/work/delivery',
-  external: 'https://use.delivery',
   excerpt: `Around Easter 2017 I decided to work on a simple webapp called Delivery to help designers share their work in progress. I wanted to create a hassle–free solution, which is reduced to the bare minimum of features and requires neither sign-up nor a credit card.`,
   details: [
     {
@@ -34,7 +34,7 @@ export const data = {
 };
 
 export default props => (
-  <Article path={data.path} {...props}>
+  <Article {...props}>
     <Block mobilePull>
       <p>
         Around Easter 2017 I decided to work on a simple webapp called{' '}
