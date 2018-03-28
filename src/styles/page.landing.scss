@@ -6,16 +6,16 @@
 
 .post:hover .cover:after {
   // box-shadow: inset 0 0 0 10px #fff;
-  background-color: rgba(#191c1e, 0.85);
+  background-color: rgba(#14151c, 0.85);
 
   @include small {
-    background-color: rgba(#000, 0);
+    background-color: rgba(#14151c, 0);
   }
 }
 
 .post:active .cover:after {
   @include small {
-    background-color: rgba(#000, 0.3);
+    background-color: rgba(#14151c, 0.3);
   }
 }
 
@@ -61,7 +61,7 @@
 
     opacity: 0;
     color: #fff;
-    text-shadow: 0 0 40px rgba(#000, 0.1);
+    text-shadow: 0 0 40px rgba(#14151c, 0.1);
   }
 
   &:after {

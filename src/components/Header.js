@@ -34,10 +34,29 @@ class Header extends React.Component {
     );
   }
 
+  renderHero(cover, renderCover, video, title) {
+    if (renderCover) {
+      return renderCover();
+    }
+
+    if (cover && !video) {
+      return <Img sizes={cover.childImageSharp.sizes} />;
+    }
+
+    if (!cover && !video) {
+      return <img src={hero} alt={title} />;
+    }
+
+    if (!cover && video) {
+      return <video autoPlay loop src={video} />;
+    }
+  }
+
   render() {
     const {
       children,
       cover,
+      renderCover,
       video,
       title,
       contain,
@@ -51,11 +70,7 @@ class Header extends React.Component {
         <header className={`header grid${loaded ? ' loaded' : ''}`}>
           <div className="col">
             <div className="figure">
-              {cover && !video ? (
-                <Img sizes={cover.childImageSharp.sizes} />
-              ) : null}
-              {!cover && !video ? <img src={hero} alt={title} /> : null}
-              {!cover && video ? <video autoPlay loop src={video} /> : null}
+              {this.renderHero(cover, renderCover, video, title)}
             </div>
           </div>
           <div className="col">

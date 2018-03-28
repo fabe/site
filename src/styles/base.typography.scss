@@ -145,10 +145,10 @@ p {
     transition: 0.15s box-shadow cubic-bezier(0.645, 0.045, 0.355, 1);
     text-decoration: none;
 
-    box-shadow: inset 0 -0.4em 0 rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 -0.4em 0 rgba(20, 21, 28, 0.1);
 
     &:hover {
-      box-shadow: inset 0 -1.2em 0 rgba(0, 0, 0, 0.1);
+      box-shadow: inset 0 -2em 0 rgba(20, 21, 28, 0.1);
     }
   }
 }
