@@ -22,15 +22,17 @@
     "gatsby-transformer-remark": "^1.7.19",
     "gatsby-transformer-sharp": "^1.6.13",
     "html-metadata": "^1.6.3",
+    "postcss-css-variables": "^0.8.0",
     "postcss-csso": "^3.0.0",
     "prop-types": "^15.6.0",
     "react-helmet": "^5.2.0",
     "react-transition-group": "^2.2.1",
-    "react-tweet-embed": "^1.0.8",
-    "postcss-css-variables": "^0.8.0"
+    "react-tweet-embed": "^1.0.8"
   },
   "homepage": "https://fabianschultz.com",
-  "keywords": ["gatsby"],
+  "keywords": [
+    "gatsby"
+  ],
   "license": "ISC",
   "main": "n/a",
   "repository": {
@@ -44,8 +46,7 @@
     "dev": "gatsby develop -S",
     "dev:build": "gatsby build",
     "build": "npm run fonts:fetch && gatsby build",
-    "fonts:fetch":
-      "wget -O Dia.zip $SECRET_FONTS_URL; unzip Dia.zip -d ./static/fonts; rm Dia.zip",
+    "fonts:fetch": "wget -O Dia.zip $SECRET_FONTS_URL; unzip Dia.zip -d ./static/fonts; rm Dia.zip",
     "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
