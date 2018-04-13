@@ -60,7 +60,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         `
           {
             allJavascriptFrontmatter(
-              filter: { frontmatter: { isWork: { eq: true } } }
+              filter: { frontmatter: { path: { regex: "/work/" } } }
               sort: { fields: [frontmatter___date], order: DESC }
             ) {
               edges {
