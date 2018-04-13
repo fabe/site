@@ -22,8 +22,8 @@ class Index extends React.Component {
         <Header cover={this.props.data.hero}>
           <div className="title">
             <h1>
-              Hello, I’m Fabian &mdash; a{' '}
-              <em>product designer and developer</em> based in Potsdam, Germany.
+              Hello, I’m Fabian &mdash; a product designer and developer based
+              in Potsdam, Germany.
             </h1>
           </div>
           <div className="summary">
@@ -70,7 +70,7 @@ export const query = graphql`
             subtitle
             cover {
               childImageSharp {
-                sizes(maxWidth: 1100, quality: 95) {
+                sizes(maxWidth: 1100, quality: 100) {
                   ...GatsbyImageSharpSizes_withWebp
                 }
               }
