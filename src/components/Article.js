@@ -8,6 +8,7 @@ import Post from './Post';
 import Block from './Block';
 import HGroup from './HGroup';
 import SEO from './SEO';
+import Layout from './Layout';
 
 class Article extends React.Component {
   render() {
@@ -24,7 +25,7 @@ class Article extends React.Component {
     } = frontmatter;
 
     return (
-      <>
+      <Layout>
         <Header cover={cover} contain={contain} background={background}>
           <div className="title">
             <HGroup large title={title} subtitle={subtitle} />
@@ -49,7 +50,7 @@ class Article extends React.Component {
             </Block>
           </div>
         </article>
-      </>
+      </Layout>
     );
   }
 }
