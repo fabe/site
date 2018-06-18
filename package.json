@@ -53,5 +53,9 @@
     "build": "npm run fonts:fetch && gatsby build",
     "fonts:fetch": "wget -O Dia.zip $SECRET_FONTS_URL; unzip Dia.zip -d ./static/fonts; rm Dia.zip",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "css-loader": "^0.28.11",
+    "style-loader": "^0.21.0"
   }
 }

@@ -24,7 +24,7 @@ class Article extends React.Component {
     } = frontmatter;
 
     return (
-      <div style={transition ? transition.style : { opacity: 0 }}>
+      <>
         <Header cover={cover} contain={contain} background={background}>
           <div className="title">
             <HGroup large title={title} subtitle={subtitle} />
@@ -49,7 +49,7 @@ class Article extends React.Component {
             </Block>
           </div>
         </article>
-      </div>
+      </>
     );
   }
 }
