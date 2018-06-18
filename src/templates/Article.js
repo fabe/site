@@ -1,8 +1,9 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import Link from 'gatsby-link';
+import { Link } from 'gatsby';
 import Header from '../components/Header';
 import Intro from '../components/Intro';
+import Layout from '../components/Layout';
 
 class Article extends React.Component {
   render() {
@@ -19,10 +20,8 @@ class Article extends React.Component {
       data,
     } = this.props;
 
-    console.log(data);
-
     return (
-      <div>
+      <Layout>
         <Header cover={cover} external={external}>
           <h1>{title}</h1>
           <h6>{subtitle}</h6>
@@ -45,7 +44,7 @@ class Article extends React.Component {
             {children}
           </div>
         </article>
-      </div>
+      </Layout>
     );
   }
 }

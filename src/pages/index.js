@@ -6,6 +6,7 @@ import Header from '../components/Header';
 import Bio from '../components/Bio';
 import Posts from '../components/Posts';
 import SEO from '../components/SEO';
+import Layout from '../components/Layout';
 
 class Index extends React.Component {
   render() {
@@ -14,32 +15,37 @@ class Index extends React.Component {
     const articles = allJavascriptFrontmatter.edges;
 
     return (
-      <div style={transition ? transition.style : { opacity: 0 }}>
-        <Helmet
-          title={`${site.siteMetadata.title}, Designer and Frontend Developer`}
-        />
-        <SEO postEdges={articles} />
-        <Header cover={this.props.data.hero}>
-          <div className="title">
-            <h1>
-              Hello, I’m Fabian &mdash; a product designer and developer based
-              in Potsdam, Germany.
-            </h1>
-          </div>
-          <div className="summary">
-            <p>
-              I’ve been working both as a product designer and frontend
-              developer for over 5 years now. I particularly enjoy working with
-              companies that try to meet broad and unique user&nbsp;needs.
-            </p>
-            <p>
-              Currently, I study Interface Design at the University of Applied
-              Sciences in Potsdam, Germany.
-            </p>
-          </div>
-        </Header>
-        <Posts posts={articles} />
-      </div>
+      <Layout>
+        <div style={transition ? transition.style : { opacity: 0 }}>
+          <Helmet
+            title={`${
+              site.siteMetadata.title
+            }, Designer and Frontend Developer`}
+          />
+          <SEO postEdges={articles} />
+          <Header cover={this.props.data.hero}>
+            <div className="title">
+              <h1>
+                Hello, I’m Fabian &mdash; a product designer and developer based
+                in Potsdam, Germany.
+              </h1>
+            </div>
+            <div className="summary">
+              <p>
+                I’ve been working both as a product designer and frontend
+                developer for over 5 years now. I particularly enjoy working
+                with companies that try to meet broad and unique
+                user&nbsp;needs.
+              </p>
+              <p>
+                Currently, I study Interface Design at the University of Applied
+                Sciences in Potsdam, Germany.
+              </p>
+            </div>
+          </Header>
+          <Posts posts={articles} />
+        </div>
+      </Layout>
     );
   }
 }
@@ -70,8 +76,8 @@ export const query = graphql`
             subtitle
             cover {
               childImageSharp {
-                sizes(maxWidth: 1100, quality: 100) {
-                  ...GatsbyImageSharpSizes_withWebp
+                fluid(maxWidth: 1100, quality: 100) {
+                  ...GatsbyImageSharpFluid_withWebp
                 }
               }
             }
@@ -81,8 +87,8 @@ export const query = graphql`
     }
     hero: file(relativePath: { eq: "hero-bw.jpg" }) {
       childImageSharp {
-        sizes(maxWidth: 1400, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp
+        fluid(maxWidth: 1400, quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }

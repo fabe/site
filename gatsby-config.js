@@ -34,20 +34,13 @@ module.exports = {
     },
     `gatsby-plugin-offline`,
     `gatsby-plugin-sitemap`,
+    `gatsby-plugin-sass`,
     `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-react-next`,
     {
       resolve: `gatsby-plugin-nprogress`,
       options: {
         color: `black`,
         showSpinner: false,
-      },
-    },
-    {
-      resolve: `gatsby-plugin-postcss-sass`,
-      options: {
-        postCssPlugins: [autoprefixer(), cssvariables(), csso()],
-        precision: 5, // SASS default: 5
       },
     },
   ],

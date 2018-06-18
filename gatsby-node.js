@@ -1,8 +1,8 @@
 const path = require(`path`);
 var scrape = require('html-metadata');
 
-exports.onCreatePage = ({ page, boundActionCreators }) => {
-  const { createPage } = boundActionCreators;
+exports.onCreatePage = ({ page, actions }) => {
+  const { createPage } = actions;
 
   return new Promise((resolve, reject) => {
     if (page.path === '/side-projects/') {
@@ -50,8 +50,8 @@ function getPagination(articles, article) {
   };
 }
 
-exports.createPages = ({ graphql, boundActionCreators }) => {
-  const { createPage } = boundActionCreators;
+exports.createPages = ({ graphql, actions }) => {
+  const { createPage } = actions;
 
   return new Promise((resolve, reject) => {
     // Query for all markdown "nodes" and for the slug we previously created.
@@ -82,8 +82,8 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                     subtitle
                     cover {
                       childImageSharp {
-                        sizes(maxWidth: 1100, quality: 90) {
-                          ...GatsbyImageSharpSizes_withWebp
+                        fluid(maxWidth: 1100, quality: 90) {
+                          ...GatsbyImageSharpFluid_withWebp
                         }
                       }
                     }
@@ -93,7 +93,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             }
           }
 
-          fragment GatsbyImageSharpSizes_withWebp on ImageSharpSizes {
+          fragment GatsbyImageSharpFluid_withWebp on ImageSharpFluid {
             base64
             aspectRatio
             src
@@ -129,5 +129,11 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         return;
       })
     );
+  });
+};
+
+exports.onCreateBabelConfig = ({ actions }) => {
+  actions.setBabelPlugin({
+    name: `babel-plugin-root-import`,
   });
 };

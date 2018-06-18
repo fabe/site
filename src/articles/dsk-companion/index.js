@@ -1,6 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import Link from 'gatsby-link';
+import { Link } from 'gatsby';
 import Article from '~/src/components/Article';
 
 import Block from '~/src/components/Block';
@@ -56,7 +56,7 @@ export default props => (
     </Block>
 
     <Block full>
-      <Figure sizes={props.data.intro} />
+      <Figure fluid={props.data.intro} />
     </Block>
 
     <hr />
@@ -70,11 +70,11 @@ export default props => (
       </p>
     </Block>
     <Block align="right">
-      <Figure sizes={props.data.persona} />
+      <Figure fluid={props.data.persona} />
     </Block>
 
     <Block>
-      <Figure sizes={props.data.vpc} />
+      <Figure fluid={props.data.vpc} />
     </Block>
     <Block vc align="right">
       <h3>Value Proposition Canvas</h3>
@@ -98,7 +98,7 @@ export default props => (
       </p>
     </Block>
     <Block vc align="right">
-      <Figure link sizes={props.data.ideation} />
+      <Figure link fluid={props.data.ideation} />
     </Block>
 
     <hr />
@@ -110,11 +110,11 @@ export default props => (
       </p>
     </Block>
     <Block full>
-      <Figure sizes={props.data.wireframes} />
+      <Figure fluid={props.data.wireframes} />
     </Block>
 
     <Block>
-      <Figure sizes={props.data.usertest} />
+      <Figure fluid={props.data.usertest} />
     </Block>
     <Block vc align="right">
       <h3>Prototyping & User Testing</h3>
@@ -140,28 +140,28 @@ export default props => (
     <Block pull>
       <Figure
         background
-        sizes={props.data.screen1}
+        fluid={props.data.screen1}
         caption="Timeline, highlighting appointments, exercises and more."
       />
     </Block>
     <Block pull align="right">
       <Figure
         background
-        sizes={props.data.screen2}
+        fluid={props.data.screen2}
         caption="Calendar items, allowing doctors to ask for tasks to be completed by the patient."
       />
     </Block>
     <Block>
       <Figure
         background
-        sizes={props.data.screen3}
+        fluid={props.data.screen3}
         caption="A custom knowledge base for the patient."
       />
     </Block>
     <Block align="right">
       <Figure
         background
-        sizes={props.data.screen4}
+        fluid={props.data.screen4}
         caption="Chat with doctors, making it easy to request appointments or prescriptions."
       />
     </Block>
@@ -172,71 +172,71 @@ export const query = graphql`
   query GatsbyImageDSK {
     intro: file(relativePath: { eq: "dsk-companion/intro.jpg" }) {
       childImageSharp {
-        sizes(maxWidth: 1100, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp
+        fluid(maxWidth: 1100, quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
     persona: file(relativePath: { eq: "dsk-companion/persona.jpg" }) {
       childImageSharp {
-        sizes(maxWidth: 800, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp
+        fluid(maxWidth: 800, quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
     vpc: file(relativePath: { eq: "dsk-companion/vpc.jpg" }) {
       childImageSharp {
-        sizes(maxWidth: 800, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp
+        fluid(maxWidth: 800, quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
     ideation: file(relativePath: { eq: "dsk-companion/ideation.jpg" }) {
       childImageSharp {
-        sizes(maxWidth: 800, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp
+        fluid(maxWidth: 800, quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
     wireframes: file(relativePath: { eq: "dsk-companion/wireframes.jpg" }) {
       childImageSharp {
-        sizes(maxWidth: 800, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp
+        fluid(maxWidth: 800, quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
     usertest: file(relativePath: { eq: "dsk-companion/usertest.jpg" }) {
       childImageSharp {
-        sizes(maxWidth: 800, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp
+        fluid(maxWidth: 800, quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
     screen1: file(relativePath: { eq: "dsk-companion/screens/1.png" }) {
       childImageSharp {
-        sizes(maxWidth: 800, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp
+        fluid(maxWidth: 800, quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
     screen2: file(relativePath: { eq: "dsk-companion/screens/2.png" }) {
       childImageSharp {
-        sizes(maxWidth: 800, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp
+        fluid(maxWidth: 800, quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
     screen3: file(relativePath: { eq: "dsk-companion/screens/3.png" }) {
       childImageSharp {
-        sizes(maxWidth: 800, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp
+        fluid(maxWidth: 800, quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
     screen4: file(relativePath: { eq: "dsk-companion/screens/4.png" }) {
       childImageSharp {
-        sizes(maxWidth: 800, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp
+        fluid(maxWidth: 800, quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }

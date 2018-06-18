@@ -1,6 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import Link from 'gatsby-link';
+import { Link } from 'gatsby';
 
 import Header from './Header';
 import Intro from './Intro';
@@ -11,8 +11,8 @@ import SEO from './SEO';
 
 class Article extends React.Component {
   render() {
-    const { children, transition, pathContext } = this.props;
-    const { frontmatter } = pathContext;
+    const { children, transition, pageContext } = this.props;
+    const { frontmatter } = pageContext;
     const {
       subtitle,
       title,
@@ -42,10 +42,10 @@ class Article extends React.Component {
               <Link to="/#work">View all</Link>
             </header>
             <Block pull>
-              <Post post={pathContext.prevArticle} />
+              <Post post={pageContext.prevArticle} />
             </Block>
             <Block align="right" pull>
-              <Post post={pathContext.nextArticle} />
+              <Post post={pageContext.nextArticle} />
             </Block>
           </div>
         </article>

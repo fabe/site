@@ -11,17 +11,8 @@ if (process.env.NODE_ENV === `production`) {
   }
 }
 
-module.exports = class HTML extends React.Component {
+export default class HTML extends React.Component {
   render() {
-    let css;
-    if (process.env.NODE_ENV === `production`) {
-      css = (
-        <style
-          id="gatsby-inlined-css"
-          dangerouslySetInnerHTML={{ __html: stylesStr }}
-        />
-      );
-    }
     return (
       <html lang="en">
         <head>
@@ -52,7 +43,6 @@ module.exports = class HTML extends React.Component {
           />
 
           {this.props.headComponents}
-          {css}
         </head>
         <body>
           {this.props.preBodyComponents}
@@ -66,4 +56,4 @@ module.exports = class HTML extends React.Component {
       </html>
     );
   }
-};
+}
