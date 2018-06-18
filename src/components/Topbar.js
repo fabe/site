@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'gatsby-link';
+import { Link } from 'gatsby';
 
 class Topbar extends React.Component {
   constructor() {
@@ -25,9 +25,9 @@ class Topbar extends React.Component {
     return (
       <div className="topbar">
         <div
-          className={`sans-serif grid container${this.state.showMenu
-            ? ' showMenu'
-            : ''}`}
+          className={`sans-serif grid container${
+            this.state.showMenu ? ' showMenu' : ''
+          }`}
         >
           <div className="col">
             <span className="name">

@@ -24,7 +24,9 @@ class SEO extends Component {
       const postMeta = postNode;
       title = `${siteTitle} | ${postMeta.subtitle}`;
       description = postMeta.excerpt ? postMeta.excerpt : postNode.title;
-      image = postMeta.cover.childImageSharp.sizes.src;
+      if (postMeta.cover) {
+        image = postMeta.cover.childImageSharp.fluid.src;
+      }
       postURL = siteUrl + postPath;
     } else {
       title = siteTitle;

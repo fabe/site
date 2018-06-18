@@ -6,6 +6,7 @@ import Header from '../components/Header';
 import Bio from '../components/Bio';
 import Posts from '../components/Posts';
 import SEO from '../components/SEO';
+import Layout from '../components/Layout';
 
 class Index extends React.Component {
   render() {
@@ -14,7 +15,7 @@ class Index extends React.Component {
     const articles = allJavascriptFrontmatter.edges;
 
     return (
-      <div style={transition ? transition.style : { opacity: 0 }}>
+      <Layout>
         <Helmet
           title={`${site.siteMetadata.title}, Designer and Frontend Developer`}
         />
@@ -39,7 +40,7 @@ class Index extends React.Component {
           </div>
         </Header>
         <Posts posts={articles} />
-      </div>
+      </Layout>
     );
   }
 }
@@ -70,8 +71,8 @@ export const query = graphql`
             subtitle
             cover {
               childImageSharp {
-                sizes(maxWidth: 1100, quality: 100) {
-                  ...GatsbyImageSharpSizes_withWebp
+                fluid(maxWidth: 1100, quality: 100) {
+                  ...GatsbyImageSharpFluid_withWebp
                 }
               }
             }
@@ -81,8 +82,8 @@ export const query = graphql`
     }
     hero: file(relativePath: { eq: "hero-bw.jpg" }) {
       childImageSharp {
-        sizes(maxWidth: 1400, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp
+        fluid(maxWidth: 1400, quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }

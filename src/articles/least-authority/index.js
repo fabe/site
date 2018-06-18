@@ -1,6 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import Link from 'gatsby-link';
+import { Link } from 'gatsby';
 import Article from '~/src/components/Article';
 
 import Block from '~/src/components/Block';
@@ -54,7 +54,7 @@ export default props => (
     </Block>
     <hr />
     <Block>
-      <Figure background sizes={props.data.variables} />
+      <Figure background fluid={props.data.variables} />
     </Block>
     <Block align="right" vc>
       <h3>Visual Exploration</h3>
@@ -72,7 +72,7 @@ export default props => (
       <p>Featuring an animated terminal to demo their&nbsp;product.</p>
     </Block>
     <Block full>
-      <Figure background frame sizes={props.data.landing} />
+      <Figure background frame fluid={props.data.landing} />
     </Block>
 
     <Block full align="center" pull>
@@ -83,7 +83,7 @@ export default props => (
       </p>
     </Block>
     <Block full>
-      <Figure background sizes={props.data.infographic} />
+      <Figure background fluid={props.data.infographic} />
     </Block>
 
     <Block full align="center" pull>
@@ -91,7 +91,7 @@ export default props => (
       <p>Comparing Least Authority's&nbsp;products.</p>
     </Block>
     <Block full>
-      <Figure background frame sizes={props.data.products} />
+      <Figure background frame fluid={props.data.products} />
     </Block>
 
     <Block vc>
@@ -105,7 +105,7 @@ export default props => (
       </p>
     </Block>
     <Block align="right">
-      <Figure background sizes={props.data.cms} />
+      <Figure background fluid={props.data.cms} />
     </Block>
   </Article>
 );
@@ -114,36 +114,36 @@ export const query = graphql`
   query GatsbyImageLA {
     variables: file(relativePath: { eq: "least-authority/variables.png" }) {
       childImageSharp {
-        sizes(maxWidth: 800, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp
+        fluid(maxWidth: 800, quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
     infographic: file(relativePath: { eq: "least-authority/infographic.png" }) {
       childImageSharp {
-        sizes(maxWidth: 1400, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp
+        fluid(maxWidth: 1400, quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
     landing: file(relativePath: { eq: "least-authority/landing.png" }) {
       childImageSharp {
-        sizes(maxWidth: 800, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp
+        fluid(maxWidth: 800, quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
     products: file(relativePath: { eq: "least-authority/products.png" }) {
       childImageSharp {
-        sizes(maxWidth: 800, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp
+        fluid(maxWidth: 800, quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
     cms: file(relativePath: { eq: "least-authority/cms.png" }) {
       childImageSharp {
-        sizes(maxWidth: 800, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp
+        fluid(maxWidth: 800, quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }

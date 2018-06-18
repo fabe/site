@@ -1,6 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import Link from 'gatsby-link';
+import { Link } from 'gatsby';
 import Article from '~/src/components/Article';
 
 import Block from '~/src/components/Block';
@@ -64,7 +64,7 @@ export default props => (
       </a>
     </Block>
     <Block align="center">
-      <Figure background sizes={props.data.screens} />
+      <Figure background fluid={props.data.screens} />
     </Block>
   </Article>
 );
@@ -73,8 +73,8 @@ export const query = graphql`
   query GatsbyImageMetro {
     screens: file(relativePath: { eq: "metroc/screens.png" }) {
       childImageSharp {
-        sizes(maxWidth: 1400, quality: 90) {
-          ...GatsbyImageSharpSizes_withWebp
+        fluid(maxWidth: 1400, quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }

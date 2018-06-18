@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'gatsby-link';
+import { Link } from 'gatsby';
 import Img from 'gatsby-image';
 import HGroup from './HGroup';
 
@@ -8,7 +8,9 @@ export default ({ post }) => (
     <Link to={post.node.frontmatter.path}>
       <div className="cover">
         <h2>{post.node.frontmatter.subtitle}</h2>
-        <Img sizes={post.node.frontmatter.cover.childImageSharp.sizes} />
+        {post.node.frontmatter.cover && (
+          <Img fluid={post.node.frontmatter.cover.childImageSharp.fluid} />
+        )}
       </div>
       {post.node.frontmatter.devOnly ? (
         <div className="dev-only">Dev Only</div>

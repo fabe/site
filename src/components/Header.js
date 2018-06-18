@@ -40,7 +40,7 @@ class Header extends React.Component {
     }
 
     if (cover && !video) {
-      return <Img sizes={cover.childImageSharp.sizes} />;
+      return <Img fluid={cover.childImageSharp.fluid} />;
     }
 
     if (!cover && !video) {

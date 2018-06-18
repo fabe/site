@@ -1,13 +1,14 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import Link from 'gatsby-link';
+import { Link } from 'gatsby';
 import Header from '../components/Header';
 import Block from '~/src/components/Block';
 import Figure from '~/src/components/Figure';
+import Layout from '~/src/components/Layout';
 import clients from '~/static/clients.svg';
 
-export default ({ posts, transition, data, pathContext }) => (
-  <div style={transition ? transition.style : { opacity: 0 }}>
+export default ({ posts, transition, data, pageContext }) => (
+  <Layout>
     <Helmet title="Fabian W. Schultz | Side Projects" />
     <article id="content">
       <div>
@@ -39,7 +40,7 @@ export default ({ posts, transition, data, pathContext }) => (
           <h3>NPR Player</h3>
           <p>
             A chrome extension to stream NPR.<br />Actively used by{' '}
-            {pathContext.nprUsers || 'thousands of'} people.
+            {pageContext.nprUsers || 'thousands of'} people.
           </p>
           <p>
             <a href="https://chrome.google.com/webstore/detail/npr/pflcdcelbkdhfjglfpgiodfknhpdcmjl">
@@ -76,5 +77,5 @@ export default ({ posts, transition, data, pathContext }) => (
         </Block>
       </div>
     </article>
-  </div>
+  </Layout>
 );
