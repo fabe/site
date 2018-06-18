@@ -1,6 +1,4 @@
 import React from 'react';
-import Helmet from 'react-helmet';
-import { Link } from 'gatsby';
 import TweetEmbed from 'react-tweet-embed';
 
 import Article from '~/src/components/Article';

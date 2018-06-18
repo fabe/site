@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import Img from 'gatsby-image';
-import HGroup from './HGroup';
 
 export default ({ post }) => (
   <div className="post" key={post.node.frontmatter.path}>

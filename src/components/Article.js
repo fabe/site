@@ -12,7 +12,7 @@ import Layout from './Layout';
 
 class Article extends React.Component {
   render() {
-    const { children, transition, pageContext } = this.props;
+    const { children, pageContext } = this.props;
     const { frontmatter } = pageContext;
     const {
       subtitle,

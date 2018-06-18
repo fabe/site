@@ -20,8 +20,6 @@ class Topbar extends React.Component {
   }
 
   render() {
-    const { scrollTop } = this.state;
-
     return (
       <div className="topbar">
         <div

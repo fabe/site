@@ -3,14 +3,13 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
 import Header from '../components/Header';
-import Bio from '../components/Bio';
 import Posts from '../components/Posts';
 import SEO from '../components/SEO';
 import Layout from '../components/Layout';
 
 class Index extends React.Component {
   render() {
-    const { transition, data } = this.props;
+    const { data } = this.props;
     const { site, allJavascriptFrontmatter } = data;
     const articles = allJavascriptFrontmatter.edges;
 

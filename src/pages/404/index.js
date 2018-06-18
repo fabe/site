@@ -1,6 +1,5 @@
 import React from 'react';
 import Header from '~/src/components/Header';
-import HGroup from '~/src/components/HGroup';
 import Layout from '~/src/components/Layout';
 import omg from './omg.mp4';
 
