@@ -1,4 +1,5 @@
 const path = require(`path`);
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 var scrape = require('html-metadata');
 
 exports.onCreatePage = ({ page, actions }) => {
@@ -151,12 +152,23 @@ exports.onCreateWebpackConfig = ({
         {
           test: /\.scss$/,
           use: [
-            'style-loader', // creates style nodes from JS strings
-            'css-loader', // translates CSS into CommonJS
-            'sass-loader', // compiles Sass to CSS
+            // fallback to style-loader in development
+            process.env.NODE_ENV !== 'production'
+              ? 'style-loader'
+              : MiniCssExtractPlugin.loader,
+            'css-loader',
+            'sass-loader',
           ],
         },
       ],
     },
+    plugins: [
+      new MiniCssExtractPlugin({
+        // Options similar to the same options in webpackOptions.output
+        // both options are optional
+        filename: 'styles.css',
+        chunkFilename: '[id].css',
+      }),
+    ],
   });
 };
