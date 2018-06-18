@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "author": "Fabian Schultz <desk@fabianschultz.com>",
   "dependencies": {
+    "@babel/core": "^7.0.0-beta.51",
     "@babel/preset-env": "^7.0.0-beta.51",
     "autoprefixer": "^8.2.0",
     "babel-plugin-root-import": "^6.0.0",
@@ -14,7 +15,6 @@
     "gatsby-plugin-google-analytics": "next",
     "gatsby-plugin-nprogress": "next",
     "gatsby-plugin-offline": "next",
-    "gatsby-plugin-postcss-sass": "next",
     "gatsby-plugin-react-helmet": "next",
     "gatsby-plugin-sass": "next",
     "gatsby-plugin-sharp": "next",
