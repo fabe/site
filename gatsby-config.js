@@ -1,7 +1,3 @@
-var csso = require('postcss-csso');
-var autoprefixer = require('autoprefixer');
-var cssvariables = require('postcss-css-variables');
-
 module.exports = {
   siteMetadata: {
     title: 'Fabian Schultz',
