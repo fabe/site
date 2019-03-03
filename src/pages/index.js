@@ -16,25 +16,25 @@ class Index extends React.Component {
     return (
       <div style={transition ? transition.style : { opacity: 0 }}>
         <Helmet
-          title={`${site.siteMetadata.title}, Designer and Frontend Developer`}
+          title={`${site.siteMetadata.title} | Designer and Frontend Developer`}
         />
         <SEO postEdges={articles} />
         <Header cover={this.props.data.hero}>
           <div className="title">
             <h1>
-              Hello, I’m Fabian &mdash; a product designer and developer based
+              Hello, I’m Fabian &mdash; a designer and front-end developer based
               in Potsdam, Germany.
             </h1>
           </div>
           <div className="summary">
             <p>
-              I’ve been working both as a product designer and frontend
-              developer for over 5 years now. I particularly enjoy working with
-              companies that try to meet broad and unique user&nbsp;needs.
+              I’m focused on turning ideas into delightful, practical software,
+              doing my best work when collaborating closely with founders,
+              designers, and developers.
             </p>
             <p>
-              Currently, I study Interface Design at the University of Applied
-              Sciences in Potsdam, Germany.
+              Currently, I’m studying Interface Design at the University of
+              Applied Sciences in Potsdam, Germany.
             </p>
           </div>
         </Header>

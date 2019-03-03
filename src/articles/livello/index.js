@@ -7,8 +7,8 @@ import Block from '~/src/components/Block';
 import Figure from '~/src/components/Figure';
 
 export const frontmatter = {
-  id: 'livello',
-  isWork: false,
+  id: 'livello-mvp',
+  isWork: true,
   subtitle: 'Livello MVP',
   title: 'Building an MVP for a Food-Tech IoT Startup',
   date: '2018-03-01',
