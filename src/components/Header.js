@@ -2,6 +2,7 @@ import React from 'react';
 import Img from 'gatsby-image';
 
 import hero from '~/static/covers/hero-bw.jpg';
+import location from '~/static/icons/location.svg';
 
 class Header extends React.Component {
   constructor() {
@@ -39,7 +40,7 @@ class Header extends React.Component {
     }
 
     if (cover && !video) {
-      return <Img fluid={cover.childImageSharp.fluid} />;
+      return <Img sizes={cover.childImageSharp.sizes} />;
     }
 
     if (!cover && !video) {
@@ -52,7 +53,16 @@ class Header extends React.Component {
   }
 
   render() {
-    const { children, cover, renderCover, video, title, simple } = this.props;
+    const {
+      children,
+      cover,
+      renderCover,
+      video,
+      title,
+      contain,
+      background,
+      simple,
+    } = this.props;
     const { loaded } = this.state;
 
     if (!simple) {

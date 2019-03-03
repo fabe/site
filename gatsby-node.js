@@ -1,9 +1,8 @@
 const path = require(`path`);
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 var scrape = require('html-metadata');
 
-exports.onCreatePage = ({ page, actions }) => {
-  const { createPage } = actions;
+exports.onCreatePage = ({ page, boundActionCreators }) => {
+  const { createPage } = boundActionCreators;
 
   return new Promise((resolve, reject) => {
     if (page.path === '/side-projects/') {
@@ -51,8 +50,8 @@ function getPagination(articles, article) {
   };
 }
 
-exports.createPages = ({ graphql, actions }) => {
-  const { createPage } = actions;
+exports.createPages = ({ graphql, boundActionCreators }) => {
+  const { createPage } = boundActionCreators;
 
   return new Promise((resolve, reject) => {
     // Query for all markdown "nodes" and for the slug we previously created.
@@ -83,8 +82,8 @@ exports.createPages = ({ graphql, actions }) => {
                     subtitle
                     cover {
                       childImageSharp {
-                        fluid(maxWidth: 1100, quality: 90) {
-                          ...GatsbyImageSharpFluid_withWebp
+                        sizes(maxWidth: 1100, quality: 90) {
+                          ...GatsbyImageSharpSizes_withWebp
                         }
                       }
                     }
@@ -94,7 +93,7 @@ exports.createPages = ({ graphql, actions }) => {
             }
           }
 
-          fragment GatsbyImageSharpFluid_withWebp on ImageSharpFluid {
+          fragment GatsbyImageSharpSizes_withWebp on ImageSharpSizes {
             base64
             aspectRatio
             src
@@ -130,46 +129,5 @@ exports.createPages = ({ graphql, actions }) => {
         return;
       })
     );
-  });
-};
-
-exports.onCreateBabelConfig = ({ actions }) => {
-  actions.setBabelPlugin({
-    name: `babel-plugin-root-import`,
-  });
-};
-
-exports.onCreateWebpackConfig = ({
-  stage,
-  rules,
-  loaders,
-  plugins,
-  actions,
-}) => {
-  actions.setWebpackConfig({
-    module: {
-      rules: [
-        {
-          test: /\.scss$/,
-          use: [
-            // fallback to style-loader in development
-            process.env.NODE_ENV !== 'production'
-              ? 'style-loader'
-              : MiniCssExtractPlugin.loader,
-            'css-loader',
-            'postcss-loader',
-            'sass-loader',
-          ],
-        },
-      ],
-    },
-    plugins: [
-      new MiniCssExtractPlugin({
-        // Options similar to the same options in webpackOptions.output
-        // both options are optional
-        filename: 'styles.css',
-        chunkFilename: '[id].css',
-      }),
-    ],
   });
 };

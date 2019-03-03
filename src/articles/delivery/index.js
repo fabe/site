@@ -1,7 +1,10 @@
 import React from 'react';
+import Helmet from 'react-helmet';
+import Link from 'gatsby-link';
 import Article from '~/src/components/Article';
 
 import Block from '~/src/components/Block';
+import Figure from '~/src/components/Figure';
 
 import video from './delivery.mp4';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'gatsby';
+import Link from 'gatsby-link';
 
 class Topbar extends React.Component {
   constructor() {
@@ -20,12 +20,14 @@ class Topbar extends React.Component {
   }
 
   render() {
+    const { scrollTop } = this.state;
+
     return (
       <div className="topbar">
         <div
-          className={`sans-serif grid container${
-            this.state.showMenu ? ' showMenu' : ''
-          }`}
+          className={`sans-serif grid container${this.state.showMenu
+            ? ' showMenu'
+            : ''}`}
         >
           <div className="col">
             <span className="name">

@@ -1,4 +1,6 @@
 import React from 'react';
+import Helmet from 'react-helmet';
+import Link from 'gatsby-link';
 import Article from '~/src/components/Article';
 
 import Block from '~/src/components/Block';
@@ -50,7 +52,7 @@ export default props => (
     <hr />
     <Block full>
       <Figure
-        fluid={props.data.intro}
+        sizes={props.data.intro}
         caption="We started out creating personas and user stories to figure out requirements of the application."
       />
     </Block>
@@ -63,27 +65,27 @@ export default props => (
       </p>
     </Block>
     <Block align="right">
-      <Figure fluid={props.data.proto} />
+      <Figure sizes={props.data.proto} />
     </Block>
     <hr />
     <Block full>
       <Figure
         background
-        fluid={props.data.overview}
+        sizes={props.data.overview}
         caption="Using high quality imagery and an elegant, dark interface, we tried making the user excited for their meal."
       />
     </Block>
     <Block full>
       <Figure
         background
-        fluid={props.data.description}
+        sizes={props.data.description}
         caption="Using the digital medium, we were able to supply the users with more information if they require it (especially interesting for allergy sufferers)."
       />
     </Block>
     <Block full>
       <Figure
         background
-        fluid={props.data.order}
+        sizes={props.data.order}
         caption="Going full circle: We also took a look at how people can use the tablet to pay the bill and split it upon request."
       />
     </Block>
@@ -104,36 +106,36 @@ export const query = graphql`
   query GatsbyImageMenu {
     intro: file(relativePath: { eq: "digital-menu/intro.jpg" }) {
       childImageSharp {
-        fluid(maxWidth: 1400, quality: 90) {
-          ...GatsbyImageSharpFluid_withWebp
+        sizes(maxWidth: 1400, quality: 90) {
+          ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
     proto: file(relativePath: { eq: "digital-menu/prototype.jpg" }) {
       childImageSharp {
-        fluid(maxWidth: 1400, quality: 90) {
-          ...GatsbyImageSharpFluid_withWebp
+        sizes(maxWidth: 1400, quality: 90) {
+          ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
     overview: file(relativePath: { eq: "digital-menu/overview.png" }) {
       childImageSharp {
-        fluid(maxWidth: 1000, quality: 90) {
-          ...GatsbyImageSharpFluid_withWebp
+        sizes(maxWidth: 1000, quality: 90) {
+          ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
     description: file(relativePath: { eq: "digital-menu/description.png" }) {
       childImageSharp {
-        fluid(maxWidth: 1000, quality: 90) {
-          ...GatsbyImageSharpFluid_withWebp
+        sizes(maxWidth: 1000, quality: 90) {
+          ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
     order: file(relativePath: { eq: "digital-menu/order.png" }) {
       childImageSharp {
-        fluid(maxWidth: 1000, quality: 90) {
-          ...GatsbyImageSharpFluid_withWebp
+        sizes(maxWidth: 1000, quality: 90) {
+          ...GatsbyImageSharpSizes_withWebp
         }
       }
     }

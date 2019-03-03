@@ -3,18 +3,18 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
 import Header from '../components/Header';
+import Bio from '../components/Bio';
 import Posts from '../components/Posts';
 import SEO from '../components/SEO';
-import Layout from '../components/Layout';
 
 class Index extends React.Component {
   render() {
-    const { data } = this.props;
+    const { transition, data } = this.props;
     const { site, allJavascriptFrontmatter } = data;
     const articles = allJavascriptFrontmatter.edges;
 
     return (
-      <Layout>
+      <div style={transition ? transition.style : { opacity: 0 }}>
         <Helmet
           title={`${site.siteMetadata.title} | Designer and Frontend Developer`}
         />
@@ -39,7 +39,7 @@ class Index extends React.Component {
           </div>
         </Header>
         <Posts posts={articles} />
-      </Layout>
+      </div>
     );
   }
 }
@@ -70,8 +70,8 @@ export const query = graphql`
             subtitle
             cover {
               childImageSharp {
-                fluid(maxWidth: 1100, quality: 100) {
-                  ...GatsbyImageSharpFluid_withWebp
+                sizes(maxWidth: 1100, quality: 100) {
+                  ...GatsbyImageSharpSizes_withWebp
                 }
               }
             }
@@ -81,8 +81,8 @@ export const query = graphql`
     }
     hero: file(relativePath: { eq: "hero-bw.jpg" }) {
       childImageSharp {
-        fluid(maxWidth: 1400, quality: 90) {
-          ...GatsbyImageSharpFluid_withWebp
+        sizes(maxWidth: 1400, quality: 90) {
+          ...GatsbyImageSharpSizes_withWebp
         }
       }
     }

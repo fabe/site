@@ -1,5 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
+import Link from 'gatsby-link';
 import Header from '../components/Header';
 import Block from '~/src/components/Block';
 import Figure from '~/src/components/Figure';
@@ -73,8 +74,8 @@ export const query = graphql`
   query GatsbyImageHeroAboutQuery {
     cover: file(relativePath: { eq: "fabian-schultz.jpg" }) {
       childImageSharp {
-        fluid(maxWidth: 700, quality: 90) {
-          ...GatsbyImageSharpFluid_withWebp
+        sizes(maxWidth: 700, quality: 90) {
+          ...GatsbyImageSharpSizes_withWebp
         }
       }
     }

@@ -1,4 +1,6 @@
 import React from 'react';
+import Helmet from 'react-helmet';
+import Link from 'gatsby-link';
 import TweetEmbed from 'react-tweet-embed';
 
 import Article from '~/src/components/Article';
@@ -78,7 +80,7 @@ export default props => (
     </Block>
 
     <Block align="center">
-      <Figure fluid={props.data.share} background />
+      <Figure sizes={props.data.share} background />
     </Block>
 
     <Block vc>
@@ -97,7 +99,7 @@ export default props => (
     <hr />
 
     <Block>
-      <Figure fluid={props.data.sunset} />
+      <Figure sizes={props.data.sunset} />
     </Block>
 
     <Block align="right" vc>
@@ -120,15 +122,15 @@ export const query = graphql`
   query GatsbyImageMomenta {
     sunset: file(relativePath: { eq: "momenta/sunset.jpg" }) {
       childImageSharp {
-        fluid(maxWidth: 1400, quality: 90) {
-          ...GatsbyImageSharpFluid_withWebp
+        sizes(maxWidth: 1400, quality: 90) {
+          ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
     share: file(relativePath: { eq: "momenta/share.png" }) {
       childImageSharp {
-        fluid(maxWidth: 1400, quality: 90) {
-          ...GatsbyImageSharpFluid_withWebp
+        sizes(maxWidth: 1400, quality: 90) {
+          ...GatsbyImageSharpSizes_withWebp
         }
       }
     }

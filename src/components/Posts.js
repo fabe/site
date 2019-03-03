@@ -5,8 +5,8 @@ const split = items => {
   let col1 = [];
   let col2 = [];
 
-  items.forEach((item, i) => {
-    if (i % 2 !== 0) {
+  items.map((item, i) => {
+    if (i % 2 != 0) {
       col1.push(item);
     } else {
       col2.push(item);
@@ -22,11 +22,9 @@ const split = items => {
 };
 
 const preparePosts = posts => {
-  let nodes = [];
-
-  posts.forEach(post => {
+  const nodes = posts.map(post => {
     if (post.node.path !== '/404/') {
-      nodes.push(<Post key={post.node.frontmatter.path} post={post} />);
+      return <Post key={post.node.frontmatter.path} post={post} />;
     }
   });
 

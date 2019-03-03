@@ -1,4 +1,6 @@
 import React from 'react';
+import Helmet from 'react-helmet';
+import Link from 'gatsby-link';
 import Article from '~/src/components/Article';
 
 import Block from '~/src/components/Block';
@@ -65,11 +67,11 @@ export default props => (
     </Block>
 
     <Block align="center">
-      <Figure fluid={props.data.dashboard} />
+      <Figure sizes={props.data.dashboard} />
     </Block>
 
     <Block>
-      <Figure fluid={props.data.dashboardDetail} />
+      <Figure sizes={props.data.dashboardDetail} />
     </Block>
     <Block vc align="right">
       <h3>Ready for handoff</h3>
@@ -88,7 +90,7 @@ export default props => (
     </Block>
 
     <Block vc align="right">
-      <Figure link fluid={props.data.dashboardMobile} />
+      <Figure link sizes={props.data.dashboardMobile} />
     </Block>
 
     <hr />
@@ -99,7 +101,7 @@ export default props => (
     </Block>
 
     <Block align="center" pull>
-      <Figure fluid={props.data.consumer} />
+      <Figure sizes={props.data.consumer} />
     </Block>
 
     <Block align="left" pull>
@@ -144,8 +146,8 @@ export const query = graphql`
   query GatsbyImageLivello {
     dashboard: file(relativePath: { eq: "livello/dashboard.png" }) {
       childImageSharp {
-        fluid(maxWidth: 1100, quality: 100) {
-          ...GatsbyImageSharpFluid_withWebp
+        sizes(maxWidth: 1100, quality: 100) {
+          ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
@@ -153,8 +155,8 @@ export const query = graphql`
       relativePath: { eq: "livello/dashboard-detail.png" }
     ) {
       childImageSharp {
-        fluid(maxWidth: 500, quality: 100) {
-          ...GatsbyImageSharpFluid_withWebp
+        sizes(maxWidth: 500, quality: 100) {
+          ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
@@ -162,15 +164,15 @@ export const query = graphql`
       relativePath: { eq: "livello/dashboard-mobile.png" }
     ) {
       childImageSharp {
-        fluid(maxWidth: 500, quality: 90) {
-          ...GatsbyImageSharpFluid_withWebp
+        sizes(maxWidth: 500, quality: 90) {
+          ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
     consumer: file(relativePath: { eq: "livello/consumer.png" }) {
       childImageSharp {
-        fluid(maxWidth: 1100, quality: 100) {
-          ...GatsbyImageSharpFluid_withWebp
+        sizes(maxWidth: 1100, quality: 100) {
+          ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
