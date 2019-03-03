@@ -41,9 +41,11 @@ export default ({
         <source src={mp4} type="video/mp4" />
       </video>
     ) : null}
-    {fluid && !video ? <Img fluid={fluid.childImageSharp.fluid} /> : null}
-    <figcaption style={{ textAlign: captionLeft && 'left' }}>
-      {caption}
-    </figcaption>
+    {sizes && !video ? <Img sizes={sizes.childImageSharp.sizes} /> : null}
+    {caption && (
+      <figcaption style={{ textAlign: captionLeft && 'left' }}>
+        {caption}
+      </figcaption>
+    )}
   </figure>
 );

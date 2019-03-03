@@ -7,7 +7,7 @@ import video from './delivery.mp4';
 
 export const frontmatter = {
   id: 'delivery',
-  isWork: true,
+  isWork: false,
   subtitle: 'Delivery',
   title: 'Share your design work,<br/>clutter-free.',
   date: '2017-04-01',

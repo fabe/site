@@ -69,9 +69,24 @@ figure {
   }
 }
 
+.phone-framer {
+  position: relative;
+  overflow: hidden;
+
+  video {
+    position: absolute;
+    left: 50%;
+    width: 29%;
+    top: 16.25%;
+    transform: translateX(-50%);
+  }
+}
+
 figcaption {
   text-align: center;
   font-size: 80%;
+  line-height: 1.5;
+  padding: 0 var(--unit);
   margin-top: var(--unit-half);
 }
 

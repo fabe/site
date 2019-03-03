@@ -4,6 +4,8 @@ import Article from '~/src/components/Article';
 import Block from '~/src/components/Block';
 import Figure from '~/src/components/Figure';
 
+import video from './medical_companion_screenani.mp4';
+
 export const frontmatter = {
   id: 'dsk',
   isWork: true,
@@ -160,6 +162,20 @@ export default props => (
         fluid={props.data.screen4}
         caption="Chat with doctors, making it easy to request appointments or prescriptions."
       />
+    </Block>
+
+    <hr />
+
+    <Block full pull align="center">
+      <h2>Prototype</h2>
+      <p>
+        To showcase the screendesign and its animations, we created a prototype
+        using After Effects.
+      </p>
+    </Block>
+
+    <Block align="center" pull>
+      <video autoPlay loop src={video} />
     </Block>
   </Article>
 );

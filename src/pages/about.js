@@ -9,13 +9,13 @@ import Layout from '~/src/components/Layout';
 import clients from '~/static/clients.svg';
 
 export default ({ posts, transition, data }) => (
-  <Layout>
-    <Helmet title="Fabian W. Schultz | About" />
+  <div style={transition ? transition.style : { opacity: 0 }}>
+    <Helmet title="Fabian Schultz | About" />
     <SEO
       postPath="/about"
       postNode={{
         subtitle: 'About',
-        excerpt: `I’ve been working both as a product designer and frontend developer for over 5 years now. I particularly enjoy working with companies that try to meet broad and unique user needs.`,
+        excerpt: `Hello! I’m a designer & developer focused on turning ideas into delightful, practical software. I’m doing my best work when collaborating closely with founders, designers, and developers.`,
         cover: data.cover,
       }}
       pageSEO
@@ -28,7 +28,7 @@ export default ({ posts, transition, data }) => (
         <ul>
           <li>Professional early adopter.</li>
           <li>Open Source on default.</li>
-          <li>Didn’t buy Bitcoin in 2011.</li>
+          <li>Indecisive about his job title.</li>
         </ul>
       </div>
     </Header>
@@ -43,40 +43,27 @@ export default ({ posts, transition, data }) => (
         </Block>
         <Block align="right" pull mobilePull>
           <p>
-            Hello, I’m Fabian &mdash; a product designer and developer based in
-            Potsdam, Germany.
+            Hello! I’m a designer & developer focused on turning ideas into
+            delightful, practical software. I’m doing my best work when
+            collaborating closely with founders, designers, and developers.
           </p>
           <p>
-            I’ve been working both as a product designer and frontend developer
-            for over 5 years now. I particularly enjoy working with companies
-            that try to meet broad and unique user needs.
+            Recently, I was a Technology Intern at{' '}
+            <a href="//stinkstudios.com">Stink Studios</a> in New York City,
+            working with brands like Google and Spotify. I’m currently working
+            towards my BA in Interface Design in Potsdam, Germany.
           </p>
           <p>
-            Outside of working as a freelancer and studying at{' '}
-            <a className="caps" href="//www.en.fh-potsdam.de">
-              FHP
-            </a>, I try to push out{' '}
-            <Link to="/side-projects">Side Projects</Link> regularly.
+            Before that, I freelanced as a designer/front-end developer hybrid,
+            helping companies such as <a href="//seatgeek.com">SeatGeek</a>,{' '}
+            <a href="//wimdu.com">Wimdu</a>, <a href="//z.cash">Zcash</a>, and{' '}
+            <a href="//door2door.io">door2door</a>.
           </p>
           <p>
-            Using the power of design, I want to help make technology usable and
-            accessible for everyone — hence my fondness for the web.
-          </p>
-          <p>
-            I’m into working iteratively on projects, owning problems and
-            solving them through interdisciplinary work and teams. For me it’s
-            crucial to act at the intersection of design & code, sharpening my
-            skills continuously in every direction.
-          </p>
-          <p>
-            View my{' '}
             <a href="https://drive.google.com/open?id=19nybcDoTKPWsYAmq5nRmx23NwqYD32er">
               Résumé
             </a>{' '}
-            or my{' '}
-            <a href="https://www.linkedin.com/in/fabian-schultz">
-              LinkedIn profile
-            </a>.
+            · <a href="https://www.linkedin.com/in/fabian-schultz">LinkedIn</a>
           </p>
         </Block>
       </div>

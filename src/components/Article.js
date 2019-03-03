@@ -33,7 +33,7 @@ class Article extends React.Component {
           <Intro details={details} />
         </Header>
         <article id="content">
-          <Helmet title={`Fabian W. Schultz | ${subtitle}`} />
+          <Helmet title={`Fabian Schultz | ${subtitle}`} />
           <SEO postPath={path} postNode={frontmatter} postSEO />
           <div>{children}</div>
           <hr />
