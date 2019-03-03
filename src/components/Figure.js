@@ -16,7 +16,7 @@ export default ({
   webm,
   marginTop,
   marginBottom,
-  fluid,
+  sizes,
   frame,
 }) => (
   <figure
@@ -28,14 +28,14 @@ export default ({
       ${frame ? 'frame' : ''} 
       ${align}`}
   >
-    {!video && !fluid ? (
+    {!video && !sizes ? (
       <img
         src={src}
         alt={name || caption}
         style={{ maxWidth: fullWidth && '100%' }}
       />
     ) : null}
-    {video && !fluid ? (
+    {video && !sizes ? (
       <video preload="true" playsInline autoPlay loop muted>
         <source src={webm} type="video/webm" />
         <source src={mp4} type="video/mp4" />

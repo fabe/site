@@ -1,11 +1,9 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import { Link } from 'gatsby';
 import Header from '../components/Header';
 import Block from '~/src/components/Block';
 import Figure from '~/src/components/Figure';
 import SEO from '~/src/components/SEO';
-import Layout from '~/src/components/Layout';
 import clients from '~/static/clients.svg';
 
 export default ({ posts, transition, data }) => (
@@ -68,7 +66,7 @@ export default ({ posts, transition, data }) => (
         </Block>
       </div>
     </article>
-  </Layout>
+  </div>
 );
 
 export const query = graphql`
