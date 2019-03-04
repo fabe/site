@@ -48,7 +48,7 @@ class Header extends React.Component {
     }
 
     if (!cover && video) {
-      return <video autoPlay loop src={video} />;
+      return <video autoPlay loop src={video} playsInline />;
     }
   }
 
