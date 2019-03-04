@@ -87,7 +87,7 @@ export default props => (
     </Block>
     <Block align="center" pull>
       <div className="phone-framer">
-        <video autoPlay loop src={video_1} playsInline />
+        <video autoPlay loop src={video_1} playsInline muted />
         <Figure sizes={props.data.frame_1} />
       </div>
     </Block>
@@ -100,7 +100,7 @@ export default props => (
     </Block>
     <Block align="center" pull>
       <div className="phone-framer">
-        <video autoPlay loop src={video_2} playsInline />
+        <video autoPlay loop src={video_2} playsInline muted />
         <Figure sizes={props.data.frame_2} />
       </div>
     </Block>

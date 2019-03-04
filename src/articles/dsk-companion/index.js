@@ -179,7 +179,7 @@ export default props => (
     </Block>
 
     <Block align="center" pull>
-      <video autoPlay loop src={video} playsInline />
+      <video autoPlay loop src={video} playsInline muted />
     </Block>
   </Article>
 );
