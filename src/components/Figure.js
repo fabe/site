@@ -43,7 +43,9 @@ export default ({
     ) : null}
     {sizes && !video ? <Img sizes={sizes.childImageSharp.sizes} /> : null}
     {caption && (
-      <figcaption style={{ textAlign: captionLeft && 'left' }}>
+      <figcaption
+        style={{ textAlign: captionLeft && 'left', padding: captionLeft && 0 }}
+      >
         {caption}
       </figcaption>
     )}
