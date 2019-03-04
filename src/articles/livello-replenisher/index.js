@@ -96,7 +96,10 @@ export default props => (
 
     <Block full pull align="center">
       <h2>On Location</h2>
-      <p>When the replenisher arrives</p>
+      <p>
+        When the replenisher arrives, they can administer the fridges and keep
+        track of the new inventory.
+      </p>
     </Block>
     <Block align="center" pull>
       <div className="phone-framer">
