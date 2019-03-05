@@ -32,7 +32,7 @@ module.exports = {
         trackingId: `UA-44440473-5`,
       },
     },
-    `gatsby-plugin-offline`,
+    'gatsby-plugin-remove-serviceworker',
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-react-next`,
