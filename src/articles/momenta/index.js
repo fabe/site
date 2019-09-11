@@ -12,7 +12,7 @@ import homepageWebm from './homepage.webm';
 
 export const frontmatter = {
   id: 'momenta',
-  isWork: true,
+  isWork: false,
   title: 'Capture your moments as pictures with sound.',
   subtitle: 'Momenta',
   date: '2013-12-31',

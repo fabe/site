@@ -14,6 +14,14 @@ figure {
 
   color: var(--meta-color);
 
+  & + & {
+    margin-top: var(--unit);
+  }
+
+  & + video {
+    margin-top: var(--unit);
+  }
+
   &:hover .link {
     opacity: 1;
   }
