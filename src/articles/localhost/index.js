@@ -6,8 +6,6 @@ import Article from '~/src/components/Article';
 import Block from '~/src/components/Block';
 import Figure from '~/src/components/Figure';
 
-import landing from './landing.mp4';
-
 export const frontmatter = {
   id: 'localhost',
   isWork: true,
@@ -59,7 +57,7 @@ export default props => (
     </Block>
     <Block align="center" pull>
       <Figure sizes={props.data.logo} />
-      <video autoPlay loop src={landing} playsInline muted />
+      <Figure sizes={props.data.landing} />
     </Block>
 
     <hr />
@@ -108,6 +106,13 @@ export default props => (
 export const query = graphql`
   query GatsbyImageLocalhost {
     logo: file(relativePath: { eq: "localhost/logo.png" }) {
+      childImageSharp {
+        sizes(maxWidth: 1100, quality: 100) {
+          ...GatsbyImageSharpSizes_withWebp
+        }
+      }
+    }
+    landing: file(relativePath: { eq: "localhost/landing.png" }) {
       childImageSharp {
         sizes(maxWidth: 1100, quality: 100) {
           ...GatsbyImageSharpSizes_withWebp
