@@ -1,7 +1,7 @@
+import { getSpotifyNowPlaying } from './spotify';
+
 export default {
   Query: {
-    sayHello() {
-      return 'Hello World!';
-    },
+    getSpotifyNowPlaying,
   },
 };
