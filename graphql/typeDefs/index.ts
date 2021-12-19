@@ -4,6 +4,7 @@ export default gql`
   type Query {
     spotifyNowPlaying: NowPlaying!
     playlists: [Playlist]!
+    nowReading: [Book]!
   }
 
   type NowPlaying {
@@ -19,5 +20,12 @@ export default gql`
     title: String!
     coverUrl: String!
     spotifyUrl: String!
+  }
+
+  type Book {
+    title: String!
+    author: String!
+    startedReadingDate: String!
+    okuUrl: String!
   }
 `;
