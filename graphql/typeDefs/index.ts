@@ -2,7 +2,8 @@ import { gql } from 'apollo-server-micro';
 
 export default gql`
   type Query {
-    getSpotifyNowPlaying: NowPlaying
+    spotifyNowPlaying: NowPlaying!
+    playlists: [Playlist]!
   }
 
   type NowPlaying {
@@ -12,5 +13,11 @@ export default gql`
     isPlaying: Boolean!
     songUrl: String
     title: String
+  }
+
+  type Playlist {
+    title: String!
+    coverUrl: String!
+    spotifyUrl: String!
   }
 `;

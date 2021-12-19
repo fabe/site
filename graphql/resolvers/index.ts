@@ -1,7 +1,9 @@
 import { getSpotifyNowPlaying } from './spotify';
+import { getPlaylists } from './content';
 
 export default {
   Query: {
-    getSpotifyNowPlaying,
+    spotifyNowPlaying: getSpotifyNowPlaying,
+    playlists: getPlaylists,
   },
 };

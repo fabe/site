@@ -6,3 +6,9 @@ export type SpotifyNowPlaying = {
   songUrl?: string;
   title?: string;
 };
+
+export type Playlist = {
+  title: string;
+  coverUrl: string;
+  spotifyUrl: string;
+};
