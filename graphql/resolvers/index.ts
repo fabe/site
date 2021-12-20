@@ -1,11 +1,13 @@
 import { getSpotifyNowPlaying } from './spotify';
-import { getPlaylists } from './content';
-import { getNowReading } from './books';
+import { getFavouriteBooks, getPlaylists } from './content';
+import { getNowReading, getRecentlyRead } from './books';
 
 export default {
   Query: {
     spotifyNowPlaying: getSpotifyNowPlaying,
     playlists: getPlaylists,
     nowReading: getNowReading,
+    recentlyRead: getRecentlyRead,
+    favouriteBooks: getFavouriteBooks,
   },
 };

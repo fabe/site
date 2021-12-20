@@ -5,6 +5,8 @@ export default gql`
     spotifyNowPlaying: NowPlaying!
     playlists: [Playlist]!
     nowReading: [Book]!
+    recentlyRead(latest: Int): [Book]!
+    favouriteBooks(limit: Int): [Book]!
   }
 
   type NowPlaying {
@@ -25,7 +27,8 @@ export default gql`
   type Book {
     title: String!
     author: String!
-    startedReadingDate: String!
+    readingDate: String
     okuUrl: String!
+    coverUrl: String
   }
 `;

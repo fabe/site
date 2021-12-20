@@ -1,5 +1,5 @@
 import querystring from 'querystring';
-import { SpotifyNowPlaying } from '../../types';
+import { NowPlaying } from '../../types/types.generated';
 
 const {
   SPOTIFY_CLIENT_ID: client_id,
@@ -44,7 +44,7 @@ const getRecentlyPlayed = async (access_token: string) => {
   });
 };
 
-export async function getSpotifyNowPlaying(): Promise<SpotifyNowPlaying> {
+export async function getSpotifyNowPlaying(): Promise<NowPlaying> {
   const { access_token } = await getAccessToken();
   const nowPlayingResponse = await getNowPlaying(access_token);
 
