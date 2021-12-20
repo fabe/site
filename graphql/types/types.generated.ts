@@ -67,6 +67,12 @@ export type Entry = {
   sys: Sys;
 };
 
+export type Flag = {
+  __typename?: "Flag";
+  key: Scalars["String"];
+  value: Scalars["String"];
+};
+
 export type ImageTransformOptions = {
   backgroundColor?: InputMaybe<Scalars["String"]>;
   cornerRadius?: InputMaybe<Scalars["Int"]>;
@@ -78,6 +84,12 @@ export type ImageTransformOptions = {
   width?: InputMaybe<Scalars["Int"]>;
 };
 
+export type Location = {
+  __typename?: "Location";
+  lat?: Maybe<Scalars["Float"]>;
+  lon?: Maybe<Scalars["Float"]>;
+};
+
 export type NowPlaying = {
   __typename?: "NowPlaying";
   album?: Maybe<Scalars["String"]>;
@@ -86,6 +98,18 @@ export type NowPlaying = {
   isPlaying: Scalars["Boolean"];
   songUrl?: Maybe<Scalars["String"]>;
   title?: Maybe<Scalars["String"]>;
+};
+
+export type Photo = {
+  __typename?: "Photo";
+  camera?: Maybe<Scalars["String"]>;
+  description?: Maybe<Scalars["String"]>;
+  height: Scalars["Int"];
+  lens?: Maybe<Scalars["String"]>;
+  location?: Maybe<Location>;
+  photoUrl: Scalars["String"];
+  unsplashUrl?: Maybe<Scalars["String"]>;
+  width: Scalars["Int"];
 };
 
 export type Playlist = {
@@ -143,14 +167,20 @@ export type Query = {
   __typename?: "Query";
   favouriteBooks: Array<Maybe<Book>>;
   nowReading: Array<Maybe<Book>>;
+  photos: Array<Maybe<Photo>>;
   playlists: Array<Maybe<Playlist>>;
   post?: Maybe<Post>;
   posts: Array<Maybe<PostWithoutBody>>;
   recentlyRead: Array<Maybe<Book>>;
+  siteSettings?: Maybe<SiteSettings>;
   spotifyNowPlaying: NowPlaying;
 };
 
 export type QueryFavouriteBooksArgs = {
+  limit?: InputMaybe<Scalars["Int"]>;
+};
+
+export type QueryPhotosArgs = {
   limit?: InputMaybe<Scalars["Int"]>;
 };
 
@@ -164,6 +194,14 @@ export type QueryPostsArgs = {
 
 export type QueryRecentlyReadArgs = {
   latest?: InputMaybe<Scalars["Int"]>;
+};
+
+export type SiteSettings = {
+  __typename?: "SiteSettings";
+  flags?: Maybe<Array<Maybe<Flag>>>;
+  intro: Scalars["String"];
+  metaDescription: Scalars["String"];
+  siteTitle: Scalars["String"];
 };
 
 export type Sys = {

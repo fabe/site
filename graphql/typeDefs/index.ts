@@ -11,6 +11,8 @@ export default gql`
     favouriteBooks(limit: Int): [Book]!
     posts(limit: Int): [PostWithoutBody]!
     post(slug: String!): Post
+    photos(limit: Int): [Photo]!
+    siteSettings: SiteSettings
   }
 
   type NowPlaying {
@@ -51,6 +53,29 @@ export default gql`
     slug: String!
     publishedDate: String!
     coverUrl: String
+  }
+
+  type Photo {
+    lens: String
+    camera: String
+    location: Location
+    description: String
+    unsplashUrl: String
+    photoUrl: String!
+    width: Int!
+    height: Int!
+  }
+
+  type SiteSettings {
+    siteTitle: String!
+    intro: String!
+    flags: [Flag]
+    metaDescription: String!
+  }
+
+  type Flag {
+    key: String!
+    value: String!
   }
 
   # Contentful types from here on out!
@@ -121,5 +146,10 @@ export default gql`
     resizeFocus: String
     backgroundColor: String
     format: String
+  }
+
+  type Location {
+    lat: Float
+    lon: Float
   }
 `;

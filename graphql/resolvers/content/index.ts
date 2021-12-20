@@ -1,9 +1,12 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 import {
+  Photo,
   Playlist,
   PostWithoutBody,
+  QueryPhotosArgs,
   QueryPostArgs,
   QueryPostsArgs,
+  SiteSettings,
 } from '../../types/types.generated';
 import { gql } from 'apollo-server-micro';
 import {
@@ -13,6 +16,7 @@ import {
 } from '../../types/types.generated';
 
 const { CONTENTFUL_SPACE_ID, CONTENTFUL_DELIVERY } = process.env;
+const SITE_SETTINGS_ENTRY_ID = '4VjpvaxnxzRE0XPfQjwHQK';
 const BASE_URL = `https://graphql.contentful.com/content/v1/spaces/${CONTENTFUL_SPACE_ID}`;
 
 const client = new ApolloClient({
@@ -180,8 +184,6 @@ export async function getPost(
     },
   });
 
-  console.log(response);
-
   if (!response.data) {
     return null;
   }
@@ -195,4 +197,75 @@ export async function getPost(
     metaDescription: post.metaDescription,
     tags: post.tags,
   }))[0];
+}
+
+export async function getPhotos(
+  _: any,
+  args: QueryPhotosArgs
+): Promise<Photo[]> {
+  const response = await client.query({
+    query: gql`
+      query getAllPosts($limit: Int) {
+        photoCollection(limit: $limit) {
+          items {
+            lens
+            camera
+            location {
+              lat
+              lon
+            }
+            description
+            unsplashUrl
+            asset {
+              url
+              width
+              height
+            }
+          }
+        }
+      }
+    `,
+    variables: {
+      limit: args.limit,
+    },
+  });
+
+  if (!response.data) {
+    return [];
+  }
+
+  return response.data.photoCollection.items.map((photo: any) => ({
+    camera: photo.camera,
+    description: photo.description,
+    height: photo.asset.height,
+    lens: photo.lens,
+    location: photo.location,
+    photoUrl: photo.asset.url,
+    unsplashUrl: photo.unsplashUrl,
+    width: photo.asset.width,
+  }));
+}
+
+export async function getSiteSettings(): Promise<SiteSettings | null> {
+  const response = await client.query({
+    query: gql`
+      query getSiteSettings($id: String!) {
+        siteSettings(id: $id) {
+          siteTitle
+          intro
+          flags
+          metaDescription
+        }
+      }
+    `,
+    variables: {
+      id: SITE_SETTINGS_ENTRY_ID,
+    },
+  });
+
+  if (!response.data) {
+    return null;
+  }
+
+  return response.data.siteSettings;
 }
