@@ -21,6 +21,25 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  JSON: any;
+};
+
+export type Asset = {
+  __typename?: "Asset";
+  contentType?: Maybe<Scalars["String"]>;
+  contentfulMetadata: ContentfulMetadata;
+  description?: Maybe<Scalars["String"]>;
+  fileName?: Maybe<Scalars["String"]>;
+  height?: Maybe<Scalars["Int"]>;
+  size?: Maybe<Scalars["Int"]>;
+  sys: Sys;
+  title?: Maybe<Scalars["String"]>;
+  url?: Maybe<Scalars["String"]>;
+  width?: Maybe<Scalars["Int"]>;
+};
+
+export type AssetUrlArgs = {
+  transform?: InputMaybe<ImageTransformOptions>;
 };
 
 export type Book = {
@@ -30,6 +49,33 @@ export type Book = {
   okuUrl: Scalars["String"];
   readingDate?: Maybe<Scalars["String"]>;
   title: Scalars["String"];
+};
+
+export type ContentfulMetadata = {
+  __typename?: "ContentfulMetadata";
+  tags: Array<Maybe<ContentfulTag>>;
+};
+
+export type ContentfulTag = {
+  __typename?: "ContentfulTag";
+  id?: Maybe<Scalars["String"]>;
+  name?: Maybe<Scalars["String"]>;
+};
+
+export type Entry = {
+  contentfulMetadata: ContentfulMetadata;
+  sys: Sys;
+};
+
+export type ImageTransformOptions = {
+  backgroundColor?: InputMaybe<Scalars["String"]>;
+  cornerRadius?: InputMaybe<Scalars["Int"]>;
+  format?: InputMaybe<Scalars["String"]>;
+  height?: InputMaybe<Scalars["Int"]>;
+  quality?: InputMaybe<Scalars["Int"]>;
+  resizeFocus?: InputMaybe<Scalars["String"]>;
+  resizeStrategy?: InputMaybe<Scalars["String"]>;
+  width?: InputMaybe<Scalars["Int"]>;
 };
 
 export type NowPlaying = {
@@ -49,11 +95,57 @@ export type Playlist = {
   title: Scalars["String"];
 };
 
+export type Post = {
+  __typename?: "Post";
+  body: PostBody;
+  coverUrl?: Maybe<Scalars["String"]>;
+  metaDescription?: Maybe<Scalars["String"]>;
+  publishedDate: Scalars["String"];
+  slug: Scalars["String"];
+  tags?: Maybe<Array<Maybe<Scalars["String"]>>>;
+  title: Scalars["String"];
+};
+
+export type PostBody = {
+  __typename?: "PostBody";
+  json: Scalars["JSON"];
+  links: PostBodyLinks;
+};
+
+export type PostBodyAssets = {
+  __typename?: "PostBodyAssets";
+  block: Array<Maybe<Asset>>;
+  hyperlink: Array<Maybe<Asset>>;
+};
+
+export type PostBodyEntries = {
+  __typename?: "PostBodyEntries";
+  block: Array<Maybe<Entry>>;
+  hyperlink: Array<Maybe<Entry>>;
+  inline: Array<Maybe<Entry>>;
+};
+
+export type PostBodyLinks = {
+  __typename?: "PostBodyLinks";
+  assets: PostBodyAssets;
+  entries: PostBodyEntries;
+};
+
+export type PostWithoutBody = {
+  __typename?: "PostWithoutBody";
+  coverUrl?: Maybe<Scalars["String"]>;
+  publishedDate: Scalars["String"];
+  slug: Scalars["String"];
+  title: Scalars["String"];
+};
+
 export type Query = {
   __typename?: "Query";
   favouriteBooks: Array<Maybe<Book>>;
   nowReading: Array<Maybe<Book>>;
   playlists: Array<Maybe<Playlist>>;
+  post?: Maybe<Post>;
+  posts: Array<Maybe<PostWithoutBody>>;
   recentlyRead: Array<Maybe<Book>>;
   spotifyNowPlaying: NowPlaying;
 };
@@ -62,6 +154,24 @@ export type QueryFavouriteBooksArgs = {
   limit?: InputMaybe<Scalars["Int"]>;
 };
 
+export type QueryPostArgs = {
+  slug: Scalars["String"];
+};
+
+export type QueryPostsArgs = {
+  limit?: InputMaybe<Scalars["Int"]>;
+};
+
 export type QueryRecentlyReadArgs = {
   latest?: InputMaybe<Scalars["Int"]>;
+};
+
+export type Sys = {
+  __typename?: "Sys";
+  environmentId: Scalars["String"];
+  firstPublishedAt?: Maybe<Scalars["String"]>;
+  id: Scalars["String"];
+  publishedAt?: Maybe<Scalars["String"]>;
+  publishedVersion?: Maybe<Scalars["Int"]>;
+  spaceId: Scalars["String"];
 };

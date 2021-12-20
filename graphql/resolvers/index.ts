@@ -1,5 +1,5 @@
 import { getSpotifyNowPlaying } from './spotify';
-import { getFavouriteBooks, getPlaylists } from './content';
+import { getFavouriteBooks, getPlaylists, getPost, getPosts } from './content';
 import { getNowReading, getRecentlyRead } from './books';
 
 export default {
@@ -9,5 +9,7 @@ export default {
     nowReading: getNowReading,
     recentlyRead: getRecentlyRead,
     favouriteBooks: getFavouriteBooks,
+    posts: getPosts,
+    post: getPost,
   },
 };

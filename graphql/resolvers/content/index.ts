@@ -1,7 +1,16 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
-import { Playlist } from '../../types/types.generated';
+import {
+  Playlist,
+  PostWithoutBody,
+  QueryPostArgs,
+  QueryPostsArgs,
+} from '../../types/types.generated';
 import { gql } from 'apollo-server-micro';
-import { Book, QueryFavouriteBooksArgs } from '../../types/types.generated';
+import {
+  Book,
+  QueryFavouriteBooksArgs,
+  Post,
+} from '../../types/types.generated';
 
 const { CONTENTFUL_SPACE_ID, CONTENTFUL_DELIVERY } = process.env;
 const BASE_URL = `https://graphql.contentful.com/content/v1/spaces/${CONTENTFUL_SPACE_ID}`;
@@ -58,8 +67,8 @@ export async function getFavouriteBooks(
 ): Promise<Book[]> {
   const response = await client.query({
     query: gql`
-      query getAllFavouriteBooks {
-        bookCollection(limit: 10) {
+      query getAllFavouriteBooks($limit: Int) {
+        bookCollection(limit: $limit) {
           items {
             title
             authors
@@ -71,26 +80,119 @@ export async function getFavouriteBooks(
         }
       }
     `,
+    variables: {
+      limit: args.limit || 50,
+    },
   });
 
   if (!response.data) {
     return [];
   }
 
-  return response.data.bookCollection.items
-    .map(
-      (book: {
-        title: string;
-        cover?: { url: string };
-        authors?: string[];
-        okuUrl?: string;
-        description?: string;
-      }) => ({
-        author: book.authors?.join(', '),
-        title: book.title,
-        coverUrl: book.cover?.url,
-        okuUrl: book.okuUrl,
-      })
-    )
-    .splice(0, args.limit || 50);
+  return response.data.bookCollection.items.map(
+    (book: {
+      title: string;
+      cover?: { url: string };
+      authors?: string[];
+      okuUrl?: string;
+      description?: string;
+    }) => ({
+      author: book.authors?.join(', '),
+      title: book.title,
+      coverUrl: book.cover?.url,
+      okuUrl: book.okuUrl,
+    })
+  );
+}
+
+export async function getPosts(
+  _: any,
+  args: QueryPostsArgs
+): Promise<PostWithoutBody[]> {
+  const response = await client.query({
+    query: gql`
+      query getAllPosts($limit: Int) {
+        postCollection(limit: $limit) {
+          items {
+            title
+            slug
+            publishedDate
+            coverImage {
+              url
+            }
+          }
+        }
+      }
+    `,
+    variables: {
+      limit: args.limit || undefined,
+    },
+  });
+
+  if (!response.data) {
+    return [];
+  }
+
+  return response.data.postCollection.items.map((post: any) => ({
+    title: post.title,
+    slug: post.slug,
+    coverUrl: post.cover?.url,
+    publishedDate: post.publishedDate,
+  }));
+}
+
+export async function getPost(
+  _: any,
+  args: QueryPostArgs
+): Promise<Post | null> {
+  const response = await client.query({
+    query: gql`
+      query getPost($slug: String!) {
+        postCollection(where: { slug: $slug }, limit: 1) {
+          items {
+            title
+            slug
+            body {
+              json
+              links {
+                assets {
+                  block {
+                    url
+                    sys {
+                      id
+                    }
+                  }
+                }
+              }
+            }
+            coverImage {
+              url
+            }
+            metaDescription
+            publishedDate
+            tags
+          }
+        }
+      }
+    `,
+    variables: {
+      slug: args.slug,
+    },
+  });
+
+  console.log(response);
+
+  if (!response.data) {
+    return null;
+  }
+
+  return response.data.postCollection.items.map((post: any) => ({
+    title: post.title,
+    slug: post.slug,
+    coverUrl: post.coverImage?.url,
+    publishedDate: post.publishedDate,
+    body: post.body,
+    metaDescription: post.metaDescription,
+    tags: post.tags,
+  }))[0];
 }
