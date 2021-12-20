@@ -34,6 +34,7 @@ export const config = {
 
 const apolloServer = new ApolloServer({
   schema,
+  introspection: true,
   plugins: [
     process.env.NODE_ENV === 'production'
       ? ApolloServerPluginLandingPageDisabled()
