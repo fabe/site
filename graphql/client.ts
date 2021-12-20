@@ -48,11 +48,8 @@ export function initializeApollo(initialState = null) {
   return _apolloClient;
 }
 
-export function useApollo(pageProps) {
+export function useApollo(pageProps: any) {
   const initialState = pageProps?.initialApolloState;
-  const store = useMemo(
-    () => initializeApollo({ initialState }),
-    [initialState]
-  );
+  const store = useMemo(() => initializeApollo(), [initialState]);
   return store;
 }
