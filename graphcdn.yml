@@ -1,0 +1,32 @@
+# GraphCDN configuration. Learn more at https://graphcdn.io/docs/cli
+schema: './graphql/typeDefs/index.ts'
+name: fabian
+originUrl: https://fabianschultz.vercel.app/api/graphql
+passThroughOnly: false
+rootTypeNames:
+  query: Query
+rules:
+  - types:
+      Query:
+        - favouriteBooks
+        - playlists
+    maxAge: 2592000
+    swr: 2592000
+    description: Longest time for almost never changing data
+  - types:
+      Query:
+        - spotifyNowPlaying
+    maxAge: 240
+    swr: 240
+    description: Close-to-live data
+  - types:
+      Query:
+        - nowReading
+        - photos
+        - post
+        - posts
+        - recentlyRead
+        - siteSettings
+    maxAge: 43200
+    swr: 43200
+    description: Default lifetime for regular content

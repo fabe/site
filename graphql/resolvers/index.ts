@@ -11,14 +11,14 @@ import { getNowReading, getRecentlyRead } from './books';
 
 export default {
   Query: {
-    spotifyNowPlaying: getSpotifyNowPlaying,
-    playlists: getPlaylists,
-    nowReading: getNowReading,
-    recentlyRead: getRecentlyRead,
     favouriteBooks: getFavouriteBooks,
-    posts: getPosts,
-    post: getPost,
+    nowReading: getNowReading,
     photos: getPhotos,
+    playlists: getPlaylists,
+    post: getPost,
+    posts: getPosts,
+    recentlyRead: getRecentlyRead,
     siteSettings: getSiteSettings,
+    spotifyNowPlaying: getSpotifyNowPlaying,
   },
 };

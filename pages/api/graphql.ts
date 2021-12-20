@@ -1,6 +1,10 @@
 import { ApolloServer } from 'apollo-server-micro';
 import Cors from 'cors';
 import { NextApiRequest, NextApiResponse } from 'next';
+import {
+  ApolloServerPluginLandingPageDisabled,
+  ApolloServerPluginLandingPageLocalDefault,
+} from 'apollo-server-core';
 
 import { schema } from '../../graphql/schema';
 
@@ -28,13 +32,23 @@ export const config = {
   },
 };
 
-const apolloServer = new ApolloServer({ schema });
+const apolloServer = new ApolloServer({
+  schema,
+  plugins: [
+    process.env.NODE_ENV === 'production'
+      ? ApolloServerPluginLandingPageDisabled()
+      : ApolloServerPluginLandingPageLocalDefault({ footer: false }),
+  ],
+});
 const startServer = apolloServer.start();
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async function gqlHandler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   await startServer;
   await cors(req, res);
 
   const handler = await apolloServer.createHandler({ path: '/api/graphql' });
   return handler(req, res);
-};
+}
