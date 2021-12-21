@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import NextHead from 'next/head';
 import { SiteSettings } from '../../graphql/types/types.generated';
 

@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { NowPlaying } from '../../graphql/types/types.generated';
 import Image from 'next/image';
 
@@ -27,7 +27,10 @@ const SongWidget: FC<WidgetSongProps> = ({ nowPlaying }) => {
           />
         </div>
 
-        <div className="absolute top-0 left-0 z-0 w-12 h-12 opacity-50 blur-lg">
+        <div
+          className="absolute top-0 left-0 z-0 w-12 h-12 opacity-50 blur-lg"
+          aria-hidden="true"
+        >
           <Image
             alt=""
             src={albumImageUrl ? albumImageUrl : ''}

@@ -1,11 +1,16 @@
-import type { NextPage } from 'next';
+import type { GetServerSideProps, NextPage } from 'next';
+import dynamic from 'next/dynamic';
+import React from 'react';
+
 import { useQuery } from '@apollo/client';
+
+import Head from '../components/Head';
+import Markdown from '../components/Markdown';
 import { initializeApollo } from '../graphql/client';
 import { QUERY_PAGE_HOME } from '../graphql/queries';
-import Head from '../components/Head';
 import { PageHomeQueryQuery } from '../graphql/types/types.generated';
-import Markdown from '../components/Markdown';
-import SongWidget from '../components/Widgets/WidgetSong';
+
+const WidgetSong = dynamic(() => import('../components/Widgets/WidgetSong'));
 
 const Home: NextPage<{ introMdx: string }> = (props) => {
   const { data } = useQuery<PageHomeQueryQuery>(QUERY_PAGE_HOME, {
@@ -28,15 +33,20 @@ const Home: NextPage<{ introMdx: string }> = (props) => {
       </div>
       <div className="col-start-1 col-end-13 xl:col-span-6 xl:col-end-10 lg:col-span-8 lg:col-start-3">
         {data?.spotifyNowPlaying && (
-          <SongWidget nowPlaying={data.spotifyNowPlaying} />
+          <WidgetSong nowPlaying={data.spotifyNowPlaying} />
         )}
       </div>
     </>
   );
 };
 
-export async function getServerSideProps() {
+export const getServerSideProps: GetServerSideProps = async ({ res }) => {
   const apolloClient = initializeApollo();
+
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=200, stale-while-revalidate=5'
+  );
 
   await apolloClient.query({
     query: QUERY_PAGE_HOME,
@@ -47,6 +57,6 @@ export async function getServerSideProps() {
       initialApolloState: apolloClient.cache.extract(),
     },
   };
-}
+};
 
 export default Home;
