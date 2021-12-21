@@ -9,10 +9,8 @@ export const FRAGMENT_SITE_SETTINGS_SHARED = gql`
 
 export const QUERY_PAGE_HOME = gql`
   query {
-    nowReading {
+    playlists {
       title
-      author
-      okuUrl
     }
   }
 `;

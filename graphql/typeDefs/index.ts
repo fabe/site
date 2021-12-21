@@ -1,6 +1,6 @@
-import { gql } from 'apollo-server-micro';
+import { gql } from '@apollo/client';
 
-export default gql`
+export const typeDefs = gql`
   scalar JSON
 
   type Query {

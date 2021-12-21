@@ -1,42 +1,51 @@
+import { IncomingMessage, ServerResponse } from 'http';
 import { useMemo } from 'react';
-import { ApolloClient, InMemoryCache } from '@apollo/client';
-import merge from 'deepmerge';
-import isEqual from 'lodash/isEqual';
+import {
+  ApolloClient,
+  InMemoryCache,
+  NormalizedCacheObject,
+} from '@apollo/client';
 
-const { GRAPHCDN_BASE_URL } = process.env;
-export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__';
-let apolloClient: ApolloClient<InMemoryCache>;
+let apolloClient: ApolloClient<NormalizedCacheObject> | undefined;
 
-function createIsomorphLink() {
+export type ResolverContext = {
+  req?: IncomingMessage;
+  res?: ServerResponse;
+};
+
+function createIsomorphLink(context: ResolverContext = {}) {
   if (typeof window === 'undefined') {
-    const { SchemaLink } = require('@apollo/link-schema');
+    const { SchemaLink } = require('@apollo/client/link/schema');
     const { schema } = require('./schema');
-    return new SchemaLink({ schema });
+
+    return new SchemaLink({ schema, context });
   } else {
-    const { HttpLink } = require('@apollo/client/link/http');
+    const { HttpLink } = require('@apollo/client');
     return new HttpLink({
-      uri:
-        process.env.NODE_ENV === 'production'
-          ? GRAPHCDN_BASE_URL
-          : '/api/graphql',
+      uri: '/api/graphql',
+      credentials: 'same-origin',
     });
   }
 }
 
-function createApolloClient() {
+function createApolloClient(context?: ResolverContext) {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
-    link: createIsomorphLink(),
+    link: createIsomorphLink(context),
     cache: new InMemoryCache(),
-    // ssrForceFetchDelay: 10000,
   });
 }
 
-export function initializeApollo(initialState = null) {
-  const _apolloClient = apolloClient ?? createApolloClient();
+export function initializeApollo(
+  initialState: any = null,
+  // Pages with Next.js data fetching methods, like `getStaticProps`, can send
+  // a custom context which will be used by `SchemaLink` to server render pages
+  context?: ResolverContext
+) {
+  const _apolloClient = apolloClient ?? createApolloClient(context);
 
   // If your page has Next.js data fetching methods that use Apollo Client, the initial state
-  // gets hydrated here
+  // get hydrated here
   if (initialState) {
     _apolloClient.cache.restore(initialState);
   }
@@ -48,8 +57,7 @@ export function initializeApollo(initialState = null) {
   return _apolloClient;
 }
 
-export function useApollo(pageProps: any) {
-  const initialState = pageProps?.initialApolloState;
-  const store = useMemo(() => initializeApollo(), [initialState]);
+export function useApollo(initialState: any) {
+  const store = useMemo(() => initializeApollo(initialState), [initialState]);
   return store;
 }

@@ -9,7 +9,7 @@ import {
 } from './content';
 import { getNowReading, getRecentlyRead } from './books';
 
-export default {
+export const resolvers = {
   Query: {
     favouriteBooks: getFavouriteBooks,
     nowReading: getNowReading,

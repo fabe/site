@@ -9,7 +9,7 @@ const Home: NextPage = () => {
   return <div>Hello World</div>;
 };
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const apolloClient = initializeApollo();
 
   await apolloClient.query({
