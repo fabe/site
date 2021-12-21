@@ -26,145 +26,6 @@ export type Scalars = {
   JSON: any;
 };
 
-export type Asset = {
-  __typename?: "Asset";
-  contentType?: Maybe<Scalars["String"]>;
-  contentfulMetadata: ContentfulMetadata;
-  description?: Maybe<Scalars["String"]>;
-  fileName?: Maybe<Scalars["String"]>;
-  height?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  sys: Sys;
-  title?: Maybe<Scalars["String"]>;
-  url?: Maybe<Scalars["String"]>;
-  width?: Maybe<Scalars["Int"]>;
-};
-
-export type AssetUrlArgs = {
-  transform?: InputMaybe<ImageTransformOptions>;
-};
-
-export type Book = {
-  __typename?: "Book";
-  author: Scalars["String"];
-  coverUrl?: Maybe<Scalars["String"]>;
-  okuUrl: Scalars["String"];
-  readingDate?: Maybe<Scalars["String"]>;
-  title: Scalars["String"];
-};
-
-export type ContentfulMetadata = {
-  __typename?: "ContentfulMetadata";
-  tags: Array<Maybe<ContentfulTag>>;
-};
-
-export type ContentfulTag = {
-  __typename?: "ContentfulTag";
-  id?: Maybe<Scalars["String"]>;
-  name?: Maybe<Scalars["String"]>;
-};
-
-export type Entry = {
-  contentfulMetadata: ContentfulMetadata;
-  sys: Sys;
-};
-
-export type Flag = {
-  __typename?: "Flag";
-  key: Scalars["String"];
-  value: Scalars["String"];
-};
-
-export type ImageTransformOptions = {
-  backgroundColor?: InputMaybe<Scalars["String"]>;
-  cornerRadius?: InputMaybe<Scalars["Int"]>;
-  format?: InputMaybe<Scalars["String"]>;
-  height?: InputMaybe<Scalars["Int"]>;
-  quality?: InputMaybe<Scalars["Int"]>;
-  resizeFocus?: InputMaybe<Scalars["String"]>;
-  resizeStrategy?: InputMaybe<Scalars["String"]>;
-  width?: InputMaybe<Scalars["Int"]>;
-};
-
-export type Location = {
-  __typename?: "Location";
-  lat?: Maybe<Scalars["Float"]>;
-  lon?: Maybe<Scalars["Float"]>;
-};
-
-export type NowPlaying = {
-  __typename?: "NowPlaying";
-  album?: Maybe<Scalars["String"]>;
-  albumImageUrl?: Maybe<Scalars["String"]>;
-  artist?: Maybe<Scalars["String"]>;
-  isPlaying: Scalars["Boolean"];
-  songUrl?: Maybe<Scalars["String"]>;
-  title?: Maybe<Scalars["String"]>;
-};
-
-export type Photo = {
-  __typename?: "Photo";
-  camera?: Maybe<Scalars["String"]>;
-  description?: Maybe<Scalars["String"]>;
-  height: Scalars["Int"];
-  lens?: Maybe<Scalars["String"]>;
-  location?: Maybe<Location>;
-  photoUrl: Scalars["String"];
-  unsplashUrl?: Maybe<Scalars["String"]>;
-  width: Scalars["Int"];
-};
-
-export type Playlist = {
-  __typename?: "Playlist";
-  coverUrl: Scalars["String"];
-  spotifyUrl: Scalars["String"];
-  title: Scalars["String"];
-};
-
-export type Post = {
-  __typename?: "Post";
-  body: PostBody;
-  coverUrl?: Maybe<Scalars["String"]>;
-  metaDescription?: Maybe<Scalars["String"]>;
-  publishedDate: Scalars["String"];
-  slug: Scalars["String"];
-  tags?: Maybe<Array<Maybe<Scalars["String"]>>>;
-  title: Scalars["String"];
-};
-
-export type PostBody = {
-  __typename?: "PostBody";
-  json: Scalars["JSON"];
-  links: PostBodyLinks;
-};
-
-export type PostBodyAssets = {
-  __typename?: "PostBodyAssets";
-  block: Array<Maybe<Asset>>;
-  hyperlink: Array<Maybe<Asset>>;
-};
-
-export type PostBodyEntries = {
-  __typename?: "PostBodyEntries";
-  block: Array<Maybe<Entry>>;
-  hyperlink: Array<Maybe<Entry>>;
-  inline: Array<Maybe<Entry>>;
-};
-
-export type PostBodyLinks = {
-  __typename?: "PostBodyLinks";
-  assets: PostBodyAssets;
-  entries: PostBodyEntries;
-};
-
-export type PostWithoutBody = {
-  __typename?: "PostWithoutBody";
-  coverUrl?: Maybe<Scalars["String"]>;
-  publishedDate: Scalars["String"];
-  slug: Scalars["String"];
-  title: Scalars["String"];
-};
-
 export type Query = {
   __typename?: "Query";
   favouriteBooks: Array<Maybe<Book>>;
@@ -198,12 +59,96 @@ export type QueryRecentlyReadArgs = {
   latest?: InputMaybe<Scalars["Int"]>;
 };
 
-export type SiteSettings = {
-  __typename?: "SiteSettings";
-  flags?: Maybe<Array<Maybe<Flag>>>;
-  intro: Scalars["String"];
-  metaDescription: Scalars["String"];
-  siteTitle: Scalars["String"];
+export type Book = {
+  __typename?: "Book";
+  author: Scalars["String"];
+  coverUrl?: Maybe<Scalars["String"]>;
+  okuUrl: Scalars["String"];
+  readingDate?: Maybe<Scalars["String"]>;
+  title: Scalars["String"];
+};
+
+export type Photo = {
+  __typename?: "Photo";
+  camera?: Maybe<Scalars["String"]>;
+  description?: Maybe<Scalars["String"]>;
+  height: Scalars["Int"];
+  lens?: Maybe<Scalars["String"]>;
+  location?: Maybe<Location>;
+  photoUrl: Scalars["String"];
+  unsplashUrl?: Maybe<Scalars["String"]>;
+  width: Scalars["Int"];
+};
+
+export type Location = {
+  __typename?: "Location";
+  lat?: Maybe<Scalars["Float"]>;
+  lon?: Maybe<Scalars["Float"]>;
+};
+
+export type Playlist = {
+  __typename?: "Playlist";
+  coverUrl: Scalars["String"];
+  spotifyUrl: Scalars["String"];
+  title: Scalars["String"];
+};
+
+export type Post = {
+  __typename?: "Post";
+  body: PostBody;
+  coverUrl?: Maybe<Scalars["String"]>;
+  metaDescription?: Maybe<Scalars["String"]>;
+  publishedDate: Scalars["String"];
+  slug: Scalars["String"];
+  tags?: Maybe<Array<Maybe<Scalars["String"]>>>;
+  title: Scalars["String"];
+};
+
+export type PostBody = {
+  __typename?: "PostBody";
+  json: Scalars["JSON"];
+  links: PostBodyLinks;
+};
+
+export type PostBodyLinks = {
+  __typename?: "PostBodyLinks";
+  assets: PostBodyAssets;
+  entries: PostBodyEntries;
+};
+
+export type PostBodyAssets = {
+  __typename?: "PostBodyAssets";
+  block: Array<Maybe<Asset>>;
+  hyperlink: Array<Maybe<Asset>>;
+};
+
+export type Asset = {
+  __typename?: "Asset";
+  contentfulMetadata: ContentfulMetadata;
+  contentType?: Maybe<Scalars["String"]>;
+  description?: Maybe<Scalars["String"]>;
+  fileName?: Maybe<Scalars["String"]>;
+  height?: Maybe<Scalars["Int"]>;
+  size?: Maybe<Scalars["Int"]>;
+  sys: Sys;
+  title?: Maybe<Scalars["String"]>;
+  url?: Maybe<Scalars["String"]>;
+  width?: Maybe<Scalars["Int"]>;
+};
+
+export type AssetUrlArgs = {
+  transform?: InputMaybe<ImageTransformOptions>;
+};
+
+export type ContentfulMetadata = {
+  __typename?: "ContentfulMetadata";
+  tags: Array<Maybe<ContentfulTag>>;
+};
+
+export type ContentfulTag = {
+  __typename?: "ContentfulTag";
+  id?: Maybe<Scalars["String"]>;
+  name?: Maybe<Scalars["String"]>;
 };
 
 export type Sys = {
@@ -214,6 +159,61 @@ export type Sys = {
   publishedAt?: Maybe<Scalars["String"]>;
   publishedVersion?: Maybe<Scalars["Int"]>;
   spaceId: Scalars["String"];
+};
+
+export type ImageTransformOptions = {
+  backgroundColor?: InputMaybe<Scalars["String"]>;
+  cornerRadius?: InputMaybe<Scalars["Int"]>;
+  format?: InputMaybe<Scalars["String"]>;
+  height?: InputMaybe<Scalars["Int"]>;
+  quality?: InputMaybe<Scalars["Int"]>;
+  resizeFocus?: InputMaybe<Scalars["String"]>;
+  resizeStrategy?: InputMaybe<Scalars["String"]>;
+  width?: InputMaybe<Scalars["Int"]>;
+};
+
+export type PostBodyEntries = {
+  __typename?: "PostBodyEntries";
+  block: Array<Maybe<Entry>>;
+  hyperlink: Array<Maybe<Entry>>;
+  inline: Array<Maybe<Entry>>;
+};
+
+export type Entry = {
+  contentfulMetadata: ContentfulMetadata;
+  sys: Sys;
+};
+
+export type PostWithoutBody = {
+  __typename?: "PostWithoutBody";
+  coverUrl?: Maybe<Scalars["String"]>;
+  publishedDate: Scalars["String"];
+  slug: Scalars["String"];
+  title: Scalars["String"];
+};
+
+export type SiteSettings = {
+  __typename?: "SiteSettings";
+  flags?: Maybe<Array<Maybe<Flag>>>;
+  intro: Scalars["String"];
+  metaDescription: Scalars["String"];
+  siteTitle: Scalars["String"];
+};
+
+export type Flag = {
+  __typename?: "Flag";
+  key: Scalars["String"];
+  value: Scalars["String"];
+};
+
+export type NowPlaying = {
+  __typename?: "NowPlaying";
+  album?: Maybe<Scalars["String"]>;
+  albumImageUrl?: Maybe<Scalars["String"]>;
+  artist?: Maybe<Scalars["String"]>;
+  isPlaying: Scalars["Boolean"];
+  songUrl?: Maybe<Scalars["String"]>;
+  title?: Maybe<Scalars["String"]>;
 };
 
 export type SiteSettingsSharedFragment = {

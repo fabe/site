@@ -6,6 +6,8 @@
 @layer base {
   html {
     @apply max-h-screen overflow-hidden text-base antialiased;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
   }
 
   body:after {
@@ -19,3 +21,22 @@
     @apply bg-white dark:bg-black;
   }
 }
+
+@layer components {
+  .type {
+    @apply text-gray-800 dark:text-gray-100 font-sans text-lg;
+  }
+
+  .type p + p {
+    @apply mt-5
+  }
+
+  .type img {
+    @apply w-full rounded-md;
+  }
+
+  .type a {
+    @apply font-medium text-blue-600 dark:text-orange-500 no-underline break-words border-b border-transparent hover:border-blue-200 dark:hover:border-orange-500;
+  }
+}
+

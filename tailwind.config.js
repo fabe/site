@@ -5,7 +5,12 @@ module.exports = {
   ],
   darkMode: 'media',
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        rainbow:
+          'linear-gradient(90deg, #FEAC5E 0%, #9D7CF0 48.75%, #4BC0C8 100%)',
+      },
+    },
     fontFamily: {
       sans: [
         'SFRounded',
