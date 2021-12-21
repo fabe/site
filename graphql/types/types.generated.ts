@@ -239,6 +239,7 @@ export type PageHomeQueryQuery = {
     isPlaying: boolean;
     title?: string | null | undefined;
     songUrl?: string | null | undefined;
+    album?: string | null | undefined;
   };
   nowReading: Array<
     | { __typename?: "Book"; title: string; author: string; okuUrl: string }
@@ -265,6 +266,7 @@ export const PageHomeQueryDocument = gql`
       isPlaying
       title
       songUrl
+      album
     }
     nowReading {
       title

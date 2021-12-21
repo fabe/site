@@ -11,6 +11,7 @@ import {
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined;
 
 const { GRAPHCDN_BASE_URL } = process.env;
+const LOCAL_BASE_URL = 'http://localhost:3000/api/graphql';
 
 export type ResolverContext = {
   req?: IncomingMessage;
@@ -18,17 +19,25 @@ export type ResolverContext = {
 };
 
 function createIsomorphLink(context: ResolverContext = {}) {
-  if (typeof window === 'undefined') {
-    const { SchemaLink } = require('@apollo/client/link/schema');
-    const { schema } = require('./schema');
+  const isServer = typeof window === 'undefined';
 
-    return new SchemaLink({ schema, context });
-  } else {
-    return new HttpLink({
-      uri: GRAPHCDN_BASE_URL || '/api/graphql',
-      credentials: 'same-origin',
-    });
+  if (isServer) {
+    if (!GRAPHCDN_BASE_URL) {
+      const { SchemaLink } = require('@apollo/client/link/schema');
+      const { schema } = require('./schema');
+
+      console.log(`🌐 Using schema link on server.`);
+      return new SchemaLink({ schema, context });
+    }
   }
+
+  const gqlUri = GRAPHCDN_BASE_URL || LOCAL_BASE_URL;
+
+  console.log(`🌐 Using ${gqlUri} on ${isServer ? 'server' : 'client'}.`);
+  return new HttpLink({
+    uri: gqlUri,
+    credentials: 'same-origin',
+  });
 }
 
 function createApolloClient(context?: ResolverContext) {

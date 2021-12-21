@@ -17,7 +17,7 @@
     "autoprefixer": "^10.4.0",
     "cors": "^2.8.5",
     "cssnano": "^5.0.14",
-    "graphql": "^16.2.0",
+    "graphql": "14.x",
     "graphql-tools": "4.x",
     "micro": "^9.3.4",
     "micro-cors": "^0.1.1",

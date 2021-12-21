@@ -21,6 +21,7 @@ export const QUERY_PAGE_HOME = gql`
       isPlaying
       title
       songUrl
+      album
     }
     nowReading {
       title

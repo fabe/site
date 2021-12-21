@@ -16,6 +16,16 @@ const Home: NextPage = () => {
       <div className="col-span-6 col-start-4">
         <div className="flex gap-4 flex-row">
           <Image
+            alt={
+              data?.spotifyNowPlaying.album
+                ? data.spotifyNowPlaying.album
+                : 'Album cover'
+            }
+            title={
+              data?.spotifyNowPlaying.album
+                ? data.spotifyNowPlaying.album
+                : undefined
+            }
             className="flex-0"
             src={
               data?.spotifyNowPlaying.albumImageUrl
