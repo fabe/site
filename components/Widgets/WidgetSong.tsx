@@ -37,7 +37,7 @@ const SongWidget: FC<WidgetSongProps> = ({ nowPlaying }) => {
         </div>
       </div>
 
-      <span className="block text-2xl font-medium text-gray-700 dark:text-gray-100">
+      <span className="block w-full text-2xl font-medium text-gray-700 dark:text-gray-100">
         {title}
       </span>
       <span className="block text-sm font-medium text-gray-500 dark:text-gray-400">

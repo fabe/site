@@ -7,11 +7,9 @@ import {
   InMemoryCache,
   NormalizedCacheObject,
 } from '@apollo/client';
+import { GRAPHCDN_BASE_URL, LOCAL_BASE_URL } from './constants';
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined;
-
-const { GRAPHCDN_BASE_URL } = process.env;
-const LOCAL_BASE_URL = 'http://localhost:3000/api/graphql';
 
 export type ResolverContext = {
   req?: IncomingMessage;
@@ -21,17 +19,16 @@ export type ResolverContext = {
 function createIsomorphLink(context: ResolverContext = {}) {
   const isServer = typeof window === 'undefined';
 
-  if (isServer) {
-    if (!GRAPHCDN_BASE_URL) {
-      const { SchemaLink } = require('@apollo/client/link/schema');
-      const { schema } = require('./schema');
+  if (isServer && process.env.PREFER_USING_SCHEMA_LINK) {
+    const { SchemaLink } = require('@apollo/client/link/schema');
+    const { schema } = require('./schema');
 
-      console.log(`🌐 Using schema link on server.`);
-      return new SchemaLink({ schema, context });
-    }
+    console.log(`🌐 Using schema link on server.`);
+    return new SchemaLink({ schema, context });
   }
 
-  const gqlUri = GRAPHCDN_BASE_URL || LOCAL_BASE_URL;
+  const gqlUri =
+    process.env.NODE_ENV === 'production' ? GRAPHCDN_BASE_URL : LOCAL_BASE_URL;
 
   console.log(`🌐 Using ${gqlUri} on ${isServer ? 'server' : 'client'}.`);
   return new HttpLink({
