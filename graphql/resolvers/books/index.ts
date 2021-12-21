@@ -1,7 +1,8 @@
 import Parser from 'rss-parser';
-let parser = new Parser();
+
 import { Book, QueryRecentlyReadArgs } from '../../types/types.generated';
 
+let parser = new Parser();
 const { OKU_CURRENTLY_READING, OKU_RECENTLY_READ } = process.env;
 
 export async function getNowReading(): Promise<any> {

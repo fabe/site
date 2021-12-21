@@ -1,5 +1,4 @@
 import NextHead from 'next/head';
-import Image from 'next/image';
 import { SiteSettings } from '../../graphql/types/types.generated';
 
 const { GRAPHCDN_BASE_URL } = process.env;

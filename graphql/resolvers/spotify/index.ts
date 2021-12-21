@@ -1,4 +1,5 @@
 import querystring from 'querystring';
+
 import { NowPlaying } from '../../types/types.generated';
 
 const {

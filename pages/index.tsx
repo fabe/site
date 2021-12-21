@@ -1,10 +1,12 @@
 import type { NextPage } from 'next';
 import { useQuery } from '@apollo/client';
+
 import { initializeApollo } from '../graphql/client';
 import { QUERY_PAGE_HOME } from '../graphql/queries';
 
 const Home: NextPage = () => {
   const { data } = useQuery(QUERY_PAGE_HOME);
+  console.log(data);
 
   return <div>Hello World</div>;
 };

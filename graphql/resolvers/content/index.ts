@@ -1,19 +1,18 @@
+import { gql } from 'apollo-server-micro';
+
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
+
 import {
+  Book,
   Photo,
   Playlist,
+  Post,
   PostWithoutBody,
+  QueryFavouriteBooksArgs,
   QueryPhotosArgs,
   QueryPostArgs,
   QueryPostsArgs,
   SiteSettings,
-} from '../../types/types.generated';
-
-import { gql } from 'apollo-server-micro';
-import {
-  Book,
-  QueryFavouriteBooksArgs,
-  Post,
 } from '../../types/types.generated';
 
 const { CONTENTFUL_SPACE_ID, CONTENTFUL_DELIVERY } = process.env;
