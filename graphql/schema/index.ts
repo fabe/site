@@ -5,4 +5,7 @@ import { resolvers } from '../resolvers';
 export const schema = makeExecutableSchema({
   typeDefs,
   resolvers,
+  resolverValidationOptions: {
+    requireResolversForResolveType: false,
+  },
 });

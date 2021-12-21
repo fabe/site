@@ -8,6 +8,8 @@ import {
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined;
 
+const { GRAPHCDN_BASE_URL } = process.env;
+
 export type ResolverContext = {
   req?: IncomingMessage;
   res?: ServerResponse;
@@ -22,7 +24,7 @@ function createIsomorphLink(context: ResolverContext = {}) {
   } else {
     const { HttpLink } = require('@apollo/client');
     return new HttpLink({
-      uri: '/api/graphql',
+      uri: GRAPHCDN_BASE_URL || '/api/graphql',
       credentials: 'same-origin',
     });
   }
