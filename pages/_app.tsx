@@ -5,13 +5,16 @@ import { ApolloProvider } from '@apollo/client';
 import { useApollo } from '../graphql/client';
 
 import type { AppProps } from 'next/app';
+import Shell from '../components/Shell';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const apolloClient = useApollo(pageProps.initialApolloState);
 
   return (
     <ApolloProvider client={apolloClient}>
-      <Component {...pageProps} />
+      <Shell>
+        <Component {...pageProps} />
+      </Shell>
     </ApolloProvider>
   );
 }

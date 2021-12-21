@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import NextHead from 'next/head';
 import { SiteSettings } from '../../graphql/types/types.generated';
 
@@ -6,13 +7,13 @@ const DIVIDER = '·';
 
 interface HeadProps {
   siteSettings: SiteSettings;
-  subpages: string[];
+  subpages?: string[];
 }
 
-const Head = (props: HeadProps) => {
+const Head: FC<HeadProps> = (props) => {
   const { siteSettings, subpages } = props;
   const title = `${siteSettings?.siteTitle}${
-    subpages ? subpages.join(` ${DIVIDER} `) : null
+    subpages ? ` ${DIVIDER} ${subpages.join(` ${DIVIDER} `)}` : ''
   }`;
 
   return (

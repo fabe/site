@@ -12,7 +12,7 @@ export const typeDefs = gql`
     posts(limit: Int): [PostWithoutBody]!
     post(slug: String!): Post
     photos(limit: Int): [Photo]!
-    siteSettings: SiteSettings
+    siteSettings: SiteSettings!
   }
 
   type NowPlaying {

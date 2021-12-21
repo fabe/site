@@ -205,7 +205,7 @@ export async function getPhotos(
 ): Promise<Photo[]> {
   const response = await client.query({
     query: gql`
-      query getAllPosts($limit: Int) {
+      query getAllPhotos($limit: Int) {
         photoCollection(limit: $limit) {
           items {
             lens

@@ -8,9 +8,24 @@ export const FRAGMENT_SITE_SETTINGS_SHARED = gql`
 `;
 
 export const QUERY_PAGE_HOME = gql`
-  query {
-    playlists {
+  ${FRAGMENT_SITE_SETTINGS_SHARED}
+
+  query PageHomeQuery {
+    siteSettings {
+      intro
+      ...SiteSettingsShared
+    }
+    spotifyNowPlaying {
+      albumImageUrl
+      artist
+      isPlaying
       title
+      songUrl
+    }
+    nowReading {
+      title
+      author
+      okuUrl
     }
   }
 `;

@@ -6,7 +6,6 @@ module.exports = {
   darkMode: 'media',
   theme: {
     extend: {},
-    colors: {},
     fontFamily: {
       sans: [
         'SFRounded',
