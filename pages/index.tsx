@@ -14,14 +14,14 @@ const WidgetSong = dynamic(() => import('../components/Widgets/WidgetSong'));
 
 const Home: NextPage<{ introMdx: string }> = (props) => {
   const { data } = useQuery<PageHomeQueryQuery>(QUERY_PAGE_HOME, {
-    pollInterval: 0.5 * 1000 * 60,
+    // pollInterval: 0.5 * 1000 * 60,
   });
 
   return (
     <>
       <Head siteSettings={data?.siteSettings!} />
       <div className="col-start-1 col-end-13">
-        <div className="grid grid-flow-col grid-cols-12 gap-10 pb-8">
+        <div className="grid grid-flow-col grid-cols-12 pb-8 lg:gap-10">
           <div className="col-start-1 col-end-13 lg:col-start-3 lg:col-span-8 xl:col-start-4 xl:col-span-6">
             <Markdown source={data?.siteSettings.intro || ''} />
           </div>

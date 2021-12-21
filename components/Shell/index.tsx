@@ -11,7 +11,7 @@ const Shell: FC<ShellProps> = (props) => {
         </h1>
       </nav>
       <div className="relative flex flex-col items-center w-full max-h-screen overflow-y-auto bg-white dark:bg-gray-800">
-        <main className="grid grid-cols-12 p-10 gap-x-10 max-w-7xl">
+        <main className="grid grid-cols-12 p-4 lg:p-10 lg:gap-x-10 max-w-7xl">
           {props.children}
         </main>
       </div>
