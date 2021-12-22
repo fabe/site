@@ -11,7 +11,7 @@ const SongWidget: FC<WidgetSongProps> = ({ nowPlaying }) => {
 
   return (
     <figure className="p-4 bg-gray-100 rounded-lg dark:bg-gray-700">
-      <h2 className="pb-6 text-sm font-medium text-gray-500 dark:text-gray-400">
+      <h2 className="pb-6 text-sm font-medium text-gray-500 dark:text-gray-300">
         {isPlaying ? `Listening to` : `Last listened to`}
       </h2>
 
@@ -40,10 +40,10 @@ const SongWidget: FC<WidgetSongProps> = ({ nowPlaying }) => {
         </div>
       </div>
 
-      <span className="block w-full text-2xl font-medium text-gray-700 dark:text-gray-100">
+      <span className="block w-full text-2xl font-medium text-gray-700 truncate dark:text-gray-100">
         {title}
       </span>
-      <span className="block text-sm font-medium text-gray-500 dark:text-gray-400">
+      <span className="block text-sm font-medium text-gray-500 truncate dark:text-gray-300">
         {artist}
       </span>
     </figure>

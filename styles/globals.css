@@ -25,6 +25,7 @@
 @layer components {
   .type {
     @apply text-gray-800 dark:text-gray-100 font-sans text-lg;
+    hyphens: auto;
   }
 
   .type p + p {

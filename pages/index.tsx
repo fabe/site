@@ -21,7 +21,7 @@ const Home: NextPage<{ introMdx: string }> = (props) => {
     <>
       <Head siteSettings={data?.siteSettings!} />
       <div className="col-start-1 col-end-13">
-        <div className="grid grid-flow-col grid-cols-12 pb-8 lg:gap-10">
+        <div className="grid grid-flow-col grid-cols-12 pb-10 lg:gap-10">
           <div className="col-start-1 col-end-13 lg:col-start-3 lg:col-span-8 xl:col-start-4 xl:col-span-6">
             <Markdown source={data?.siteSettings.intro || ''} />
           </div>
