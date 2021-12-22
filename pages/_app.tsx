@@ -13,6 +13,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <ApolloProvider client={apolloClient}>
+      <nav className="sr-only">
+        <a href="/#content">Skip to content</a>
+      </nav>
       <Shell>
         <Component {...pageProps} />
       </Shell>

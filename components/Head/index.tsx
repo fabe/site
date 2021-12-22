@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import NextHead from 'next/head';
 import { SiteSettings } from '../../graphql/types/types.generated';
+import { GRAPHQL_BASE_URL } from '../../graphql/constants';
 
-const { GRAPHCDN_BASE_URL } = process.env;
 const DIVIDER = '·';
 
 interface HeadProps {
@@ -12,9 +12,9 @@ interface HeadProps {
 
 const Head: FC<HeadProps> = (props) => {
   const { siteSettings, subpages } = props;
-  const title = `${siteSettings?.siteTitle}${
-    subpages ? ` ${DIVIDER} ${subpages.join(` ${DIVIDER} `)}` : ''
-  }`;
+  const title = `${
+    subpages ? `${subpages.join(` ${DIVIDER} `)} ${DIVIDER} ` : ''
+  }${siteSettings?.siteTitle}`;
 
   return (
     <NextHead>
@@ -28,7 +28,9 @@ const Head: FC<HeadProps> = (props) => {
         content={siteSettings?.metaDescription}
       />
       <meta name="description" content={siteSettings?.metaDescription} />
-      <link rel="dns-prefetch" href={GRAPHCDN_BASE_URL} />
+
+      <link rel="dns-prefetch" href={GRAPHQL_BASE_URL} />
+      <link rel="preconnect" href={GRAPHQL_BASE_URL} />
 
       <link
         rel="icon"

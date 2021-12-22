@@ -9,10 +9,13 @@ import Markdown from '../components/Markdown';
 import { initializeApollo } from '../graphql/client';
 import { QUERY_PAGE_HOME } from '../graphql/queries';
 import { PageHomeQueryQuery } from '../graphql/types/types.generated';
+import NowReading from '../components/Widgets/NowReading';
+import FeaturedPhotos from '../components/Widgets/FeaturedPhotos';
+import WidgetWrapper from '../components/Widgets';
 
-const WidgetSong = dynamic(() => import('../components/Widgets/WidgetSong'));
+const NowPlaying = dynamic(() => import('../components/Widgets/NowPlaying'));
 
-const Home: NextPage<{ introMdx: string }> = (props) => {
+const Home: NextPage = (props) => {
   const { data } = useQuery<PageHomeQueryQuery>(QUERY_PAGE_HOME, {
     // pollInterval: 0.5 * 1000 * 60,
   });
@@ -21,20 +24,33 @@ const Home: NextPage<{ introMdx: string }> = (props) => {
     <>
       <Head siteSettings={data?.siteSettings!} />
       <div className="col-start-1 col-end-13">
-        <div className="grid grid-flow-col grid-cols-12 pb-10 lg:gap-10">
+        <div className="grid grid-flow-col grid-cols-12 pb-4 lg:pb-10 lg:gap-10">
           <div className="col-start-1 col-end-13 lg:col-start-3 lg:col-span-8 xl:col-start-4 xl:col-span-6">
             <Markdown source={data?.siteSettings.intro || ''} />
           </div>
         </div>
       </div>
 
-      <div className="col-start-1 col-end-13 pt-4 pb-4 text-sm font-medium text-gray-700 border-t border-gray-200 xl:col-start-1 xl:col-end-4 lg:col-end-3 dark:text-gray-100 dark:border-gray-700">
+      <h2 className="col-start-1 col-end-13 pt-4 pb-4 text-sm font-medium border-t border-gray-200 text-zinc-700 xl:col-start-1 xl:col-end-4 lg:col-end-3 dark:text-zinc-50 dark:border-zinc-700">
         Right now
+      </h2>
+
+      <div className="flex col-start-1 col-end-13 xl:col-span-6 xl:col-end-10 lg:col-span-6 lg:col-start-3">
+        <NowReading />
       </div>
-      <div className="col-start-1 col-end-13 xl:col-span-6 xl:col-end-10 lg:col-span-8 lg:col-start-3">
+
+      <div className="flex col-start-1 col-end-13 xl:col-span-3 xl:col-end-13 lg:col-span-2 lg:col-start-10">
         {data?.spotifyNowPlaying && (
-          <WidgetSong nowPlaying={data.spotifyNowPlaying} />
+          <NowPlaying nowPlaying={data.spotifyNowPlaying} />
         )}
+      </div>
+
+      <div className="flex col-start-1 col-end-13 mt-0 lg:mt-10 xl:col-span-3 xl:col-start-4 lg:col-span-3 lg:col-start-4">
+        <WidgetWrapper title="Something else"></WidgetWrapper>
+      </div>
+
+      <div className="flex col-start-1 col-end-13 mt-0 lg:mt-10 lg:col-span-8 lg:col-end-13 xl:col-span-6 xl:col-end-13">
+        <FeaturedPhotos />
       </div>
     </>
   );

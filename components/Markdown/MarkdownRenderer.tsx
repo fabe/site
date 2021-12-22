@@ -29,7 +29,7 @@ const Markdown: FC<MarkdownProps> = ({ source, className, ...rest }) => {
   return (
     <MarkdownRenderer
       {...rest}
-      className={`${className ? className : ''} type`}
+      className={`${className ? className : ''} prose`}
       remarkPlugins={[
         remarkGfm,
         [

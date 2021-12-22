@@ -248,6 +248,17 @@ export type PageHomeQueryQuery = {
   >;
 };
 
+export type PageProjectsQueryQueryVariables = Exact<{ [key: string]: never }>;
+
+export type PageProjectsQueryQuery = {
+  __typename?: "Query";
+  siteSettings: {
+    __typename?: "SiteSettings";
+    siteTitle: string;
+    metaDescription: string;
+  };
+};
+
 export const SiteSettingsSharedFragmentDoc = gql`
   fragment SiteSettingsShared on SiteSettings {
     siteTitle
@@ -325,4 +336,62 @@ export type PageHomeQueryLazyQueryHookResult = ReturnType<
 export type PageHomeQueryQueryResult = Apollo.QueryResult<
   PageHomeQueryQuery,
   PageHomeQueryQueryVariables
+>;
+export const PageProjectsQueryDocument = gql`
+  query PageProjectsQuery {
+    siteSettings {
+      ...SiteSettingsShared
+    }
+  }
+  ${SiteSettingsSharedFragmentDoc}
+`;
+
+/**
+ * __usePageProjectsQueryQuery__
+ *
+ * To run a query within a React component, call `usePageProjectsQueryQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePageProjectsQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePageProjectsQueryQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function usePageProjectsQueryQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    PageProjectsQueryQuery,
+    PageProjectsQueryQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    PageProjectsQueryQuery,
+    PageProjectsQueryQueryVariables
+  >(PageProjectsQueryDocument, options);
+}
+export function usePageProjectsQueryLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    PageProjectsQueryQuery,
+    PageProjectsQueryQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    PageProjectsQueryQuery,
+    PageProjectsQueryQueryVariables
+  >(PageProjectsQueryDocument, options);
+}
+export type PageProjectsQueryQueryHookResult = ReturnType<
+  typeof usePageProjectsQueryQuery
+>;
+export type PageProjectsQueryLazyQueryHookResult = ReturnType<
+  typeof usePageProjectsQueryLazyQuery
+>;
+export type PageProjectsQueryQueryResult = Apollo.QueryResult<
+  PageProjectsQueryQuery,
+  PageProjectsQueryQueryVariables
 >;
