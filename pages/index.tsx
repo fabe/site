@@ -59,10 +59,10 @@ const Home: NextPage = (props) => {
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
   const apolloClient = initializeApollo();
 
-  res.setHeader(
-    'Cache-Control',
-    'public, s-maxage=43200, stale-while-revalidate=60'
-  );
+  // res.setHeader(
+  //   'Cache-Control',
+  //   'public, s-maxage=43200, stale-while-revalidate=60'
+  // );
 
   await apolloClient.query({
     query: QUERY_PAGE_HOME,
