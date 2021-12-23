@@ -3,7 +3,7 @@ module.exports = {
   reactStrictMode: true,
   images: {
     formats: ['image/avif', 'image/webp'],
-    domains: ['i.scdn.co'],
+    domains: ['images.ctfassets.net', 'i.scdn.co'],
   },
   webpack: (config, { webpack }) => {
     /* Hide error "Critical dependency: the request of a dependency is an expression" from remark-textr */

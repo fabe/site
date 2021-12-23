@@ -50,7 +50,7 @@ const Home: NextPage = (props) => {
       </div>
 
       <div className="flex col-start-1 col-end-13 mt-0 lg:mt-10 lg:col-span-8 lg:col-end-13 xl:col-span-6 xl:col-end-13">
-        <FeaturedPhotos />
+        {data?.photos && <FeaturedPhotos photos={data.photos} />}
       </div>
     </>
   );
@@ -61,11 +61,14 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 
   res.setHeader(
     'Cache-Control',
-    'public, s-maxage=200, stale-while-revalidate=5'
+    'public, s-maxage=43200, stale-while-revalidate=60'
   );
 
   await apolloClient.query({
     query: QUERY_PAGE_HOME,
+    variables: {
+      photosLimit: 5,
+    },
   });
 
   return {

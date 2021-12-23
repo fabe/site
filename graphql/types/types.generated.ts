@@ -222,7 +222,9 @@ export type SiteSettingsSharedFragment = {
   metaDescription: string;
 };
 
-export type PageHomeQueryQueryVariables = Exact<{ [key: string]: never }>;
+export type PageHomeQueryQueryVariables = Exact<{
+  photosLimit?: InputMaybe<Scalars["Int"]>;
+}>;
 
 export type PageHomeQueryQuery = {
   __typename?: "Query";
@@ -246,6 +248,17 @@ export type PageHomeQueryQuery = {
     | null
     | undefined
   >;
+  photos: Array<
+    | {
+        __typename?: "Photo";
+        photoUrl: string;
+        width: number;
+        height: number;
+        unsplashUrl?: string | null | undefined;
+      }
+    | null
+    | undefined
+  >;
 };
 
 export type PageProjectsQueryQueryVariables = Exact<{ [key: string]: never }>;
@@ -266,7 +279,7 @@ export const SiteSettingsSharedFragmentDoc = gql`
   }
 `;
 export const PageHomeQueryDocument = gql`
-  query PageHomeQuery {
+  query PageHomeQuery($photosLimit: Int) {
     siteSettings {
       intro
       ...SiteSettingsShared
@@ -284,6 +297,12 @@ export const PageHomeQueryDocument = gql`
       author
       okuUrl
     }
+    photos(limit: $photosLimit) {
+      photoUrl
+      width
+      height
+      unsplashUrl
+    }
   }
   ${SiteSettingsSharedFragmentDoc}
 `;
@@ -300,6 +319,7 @@ export const PageHomeQueryDocument = gql`
  * @example
  * const { data, loading, error } = usePageHomeQueryQuery({
  *   variables: {
+ *      photosLimit: // value for 'photosLimit'
  *   },
  * });
  */

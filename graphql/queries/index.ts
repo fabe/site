@@ -10,7 +10,7 @@ export const FRAGMENT_SITE_SETTINGS_SHARED = gql`
 export const QUERY_PAGE_HOME = gql`
   ${FRAGMENT_SITE_SETTINGS_SHARED}
 
-  query PageHomeQuery {
+  query PageHomeQuery($photosLimit: Int) {
     siteSettings {
       intro
       ...SiteSettingsShared
@@ -27,6 +27,12 @@ export const QUERY_PAGE_HOME = gql`
       title
       author
       okuUrl
+    }
+    photos(limit: $photosLimit) {
+      photoUrl
+      width
+      height
+      unsplashUrl
     }
   }
 `;
