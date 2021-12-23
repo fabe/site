@@ -222,9 +222,7 @@ export type SiteSettingsSharedFragment = {
   metaDescription: string;
 };
 
-export type PageHomeQueryQueryVariables = Exact<{
-  photosLimit?: InputMaybe<Scalars["Int"]>;
-}>;
+export type PageHomeQueryQueryVariables = Exact<{ [key: string]: never }>;
 
 export type PageHomeQueryQuery = {
   __typename?: "Query";
@@ -280,7 +278,7 @@ export const SiteSettingsSharedFragmentDoc = gql`
   }
 `;
 export const PageHomeQueryDocument = gql`
-  query PageHomeQuery($photosLimit: Int) {
+  query PageHomeQuery {
     siteSettings {
       intro
       ...SiteSettingsShared
@@ -298,7 +296,7 @@ export const PageHomeQueryDocument = gql`
       author
       okuUrl
     }
-    photos(limit: $photosLimit) {
+    photos(limit: 3) {
       photoUrl
       width
       height
@@ -321,7 +319,6 @@ export const PageHomeQueryDocument = gql`
  * @example
  * const { data, loading, error } = usePageHomeQueryQuery({
  *   variables: {
- *      photosLimit: // value for 'photosLimit'
  *   },
  * });
  */

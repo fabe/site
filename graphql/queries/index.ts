@@ -10,7 +10,7 @@ export const FRAGMENT_SITE_SETTINGS_SHARED = gql`
 export const QUERY_PAGE_HOME = gql`
   ${FRAGMENT_SITE_SETTINGS_SHARED}
 
-  query PageHomeQuery($photosLimit: Int) {
+  query PageHomeQuery {
     siteSettings {
       intro
       ...SiteSettingsShared
@@ -28,7 +28,7 @@ export const QUERY_PAGE_HOME = gql`
       author
       okuUrl
     }
-    photos(limit: $photosLimit) {
+    photos(limit: 3) {
       photoUrl
       width
       height
