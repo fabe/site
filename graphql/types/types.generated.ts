@@ -255,6 +255,7 @@ export type PageHomeQueryQuery = {
         width: number;
         height: number;
         unsplashUrl?: string | null | undefined;
+        description?: string | null | undefined;
       }
     | null
     | undefined
@@ -302,6 +303,7 @@ export const PageHomeQueryDocument = gql`
       width
       height
       unsplashUrl
+      description
     }
   }
   ${SiteSettingsSharedFragmentDoc}

@@ -33,6 +33,7 @@ export const QUERY_PAGE_HOME = gql`
       width
       height
       unsplashUrl
+      description
     }
   }
 `;

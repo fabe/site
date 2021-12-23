@@ -49,6 +49,7 @@ const FeaturedPhotos: FC<FeaturedPhotosProps> = ({ photos }) => {
 
           return (
             <a
+              key={photo.unsplashUrl}
               href={photo.unsplashUrl || '#'}
               target="_blank"
               title="View on Unsplash"
@@ -56,6 +57,7 @@ const FeaturedPhotos: FC<FeaturedPhotosProps> = ({ photos }) => {
               className="drop-shadow-md"
             >
               <Image
+                alt={photo.description || ''}
                 className="bg-gray-200 rounded dark:bg-zinc-600"
                 src={photo.photoUrl}
                 width={width}
