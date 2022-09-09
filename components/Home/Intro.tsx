@@ -4,12 +4,14 @@ export default function Intro() {
   return (
     <dl className="list-container">
       <dt className="list-title">
-        <h1 className="flex [font-variation-settings:'wght'_480] text-white">
+        <h1 className="flex [font-variation-settings:'wght'_500] dark:text-white text-neutral-900">
           <Link href="/">
             <a>Fabian Schultz</a>
           </Link>
         </h1>
-        <h2 className="text-silver-dark">Product Designer</h2>
+        <h2 className="dark:text-silver-dark text-neutral-500">
+          Product Designer
+        </h2>
       </dt>
       <dd className="list-content">
         <p>

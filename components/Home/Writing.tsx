@@ -4,7 +4,7 @@ export default function Writing() {
   return (
     <dl className="list-container">
       <dt className="list-title">
-        <h3 className="text-silver-dark">Writing</h3>
+        <h3 className="dark:text-silver-dark text-neutral-500">Writing</h3>
       </dt>
       <dd className="list-content">
         <div>

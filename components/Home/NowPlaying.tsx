@@ -10,12 +10,10 @@ export default function NowPlayingWidget(props: NowPlayingProps) {
   const { album, albumImageUrl, title, artist, isPlaying, songUrl, timestamp } =
     props.nowPlaying;
 
-  console.log(timestamp);
-
   return (
     <dl className="list-container">
       <dt className="list-title">
-        <h3 className="text-silver-dark">
+        <h3 className="dark:text-silver-dark text-neutral-500">
           <div className="flex items-center gap-2">
             Listening
             {isPlaying ? <Badge isLive>Live</Badge> : null}

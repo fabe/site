@@ -36,7 +36,7 @@ export default function MediaCard({
         </div>
 
         <div
-          className="flex absolute top-0 left-0 z-0 opacity-10 blur-lg group-hover:opacity-30 transition-opacity"
+          className="flex absolute top-0 left-0 z-0 dark:opacity-10 opacity-20 blur-lg dark:group-hover:opacity-30 group-hover:opacity-50 transition-opacity"
           aria-hidden="true"
         >
           <Image
@@ -50,7 +50,7 @@ export default function MediaCard({
 
       <div className="w-full truncate group-hover:translate-x-0.5 transition-transform">
         <div className="truncate">{title}</div>
-        <div className="text-sm tracking-sm text-silver-dark truncate">
+        <div className="text-sm tracking-sm dark:text-silver-dark text-neutral-500 truncate">
           {subtitle}
         </div>
       </div>
