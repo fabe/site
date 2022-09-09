@@ -1,5 +1,4 @@
 import Intro from "../components/Home/Intro";
-import Notes from "../components/Home/Notes";
 import Resume from "../components/Home/Resume";
 import Writing from "../components/Home/Writing";
 import { Main } from "../components/Layouts";
@@ -26,7 +25,6 @@ export default function Home() {
       <Main>
         <Intro />
         <Resume />
-        {/* <Notes /> */}
         <Writing />
 
         {data?.spotifyNowPlaying && (
