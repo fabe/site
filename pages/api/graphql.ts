@@ -1,12 +1,12 @@
 import {
   ApolloServerPluginLandingPageDisabled,
-  ApolloServerPluginLandingPageLocalDefault,
-} from 'apollo-server-core';
-import { ApolloServer } from 'apollo-server-micro';
-import Cors from 'cors';
-import { NextApiRequest, NextApiResponse } from 'next';
+  ApolloServerPluginLandingPageGraphQLPlayground,
+} from "apollo-server-core";
+import { ApolloServer } from "apollo-server-micro";
+import Cors from "cors";
+import { NextApiRequest, NextApiResponse } from "next";
 
-import { schema } from '../../graphql/schema';
+import { schema } from "../../graphql/schema";
 
 function initMiddleware(middleware: any) {
   return (req: NextApiRequest, res: NextApiResponse) =>
@@ -22,7 +22,7 @@ function initMiddleware(middleware: any) {
 
 const cors = initMiddleware(
   Cors({
-    methods: ['GET', 'OPTIONS'],
+    methods: ["GET", "OPTIONS"],
   })
 );
 
@@ -36,9 +36,9 @@ const apolloServer = new ApolloServer({
   schema,
   introspection: true,
   plugins: [
-    process.env.NODE_ENV === 'production'
+    process.env.NODE_ENV === "production"
       ? ApolloServerPluginLandingPageDisabled()
-      : ApolloServerPluginLandingPageLocalDefault({ footer: false }),
+      : ApolloServerPluginLandingPageGraphQLPlayground(),
   ],
 });
 const startServer = apolloServer.start();
@@ -50,6 +50,6 @@ export default async function gqlHandler(
   await startServer;
   await cors(req, res);
 
-  const handler = await apolloServer.createHandler({ path: '/api/graphql' });
+  const handler = await apolloServer.createHandler({ path: "/api/graphql" });
   return handler(req, res);
 }

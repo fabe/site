@@ -1,9 +1,14 @@
 /** @type {import('next').NextConfig} */
-module.exports = {
+const nextConfig = {
   reactStrictMode: true,
+  swcMinify: true,
   images: {
-    formats: ['image/avif', 'image/webp'],
-    domains: ['images.ctfassets.net', 'i.scdn.co'],
+    formats: ["image/avif", "image/webp"],
+    domains: [
+      "images.ctfassets.net",
+      "i.scdn.co",
+      "oku.ams3.cdn.digitaloceanspaces.com",
+    ],
   },
   webpack: (config, { webpack }) => {
     /* Hide error "Critical dependency: the request of a dependency is an expression" from remark-textr */
@@ -12,3 +17,5 @@ module.exports = {
     return config;
   },
 };
+
+module.exports = nextConfig;

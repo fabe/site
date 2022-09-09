@@ -1,8 +1,12 @@
-import Parser from 'rss-parser';
+import Parser from "rss-parser";
 
-import { Book, QueryRecentlyReadArgs } from '../../types/types.generated';
+import { Book, QueryRecentlyReadArgs } from "../../types/types.generated";
 
-let parser = new Parser();
+let parser = new Parser({
+  customFields: {
+    item: ["oku:cover"],
+  },
+});
 const { OKU_CURRENTLY_READING, OKU_RECENTLY_READ } = process.env;
 
 export async function getNowReading(): Promise<any> {
@@ -11,12 +15,14 @@ export async function getNowReading(): Promise<any> {
   }
 
   const currentlyReading = await parser.parseURL(OKU_CURRENTLY_READING);
+
   const books = currentlyReading.items.map((book): Book => {
     return {
       title: book.title!,
       author: book.creator!,
       readingDate: book.pubDate!,
       okuUrl: book.link!,
+      coverUrl: book["oku:cover"] || null,
     };
   });
 

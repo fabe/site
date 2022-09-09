@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server-micro';
+import { gql } from "apollo-server-micro";
 
 export const typeDefs = gql`
   scalar JSON
@@ -16,6 +16,7 @@ export const typeDefs = gql`
   }
 
   type NowPlaying {
+    timestamp: String
     album: String
     albumImageUrl: String
     artist: String

@@ -1,7 +1,7 @@
-import { ImageLoaderProps } from 'next/image';
+import { ImageLoaderProps } from "next/image";
 
 function normalizeSrc(src: string) {
-  return src[0] === '/' ? src.slice(1) : src;
+  return src[0] === "/" ? src.slice(1) : src;
 }
 
 function contentfulLoader({
@@ -9,13 +9,13 @@ function contentfulLoader({
   quality = 75,
   width,
 }: ImageLoaderProps): string {
-  const params = ['w=' + Math.floor(width)];
+  const params = ["w=" + Math.floor(width)];
 
   if (quality) {
-    params.push('q=' + quality);
+    params.push("q=" + quality);
   }
 
-  return `${normalizeSrc(src)}?${params.join('&')}`;
+  return `${normalizeSrc(src)}?${params.join("&")}`;
 }
 
 export default contentfulLoader;

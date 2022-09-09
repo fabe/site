@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const FRAGMENT_SITE_SETTINGS_SHARED = gql`
   fragment SiteSettingsShared on SiteSettings {
@@ -22,18 +22,13 @@ export const QUERY_PAGE_HOME = gql`
       title
       songUrl
       album
+      timestamp
     }
     nowReading {
       title
       author
       okuUrl
-    }
-    photos(limit: 3) {
-      photoUrl
-      width
-      height
-      unsplashUrl
-      description
+      coverUrl
     }
   }
 `;
