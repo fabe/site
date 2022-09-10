@@ -114,38 +114,13 @@ export type Playlist = {
 
 export type Post = {
   __typename?: 'Post';
-  body: PostBody;
+  body: Scalars['String'];
   coverUrl?: Maybe<Scalars['String']>;
   metaDescription?: Maybe<Scalars['String']>;
   publishedDate: Scalars['String'];
   slug: Scalars['String'];
   tags?: Maybe<Array<Maybe<Scalars['String']>>>;
   title: Scalars['String'];
-};
-
-export type PostBody = {
-  __typename?: 'PostBody';
-  json: Scalars['JSON'];
-  links: PostBodyLinks;
-};
-
-export type PostBodyAssets = {
-  __typename?: 'PostBodyAssets';
-  block: Array<Maybe<Asset>>;
-  hyperlink: Array<Maybe<Asset>>;
-};
-
-export type PostBodyEntries = {
-  __typename?: 'PostBodyEntries';
-  block: Array<Maybe<Entry>>;
-  hyperlink: Array<Maybe<Entry>>;
-  inline: Array<Maybe<Entry>>;
-};
-
-export type PostBodyLinks = {
-  __typename?: 'PostBodyLinks';
-  assets: PostBodyAssets;
-  entries: PostBodyEntries;
 };
 
 export type PostWithoutBody = {
@@ -195,6 +170,7 @@ export type QueryPostsArgs = {
 
 export type SiteSettings = {
   __typename?: 'SiteSettings';
+  avatar: Asset;
   flags?: Maybe<Array<Maybe<Flag>>>;
   intro: Scalars['String'];
   metaDescription: Scalars['String'];
@@ -234,10 +210,12 @@ export type PageHomeQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type PageHomeQueryQuery = { __typename?: 'Query', siteSettings: { __typename?: 'SiteSettings', intro: string, siteTitle: string, metaDescription: string }, spotifyStatus: { __typename?: 'SpotifyStatus', timestamp?: string | null, isPlaying: boolean, song?: { __typename?: 'Song', albumImageUrl?: string | null, artist?: string | null, title?: string | null, spotifyUrl?: string | null, album?: string | null } | null }, books: Array<{ __typename?: 'Book', title: string, author: string, okuUrl: string, coverUrl?: string | null } | null> };
 
-export type PageProjectsQueryQueryVariables = Exact<{ [key: string]: never; }>;
+export type PostQueryQueryVariables = Exact<{
+  slug: Scalars['String'];
+}>;
 
 
-export type PageProjectsQueryQuery = { __typename?: 'Query', siteSettings: { __typename?: 'SiteSettings', siteTitle: string, metaDescription: string } };
+export type PostQueryQuery = { __typename?: 'Query', siteSettings: { __typename?: 'SiteSettings', siteTitle: string, metaDescription: string, avatar: { __typename?: 'Asset', url?: string | null } }, post?: { __typename?: 'Post', body: string, coverUrl?: string | null, metaDescription?: string | null, publishedDate: string, tags?: Array<string | null> | null, title: string } | null };
 
 export const SiteSettingsSharedFragmentDoc = gql`
     fragment SiteSettingsShared on SiteSettings {
@@ -297,37 +275,49 @@ export function usePageHomeQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
 export type PageHomeQueryQueryHookResult = ReturnType<typeof usePageHomeQueryQuery>;
 export type PageHomeQueryLazyQueryHookResult = ReturnType<typeof usePageHomeQueryLazyQuery>;
 export type PageHomeQueryQueryResult = Apollo.QueryResult<PageHomeQueryQuery, PageHomeQueryQueryVariables>;
-export const PageProjectsQueryDocument = gql`
-    query PageProjectsQuery {
+export const PostQueryDocument = gql`
+    query PostQuery($slug: String!) {
   siteSettings {
+    avatar {
+      url
+    }
     ...SiteSettingsShared
+  }
+  post(slug: $slug) {
+    body
+    coverUrl
+    metaDescription
+    publishedDate
+    tags
+    title
   }
 }
     ${SiteSettingsSharedFragmentDoc}`;
 
 /**
- * __usePageProjectsQueryQuery__
+ * __usePostQueryQuery__
  *
- * To run a query within a React component, call `usePageProjectsQueryQuery` and pass it any options that fit your needs.
- * When your component renders, `usePageProjectsQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `usePostQueryQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePostQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = usePageProjectsQueryQuery({
+ * const { data, loading, error } = usePostQueryQuery({
  *   variables: {
+ *      slug: // value for 'slug'
  *   },
  * });
  */
-export function usePageProjectsQueryQuery(baseOptions?: Apollo.QueryHookOptions<PageProjectsQueryQuery, PageProjectsQueryQueryVariables>) {
+export function usePostQueryQuery(baseOptions: Apollo.QueryHookOptions<PostQueryQuery, PostQueryQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PageProjectsQueryQuery, PageProjectsQueryQueryVariables>(PageProjectsQueryDocument, options);
+        return Apollo.useQuery<PostQueryQuery, PostQueryQueryVariables>(PostQueryDocument, options);
       }
-export function usePageProjectsQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageProjectsQueryQuery, PageProjectsQueryQueryVariables>) {
+export function usePostQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PostQueryQuery, PostQueryQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PageProjectsQueryQuery, PageProjectsQueryQueryVariables>(PageProjectsQueryDocument, options);
+          return Apollo.useLazyQuery<PostQueryQuery, PostQueryQueryVariables>(PostQueryDocument, options);
         }
-export type PageProjectsQueryQueryHookResult = ReturnType<typeof usePageProjectsQueryQuery>;
-export type PageProjectsQueryLazyQueryHookResult = ReturnType<typeof usePageProjectsQueryLazyQuery>;
-export type PageProjectsQueryQueryResult = Apollo.QueryResult<PageProjectsQueryQuery, PageProjectsQueryQueryVariables>;
+export type PostQueryQueryHookResult = ReturnType<typeof usePostQueryQuery>;
+export type PostQueryLazyQueryHookResult = ReturnType<typeof usePostQueryLazyQuery>;
+export type PostQueryQueryResult = Apollo.QueryResult<PostQueryQuery, PostQueryQueryVariables>;

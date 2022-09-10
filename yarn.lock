@@ -1125,6 +1125,18 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
+"@markdoc/markdoc@^0.1.7":
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/@markdoc/markdoc/-/markdoc-0.1.7.tgz#c4a4876ddb4886a45a9d16462277f57fde576f54"
+  integrity sha512-Dz7+VP5I3m/DFpLnzjwvXv64XmneYNzy4adm5uJSkcAJxFlJujIn+hCmMh11k70w+y5Qu18sjngetpuP+3570g==
+
+"@markdoc/next.js@^0.1.6":
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/@markdoc/next.js/-/next.js-0.1.6.tgz#dee33b28f2f05c0c22a7aeebca7a4ec5685dc7bf"
+  integrity sha512-AkILWoOg3zMrTPDubQgq5lRZ22UuFQsRn/J8oaYUYx/w8RtZ3ZACDNwX9hWVVDT3AcGokNSXaFRsQeWbmpPoFQ==
+  dependencies:
+    js-yaml "^4.1.0"
+
 "@mdx-js/mdx@^2.0.0":
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/@mdx-js/mdx/-/mdx-2.1.2.tgz#d13fb811809fda37967dc0eebd5bb36adce89a81"

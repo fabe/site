@@ -58,6 +58,9 @@ module.exports = {
       maxWidth: {
         main: "44rem",
       },
+      width: {
+        main: "44rem",
+      },
       animation: {
         "spin-slow": "spin 10s linear infinite",
       },

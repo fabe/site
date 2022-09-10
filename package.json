@@ -15,6 +15,8 @@
   "dependencies": {
     "@apollo/client": "^3.6.9",
     "@graphql-tools/schema": "^9.0.4",
+    "@markdoc/markdoc": "^0.1.7",
+    "@markdoc/next.js": "^0.1.6",
     "apollo-server-core": "^3.10.2",
     "apollo-server-micro": "^3.10.2",
     "contentful": "^9.1.32",

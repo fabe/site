@@ -2,8 +2,8 @@ export default function Footer() {
   return (
     <footer className="flex justify-center m:px-0 mt-10 sm:mt-20 w-full border-t border-solid dark:border-neutral-950 border:neutral-200">
       <div className="flex-1 max-w-main">
-        <div className="sm:grid flex w-full grid-cols-12 gap-4 pt-4 items-center sm:justify-start justify-between sm:pb-16 pb-5">
-          <div className="flex gap-1.5 sm:col-span-4 col-span-8 dark:text-silver-dark text-neutral-500 text-xs tracking-xs">
+        <div className="flex w-full gap-4 pt-4 items-center justify-between sm:pb-16 pb-5">
+          <div className="flex gap-1.5 dark:text-silver-dark text-neutral-500 text-xs tracking-xs">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="7"
@@ -21,17 +21,15 @@ export default function Footer() {
             </svg>
             Potsdam, Germany &middot; {new Date().getFullYear()}
           </div>
-          <div className="grid grid-cols-1 sm:col-span-8 col-span-4">
-            <div className="flex">
-              <a
-                className="link link-sm"
-                href="//github.com/fabe/site"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                View source
-              </a>
-            </div>
+          <div className="flex">
+            <a
+              className="link link-sm"
+              href="//github.com/fabe/site"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View source
+            </a>
           </div>
         </div>
       </div>

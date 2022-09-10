@@ -35,12 +35,23 @@ export const QUERY_PAGE_HOME = gql`
   }
 `;
 
-export const QUERY_PAGE_PROJECTS = gql`
+export const QUERY_POST = gql`
   ${FRAGMENT_SITE_SETTINGS_SHARED}
 
-  query PageProjectsQuery {
+  query PostQuery($slug: String!) {
     siteSettings {
+      avatar {
+        url
+      }
       ...SiteSettingsShared
+    }
+    post(slug: $slug) {
+      body
+      coverUrl
+      metaDescription
+      publishedDate
+      tags
+      title
     }
   }
 `;

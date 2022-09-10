@@ -41,8 +41,8 @@ p {
     @apply underline;
     @apply decoration-1.5;
     @apply underline-offset-2.5;
-    @apply dark:decoration-neutral-700 decoration-neutral-300;
-    @apply dark:hover:decoration-silver-dark hover:decoration-neutral-400;
+    @apply dark:decoration-neutral-800 decoration-neutral-300;
+    @apply dark:hover:decoration-neutral-600 hover:decoration-neutral-400;
     @apply motion-safe:transition;
     @apply duration-150;
     @apply ease-out-expo;
@@ -82,7 +82,7 @@ p {
   }
 
   .badge {
-    @apply flex items-center gap-1 text-xs dark:bg-zinc-900 bg-gray-200 dark:text-silver text-neutral-700 rounded-xl font-medium px-1.5 tracking-wide py-0.5;
+    @apply flex items-center gap-1 text-xs dark:bg-neutral-950 bg-gray-200 dark:text-silver-dark text-neutral-700 rounded-xl font-medium px-1.5 tracking-xs py-0.5;
   }
 
   .list-container {
@@ -105,6 +105,15 @@ p {
     @apply max-w-none;
     @apply items-center;
     @apply gap-0.5;
+  }
+
+  .link-share {
+    @apply inline-flex;
+    @apply items-center;
+    @apply gap-1;
+    @apply text-sm;
+    @apply px-2;
+    @apply dark:bg-neutral-950 bg-gray-200 dark:text-silver-dark text-neutral-700 rounded-lg dark:hover:bg-neutral-900 hover:bg-gray-300 transition-colors;
   }
 
   .link-external svg {
@@ -132,8 +141,8 @@ p {
     @apply decoration-1.5;
     @apply underline-offset-1.5;
     @apply dark:text-silver-dark text-neutral-500;
-    @apply dark:decoration-neutral-700 decoration-neutral-300;
-    @apply dark:hover:decoration-silver-dark hover:decoration-neutral-400;
+    @apply dark:decoration-neutral-800 decoration-neutral-300;
+    @apply dark:hover:decoration-neutral-600 hover:decoration-neutral-400;
     @apply tracking-xs;
   }
 }

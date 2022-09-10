@@ -118,19 +118,7 @@ export async function getPost(
           items {
             title
             slug
-            body {
-              json
-              links {
-                assets {
-                  block {
-                    url
-                    sys {
-                      id
-                    }
-                  }
-                }
-              }
-            }
+            body
             coverImage {
               url
             }
@@ -155,7 +143,7 @@ export async function getPost(
     slug: post.slug,
     coverUrl: post.coverImage?.url,
     publishedDate: post.publishedDate,
-    body: post.body,
+    body: post.body.raw,
     metaDescription: post.metaDescription,
     tags: post.tags,
   }))[0];
@@ -217,6 +205,9 @@ export async function getSiteSettings(): Promise<SiteSettings | null> {
           intro
           flags
           metaDescription
+          avatar {
+            url
+          }
         }
       }
     `,

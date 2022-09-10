@@ -54,7 +54,7 @@ export const typeDefs = gql`
     metaDescription: String
     coverUrl: String
     tags: [String]
-    body: PostBody!
+    body: String!
   }
 
   type PostWithoutBody {
@@ -80,6 +80,7 @@ export const typeDefs = gql`
     intro: String!
     flags: [Flag]
     metaDescription: String!
+    avatar: Asset!
   }
 
   type Flag {
@@ -88,27 +89,6 @@ export const typeDefs = gql`
   }
 
   # Contentful types from here on out! ---------------------------------------------
-
-  type PostBody {
-    json: JSON!
-    links: PostBodyLinks!
-  }
-
-  type PostBodyLinks {
-    entries: PostBodyEntries!
-    assets: PostBodyAssets!
-  }
-
-  type PostBodyEntries {
-    inline: [Entry]!
-    hyperlink: [Entry]!
-    block: [Entry]!
-  }
-
-  type PostBodyAssets {
-    hyperlink: [Asset]!
-    block: [Asset]!
-  }
 
   interface Entry {
     sys: Sys!

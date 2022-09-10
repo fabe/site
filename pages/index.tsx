@@ -10,7 +10,6 @@ import { PageHomeQueryQuery } from "../graphql/types/types.generated";
 import { useQuery } from "@apollo/client";
 import dynamic from "next/dynamic";
 import NowReading from "../components/Home/NowReading";
-import Footer from "../components/Footer";
 import { useEffect } from "react";
 
 const NowPlaying = dynamic(() => import("../components/Home/NowPlaying"));
@@ -41,7 +40,6 @@ export default function Home() {
           <NowPlaying spotifyStatus={data.spotifyStatus} />
         )}
         {data?.books && <NowReading book={data.books[0]} />}
-        <Footer />
       </Main>
     </>
   );
