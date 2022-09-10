@@ -27,7 +27,12 @@ export default function Home() {
 
   return (
     <>
-      <SEO />
+      <SEO
+        seo={{
+          title: data.siteSettings.siteTitle,
+          description: data.siteSettings.metaDescription,
+        }}
+      />
       <Main>
         <Intro />
         <Resume />
