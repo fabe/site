@@ -11,13 +11,19 @@ import { useQuery } from "@apollo/client";
 import dynamic from "next/dynamic";
 import NowReading from "../components/Home/NowReading";
 import Footer from "../components/Footer";
+import { useEffect } from "react";
 
 const NowPlaying = dynamic(() => import("../components/Home/NowPlaying"));
 
 export default function Home() {
-  const { data } = useQuery<PageHomeQueryQuery>(QUERY_PAGE_HOME, {
-    // pollInterval: 0.5 * 1000 * 60,
-  });
+  const { data, startPolling, stopPolling } =
+    useQuery<PageHomeQueryQuery>(QUERY_PAGE_HOME);
+
+  // Refetch every minute for live data to be fresh.
+  useEffect(() => {
+    startPolling(60 * 1000);
+    return () => stopPolling();
+  }, []);
 
   return (
     <>
