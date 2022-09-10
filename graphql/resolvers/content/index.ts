@@ -1,6 +1,6 @@
-import { gql } from 'apollo-server-micro';
+import { gql } from "@apollo/client";
 
-import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
+import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
 
 import {
   Book,
@@ -13,17 +13,17 @@ import {
   QueryPostArgs,
   QueryPostsArgs,
   SiteSettings,
-} from '../../types/types.generated';
+} from "../../types/types.generated";
 
 const { CONTENTFUL_SPACE_ID, CONTENTFUL_DELIVERY } = process.env;
-const SITE_SETTINGS_ENTRY_ID = '4VjpvaxnxzRE0XPfQjwHQK';
+const SITE_SETTINGS_ENTRY_ID = "4VjpvaxnxzRE0XPfQjwHQK";
 const BASE_URL = `https://graphql.contentful.com/content/v1/spaces/${CONTENTFUL_SPACE_ID}`;
 
 const client = new ApolloClient({
   ssrMode: true,
   link: createHttpLink({
     uri: BASE_URL,
-    credentials: 'same-origin',
+    credentials: "same-origin",
     headers: {
       Authorization: `Bearer ${CONTENTFUL_DELIVERY}`,
     },
@@ -101,7 +101,7 @@ export async function getFavouriteBooks(
       okuUrl?: string;
       description?: string;
     }) => ({
-      author: book.authors?.join(', '),
+      author: book.authors?.join(", "),
       title: book.title,
       coverUrl: book.cover?.url,
       okuUrl: book.okuUrl,

@@ -1,4 +1,4 @@
-import { getNowReading, getRecentlyRead } from './books';
+import { getNowReading, getRecentlyRead } from "./books";
 import {
   getFavouriteBooks,
   getPhotos,
@@ -6,8 +6,8 @@ import {
   getPost,
   getPosts,
   getSiteSettings,
-} from './content';
-import { getSpotifyNowPlaying } from './spotify';
+} from "./content";
+import { getSpotifyNowPlaying } from "./spotify";
 
 export const resolvers = {
   Query: {

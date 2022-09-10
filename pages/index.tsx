@@ -32,7 +32,7 @@ export default function Home() {
         )}
         {data?.nowReading && <NowReading book={data.nowReading[0]} />}
 
-        <Footer></Footer>
+        <Footer />
       </Main>
     </>
   );

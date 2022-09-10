@@ -1,5 +1,5 @@
 # GraphCDN configuration. Learn more at https://graphcdn.io/docs/cli
-schema: './graphql/typeDefs/index.ts'
+schema: "./graphql/typeDefs/index.ts"
 name: fabian
 originUrl: https://fabianschultz.vercel.app/api/graphql
 passThroughOnly: false
