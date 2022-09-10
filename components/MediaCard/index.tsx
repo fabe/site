@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next/future/image";
 
 interface MediaCardProps {
   image: {
@@ -24,7 +24,7 @@ export default function MediaCard({
   const cardComponent = (
     <div className="flex items-center gap-4 group">
       <div className="relative">
-        <div className="flex relative z-10 drop-shadow-md group-hover:scale-110 origin-center transition-transform">
+        <div className="relative z-10 drop-shadow-md group-hover:scale-110 origin-center transition-transform">
           <Image
             alt={image.alt || ""}
             title={title}
@@ -36,7 +36,7 @@ export default function MediaCard({
         </div>
 
         <div
-          className="flex absolute top-0 left-0 z-0 dark:opacity-10 opacity-20 blur-lg dark:group-hover:opacity-30 group-hover:opacity-50 transition-opacity"
+          className="absolute top-0 left-0 z-0 dark:opacity-10 opacity-20 blur-lg dark:group-hover:opacity-30 group-hover:opacity-50 transition-opacity"
           aria-hidden="true"
         >
           <Image

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Book } from "../../graphql/types/types.generated";
 import MediaCard from "../MediaCard";
 

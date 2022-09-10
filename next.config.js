@@ -4,10 +4,12 @@ const nextConfig = {
   swcMinify: true,
   images: {
     formats: ["image/avif", "image/webp"],
-    domains: [
-      "images.ctfassets.net",
-      "i.scdn.co",
-      "oku.ams3.cdn.digitaloceanspaces.com",
+    domains: ["images.ctfassets.net", "i.scdn.co"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**.digitaloceanspaces.com",
+      },
     ],
   },
   webpack: (config, { webpack }) => {
