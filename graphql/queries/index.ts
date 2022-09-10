@@ -15,16 +15,18 @@ export const QUERY_PAGE_HOME = gql`
       intro
       ...SiteSettingsShared
     }
-    spotifyNowPlaying {
-      albumImageUrl
-      artist
-      isPlaying
-      title
-      songUrl
-      album
+    spotifyStatus {
       timestamp
+      isPlaying
+      song {
+        albumImageUrl
+        artist
+        title
+        spotifyUrl
+        album
+      }
     }
-    nowReading {
+    books: books(limit: 1, collection: READING) {
       title
       author
       okuUrl

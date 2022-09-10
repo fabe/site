@@ -4,25 +4,33 @@ export const typeDefs = gql`
   scalar JSON
 
   type Query {
-    spotifyNowPlaying: NowPlaying!
-    playlists: [Playlist]!
-    nowReading: [Book]!
-    recentlyRead(latest: Int): [Book]!
-    favouriteBooks(limit: Int): [Book]!
-    posts(limit: Int): [PostWithoutBody]!
-    post(slug: String!): Post
+    books(limit: Int, collection: CollectionType): [Book]!
     photos(limit: Int): [Photo]!
+    playlists(limit: Int): [Playlist]!
+    post(slug: String!): Post
+    posts(limit: Int): [PostWithoutBody]!
     siteSettings: SiteSettings!
+    spotifyStatus: SpotifyStatus!
   }
 
-  type NowPlaying {
+  enum CollectionType {
+    FAVOURITES
+    READ
+    READING
+  }
+
+  type SpotifyStatus {
     timestamp: String
+    isPlaying: Boolean!
+    song: Song
+  }
+
+  type Song {
+    title: String
+    artist: String
     album: String
     albumImageUrl: String
-    artist: String
-    isPlaying: Boolean!
-    songUrl: String
-    title: String
+    spotifyUrl: String
   }
 
   type Playlist {
@@ -79,7 +87,7 @@ export const typeDefs = gql`
     value: String!
   }
 
-  # Contentful types from here on out!
+  # Contentful types from here on out! ---------------------------------------------
 
   type PostBody {
     json: JSON!

@@ -48,6 +48,12 @@ export type Book = {
   title: Scalars['String'];
 };
 
+export enum CollectionType {
+  Favourites = 'FAVOURITES',
+  Read = 'READ',
+  Reading = 'READING'
+}
+
 export type ContentfulMetadata = {
   __typename?: 'ContentfulMetadata';
   tags: Array<Maybe<ContentfulTag>>;
@@ -85,17 +91,6 @@ export type Location = {
   __typename?: 'Location';
   lat?: Maybe<Scalars['Float']>;
   lon?: Maybe<Scalars['Float']>;
-};
-
-export type NowPlaying = {
-  __typename?: 'NowPlaying';
-  album?: Maybe<Scalars['String']>;
-  albumImageUrl?: Maybe<Scalars['String']>;
-  artist?: Maybe<Scalars['String']>;
-  isPlaying: Scalars['Boolean'];
-  songUrl?: Maybe<Scalars['String']>;
-  timestamp?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
 };
 
 export type Photo = {
@@ -163,24 +158,28 @@ export type PostWithoutBody = {
 
 export type Query = {
   __typename?: 'Query';
-  favouriteBooks: Array<Maybe<Book>>;
-  nowReading: Array<Maybe<Book>>;
+  books: Array<Maybe<Book>>;
   photos: Array<Maybe<Photo>>;
   playlists: Array<Maybe<Playlist>>;
   post?: Maybe<Post>;
   posts: Array<Maybe<PostWithoutBody>>;
-  recentlyRead: Array<Maybe<Book>>;
   siteSettings: SiteSettings;
-  spotifyNowPlaying: NowPlaying;
+  spotifyStatus: SpotifyStatus;
 };
 
 
-export type QueryFavouriteBooksArgs = {
+export type QueryBooksArgs = {
+  collection?: InputMaybe<CollectionType>;
   limit?: InputMaybe<Scalars['Int']>;
 };
 
 
 export type QueryPhotosArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type QueryPlaylistsArgs = {
   limit?: InputMaybe<Scalars['Int']>;
 };
 
@@ -194,17 +193,28 @@ export type QueryPostsArgs = {
   limit?: InputMaybe<Scalars['Int']>;
 };
 
-
-export type QueryRecentlyReadArgs = {
-  latest?: InputMaybe<Scalars['Int']>;
-};
-
 export type SiteSettings = {
   __typename?: 'SiteSettings';
   flags?: Maybe<Array<Maybe<Flag>>>;
   intro: Scalars['String'];
   metaDescription: Scalars['String'];
   siteTitle: Scalars['String'];
+};
+
+export type Song = {
+  __typename?: 'Song';
+  album?: Maybe<Scalars['String']>;
+  albumImageUrl?: Maybe<Scalars['String']>;
+  artist?: Maybe<Scalars['String']>;
+  spotifyUrl?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+};
+
+export type SpotifyStatus = {
+  __typename?: 'SpotifyStatus';
+  isPlaying: Scalars['Boolean'];
+  song?: Maybe<Song>;
+  timestamp?: Maybe<Scalars['String']>;
 };
 
 export type Sys = {
@@ -222,7 +232,7 @@ export type SiteSettingsSharedFragment = { __typename?: 'SiteSettings', siteTitl
 export type PageHomeQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type PageHomeQueryQuery = { __typename?: 'Query', siteSettings: { __typename?: 'SiteSettings', intro: string, siteTitle: string, metaDescription: string }, spotifyNowPlaying: { __typename?: 'NowPlaying', albumImageUrl?: string | null, artist?: string | null, isPlaying: boolean, title?: string | null, songUrl?: string | null, album?: string | null, timestamp?: string | null }, nowReading: Array<{ __typename?: 'Book', title: string, author: string, okuUrl: string, coverUrl?: string | null } | null> };
+export type PageHomeQueryQuery = { __typename?: 'Query', siteSettings: { __typename?: 'SiteSettings', intro: string, siteTitle: string, metaDescription: string }, spotifyStatus: { __typename?: 'SpotifyStatus', timestamp?: string | null, isPlaying: boolean, song?: { __typename?: 'Song', albumImageUrl?: string | null, artist?: string | null, title?: string | null, spotifyUrl?: string | null, album?: string | null } | null }, books: Array<{ __typename?: 'Book', title: string, author: string, okuUrl: string, coverUrl?: string | null } | null> };
 
 export type PageProjectsQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -241,16 +251,18 @@ export const PageHomeQueryDocument = gql`
     intro
     ...SiteSettingsShared
   }
-  spotifyNowPlaying {
-    albumImageUrl
-    artist
-    isPlaying
-    title
-    songUrl
-    album
+  spotifyStatus {
     timestamp
+    isPlaying
+    song {
+      albumImageUrl
+      artist
+      title
+      spotifyUrl
+      album
+    }
   }
-  nowReading {
+  books: books(limit: 1, collection: READING) {
     title
     author
     okuUrl

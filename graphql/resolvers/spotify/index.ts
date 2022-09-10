@@ -1,6 +1,6 @@
 import querystring from "querystring";
 
-import { NowPlaying } from "../../types/types.generated";
+import { SpotifyStatus } from "../../types/types.generated";
 
 const {
   SPOTIFY_CLIENT_ID: client_id,
@@ -45,7 +45,7 @@ const getRecentlyPlayed = async (access_token: string) => {
   });
 };
 
-export async function getSpotifyNowPlaying(): Promise<NowPlaying> {
+export async function getSpotifyStatus(): Promise<SpotifyStatus> {
   const { access_token } = await getAccessToken();
   const nowPlayingResponse = await getNowPlaying(access_token);
 
@@ -65,16 +65,18 @@ export async function getSpotifyNowPlaying(): Promise<NowPlaying> {
       .join(", ");
     const album = song.track.album.name;
     const albumImageUrl = song.track.album.images[0].url;
-    const songUrl = song.track.external_urls.spotify;
+    const spotifyUrl = song.track.external_urls.spotify;
 
     return {
-      isPlaying: false,
-      album,
-      albumImageUrl,
-      artist,
-      songUrl,
-      title,
       timestamp,
+      isPlaying: false,
+      song: {
+        title,
+        artist,
+        album,
+        albumImageUrl,
+        spotifyUrl,
+      },
     };
   }
 
@@ -88,15 +90,17 @@ export async function getSpotifyNowPlaying(): Promise<NowPlaying> {
     .join(", ");
   const album = song.item.album.name;
   const albumImageUrl = song.item.album.images[0].url;
-  const songUrl = song.item.external_urls.spotify;
+  const spotifyUrl = song.item.external_urls.spotify;
 
   return {
-    album,
-    albumImageUrl,
-    artist,
-    isPlaying,
-    songUrl,
-    title,
     timestamp,
+    isPlaying,
+    song: {
+      title,
+      artist,
+      album,
+      albumImageUrl,
+      spotifyUrl,
+    },
   };
 }

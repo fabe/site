@@ -1,24 +1,21 @@
-import { getNowReading, getRecentlyRead } from "./books";
+import { getBooks } from "./books";
 import {
-  getFavouriteBooks,
   getPhotos,
   getPlaylists,
   getPost,
   getPosts,
   getSiteSettings,
 } from "./content";
-import { getSpotifyNowPlaying } from "./spotify";
+import { getSpotifyStatus } from "./spotify";
 
 export const resolvers = {
   Query: {
-    favouriteBooks: getFavouriteBooks,
-    nowReading: getNowReading,
+    books: getBooks,
     photos: getPhotos,
     playlists: getPlaylists,
     post: getPost,
     posts: getPosts,
-    recentlyRead: getRecentlyRead,
     siteSettings: getSiteSettings,
-    spotifyNowPlaying: getSpotifyNowPlaying,
+    spotifyStatus: getSpotifyStatus,
   },
 };

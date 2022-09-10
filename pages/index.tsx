@@ -21,7 +21,7 @@ export default function Home() {
 
   // Refetch every minute for live data to be fresh.
   useEffect(() => {
-    startPolling(60 * 1000);
+    startPolling(2 * 60 * 1000);
     return () => stopPolling();
   }, []);
 
@@ -32,12 +32,10 @@ export default function Home() {
         <Intro />
         <Resume />
         <Writing />
-
-        {data?.spotifyNowPlaying && (
-          <NowPlaying nowPlaying={data.spotifyNowPlaying} />
+        {data?.spotifyStatus && (
+          <NowPlaying spotifyStatus={data.spotifyStatus} />
         )}
-        {data?.nowReading && <NowReading book={data.nowReading[0]} />}
-
+        {data?.books && <NowReading book={data.books[0]} />}
         <Footer />
       </Main>
     </>

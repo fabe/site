@@ -8,8 +8,8 @@ import {
   Playlist,
   Post,
   PostWithoutBody,
-  QueryFavouriteBooksArgs,
   QueryPhotosArgs,
+  QueryPlaylistsArgs,
   QueryPostArgs,
   QueryPostsArgs,
   SiteSettings,
@@ -19,7 +19,7 @@ const { CONTENTFUL_SPACE_ID, CONTENTFUL_DELIVERY } = process.env;
 const SITE_SETTINGS_ENTRY_ID = "4VjpvaxnxzRE0XPfQjwHQK";
 const BASE_URL = `https://graphql.contentful.com/content/v1/spaces/${CONTENTFUL_SPACE_ID}`;
 
-const client = new ApolloClient({
+export const contentfulClient = new ApolloClient({
   ssrMode: true,
   link: createHttpLink({
     uri: BASE_URL,
@@ -31,11 +31,14 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-export async function getPlaylists(): Promise<Playlist[]> {
-  const response = await client.query({
+export async function getPlaylists(
+  _: any,
+  args: QueryPlaylistsArgs
+): Promise<Playlist[]> {
+  const response = await contentfulClient.query({
     query: gql`
-      query getAllPlaylists {
-        playlistCollection(limit: 10) {
+      query getAllPlaylists($limit: Int) {
+        playlistCollection(limit: $limit) {
           items {
             title
             cover {
@@ -46,6 +49,9 @@ export async function getPlaylists(): Promise<Playlist[]> {
         }
       }
     `,
+    variables: {
+      limit: args.limit,
+    },
   });
 
   if (!response.data) {
@@ -65,55 +71,11 @@ export async function getPlaylists(): Promise<Playlist[]> {
   );
 }
 
-export async function getFavouriteBooks(
-  _: any,
-  args: QueryFavouriteBooksArgs
-): Promise<Book[]> {
-  const response = await client.query({
-    query: gql`
-      query getAllFavouriteBooks($limit: Int) {
-        bookCollection(limit: $limit) {
-          items {
-            title
-            authors
-            cover {
-              url
-            }
-            okuUrl
-          }
-        }
-      }
-    `,
-    variables: {
-      limit: args.limit || 50,
-    },
-  });
-
-  if (!response.data) {
-    return [];
-  }
-
-  return response.data.bookCollection.items.map(
-    (book: {
-      title: string;
-      cover?: { url: string };
-      authors?: string[];
-      okuUrl?: string;
-      description?: string;
-    }) => ({
-      author: book.authors?.join(", "),
-      title: book.title,
-      coverUrl: book.cover?.url,
-      okuUrl: book.okuUrl,
-    })
-  );
-}
-
 export async function getPosts(
   _: any,
   args: QueryPostsArgs
 ): Promise<PostWithoutBody[]> {
-  const response = await client.query({
+  const response = await contentfulClient.query({
     query: gql`
       query getAllPosts($limit: Int) {
         postCollection(limit: $limit) {
@@ -149,7 +111,7 @@ export async function getPost(
   _: any,
   args: QueryPostArgs
 ): Promise<Post | null> {
-  const response = await client.query({
+  const response = await contentfulClient.query({
     query: gql`
       query getPost($slug: String!) {
         postCollection(where: { slug: $slug }, limit: 1) {
@@ -203,7 +165,7 @@ export async function getPhotos(
   _: any,
   args: QueryPhotosArgs
 ): Promise<Photo[]> {
-  const response = await client.query({
+  const response = await contentfulClient.query({
     query: gql`
       query getAllPhotos($limit: Int) {
         photoCollection(limit: $limit) {
@@ -247,7 +209,7 @@ export async function getPhotos(
 }
 
 export async function getSiteSettings(): Promise<SiteSettings | null> {
-  const response = await client.query({
+  const response = await contentfulClient.query({
     query: gql`
       query getSiteSettings($id: String!) {
         siteSettings(id: $id) {

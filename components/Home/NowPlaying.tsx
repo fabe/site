@@ -1,14 +1,14 @@
-import { NowPlaying } from "../../graphql/types/types.generated";
+import { SpotifyStatus } from "../../graphql/types/types.generated";
 import Badge from "../Badge";
 import MediaCard from "../MediaCard";
 
 interface NowPlayingProps {
-  nowPlaying: NowPlaying;
+  spotifyStatus: SpotifyStatus;
 }
 
 export default function NowPlayingWidget(props: NowPlayingProps) {
-  const { album, albumImageUrl, title, artist, isPlaying, songUrl, timestamp } =
-    props.nowPlaying;
+  const { song, isPlaying } = props.spotifyStatus;
+  const { album, albumImageUrl, title, artist, spotifyUrl } = song;
 
   return (
     <dl className="list-container">
@@ -32,7 +32,7 @@ export default function NowPlayingWidget(props: NowPlayingProps) {
             width: 56,
             height: 56,
           }}
-          href={songUrl}
+          href={spotifyUrl}
           hrefLabel="View on Spotify"
         />
       </dd>

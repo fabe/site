@@ -1,4 +1,3 @@
-# GraphCDN configuration. Learn more at https://graphcdn.io/docs/cli
 schema: "./graphql/typeDefs/index.ts"
 name: fabian
 originUrl: https://fabianschultz.vercel.app/api/graphql
@@ -8,24 +7,22 @@ rootTypeNames:
 rules:
   - types:
       Query:
-        - favouriteBooks
         - playlists
-    maxAge: 2592000
-    swr: 2592000
+    maxAge: 604800
+    swr: 604800
     description: Longest time for almost never changing data
   - types:
       Query:
-        - spotifyNowPlaying
+        - spotifyStatus
     maxAge: 240
     swr: 240
     description: Close-to-live data
   - types:
       Query:
-        - nowReading
+        - books
         - photos
         - post
         - posts
-        - recentlyRead
         - siteSettings
     maxAge: 43200
     swr: 43200
