@@ -6,7 +6,7 @@ import { ApolloServer } from "apollo-server-micro";
 import Cors from "cors";
 import { NextApiRequest, NextApiResponse } from "next";
 
-import { schema } from "../../graphql/schema";
+const { schema } = require("../../graphql/schema");
 
 function initMiddleware(middleware: any) {
   return (req: NextApiRequest, res: NextApiResponse) =>

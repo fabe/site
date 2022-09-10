@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { IncomingMessage, ServerResponse } from "http";
 
 import {
   ApolloClient,
@@ -7,12 +8,11 @@ import {
   NormalizedCacheObject,
 } from "@apollo/client";
 import { GRAPHQL_BASE_URL } from "./constants";
-
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined;
 
 export type ResolverContext = {
-  req?: any;
-  res?: any;
+  req?: IncomingMessage;
+  res?: ServerResponse;
 };
 
 function createIsomorphLink(context: ResolverContext = {}) {
