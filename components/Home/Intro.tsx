@@ -15,17 +15,33 @@ export default function Intro() {
       </dt>
       <dd className="list-content">
         <p>
-          I’m Fabian, a product designer currently working remotely at
-          Contentful. There, I’m responsible for the design of the extensibility
-          platform.
+          I’m Fabian, a product designer currently working remotely at{" "}
+          <a
+            className="link"
+            href="//contentful.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Contentful
+          </a>
+          . There, I’m working on design systems and core experience.
         </p>
         <p>
           Before that, I studied Interface Design at the University of Applied
-          Sciences in Potsdam and interned at Stink Studios in Brooklyn, NY.
+          Sciences in Potsdam and interned at{" "}
+          <a
+            className="link"
+            href="//stinkstudios.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Stink Studios
+          </a>{" "}
+          in Brooklyn, NY.
         </p>
         <p>
           I’m excited about the intersection of design and code, caring deeply
-          about implementation, accessibility, and performance.
+          about quality, accessibility, and implementation.
         </p>
         <p>
           Check out some mildly interesting things I coded on{" "}

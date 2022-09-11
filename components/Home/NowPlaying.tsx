@@ -1,3 +1,4 @@
+import { formatDistanceToNowStrict } from "date-fns";
 import { SpotifyStatus } from "../../graphql/types/types.generated";
 import Badge from "../Badge";
 import MediaCard from "../MediaCard";
@@ -7,7 +8,11 @@ interface NowPlayingProps {
 }
 
 export default function NowPlayingWidget(props: NowPlayingProps) {
-  const { song, isPlaying } = props.spotifyStatus;
+  if (!props.spotifyStatus.song) {
+    return null;
+  }
+
+  const { song, isPlaying, timestamp } = props.spotifyStatus;
   const { album, albumImageUrl, title, artist, spotifyUrl } = song;
 
   return (
@@ -16,7 +21,15 @@ export default function NowPlayingWidget(props: NowPlayingProps) {
         <h3 className="dark:text-silver-dark text-neutral-500">
           <div className="flex items-center gap-2">
             Listening
-            {isPlaying ? <Badge isLive>Live</Badge> : null}
+            {isPlaying ? (
+              <Badge isLive>Live</Badge>
+            ) : (
+              <Badge>
+                {formatDistanceToNowStrict(new Date(timestamp), {
+                  addSuffix: true,
+                })}
+              </Badge>
+            )}
           </div>
         </h3>
       </dt>

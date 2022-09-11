@@ -58,7 +58,11 @@ export async function getSpotifyStatus(): Promise<SpotifyStatus> {
     const songs = await recentlyPlayedResponse.json();
     const song = songs.items[0];
 
-    const timestamp = song.timestamp?.toString();
+    if (!song.track) {
+      return { isPlaying: false };
+    }
+
+    const timestamp = song.played_at?.toString();
     const title = song.track.name;
     const artist = song.track.artists
       .map((_artist: any) => _artist.name)
@@ -82,8 +86,13 @@ export async function getSpotifyStatus(): Promise<SpotifyStatus> {
 
   const song = await nowPlayingResponse.json();
 
-  const isPlaying = song.is_playing;
-  const timestamp = song.timestamp?.toString();
+  console.log(song);
+
+  if (!song.item) {
+    return { isPlaying: false };
+  }
+
+  const isPlaying = song.is_playing || Number.isInteger(song.timestamp);
   const title = song.item.name;
   const artist = song.item.artists
     .map((_artist: any) => _artist.name)
@@ -93,7 +102,6 @@ export async function getSpotifyStatus(): Promise<SpotifyStatus> {
   const spotifyUrl = song.item.external_urls.spotify;
 
   return {
-    timestamp,
     isPlaying,
     song: {
       title,

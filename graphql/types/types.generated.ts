@@ -210,6 +210,11 @@ export type PageHomeQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type PageHomeQueryQuery = { __typename?: 'Query', siteSettings: { __typename?: 'SiteSettings', intro: string, siteTitle: string, metaDescription: string }, spotifyStatus: { __typename?: 'SpotifyStatus', timestamp?: string | null, isPlaying: boolean, song?: { __typename?: 'Song', albumImageUrl?: string | null, artist?: string | null, title?: string | null, spotifyUrl?: string | null, album?: string | null } | null }, books: Array<{ __typename?: 'Book', title: string, author: string, okuUrl: string, coverUrl?: string | null } | null> };
 
+export type SpotifyStatusQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SpotifyStatusQueryQuery = { __typename?: 'Query', spotifyStatus: { __typename?: 'SpotifyStatus', timestamp?: string | null, isPlaying: boolean, song?: { __typename?: 'Song', albumImageUrl?: string | null, artist?: string | null, title?: string | null, spotifyUrl?: string | null, album?: string | null } | null } };
+
 export type PostQueryQueryVariables = Exact<{
   slug: Scalars['String'];
 }>;
@@ -275,6 +280,48 @@ export function usePageHomeQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
 export type PageHomeQueryQueryHookResult = ReturnType<typeof usePageHomeQueryQuery>;
 export type PageHomeQueryLazyQueryHookResult = ReturnType<typeof usePageHomeQueryLazyQuery>;
 export type PageHomeQueryQueryResult = Apollo.QueryResult<PageHomeQueryQuery, PageHomeQueryQueryVariables>;
+export const SpotifyStatusQueryDocument = gql`
+    query SpotifyStatusQuery {
+  spotifyStatus {
+    timestamp
+    isPlaying
+    song {
+      albumImageUrl
+      artist
+      title
+      spotifyUrl
+      album
+    }
+  }
+}
+    `;
+
+/**
+ * __useSpotifyStatusQueryQuery__
+ *
+ * To run a query within a React component, call `useSpotifyStatusQueryQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSpotifyStatusQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSpotifyStatusQueryQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useSpotifyStatusQueryQuery(baseOptions?: Apollo.QueryHookOptions<SpotifyStatusQueryQuery, SpotifyStatusQueryQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SpotifyStatusQueryQuery, SpotifyStatusQueryQueryVariables>(SpotifyStatusQueryDocument, options);
+      }
+export function useSpotifyStatusQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SpotifyStatusQueryQuery, SpotifyStatusQueryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SpotifyStatusQueryQuery, SpotifyStatusQueryQueryVariables>(SpotifyStatusQueryDocument, options);
+        }
+export type SpotifyStatusQueryQueryHookResult = ReturnType<typeof useSpotifyStatusQueryQuery>;
+export type SpotifyStatusQueryLazyQueryHookResult = ReturnType<typeof useSpotifyStatusQueryLazyQuery>;
+export type SpotifyStatusQueryQueryResult = Apollo.QueryResult<SpotifyStatusQueryQuery, SpotifyStatusQueryQueryVariables>;
 export const PostQueryDocument = gql`
     query PostQuery($slug: String!) {
   siteSettings {

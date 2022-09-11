@@ -36,7 +36,7 @@ export default function MediaCard({
         </div>
 
         <div
-          className="absolute top-0 left-0 z-0 dark:opacity-10 opacity-20 blur-lg dark:group-hover:opacity-30 group-hover:opacity-50 transition-opacity"
+          className="absolute top-0 left-0 z-0 dark:opacity-30 opacity-50 blur-lg dark:group-hover:opacity-20 group-hover:opacity-30 transition-opacity"
           aria-hidden="true"
         >
           <Image

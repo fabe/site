@@ -5,8 +5,11 @@ import { Main } from "../components/Layouts";
 import { SEO } from "../components/SEO";
 import { initializeApollo } from "../graphql/client";
 import type { GetServerSideProps, NextPage } from "next";
-import { QUERY_PAGE_HOME } from "../graphql/queries";
-import { PageHomeQueryQuery } from "../graphql/types/types.generated";
+import { QUERY_PAGE_HOME, QUERY_SPOTIFY_STATUS } from "../graphql/queries";
+import {
+  PageHomeQueryQuery,
+  SpotifyStatusQueryQuery,
+} from "../graphql/types/types.generated";
 import { useQuery } from "@apollo/client";
 import dynamic from "next/dynamic";
 import NowReading from "../components/Home/NowReading";
@@ -14,12 +17,28 @@ import { useEffect } from "react";
 
 const NowPlaying = dynamic(() => import("../components/Home/NowPlaying"));
 
+const isDev = process.env.NODE_ENV === "development";
+
 export default function Home() {
-  const { data, startPolling, stopPolling } =
-    useQuery<PageHomeQueryQuery>(QUERY_PAGE_HOME);
+  const { data } = useQuery<PageHomeQueryQuery>(QUERY_PAGE_HOME);
+
+  const {
+    data: liveData,
+    startPolling,
+    stopPolling,
+    refetch,
+  } = useQuery<SpotifyStatusQueryQuery>(QUERY_SPOTIFY_STATUS, {
+    ssr: false,
+    fetchPolicy: "cache-and-network",
+    skip: isDev,
+  });
 
   // Refetch every minute for live data to be fresh.
   useEffect(() => {
+    if (!isDev) {
+      refetch();
+    }
+
     startPolling(2 * 60 * 1000);
     return () => stopPolling();
   }, []);
@@ -36,9 +55,9 @@ export default function Home() {
         <Intro />
         <Resume />
         <Writing />
-        {data?.spotifyStatus && (
-          <NowPlaying spotifyStatus={data.spotifyStatus} />
-        )}
+        <NowPlaying
+          spotifyStatus={liveData?.spotifyStatus || data.spotifyStatus}
+        />
         {data?.books && <NowReading book={data.books[0]} />}
       </Main>
     </>

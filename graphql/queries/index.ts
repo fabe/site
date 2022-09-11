@@ -35,6 +35,22 @@ export const QUERY_PAGE_HOME = gql`
   }
 `;
 
+export const QUERY_SPOTIFY_STATUS = gql`
+  query SpotifyStatusQuery {
+    spotifyStatus {
+      timestamp
+      isPlaying
+      song {
+        albumImageUrl
+        artist
+        title
+        spotifyUrl
+        album
+      }
+    }
+  }
+`;
+
 export const QUERY_POST = gql`
   ${FRAGMENT_SITE_SETTINGS_SHARED}
 
