@@ -5,10 +5,26 @@ import MediaCard from "../MediaCard";
 
 interface NowPlayingProps {
   spotifyStatus: SpotifyStatus;
+  loading: boolean;
 }
 
 export default function NowPlayingWidget(props: NowPlayingProps) {
-  if (!props.spotifyStatus.song) {
+  if (props.loading) {
+    return (
+      <dl className="list-container">
+        <dt className="list-title">
+          <h3 className="dark:text-silver-dark text-neutral-500">
+            <div className="flex items-center gap-2">Listening</div>
+          </h3>
+        </dt>
+        <dd className="list-content animate-pulse">
+          <MediaCard loading={true} />
+        </dd>
+      </dl>
+    );
+  }
+
+  if (!props.spotifyStatus?.song) {
     return null;
   }
 

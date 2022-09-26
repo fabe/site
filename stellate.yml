@@ -14,8 +14,8 @@ rules:
   - types:
       Query:
         - spotifyStatus
-    maxAge: 240
-    swr: 240
+    maxAge: 120
+    swr: 1800
     description: Close-to-live data
   - types:
       Query:
@@ -24,6 +24,6 @@ rules:
         - post
         - posts
         - siteSettings
-    maxAge: 43200
-    swr: 43200
+    maxAge: 86400
+    swr: 604800
     description: Default lifetime for regular content

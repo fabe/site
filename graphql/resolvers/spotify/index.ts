@@ -58,7 +58,7 @@ export async function getSpotifyStatus(): Promise<SpotifyStatus> {
     const songs = await recentlyPlayedResponse.json();
     const song = songs.items[0];
 
-    if (!song.track) {
+    if (!song?.track) {
       return { isPlaying: false };
     }
 
@@ -86,9 +86,7 @@ export async function getSpotifyStatus(): Promise<SpotifyStatus> {
 
   const song = await nowPlayingResponse.json();
 
-  console.log(song);
-
-  if (!song.item) {
+  if (!song?.item) {
     return { isPlaying: false };
   }
 

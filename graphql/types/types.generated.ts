@@ -208,7 +208,7 @@ export type SiteSettingsSharedFragment = { __typename?: 'SiteSettings', siteTitl
 export type PageHomeQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type PageHomeQueryQuery = { __typename?: 'Query', siteSettings: { __typename?: 'SiteSettings', intro: string, siteTitle: string, metaDescription: string }, spotifyStatus: { __typename?: 'SpotifyStatus', timestamp?: string | null, isPlaying: boolean, song?: { __typename?: 'Song', albumImageUrl?: string | null, artist?: string | null, title?: string | null, spotifyUrl?: string | null, album?: string | null } | null }, books: Array<{ __typename?: 'Book', title: string, author: string, okuUrl: string, coverUrl?: string | null } | null> };
+export type PageHomeQueryQuery = { __typename?: 'Query', siteSettings: { __typename?: 'SiteSettings', intro: string, siteTitle: string, metaDescription: string }, books: Array<{ __typename?: 'Book', title: string, author: string, okuUrl: string, coverUrl?: string | null } | null> };
 
 export type SpotifyStatusQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -233,17 +233,6 @@ export const PageHomeQueryDocument = gql`
   siteSettings {
     intro
     ...SiteSettingsShared
-  }
-  spotifyStatus {
-    timestamp
-    isPlaying
-    song {
-      albumImageUrl
-      artist
-      title
-      spotifyUrl
-      album
-    }
   }
   books: books(limit: 1, collection: READING) {
     title

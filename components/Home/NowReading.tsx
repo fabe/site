@@ -8,6 +8,10 @@ interface NowReadingProps {
 export default function NowReading({ book }: NowReadingProps) {
   const { coverUrl, title, author, okuUrl } = book;
 
+  if (!title) {
+    return null;
+  }
+
   return (
     <dl className="list-container">
       <dt className="list-title">
