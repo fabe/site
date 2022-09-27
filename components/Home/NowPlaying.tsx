@@ -5,7 +5,7 @@ import MediaCard from "../MediaCard";
 
 interface NowPlayingProps {
   spotifyStatus: SpotifyStatus;
-  loading: boolean;
+  loading?: boolean;
 }
 
 export default function NowPlayingWidget(props: NowPlayingProps) {

@@ -14,10 +14,11 @@ import { useQuery } from "@apollo/client";
 import NowReading from "../components/Home/NowReading";
 import { useEffect } from "react";
 import NowPlaying from "../components/Home/NowPlaying";
+import { serialize } from "next-mdx-remote/serialize";
 
 const isDev = process.env.NODE_ENV === "development";
 
-export default function Home() {
+export default function Home({ intro }) {
   const { data } = useQuery<PageHomeQueryQuery>(QUERY_PAGE_HOME);
 
   const {
@@ -25,19 +26,20 @@ export default function Home() {
     startPolling,
     stopPolling,
     refetch,
-    loading,
   } = useQuery<SpotifyStatusQueryQuery>(QUERY_SPOTIFY_STATUS, {
     ssr: false,
     fetchPolicy: "cache-and-network",
+    skip: isDev,
   });
 
   // Refetch every minute for live data to be fresh.
   useEffect(() => {
-    refetch();
-
     if (!isDev) {
-      startPolling(2 * 60 * 1000);
+      refetch();
     }
+
+    startPolling(2 * 60 * 1000);
+
     return () => stopPolling();
   }, []);
 
@@ -50,10 +52,13 @@ export default function Home() {
         }}
       />
       <Main>
-        <Intro />
+        <Intro content={intro} />
         <Resume />
         <Writing />
-        <NowPlaying spotifyStatus={liveData?.spotifyStatus} loading={loading} />
+        <NowPlaying
+          spotifyStatus={liveData?.spotifyStatus || data.spotifyStatus}
+          loading={false}
+        />
         <NowReading book={data.books[0]} />
       </Main>
     </>
@@ -72,9 +77,15 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
     query: QUERY_PAGE_HOME,
   });
 
+  const cache = apolloClient.cache.extract();
+
+  const data = apolloClient.readQuery({ query: QUERY_PAGE_HOME });
+  const intro = await serialize(data.siteSettings.intro);
+
   return {
     props: {
-      initialApolloState: apolloClient.cache.extract(),
+      initialApolloState: { ...cache },
+      intro,
     },
   };
 };
