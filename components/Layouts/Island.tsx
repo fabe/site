@@ -8,7 +8,7 @@ export function Island() {
   return (
     <>
       <nav className="opacity-0 animate-scale origin-left fixed bottom-8 left-1/2 -translate-x-1/2 px-1 py-1 dark:bg-white/[.02] dark:border-white/[.03] border-transparent border backdrop-blur-2xl rounded-full overflow-hidden dark:shadow-xl shadow-fancy z-10">
-        <ul className="flex gap-2 rounded-full">
+        <ul className="flex gap-1 rounded-full">
           <li>
             <Link href="/">
               <a
