@@ -2,6 +2,7 @@ import "../styles/globals.css";
 import type { AppProps as NextAppProps } from "next/app";
 import { ApolloCache, ApolloProvider } from "@apollo/client";
 import { useApollo } from "../graphql/client";
+import { Island } from "../components/Layouts/Island";
 
 type AppProps<P = any> = {
   pageProps: P;
@@ -20,6 +21,7 @@ export default function MyApp({
   return (
     <ApolloProvider client={apolloClient}>
       <Component {...pageProps} />
+      <Island />
     </ApolloProvider>
   );
 }

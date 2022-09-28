@@ -70,6 +70,19 @@ module.exports = {
         normal: "-.0109598em",
         zero: "0",
       },
+      animation: {
+        scale: "scale .4s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards",
+      },
+      keyframes: {
+        scale: {
+          "0%": { transform: "scale(.8) translateX(-50%)", opacity: 0 },
+          "100%": { transform: "scale(1) translateX(-50%)", opacity: 1 },
+        },
+      },
+      boxShadow: {
+        fancy:
+          "0px 0px 0px 1px rgba(25, 37, 50, 0.05), 0px 3px 7px -3px rgba(25, 37, 50, 0.1), 0px 6px 12px -2px rgba(25, 37, 50, 0.1);",
+      },
     },
   },
   plugins: [require("@tailwindcss/typography")],
