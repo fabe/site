@@ -1,10 +1,12 @@
 import {
+  ApolloServerPluginCacheControl,
   ApolloServerPluginLandingPageDisabled,
   ApolloServerPluginLandingPageGraphQLPlayground,
 } from "apollo-server-core";
 import { ApolloServer } from "apollo-server-micro";
 import Cors from "cors";
 import { NextApiRequest, NextApiResponse } from "next";
+import withRateLimit from "../../graphql/helpers/withRateLimit";
 
 const { schema } = require("../../graphql/schema");
 
@@ -35,10 +37,12 @@ export const config = {
 const apolloServer = new ApolloServer({
   schema,
   introspection: true,
+  cache: "bounded",
   plugins: [
     process.env.NODE_ENV === "production"
       ? ApolloServerPluginLandingPageDisabled()
       : ApolloServerPluginLandingPageGraphQLPlayground(),
+    ApolloServerPluginCacheControl({ calculateHttpHeaders: false }),
   ],
 });
 const startServer = apolloServer.start();
@@ -51,5 +55,5 @@ export default async function gqlHandler(
   await cors(req, res);
 
   const handler = await apolloServer.createHandler({ path: "/api/graphql" });
-  return handler(req, res);
+  return withRateLimit(handler)(req, res);
 }

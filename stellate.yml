@@ -6,11 +6,10 @@ rootTypeNames:
   query: Query
 rules:
   - types:
-      Query:
-        - playlists
+      Query: true
+    description: Cache all queries
     maxAge: 604800
     swr: 604800
-    description: Longest time for almost never changing data
   - types:
       Query:
         - spotifyStatus
