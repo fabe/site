@@ -4,7 +4,7 @@ import Writing from "../components/Home/Writing";
 import { Main } from "../components/Layouts";
 import { SEO } from "../components/SEO";
 import { initializeApollo } from "../graphql/client";
-import type { GetServerSideProps } from "next";
+import type { GetServerSideProps, GetStaticProps } from "next";
 import { QUERY_PAGE_HOME, QUERY_SPOTIFY_STATUS } from "../graphql/queries";
 import {
   PageHomeQueryQuery,
@@ -15,8 +15,6 @@ import NowReading from "../components/Home/NowReading";
 import { useEffect } from "react";
 import NowPlaying from "../components/Home/NowPlaying";
 import { serialize } from "next-mdx-remote/serialize";
-
-const isDev = process.env.NODE_ENV === "development";
 
 export default function Home({ intro }) {
   const { data } = useQuery<PageHomeQueryQuery>(QUERY_PAGE_HOME);
@@ -59,13 +57,13 @@ export default function Home({ intro }) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+export const getStaticProps: GetStaticProps = async () => {
   const apolloClient = initializeApollo();
 
-  res.setHeader(
-    "Cache-Control",
-    "public, s-maxage=86400, stale-while-revalidate=604800"
-  );
+  // res.setHeader(
+  //   "Cache-Control",
+  //   "public, s-maxage=86400, stale-while-revalidate=604800"
+  // );
 
   await apolloClient.query({
     query: QUERY_PAGE_HOME,
