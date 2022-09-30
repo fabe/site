@@ -13,10 +13,10 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@apollo/client": "^3.6.9",
+    "@apollo/client": "^3.7.0",
     "@graphql-tools/schema": "^9.0.4",
-    "@markdoc/markdoc": "^0.1.7",
-    "@markdoc/next.js": "^0.1.6",
+    "@markdoc/markdoc": "^0.1.12",
+    "@markdoc/next.js": "^0.1.10",
     "apollo-server-core": "^3.10.2",
     "apollo-server-micro": "^3.10.2",
     "contentful": "^9.1.32",
@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "@graphql-codegen/add": "^3.2.1",
-    "@graphql-codegen/cli": "2.13.0",
+    "@graphql-codegen/cli": "2.13.1",
     "@graphql-codegen/typescript": "2.7.3",
     "@graphql-codegen/typescript-operations": "2.5.3",
     "@graphql-codegen/typescript-react-apollo": "3.3.3",
@@ -47,7 +47,7 @@
     "autoprefixer": "^10.4.7",
     "eslint": "8.24.0",
     "eslint-config-next": "12.3.1",
-    "postcss": "^8.4.14",
+    "postcss": "^8.4.17",
     "prettier": "^2.7.1",
     "tailwindcss": "^3.1.6",
     "typescript": "^4.7.4"

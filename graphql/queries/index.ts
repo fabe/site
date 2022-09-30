@@ -21,17 +21,6 @@ export const QUERY_PAGE_HOME = gql`
       okuUrl
       coverUrl
     }
-    spotifyStatus {
-      timestamp
-      isPlaying
-      song {
-        albumImageUrl
-        artist
-        title
-        spotifyUrl
-        album
-      }
-    }
   }
 `;
 

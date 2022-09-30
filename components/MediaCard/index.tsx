@@ -48,7 +48,7 @@ export default function MediaCard({
           <Image
             alt={image?.alt || ""}
             title={title}
-            className="bg-gray-200 rounded dark:bg-zinc-600"
+            className="bg-gray-200 rounded dark:bg-zinc-600 truncate"
             src={image?.src || ""}
             width={image?.width}
             height={image?.height}

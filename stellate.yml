@@ -13,7 +13,7 @@ rules:
   - types:
       Query:
         - spotifyStatus
-    maxAge: 120
+    maxAge: 600
     swr: 604800
     description: Close-to-live data
   - types:

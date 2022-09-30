@@ -38,7 +38,6 @@ function createApolloClient(context?: ResolverContext) {
     ssrMode: typeof window === "undefined",
     link: createIsomorphLink(context),
     cache: new InMemoryCache(),
-    ssrForceFetchDelay: 1000,
   });
 }
 

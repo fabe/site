@@ -26,19 +26,16 @@ export default function Home({ intro }) {
     startPolling,
     stopPolling,
     refetch,
+    loading,
   } = useQuery<SpotifyStatusQueryQuery>(QUERY_SPOTIFY_STATUS, {
     ssr: false,
     fetchPolicy: "cache-and-network",
-    skip: isDev,
   });
 
   // Refetch every minute for live data to be fresh.
   useEffect(() => {
-    if (!isDev) {
-      refetch();
-    }
-
-    startPolling(2 * 60 * 1000);
+    refetch();
+    startPolling(3 * 60 * 1000);
 
     return () => stopPolling();
   }, []);
@@ -55,10 +52,7 @@ export default function Home({ intro }) {
         <Intro content={intro} />
         <Resume />
         <Writing />
-        <NowPlaying
-          spotifyStatus={liveData?.spotifyStatus || data.spotifyStatus}
-          loading={false}
-        />
+        <NowPlaying spotifyStatus={liveData?.spotifyStatus} loading={loading} />
         <NowReading book={data.books[0]} />
       </Main>
     </>
@@ -70,7 +64,7 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 
   res.setHeader(
     "Cache-Control",
-    "public, s-maxage=43200, stale-while-revalidate=60"
+    "public, s-maxage=86400, stale-while-revalidate=604800"
   );
 
   await apolloClient.query({
