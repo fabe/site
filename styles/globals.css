@@ -38,7 +38,7 @@ p {
 
 [cmdk-overlay] {
   @apply bg-neutral-950/[.20];
-  @apply dark:bg-neutral-950/[.70];
+  @apply dark:bg-black/[.70];
   @apply fixed left-0 top-0;
   @apply h-full w-full;
   @apply z-10;
@@ -217,7 +217,7 @@ p {
 
   .island {
     @apply bg-white/[.98];
-    @apply dark:bg-neutral-950/[.98];
+    @apply dark:bg-neutral-900/[.98];
     @apply border-transparent;
     @apply dark:border-white/[.03];
     @apply border;

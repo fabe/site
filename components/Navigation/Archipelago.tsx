@@ -94,7 +94,7 @@ export function Archipelago() {
       >
         <ul>
           <CSSTransitionGroup
-            className="relative flex h-[46px] gap-2"
+            className="relative flex h-12 gap-2"
             transitionName="island"
             transitionEnterTimeout={500}
             transitionLeaveTimeout={300}

@@ -1,16 +1,16 @@
 export default function Footer() {
   return (
-    <footer className="flex justify-center m:px-0 mt-10 sm:mt-20 w-full border-t border-solid dark:border-neutral-950 border:neutral-200">
-      <div className="flex-1 max-w-main">
-        <div className="flex w-full gap-4 pt-4 items-center justify-between">
-          <div className="flex gap-1.5 dark:text-silver-dark text-neutral-500 text-xs tracking-xs">
+    <footer className="m:px-0 border:neutral-200 mt-10 flex w-full justify-center border-t border-solid dark:border-neutral-950 sm:mt-20">
+      <div className="max-w-main flex-1">
+        <div className="flex w-full items-center justify-between gap-4 pt-4">
+          <div className="flex gap-1.5 text-xs tracking-xs text-neutral-500 dark:text-silver-dark">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="7"
               height="16"
               fill="none"
               viewBox="0 0 7 16"
-              className="dark:fill-silver-dark fill-neutral-500"
+              className="fill-neutral-500 dark:fill-silver-dark"
             >
               <path d="M3 6.5h1v6l-.5 1-.5-1v-6z"></path>
               <path
@@ -19,7 +19,7 @@ export default function Footer() {
                 clipRule="evenodd"
               ></path>
             </svg>
-            Potsdam, Germany &middot; {new Date().getFullYear()}
+            Potsdam, Germany
           </div>
           <div className="flex">
             <a
