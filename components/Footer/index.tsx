@@ -2,7 +2,7 @@ export default function Footer() {
   return (
     <footer className="flex justify-center m:px-0 mt-10 sm:mt-20 w-full border-t border-solid dark:border-neutral-950 border:neutral-200">
       <div className="flex-1 max-w-main">
-        <div className="flex w-full gap-4 pt-4 items-center justify-between sm:pb-16 pb-5">
+        <div className="flex w-full gap-4 pt-4 items-center justify-between">
           <div className="flex gap-1.5 dark:text-silver-dark text-neutral-500 text-xs tracking-xs">
             <svg
               xmlns="http://www.w3.org/2000/svg"

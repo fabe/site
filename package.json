@@ -19,6 +19,7 @@
     "@markdoc/next.js": "^0.1.10",
     "apollo-server-core": "^3.10.2",
     "apollo-server-micro": "^3.10.2",
+    "cmdk": "^0.1.20",
     "contentful": "^9.1.32",
     "cors": "^2.8.5",
     "date-fns": "^2.29.2",
@@ -31,6 +32,7 @@
     "next-seo": "^5.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-transition-group": "1.x",
     "rss-parser": "^3.12.0",
     "uuid": "^9.0.0"
   },

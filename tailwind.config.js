@@ -54,6 +54,7 @@ module.exports = {
       transitionTimingFunction: {
         "in-expo": "cubic-bezier(0.95, 0.05, 0.795, 0.035)",
         "out-expo": "cubic-bezier(0.215, 0.61, 0.355, 1)",
+        spring: "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
       },
       maxWidth: {
         main: "44rem",
@@ -75,11 +76,12 @@ module.exports = {
       },
       keyframes: {
         scale: {
-          "0%": { transform: "scale(.8) translateX(-50%)", opacity: 0 },
-          "100%": { transform: "scale(1) translateX(-50%)", opacity: 1 },
+          "0%": { transform: "scale(.8)", opacity: 0 },
+          "100%": { transform: "scale(1)", opacity: 1 },
         },
       },
       boxShadow: {
+        dark: "0 16px 70px rgb(0 0 0 / 20%)",
         fancy:
           "0px 0px 0px 1px rgba(25, 37, 50, 0.05), 0px 3px 7px -3px rgba(25, 37, 50, 0.1), 0px 6px 12px -2px rgba(25, 37, 50, 0.1);",
       },

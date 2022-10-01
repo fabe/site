@@ -4,12 +4,12 @@
 
 html,
 body {
-  @apply dark:bg-black bg-gray-50;
+  @apply dark:bg-[#010101] bg-gray-50;
   @apply dark:text-silver text-neutral-900;
   @apply antialiased;
   @apply tracking-normal;
 
-  @apply dark:selection:bg-indigo-900 selection:bg-indigo-300;
+  @apply dark:selection:bg-indigo-900 selection:bg-indigo-500 selection:text-white;
   text-rendering: optimizeLegibility;
   font-feature-settings: "cv10" on;
 }
@@ -34,6 +34,102 @@ p {
   font-weight: 400;
   font-display: swap;
   src: url(/literata.roman.var.woff2) format("woff2");
+}
+
+[cmdk-overlay] {
+  @apply bg-neutral-950/[.20];
+  @apply dark:bg-neutral-950/[.70];
+  @apply fixed left-0 top-0;
+  @apply w-full h-full;
+  @apply z-10;
+  @apply backdrop-blur-sm backdrop-saturate-150;
+}
+
+[cmdk-dialog] {
+  @apply max-w-md;
+  @apply w-full;
+  @apply fixed top-[20%] left-1/2;
+  @apply flex justify-center items-start;
+  @apply -translate-x-1/2;
+  @apply z-20;
+  @apply px-4;
+}
+
+[cmdk-root] {
+  @apply bg-white/[.98];
+  @apply dark:bg-neutral-950/[.98];
+  @apply border-transparent;
+  @apply dark:border-neutral-800;
+  @apply border;
+  @apply rounded-xl;
+  @apply backdrop-blur-lg;
+  @apply w-full;
+  @apply shadow-fancy;
+  @apply dark:shadow-dark;
+}
+
+[cmdk-input] {
+  @apply appearance-none;
+  @apply dark:text-silver text-neutral-900;
+  @apply dark:placeholder:text-neutral-600 placeholder:text-neutral-400;
+  @apply bg-transparent;
+  @apply w-full;
+  @apply px-5 py-3 pb-0;
+  /* @apply border-b dark:border-neutral-800; */
+  @apply outline-none;
+  @apply text-lg;
+}
+
+[cmdk-list] {
+  @apply py-2 px-2;
+}
+
+[cmdk-item] {
+  @apply px-3;
+  @apply flex items-center gap-2;
+  @apply px-3 py-2;
+  @apply rounded-md;
+  @apply cursor-pointer;
+  @apply dark:text-silver-dark text-neutral-600;
+  @apply transition-colors;
+}
+
+[cmdk-item][aria-selected] {
+  @apply dark:bg-neutral-800 bg-neutral-200/[.7];
+  @apply dark:text-silver text-neutral-950;
+}
+
+[cmdk-empty] {
+  @apply px-3 py-3;
+  @apply text-sm dark:text-silver-dark text-neutral-600 font-medium tracking-xs;
+}
+
+[cmdk-separator] {
+  @apply border-b dark:border-neutral-800;
+  @apply my-2;
+}
+
+[cmdk-group-heading] {
+  @apply px-3 py-2;
+  @apply text-xs dark:text-silver-dark text-neutral-600 font-medium tracking-xs;
+}
+
+.island-enter {
+  @apply opacity-[.01] scale-50;
+}
+
+.island-enter.island-enter-active {
+  @apply opacity-100 scale-100;
+  @apply transition-all duration-500 ease-spring;
+}
+
+.island-leave {
+  @apply opacity-100 scale-100;
+}
+
+.island-leave.island-leave-active {
+  @apply opacity-[.01] scale-50;
+  @apply transition-all duration-300 ease-spring;
 }
 
 @layer components {
@@ -95,6 +191,22 @@ p {
 
   .list-content {
     @apply sm:col-span-8 col-span-12;
+  }
+
+  .island {
+    @apply bg-white/[.98];
+    @apply dark:bg-neutral-950/[.98];
+    @apply border-transparent;
+    @apply dark:border-white/[.03];
+    @apply border;
+    @apply dark:shadow-xl;
+    @apply shadow-fancy;
+    @apply px-3 py-3;
+    @apply rounded-full;
+    @apply inline-flex;
+    @apply active:scale-90;
+    @apply hover:scale-110;
+    @apply transition-all;
   }
 }
 
