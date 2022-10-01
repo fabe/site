@@ -4,12 +4,12 @@
 
 html,
 body {
-  @apply dark:bg-[#010101] bg-gray-50;
-  @apply dark:text-silver text-neutral-900;
+  @apply bg-gray-50 dark:bg-[#010101];
+  @apply text-neutral-900 dark:text-silver;
   @apply antialiased;
   @apply tracking-normal;
 
-  @apply dark:selection:bg-indigo-900 selection:bg-indigo-500 selection:text-white;
+  @apply selection:bg-indigo-500 selection:text-white dark:selection:bg-indigo-900;
   text-rendering: optimizeLegibility;
   font-feature-settings: "cv10" on;
 }
@@ -40,7 +40,7 @@ p {
   @apply bg-neutral-950/[.20];
   @apply dark:bg-neutral-950/[.70];
   @apply fixed left-0 top-0;
-  @apply w-full h-full;
+  @apply h-full w-full;
   @apply z-10;
   @apply backdrop-blur-sm backdrop-saturate-150;
 }
@@ -49,7 +49,7 @@ p {
   @apply max-w-md;
   @apply w-full;
   @apply fixed top-[20%] left-1/2;
-  @apply flex justify-center items-start;
+  @apply flex items-start justify-center;
   @apply -translate-x-1/2;
   @apply z-20;
   @apply px-4;
@@ -70,8 +70,8 @@ p {
 
 [cmdk-input] {
   @apply appearance-none;
-  @apply dark:text-silver text-neutral-900;
-  @apply dark:placeholder:text-neutral-600 placeholder:text-neutral-400;
+  @apply text-neutral-900 dark:text-silver;
+  @apply placeholder:text-neutral-400 dark:placeholder:text-neutral-600;
   @apply bg-transparent;
   @apply w-full;
   @apply px-5 py-3 pb-0;
@@ -82,6 +82,8 @@ p {
 
 [cmdk-list] {
   @apply py-2 px-2;
+  @apply transition-all;
+  height: calc(var(--cmdk-list-height) + 16px);
 }
 
 [cmdk-item] {
@@ -90,18 +92,18 @@ p {
   @apply px-3 py-2;
   @apply rounded-md;
   @apply cursor-pointer;
-  @apply dark:text-silver-dark text-neutral-600;
+  @apply text-neutral-600 dark:text-silver-dark;
   @apply transition-colors;
 }
 
 [cmdk-item][aria-selected] {
-  @apply dark:bg-neutral-800 bg-neutral-200/[.7];
-  @apply dark:text-silver text-neutral-950;
+  @apply bg-neutral-200/[.7] dark:bg-neutral-800;
+  @apply text-neutral-950 dark:text-silver;
 }
 
 [cmdk-empty] {
   @apply px-3 py-3;
-  @apply text-sm dark:text-silver-dark text-neutral-600 font-medium tracking-xs;
+  @apply text-sm font-medium tracking-xs text-neutral-600 dark:text-silver-dark;
 }
 
 [cmdk-separator] {
@@ -111,25 +113,45 @@ p {
 
 [cmdk-group-heading] {
   @apply px-3 py-2;
-  @apply text-xs dark:text-silver-dark text-neutral-600 font-medium tracking-xs;
+  @apply text-xs font-medium tracking-xs text-neutral-600 dark:text-silver-dark;
 }
 
+/* Animations */
+
 .island-enter {
-  @apply opacity-[.01] scale-50;
+  @apply scale-50 opacity-[.01];
 }
 
 .island-enter.island-enter-active {
-  @apply opacity-100 scale-100;
+  @apply scale-100 opacity-100;
   @apply transition-all duration-500 ease-spring;
 }
 
 .island-leave {
-  @apply opacity-100 scale-100;
+  @apply scale-100 opacity-100;
 }
 
 .island-leave.island-leave-active {
-  @apply opacity-[.01] scale-50;
-  @apply transition-all duration-300 ease-spring;
+  @apply scale-50 opacity-[.01];
+  @apply transition-all duration-300 ease-in-out;
+}
+
+.tooltip-enter {
+  @apply translate-y-1 opacity-[.01];
+}
+
+.tooltip-enter.tooltip-enter-active {
+  @apply translate-y-0 opacity-100;
+  @apply transition-all duration-200 ease-in-out;
+}
+
+.tooltip-leave {
+  @apply translate-y-0 opacity-100;
+}
+
+.tooltip-leave.tooltip-leave-active {
+  @apply translate-y-1 opacity-[.01];
+  @apply transition-all duration-200 ease-in-out;
 }
 
 @layer components {
@@ -137,8 +159,8 @@ p {
     @apply underline;
     @apply decoration-1.5;
     @apply underline-offset-2.5;
-    @apply dark:decoration-neutral-800 decoration-neutral-300;
-    @apply dark:hover:decoration-neutral-600 hover:decoration-neutral-400;
+    @apply decoration-neutral-300 dark:decoration-neutral-800;
+    @apply hover:decoration-neutral-400 dark:hover:decoration-neutral-600;
     @apply motion-safe:transition;
     @apply duration-150;
     @apply ease-out-expo;
@@ -172,25 +194,25 @@ p {
     @apply font-sans;
     @apply block;
     @apply text-sm;
-    @apply dark:text-silver-dark text-neutral-500;
+    @apply text-neutral-500 dark:text-silver-dark;
     @apply pt-1;
     @apply tracking-sm;
   }
 
   .badge {
-    @apply flex items-center gap-1 text-xs dark:bg-neutral-950 bg-gray-200 dark:text-silver-dark text-neutral-700 rounded-xl font-medium px-1.5 tracking-xs py-0.5;
+    @apply flex items-center gap-1 rounded-xl bg-gray-200 px-1.5 py-0.5 text-xs font-medium tracking-xs text-neutral-700 dark:bg-neutral-950 dark:text-silver-dark;
   }
 
   .list-container {
-    @apply grid sm:mb-20 mb-12 grid-cols-12 gap-4;
+    @apply mb-12 grid grid-cols-12 gap-4 sm:mb-20;
   }
 
   .list-title {
-    @apply sm:col-span-4 col-span-12;
+    @apply col-span-12 sm:col-span-4;
   }
 
   .list-content {
-    @apply sm:col-span-8 col-span-12;
+    @apply col-span-12 sm:col-span-8;
   }
 
   .island {
@@ -201,11 +223,11 @@ p {
     @apply border;
     @apply dark:shadow-xl;
     @apply shadow-fancy;
-    @apply px-3 py-3;
+    @apply h-12 w-12;
     @apply rounded-full;
-    @apply inline-flex;
-    @apply active:scale-90;
+    @apply inline-flex items-center justify-center;
     @apply hover:scale-110;
+    @apply active:scale-90;
     @apply transition-all;
   }
 }
@@ -225,12 +247,12 @@ p {
     @apply gap-1;
     @apply text-sm;
     @apply px-2;
-    @apply dark:bg-neutral-950 bg-gray-200 dark:text-silver-dark text-neutral-700 rounded-lg dark:hover:bg-neutral-900 hover:bg-gray-300 transition-colors;
+    @apply rounded-lg bg-gray-200 text-neutral-700 transition-colors hover:bg-gray-300 dark:bg-neutral-950 dark:text-silver-dark dark:hover:bg-neutral-900;
   }
 
   .link-external svg {
     @apply decoration-transparent;
-    @apply dark:text-silver-dark text-neutral-400;
+    @apply text-neutral-400 dark:text-silver-dark;
   }
 
   .link-back:hover svg {
@@ -252,9 +274,9 @@ p {
     @apply text-xs;
     @apply decoration-1.5;
     @apply underline-offset-1.5;
-    @apply dark:text-silver-dark text-neutral-500;
-    @apply dark:decoration-neutral-800 decoration-neutral-300;
-    @apply dark:hover:decoration-neutral-600 hover:decoration-neutral-400;
+    @apply text-neutral-500 dark:text-silver-dark;
+    @apply decoration-neutral-300 dark:decoration-neutral-800;
+    @apply hover:decoration-neutral-400 dark:hover:decoration-neutral-600;
     @apply tracking-xs;
   }
 }
