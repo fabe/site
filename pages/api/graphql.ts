@@ -42,7 +42,6 @@ const apolloServer = new ApolloServer({
     process.env.NODE_ENV === "production"
       ? ApolloServerPluginLandingPageDisabled()
       : ApolloServerPluginLandingPageGraphQLPlayground(),
-    ApolloServerPluginCacheControl({ calculateHttpHeaders: false }),
   ],
 });
 const startServer = apolloServer.start();
