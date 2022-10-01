@@ -10,12 +10,19 @@ import {
   TwitterIcon,
 } from "../Icons";
 import { CSSTransitionGroup } from "react-transition-group";
+import { Tooltip } from "../Tooltip";
+
+enum TooltipState {
+  HOME,
+  MENU,
+}
 
 export function Archipelago() {
   const router = useRouter();
   const currentRoute = router.pathname;
-  const [open, setOpen] = useState(false);
   const isHome = currentRoute === "/";
+  const [open, setOpen] = useState(false);
+  const [tooltip, setTooltip] = useState<TooltipState>(undefined);
 
   const navigate = async (href) => {
     if (!href) return;
@@ -80,18 +87,27 @@ export function Archipelago() {
         </Command.List>
       </Command.Dialog>
 
-      <nav className="opacity-0 animate-scale fixed md:bottom-8 md:left-8 bottom-4 left-4 z-10">
+      <nav
+        className={`${
+          isHome ? "w-12" : "w-28"
+        } fixed bottom-4 left-4 z-10 animate-scale opacity-0 md:bottom-8 md:left-8`}
+      >
         <ul>
           <CSSTransitionGroup
-            className="relative flex gap-2 h-[46px]"
+            className="relative flex h-[46px] gap-2"
             transitionName="island"
             transitionEnterTimeout={500}
             transitionLeaveTimeout={300}
           >
             {!isHome ? (
-              <li className="absolute left-0">
+              <li
+                className="absolute left-0 rounded-full"
+                onMouseEnter={() => setTooltip(TooltipState.HOME)}
+                onMouseLeave={() => setTooltip(undefined)}
+              >
+                <Tooltip open={tooltip === TooltipState.HOME}>Home</Tooltip>
                 <Link href="/">
-                  <a title="Go home" className="island">
+                  <a title="Go home" className="island" tabIndex={1}>
                     <span className="sr-only">Go home</span>
                     <HomeIcon size={20} />
                   </a>
@@ -99,13 +115,17 @@ export function Archipelago() {
               </li>
             ) : null}
             <li
-              className={`absolute transition-all duration-250 ease-out-expo ${
-                !isHome ? "left-14 delay-50" : "left-0 delay-300"
+              className={`duration-250 absolute rounded-full transition-all ease-out-expo ${
+                !isHome ? "delay-50 left-14" : "left-0 delay-300"
               }`}
+              onMouseEnter={() => setTooltip(TooltipState.MENU)}
+              onMouseLeave={() => setTooltip(undefined)}
             >
+              <Tooltip open={tooltip === TooltipState.MENU}>Menu</Tooltip>
               <button
                 title="Open menu"
                 className="island"
+                tabIndex={1}
                 onClick={() => setOpen((open) => !open)}
               >
                 <span className="sr-only">Open menu</span>
