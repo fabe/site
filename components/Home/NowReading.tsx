@@ -15,7 +15,7 @@ export default function NowReading({ book }: NowReadingProps) {
   return (
     <dl className="list-container">
       <dt className="list-title">
-        <h3 className="dark:text-silver-dark text-neutral-500">Reading</h3>
+        <h3 className="text-neutral-500 dark:text-silver-dark">Reading</h3>
       </dt>
 
       <dd className="list-content">

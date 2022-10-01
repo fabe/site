@@ -18,7 +18,7 @@ import { Tag, nodes } from "@markdoc/markdoc";
 import { getSchema } from "@markdoc/next.js/runtime";
 
 const CustomDocumentComponent = ({ children }) => (
-  <div className="prose prose-neutral dark:prose-invert prose-a:link col-span-10 col-start-2 max-w-xl prose-img:rounded-lg prose-pre:bg-neutral-950 prose-pre:-ml-4 prose-pre:-mr-4 prose-pre:text-sm prose-headings:font-normal prose-headings:[font-variation-settings:'wght'_550] prose-strong:font-normal prose-strong:[font-variation-settings:'wght'_550] prose-hr:border-neutral-900 prose-code:font-normal prose-code:bg-neutral-950 prose-code:p-1 prose-code:rounded-md prose-em:not-italic prose-em:decoration-wavy prose-em:underline prose-em:decoration-neutral-800">
+  <div className="prose-a:link prose prose-neutral col-span-10 col-start-2 max-w-xl prose-headings:font-normal prose-headings:[font-variation-settings:'wght'_550] prose-strong:font-normal prose-strong:[font-variation-settings:'wght'_550] prose-em:not-italic prose-em:underline prose-em:decoration-neutral-800 prose-em:decoration-wavy prose-code:rounded-md prose-code:bg-neutral-950 prose-code:p-1 prose-code:font-normal prose-pre:-ml-4 prose-pre:-mr-4 prose-pre:bg-neutral-950 prose-pre:text-sm prose-img:rounded-lg prose-hr:border-neutral-900 dark:prose-invert">
     {children}
   </div>
 );
@@ -92,10 +92,10 @@ export default function Post(props) {
       />
       <Main>
         <header>
-          <h1 className="[font-variation-settings:'wght'_450] dark:text-white text-neutral-900 text-3xl tracking-tight">
+          <h1 className="text-3xl tracking-tight text-neutral-900 [font-variation-settings:'wght'_450] dark:text-white">
             {title}
           </h1>
-          <div className="flex flex-row justify-between mt-10 mb-14 sm:mt-4 pb-4 w-full border-b border-solid dark:border-neutral-900 border:neutral-200">
+          <div className="border:neutral-200 mt-10 mb-14 flex w-full flex-row justify-between border-b border-solid pb-4 dark:border-neutral-900 sm:mt-4">
             <div className="flex flex-row items-center gap-3">
               <Link href="/">
                 <a className="flex flex-row items-center gap-2 [font-variation-settings:'wght'_450]">
@@ -103,7 +103,7 @@ export default function Post(props) {
                     <Image
                       alt={data.siteSettings.siteTitle}
                       title={data.siteSettings.siteTitle}
-                      className="bg-gray-200 rounded-full dark:bg-zinc-600"
+                      className="rounded-full bg-gray-200 dark:bg-zinc-600"
                       src={data.siteSettings.avatar.url || ""}
                       width={32}
                       height={32}
@@ -124,7 +124,7 @@ export default function Post(props) {
           </div>
         </header>
 
-        <div className="flex justify-center -mb-6">
+        <div className="-mb-6 flex justify-center">
           {Markdoc.renderers.react(content, React, {
             components: {
               CustomDocument: CustomDocumentComponent,

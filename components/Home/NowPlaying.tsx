@@ -13,7 +13,7 @@ export default function NowPlayingWidget(props: NowPlayingProps) {
     return (
       <dl className="list-container">
         <dt className="list-title">
-          <h3 className="dark:text-silver-dark text-neutral-500">
+          <h3 className="text-neutral-500 dark:text-silver-dark">
             <div className="flex items-center gap-2">Listening</div>
           </h3>
         </dt>
@@ -34,7 +34,7 @@ export default function NowPlayingWidget(props: NowPlayingProps) {
   return (
     <dl className="list-container">
       <dt className="list-title">
-        <h3 className="dark:text-silver-dark text-neutral-500">
+        <h3 className="text-neutral-500 dark:text-silver-dark">
           <div className="flex items-center gap-2">
             Listening
             {isPlaying ? (

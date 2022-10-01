@@ -8,11 +8,11 @@ export default function Badge({ isLive = false, children }: BadgeProps) {
     <span className="badge">
       {isLive ? (
         <span
-          className="relative flex w-2 h-2 items-center justify-center"
+          className="relative flex h-2 w-2 items-center justify-center"
           aria-hidden
         >
-          <span className="absolute inline-flex w-full h-full bg-red-600 rounded-full opacity-85 dark:opacity-30 dark:bg-rose-400 animate-ping"></span>
-          <span className="relative inline-flex w-1 h-1 bg-red-600 rounded-full dark:bg-rose-400"></span>
+          <span className="opacity-85 absolute inline-flex h-full w-full animate-ping rounded-full bg-red-600 dark:bg-rose-400 dark:opacity-30"></span>
+          <span className="relative inline-flex h-1 w-1 rounded-full bg-red-600 dark:bg-rose-400"></span>
         </span>
       ) : null}
       {children}

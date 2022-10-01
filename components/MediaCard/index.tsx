@@ -25,30 +25,30 @@ export default function MediaCard({
 }: MediaCardProps) {
   const loadingComponent = (
     <div
-      className="flex items-center gap-4 group animate-pulse"
+      className="group flex animate-pulse items-center gap-4"
       title="Loading..."
     >
       <div className="relative">
         <div className="relative">
-          <span className="block dark:opacity-100 opacity-70 bg-gray-200 rounded dark:bg-zinc-900 h-12 w-12"></span>
+          <span className="block h-12 w-12 rounded bg-gray-200 opacity-70 dark:bg-zinc-900 dark:opacity-100"></span>
         </div>
       </div>
 
       <div className="w-full">
-        <span className="block dark:opacity-100 opacity-70 bg-gray-200 rounded dark:bg-zinc-900 h-5 mb-2 w-1/2"></span>
-        <span className="block dark:opacity-100 opacity-70 bg-gray-200 rounded dark:bg-zinc-900 h-4 w-1/3"></span>
+        <span className="mb-2 block h-5 w-1/2 rounded bg-gray-200 opacity-70 dark:bg-zinc-900 dark:opacity-100"></span>
+        <span className="block h-4 w-1/3 rounded bg-gray-200 opacity-70 dark:bg-zinc-900 dark:opacity-100"></span>
       </div>
     </div>
   );
 
   const cardComponent = (
-    <div className="flex items-center gap-4 group">
+    <div className="group flex items-center gap-4">
       <div className="relative">
-        <div className="relative z-10 drop-shadow-md group-hover:scale-110 origin-center transition-transform">
+        <div className="relative z-10 origin-center drop-shadow-md transition-transform group-hover:scale-110">
           <Image
             alt={image?.alt || ""}
             title={title}
-            className="bg-gray-200 rounded dark:bg-zinc-600 truncate"
+            className="truncate rounded bg-gray-200 dark:bg-zinc-600"
             src={image?.src || ""}
             width={image?.width}
             height={image?.height}
@@ -57,7 +57,7 @@ export default function MediaCard({
         </div>
 
         <div
-          className="absolute top-0 left-0 z-0 dark:opacity-30 opacity-50 blur-lg dark:group-hover:opacity-20 group-hover:opacity-30 transition-opacity"
+          className="absolute top-0 left-0 z-0 opacity-50 blur-lg transition-opacity group-hover:opacity-30 dark:opacity-30 dark:group-hover:opacity-20"
           aria-hidden="true"
         >
           <Image
@@ -70,9 +70,9 @@ export default function MediaCard({
         </div>
       </div>
 
-      <div className="w-full truncate group-hover:translate-x-0.5 transition-transform">
+      <div className="w-full truncate transition-transform group-hover:translate-x-0.5">
         <div className="truncate">{title}</div>
-        <div className="text-sm tracking-sm dark:text-silver-dark text-neutral-500 truncate">
+        <div className="truncate text-sm tracking-sm text-neutral-500 dark:text-silver-dark">
           {subtitle}
         </div>
       </div>

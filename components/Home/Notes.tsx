@@ -9,7 +9,7 @@ export default function Notes() {
         </div>
       </dt>
       <dd className="list-content">
-        <div className="note mb-2 sm:-ml-4 ml-0">
+        <div className="note mb-2 ml-0 sm:-ml-4">
           This is merely a test.
           <time className="time" dateTime="YYYY-MM-DDThh:mm:ssTZD">
             August 20, 2022
