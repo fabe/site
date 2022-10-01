@@ -1,71 +1,27 @@
-import { useQuery } from "@apollo/client";
-import type { GetServerSideProps } from "next";
+import type { GetStaticProps } from "next";
 import { Main } from "../../components/Layouts";
 import { baseUrl, SEO } from "../../components/SEO";
 import { initializeApollo } from "../../graphql/client";
 import { QUERY_POST } from "../../graphql/queries";
-import { PostQueryQuery } from "../../graphql/types/types.generated";
 import { useRouter } from "next/router";
-import Markdoc from "@markdoc/markdoc";
-import React, { Children, useMemo } from "react";
+import React from "react";
 import Image from "next/future/image";
 import Badge from "../../components/Badge";
 import { format } from "date-fns";
 import { LinkShare } from "../../components/Links";
 import Link from "next/link";
-import { Tag, nodes } from "@markdoc/markdoc";
-
-import { getSchema } from "@markdoc/next.js/runtime";
-
-const CustomDocumentComponent = ({ children }) => (
-  <div className="prose-a:link prose prose-neutral col-span-10 col-start-2 max-w-xl prose-headings:font-normal prose-headings:[font-variation-settings:'wght'_550] prose-strong:font-normal prose-strong:[font-variation-settings:'wght'_550] prose-em:not-italic prose-em:underline prose-em:decoration-neutral-800 prose-em:decoration-wavy prose-code:rounded-md prose-code:bg-neutral-950 prose-code:p-1 prose-code:font-normal prose-pre:-ml-4 prose-pre:-mr-4 prose-pre:bg-neutral-950 prose-pre:text-sm prose-img:rounded-lg prose-hr:border-neutral-900 dark:prose-invert">
-    {children}
-  </div>
-);
-
-const customDocument = {
-  ...nodes.document,
-  render: CustomDocumentComponent,
-  transform(node, config) {
-    return new Tag(
-      "CustomDocument",
-      { source: config.source },
-      node.transformChildren(config)
-    );
-  },
-};
-
-const markdocSchema = {
-  nodes: {
-    document: customDocument,
-  },
-};
+import { serialize } from "next-mdx-remote/serialize";
+import { MDXRemote } from "next-mdx-remote";
+import { mdxComponents } from "../../components/Prose";
 
 export default function Post(props) {
   const router = useRouter();
   const slug = router.query.slug;
 
-  const { data, error } = useQuery<PostQueryQuery>(QUERY_POST, {
-    variables: {
-      slug,
-    },
-  });
-
-  const { title, metaDescription, publishedDate } = data.post || {};
+  const { title, metaDescription, publishedDate } = props.post || {};
   const url = `${baseUrl}/posts/${slug}`;
 
-  const content = useMemo(() => {
-    if (!data.post?.body) return null;
-
-    const schema = getSchema(markdocSchema);
-
-    const ast = Markdoc.parse(data.post.body);
-    return Markdoc.transform(ast, {
-      ...schema,
-    });
-  }, [data]);
-
-  if (!data.post?.body) {
+  if (!props.post.title) {
     return (
       <>
         <SEO
@@ -80,8 +36,6 @@ export default function Post(props) {
     );
   }
 
-  console.log();
-
   return (
     <>
       <SEO
@@ -91,25 +45,29 @@ export default function Post(props) {
         }}
       />
       <Main>
-        <header>
-          <h1 className="text-3xl tracking-tight text-neutral-900 [font-variation-settings:'wght'_450] dark:text-white">
-            {title}
+        <header className="mb-6 rounded-lg sm:mb-12">
+          <h1 className="pb-4 text-2xl tracking-tight text-neutral-900 [font-variation-settings:'wght'_450] dark:text-white sm:text-3xl">
+            <Link href={url}>
+              <a>{title}</a>
+            </Link>
           </h1>
-          <div className="border:neutral-200 mt-10 mb-14 flex w-full flex-row justify-between border-b border-solid pb-4 dark:border-neutral-900 sm:mt-4">
+          <div className="flex w-full flex-row justify-between">
             <div className="flex flex-row items-center gap-3">
               <Link href="/">
-                <a className="flex flex-row items-center gap-2 [font-variation-settings:'wght'_450]">
-                  <div className="drop-shadow-md">
+                <a className="hidden flex-row items-center gap-2 [font-variation-settings:'wght'_450] sm:flex">
+                  <div>
                     <Image
-                      alt={data.siteSettings.siteTitle}
-                      title={data.siteSettings.siteTitle}
-                      className="rounded-full bg-gray-200 dark:bg-zinc-600"
-                      src={data.siteSettings.avatar.url || ""}
-                      width={32}
-                      height={32}
+                      alt={props.siteSettings.siteTitle}
+                      title={props.siteSettings.siteTitle}
+                      className="rounded-full bg-gray-200 dark:bg-neutral-600"
+                      src={props.siteSettings.avatar.url || ""}
+                      width={24}
+                      height={24}
                     />
                   </div>
-                  {data.siteSettings.siteTitle}
+                  <span className="[font-variation-settings:'wght'_450]">
+                    {props.siteSettings.siteTitle}
+                  </span>
                 </a>
               </Link>
               <time dateTime={publishedDate}>
@@ -124,28 +82,28 @@ export default function Post(props) {
           </div>
         </header>
 
-        <div className="-mb-6 flex justify-center">
-          {Markdoc.renderers.react(content, React, {
-            components: {
-              CustomDocument: CustomDocumentComponent,
-            },
-          })}
+        <div className="-mb-2 rounded-lg p-0 sm:-mb-8 sm:bg-gray-100 sm:p-16 sm:dark:bg-neutral-950/[.2]">
+          <div className="prose-custom">
+            <MDXRemote {...props.post.body} components={mdxComponents} />
+          </div>
         </div>
       </Main>
     </>
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({
-  params,
-  res,
-}) => {
-  const apolloClient = initializeApollo();
+export async function getStaticPaths() {
+  return {
+    paths: [
+      { params: { slug: "avoiding-font-piracy-github-netlify" } },
+      { params: { slug: "test-entry" } },
+    ],
+    fallback: false, // can also be true or 'blocking'
+  };
+}
 
-  res.setHeader(
-    "Cache-Control",
-    "public, s-maxage=43200, stale-while-revalidate=60"
-  );
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const apolloClient = initializeApollo();
 
   await apolloClient.query({
     query: QUERY_POST,
@@ -154,9 +112,19 @@ export const getServerSideProps: GetServerSideProps = async ({
     },
   });
 
+  const data = apolloClient.readQuery({
+    query: QUERY_POST,
+    variables: {
+      slug: params.slug,
+    },
+  });
+
+  const body = await serialize(data.post.body);
+
   return {
     props: {
-      initialApolloState: apolloClient.cache.extract(),
+      siteSettings: data.siteSettings,
+      post: { ...data.post, body },
     },
   };
 };

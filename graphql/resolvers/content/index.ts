@@ -143,7 +143,7 @@ export async function getPost(
     slug: post.slug,
     coverUrl: post.coverImage?.url,
     publishedDate: post.publishedDate,
-    body: post.body.raw,
+    body: post.body,
     metaDescription: post.metaDescription,
     tags: post.tags,
   }))[0];

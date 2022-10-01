@@ -40,8 +40,11 @@ export function Archipelago() {
     setOpen(false);
   };
 
-  // Toggle the menu when ⌘K is pressed
   useEffect(() => {
+    // Prefetch menu
+    router.prefetch("/posts");
+
+    // Toggle the menu when ⌘K is pressed
     const down = (e) => {
       if (e.keyCode === 75 && e.ctrlKey) {
         e.preventDefault();
@@ -90,7 +93,7 @@ export function Archipelago() {
       <nav
         className={`${
           isHome ? "w-12" : "w-28"
-        } fixed bottom-4 left-4 z-10 animate-scale opacity-0 md:bottom-8 md:left-8`}
+        } fixed top-4 left-4 z-10 animate-scale opacity-0 md:top-8 md:left-8`}
       >
         <ul>
           <CSSTransitionGroup
@@ -107,7 +110,7 @@ export function Archipelago() {
               >
                 <Tooltip open={tooltip === TooltipState.HOME}>Home</Tooltip>
                 <Link href="/">
-                  <a title="Go home" className="island" tabIndex={1}>
+                  <a className="island" tabIndex={1}>
                     <span className="sr-only">Go home</span>
                     <HomeIcon size={20} />
                   </a>
@@ -123,7 +126,6 @@ export function Archipelago() {
             >
               <Tooltip open={tooltip === TooltipState.MENU}>Menu</Tooltip>
               <button
-                title="Open menu"
                 className="island"
                 tabIndex={1}
                 onClick={() => setOpen((open) => !open)}

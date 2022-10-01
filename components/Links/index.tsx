@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ShareIcon } from "../Icons";
 
 export function LinkExternal({ href, children }) {
   return (
@@ -68,21 +69,7 @@ export function LinkShare({ title, url, children }) {
 
   return (
     <button className="link-share" onClick={onClick}>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        fill="none"
-        viewBox="0 0 16 16"
-      >
-        <path
-          stroke="currentColor"
-          strokeWidth="1"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M5 7.5H2.667v5.333A1.333 1.333 0 004 14.167h8a1.333 1.333 0 001.333-1.334V7.5H11M10.667 4.667L8 2 5.333 4.667M8 2v8.667"
-        ></path>
-      </svg>
+      <ShareIcon size={16} />
 
       {children}
     </button>

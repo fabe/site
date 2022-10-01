@@ -1,17 +1,12 @@
 import { MDXRemote } from "next-mdx-remote";
 import Link from "next/link";
-
-const components = {
-  a: (props) => (
-    <a className="link" target="_blank" rel="noopener noreferrer" {...props} />
-  ),
-};
+import { mdxComponents } from "../Prose";
 
 export default function Intro({ content }) {
   return (
     <dl className="list-container">
       <dt className="list-title">
-        <h1 className="flex text-neutral-900 [font-variation-settings:'wght'_500] dark:text-white">
+        <h1 className="flex text-neutral-900 [font-variation-settings:'wght'_550] dark:text-white">
           <Link href="/">
             <a>Fabian Schultz</a>
           </Link>
@@ -21,7 +16,7 @@ export default function Intro({ content }) {
         </h2>
       </dt>
       <dd className="list-content">
-        <MDXRemote {...content} components={components} />
+        <MDXRemote {...content} components={mdxComponents} />
       </dd>
     </dl>
   );

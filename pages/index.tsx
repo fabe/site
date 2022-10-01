@@ -4,7 +4,7 @@ import Writing from "../components/Home/Writing";
 import { Main } from "../components/Layouts";
 import { SEO } from "../components/SEO";
 import { initializeApollo } from "../graphql/client";
-import type { GetServerSideProps, GetStaticProps } from "next";
+import type { GetStaticProps } from "next";
 import { QUERY_PAGE_HOME, QUERY_SPOTIFY_STATUS } from "../graphql/queries";
 import {
   PageHomeQueryQuery,

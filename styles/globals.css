@@ -37,7 +37,7 @@ p {
 }
 
 [cmdk-overlay] {
-  @apply bg-neutral-950/[.20];
+  @apply bg-neutral-900/[.20];
   @apply dark:bg-black/[.70];
   @apply fixed left-0 top-0;
   @apply h-full w-full;
@@ -57,7 +57,7 @@ p {
 
 [cmdk-root] {
   @apply bg-white/[.98];
-  @apply dark:bg-neutral-950/[.98];
+  @apply dark:bg-neutral-900/[.98];
   @apply border-transparent;
   @apply dark:border-neutral-800;
   @apply border;
@@ -98,7 +98,7 @@ p {
 
 [cmdk-item][aria-selected] {
   @apply bg-neutral-200/[.7] dark:bg-neutral-800;
-  @apply text-neutral-950 dark:text-silver;
+  @apply text-neutral-900 dark:text-silver;
 }
 
 [cmdk-empty] {
@@ -137,7 +137,7 @@ p {
 }
 
 .tooltip-enter {
-  @apply translate-y-1 opacity-[.01];
+  @apply -translate-y-1 opacity-[.01];
 }
 
 .tooltip-enter.tooltip-enter-active {
@@ -150,17 +150,17 @@ p {
 }
 
 .tooltip-leave.tooltip-leave-active {
-  @apply translate-y-1 opacity-[.01];
+  @apply -translate-y-1 opacity-[.01];
   @apply transition-all duration-200 ease-in-out;
 }
 
 @layer components {
   .link {
-    @apply underline;
-    @apply decoration-1.5;
-    @apply underline-offset-2.5;
-    @apply decoration-neutral-300 dark:decoration-neutral-800;
-    @apply hover:decoration-neutral-400 dark:hover:decoration-neutral-600;
+    @apply !underline;
+    @apply !decoration-1.5;
+    @apply !underline-offset-2.5;
+    @apply !decoration-neutral-300 dark:!decoration-neutral-800;
+    @apply hover:!decoration-neutral-400 dark:hover:!decoration-neutral-600;
     @apply motion-safe:transition;
     @apply duration-150;
     @apply ease-out-expo;
@@ -230,6 +230,19 @@ p {
     @apply active:scale-90;
     @apply transition-all;
   }
+
+  .prose-custom {
+    @apply prose-a:link;
+    @apply prose-p:first:mt-0;
+    @apply prose prose-neutral dark:prose-invert;
+    @apply prose-headings:font-normal prose-headings:[font-variation-settings:'wght'_550];
+    @apply prose-strong:font-normal prose-strong:[font-variation-settings:'wght'_550];
+    @apply prose-em:not-italic prose-em:underline prose-em:decoration-neutral-300 prose-em:decoration-wavy dark:prose-em:decoration-neutral-800;
+    @apply prose-code:rounded prose-code:font-normal prose-code:text-neutral-900 dark:prose-code:text-silver-dark;
+    @apply prose-pre:overflow-auto prose-pre:whitespace-pre prose-pre:border prose-pre:border-gray-300 prose-pre:bg-transparent prose-pre:p-4 prose-pre:text-sm dark:prose-pre:border-neutral-900 sm:prose-pre:-ml-4 sm:prose-pre:-mr-4;
+    @apply prose-img:rounded-lg;
+    @apply prose-hr:my-6 prose-hr:border-gray-300 dark:prose-hr:border-neutral-900 sm:prose-hr:my-10;
+  }
 }
 
 @layer utilities {
@@ -246,7 +259,7 @@ p {
     @apply items-center;
     @apply gap-1;
     @apply text-sm;
-    @apply px-2;
+    @apply px-2 py-1.5;
     @apply rounded-lg bg-gray-200 text-neutral-700 transition-colors hover:bg-gray-300 dark:bg-neutral-950 dark:text-silver-dark dark:hover:bg-neutral-900;
   }
 
