@@ -34,6 +34,7 @@
     "react-dom": "^18.2.0",
     "react-transition-group": "1.x",
     "rss-parser": "^3.12.0",
+    "sharp": "^0.31.1",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

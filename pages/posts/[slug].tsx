@@ -1,4 +1,4 @@
-import type { GetStaticProps } from "next";
+import type { GetStaticProps, GetStaticPaths } from "next";
 import { Main } from "../../components/Layouts";
 import { baseUrl, SEO } from "../../components/SEO";
 import { initializeApollo } from "../../graphql/client";
@@ -92,7 +92,7 @@ export default function Post(props) {
   );
 }
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: [
       { params: { slug: "avoiding-font-piracy-github-netlify" } },
@@ -100,7 +100,7 @@ export async function getStaticPaths() {
     ],
     fallback: false, // can also be true or 'blocking'
   };
-}
+};
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const apolloClient = initializeApollo();

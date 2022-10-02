@@ -54,7 +54,7 @@ export function Archipelago() {
 
     document.addEventListener("keydown", down);
     return () => document.removeEventListener("keydown", down);
-  }, []);
+  }, [router]);
 
   return (
     <>

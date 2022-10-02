@@ -16,10 +16,7 @@ export type ResolverContext = {
 };
 
 function createIsomorphLink(context: ResolverContext = {}) {
-  if (typeof window === "undefined" && process.env.NODE_ENV === "development") {
-    // We don't want to use the CDN in development (when using SSR).
-    // In production, it's much more performant to always use the CDN,
-    // even when doing SSR.
+  if (typeof window === "undefined") {
     const { SchemaLink } = require("@apollo/client/link/schema");
     const { schema } = require("./schema");
 

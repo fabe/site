@@ -6,7 +6,7 @@ export default function Intro({ content }) {
   return (
     <dl className="list-container">
       <dt className="list-title">
-        <h1 className="flex text-neutral-900 [font-variation-settings:'wght'_550] dark:text-white">
+        <h1 className="flex text-neutral-900 [font-variation-settings:'wght'_520] dark:text-white">
           <Link href="/">
             <a>Fabian Schultz</a>
           </Link>
