@@ -90,6 +90,13 @@ module.exports = {
         fancy:
           "0px 0px 0px 1px rgba(25, 37, 50, 0.05), 0px 3px 7px -3px rgba(25, 37, 50, 0.1), 0px 6px 12px -2px rgba(25, 37, 50, 0.1);",
       },
+      typography: {
+        quotefix: {
+          css: {
+            "blockquote p:first-of-type::before": { marginLeft: "-.6ch" },
+          },
+        },
+      },
     },
   },
   plugins: [require("@tailwindcss/typography"), require("tailwindcss-touch")()],

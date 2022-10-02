@@ -60,3 +60,21 @@ export const QUERY_POST = gql`
     }
   }
 `;
+
+export const QUERY_POSTS = gql`
+  query PostsQuery {
+    posts {
+      publishedDate
+      title
+      slug
+    }
+  }
+`;
+
+export const QUERY_POST_SLUGS = gql`
+  query PostsSlugsQuery {
+    posts {
+      slug
+    }
+  }
+`;

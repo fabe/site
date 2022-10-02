@@ -204,7 +204,8 @@ p {
     @apply [font-variation-settings:'opsz'_7,_'wght'_500];
   }
 
-  .note .time {
+  .note .time,
+  .list-content .time {
     @apply pt-1;
   }
 
@@ -213,8 +214,13 @@ p {
     @apply block;
     @apply text-sm;
     @apply text-neutral-500 dark:text-silver-dark;
-    @apply pt-1;
     @apply tracking-sm;
+    @apply slashed-zero tabular-nums;
+  }
+
+  .time-lg {
+    @apply text-base;
+    @apply tracking-normal;
   }
 
   .badge {
@@ -222,7 +228,7 @@ p {
   }
 
   .list-container {
-    @apply mb-12 grid grid-cols-12 gap-4 sm:mb-20;
+    @apply mb-12 grid grid-cols-12 gap-4 gap-y-2 sm:mb-20 sm:gap-y-4;
   }
 
   .list-title {
@@ -260,6 +266,7 @@ p {
     @apply prose-pre:overflow-auto prose-pre:whitespace-pre prose-pre:border prose-pre:border-gray-300 prose-pre:bg-transparent prose-pre:p-4 prose-pre:text-sm dark:prose-pre:border-neutral-900 sm:prose-pre:-ml-4 sm:prose-pre:-mr-4;
     @apply prose-img:rounded-lg;
     @apply prose-hr:my-6 prose-hr:border-gray-300 dark:prose-hr:border-neutral-900 sm:prose-hr:my-10;
+    @apply prose-blockquote:border-0 prose-blockquote:p-0 prose-blockquote:not-italic prose-blockquote:text-neutral-600 dark:prose-blockquote:text-silver-dark;
   }
 }
 

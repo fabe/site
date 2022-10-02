@@ -78,7 +78,11 @@ export async function getPosts(
   const response = await contentfulClient.query({
     query: gql`
       query getAllPosts($limit: Int) {
-        postCollection(limit: $limit) {
+        postCollection(
+          limit: $limit
+          where: { unlisted: false }
+          order: publishedDate_DESC
+        ) {
           items {
             title
             slug

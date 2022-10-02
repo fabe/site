@@ -2,17 +2,17 @@ import type { GetStaticProps, GetStaticPaths } from "next";
 import { Main } from "../../components/Layouts";
 import { baseUrl, SEO } from "../../components/SEO";
 import { initializeApollo } from "../../graphql/client";
-import { QUERY_POST } from "../../graphql/queries";
+import { QUERY_POST, QUERY_POST_SLUGS } from "../../graphql/queries";
 import { useRouter } from "next/router";
 import React from "react";
 import Image from "next/future/image";
 import Badge from "../../components/Badge";
-import { format } from "date-fns";
 import { LinkShare } from "../../components/Links";
 import Link from "next/link";
 import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemote } from "next-mdx-remote";
 import { mdxComponents } from "../../components/Prose";
+import formatDate from "../../lib/formatDate";
 
 export default function Post(props) {
   const router = useRouter();
@@ -71,9 +71,7 @@ export default function Post(props) {
                 </a>
               </Link>
               <time dateTime={publishedDate}>
-                <Badge>
-                  {format(new Date(publishedDate), "MMMM do, yyyy")}
-                </Badge>
+                <Badge>{formatDate(publishedDate)}</Badge>
               </time>
             </div>
             <LinkShare title={title} url={url}>
@@ -83,7 +81,7 @@ export default function Post(props) {
         </header>
 
         <div className="-mb-2 rounded-lg p-0 sm:-mb-8 sm:bg-gray-100 sm:p-16 sm:dark:bg-neutral-950/[.2]">
-          <div className="prose-custom">
+          <div className="prose-custom prose-quotefix">
             <MDXRemote {...props.post.body} components={mdxComponents} />
           </div>
         </div>
@@ -93,11 +91,20 @@ export default function Post(props) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const apolloClient = initializeApollo();
+
+  await apolloClient.query({
+    query: QUERY_POST_SLUGS,
+  });
+
+  const data = apolloClient.readQuery({
+    query: QUERY_POST_SLUGS,
+  });
+
+  const posts = data.posts.map((post) => ({ params: { ...post } }));
+
   return {
-    paths: [
-      { params: { slug: "avoiding-font-piracy-github-netlify" } },
-      { params: { slug: "test-entry" } },
-    ],
+    paths: posts,
     fallback: false, // can also be true or 'blocking'
   };
 };

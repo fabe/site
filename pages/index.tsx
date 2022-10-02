@@ -60,11 +60,6 @@ export default function Home({ intro }) {
 export const getStaticProps: GetStaticProps = async () => {
   const apolloClient = initializeApollo();
 
-  // res.setHeader(
-  //   "Cache-Control",
-  //   "public, s-maxage=86400, stale-while-revalidate=604800"
-  // );
-
   await apolloClient.query({
     query: QUERY_PAGE_HOME,
   });
