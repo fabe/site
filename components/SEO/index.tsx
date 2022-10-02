@@ -49,13 +49,13 @@ export function SEO({ seo }: { seo?: SEOProps }) {
           crossOrigin="anonymous"
         />
 
-        <link
+        {/* <link
           rel="preload"
           href="/literata.roman.var.woff2"
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"
-        />
+        /> */}
 
         <meta name="author" content="Fabian Schultz" />
         <meta
