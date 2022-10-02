@@ -72,3 +72,15 @@ export function ShareIcon({ size }) {
     />
   );
 }
+
+export function SpinnerIcon({ size }) {
+  return (
+    <div className="inline-flex animate-spin">
+      <PhosphorIcon
+        label="Loading..."
+        size={size}
+        path="M232 128A104 104 0 1184.7 33.4a8.1 8.1 0 0110.6 4 8 8 0 01-4 10.6 88 88 0 1073.4 0 8 8 0 01-4-10.6 8.1 8.1 0 0110.6-4A104.4 104.4 0 01232 128z"
+      />
+    </div>
+  );
+}

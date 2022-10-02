@@ -73,11 +73,16 @@ module.exports = {
       },
       animation: {
         scale: "scale .4s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards",
+        fadeIn: "fadeIn .3s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards",
       },
       keyframes: {
         scale: {
           "0%": { transform: "scale(.8)", opacity: 0 },
           "100%": { transform: "scale(1)", opacity: 1 },
+        },
+        fadeIn: {
+          "0%": { opacity: 0 },
+          "100%": { opacity: 1 },
         },
       },
       boxShadow: {

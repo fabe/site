@@ -7,6 +7,7 @@ import {
   HomeIcon,
   NavigationIcon,
   NoteIcon,
+  SpinnerIcon,
   TwitterIcon,
 } from "../Icons";
 import { CSSTransitionGroup } from "react-transition-group";
@@ -22,10 +23,12 @@ export function Archipelago() {
   const currentRoute = router.pathname;
   const isHome = currentRoute === "/";
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [tooltip, setTooltip] = useState<TooltipState>(undefined);
 
   const navigate = async (href) => {
     if (!href) return;
+    setLoading(true);
 
     if (href.includes("mailto:")) {
       window.location.href = href;
@@ -37,6 +40,7 @@ export function Archipelago() {
       await router.push(href);
     }
 
+    setLoading(false);
     setOpen(false);
   };
 
@@ -62,6 +66,14 @@ export function Archipelago() {
         <Command.Input placeholder="Go to..." />
 
         <Command.List>
+          {loading && (
+            <Command.Loading>
+              <div>
+                <SpinnerIcon size={24} />
+              </div>
+            </Command.Loading>
+          )}
+
           <Command.Empty>Maybe someday...</Command.Empty>
 
           <Command.Group heading="Pages">
@@ -93,7 +105,7 @@ export function Archipelago() {
       <nav
         className={`${
           isHome ? "w-12" : "w-28"
-        } fixed bottom-4 left-4 z-10 animate-scale opacity-0 md:top-8 md:left-8`}
+        } fixed bottom-4 top-auto left-4 z-10 animate-scale opacity-0 md:top-8 md:bottom-auto md:left-8`}
       >
         <ul>
           <CSSTransitionGroup

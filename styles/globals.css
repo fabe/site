@@ -56,6 +56,7 @@ p {
 }
 
 [cmdk-root] {
+  @apply relative;
   @apply bg-white/[.98];
   @apply dark:bg-neutral-900/[.98];
   @apply border-transparent;
@@ -101,6 +102,11 @@ p {
   @apply text-neutral-900 dark:text-silver;
 }
 
+[cmdk-item]:active {
+  @apply bg-neutral-200/[.9] dark:bg-neutral-700;
+  @apply text-neutral-900 dark:text-silver;
+}
+
 [cmdk-empty] {
   @apply px-3 py-3;
   @apply text-sm font-medium tracking-xs text-neutral-600 dark:text-silver-dark;
@@ -114,6 +120,18 @@ p {
 [cmdk-group-heading] {
   @apply px-3 py-2;
   @apply text-xs font-medium tracking-xs text-neutral-600 dark:text-silver-dark;
+}
+
+[cmdk-loading] {
+  @apply absolute;
+  @apply top-3;
+  @apply right-3;
+  @apply text-neutral-400 dark:text-neutral-600;
+  @apply animate-fadeIn;
+}
+
+[cmdk-loading] div {
+  @apply flex;
 }
 
 /* Animations */
