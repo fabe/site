@@ -6049,6 +6049,11 @@ symbol-observable@^4.0.0:
   resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-4.0.0.tgz#5b425f192279e87f2f9b937ac8540d1984b39205"
   integrity sha512-b19dMThMV4HVFynSAM1++gBHAbk2Tc/osgLIBZMKsyqh34jb2e8Os7T6ZW/Bt3pJFdBTd2JwAnAAEQV7rSNvcQ==
 
+tailwindcss-touch@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/tailwindcss-touch/-/tailwindcss-touch-1.0.1.tgz#10b8a007a042b486b2a26a4ceddcff3b4bed834f"
+  integrity sha512-h8A/S9+Mk2rnnaOB/NGCE7CxDhtGKbsAWf8Y2tCO6Zf381Y8dKcygPl1OXkFDnWXkL+FfHxmrGpwculDWAumbA==
+
 tailwindcss@^3.1.6:
   version "3.1.8"
   resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-3.1.8.tgz#4f8520550d67a835d32f2f4021580f9fddb7b741"

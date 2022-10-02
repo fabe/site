@@ -22,7 +22,7 @@ export default function Resume() {
         </div>
       </dd>
 
-      <dt className="list-title mt-6 sm:mt-0">
+      <dt className="list-title mt-4 sm:mt-0">
         <h3 className="text-neutral-500 dark:text-silver-dark">2019</h3>
       </dt>
       <dd className="list-content">
@@ -35,7 +35,7 @@ export default function Resume() {
         </div>
       </dd>
 
-      <dt className="list-title mt-6 sm:mt-0">
+      <dt className="list-title mt-4 sm:mt-0">
         <h3 className="text-neutral-500 dark:text-silver-dark">2018</h3>
       </dt>
       <dd className="list-content">

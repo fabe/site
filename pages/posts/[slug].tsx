@@ -46,7 +46,7 @@ export default function Post(props) {
       />
       <Main>
         <header className="mb-6 rounded-lg sm:mb-12">
-          <h1 className="pb-4 text-2xl tracking-tight text-neutral-900 [font-variation-settings:'wght'_450] dark:text-white sm:text-3xl">
+          <h1 className="pb-2 text-2xl tracking-tight text-neutral-900 [font-variation-settings:'wght'_450] dark:text-white sm:pb-4 sm:text-3xl">
             <Link href={url}>
               <a>{title}</a>
             </Link>

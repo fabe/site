@@ -93,7 +93,7 @@ export function Archipelago() {
       <nav
         className={`${
           isHome ? "w-12" : "w-28"
-        } fixed top-4 left-4 z-10 animate-scale opacity-0 md:top-8 md:left-8`}
+        } fixed bottom-4 left-4 z-10 animate-scale opacity-0 md:top-8 md:left-8`}
       >
         <ul>
           <CSSTransitionGroup
