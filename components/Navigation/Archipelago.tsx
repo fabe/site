@@ -18,7 +18,7 @@ enum TooltipState {
   MENU,
 }
 
-export function Archipelago() {
+export default function Archipelago() {
   const router = useRouter();
   const currentRoute = router.pathname;
   const isHome = currentRoute === "/";
@@ -107,7 +107,7 @@ export function Archipelago() {
           isHome ? "w-12" : "w-28"
         } fixed bottom-4 top-auto left-4 z-10 animate-scale opacity-0 md:top-8 md:bottom-auto md:left-8`}
       >
-        <ul>
+        <div>
           <CSSTransitionGroup
             className="relative flex h-12 gap-2"
             transitionName="island"
@@ -115,21 +115,21 @@ export function Archipelago() {
             transitionLeaveTimeout={300}
           >
             {!isHome ? (
-              <li
+              <div
                 className="absolute left-0 rounded-full"
                 onMouseEnter={() => setTooltip(TooltipState.HOME)}
                 onMouseLeave={() => setTooltip(undefined)}
               >
                 <Tooltip open={tooltip === TooltipState.HOME}>Home</Tooltip>
                 <Link href="/">
-                  <a className="island" tabIndex={1}>
+                  <a className="island">
                     <span className="sr-only">Go home</span>
                     <HomeIcon size={20} />
                   </a>
                 </Link>
-              </li>
+              </div>
             ) : null}
-            <li
+            <div
               className={`duration-250 absolute rounded-full transition-all ease-out-expo ${
                 !isHome ? "delay-50 left-14" : "left-0 delay-300"
               }`}
@@ -139,15 +139,14 @@ export function Archipelago() {
               <Tooltip open={tooltip === TooltipState.MENU}>Menu</Tooltip>
               <button
                 className="island"
-                tabIndex={1}
                 onClick={() => setOpen((open) => !open)}
               >
                 <span className="sr-only">Open menu</span>
                 <NavigationIcon size={20} />
               </button>
-            </li>
+            </div>
           </CSSTransitionGroup>
-        </ul>
+        </div>
       </nav>
     </>
   );
