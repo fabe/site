@@ -10,7 +10,7 @@ export default function Posts({ posts }) {
       </dt>
       <dd className="list-content">
         {posts.map((post) => (
-          <div className="pb-2 last-of-type:pb-0">
+          <div key={post.slug} className="pb-2 last-of-type:pb-0">
             <div>
               <Link href={`/posts/${post.slug}`}>
                 <a className="link inline-flex items-center gap-1 sm:-ml-5">
