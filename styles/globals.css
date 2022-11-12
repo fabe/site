@@ -20,22 +20,6 @@ p {
   @apply leading-relaxed;
 }
 
-@font-face {
-  font-family: "InterVar";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(/inter.roman.var.woff2) format("woff2");
-}
-
-/* @font-face {
-  font-family: "LiterataVar";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(/literata.roman.var.woff2) format("woff2");
-} */
-
 [cmdk-overlay] {
   @apply bg-neutral-900/[.20];
   @apply dark:bg-black/[.70];

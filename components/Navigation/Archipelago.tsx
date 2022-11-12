@@ -60,92 +60,92 @@ export default function Archipelago() {
     return () => document.removeEventListener("keydown", down);
   }, [router]);
 
-  return <>
-    <Command.Dialog open={open} onOpenChange={setOpen}>
-      <Command.Input placeholder="Go to..." />
+  return (
+    <>
+      <Command.Dialog open={open} onOpenChange={setOpen}>
+        <Command.Input placeholder="Go to..." />
 
-      <Command.List>
-        {loading && (
-          <Command.Loading>
-            <div>
-              <SpinnerIcon size={24} />
-            </div>
-          </Command.Loading>
-        )}
+        <Command.List>
+          {loading && (
+            <Command.Loading>
+              <div>
+                <SpinnerIcon size={24} />
+              </div>
+            </Command.Loading>
+          )}
 
-        <Command.Empty>Maybe someday...</Command.Empty>
+          <Command.Empty>Maybe someday...</Command.Empty>
 
-        <Command.Group heading="Pages">
-          <Command.Item onSelect={() => navigate("/")}>
-            <HomeIcon size={16} />
-            Home
-          </Command.Item>
-          <Command.Item onSelect={() => navigate("/posts")}>
-            <NoteIcon size={16} />
-            Posts
-          </Command.Item>
-        </Command.Group>
+          <Command.Group heading="Pages">
+            <Command.Item onSelect={() => navigate("/")}>
+              <HomeIcon size={16} />
+              Home
+            </Command.Item>
+            <Command.Item onSelect={() => navigate("/posts")}>
+              <NoteIcon size={16} />
+              Posts
+            </Command.Item>
+          </Command.Group>
 
-        <Command.Group heading="Contact">
-          <Command.Item onSelect={() => navigate("//twitter.com/fschultz_")}>
-            <TwitterIcon size={16} />
-            Twitter
-          </Command.Item>
-          <Command.Item
-            onSelect={() => navigate("mailto:desk@fabianschultz.com")}
+          <Command.Group heading="Contact">
+            <Command.Item onSelect={() => navigate("//twitter.com/fschultz_")}>
+              <TwitterIcon size={16} />
+              Twitter
+            </Command.Item>
+            <Command.Item
+              onSelect={() => navigate("mailto:desk@fabianschultz.com")}
+            >
+              <EmailIcon size={16} />
+              Email
+            </Command.Item>
+          </Command.Group>
+        </Command.List>
+      </Command.Dialog>
+
+      <nav
+        className={`${
+          isHome ? "w-12" : "w-28"
+        } fixed bottom-4 top-auto left-4 z-10 animate-scale opacity-0 md:top-8 md:bottom-auto md:left-8`}
+      >
+        <div>
+          <CSSTransitionGroup
+            className="relative flex h-12 gap-2"
+            transitionName="island"
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={300}
           >
-            <EmailIcon size={16} />
-            Email
-          </Command.Item>
-        </Command.Group>
-      </Command.List>
-    </Command.Dialog>
-
-    <nav
-      className={`${
-        isHome ? "w-12" : "w-28"
-      } fixed bottom-4 top-auto left-4 z-10 animate-scale opacity-0 md:top-8 md:bottom-auto md:left-8`}
-    >
-      <div>
-        <CSSTransitionGroup
-          className="relative flex h-12 gap-2"
-          transitionName="island"
-          transitionEnterTimeout={500}
-          transitionLeaveTimeout={300}
-        >
-          {!isHome ? (
+            {!isHome ? (
+              <div
+                className="absolute left-0 rounded-full"
+                onMouseEnter={() => setTooltip(TooltipState.HOME)}
+                onMouseLeave={() => setTooltip(undefined)}
+              >
+                <Tooltip open={tooltip === TooltipState.HOME}>Home</Tooltip>
+                <Link href="/" className="island">
+                  <span className="sr-only">Go home</span>
+                  <HomeIcon size={20} />
+                </Link>
+              </div>
+            ) : null}
             <div
-              className="absolute left-0 rounded-full"
-              onMouseEnter={() => setTooltip(TooltipState.HOME)}
+              className={`duration-250 absolute rounded-full transition-all ease-out-expo ${
+                !isHome ? "delay-50 left-14" : "left-0 delay-300"
+              }`}
+              onMouseEnter={() => setTooltip(TooltipState.MENU)}
               onMouseLeave={() => setTooltip(undefined)}
             >
-              <Tooltip open={tooltip === TooltipState.HOME}>Home</Tooltip>
-              <Link href="/" className="island">
-
-                <span className="sr-only">Go home</span>
-                <HomeIcon size={20} />
-
-              </Link>
+              <Tooltip open={tooltip === TooltipState.MENU}>Menu</Tooltip>
+              <button
+                className="island"
+                onClick={() => setOpen((open) => !open)}
+              >
+                <span className="sr-only">Open menu</span>
+                <NavigationIcon size={20} />
+              </button>
             </div>
-          ) : null}
-          <div
-            className={`duration-250 absolute rounded-full transition-all ease-out-expo ${
-              !isHome ? "delay-50 left-14" : "left-0 delay-300"
-            }`}
-            onMouseEnter={() => setTooltip(TooltipState.MENU)}
-            onMouseLeave={() => setTooltip(undefined)}
-          >
-            <Tooltip open={tooltip === TooltipState.MENU}>Menu</Tooltip>
-            <button
-              className="island"
-              onClick={() => setOpen((open) => !open)}
-            >
-              <span className="sr-only">Open menu</span>
-              <NavigationIcon size={20} />
-            </button>
-          </div>
-        </CSSTransitionGroup>
-      </div>
-    </nav>
-  </>;
+          </CSSTransitionGroup>
+        </div>
+      </nav>
+    </>
+  );
 }

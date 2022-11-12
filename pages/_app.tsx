@@ -4,6 +4,15 @@ import { ApolloCache, ApolloProvider } from "@apollo/client";
 import { useApollo } from "../graphql/client";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
+import localFont from "@next/font/local";
+import Head from "next/head";
+
+const interVar = localFont({
+  src: "../public/inter.roman.var.woff2",
+  weight: "400",
+  display: "swap",
+  variable: "--inter-font",
+});
 
 const Archipelago = dynamic(
   () => import("../components/Navigation/Archipelago")
@@ -24,12 +33,18 @@ export default function MyApp({
   const apolloClient = useApollo(pageProps.initialApolloState);
 
   return (
-    <ApolloProvider client={apolloClient}>
-      <Component {...pageProps} />
+    <>
+      <Head>
+        <html className={interVar.variable} />
+      </Head>
 
-      <Suspense>
-        <Archipelago />
-      </Suspense>
-    </ApolloProvider>
+      <ApolloProvider client={apolloClient}>
+        <Component {...pageProps} />
+
+        <Suspense>
+          <Archipelago />
+        </Suspense>
+      </ApolloProvider>
+    </>
   );
 }
