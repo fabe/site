@@ -21,7 +21,7 @@ export default function Footer() {
             </svg>
             Potsdam, Germany
           </div>
-          {/* <div className="flex">
+          <div className="flex">
             <a
               className="link link-sm"
               href="//github.com/fabe/site"
@@ -30,7 +30,7 @@ export default function Footer() {
             >
               View source
             </a>
-          </div> */}
+          </div>
         </div>
       </div>
     </footer>
