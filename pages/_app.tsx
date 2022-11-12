@@ -5,14 +5,12 @@ import { useApollo } from "../graphql/client";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import localFont from "@next/font/local";
-import Head from "next/head";
 import { Analytics } from "@vercel/analytics/react";
 
 const interVar = localFont({
   src: "../public/inter.roman.var.woff2",
   weight: "400",
   display: "swap",
-  variable: "--inter-font",
 });
 
 const Archipelago = dynamic(
@@ -35,11 +33,15 @@ export default function MyApp({
 
   return (
     <>
-      <Head>
-        <html className={interVar.variable} />
-      </Head>
-
       <ApolloProvider client={apolloClient}>
+        <style jsx global>
+          {`
+            :root {
+              --inter-font: ${interVar.style.fontFamily};
+            }
+          `}
+        </style>
+
         <Component {...pageProps} />
         <Analytics />
 
