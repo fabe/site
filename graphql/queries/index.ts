@@ -15,6 +15,11 @@ export const QUERY_PAGE_HOME = gql`
       intro
       ...SiteSettingsShared
     }
+    posts(limit: 5) {
+      publishedDate
+      title
+      slug
+    }
     books: books(limit: 1, collection: READING) {
       title
       author

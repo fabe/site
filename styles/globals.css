@@ -177,8 +177,8 @@ p {
     @apply !underline;
     @apply !decoration-1.5;
     @apply !underline-offset-2.5;
-    @apply !decoration-neutral-300 dark:!decoration-neutral-800;
-    @apply hover:!decoration-neutral-400 dark:hover:!decoration-neutral-600;
+    @apply !decoration-neutral-200 dark:!decoration-neutral-800;
+    @apply hover:!decoration-neutral-300 dark:hover:!decoration-neutral-600;
     @apply motion-safe:transition;
     @apply duration-150;
     @apply ease-out-expo;
@@ -215,7 +215,7 @@ p {
     @apply text-sm;
     @apply text-neutral-500 dark:text-silver-dark;
     @apply tracking-sm;
-    @apply slashed-zero tabular-nums;
+    @apply tabular-nums;
   }
 
   .time-lg {
@@ -224,7 +224,7 @@ p {
   }
 
   .badge {
-    @apply flex items-center gap-1 rounded-xl bg-gray-200 px-1.5 py-0.5 text-xs font-medium tracking-xs text-neutral-700 dark:bg-neutral-950 dark:text-silver-dark;
+    @apply flex items-center gap-1 rounded-xl bg-gray-200 px-1.5 py-0.5 text-xs font-medium tracking-xs text-neutral-700 dark:bg-neutral-900 dark:text-silver-dark;
   }
 
   .list-container {
@@ -241,9 +241,9 @@ p {
 
   .island {
     @apply bg-white/[.98];
-    @apply dark:bg-neutral-900/[.98];
+    @apply dark:bg-neutral-900/[.95];
     @apply border-transparent;
-    @apply dark:border-white/[.03];
+    @apply dark:border-white/[.1];
     @apply border;
     @apply dark:shadow-xl;
     @apply shadow-fancy;
@@ -263,9 +263,9 @@ p {
     @apply prose-strong:font-normal prose-strong:[font-variation-settings:'wght'_550];
     @apply prose-em:not-italic prose-em:underline prose-em:decoration-neutral-300 prose-em:decoration-wavy dark:prose-em:decoration-neutral-800;
     @apply prose-code:rounded prose-code:font-normal prose-code:text-neutral-900 dark:prose-code:text-silver-dark;
-    @apply prose-pre:overflow-auto prose-pre:whitespace-pre prose-pre:border prose-pre:border-gray-300 prose-pre:bg-transparent prose-pre:p-4 prose-pre:text-sm dark:prose-pre:border-neutral-900 sm:prose-pre:-ml-4 sm:prose-pre:-mr-4;
+    @apply prose-pre:overflow-auto prose-pre:whitespace-pre prose-pre:border prose-pre:border-neutral-200 prose-pre:bg-transparent prose-pre:p-4 prose-pre:text-sm dark:prose-pre:border-neutral-900 sm:prose-pre:-ml-4 sm:prose-pre:-mr-4;
     @apply prose-img:rounded-lg;
-    @apply prose-hr:my-6 prose-hr:border-gray-300 dark:prose-hr:border-neutral-900 sm:prose-hr:my-10;
+    @apply prose-hr:my-6 prose-hr:border-neutral-300 dark:prose-hr:border-neutral-900 sm:prose-hr:my-10;
     @apply prose-blockquote:border-0 prose-blockquote:p-0 prose-blockquote:not-italic prose-blockquote:text-neutral-600 dark:prose-blockquote:text-silver-dark;
   }
 }
@@ -284,8 +284,9 @@ p {
     @apply items-center;
     @apply gap-1;
     @apply text-sm;
+    @apply tracking-sm;
     @apply px-2 py-1.5;
-    @apply rounded-lg bg-gray-200 text-neutral-700 transition-colors hover:bg-gray-300 dark:bg-neutral-950 dark:text-silver-dark dark:hover:bg-neutral-900;
+    @apply rounded-lg bg-gray-200 text-neutral-700 transition-colors hover:bg-gray-300 dark:bg-neutral-900 dark:text-silver-dark dark:hover:bg-neutral-800;
   }
 
   .link-external svg {
@@ -313,8 +314,8 @@ p {
     @apply decoration-1.5;
     @apply underline-offset-1.5;
     @apply text-neutral-500 dark:text-silver-dark;
-    @apply decoration-neutral-300 dark:decoration-neutral-800;
-    @apply hover:decoration-neutral-400 dark:hover:decoration-neutral-600;
+    @apply decoration-neutral-200 dark:decoration-neutral-800;
+    @apply hover:decoration-neutral-300 dark:hover:decoration-neutral-600;
     @apply tracking-xs;
   }
 }

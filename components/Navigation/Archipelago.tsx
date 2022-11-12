@@ -50,7 +50,7 @@ export default function Archipelago() {
 
     // Toggle the menu when ⌘K is pressed
     const down = (e) => {
-      if (e.keyCode === 75 && e.ctrlKey) {
+      if (e.keyCode === 75 && (e.ctrlKey || e.metaKey)) {
         e.preventDefault();
         setOpen((open) => !open);
       }

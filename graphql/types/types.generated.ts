@@ -208,7 +208,7 @@ export type SiteSettingsSharedFragment = { __typename?: 'SiteSettings', siteTitl
 export type PageHomeQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type PageHomeQueryQuery = { __typename?: 'Query', siteSettings: { __typename?: 'SiteSettings', intro: string, siteTitle: string, metaDescription: string }, books: Array<{ __typename?: 'Book', title: string, author: string, okuUrl: string, coverUrl?: string | null } | null> };
+export type PageHomeQueryQuery = { __typename?: 'Query', siteSettings: { __typename?: 'SiteSettings', intro: string, siteTitle: string, metaDescription: string }, posts: Array<{ __typename?: 'PostWithoutBody', publishedDate: string, title: string, slug: string } | null>, books: Array<{ __typename?: 'Book', title: string, author: string, okuUrl: string, coverUrl?: string | null } | null> };
 
 export type SpotifyStatusQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -243,6 +243,11 @@ export const PageHomeQueryDocument = gql`
   siteSettings {
     intro
     ...SiteSettingsShared
+  }
+  posts(limit: 5) {
+    publishedDate
+    title
+    slug
   }
   books: books(limit: 1, collection: READING) {
     title

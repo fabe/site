@@ -15,6 +15,7 @@ import NowReading from "../components/Home/NowReading";
 import { useEffect } from "react";
 import NowPlaying from "../components/Home/NowPlaying";
 import { serialize } from "next-mdx-remote/serialize";
+import Posts from "../components/Home/Posts";
 
 export default function Home({ intro }) {
   const { data } = useQuery<PageHomeQueryQuery>(QUERY_PAGE_HOME);
@@ -49,6 +50,7 @@ export default function Home({ intro }) {
       <Main>
         <Intro content={intro} />
         <Resume />
+        <Posts posts={data.posts} />
         <Writing />
         <NowPlaying spotifyStatus={liveData?.spotifyStatus} loading={loading} />
         <NowReading book={data.books[0]} />
