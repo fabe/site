@@ -1824,6 +1824,11 @@
     "@typescript-eslint/types" "5.42.1"
     eslint-visitor-keys "^3.3.0"
 
+"@vercel/analytics@^0.1.4":
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/@vercel/analytics/-/analytics-0.1.4.tgz#86481995ec5520b349befddaf5b8b22203023871"
+  integrity sha512-6xI1kozfgigwmDTQCrtj+m0yQnzhLGa/l0yE8BjTbUQ2vF9b88CEXF3dXjZl48ESfjssCur3FkK3jOwZm4emrw==
+
 "@whatwg-node/fetch@0.5.1":
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/@whatwg-node/fetch/-/fetch-0.5.1.tgz#62c7e902ddfb7d16b0b31599d81628bbd22350a9"

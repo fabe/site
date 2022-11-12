@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import localFont from "@next/font/local";
 import Head from "next/head";
+import { Analytics } from "@vercel/analytics/react";
 
 const interVar = localFont({
   src: "../public/inter.roman.var.woff2",
@@ -40,6 +41,7 @@ export default function MyApp({
 
       <ApolloProvider client={apolloClient}>
         <Component {...pageProps} />
+        <Analytics />
 
         <Suspense>
           <Archipelago />

@@ -19,6 +19,7 @@
     "@markdoc/next.js": "^0.2.1",
     "@next/font": "^13.0.3",
     "@react-hook/copy": "^2.0.1",
+    "@vercel/analytics": "^0.1.4",
     "apollo-server-core": "^3.10.2",
     "apollo-server-micro": "^3.10.2",
     "cmdk": "^0.1.20",
