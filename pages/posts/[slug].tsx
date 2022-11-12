@@ -47,28 +47,27 @@ export default function Post(props) {
       <Main>
         <header className="mb-6 rounded-lg sm:mb-12">
           <h1 className="pb-2 text-2xl tracking-tight text-neutral-900 [font-variation-settings:'wght'_450] dark:text-white sm:pb-4 sm:text-3xl">
-            <Link href={url}>
-              <a>{title}</a>
-            </Link>
+            <Link href={url}>{title}</Link>
           </h1>
           <div className="flex w-full flex-row justify-between">
             <div className="flex flex-row items-center gap-3">
-              <Link href="/">
-                <a className="hidden flex-row items-center gap-2 [font-variation-settings:'wght'_450] sm:flex">
-                  <div>
-                    <Image
-                      alt={props.siteSettings.siteTitle}
-                      title={props.siteSettings.siteTitle}
-                      className="rounded-full bg-gray-200 dark:bg-neutral-600"
-                      src={props.siteSettings.avatar.url || ""}
-                      width={24}
-                      height={24}
-                    />
-                  </div>
-                  <span className="[font-variation-settings:'wght'_450]">
-                    {props.siteSettings.siteTitle}
-                  </span>
-                </a>
+              <Link
+                href="/"
+                className="hidden flex-row items-center gap-2 [font-variation-settings:'wght'_450] sm:flex"
+              >
+                <div>
+                  <Image
+                    alt={props.siteSettings.siteTitle}
+                    title={props.siteSettings.siteTitle}
+                    className="rounded-full bg-gray-200 dark:bg-neutral-600"
+                    src={props.siteSettings.avatar.url || ""}
+                    width={24}
+                    height={24}
+                  />
+                </div>
+                <span className="[font-variation-settings:'wght'_450]">
+                  {props.siteSettings.siteTitle}
+                </span>
               </Link>
               <time dateTime={publishedDate}>
                 <Badge>{formatDate(publishedDate)}</Badge>
