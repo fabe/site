@@ -224,10 +224,11 @@ p {
   }
 
   .island {
-    @apply bg-white/[.98];
-    @apply dark:bg-neutral-900/[.95];
+    @apply bg-white/95;
+    @apply dark:bg-neutral-900/95;
     @apply border-transparent;
     @apply dark:border-white/[.1];
+    @apply backdrop-blur-md;
     @apply border;
     @apply dark:shadow-xl;
     @apply shadow-fancy;

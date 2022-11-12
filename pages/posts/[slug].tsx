@@ -19,7 +19,8 @@ export default function Post(props) {
   const slug = router.query.slug;
 
   const { title, metaDescription, publishedDate } = props.post || {};
-  const url = `${baseUrl}/posts/${slug}`;
+  const relativeUrl = `/posts/${slug}`;
+  const url = `${baseUrl}${relativeUrl}`;
 
   if (!props.post.title) {
     return (
@@ -47,7 +48,7 @@ export default function Post(props) {
       <Main>
         <header className="mb-6 rounded-lg sm:mb-12">
           <h1 className="pb-2 text-2xl tracking-tight text-neutral-900 [font-variation-settings:'wght'_450] dark:text-white sm:pb-4 sm:text-3xl">
-            <Link href={url}>{title}</Link>
+            <Link href={relativeUrl}>{title}</Link>
           </h1>
           <div className="flex w-full flex-row justify-between">
             <div className="flex flex-row items-center gap-3">

@@ -10,11 +10,11 @@ export default function Writing() {
         <div>
           <div>
             <LinkExternal href="//contentful.com/blog/2021/08/20/forma36-design-system-color-update">
-              Creating an accessible color palette for Forma 36
+              Creating an accessible color palette
             </LinkExternal>
           </div>
           <time className="time" dateTime="2021-08-20">
-            August 20, 2021
+            Life at Contentful &middot; August 20, 2021
           </time>
         </div>
       </dd>
