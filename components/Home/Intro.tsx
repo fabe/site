@@ -8,7 +8,7 @@ export default function Intro({ content }) {
       <dt className="list-title">
         <h1 className="flex text-neutral-900 [font-variation-settings:'wght'_520] dark:text-white">
           <Link href="/">
-            <a>Fabian Schultz</a>
+            Fabian Schultz
           </Link>
         </h1>
         <h2 className="text-neutral-500 dark:text-silver-dark">

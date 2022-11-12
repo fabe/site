@@ -5,7 +5,7 @@ import { initializeApollo } from "../../graphql/client";
 import { QUERY_POST, QUERY_POST_SLUGS } from "../../graphql/queries";
 import { useRouter } from "next/router";
 import React from "react";
-import Image from "next/future/image";
+import Image from "next/image";
 import Badge from "../../components/Badge";
 import { LinkShare } from "../../components/Links";
 import Link from "next/link";

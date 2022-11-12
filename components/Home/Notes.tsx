@@ -15,8 +15,8 @@ export default function Notes() {
             August 20, 2022
           </time>
         </div>
-        <Link href="/notes">
-          <a className="link link-sm mr-3">View all</a>
+        <Link href="/notes" className="link link-sm mr-3">
+          View all
         </Link>
         <a className="link link-sm" href="/rss/notes.xml">
           RSS
