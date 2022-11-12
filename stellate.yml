@@ -1,0 +1,28 @@
+schema: "./graphql/typeDefs/index.ts"
+name: fabian
+originUrl: https://fabianschultz.vercel.app/api/graphql
+passThroughOnly: false
+rootTypeNames:
+  query: Query
+rules:
+  - types:
+      Query: true
+    description: Cache all queries
+    maxAge: 604800
+    swr: 604800
+  - types:
+      Query:
+        - spotifyStatus
+    maxAge: 600
+    swr: 604800
+    description: Close-to-live data
+  - types:
+      Query:
+        - books
+        - photos
+        - post
+        - posts
+        - siteSettings
+    maxAge: 86400
+    swr: 604800
+    description: Default lifetime for regular content
