@@ -1,3 +1,4 @@
+import formatDate from "../../lib/formatDate";
 import { LinkExternal } from "../Links";
 
 export default function Writing() {
@@ -14,7 +15,7 @@ export default function Writing() {
             </LinkExternal>
           </div>
           <time className="time" dateTime="2021-08-20">
-            Life at Contentful &middot; August 20, 2021
+            Life at Contentful &middot; {formatDate("2021-08-20", true)}
           </time>
         </div>
       </dd>
