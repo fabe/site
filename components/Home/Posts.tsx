@@ -31,6 +31,7 @@ export default function Posts({ posts }) {
           <Link href="/posts" className="link link-sm inline-flex items-center">
             View all
           </Link>
+          {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
           <a
             href="/posts/atom"
             className="link link-sm inline-flex items-center gap-0.5"
