@@ -62,6 +62,7 @@ export const typeDefs = gql`
     slug: String!
     publishedDate: String!
     coverUrl: String
+    metaDescription: String
   }
 
   type Photo {

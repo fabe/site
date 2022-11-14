@@ -68,12 +68,12 @@ export function SEO({ seo }: { seo?: SEOProps }) {
           content="#000"
           media="(prefers-color-scheme: dark)"
         />
-        {/* <link
-            rel="alternate"
-            type="application/rss+xml"
-            title="RSS feed"
-            href={`${baseUrl}/rss`}
-          /> */}
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="RSS feed"
+          href={`${baseUrl}/posts/rss`}
+        />
       </Head>
     </>
   );

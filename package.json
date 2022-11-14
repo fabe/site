@@ -26,6 +26,7 @@
     "contentful": "^9.1.32",
     "cors": "^2.8.5",
     "date-fns": "^2.29.2",
+    "feed": "^4.2.2",
     "graphql": "^16.6.0",
     "lru-cache": "^7.14.0",
     "marked": "^4.0.18",

@@ -72,6 +72,23 @@ export const QUERY_POSTS = gql`
       publishedDate
       title
       slug
+      metaDescription
+    }
+  }
+`;
+
+export const QUERY_POSTS_FEED = gql`
+  ${FRAGMENT_SITE_SETTINGS_SHARED}
+
+  query PostsFeedQuery {
+    siteSettings {
+      ...SiteSettingsShared
+    }
+    posts(limit: 5) {
+      publishedDate
+      title
+      slug
+      metaDescription
     }
   }
 `;

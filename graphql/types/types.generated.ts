@@ -126,6 +126,7 @@ export type Post = {
 export type PostWithoutBody = {
   __typename?: 'PostWithoutBody';
   coverUrl?: Maybe<Scalars['String']>;
+  metaDescription?: Maybe<Scalars['String']>;
   publishedDate: Scalars['String'];
   slug: Scalars['String'];
   title: Scalars['String'];
@@ -225,7 +226,12 @@ export type PostQueryQuery = { __typename?: 'Query', siteSettings: { __typename?
 export type PostsQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type PostsQueryQuery = { __typename?: 'Query', posts: Array<{ __typename?: 'PostWithoutBody', publishedDate: string, title: string, slug: string } | null> };
+export type PostsQueryQuery = { __typename?: 'Query', posts: Array<{ __typename?: 'PostWithoutBody', publishedDate: string, title: string, slug: string, metaDescription?: string | null } | null> };
+
+export type PostsFeedQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type PostsFeedQueryQuery = { __typename?: 'Query', siteSettings: { __typename?: 'SiteSettings', siteTitle: string, metaDescription: string }, posts: Array<{ __typename?: 'PostWithoutBody', publishedDate: string, title: string, slug: string, metaDescription?: string | null } | null> };
 
 export type PostsSlugsQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -378,6 +384,7 @@ export const PostsQueryDocument = gql`
     publishedDate
     title
     slug
+    metaDescription
   }
 }
     `;
@@ -408,6 +415,46 @@ export function usePostsQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
 export type PostsQueryQueryHookResult = ReturnType<typeof usePostsQueryQuery>;
 export type PostsQueryLazyQueryHookResult = ReturnType<typeof usePostsQueryLazyQuery>;
 export type PostsQueryQueryResult = Apollo.QueryResult<PostsQueryQuery, PostsQueryQueryVariables>;
+export const PostsFeedQueryDocument = gql`
+    query PostsFeedQuery {
+  siteSettings {
+    ...SiteSettingsShared
+  }
+  posts {
+    publishedDate
+    title
+    slug
+    metaDescription
+  }
+}
+    ${SiteSettingsSharedFragmentDoc}`;
+
+/**
+ * __usePostsFeedQueryQuery__
+ *
+ * To run a query within a React component, call `usePostsFeedQueryQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePostsFeedQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePostsFeedQueryQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function usePostsFeedQueryQuery(baseOptions?: Apollo.QueryHookOptions<PostsFeedQueryQuery, PostsFeedQueryQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PostsFeedQueryQuery, PostsFeedQueryQueryVariables>(PostsFeedQueryDocument, options);
+      }
+export function usePostsFeedQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PostsFeedQueryQuery, PostsFeedQueryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PostsFeedQueryQuery, PostsFeedQueryQueryVariables>(PostsFeedQueryDocument, options);
+        }
+export type PostsFeedQueryQueryHookResult = ReturnType<typeof usePostsFeedQueryQuery>;
+export type PostsFeedQueryLazyQueryHookResult = ReturnType<typeof usePostsFeedQueryLazyQuery>;
+export type PostsFeedQueryQueryResult = Apollo.QueryResult<PostsFeedQueryQuery, PostsFeedQueryQueryVariables>;
 export const PostsSlugsQueryDocument = gql`
     query PostsSlugsQuery {
   posts {

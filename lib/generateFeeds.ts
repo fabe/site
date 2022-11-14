@@ -1,42 +1,53 @@
-import fs from "fs";
-import { marked } from "marked";
-import { DATE_FORMAT } from "../constants";
-const MAX = 10;
+import { Post, SiteSettings } from "../graphql/types/types.generated";
+import { Feed as RSSFeed } from "feed";
+import { baseUrl } from "../components/SEO";
 
-export function generateNotesFeed(notes) {
-  const feed = `<?xml version="1.0" encoding="utf-8"?>
-    <feed xmlns="http://www.w3.org/2005/Atom">
-      <title>Fabian Schultz</title>
-      <subtitle>Notes</subtitle>
-      <link href="https://fabianschultz.com/rss/notes" rel="self"/>
-      <link href="https://fabianschultz.com/"/>
-      <updated>${notes[0].date}</updated>
-      <id>https://fabianschultz.com/</id>
-      <author>
-        <name>Fabian Schultz</name>
-        <email>desk@fabianschultz.com</email>
-      </author>
-      ${notes.slice(0, MAX).reduce((acc, note) => {
-        return `${acc}
-          <entry>
-            <id>${note.sys.id}</id>
-            <title>${new Date(note.date).toLocaleDateString(
-              "en-US",
-              DATE_FORMAT
-            )}</title>
-            <description>${marked.parse(note.body, {
-              xhtml: true,
-            })}</description>
-            <link href="https://fabianschultz.com/notes#${note.sys.id}" />
-            <updated>${note.date}</updated>
-            <guid isPermaLink="true">https://fabianschultz.com/notes#${
-              note.sys.id
-            }</guid>
-          </entry>`;
-      }, "")}
-    </feed>
-  `;
+export default function (posts: Post[], siteSettings: SiteSettings) {
+  const date = new Date();
+  const updated = new Date(posts[0].publishedDate);
+  const author = {
+    name: siteSettings.siteTitle,
+    email: "desk@fabianschultz.com",
+    link: baseUrl,
+  };
 
-  fs.mkdirSync("./public/rss", { recursive: true });
-  fs.writeFileSync("./public/rss/notes.xml", feed);
+  const feed = new RSSFeed({
+    title: siteSettings.siteTitle,
+    description: siteSettings.metaDescription,
+    id: baseUrl,
+    link: baseUrl,
+    language: "en",
+    favicon: `${baseUrl}/public/favicon.ico`,
+    copyright: `Copyright ${date.getFullYear()}, Fabian Schultz`,
+    updated,
+    feedLinks: {
+      rss2: `${baseUrl}/posts/rss`,
+      json: `${baseUrl}/posts/feed`,
+      atom: `${baseUrl}/posts/atom`,
+    },
+    author,
+  });
+
+  posts.forEach((post) => {
+    const url = `${baseUrl}/posts/${post.slug}`;
+    feed.addItem({
+      title: post.title,
+      id: url,
+      link: url,
+      description: post.metaDescription,
+      author: [author],
+      contributor: [author],
+      date: new Date(post.publishedDate),
+    });
+  });
+
+  const rss = feed.rss2();
+  const atom = feed.atom1();
+  const json = feed.json1();
+
+  return {
+    rss,
+    atom,
+    json,
+  };
 }

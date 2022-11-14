@@ -87,6 +87,7 @@ export async function getPosts(
             title
             slug
             publishedDate
+            metaDescription
             coverImage {
               url
             }
@@ -108,6 +109,7 @@ export async function getPosts(
     slug: post.slug,
     coverUrl: post.cover?.url,
     publishedDate: post.publishedDate,
+    metaDescription: post.metaDescription,
   }));
 }
 
