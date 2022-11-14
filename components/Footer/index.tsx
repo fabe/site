@@ -1,4 +1,8 @@
+import { GithubIcon } from "../Icons";
+
 export default function Footer() {
+  console.log(process.env.VERCEL_GIT_COMMIT_SHA);
+
   return (
     <footer className="m:px-0 border:neutral-200 mt-10 flex w-full justify-center border-t border-solid dark:border-neutral-950 sm:mt-20">
       <div className="max-w-main flex-1">
@@ -23,12 +27,20 @@ export default function Footer() {
           </div>
           <div className="flex">
             <a
-              className="link link-sm"
+              className="link link-sm flex items-center gap-1.5"
               href="//github.com/fabe/site"
               target="_blank"
               rel="noopener noreferrer"
             >
-              View source
+              <GithubIcon size={12} />
+              <span>
+                fabe/site
+                {process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA && (
+                  <span className="font-mono text-neutral-500/[.5] dark:text-silver-dark/[.5]">
+                    #{process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA.slice(0, 7)}
+                  </span>
+                )}
+              </span>
             </a>
           </div>
         </div>
