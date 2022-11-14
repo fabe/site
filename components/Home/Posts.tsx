@@ -34,7 +34,7 @@ export default function Posts({ posts }) {
           {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
           <a
             href="/posts/atom"
-            className="link link-sm inline-flex items-center gap-0.5"
+            className="link link-sm inline-flex items-center gap-1"
           >
             <FeedIcon size={12} />
             RSS

@@ -14,11 +14,7 @@ export default function Intro({ content }) {
         <h1 className="flex items-center gap-1 text-neutral-900 [font-variation-settings:'wght'_520] dark:text-white">
           <Link href="/">Fabian Schultz</Link>
           <div className="relative">
-            <Tooltip open={tooltipOpen}>
-              This website is verified
-              <br />
-              because I said so.
-            </Tooltip>
+            <Tooltip open={tooltipOpen}>Verified, trust me.</Tooltip>
             <VerifiedIcon
               size={16}
               onMouseEnter={() => setTooltipOpen(true)}
