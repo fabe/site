@@ -84,3 +84,13 @@ export function SpinnerIcon({ size }) {
     </div>
   );
 }
+
+export function FeedIcon({ size }) {
+  return (
+    <PhosphorIcon
+      label="Feed"
+      size={size}
+      path="M216 200a8 8 0 01-16 0c0-79.4-64.6-144-144-144a8 8 0 010-16c88.2 0 160 71.8 160 160zM56 112a8 8 0 000 16 72.1 72.1 0 0172 72 8 8 0 0016 0 88.1 88.1 0 00-88-88zm0 76a12 12 0 1012 12 12 12 0 00-12-12z"
+    />
+  );
+}
