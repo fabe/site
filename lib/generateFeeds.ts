@@ -17,7 +17,7 @@ export default function (posts: Post[], siteSettings: SiteSettings) {
     id: baseUrl,
     link: baseUrl,
     language: "en",
-    favicon: `${baseUrl}/public/favicon.ico`,
+    favicon: `${baseUrl}/favicon.ico`,
     copyright: `Copyright ${date.getFullYear()}, Fabian Schultz`,
     updated,
     feedLinks: {
