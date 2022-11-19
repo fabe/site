@@ -11,7 +11,7 @@ body {
 
   @apply selection:bg-indigo-500 selection:text-white dark:selection:bg-indigo-900;
   text-rendering: optimizeLegibility;
-  font-feature-settings: "cv10" on;
+  font-feature-settings: "kern" on, "liga" on, "ss01" on;
 }
 
 p {
@@ -199,7 +199,7 @@ p {
     @apply text-sm;
     @apply text-neutral-500 dark:text-silver-dark;
     @apply tracking-sm;
-    @apply tabular-nums;
+    @apply slashed-zero tabular-nums;
   }
 
   .time-lg {
@@ -209,6 +209,7 @@ p {
 
   .badge {
     @apply flex items-center gap-1 rounded-xl bg-gray-200 px-1.5 py-0.5 text-xs font-medium tracking-xs text-neutral-700 dark:bg-neutral-900 dark:text-silver-dark;
+    @apply slashed-zero tabular-nums;
   }
 
   .list-container {

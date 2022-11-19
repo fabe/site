@@ -7,8 +7,8 @@ import { Suspense } from "react";
 import localFont from "@next/font/local";
 import { Analytics } from "@vercel/analytics/react";
 
-const interVar = localFont({
-  src: "../public/inter.roman.var.woff2",
+const sansFont = localFont({
+  src: "../public/hubot-sans.var.woff2",
   weight: "400",
   display: "swap",
 });
@@ -37,7 +37,7 @@ export default function MyApp({
         <style jsx global>
           {`
             :root {
-              --inter-font: ${interVar.style.fontFamily};
+              --sans-font: ${sansFont.style.fontFamily};
             }
           `}
         </style>
