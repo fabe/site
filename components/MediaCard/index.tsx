@@ -72,7 +72,7 @@ export default function MediaCard({
 
       <div className="w-full truncate transition-transform group-hover:translate-x-0.5">
         <div className="truncate">{title}</div>
-        <div className="truncate text-sm tracking-sm text-neutral-500 dark:text-silver-dark">
+        <div className="truncate text-sm slashed-zero tracking-sm text-neutral-500 dark:text-silver-dark">
           {subtitle}
         </div>
       </div>
