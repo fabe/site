@@ -23,6 +23,7 @@ export default function Playlists({ playlists }) {
         <div className="-mb-2 grid grid-cols-1 gap-6 sm:-mb-8 sm:grid-cols-2 sm:gap-8">
           {playlists.map((playlist: SpotifyPlaylist) => (
             <MediaCard
+              key={playlist.name}
               title={playlist.name}
               subtitle={`${playlist.trackCount} songs${
                 playlist.followerCount
