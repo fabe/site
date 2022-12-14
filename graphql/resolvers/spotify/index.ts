@@ -1,6 +1,10 @@
 import querystring from "querystring";
 
-import { SpotifyStatus } from "../../types/types.generated";
+import {
+  QuerySpotifyPlaylistArgs,
+  SpotifyPlaylist,
+  SpotifyStatus,
+} from "../../types/types.generated";
 
 const {
   SPOTIFY_CLIENT_ID: client_id,
@@ -11,6 +15,7 @@ const {
 const basic = Buffer.from(`${client_id}:${client_secret}`).toString("base64");
 const NOW_PLAYING_ENDPOINT = `https://api.spotify.com/v1/me/player/currently-playing`;
 const RECENTLY_PLAYED_ENDPOINT = `https://api.spotify.com/v1/me/player/recently-played`;
+const PLAYLIST_ENDPOINT = `https://api.spotify.com/v1/playlists`;
 const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
 
 const getAccessToken = async () => {
@@ -39,6 +44,14 @@ const getNowPlaying = async (access_token: string) => {
 
 const getRecentlyPlayed = async (access_token: string) => {
   return fetch(RECENTLY_PLAYED_ENDPOINT, {
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+};
+
+const getPlaylist = async (access_token: string, playlistId: string) => {
+  return fetch(PLAYLIST_ENDPOINT + `/${playlistId}`, {
     headers: {
       Authorization: `Bearer ${access_token}`,
     },
@@ -108,5 +121,27 @@ export async function getSpotifyStatus(): Promise<SpotifyStatus> {
       albumImageUrl,
       spotifyUrl,
     },
+  };
+}
+
+export async function getSpotifyPlaylist(
+  _: any,
+  args: QuerySpotifyPlaylistArgs
+): Promise<SpotifyPlaylist> {
+  const { access_token } = await getAccessToken();
+  const playlistResponse = await getPlaylist(access_token, args.id);
+
+  if (playlistResponse.status > 200) {
+    return null;
+  }
+
+  const playlist = await playlistResponse.json();
+
+  return {
+    name: playlist.name,
+    coverUrl: playlist.images[0]?.url,
+    trackCount: playlist.tracks.total,
+    followerCount: playlist.followers.total,
+    spotifyUrl: playlist.external_urls.spotify,
   };
 }

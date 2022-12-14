@@ -140,6 +140,7 @@ export type Query = {
   post?: Maybe<Post>;
   posts: Array<Maybe<PostWithoutBody>>;
   siteSettings: SiteSettings;
+  spotifyPlaylist: SpotifyPlaylist;
   spotifyStatus: SpotifyStatus;
 };
 
@@ -169,6 +170,11 @@ export type QueryPostsArgs = {
   limit?: InputMaybe<Scalars['Int']>;
 };
 
+
+export type QuerySpotifyPlaylistArgs = {
+  id: Scalars['String'];
+};
+
 export type SiteSettings = {
   __typename?: 'SiteSettings';
   avatar: Asset;
@@ -185,6 +191,15 @@ export type Song = {
   artist?: Maybe<Scalars['String']>;
   spotifyUrl?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
+};
+
+export type SpotifyPlaylist = {
+  __typename?: 'SpotifyPlaylist';
+  coverUrl: Scalars['String'];
+  followerCount: Scalars['Int'];
+  name: Scalars['String'];
+  spotifyUrl: Scalars['String'];
+  trackCount: Scalars['Int'];
 };
 
 export type SpotifyStatus = {
@@ -237,6 +252,13 @@ export type PostsSlugsQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type PostsSlugsQueryQuery = { __typename?: 'Query', posts: Array<{ __typename?: 'PostWithoutBody', slug: string } | null> };
+
+export type PlaylistQueryQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type PlaylistQueryQuery = { __typename?: 'Query', spotifyPlaylist: { __typename?: 'SpotifyPlaylist', name: string, coverUrl: string, trackCount: number, followerCount: number, spotifyUrl: string } };
 
 export const SiteSettingsSharedFragmentDoc = gql`
     fragment SiteSettingsShared on SiteSettings {
@@ -420,7 +442,7 @@ export const PostsFeedQueryDocument = gql`
   siteSettings {
     ...SiteSettingsShared
   }
-  posts {
+  posts(limit: 5) {
     publishedDate
     title
     slug
@@ -489,3 +511,42 @@ export function usePostsSlugsQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
 export type PostsSlugsQueryQueryHookResult = ReturnType<typeof usePostsSlugsQueryQuery>;
 export type PostsSlugsQueryLazyQueryHookResult = ReturnType<typeof usePostsSlugsQueryLazyQuery>;
 export type PostsSlugsQueryQueryResult = Apollo.QueryResult<PostsSlugsQueryQuery, PostsSlugsQueryQueryVariables>;
+export const PlaylistQueryDocument = gql`
+    query PlaylistQuery($id: String!) {
+  spotifyPlaylist(id: $id) {
+    name
+    coverUrl
+    trackCount
+    followerCount
+    spotifyUrl
+  }
+}
+    `;
+
+/**
+ * __usePlaylistQueryQuery__
+ *
+ * To run a query within a React component, call `usePlaylistQueryQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePlaylistQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePlaylistQueryQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function usePlaylistQueryQuery(baseOptions: Apollo.QueryHookOptions<PlaylistQueryQuery, PlaylistQueryQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PlaylistQueryQuery, PlaylistQueryQueryVariables>(PlaylistQueryDocument, options);
+      }
+export function usePlaylistQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PlaylistQueryQuery, PlaylistQueryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PlaylistQueryQuery, PlaylistQueryQueryVariables>(PlaylistQueryDocument, options);
+        }
+export type PlaylistQueryQueryHookResult = ReturnType<typeof usePlaylistQueryQuery>;
+export type PlaylistQueryLazyQueryHookResult = ReturnType<typeof usePlaylistQueryLazyQuery>;
+export type PlaylistQueryQueryResult = Apollo.QueryResult<PlaylistQueryQuery, PlaylistQueryQueryVariables>;

@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import {
   EmailIcon,
   HomeIcon,
+  MusicIcon,
   NavigationIcon,
   NoteIcon,
   SpinnerIcon,
@@ -84,6 +85,10 @@ export default function Archipelago() {
             <Command.Item onSelect={() => navigate("/posts")}>
               <NoteIcon size={16} />
               Posts
+            </Command.Item>
+            <Command.Item onSelect={() => navigate("/playlists")}>
+              <MusicIcon size={16} />
+              Playlists
             </Command.Item>
           </Command.Group>
 

@@ -126,3 +126,13 @@ export function GithubIcon({ size }) {
     />
   );
 }
+
+export function MusicIcon({ size }) {
+  return (
+    <PhosphorIcon
+      label="Music note"
+      size={size}
+      path="M210.3,56.3l-80-24a8.2,8.2,0,0,0-7.1,1.3A8.1,8.1,0,0,0,120,40V148.3A47.4,47.4,0,0,0,88,136a48,48,0,1,0,48,48V98.8l69.7,20.9a8.2,8.2,0,0,0,7.1-1.3A8.1,8.1,0,0,0,216,112V64A8.1,8.1,0,0,0,210.3,56.3Z"
+    />
+  );
+}

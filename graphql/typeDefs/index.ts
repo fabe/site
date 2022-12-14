@@ -11,6 +11,7 @@ export const typeDefs = gql`
     posts(limit: Int): [PostWithoutBody]!
     siteSettings: SiteSettings!
     spotifyStatus: SpotifyStatus!
+    spotifyPlaylist(id: String!): SpotifyPlaylist!
   }
 
   enum CollectionType {
@@ -23,6 +24,14 @@ export const typeDefs = gql`
     timestamp: String
     isPlaying: Boolean!
     song: Song
+  }
+
+  type SpotifyPlaylist {
+    name: String!
+    coverUrl: String!
+    trackCount: Int!
+    followerCount: Int!
+    spotifyUrl: String!
   }
 
   type Song {

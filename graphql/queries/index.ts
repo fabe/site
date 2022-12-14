@@ -100,3 +100,17 @@ export const QUERY_POST_SLUGS = gql`
     }
   }
 `;
+
+export const QUERY_PLAYLIST = gql`
+  ${FRAGMENT_SITE_SETTINGS_SHARED}
+
+  query PlaylistQuery($id: String!) {
+    spotifyPlaylist(id: $id) {
+      name
+      coverUrl
+      trackCount
+      followerCount
+      spotifyUrl
+    }
+  }
+`;

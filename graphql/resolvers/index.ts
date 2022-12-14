@@ -6,7 +6,7 @@ import {
   getPosts,
   getSiteSettings,
 } from "./content";
-import { getSpotifyStatus } from "./spotify";
+import { getSpotifyPlaylist, getSpotifyStatus } from "./spotify";
 
 export const resolvers = {
   Query: {
@@ -17,5 +17,6 @@ export const resolvers = {
     posts: getPosts,
     siteSettings: getSiteSettings,
     spotifyStatus: getSpotifyStatus,
+    spotifyPlaylist: getSpotifyPlaylist,
   },
 };
