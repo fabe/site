@@ -48,8 +48,8 @@ module.exports = {
         1.5: "1.5px",
       },
       textUnderlineOffset: {
-        1.5: "1px",
-        2.5: "2px",
+        1.5: "1.5px",
+        2.5: "2.5px",
       },
       transitionTimingFunction: {
         "in-expo": "cubic-bezier(0.95, 0.05, 0.795, 0.035)",
@@ -57,7 +57,7 @@ module.exports = {
         spring: "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
       },
       maxWidth: {
-        main: "45rem",
+        main: "44rem",
       },
       width: {
         main: "44rem",
