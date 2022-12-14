@@ -111,6 +111,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const apolloClient = initializeApollo();
+  const remarkTypograf = require("@mavrin/remark-typograf");
 
   await apolloClient.query({
     query: QUERY_POST,
@@ -126,7 +127,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     },
   });
 
-  const body = await serialize(data.post.body);
+  const body = await serialize(data.post.body, {
+    mdxOptions: {
+      remarkPlugins: [[remarkTypograf, { locale: ["en-US"] }]],
+    },
+  });
 
   return {
     props: {
