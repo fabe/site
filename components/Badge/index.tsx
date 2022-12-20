@@ -12,7 +12,7 @@ export default function Badge({
   return (
     <span
       className={`badge ${
-        border && `border	border-gray-900/5 bg-transparent dark:border-white/10`
+        border && `border border-gray-900/5 bg-transparent dark:border-white/10`
       }`}
     >
       {isLive ? (

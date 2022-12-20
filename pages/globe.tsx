@@ -51,7 +51,7 @@ export default function GlobePage({}) {
           }}
         >
           <div
-            className={`h-4	w-4 cursor-pointer rounded-xl border-2 pin-${place.locationType.toLowerCase()} bg-clip-content p-0.5`}
+            className={`h-4 w-4 cursor-pointer rounded-xl border-2 pin-${place.locationType.toLowerCase()} bg-clip-content p-0.5`}
           />
         </Marker>
       )),
