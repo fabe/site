@@ -18,6 +18,15 @@ const nextConfig = {
 
     return config;
   },
+  async redirects() {
+    return [
+      {
+        source: "/projects/:path*",
+        destination: "https://fabe.github.io/projects/:path*",
+        permanent: false,
+      },
+    ];
+  },
 };
 
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
