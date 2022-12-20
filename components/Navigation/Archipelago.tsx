@@ -4,6 +4,7 @@ import { Command } from "cmdk";
 import { useState, useEffect } from "react";
 import {
   EmailIcon,
+  GlobeIcon,
   HomeIcon,
   MusicIcon,
   NavigationIcon,
@@ -13,6 +14,7 @@ import {
 } from "../Icons";
 import { CSSTransitionGroup } from "react-transition-group";
 import { Tooltip } from "../Tooltip";
+import Badge from "../Badge";
 
 enum TooltipState {
   HOME,
@@ -89,6 +91,10 @@ export default function Archipelago() {
             <Command.Item onSelect={() => navigate("/playlists")}>
               <MusicIcon size={16} />
               Playlists
+            </Command.Item>
+            <Command.Item onSelect={() => navigate("/globe")}>
+              <GlobeIcon size={16} />
+              Globe <Badge border>Experimental</Badge>
             </Command.Item>
           </Command.Group>
 

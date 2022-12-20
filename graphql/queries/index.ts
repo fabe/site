@@ -114,3 +114,16 @@ export const QUERY_PLAYLIST = gql`
     }
   }
 `;
+
+export const QUERY_PLACES = gql`
+  query PlacesQuery {
+    places {
+      name
+      locationType
+      location {
+        lat
+        lon
+      }
+    }
+  }
+`;

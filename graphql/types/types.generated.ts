@@ -105,6 +105,13 @@ export type Photo = {
   width: Scalars['Int'];
 };
 
+export type Place = {
+  __typename?: 'Place';
+  location: Location;
+  locationType: Scalars['String'];
+  name: Scalars['String'];
+};
+
 export type Playlist = {
   __typename?: 'Playlist';
   coverUrl: Scalars['String'];
@@ -136,6 +143,7 @@ export type Query = {
   __typename?: 'Query';
   books: Array<Maybe<Book>>;
   photos: Array<Maybe<Photo>>;
+  places: Array<Maybe<Place>>;
   playlists: Array<Maybe<Playlist>>;
   post?: Maybe<Post>;
   posts: Array<Maybe<PostWithoutBody>>;
@@ -259,6 +267,11 @@ export type PlaylistQueryQueryVariables = Exact<{
 
 
 export type PlaylistQueryQuery = { __typename?: 'Query', spotifyPlaylist: { __typename?: 'SpotifyPlaylist', name: string, coverUrl: string, trackCount: number, followerCount: number, spotifyUrl: string } };
+
+export type PlacesQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type PlacesQueryQuery = { __typename?: 'Query', places: Array<{ __typename?: 'Place', name: string, locationType: string, location: { __typename?: 'Location', lat?: number | null, lon?: number | null } } | null> };
 
 export const SiteSettingsSharedFragmentDoc = gql`
     fragment SiteSettingsShared on SiteSettings {
@@ -550,3 +563,42 @@ export function usePlaylistQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
 export type PlaylistQueryQueryHookResult = ReturnType<typeof usePlaylistQueryQuery>;
 export type PlaylistQueryLazyQueryHookResult = ReturnType<typeof usePlaylistQueryLazyQuery>;
 export type PlaylistQueryQueryResult = Apollo.QueryResult<PlaylistQueryQuery, PlaylistQueryQueryVariables>;
+export const PlacesQueryDocument = gql`
+    query PlacesQuery {
+  places {
+    name
+    locationType
+    location {
+      lat
+      lon
+    }
+  }
+}
+    `;
+
+/**
+ * __usePlacesQueryQuery__
+ *
+ * To run a query within a React component, call `usePlacesQueryQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePlacesQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePlacesQueryQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function usePlacesQueryQuery(baseOptions?: Apollo.QueryHookOptions<PlacesQueryQuery, PlacesQueryQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PlacesQueryQuery, PlacesQueryQueryVariables>(PlacesQueryDocument, options);
+      }
+export function usePlacesQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PlacesQueryQuery, PlacesQueryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PlacesQueryQuery, PlacesQueryQueryVariables>(PlacesQueryDocument, options);
+        }
+export type PlacesQueryQueryHookResult = ReturnType<typeof usePlacesQueryQuery>;
+export type PlacesQueryLazyQueryHookResult = ReturnType<typeof usePlacesQueryLazyQuery>;
+export type PlacesQueryQueryResult = Apollo.QueryResult<PlacesQueryQuery, PlacesQueryQueryVariables>;

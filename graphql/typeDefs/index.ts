@@ -9,6 +9,7 @@ export const typeDefs = gql`
     playlists(limit: Int): [Playlist]!
     post(slug: String!): Post
     posts(limit: Int): [PostWithoutBody]!
+    places: [Place]!
     siteSettings: SiteSettings!
     spotifyStatus: SpotifyStatus!
     spotifyPlaylist(id: String!): SpotifyPlaylist!
@@ -72,6 +73,12 @@ export const typeDefs = gql`
     publishedDate: String!
     coverUrl: String
     metaDescription: String
+  }
+
+  type Place {
+    name: String!
+    locationType: String!
+    location: Location!
   }
 
   type Photo {

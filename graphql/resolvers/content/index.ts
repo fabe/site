@@ -1,6 +1,7 @@
 import { gql } from "@apollo/client";
 
 import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
+import { Place } from "next-seo/lib/types";
 
 import {
   Book,
@@ -15,9 +16,15 @@ import {
   SiteSettings,
 } from "../../types/types.generated";
 
-const { CONTENTFUL_SPACE_ID, CONTENTFUL_DELIVERY } = process.env;
+const {
+  CONTENTFUL_SPACE_ID,
+  CONTENTFUL_DELIVERY,
+  GLOBE_CONTENTFUL_SPACE_ID,
+  GLOBE_CONTENTFUL_DELIVERY,
+} = process.env;
 const SITE_SETTINGS_ENTRY_ID = "4VjpvaxnxzRE0XPfQjwHQK";
 const BASE_URL = `https://graphql.contentful.com/content/v1/spaces/${CONTENTFUL_SPACE_ID}`;
+const GLOBE_BASE_URL = `https://graphql.contentful.com/content/v1/spaces/${GLOBE_CONTENTFUL_SPACE_ID}`;
 
 export const contentfulClient = new ApolloClient({
   ssrMode: true,
@@ -26,6 +33,18 @@ export const contentfulClient = new ApolloClient({
     credentials: "same-origin",
     headers: {
       Authorization: `Bearer ${CONTENTFUL_DELIVERY}`,
+    },
+  }),
+  cache: new InMemoryCache(),
+});
+
+export const contentfulGlobeClient = new ApolloClient({
+  ssrMode: true,
+  link: createHttpLink({
+    uri: GLOBE_BASE_URL,
+    credentials: "same-origin",
+    headers: {
+      Authorization: `Bearer ${GLOBE_CONTENTFUL_DELIVERY}`,
     },
   }),
   cache: new InMemoryCache(),
@@ -227,4 +246,39 @@ export async function getSiteSettings(): Promise<SiteSettings | null> {
   }
 
   return response.data.siteSettings;
+}
+
+export async function getPlaces(_: any): Promise<Place[]> {
+  const response = await contentfulGlobeClient.query({
+    query: gql`
+      query getAllPlaces {
+        placeCollection(limit: 500, where: { bucketList_not: true }) {
+          total
+          items {
+            name
+            type {
+              name
+            }
+            location {
+              lat
+              lon
+            }
+          }
+        }
+      }
+    `,
+  });
+
+  if (!response.data) {
+    return [];
+  }
+
+  return response.data.placeCollection.items.map((place: any) => ({
+    name: place.name,
+    locationType: place.type.name,
+    location: {
+      lat: place.location.lat,
+      lon: place.location.lon,
+    },
+  }));
 }
