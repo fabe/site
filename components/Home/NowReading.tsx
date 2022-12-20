@@ -6,11 +6,11 @@ interface NowReadingProps {
 }
 
 export default function NowReading({ book }: NowReadingProps) {
-  const { coverUrl, title, author, okuUrl } = book;
-
-  if (!title) {
+  if (!book) {
     return null;
   }
+
+  const { coverUrl, title, author, okuUrl } = book;
 
   return (
     <dl className="list-container">
