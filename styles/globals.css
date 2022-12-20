@@ -156,6 +156,50 @@ p {
   @apply transition-all duration-200 ease-in-out;
 }
 
+.pin-city {
+  @apply border-fuchsia-500/20;
+  @apply bg-fuchsia-500/60;
+}
+
+.pin-place {
+  @apply border-purple-500/20;
+  @apply bg-purple-500/60;
+}
+
+.pin-airport {
+  @apply border-rose-500/20;
+  @apply bg-rose-500/60;
+}
+
+.pin-country {
+  @apply border-green-500/20;
+  @apply bg-green-500/60;
+}
+
+.pin-neighborhood {
+  @apply border-amber-500/20;
+  @apply bg-amber-500/60;
+}
+
+.pin-hotel {
+  @apply border-orange-500/20;
+  @apply bg-orange-500/60;
+}
+
+.pin-park {
+  @apply border-emerald-500/20;
+  @apply bg-emerald-500/60;
+}
+
+.mapboxgl-popup-tip,
+.mapboxgl-popup-close-button {
+  @apply hidden;
+}
+
+.mapboxgl-popup-content {
+  @apply rounded border border-transparent bg-neutral-900 px-3 py-3 font-sans text-base font-medium tracking-normal text-silver [font-variation-settings:'opsz'_7,_'wght'_500] dark:border-white/[.08] dark:bg-black/[.96] dark:text-silver !important;
+}
+
 @layer components {
   .link {
     @apply !underline;
