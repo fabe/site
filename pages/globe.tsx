@@ -90,7 +90,7 @@ export default function GlobePage({}) {
           Globe
         </h1>
         <p className="dark:text-shadow text-sm tracking-tight text-neutral-500 dark:text-silver-dark">
-          Places I've been to. Inspired by{" "}
+          Places I’ve been to. Inspired by{" "}
           <a className="link" href="https://conquer.earth">
             conquer.earth
           </a>
