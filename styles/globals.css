@@ -82,7 +82,7 @@ p {
 }
 
 [cmdk-item][aria-selected] {
-  @apply bg-neutral-200/[.7] dark:bg-neutral-800;
+  @apply bg-neutral-100 dark:bg-neutral-800;
   @apply text-neutral-900 dark:text-silver;
 }
 

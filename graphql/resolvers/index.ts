@@ -1,6 +1,7 @@
 import { getBooks } from "./books";
 import {
   getPhotos,
+  getPlaces,
   getPlaylists,
   getPost,
   getPosts,
@@ -15,6 +16,7 @@ export const resolvers = {
     playlists: getPlaylists,
     post: getPost,
     posts: getPosts,
+    places: getPlaces,
     siteSettings: getSiteSettings,
     spotifyStatus: getSpotifyStatus,
     spotifyPlaylist: getSpotifyPlaylist,
