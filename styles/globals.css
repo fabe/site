@@ -348,4 +348,12 @@ p {
     @apply hover:decoration-neutral-300 dark:hover:decoration-neutral-600;
     @apply tracking-xs;
   }
+
+  .text-shadow {
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  }
+
+  .mask-gradient {
+    mask-image: linear-gradient(to top, transparent 0%, rgba(0, 0, 0, 1) 90%);
+  }
 }
