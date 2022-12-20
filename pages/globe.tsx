@@ -91,7 +91,12 @@ export default function GlobePage({}) {
         </h1>
         <p className="dark:text-shadow text-sm tracking-tight text-neutral-500 dark:text-silver-dark">
           Places I’ve been to. Inspired by{" "}
-          <a className="link" href="https://conquer.earth">
+          <a
+            className="link"
+            href="//conquer.earth"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             conquer.earth
           </a>
         </p>
