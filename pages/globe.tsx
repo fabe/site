@@ -12,7 +12,7 @@ import { PlacesQueryQuery } from "../graphql/types/types.generated";
 const initialViewState = {
   latitude: 52.39,
   longitude: 13.06,
-  zoom: 2,
+  zoom: 0.7,
   bearing: 0,
   pitch: 0,
 };
@@ -21,6 +21,7 @@ export default function GlobePage({}) {
   const [popupInfo, setPopupInfo] = useState(null);
   const [mode, setMode] = useState("light");
   const { data } = useQuery<PlacesQueryQuery>(QUERY_PLACES);
+  const mapRef = React.useRef();
 
   const [settings, _] = useState({
     scrollZoom: true,
@@ -77,6 +78,13 @@ export default function GlobePage({}) {
     };
   }, []);
 
+  const onMapLoad = React.useCallback(() => {
+    if (window.screen.width > 768) {
+      // @ts-ignore
+      mapRef.current.zoomTo(2);
+    }
+  }, []);
+
   return (
     <>
       <SEO
@@ -103,6 +111,8 @@ export default function GlobePage({}) {
       </div>
       <div className="-mb-10 min-h-[95vh] sm:-mb-20">
         <Map
+          ref={mapRef}
+          onLoad={onMapLoad}
           initialViewState={initialViewState}
           {...settings}
           mapStyle={
