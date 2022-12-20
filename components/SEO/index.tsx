@@ -69,6 +69,10 @@ export function SEO({ seo }: { seo?: SEOProps }) {
           content="#000"
           media="(prefers-color-scheme: dark)"
         />
+        <meta
+          name="google-site-verification"
+          content="Oh4RDwXU307Z8ZofFyLQcqmin4Zuv309dats9oWWeHU"
+        />
         <link
           rel="alternate"
           type="application/rss+xml"
