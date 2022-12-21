@@ -157,37 +157,37 @@ p {
 }
 
 .pin-city {
-  @apply border-fuchsia-500/20;
+  @apply border-fuchsia-500/10;
   @apply bg-fuchsia-500/60;
 }
 
 .pin-place {
-  @apply border-purple-500/20;
+  @apply border-purple-500/10;
   @apply bg-purple-500/60;
 }
 
 .pin-airport {
-  @apply border-rose-500/20;
+  @apply border-rose-500/10;
   @apply bg-rose-500/60;
 }
 
 .pin-country {
-  @apply border-green-500/20;
+  @apply border-green-500/10;
   @apply bg-green-500/60;
 }
 
 .pin-neighborhood {
-  @apply border-amber-500/20;
-  @apply bg-amber-500/60;
-}
-
-.pin-hotel {
-  @apply border-orange-500/20;
+  @apply border-orange-500/10;
   @apply bg-orange-500/60;
 }
 
+.pin-hotel {
+  @apply border-yellow-400/10;
+  @apply bg-yellow-400/60;
+}
+
 .pin-park {
-  @apply border-emerald-500/20;
+  @apply border-emerald-500/10;
   @apply bg-emerald-500/60;
 }
 

@@ -81,7 +81,7 @@ export default function GlobePage({}) {
   const onMapLoad = React.useCallback(() => {
     if (window.screen.width > 768) {
       // @ts-ignore
-      mapRef.current.zoomTo(2);
+      mapRef.current.zoomTo(2.5);
     }
   }, []);
 
