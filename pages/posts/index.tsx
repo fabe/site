@@ -13,6 +13,7 @@ export default function Posts({ posts }) {
       <SEO
         seo={{
           title: "Posts",
+          path: "/posts",
         }}
       />
       <Main>

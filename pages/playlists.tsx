@@ -14,6 +14,7 @@ export default function Playlists({ playlists }) {
       <SEO
         seo={{
           title: "Playlists",
+          path: "/playlists",
         }}
       />
       <Main>

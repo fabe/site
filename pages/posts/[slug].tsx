@@ -43,6 +43,7 @@ export default function Post(props) {
         seo={{
           title,
           description: metaDescription,
+          path: relativeUrl,
         }}
       />
       <Main>

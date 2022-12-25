@@ -90,6 +90,7 @@ export default function GlobePage({}) {
       <SEO
         seo={{
           title: "Globe",
+          path: "/globe",
         }}
       />
       <div className="mask-gradient pointer-events-none absolute top-0 left-0 z-10 h-32 w-full bg-gradient-to-t from-white/0 to-white backdrop-blur-lg dark:from-neutral-950/0 dark:to-neutral-950 sm:h-48"></div>

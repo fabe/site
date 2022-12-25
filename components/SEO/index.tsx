@@ -29,7 +29,7 @@ export interface SEOProps {
   title?: string;
   description?: string;
   image?: string;
-  url?: string;
+  path?: string;
 }
 
 export function SEO({ seo }: { seo?: SEOProps }) {
@@ -40,7 +40,9 @@ export function SEO({ seo }: { seo?: SEOProps }) {
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        {/* <link rel="canonical" href={baseUrl} /> */}
+        {seo.path ? (
+          <link rel="canonical" href={`${baseUrl}${seo.path}`} />
+        ) : null}
 
         <link
           rel="preload"

@@ -45,6 +45,7 @@ export default function Home({ intro }) {
         seo={{
           title: data.siteSettings.siteTitle,
           description: data.siteSettings.metaDescription,
+          path: "/",
         }}
       />
       <Main>
