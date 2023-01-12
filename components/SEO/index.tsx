@@ -37,11 +37,15 @@ export function SEO({ seo }: { seo?: SEOProps }) {
     <>
       <DefaultSeo {...{ ...defaultSEO, ...seo }} />
       <Head>
+        <meta name="googlebot" content="index,follow" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         {seo.path ? (
-          <link rel="canonical" href={`${baseUrl}${seo.path}`} />
+          <link
+            rel="canonical"
+            href={`${baseUrl}${seo.path === "/" ? "" : seo.path}`}
+          />
         ) : null}
 
         <link
@@ -59,6 +63,30 @@ export function SEO({ seo }: { seo?: SEOProps }) {
           type="font/woff2"
           crossOrigin="anonymous"
         /> */}
+
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "http://schema.org",
+            "@type": "WebSite",
+            name: defaultSEO.title,
+            url: baseUrl,
+            image: defaultSEO.openGraph.images[0].url,
+            author: {
+              "@context": "http://schema.org",
+              "@type": "Person",
+              name: defaultSEO.title,
+              url: baseUrl,
+              jobTitle: "Product Designer",
+              alumniOf: "University of Applied Sciences Potsdam",
+              gender: "male",
+              image: defaultSEO.openGraph.images[0].url,
+              sameAs: [
+                "https://twitter.com/fschultz_",
+                "https://www.linkedin.com/in/fabian-schultz",
+              ],
+            },
+          })}
+        </script>
 
         <meta name="author" content="Fabian Schultz" />
         <meta
