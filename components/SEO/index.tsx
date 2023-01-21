@@ -103,6 +103,7 @@ export function SEO({ seo }: { seo?: SEOProps }) {
           name="google-site-verification"
           content="Oh4RDwXU307Z8ZofFyLQcqmin4Zuv309dats9oWWeHU"
         />
+        <link rel="me" href="https://mastodon.social/@fabians" />
         <link
           rel="alternate"
           type="application/rss+xml"
