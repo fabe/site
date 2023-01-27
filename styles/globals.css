@@ -297,7 +297,7 @@ p {
     @apply prose-code:rounded prose-code:font-normal prose-code:text-neutral-900 dark:prose-code:text-silver-dark;
     @apply prose-pre:overflow-auto prose-pre:whitespace-pre prose-pre:border prose-pre:border-neutral-200 prose-pre:bg-transparent prose-pre:p-4 prose-pre:text-sm dark:prose-pre:border-neutral-900 sm:prose-pre:-ml-4 sm:prose-pre:-mr-4;
     @apply prose-img:rounded-lg;
-    @apply prose-hr:my-6 prose-hr:border-neutral-300 dark:prose-hr:border-neutral-800 sm:prose-hr:my-10;
+    @apply prose-hr:my-6 prose-hr:border-neutral-300 dark:prose-hr:border-neutral-900 sm:prose-hr:my-10;
     @apply prose-blockquote:border-0 prose-blockquote:p-0 prose-blockquote:not-italic prose-blockquote:text-neutral-600 dark:prose-blockquote:text-silver-dark;
   }
 }
