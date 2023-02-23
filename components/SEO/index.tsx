@@ -64,29 +64,32 @@ export function SEO({ seo }: { seo?: SEOProps }) {
           crossOrigin="anonymous"
         /> */}
 
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "http://schema.org",
-            "@type": "WebSite",
-            name: defaultSEO.title,
-            url: baseUrl,
-            image: defaultSEO.openGraph.images[0].url,
-            author: {
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
               "@context": "http://schema.org",
-              "@type": "Person",
+              "@type": "WebSite",
               name: defaultSEO.title,
               url: baseUrl,
-              jobTitle: "Product Designer",
-              alumniOf: "University of Applied Sciences Potsdam",
-              gender: "male",
               image: defaultSEO.openGraph.images[0].url,
-              sameAs: [
-                "https://twitter.com/fschultz_",
-                "https://www.linkedin.com/in/fabian-schultz",
-              ],
-            },
-          })}
-        </script>
+              author: {
+                "@context": "http://schema.org",
+                "@type": "Person",
+                name: defaultSEO.title,
+                url: baseUrl,
+                jobTitle: "Product Designer",
+                alumniOf: "University of Applied Sciences Potsdam",
+                gender: "male",
+                image: defaultSEO.openGraph.images[0].url,
+                sameAs: [
+                  "https://twitter.com/fschultz_",
+                  "https://www.linkedin.com/in/fabian-schultz",
+                ],
+              },
+            }),
+          }}
+        />
 
         <meta name="author" content="Fabian Schultz" />
         <meta
