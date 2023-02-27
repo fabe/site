@@ -15,6 +15,9 @@ interface MediaCardProps {
   loading?: boolean;
 }
 
+const FALLBACK_COVER =
+  "data:image/svg+xml,%0A%3Csvg fill='none' height='160' viewBox='0 0 112 160' width='112' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m0 0h112v160h-112z' fill='%2318181b'/%3E%3Cg fill='%23e2e8f0' fill-opacity='.15'%3E%3Ccircle cx='56' cy='57' r='34'/%3E%3Ccircle cx='56' cy='102' r='34'/%3E%3C/g%3E%3C/svg%3E";
+
 export default function MediaCard({
   title,
   subtitle,
@@ -49,7 +52,7 @@ export default function MediaCard({
             alt={image?.alt || ""}
             title={title}
             className="truncate rounded bg-gray-200 dark:bg-zinc-600"
-            src={image?.src || ""}
+            src={image?.src || FALLBACK_COVER}
             width={image?.width}
             height={image?.height}
             priority={false}
@@ -62,7 +65,7 @@ export default function MediaCard({
         >
           <Image
             alt=""
-            src={image?.src || ""}
+            src={image?.src || FALLBACK_COVER}
             width={image?.width}
             height={image?.height}
             priority={false}
