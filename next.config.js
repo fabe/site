@@ -10,6 +10,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "**.digitaloceanspaces.com",
       },
+      {
+        protocol: "http",
+        hostname: "books.google.com",
+      },
     ],
   },
   webpack: (config, { webpack }) => {

@@ -23,7 +23,7 @@ export const QUERY_PAGE_HOME = gql`
     books: books(limit: 1, collection: READING) {
       title
       author
-      okuUrl
+      url
       coverUrl
     }
   }

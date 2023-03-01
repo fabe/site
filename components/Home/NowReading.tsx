@@ -10,7 +10,7 @@ export default function NowReading({ book }: NowReadingProps) {
     return null;
   }
 
-  const { coverUrl, title, author, okuUrl } = book;
+  const { coverUrl, title, author, url } = book;
 
   return (
     <dl className="list-container">
@@ -29,8 +29,8 @@ export default function NowReading({ book }: NowReadingProps) {
             width: 56,
             height: 80,
           }}
-          href={okuUrl}
-          hrefLabel="View on Oku"
+          href={url}
+          hrefLabel="View on Literal"
         />
       </dd>
     </dl>

@@ -43,14 +43,13 @@ export type Book = {
   __typename?: 'Book';
   author: Scalars['String'];
   coverUrl?: Maybe<Scalars['String']>;
-  okuUrl: Scalars['String'];
+  fallbackColors?: Maybe<Array<Maybe<Scalars['String']>>>;
   readingDate?: Maybe<Scalars['String']>;
   title: Scalars['String'];
+  url: Scalars['String'];
 };
 
 export enum CollectionType {
-  Favourites = 'FAVOURITES',
-  Read = 'READ',
   Reading = 'READING'
 }
 
@@ -232,7 +231,7 @@ export type SiteSettingsSharedFragment = { __typename?: 'SiteSettings', siteTitl
 export type PageHomeQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type PageHomeQueryQuery = { __typename?: 'Query', siteSettings: { __typename?: 'SiteSettings', intro: string, siteTitle: string, metaDescription: string }, posts: Array<{ __typename?: 'PostWithoutBody', publishedDate: string, title: string, slug: string } | null>, books: Array<{ __typename?: 'Book', title: string, author: string, okuUrl: string, coverUrl?: string | null } | null> };
+export type PageHomeQueryQuery = { __typename?: 'Query', siteSettings: { __typename?: 'SiteSettings', intro: string, siteTitle: string, metaDescription: string }, posts: Array<{ __typename?: 'PostWithoutBody', publishedDate: string, title: string, slug: string } | null>, books: Array<{ __typename?: 'Book', title: string, author: string, url: string, coverUrl?: string | null } | null> };
 
 export type SpotifyStatusQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -293,7 +292,7 @@ export const PageHomeQueryDocument = gql`
   books: books(limit: 1, collection: READING) {
     title
     author
-    okuUrl
+    url
     coverUrl
   }
 }

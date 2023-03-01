@@ -1,33 +1,91 @@
-import { gql } from "@apollo/client";
-import Parser from "rss-parser";
+import {
+  ApolloClient,
+  createHttpLink,
+  gql,
+  InMemoryCache,
+} from "@apollo/client";
+// import { setContext } from "@apollo/client/link/context";
 import {
   Book,
   CollectionType,
   QueryBooksArgs,
 } from "../../types/types.generated";
-import { contentfulClient } from "../content";
 
-const parser = new Parser({
-  customFields: {
-    item: ["oku:cover"],
-  },
+const {
+  LITERAL_EMAIL,
+  LITERAL_PASSWORD,
+  LITERAL_TOKEN,
+  LITERAL_USER_ID,
+  LITERAL_USER_HANDLE,
+} = process.env;
+
+const LITERAL_BASE_URL = "https://literal.club/graphql/";
+
+// No need for auth at the moment
+//
+// const authLink = setContext(async (_, { headers }) => {
+//   const token = await getLiteralToken(LITERAL_EMAIL, LITERAL_PASSWORD);
+//   return {
+//     headers: {
+//       ...headers,
+//       authorization: token ? `Bearer ${token}` : "",
+//     },
+//   };
+// });
+
+export const literalClient = new ApolloClient({
+  ssrMode: true,
+  link: createHttpLink({
+    uri: LITERAL_BASE_URL,
+    credentials: "same-origin",
+  }),
+  cache: new InMemoryCache(),
 });
 
-const { OKU_CURRENTLY_READING, OKU_RECENTLY_READ } = process.env;
+const getLiteralToken = async (email: String, password: String) => {
+  if (LITERAL_TOKEN) return LITERAL_TOKEN;
+
+  const query = JSON.stringify({
+    query: `
+        mutation {
+          login(email: "${LITERAL_EMAIL}", password: "${LITERAL_PASSWORD}") {
+            token
+            email
+            languages
+            profile {
+              id
+              handle
+              name
+              bio
+              image
+            }
+          }
+        }
+    `,
+  });
+
+  const response = await fetch(LITERAL_BASE_URL, {
+    headers: { "content-type": "application/json" },
+    method: "POST",
+    body: query,
+  });
+
+  const json = await response.json();
+  console.log(json.data.login.profile);
+
+  return json.data.login.token;
+};
 
 export async function getBooks(_: any, args: QueryBooksArgs): Promise<Book[]> {
   const { limit } = args;
   let books = [];
 
   switch (args.collection) {
-    case CollectionType.Favourites:
-      books = await getFavourites(limit);
-      break;
     case CollectionType.Reading:
       books = await getReading();
       break;
     default:
-      books = await getRead();
+      books = await getReading();
       break;
   }
 
@@ -39,81 +97,46 @@ export async function getBooks(_: any, args: QueryBooksArgs): Promise<Book[]> {
 }
 
 async function getReading(): Promise<Book[]> {
-  if (!OKU_CURRENTLY_READING) {
-    return [];
-  }
-
-  const currentlyReading = await parser.parseURL(OKU_CURRENTLY_READING);
-
-  const books = currentlyReading.items.map((book): Book => {
-    return {
-      title: book.title!,
-      author: book.creator!,
-      readingDate: book.pubDate!,
-      okuUrl: book.link!,
-      coverUrl: book["oku:cover"] || null,
-    };
-  });
-
-  return books;
-}
-
-async function getRead(): Promise<Book[]> {
-  if (!OKU_RECENTLY_READ) {
-    return [];
-  }
-
-  const recentlyRead = await parser.parseURL(OKU_RECENTLY_READ);
-  let books = recentlyRead.items.map((book): Book => {
-    return {
-      title: book.title!,
-      author: book.creator!,
-      readingDate: book.pubDate,
-      okuUrl: book.link!,
-      coverUrl: book["oku:cover"] || null,
-    };
-  });
-
-  return books || [];
-}
-
-async function getFavourites(limit = 10): Promise<Book[]> {
-  const response = await contentfulClient.query({
+  const response = await literalClient.query({
     query: gql`
-      query getAllFavouriteBooks($limit: Int) {
-        bookCollection(limit: $limit) {
-          items {
-            title
-            authors
-            cover {
-              url
-            }
-            okuUrl
+      query booksByReadingStateAndProfile($profileId: String!) {
+        booksByReadingStateAndProfile(
+          limit: 1
+          offset: 0
+          readingStatus: IS_READING
+          profileId: $profileId
+        ) {
+          slug
+          title
+          publishedDate
+          cover
+          authors {
+            id
+            name
           }
+          gradientColors
         }
       }
     `,
     variables: {
-      limit,
+      profileId: LITERAL_USER_ID,
     },
   });
 
-  if (!response.data) {
-    return [];
-  }
+  const isReading = response.data.booksByReadingStateAndProfile[0];
 
-  return response.data.bookCollection.items.map(
-    (book: {
-      title: string;
-      cover?: { url: string };
-      authors?: string[];
-      okuUrl?: string;
-      description?: string;
-    }) => ({
-      author: book.authors?.join(", "),
-      title: book.title,
-      coverUrl: book.cover?.url,
-      okuUrl: book.okuUrl,
-    })
-  );
+  return [
+    {
+      title: isReading.title,
+      author: isReading.authors
+        .map((a) => {
+          return a.name;
+        })
+        .join(", "),
+      url: `https://literal.club/${LITERAL_USER_HANDLE}/book/${isReading.slug}`,
+      coverUrl: isReading.cover,
+      readingDate: isReading.publishedDate,
+      fallbackColors: isReading.gradientColors,
+    },
+  ];
 }

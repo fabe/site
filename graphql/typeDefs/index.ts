@@ -16,8 +16,6 @@ export const typeDefs = gql`
   }
 
   enum CollectionType {
-    FAVOURITES
-    READ
     READING
   }
 
@@ -53,8 +51,9 @@ export const typeDefs = gql`
     title: String!
     author: String!
     readingDate: String
-    okuUrl: String!
+    url: String!
     coverUrl: String
+    fallbackColors: [String]
   }
 
   type Post {
