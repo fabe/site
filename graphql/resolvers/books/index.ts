@@ -125,6 +125,8 @@ async function getReading(): Promise<Book[]> {
 
   const isReading = response.data.booksByReadingStateAndProfile[0];
 
+  if (!isReading) return [];
+
   return [
     {
       title: isReading.title,
