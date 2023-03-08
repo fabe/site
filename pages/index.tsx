@@ -54,7 +54,7 @@ export default function Home({ intro }) {
         <Posts posts={data.posts} />
         <Writing />
         <NowPlaying spotifyStatus={liveData?.spotifyStatus} loading={loading} />
-        <NowReading book={data.books[0]} />
+        <NowReading books={data.books} />
       </Main>
     </>
   );

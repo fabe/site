@@ -101,7 +101,7 @@ async function getReading(): Promise<Book[]> {
     query: gql`
       query booksByReadingStateAndProfile($profileId: String!) {
         booksByReadingStateAndProfile(
-          limit: 1
+          limit: 3
           offset: 0
           readingStatus: IS_READING
           profileId: $profileId
@@ -123,22 +123,22 @@ async function getReading(): Promise<Book[]> {
     },
   });
 
-  const isReading = response.data.booksByReadingStateAndProfile[0];
+  const isReading = response.data.booksByReadingStateAndProfile;
 
   if (!isReading) return [];
 
-  return [
-    {
-      title: isReading.title,
-      author: isReading.authors
-        .map((a) => {
-          return a.name;
-        })
-        .join(", "),
-      url: `https://literal.club/${LITERAL_USER_HANDLE}/book/${isReading.slug}`,
-      coverUrl: isReading.cover,
-      readingDate: isReading.publishedDate,
-      fallbackColors: isReading.gradientColors,
-    },
-  ];
+  const books = isReading.map((book) => ({
+    title: book.title,
+    author: book.authors
+      .map((a) => {
+        return a.name;
+      })
+      .join(", "),
+    url: `https://literal.club/${LITERAL_USER_HANDLE}/book/${book.slug}`,
+    coverUrl: book.cover,
+    readingDate: book.publishedDate,
+    fallbackColors: book.gradientColors,
+  }));
+
+  return books;
 }

@@ -20,7 +20,7 @@ export const QUERY_PAGE_HOME = gql`
       title
       slug
     }
-    books: books(limit: 1, collection: READING) {
+    books: books(limit: 3, collection: READING) {
       title
       author
       url
