@@ -48,14 +48,14 @@ export default function Post(props) {
       />
       <Main>
         <header className="mb-6 rounded-lg sm:mb-12">
-          <h1 className="pb-2 text-2xl tracking-tight text-neutral-900 [font-variation-settings:'wght'_450] dark:text-white sm:pb-4 sm:text-3xl">
+          <h1 className="pb-2 text-2xl tracking-tight text-neutral-900 [font-stretch:125%] [font-variation-settings:'wght'_550] dark:text-white sm:pb-4 sm:text-3xl">
             <Link href={relativeUrl}>{title}</Link>
           </h1>
           <div className="flex w-full flex-row justify-between">
             <div className="flex flex-row items-center gap-3">
               <Link
                 href="/"
-                className="hidden flex-row items-center gap-2 [font-variation-settings:'wght'_450] sm:flex"
+                className="hidden flex-row items-center gap-2 sm:flex"
               >
                 <div>
                   <Image
@@ -81,7 +81,7 @@ export default function Post(props) {
           </div>
         </header>
 
-        <div className="-mb-2 rounded-lg p-0 sm:-mb-8 sm:bg-gray-100 sm:p-20 sm:dark:bg-white/[.02]">
+        <div className="-mb-2 rounded-lg p-0 sm:-mb-8 sm:bg-gray-100 sm:p-20 sm:dark:bg-white/[.05]">
           <div className="prose-custom prose-quotefix">
             <MDXRemote {...props.post.body} components={mdxComponents} />
           </div>

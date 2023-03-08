@@ -11,10 +11,15 @@ export default function Intro({ content }) {
   return (
     <dl className="list-container">
       <dt className="list-title pb-4 leading-relaxed sm:pb-0">
-        <h1 className="flex items-center gap-1 text-neutral-900 [font-variation-settings:'wght'_520] dark:text-white">
-          <Link href="/">Fabian Schultz</Link>
+        <h1 className="flex items-center gap-1 text-neutral-900 dark:text-white">
+          <Link
+            href="/"
+            className="[font-stretch:125%] [font-variation-settings:'wght'_550]"
+          >
+            Fabian Schultz
+          </Link>
           <div className="relative">
-            <Tooltip open={tooltipOpen}>Verified, trust me.</Tooltip>
+            <Tooltip open={tooltipOpen}>Verified, trust me</Tooltip>
             <VerifiedIcon
               size={16}
               onMouseEnter={() => setTooltipOpen(true)}
