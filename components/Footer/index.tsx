@@ -28,7 +28,11 @@ export default function Footer() {
           <div className="flex">
             <a
               className="link link-sm flex items-center gap-1.5"
-              href="//github.com/fabe/site"
+              href={
+                process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA
+                  ? `//github.com/fabe/site/commit/${process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA}`
+                  : `//github.com/fabe/site`
+              }
               target="_blank"
               rel="noopener noreferrer"
             >
