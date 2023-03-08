@@ -16,7 +16,7 @@ export default function NowReading({ books }: NowReadingProps) {
         <h3 className="text-neutral-500 dark:text-silver-dark">Reading</h3>
       </dt>
 
-      <dd className="list-content grid gap-6">
+      <dd className="list-content grid gap-4 sm:gap-6">
         {books.map(({ title, author, coverUrl, url }) => (
           <MediaCard
             key={url}
