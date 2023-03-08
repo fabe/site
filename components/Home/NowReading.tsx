@@ -19,6 +19,7 @@ export default function NowReading({ books }: NowReadingProps) {
       <dd className="list-content grid gap-6">
         {books.map(({ title, author, coverUrl, url }) => (
           <MediaCard
+            key={url}
             title={title}
             subtitle={author}
             image={{
