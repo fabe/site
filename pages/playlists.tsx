@@ -28,7 +28,7 @@ export default function Playlists({ playlists }) {
               title={playlist.name}
               subtitle={`${playlist.trackCount} songs${
                 playlist.followerCount
-                  ? ` · ${playlist.followerCount} like${
+                  ? ` · ${playlist.followerCount} save${
                       playlist.followerCount > 1 ? "s" : ""
                     }`
                   : ""

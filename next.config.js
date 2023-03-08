@@ -14,6 +14,10 @@ const nextConfig = {
         protocol: "http",
         hostname: "books.google.com",
       },
+      {
+        protocol: "https",
+        hostname: "assets.literal.club",
+      },
     ],
   },
   webpack: (config, { webpack }) => {
