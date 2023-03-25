@@ -289,7 +289,7 @@ p {
     @apply prose-a:link;
     @apply prose-a:[font-variation-settings:'opsz'_7,_'wght'_460];
     @apply prose-p:first:mt-0;
-    @apply prose-p:leading-golden;
+    @apply prose-p:leading-relaxed sm:prose-p:leading-golden;
     @apply prose prose-neutral dark:prose-invert;
     @apply prose-headings:font-normal prose-headings:[font-variation-settings:'wght'_550];
     @apply prose-strong:font-normal prose-strong:[font-variation-settings:'wght'_550];
