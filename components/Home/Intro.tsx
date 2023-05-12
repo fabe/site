@@ -12,10 +12,7 @@ export default function Intro({ content }) {
     <dl className="list-container">
       <dt className="list-title pb-4 leading-relaxed sm:pb-0">
         <h1 className="flex items-center gap-1 text-neutral-900 dark:text-white">
-          <Link
-            href="/"
-            className="[font-stretch:125%] [font-variation-settings:'wght'_550]"
-          >
+          <Link href="/" className="[font-variation-settings:'wght'_500]">
             Fabian Schultz
           </Link>
           <div className="relative">

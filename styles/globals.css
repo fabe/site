@@ -7,11 +7,11 @@ body {
   @apply bg-gray-50 dark:bg-black;
   @apply text-neutral-900 dark:text-silver;
   @apply antialiased;
-  @apply tracking-normal;
 
   @apply selection:bg-indigo-500 selection:text-white dark:selection:bg-indigo-900;
   text-rendering: optimizeLegibility;
-  font-feature-settings: "kern" on, "liga" off, "ss01" on;
+  font-feature-settings: "kern" on, "liga" on, "cv10" on;
+  font-variation-settings: "opsz" 16;
 }
 
 p {
@@ -32,7 +32,7 @@ p {
 [cmdk-dialog] {
   @apply max-w-md;
   @apply w-full;
-  @apply fixed top-[20%] left-1/2;
+  @apply fixed left-1/2 top-[20%];
   @apply flex items-start justify-center;
   @apply -translate-x-1/2;
   @apply z-20;
@@ -66,7 +66,7 @@ p {
 }
 
 [cmdk-list] {
-  @apply py-2 px-2;
+  @apply px-2 py-2;
   @apply transition-all;
   height: calc(var(--cmdk-list-height) + 16px);
 }
@@ -79,6 +79,7 @@ p {
   @apply cursor-pointer;
   @apply text-neutral-600 dark:text-silver-dark;
   @apply transition-colors;
+  @apply [font-variation-settings:'wght'_450];
 }
 
 [cmdk-item][aria-selected] {
@@ -93,7 +94,7 @@ p {
 
 [cmdk-empty] {
   @apply px-3 py-3;
-  @apply text-sm font-medium tracking-xs text-neutral-600 dark:text-silver-dark;
+  @apply text-sm font-medium text-neutral-600 [font-variation-settings:'opsz'_12] dark:text-silver-dark;
 }
 
 [cmdk-separator] {
@@ -103,7 +104,7 @@ p {
 
 [cmdk-group-heading] {
   @apply px-3 py-2;
-  @apply text-xs font-medium tracking-xs text-neutral-600 dark:text-silver-dark;
+  @apply text-xs font-medium text-neutral-600 [font-variation-settings:'opsz'_12] dark:text-silver-dark;
 }
 
 [cmdk-loading] {
@@ -197,7 +198,7 @@ p {
 }
 
 .mapboxgl-popup-content {
-  @apply rounded border border-transparent bg-neutral-900 px-3 py-3 font-sans text-base font-medium tracking-normal text-silver [font-variation-settings:'opsz'_7,_'wght'_500] dark:border-white/[.08] dark:bg-black/[.96] dark:text-silver !important;
+  @apply rounded border border-transparent bg-neutral-900 px-3 py-3 font-sans text-base font-medium text-silver [font-variation-settings:'opsz'_16,_'wght'_500] dark:border-white/[.08] dark:bg-black/[.96] dark:text-silver !important;
 }
 
 @layer components {
@@ -242,17 +243,17 @@ p {
     @apply block;
     @apply text-sm;
     @apply text-neutral-500 dark:text-silver-dark;
-    @apply tracking-sm;
+    @apply [font-variation-settings:'opsz'_14];
     @apply slashed-zero tabular-nums;
   }
 
   .time-lg {
     @apply text-base;
-    @apply tracking-normal;
+    @apply [font-variation-settings:'opsz'_16];
   }
 
   .badge {
-    @apply flex items-center gap-1 rounded-xl bg-gray-200 px-1.5 py-0.5 text-xs font-medium tracking-xs text-neutral-600 dark:bg-neutral-900 dark:text-silver-dark;
+    @apply flex items-center gap-1 rounded-xl bg-gray-200 px-1.5 py-0.5 text-xs font-medium text-neutral-600 [font-variation-settings:'opsz'_12] dark:bg-neutral-900 dark:text-silver-dark;
     @apply slashed-zero tabular-nums;
   }
 
@@ -291,8 +292,8 @@ p {
     @apply prose-p:first:mt-0;
     @apply prose-p:leading-relaxed sm:prose-p:leading-golden;
     @apply prose prose-neutral dark:prose-invert;
-    @apply prose-headings:font-normal prose-headings:[font-variation-settings:'wght'_550];
-    @apply prose-strong:font-normal prose-strong:[font-variation-settings:'wght'_550];
+    @apply prose-headings:font-normal prose-headings:[font-variation-settings:'wght'_500];
+    @apply prose-strong:font-normal prose-strong:[font-variation-settings:'wght'_500];
     @apply prose-em:not-italic prose-em:underline prose-em:decoration-neutral-300 prose-em:decoration-wavy dark:prose-em:decoration-neutral-800;
     @apply prose-code:rounded prose-code:font-normal prose-code:text-neutral-900 dark:prose-code:text-silver-dark;
     @apply prose-pre:overflow-auto prose-pre:whitespace-pre prose-pre:border prose-pre:border-neutral-200 prose-pre:bg-transparent prose-pre:p-4 prose-pre:text-sm dark:prose-pre:border-neutral-900 sm:prose-pre:-ml-4 sm:prose-pre:-mr-4;
@@ -316,7 +317,7 @@ p {
     @apply items-center;
     @apply gap-1;
     @apply text-sm;
-    @apply tracking-sm;
+    @apply [font-variation-settings:'opsz'_14];
     @apply px-2 py-1.5;
     @apply rounded-lg bg-gray-200 text-neutral-700 transition-colors hover:bg-gray-300 dark:bg-neutral-900 dark:text-silver-dark dark:hover:bg-neutral-800;
   }
@@ -348,7 +349,7 @@ p {
     @apply text-neutral-500 dark:text-silver-dark;
     @apply decoration-neutral-200 dark:decoration-neutral-800;
     @apply hover:decoration-neutral-300 dark:hover:decoration-neutral-600;
-    @apply tracking-xs;
+    @apply [font-variation-settings:'opsz'_12];
   }
 
   .text-shadow {

@@ -48,14 +48,14 @@ export default function Post(props) {
       />
       <Main>
         <header className="mb-6 rounded-lg sm:mb-12">
-          <h1 className="pb-2 text-2xl tracking-tight text-neutral-900 [font-stretch:125%] [font-variation-settings:'wght'_550] dark:text-white sm:pb-4 sm:text-3xl">
+          <h1 className="pb-2 text-2xl text-neutral-900 [font-variation-settings:'wght'_600] dark:text-white sm:pb-4 sm:text-3xl">
             <Link href={relativeUrl}>{title}</Link>
           </h1>
           <div className="flex w-full flex-row justify-between">
             <div className="flex flex-row items-center gap-3">
               <Link
                 href="/"
-                className="hidden flex-row items-center gap-2 sm:flex"
+                className="hidden flex-row items-center gap-2 [font-variation-settings:'wght'_450] sm:flex"
               >
                 <div>
                   <Image

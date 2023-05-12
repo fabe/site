@@ -17,7 +17,7 @@ export default function Resume() {
         <div>
           <LinkExternal href="//contentful.com">Contentful</LinkExternal>
         </div>
-        <div className="pt-1 text-sm tracking-sm text-neutral-500 dark:text-silver-dark">
+        <div className="pt-1 text-sm text-neutral-500 [font-variation-settings:'opsz'_14] dark:text-silver-dark">
           Berlin, Germany
         </div>
       </dd>
@@ -30,7 +30,7 @@ export default function Resume() {
         <div>
           <LinkExternal href="//contentful.com">Contentful</LinkExternal>
         </div>
-        <div className="pt-1 text-sm tracking-sm text-neutral-500 dark:text-silver-dark">
+        <div className="pt-1 text-sm text-neutral-500 [font-variation-settings:'opsz'_14] dark:text-silver-dark">
           Berlin, Germany
         </div>
       </dd>
@@ -43,7 +43,7 @@ export default function Resume() {
         <div>
           <LinkExternal href="//stinkstudios.com">Stink Studios</LinkExternal>
         </div>
-        <div className="pt-1 text-sm tracking-sm text-neutral-500 dark:text-silver-dark">
+        <div className="pt-1 text-sm text-neutral-500 [font-variation-settings:'opsz'_14] dark:text-silver-dark">
           Brooklyn, NY
         </div>
       </dd>
