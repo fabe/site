@@ -2,8 +2,8 @@ import * as uuid from "uuid";
 
 const LRU = require("lru-cache");
 
-const RATE_LIMIT_REQUEST_AMOUNT = 256;
-const RATE_LIMIT_REQUEST_DURATION = 10 * 1000; // 10 seconds
+const RATE_LIMIT_REQUEST_AMOUNT = 60;
+const RATE_LIMIT_REQUEST_DURATION = 60 * 1000; // 60 seconds
 
 const rateLimit = (options) => {
   const tokenCache = new LRU({
