@@ -95,19 +95,11 @@ export default function GlobePage({}) {
       />
       <div className="mask-gradient pointer-events-none absolute left-0 top-0 z-10 h-32 w-full bg-gradient-to-t from-white/0 to-white backdrop-blur-lg dark:from-neutral-950/0 dark:to-neutral-950 sm:h-48"></div>
       <div className="absolute left-4 top-4 z-20 md:left-1/2 md:top-8 md:-translate-x-1/2 md:text-center">
-        <h1 className="dark:text-shadow pb-1 text-2xl text-neutral-900 [font-variation-settings:'wght'_600] dark:text-white sm:text-3xl">
+        <h1 className="dark:text-shadow pb-1 text-2xl text-neutral-800 [font-variation-settings:'opsz'_32,_'wght'_500] dark:text-white sm:text-3xl">
           Globe
         </h1>
         <p className="dark:text-shadow text-sm text-neutral-500 dark:text-silver-dark">
-          Places I’ve been to. Inspired by{" "}
-          <a
-            className="link"
-            href="//conquer.earth"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            conquer.earth
-          </a>
+          Places I’ve been to. Inspired by conquer.earth
         </p>
       </div>
       <div className="-mb-10 min-h-[95vh] sm:-mb-20">

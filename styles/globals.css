@@ -5,7 +5,7 @@
 html,
 body {
   @apply bg-gray-50 dark:bg-black;
-  @apply text-neutral-900 dark:text-silver;
+  @apply text-neutral-800 dark:text-silver;
   @apply antialiased;
 
   @apply selection:bg-indigo-500 selection:text-white dark:selection:bg-indigo-900;
@@ -25,7 +25,7 @@ p {
   @apply dark:bg-black/[.70];
   @apply fixed left-0 top-0;
   @apply h-full w-full;
-  @apply z-10;
+  @apply z-20;
   @apply backdrop-blur-sm backdrop-saturate-150;
 }
 
@@ -55,7 +55,7 @@ p {
 
 [cmdk-input] {
   @apply appearance-none;
-  @apply text-neutral-900 dark:text-silver;
+  @apply text-neutral-800 dark:text-silver;
   @apply placeholder:text-neutral-400 dark:placeholder:text-neutral-600;
   @apply bg-transparent;
   @apply w-full;
@@ -79,17 +79,17 @@ p {
   @apply cursor-pointer;
   @apply text-neutral-600 dark:text-silver-dark;
   @apply transition-colors;
-  @apply [font-variation-settings:'wght'_450];
+  @apply [font-variation-settings:'wght'_420];
 }
 
 [cmdk-item][aria-selected] {
   @apply bg-neutral-100 dark:bg-neutral-800;
-  @apply text-neutral-900 dark:text-silver;
+  @apply text-neutral-800 dark:text-silver;
 }
 
 [cmdk-item]:active {
   @apply bg-neutral-200/[.9] dark:bg-neutral-700;
-  @apply text-neutral-900 dark:text-silver;
+  @apply text-neutral-800 dark:text-silver;
 }
 
 [cmdk-empty] {
@@ -198,7 +198,7 @@ p {
 }
 
 .mapboxgl-popup-content {
-  @apply rounded border border-transparent bg-neutral-900 px-3 py-3 font-sans text-base font-medium text-silver [font-variation-settings:'opsz'_16,_'wght'_500] dark:border-white/[.08] dark:bg-black/[.96] dark:text-silver !important;
+  @apply rounded border border-transparent bg-neutral-800 px-3 py-3 font-sans text-base font-medium text-silver [font-variation-settings:'opsz'_16,_'wght'_500] dark:border-white/[.08] dark:bg-black/[.96] dark:text-silver !important;
 }
 
 @layer components {
@@ -206,8 +206,8 @@ p {
     @apply !underline;
     @apply !decoration-1.5;
     @apply !underline-offset-2.5;
-    @apply !decoration-neutral-200 dark:!decoration-neutral-800;
-    @apply hover:!decoration-neutral-300 dark:hover:!decoration-neutral-600;
+    @apply !decoration-neutral-300 dark:!decoration-neutral-700;
+    @apply hover:!decoration-neutral-400 dark:hover:!decoration-neutral-600;
     @apply motion-safe:transition;
     @apply duration-150;
     @apply ease-out-expo;
@@ -253,8 +253,8 @@ p {
   }
 
   .badge {
-    @apply flex items-center gap-1 rounded-xl bg-gray-200 px-1.5 py-0.5 text-xs font-medium text-neutral-600 [font-variation-settings:'opsz'_12] dark:bg-neutral-900 dark:text-silver-dark;
-    @apply slashed-zero tabular-nums;
+    @apply flex items-center gap-1 rounded-xl bg-gray-200 px-1.5 py-0.5 text-xs font-medium text-neutral-600 [font-variation-settings:'opsz'_12] dark:bg-neutral-800 dark:text-silver-dark;
+    @apply slashed-zero;
   }
 
   .list-container {
@@ -288,17 +288,18 @@ p {
 
   .prose-custom {
     @apply prose-a:link;
-    @apply prose-a:[font-variation-settings:'opsz'_7,_'wght'_460];
+    @apply prose-a:[font-variation-settings:'opsz'_16,_'wght'_450];
     @apply prose-p:first:mt-0;
     @apply prose-p:leading-relaxed sm:prose-p:leading-golden;
     @apply prose prose-neutral dark:prose-invert;
+    @apply prose-p:text-neutral-800 dark:prose-p:text-silver;
     @apply prose-headings:font-normal prose-headings:[font-variation-settings:'wght'_500];
     @apply prose-strong:font-normal prose-strong:[font-variation-settings:'wght'_500];
-    @apply prose-em:not-italic prose-em:underline prose-em:decoration-neutral-300 prose-em:decoration-wavy dark:prose-em:decoration-neutral-800;
-    @apply prose-code:rounded prose-code:font-normal prose-code:text-neutral-900 dark:prose-code:text-silver-dark;
+    @apply prose-em:not-italic prose-em:underline prose-em:decoration-neutral-300 prose-em:decoration-wavy dark:prose-em:decoration-neutral-700;
+    @apply prose-code:rounded prose-code:font-normal prose-code:text-neutral-800 dark:prose-code:text-silver-dark;
     @apply prose-pre:overflow-auto prose-pre:whitespace-pre prose-pre:border prose-pre:border-neutral-200 prose-pre:bg-transparent prose-pre:p-4 prose-pre:text-sm dark:prose-pre:border-neutral-900 sm:prose-pre:-ml-4 sm:prose-pre:-mr-4;
     @apply prose-img:rounded-lg;
-    @apply prose-hr:my-6 prose-hr:border-neutral-300 dark:prose-hr:border-neutral-900 sm:prose-hr:my-10;
+    @apply prose-hr:my-6 prose-hr:h-[2px] prose-hr:border-none prose-hr:bg-neutral-200 dark:prose-hr:bg-neutral-900 sm:prose-hr:my-10;
     @apply prose-blockquote:border-0 prose-blockquote:p-0 prose-blockquote:not-italic prose-blockquote:text-neutral-600 dark:prose-blockquote:text-silver-dark;
   }
 }
@@ -317,9 +318,8 @@ p {
     @apply items-center;
     @apply gap-1;
     @apply text-sm;
-    @apply [font-variation-settings:'opsz'_14];
     @apply px-2 py-1.5;
-    @apply rounded-lg bg-gray-200 text-neutral-700 transition-colors hover:bg-gray-300 dark:bg-neutral-900 dark:text-silver-dark dark:hover:bg-neutral-800;
+    @apply rounded-lg bg-gray-200 text-neutral-700 transition-colors [font-variation-settings:'opsz'_14,'wght'_400] hover:bg-gray-300 dark:bg-neutral-900 dark:text-silver-dark dark:hover:bg-neutral-800;
   }
 
   .link-external svg {
@@ -347,8 +347,8 @@ p {
     @apply decoration-1.5;
     @apply underline-offset-1.5;
     @apply text-neutral-500 dark:text-silver-dark;
-    @apply decoration-neutral-200 dark:decoration-neutral-800;
-    @apply hover:decoration-neutral-300 dark:hover:decoration-neutral-600;
+    @apply decoration-neutral-300 dark:decoration-neutral-700;
+    @apply hover:decoration-neutral-400 dark:hover:decoration-neutral-600;
     @apply [font-variation-settings:'opsz'_12];
   }
 

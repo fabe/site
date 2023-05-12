@@ -48,14 +48,14 @@ export default function Post(props) {
       />
       <Main>
         <header className="mb-6 rounded-lg sm:mb-12">
-          <h1 className="pb-2 text-2xl text-neutral-900 [font-variation-settings:'wght'_600] dark:text-white sm:pb-4 sm:text-3xl">
+          <h1 className="pb-2 text-2xl text-neutral-800 [font-variation-settings:'opsz'_32,_'wght'_500] dark:text-white sm:pb-3 sm:text-3xl">
             <Link href={relativeUrl}>{title}</Link>
           </h1>
           <div className="flex w-full flex-row justify-between">
-            <div className="flex flex-row items-center gap-3">
+            <div className="flex flex-row items-center gap-2">
               <Link
                 href="/"
-                className="hidden flex-row items-center gap-2 [font-variation-settings:'wght'_450] sm:flex"
+                className="flex flex-row items-center gap-2 [font-variation-settings:'wght'_450]"
               >
                 <div>
                   <Image
@@ -63,13 +63,10 @@ export default function Post(props) {
                     title={props.siteSettings.siteTitle}
                     className="rounded-full bg-gray-200 dark:bg-neutral-600"
                     src={props.siteSettings.avatar.url || ""}
-                    width={24}
-                    height={24}
+                    width={20}
+                    height={20}
                   />
                 </div>
-                <span className="[font-variation-settings:'wght'_450]">
-                  {props.siteSettings.siteTitle}
-                </span>
               </Link>
               <time dateTime={publishedDate}>
                 <Badge>{formatDate(publishedDate)}</Badge>

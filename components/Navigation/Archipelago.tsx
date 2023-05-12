@@ -116,7 +116,7 @@ export default function Archipelago() {
       <nav
         className={`${
           isHome ? "w-12" : "w-28"
-        } fixed bottom-6 top-auto left-6 z-10 animate-scale opacity-0 md:top-8 md:bottom-auto md:left-8`}
+        } fixed bottom-6 left-6 top-auto z-10 animate-scale opacity-0 md:bottom-auto md:left-8 md:top-8`}
       >
         <div>
           <CSSTransitionGroup

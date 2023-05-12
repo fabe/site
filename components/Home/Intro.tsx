@@ -11,8 +11,8 @@ export default function Intro({ content }) {
   return (
     <dl className="list-container">
       <dt className="list-title pb-4 leading-relaxed sm:pb-0">
-        <h1 className="flex items-center gap-1 text-neutral-900 dark:text-white">
-          <Link href="/" className="[font-variation-settings:'wght'_500]">
+        <h1 className="flex items-center gap-1 text-neutral-800 dark:text-white">
+          <Link href="/" className="[font-variation-settings:'wght'_550]">
             Fabian Schultz
           </Link>
           <div className="relative">
