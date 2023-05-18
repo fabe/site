@@ -1,5 +1,5 @@
 import { Book } from "../../graphql/types/types.generated";
-import MediaCard from "../MediaCard";
+import MediaCard, { MediaCardImageRadius } from "../MediaCard";
 
 interface NowReadingProps {
   books: Book[];
@@ -28,6 +28,7 @@ export default function NowReading({ books }: NowReadingProps) {
               src: coverUrl ? coverUrl : "",
               width: 56,
               height: 80,
+              radius: MediaCardImageRadius.Book,
             }}
             href={url}
             hrefLabel="View on Literal"

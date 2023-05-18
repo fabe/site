@@ -1,5 +1,10 @@
 import Image from "next/image";
 
+export enum MediaCardImageRadius {
+  Default = "default",
+  Book = "book",
+}
+
 interface MediaCardProps {
   image?: {
     alt?: string;
@@ -7,6 +12,7 @@ interface MediaCardProps {
     src: string;
     width: number;
     height: number;
+    radius?: MediaCardImageRadius;
   };
   title?: string;
   subtitle?: string;
@@ -51,7 +57,11 @@ export default function MediaCard({
           <Image
             alt={image?.alt || ""}
             title={title}
-            className="truncate rounded bg-gray-200 dark:bg-zinc-600"
+            className={`truncate ${
+              image?.radius === MediaCardImageRadius.Book
+                ? "rounded-l-sm rounded-r"
+                : "rounded"
+            } bg-gray-200 dark:bg-zinc-600`}
             src={image?.src || FALLBACK_COVER}
             width={image?.width}
             height={image?.height}
