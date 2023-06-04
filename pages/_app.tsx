@@ -8,8 +8,8 @@ import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/react";
 
 const sansFont = localFont({
-  src: "../public/inter.roman.var.woff2",
-  weight: "100 900",
+  src: "../public/instrument-sans.roman.var.woff2",
+  weight: "400 700",
   display: "swap",
 });
 

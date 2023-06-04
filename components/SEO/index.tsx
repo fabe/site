@@ -50,7 +50,7 @@ export function SEO({ seo }: { seo?: SEOProps }) {
 
         <link
           rel="preload"
-          href="/inter.roman.var.woff2"
+          href="/instrument-sans.roman.var.woff2"
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"
