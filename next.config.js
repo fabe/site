@@ -18,6 +18,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "assets.literal.club",
       },
+      {
+        protocol: "https",
+        hostname: "**.spotifycdn.com",
+      },
     ],
   },
   webpack: (config, { webpack }) => {
