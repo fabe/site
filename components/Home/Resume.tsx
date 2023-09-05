@@ -7,18 +7,18 @@ export default function Resume() {
       <dt className="list-title">
         <h3 className="text-neutral-500 dark:text-silver-dark">
           <div className="flex items-center gap-2">
-            2022
+            2023
             <Badge>Present</Badge>
           </div>
         </h3>
       </dt>
       <dd className="list-content">
-        <div>Sr. Product Designer, Core Experience</div>
+        <div>Sr. Product Designer, Collaboration & AI</div>
         <div>
           <LinkExternal href="//contentful.com">Contentful</LinkExternal>
         </div>
         <div className="pt-1 text-sm text-neutral-500 [font-variation-settings:'opsz'_14] dark:text-silver-dark">
-          Berlin, Germany
+          London, UK
         </div>
       </dd>
 
@@ -26,7 +26,7 @@ export default function Resume() {
         <h3 className="text-neutral-500 dark:text-silver-dark">2019</h3>
       </dt>
       <dd className="list-content">
-        <div>Product Designer, Extensibility</div>
+        <div>Product Designer, Extensibility & Core Experience</div>
         <div>
           <LinkExternal href="//contentful.com">Contentful</LinkExternal>
         </div>

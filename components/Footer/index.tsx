@@ -23,7 +23,7 @@ export default function Footer() {
                 clipRule="evenodd"
               ></path>
             </svg>
-            Potsdam, Germany
+            London, UK
           </div>
           <div className="flex">
             <a
