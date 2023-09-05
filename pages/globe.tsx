@@ -113,7 +113,7 @@ export default function GlobePage({}) {
               ? "mapbox://styles/fschultz/ck6faw97927g61ioh30mxkgxl"
               : "mapbox://styles/mapbox/light-v9"
           }
-          projection="globe"
+          projection={{ name: "globe" }}
           style={{
             width: "100vw",
             height: "95vh",
