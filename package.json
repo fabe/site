@@ -22,7 +22,6 @@
     "@markdoc/next.js": "^0.2.1",
     "@mavrin/remark-typograf": "^2.2.0",
     "@react-hook/copy": "^2.0.1",
-    "@vercel/analytics": "^0.1.4",
     "cmdk": "^0.1.20",
     "contentful": "^9.1.32",
     "date-fns": "^2.29.2",

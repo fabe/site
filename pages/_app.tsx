@@ -5,7 +5,6 @@ import { useApollo } from "../graphql/client";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import localFont from "next/font/local";
-import { Analytics } from "@vercel/analytics/react";
 
 const sansFont = localFont({
   src: "../public/inter.roman.var.woff2",
@@ -43,7 +42,6 @@ export default function MyApp({
         </style>
 
         <Component {...pageProps} />
-        <Analytics />
 
         <Suspense>
           <Archipelago />

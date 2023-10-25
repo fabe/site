@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       fontSize: {
-        base: "1rem",
+        base: "0.97rem",
         "base-adjusted-sm": "0.938rem",
       },
       fontFamily: {
@@ -57,10 +57,10 @@ module.exports = {
         spring: "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
       },
       maxWidth: {
-        main: "44rem",
+        main: "46rem",
       },
       width: {
-        main: "44rem",
+        main: "46rem",
       },
       animation: {
         "spin-slow": "spin 10s linear infinite",

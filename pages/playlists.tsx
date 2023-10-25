@@ -42,6 +42,7 @@ export default function Playlists({ playlists }) {
               }}
               href={playlist.spotifyUrl}
               hrefLabel="View on Spotify"
+              borderTop
             />
           ))}
         </div>

@@ -19,6 +19,7 @@ interface MediaCardProps {
   href?: string;
   hrefLabel?: string;
   loading?: boolean;
+  borderTop?: boolean;
 }
 
 const FALLBACK_COVER =
@@ -31,10 +32,15 @@ export default function MediaCard({
   href,
   hrefLabel,
   loading,
+  borderTop,
 }: MediaCardProps) {
   const loadingComponent = (
     <div
-      className="group flex animate-pulse items-center gap-4"
+      className={`group flex animate-pulse items-center gap-4 ${
+        borderTop
+          ? `border-t border-solid border-neutral-800/10 pt-4 dark:border-neutral-900`
+          : null
+      }`}
       title="Loading..."
     >
       <div className="relative">
@@ -51,7 +57,13 @@ export default function MediaCard({
   );
 
   const cardComponent = (
-    <div className="group flex items-center gap-4">
+    <div
+      className={`group flex items-center gap-4 ${
+        borderTop
+          ? `border-t border-solid border-neutral-800/10 pt-4 dark:border-neutral-900`
+          : null
+      }`}
+    >
       <div className="relative">
         <div className="relative z-10 origin-center drop-shadow-md transition-transform group-hover:scale-110">
           <Image
@@ -62,19 +74,6 @@ export default function MediaCard({
                 ? "rounded-l-sm rounded-r"
                 : "rounded"
             } bg-gray-200 dark:bg-zinc-600`}
-            src={image?.src || FALLBACK_COVER}
-            width={image?.width}
-            height={image?.height}
-            priority={false}
-          />
-        </div>
-
-        <div
-          className="absolute left-0 top-0 z-0 opacity-50 blur-lg transition-opacity group-hover:opacity-30 dark:opacity-30 dark:group-hover:opacity-20"
-          aria-hidden="true"
-        >
-          <Image
-            alt=""
             src={image?.src || FALLBACK_COVER}
             width={image?.width}
             height={image?.height}

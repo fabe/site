@@ -10,21 +10,21 @@ export default function Badge({
   border = false,
 }: BadgeProps) {
   return (
-    <span
+    <div
       className={`badge ${
         border && `border border-gray-900/5 bg-transparent dark:border-white/10`
       }`}
     >
       {isLive ? (
-        <span
+        <div
           className="relative flex h-2 w-2 items-center justify-center"
           aria-hidden
         >
-          <span className="opacity-85 absolute inline-flex h-full w-full animate-ping rounded-full bg-red-600 dark:bg-rose-400 dark:opacity-30"></span>
-          <span className="relative inline-flex h-1 w-1 rounded-full bg-red-600 dark:bg-rose-400"></span>
-        </span>
+          <div className="opacity-85 absolute inline-flex h-full w-full animate-ping rounded-full bg-red-600 dark:bg-rose-400 dark:opacity-30"></div>
+          <div className="relative inline-flex h-1 w-1 rounded-full bg-red-600 dark:bg-rose-400"></div>
+        </div>
       ) : null}
       {children}
-    </span>
+    </div>
   );
 }

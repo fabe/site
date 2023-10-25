@@ -14,7 +14,7 @@ export default function Posts({ posts }) {
             <div>
               <Link
                 href={`/posts/${post.slug}`}
-                className="link inline-flex items-center gap-1 sm:-ml-5"
+                className="link inline-flex items-center gap-1"
               >
                 <div className="opacity-20 dark:opacity-30">
                   <NoteIcon size={16} />

@@ -17,15 +17,15 @@ export default function Posts({ posts }) {
         }}
       />
       <Main>
-        <dl className="list-container items-center">
+        <dl className="list-container items-center gap-2">
           {posts.map(({ slug, title, publishedDate }) => (
             <React.Fragment key={slug}>
-              <dt className="list-title">
+              <dt className="list-title border-none pt-0">
                 <time className="time time-lg" dateTime={publishedDate}>
                   {formatDate(publishedDate, true)}
                 </time>
               </dt>
-              <dd className="list-content pb-4 sm:pb-0">
+              <dd className="list-content border-none pb-4 pt-0 sm:pb-0">
                 <div>
                   <Link href={`/posts/${slug}`} className="link">
                     {title}

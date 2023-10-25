@@ -7,17 +7,22 @@ body {
   @apply bg-gray-50 dark:bg-black;
   @apply text-neutral-800 dark:text-silver;
   @apply antialiased;
+  @apply text-base;
 
   @apply selection:bg-indigo-500 selection:text-white dark:selection:bg-indigo-900;
   text-rendering: optimizeLegibility;
   font-feature-settings: "kern" on, "liga" on, "cv10" on;
-  font-variation-settings: "opsz" 16;
+  font-variation-settings: "opsz" 15;
 }
 
 p {
   @apply mb-6;
   @apply last-of-type:mb-0;
   @apply leading-relaxed;
+}
+
+a[href^="mailto:"] {
+  @apply cursor-alias;
 }
 
 [cmdk-overlay] {
@@ -198,7 +203,7 @@ p {
 }
 
 .mapboxgl-popup-content {
-  @apply rounded border border-transparent bg-neutral-800 px-3 py-3 font-sans text-base font-medium text-silver [font-variation-settings:'opsz'_16,_'wght'_500] dark:border-white/[.08] dark:bg-black/[.96] dark:text-silver !important;
+  @apply rounded border border-transparent bg-neutral-800 px-3 py-3 font-sans text-base font-medium text-silver [font-variation-settings:'opsz'_15,_'wght'_500] dark:border-white/[.08] dark:bg-black/[.96] dark:text-silver !important;
 }
 
 @layer components {
@@ -249,24 +254,25 @@ p {
 
   .time-lg {
     @apply text-base;
-    @apply [font-variation-settings:'opsz'_16];
+    @apply [font-variation-settings:'opsz'_15];
   }
 
   .badge {
-    @apply flex items-center gap-1 rounded-xl bg-gray-200 px-1.5 py-0.5 text-xs font-medium text-neutral-600 [font-variation-settings:'opsz'_12] dark:bg-neutral-800 dark:text-silver-dark;
+    @apply flex items-center gap-1 rounded-xl bg-gray-200 px-1.5 py-0.5 text-xs font-medium text-neutral-600 [font-variation-settings:'opsz'_12] dark:bg-neutral-900 dark:text-silver-dark;
     @apply slashed-zero;
+    @apply decoration-neutral-600;
   }
 
   .list-container {
-    @apply mb-12 grid grid-cols-12 gap-4 gap-y-2 sm:mb-20 sm:gap-y-4;
+    @apply mb-12 grid grid-cols-12 gap-8 gap-y-2 sm:mb-16 sm:gap-y-4;
   }
 
   .list-title {
-    @apply col-span-12 sm:col-span-4;
+    @apply col-span-12 border-t border-solid border-neutral-800/10 pt-4 dark:border-neutral-900 sm:col-span-4;
   }
 
   .list-content {
-    @apply col-span-12 sm:col-span-8;
+    @apply col-span-12 border-solid border-neutral-800/10 pt-4 dark:border-neutral-900 sm:col-span-8 sm:border-t;
   }
 
   .island {
@@ -288,7 +294,7 @@ p {
 
   .prose-custom {
     @apply prose-a:link;
-    @apply prose-a:[font-variation-settings:'opsz'_16,_'wght'_450];
+    @apply prose-a:[font-variation-settings:'opsz'_15,_'wght'_450];
     @apply prose-p:first:mt-0;
     @apply prose-p:leading-relaxed sm:prose-p:leading-golden;
     @apply prose prose-neutral dark:prose-invert;
@@ -350,6 +356,13 @@ p {
     @apply decoration-neutral-300 dark:decoration-neutral-700;
     @apply hover:decoration-neutral-400 dark:hover:decoration-neutral-600;
     @apply [font-variation-settings:'opsz'_12];
+  }
+
+  .link-fade {
+    @apply text-sm;
+    @apply text-neutral-500 dark:text-silver-dark;
+    @apply hover:text-neutral-800 dark:hover:text-silver;
+    @apply transition-colors;
   }
 
   .text-shadow {

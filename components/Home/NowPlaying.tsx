@@ -53,7 +53,7 @@ export default function NowPlayingWidget(props: NowPlayingProps) {
       <dd className="list-content">
         <MediaCard
           title={title}
-          subtitle={artist}
+          subtitle={`${artist}${album ? ` · ${album}` : null}`}
           image={{
             alt: album ? album : "Album cover",
             title: album ? album : null,
