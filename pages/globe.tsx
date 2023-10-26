@@ -102,7 +102,7 @@ export default function GlobePage({}) {
           Places I’ve been to. Inspired by conquer.earth
         </p>
       </div>
-      <div className="-mb-10 min-h-[95vh] sm:-mb-20">
+      <div className="min-h-[95vh]">
         <Map
           ref={mapRef}
           onLoad={onMapLoad}

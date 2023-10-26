@@ -21,7 +21,7 @@ export default function Playlists({ playlists }) {
         <h1 className="pb-6 text-2xl text-neutral-800 [font-variation-settings:'opsz'_32,_'wght'_500] dark:text-white sm:pb-12 sm:text-3xl">
           Playlists
         </h1>
-        <div className="-mb-2 grid grid-cols-1 gap-6 sm:-mb-8 sm:grid-cols-2 sm:gap-8">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
           {playlists.map((playlist: SpotifyPlaylist) => (
             <MediaCard
               key={playlist.name}

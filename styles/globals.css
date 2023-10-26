@@ -267,12 +267,16 @@ a[href^="mailto:"] {
     @apply mb-12 grid grid-cols-12 gap-8 gap-y-2 sm:mb-16 sm:gap-y-4;
   }
 
+  .list-container:last-of-type {
+    @apply mb-0;
+  }
+
   .list-title {
-    @apply col-span-12 border-t border-solid border-neutral-800/10 pt-4 dark:border-neutral-900 sm:col-span-4;
+    @apply col-span-12 border-t border-solid border-neutral-500/10 pt-4 dark:border-neutral-900 sm:col-span-4;
   }
 
   .list-content {
-    @apply col-span-12 border-solid border-neutral-800/10 pt-4 dark:border-neutral-900 sm:col-span-8 sm:border-t;
+    @apply col-span-12 border-solid border-neutral-500/10 pt-4 dark:border-neutral-900 sm:col-span-8 sm:border-t;
   }
 
   .island {

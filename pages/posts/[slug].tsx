@@ -78,7 +78,7 @@ export default function Post(props) {
           </div>
         </header>
 
-        <div className="-mb-2 rounded-lg p-0 sm:-mb-8 sm:bg-gray-100 sm:p-20 sm:dark:bg-white/[.05]">
+        <div className="rounded-lg p-0 sm:bg-gray-100 sm:p-20 sm:dark:bg-white/[.05]">
           <div className="prose-custom prose-quotefix">
             <MDXRemote {...props.post.body} components={mdxComponents} />
           </div>

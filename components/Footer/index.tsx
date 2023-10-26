@@ -3,11 +3,11 @@ import { GithubIcon } from "../Icons";
 
 export default function Footer() {
   return (
-    <footer className="m:px-0 mt-10 flex w-full justify-center border-t border-solid border-neutral-200 dark:border-neutral-900 sm:mt-20">
+    <footer className="m:px-0 flex w-full justify-center pt-10 sm:pt-20">
       <div className="max-w-main flex-1">
-        <div className="flex h-full w-full items-end justify-between gap-4 pt-8">
+        <div className="flex h-full w-full items-end justify-between gap-4 border-t border-solid border-neutral-500/10 pt-8 dark:border-neutral-900">
           <div className="flex-1">
-            <ul className="flex flex-col pb-5">
+            <ul className="flex flex-col pb-6">
               <li>
                 <Link href="/" className="link-fade">
                   Home
@@ -48,13 +48,13 @@ export default function Footer() {
               Made in London, UK
             </div>
           </div>
-          <div className="flex h-full flex-1 flex-col items-end justify-between">
+          <div className="flex h-full flex-col items-end justify-between">
             <div
-              className="flex-1 select-none text-sm text-neutral-400 dark:text-neutral-700"
+              className="flex-1 select-none text-sm text-neutral-900/30 dark:text-neutral-700"
               aria-hidden="true"
               role="img"
             >
-              We’re only here briefly.
+              Becoming is better than being.
             </div>
             <div className="flex gap-4">
               <Link href="/colophon" className="link link-sm">
@@ -73,7 +73,7 @@ export default function Footer() {
                 <GithubIcon size={12} />
                 <span>
                   fabe/site
-                  <span className="font-mono text-neutral-500/[.5] dark:text-silver-dark/[.5]">
+                  <span className="hidden font-mono text-neutral-500/[.5] dark:text-silver-dark/[.5] sm:inline">
                     #
                     {process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA?.slice(
                       0,

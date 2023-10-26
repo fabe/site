@@ -60,7 +60,7 @@ export default function MediaCard({
     <div
       className={`group flex items-center gap-4 ${
         borderTop
-          ? `border-t border-solid border-neutral-800/10 pt-4 dark:border-neutral-900`
+          ? `border-t border-solid border-neutral-500/10 pt-4 dark:border-neutral-900`
           : null
       }`}
     >
