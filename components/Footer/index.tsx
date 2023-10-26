@@ -5,9 +5,9 @@ export default function Footer() {
   return (
     <footer className="m:px-0 flex w-full justify-center pt-10 sm:pt-20">
       <div className="max-w-main flex-1">
-        <div className="flex h-full w-full items-end justify-between gap-4 border-t border-solid border-neutral-500/10 pt-8 dark:border-neutral-900">
+        <div className="flex h-full w-full items-end justify-between border-t border-solid border-neutral-500/10 pt-8 dark:border-neutral-900">
           <div className="flex-1">
-            <ul className="flex flex-col pb-6">
+            <ul className="flex gap-4 pb-6">
               <li>
                 <Link href="/" className="link-fade">
                   Home
@@ -48,9 +48,9 @@ export default function Footer() {
               Made in London, UK
             </div>
           </div>
-          <div className="flex h-full flex-col items-end justify-between">
+          <div className="flex h-full flex-col items-end justify-end sm:justify-between">
             <div
-              className="flex-1 select-none text-sm text-neutral-900/30 dark:text-neutral-700"
+              className="hidden flex-1 select-none text-sm text-neutral-900/30 dark:text-neutral-700 sm:block"
               aria-hidden="true"
               role="img"
             >
