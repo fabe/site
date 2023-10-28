@@ -11,7 +11,11 @@ body {
 
   @apply selection:bg-indigo-500 selection:text-white dark:selection:bg-indigo-900;
   text-rendering: optimizeLegibility;
-  font-feature-settings: "kern" on, "liga" on, "cv10" on;
+  font-feature-settings:
+    "kern" on,
+    "liga" on,
+    "cv05" on,
+    "cv10" on;
   font-variation-settings: "opsz" 15;
 }
 
