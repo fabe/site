@@ -10,8 +10,8 @@ import { QUERY_PLACES } from "../graphql/queries";
 import { PlacesQueryQuery } from "../graphql/types/types.generated";
 
 const initialViewState = {
-  latitude: 52.39,
-  longitude: 13.06,
+  latitude: 51.5,
+  longitude: 0.12,
   zoom: 0.7,
   bearing: 0,
   pitch: 0,
@@ -56,7 +56,7 @@ export default function GlobePage({}) {
           />
         </Marker>
       )),
-    []
+    [],
   );
 
   // Handle dark mode
@@ -68,7 +68,7 @@ export default function GlobePage({}) {
     setMode(
       window.matchMedia("(prefers-color-scheme: dark)").matches
         ? "dark"
-        : "light"
+        : "light",
     );
 
     return () => {
