@@ -57,7 +57,7 @@ export default function Post(props: PostProps) {
               ? `&bg=${encodeURI(
                   new URL(coverUrl).pathname.split("/").slice(2).join("/"),
                 )}`
-              : null
+              : ""
           }`,
         }}
       />
