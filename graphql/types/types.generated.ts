@@ -17,6 +17,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  Freeform: any;
   JSON: any;
 };
 
@@ -120,7 +121,8 @@ export type Playlist = {
 
 export type Post = {
   __typename?: 'Post';
-  body: Scalars['String'];
+  body: Scalars['Freeform'];
+  coverAlt?: Maybe<Scalars['String']>;
   coverUrl?: Maybe<Scalars['String']>;
   metaDescription?: Maybe<Scalars['String']>;
   publishedDate: Scalars['String'];
@@ -243,7 +245,7 @@ export type PostQueryQueryVariables = Exact<{
 }>;
 
 
-export type PostQueryQuery = { __typename?: 'Query', siteSettings: { __typename?: 'SiteSettings', siteTitle: string, metaDescription: string, avatar: { __typename?: 'Asset', url?: string | null } }, post?: { __typename?: 'Post', body: string, coverUrl?: string | null, metaDescription?: string | null, publishedDate: string, tags?: Array<string | null> | null, title: string } | null };
+export type PostQueryQuery = { __typename?: 'Query', siteSettings: { __typename?: 'SiteSettings', siteTitle: string, metaDescription: string, avatar: { __typename?: 'Asset', url?: string | null } }, post?: { __typename?: 'Post', body: any, coverUrl?: string | null, coverAlt?: string | null, metaDescription?: string | null, publishedDate: string, tags?: Array<string | null> | null, title: string } | null };
 
 export type PostsQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -289,7 +291,7 @@ export const PageHomeQueryDocument = gql`
     title
     slug
   }
-  books: books(limit: 1, collection: READING) {
+  books: books(limit: 3, collection: READING) {
     title
     author
     url
@@ -377,6 +379,7 @@ export const PostQueryDocument = gql`
   post(slug: $slug) {
     body
     coverUrl
+    coverAlt
     metaDescription
     publishedDate
     tags

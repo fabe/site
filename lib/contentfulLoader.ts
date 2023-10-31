@@ -8,14 +8,17 @@ function contentfulLoader({
   src,
   quality = 75,
   width,
-}: ImageLoaderProps): string {
+  custom,
+}: ImageLoaderProps & { custom?: string[] }): string {
   const params = ["w=" + Math.floor(width)];
 
   if (quality) {
     params.push("q=" + quality);
   }
 
-  return `${normalizeSrc(src)}?${params.join("&")}`;
+  return `${normalizeSrc(src)}?fm=webp&${params.join("&")}${
+    custom ? `&${custom.join("&")}` : null
+  }`;
 }
 
 export default contentfulLoader;

@@ -56,14 +56,17 @@ export const typeDefs = gql`
     fallbackColors: [String]
   }
 
+  scalar Freeform
+
   type Post {
     title: String!
     slug: String!
     publishedDate: String!
     metaDescription: String
     coverUrl: String
+    coverAlt: String
     tags: [String]
-    body: String!
+    body: Freeform!
   }
 
   type PostWithoutBody {

@@ -35,7 +35,16 @@ export interface SEOProps {
 export function SEO({ seo }: { seo?: SEOProps }) {
   return (
     <>
-      <DefaultSeo {...{ ...defaultSEO, ...seo }} />
+      <DefaultSeo
+        {...{
+          ...defaultSEO,
+          openGraph: {
+            ...defaultSEO.openGraph,
+            images: [{ url: seo.image, alt: seo.title }],
+          },
+          ...seo,
+        }}
+      />
       <Head>
         <meta name="googlebot" content="index,follow" />
         <link rel="icon" href="/favicon.ico" sizes="any" />

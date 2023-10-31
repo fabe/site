@@ -58,6 +58,7 @@ export const QUERY_POST = gql`
     post(slug: $slug) {
       body
       coverUrl
+      coverAlt
       metaDescription
       publishedDate
       tags

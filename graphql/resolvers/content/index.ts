@@ -52,7 +52,7 @@ export const contentfulGlobeClient = new ApolloClient({
 
 export async function getPlaylists(
   _: any,
-  args: QueryPlaylistsArgs
+  args: QueryPlaylistsArgs,
 ): Promise<Playlist[]> {
   const response = await contentfulClient.query({
     query: gql`
@@ -86,13 +86,13 @@ export async function getPlaylists(
       title: playlist.title,
       coverUrl: playlist.cover.url,
       spotifyUrl: playlist.spotifyUrl,
-    })
+    }),
   );
 }
 
 export async function getPosts(
   _: any,
-  args: QueryPostsArgs
+  args: QueryPostsArgs,
 ): Promise<PostWithoutBody[]> {
   const response = await contentfulClient.query({
     query: gql`
@@ -134,7 +134,7 @@ export async function getPosts(
 
 export async function getPost(
   _: any,
-  args: QueryPostArgs
+  args: QueryPostArgs,
 ): Promise<Post | null> {
   const response = await contentfulClient.query({
     query: gql`
@@ -146,6 +146,7 @@ export async function getPost(
             body
             coverImage {
               url
+              description
             }
             metaDescription
             publishedDate
@@ -167,6 +168,7 @@ export async function getPost(
     title: post.title,
     slug: post.slug,
     coverUrl: post.coverImage?.url,
+    coverAlt: post.coverImage?.description,
     publishedDate: post.publishedDate,
     body: post.body,
     metaDescription: post.metaDescription,
@@ -176,7 +178,7 @@ export async function getPost(
 
 export async function getPhotos(
   _: any,
-  args: QueryPhotosArgs
+  args: QueryPhotosArgs,
 ): Promise<Photo[]> {
   const response = await contentfulClient.query({
     query: gql`
