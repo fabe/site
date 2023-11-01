@@ -70,7 +70,7 @@ export default async function handler(request: NextRequest) {
               whiteSpace: "pre-wrap",
             }}
           >
-            {title}
+            {decodeURIComponent(title)}
           </div>
         </div>
       ),

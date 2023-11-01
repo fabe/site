@@ -52,7 +52,7 @@ export default function Post(props: PostProps) {
           title,
           description: metaDescription,
           path: relativeUrl,
-          image: `${baseUrl}/api/og?title=${encodeURI(title)}${
+          image: `${baseUrl}/api/og?title=${encodeURIComponent(title)}${
             coverUrl
               ? `&bg=${encodeURI(
                   new URL(coverUrl).pathname.split("/").slice(2).join("/"),
