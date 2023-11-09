@@ -28,13 +28,13 @@ export default function Home({ intro }) {
     loading,
   } = useQuery<SpotifyStatusQueryQuery>(QUERY_SPOTIFY_STATUS, {
     ssr: false,
-    fetchPolicy: "cache-and-network",
+    fetchPolicy: "network-only",
   });
 
-  // Refetch every minute for live data to be fresh.
+  // Refetch every 15 seconds for live data to be fresh.
   useEffect(() => {
     refetch();
-    startPolling(3 * 60 * 1000);
+    startPolling(15 * 1000);
 
     return () => stopPolling();
   }, []);
