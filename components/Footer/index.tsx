@@ -62,11 +62,7 @@ export default function Footer() {
               </Link>
               <a
                 className="link link-sm flex items-center gap-1.5"
-                href={
-                  process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA
-                    ? `//github.com/fabe/site/commit/${process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA}`
-                    : `//github.com/fabe/site`
-                }
+                href="//github.com/fabe/site"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -77,7 +73,7 @@ export default function Footer() {
                     #
                     {process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA?.slice(
                       0,
-                      7
+                      7,
                     ) || "97540ec"}
                   </span>
                 </span>
