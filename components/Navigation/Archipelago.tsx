@@ -9,6 +9,7 @@ import {
   MusicIcon,
   NavigationIcon,
   NoteIcon,
+  ShieldIcon,
   SpinnerIcon,
   TwitterIcon,
 } from "../Icons";
@@ -91,6 +92,10 @@ export default function Archipelago() {
             <Command.Item onSelect={() => navigate("/playlists")}>
               <MusicIcon size={16} />
               Playlists
+            </Command.Item>
+            <Command.Item onSelect={() => navigate("/patents")}>
+              <ShieldIcon size={16} />
+              Patents
             </Command.Item>
             <Command.Item onSelect={() => navigate("/globe")}>
               <GlobeIcon size={16} />
