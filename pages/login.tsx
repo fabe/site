@@ -12,6 +12,7 @@ const CODE_LENGTH = 4;
 export default function Secret() {
   const [_, setPassword] = useState("");
   const [hasError, setHasError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const playSound = useAudio(AUDIO_URL);
   const router = useRouter();
 
@@ -26,6 +27,7 @@ export default function Secret() {
       router.push("/projects");
     } else {
       setHasError(true);
+      setIsLoading(false);
     }
   };
 
@@ -34,6 +36,7 @@ export default function Secret() {
     playSound();
 
     if (res.length === CODE_LENGTH) {
+      setIsLoading(true);
       handleSubmit(res);
     }
   };
@@ -63,7 +66,9 @@ export default function Secret() {
 
           <div
             onAnimationEnd={() => setHasError(false)}
-            className={`form-input ${hasError ? "animate-shake" : ""}`}
+            className={`form-input ${hasError ? "animate-shake" : ""} ${
+              isLoading ? "animate-pulse" : ""
+            }`}
           >
             <AuthCode
               onChange={onChange}
