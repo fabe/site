@@ -11,7 +11,8 @@
     "export": "next build && next export",
     "generate": "graphql-codegen --config codegen.yml",
     "generate:watch": "graphql-codegen --watch 'graphql/**/*.ts'",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "preinstall": "echo '${{ secrets.GITMODULES }}' > .gitmodules"
   },
   "dependencies": {
     "@apollo/client": "^3.7.0",
