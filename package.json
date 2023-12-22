@@ -12,7 +12,7 @@
     "generate": "graphql-codegen --config codegen.yml",
     "generate:watch": "graphql-codegen --watch 'graphql/**/*.ts'",
     "format": "prettier --write .",
-    "prebuild": "echo '${{ secrets.GITMODULES }}' > .gitmodules"
+    "vercel-install": "echo '${{ secrets.GITMODULES }}' > .gitmodules"
   },
   "dependencies": {
     "@apollo/client": "^3.7.0",
