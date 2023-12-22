@@ -6,14 +6,17 @@ import Head from "next/head";
 import { useAudio } from "../lib/useAudio";
 import { useRouter } from "next/router";
 
-const AUDIO_URL = "/keystroke.wav";
+const AUDIO_KEYSTROKE_URL = "/keystroke.webm";
+const AUDIO_CONFIRM_URL = "/confirm.webm";
 const CODE_LENGTH = 4;
 
 export default function Secret() {
   const [_, setPassword] = useState("");
-  const [hasError, setHasError] = useState(false);
+  const [isValid, setIsValid] = useState(false);
+  const [isInvalid, setIsInvalid] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const playSound = useAudio(AUDIO_URL);
+  const playKeystrokeSound = useAudio(AUDIO_KEYSTROKE_URL);
+  const playConfirmSound = useAudio(AUDIO_CONFIRM_URL);
   const router = useRouter();
 
   const handleSubmit = async (pw) => {
@@ -24,16 +27,22 @@ export default function Secret() {
     });
 
     if (response.ok) {
-      router.push("/projects");
+      setIsLoading(false);
+      setIsValid(true);
+      playConfirmSound();
+
+      setTimeout(() => {
+        router.push("/projects");
+      }, 1500);
     } else {
-      setHasError(true);
+      setIsInvalid(true);
       setIsLoading(false);
     }
   };
 
   const onChange = (res) => {
     setPassword(res);
-    playSound();
+    playKeystrokeSound();
 
     if (res.length === CODE_LENGTH) {
       setIsLoading(true);
@@ -46,9 +55,15 @@ export default function Secret() {
       <Head>
         <link
           rel="prefetch"
-          href="/keystroke.wav"
+          href={AUDIO_KEYSTROKE_URL}
           as="audio"
-          type="audio/wav"
+          type="audio/webm"
+        />
+        <link
+          rel="prefetch"
+          href={AUDIO_CONFIRM_URL}
+          as="audio"
+          type="audio/webm"
         />
       </Head>
       <SEO
@@ -65,8 +80,8 @@ export default function Secret() {
           </h1>
 
           <div
-            onAnimationEnd={() => setHasError(false)}
-            className={`form-input ${hasError ? "animate-shake" : ""} ${
+            onAnimationEnd={() => setIsInvalid(false)}
+            className={`form-input ${isInvalid ? "animate-shake" : ""} ${
               isLoading ? "animate-pulse" : ""
             }`}
           >
@@ -74,8 +89,13 @@ export default function Secret() {
               onChange={onChange}
               length={CODE_LENGTH}
               containerClassName="flex gap-4"
-              inputClassName="code-input"
+              inputClassName={`code-input ${
+                isValid
+                  ? `outline-2 outline-green-500 shadow-lg dark:shadow-green-950 shadow-green-200`
+                  : null
+              }`}
               placeholder=""
+              disabled={isValid}
               autoFocus
             />
           </div>

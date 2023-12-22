@@ -218,7 +218,7 @@ a[href^="mailto:"] {
   .code-input {
     @apply bg-white dark:bg-white/5;
     @apply border-neutral-200 dark:border-white/[.05] border;
-    @apply dark:shadow-lg shadow-none;
+    @apply shadow-lg shadow-neutral-200 dark:shadow-neutral-950;
     @apply w-12 h-16;
     @apply text-center dark:text-white uppercase text-2xl [font-variation-settings:'opsz'_24,_'wght'_650];
     @apply outline-none;
