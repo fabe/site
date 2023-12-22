@@ -32,7 +32,9 @@ export default function Secret() {
       playConfirmSound();
 
       setTimeout(() => {
-        router.push("/projects");
+        router.prefetch("/projects").then(() => {
+          router.push("/projects");
+        });
       }, 1500);
     } else {
       setIsInvalid(true);
