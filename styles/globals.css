@@ -39,7 +39,7 @@ a[href^="mailto:"] {
 }
 
 [cmdk-dialog] {
-  @apply max-w-md;
+  @apply max-w-xl;
   @apply w-full;
   @apply fixed left-1/2 top-[20%];
   @apply flex items-start justify-center;
@@ -68,27 +68,31 @@ a[href^="mailto:"] {
   @apply placeholder:text-neutral-400 dark:placeholder:text-neutral-600;
   @apply bg-transparent;
   @apply w-full;
-  @apply px-5 py-3 pb-0;
+  @apply px-5 pt-5 pb-1;
   /* @apply border-b dark:border-neutral-800; */
   @apply outline-none;
   @apply text-lg;
 }
 
 [cmdk-list] {
-  @apply px-2 py-2;
+  @apply px-2 py-0;
   @apply transition-all;
   height: calc(var(--cmdk-list-height) + 16px);
 }
 
 [cmdk-item] {
   @apply px-3;
-  @apply flex items-center gap-2;
+  @apply flex items-center justify-between;
   @apply px-3 py-2;
   @apply rounded-md;
   @apply cursor-pointer;
   @apply text-neutral-600 dark:text-silver-dark;
   @apply transition-colors;
   @apply [font-variation-settings:'wght'_420];
+}
+
+[cmdk-item] > div {
+  @apply flex items-center gap-2;
 }
 
 [cmdk-item][aria-selected] {
@@ -112,7 +116,7 @@ a[href^="mailto:"] {
 }
 
 [cmdk-group-heading] {
-  @apply px-3 py-2;
+  @apply px-3 pb-2 pt-4;
   @apply text-xs font-medium text-neutral-600 [font-variation-settings:'opsz'_12] dark:text-silver-dark;
 }
 
@@ -211,6 +215,29 @@ a[href^="mailto:"] {
 }
 
 @layer components {
+  .code-input {
+    @apply bg-white dark:bg-white/5;
+    @apply border-neutral-200 dark:border-white/[.05] border;
+    @apply dark:shadow-lg shadow-none;
+    @apply w-12 h-16;
+    @apply text-center dark:text-white uppercase text-2xl [font-variation-settings:'opsz'_24,_'wght'_650];
+    @apply outline-none;
+    @apply rounded-lg;
+    @apply transition-shadow duration-100;
+  }
+
+  .code-input:focus,
+  .code-input:placeholder-shown:focus {
+    @apply border-transparent shadow-lg shadow-indigo-200;
+    @apply outline-2 outline-indigo-600 dark:outline-indigo-400 dark:shadow-indigo-900 outline-offset-0;
+  }
+
+  .code-input:placeholder-shown {
+    @apply border-neutral-200 dark:border-white/[.08];
+    @apply bg-white dark:bg-black/70;
+    @apply dark:border-t-0 dark:border-b dark:border-x-0;
+  }
+
   .link {
     @apply !underline;
     @apply !decoration-1.5;
@@ -262,7 +289,7 @@ a[href^="mailto:"] {
   }
 
   .badge {
-    @apply flex items-center gap-1 rounded-xl bg-gray-200 px-1.5 py-0.5 text-xs font-medium text-neutral-600 [font-variation-settings:'opsz'_12] dark:bg-neutral-900 dark:text-silver-dark;
+    @apply inline-flex items-center gap-1 rounded-xl bg-gray-200 px-1.5 py-0.5 text-xs font-medium text-neutral-600 [font-variation-settings:'opsz'_12] dark:bg-neutral-900 dark:text-silver-dark;
     @apply slashed-zero;
     @apply decoration-neutral-600;
   }

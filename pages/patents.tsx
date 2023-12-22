@@ -18,6 +18,9 @@ export default function Patents() {
         }}
       />
       <Main>
+        <h1 className="pb-6 text-2xl text-neutral-800 [font-variation-settings:'opsz'_32,_'wght'_500] dark:text-white sm:pb-12 sm:text-3xl">
+          Patents
+        </h1>
         <dl className="list-container items-center gap-2">
           {PATENTS.map((patent) => (
             <React.Fragment key={patent.id}>
