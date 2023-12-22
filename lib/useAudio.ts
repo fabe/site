@@ -1,20 +1,25 @@
 import { useState, useEffect } from "react";
 
 export const useAudio = (url) => {
-  if (typeof Audio === "undefined") {
-    return;
-  }
-
-  const [audio] = useState(new Audio(url));
+  const [audio] = useState(() => {
+    if (typeof Audio !== "undefined") {
+      return new Audio(url);
+    }
+    return null;
+  });
 
   const play = () => {
-    audio.play();
+    if (audio) {
+      audio.play();
+    }
   };
 
   useEffect(() => {
     return () => {
-      audio.pause();
-      audio.currentTime = 0;
+      if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
+      }
     };
   }, [audio]);
 
