@@ -1,0 +1,3 @@
+[submodule "pages/projects"]
+	path = pages/projects
+	url = git@github.com:fabe/site-private.git
