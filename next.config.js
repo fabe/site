@@ -33,7 +33,7 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: "/projects/:path*",
+        source: "/projects-legacy/:path*",
         destination: "https://fabe.github.io/projects/:path*",
         permanent: false,
       },

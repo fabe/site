@@ -1,11 +1,15 @@
+import { LockIcon } from "../Icons";
+
 interface BadgeProps {
   isLive?: boolean;
+  isPrivate?: boolean;
   children: JSX.Element | string;
   border?: boolean;
 }
 
 export default function Badge({
   isLive = false,
+  isPrivate = false,
   children,
   border = false,
 }: BadgeProps) {
@@ -13,8 +17,12 @@ export default function Badge({
     <div
       className={`badge ${
         border && `border border-gray-900/5 bg-transparent dark:border-white/10`
+      }  ${
+        isPrivate &&
+        `dark:bg-orange-500 bg-orange-200 dark:text-white text-orange-800`
       }`}
     >
+      {isPrivate ? <LockIcon size={12}></LockIcon> : null}
       {isLive ? (
         <div
           className="relative flex h-2 w-2 items-center justify-center"

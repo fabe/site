@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { Command } from "cmdk";
 import { useState, useEffect } from "react";
 import {
+  CursorIcon,
   EmailIcon,
   GlobeIcon,
   HomeIcon,
@@ -82,37 +83,62 @@ export default function Archipelago() {
 
           <Command.Group heading="Pages">
             <Command.Item onSelect={() => navigate("/")}>
-              <HomeIcon size={16} />
-              Home
+              <div>
+                <HomeIcon size={16} />
+                Home
+              </div>
             </Command.Item>
             <Command.Item onSelect={() => navigate("/posts")}>
-              <NoteIcon size={16} />
-              Posts
+              <div>
+                <NoteIcon size={16} />
+                Posts
+              </div>
             </Command.Item>
             <Command.Item onSelect={() => navigate("/playlists")}>
-              <MusicIcon size={16} />
-              Playlists
-            </Command.Item>
-            <Command.Item onSelect={() => navigate("/patents")}>
-              <ShieldIcon size={16} />
-              Patents
+              <div>
+                <MusicIcon size={16} />
+                Playlists
+              </div>
             </Command.Item>
             <Command.Item onSelect={() => navigate("/globe")}>
-              <GlobeIcon size={16} />
-              Globe <Badge border>Experimental</Badge>
+              <div>
+                <GlobeIcon size={16} />
+                Globe
+              </div>
+              <Badge border>Experimental</Badge>
+            </Command.Item>
+          </Command.Group>
+
+          <Command.Group heading="Portfolio">
+            <Command.Item onSelect={() => navigate("/projects")}>
+              <div>
+                <CursorIcon size={16} />
+                Projects
+              </div>
+              <Badge border>Private</Badge>
+            </Command.Item>
+            <Command.Item onSelect={() => navigate("/patents")}>
+              <div>
+                <ShieldIcon size={16} />
+                Patents
+              </div>
             </Command.Item>
           </Command.Group>
 
           <Command.Group heading="Contact">
             <Command.Item onSelect={() => navigate("//twitter.com/fschultz_")}>
-              <TwitterIcon size={16} />
-              Twitter
+              <div>
+                <TwitterIcon size={16} />
+                Twitter
+              </div>
             </Command.Item>
             <Command.Item
               onSelect={() => navigate("mailto:desk@fabianschultz.com")}
             >
-              <EmailIcon size={16} />
-              Email
+              <div>
+                <EmailIcon size={16} />
+                Email
+              </div>
             </Command.Item>
           </Command.Group>
         </Command.List>
