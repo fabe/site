@@ -430,4 +430,12 @@ a[href^="mailto:"] {
   .mask-gradient {
     mask-image: linear-gradient(to top, transparent 0%, rgba(0, 0, 0, 1) 90%);
   }
+
+  .paragraph-lg {
+    @apply text-base sm:text-lg hyphens-auto sm:leading-golden leading-relaxed;
+    @apply [font-variation-settings:'opsz'_18,_'wght'_450];
+    @apply pb-12;
+    @apply m-0;
+    @apply text-neutral-800 dark:text-silver;
+  }
 }
