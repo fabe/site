@@ -58,13 +58,13 @@
     "@tailwindcss/typography": "^0.5.4",
     "@types/node": "^20.8.9",
     "@types/react": "^18.0.15",
-    "autoprefixer": "^10.4.7",
+    "autoprefixer": "^10.4.16",
     "eslint": "8.52.0",
     "eslint-config-next": "^14.0.0",
-    "postcss": "^8.4.17",
+    "postcss": "^8.4.32",
     "prettier": "^3.0.3",
     "prettier-plugin-tailwindcss": "^0.5.6",
-    "tailwindcss": "^3.1.6",
+    "tailwindcss": "^3.4.0",
     "tailwindcss-touch": "^1.0.1",
     "typescript": "^5.2.2"
   }
