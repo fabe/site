@@ -29,8 +29,7 @@ a[href^="mailto:"] {
   @apply cursor-alias;
 }
 
-[cmdk-overlay],
-[data-reach-dialog-overlay] {
+[cmdk-overlay] {
   @apply bg-neutral-950/[.40];
   @apply dark:bg-neutral-800/[.40];
   @apply fixed left-0 top-0;
@@ -126,7 +125,6 @@ a[href^="mailto:"] {
   @apply top-3;
   @apply right-3;
   @apply text-neutral-400 dark:text-neutral-600;
-  @apply animate-fadeIn;
 }
 
 [cmdk-loading] div {
@@ -134,16 +132,26 @@ a[href^="mailto:"] {
 }
 
 [data-reach-dialog-overlay] {
-  @apply flex flex-col items-center;
   @apply overflow-scroll scroll-smooth;
   transform: translateZ(0);
+  @apply fixed left-0 top-0;
+  @apply h-full w-full;
+  @apply z-10;
+  @apply flex flex-col items-center;
 }
 
 [data-reach-dialog-content] {
   @apply relative;
-  @apply order-2;
-  @apply dark:bg-black bg-gray-50;
-  @apply rounded-3xl;
+  @apply order-2 grow w-full;
+  @apply relative;
+  @apply bg-white/[.98];
+  @apply dark:bg-neutral-900;
+  @apply border-transparent;
+  @apply dark:border-neutral-800;
+  @apply border;
+  @apply rounded-xl;
+  @apply shadow-fancy;
+  @apply dark:shadow-dark;
   @apply min-h-screen;
 }
 

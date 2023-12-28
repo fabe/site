@@ -28,6 +28,7 @@
     "contentful": "^10.6.5",
     "date-fns": "^2.29.2",
     "feed": "^4.2.2",
+    "framer-motion": "^10.16.16",
     "graphql": "^16.6.0",
     "lru-cache": "^7.14.0",
     "mapbox-gl": "^2.11.1",
