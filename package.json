@@ -21,6 +21,7 @@
     "@markdoc/markdoc": "^0.2.1",
     "@markdoc/next.js": "^0.2.1",
     "@mavrin/remark-typograf": "^2.2.0",
+    "@reach/dialog": "^0.18.0",
     "@react-hook/copy": "^2.0.1",
     "@vercel/og": "^0.5.20",
     "cmdk": "^0.2.0",
