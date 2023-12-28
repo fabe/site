@@ -29,6 +29,24 @@ a[href^="mailto:"] {
   @apply cursor-alias;
 }
 
+blockquote span::before {
+  display: inline-block;
+  width: 2em;
+  margin-left: -2em;
+  text-align: right;
+  visibility: visible;
+  content: open-quote;
+}
+
+blockquote span::after {
+  display: inline-block;
+  width: 2em;
+  margin-right: -2em;
+  text-align: left;
+  visibility: visible;
+  content: close-quote;
+}
+
 [cmdk-overlay] {
   @apply bg-neutral-950/[.40];
   @apply dark:bg-black/[.50];
