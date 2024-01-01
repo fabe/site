@@ -32,8 +32,8 @@ export default function Secret() {
       playConfirmSound();
 
       setTimeout(() => {
-        router.prefetch("/projects").then(() => {
-          router.push("/projects");
+        router.prefetch("/work").then(() => {
+          router.push("/work");
         });
       }, 1500);
     } else {

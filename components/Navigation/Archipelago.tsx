@@ -110,7 +110,7 @@ export default function Archipelago() {
           </Command.Group>
 
           <Command.Group heading="Portfolio">
-            <Command.Item onSelect={() => navigate("/projects")}>
+            <Command.Item onSelect={() => navigate("/work")}>
               <div>
                 <CursorIcon size={16} />
                 Projects

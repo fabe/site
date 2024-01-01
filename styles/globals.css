@@ -29,13 +29,31 @@ a[href^="mailto:"] {
   @apply cursor-alias;
 }
 
+blockquote span::before {
+  display: inline-block;
+  width: 2em;
+  margin-left: -2em;
+  text-align: right;
+  visibility: visible;
+  content: open-quote;
+}
+
+blockquote span::after {
+  display: inline-block;
+  width: 2em;
+  margin-right: -2em;
+  text-align: left;
+  visibility: visible;
+  content: close-quote;
+}
+
 [cmdk-overlay] {
-  @apply bg-neutral-900/[.20];
-  @apply dark:bg-black/[.70];
+  @apply bg-neutral-950/[.40];
+  @apply dark:bg-black/[.40];
   @apply fixed left-0 top-0;
   @apply h-full w-full;
   @apply z-20;
-  @apply backdrop-blur-sm backdrop-saturate-150;
+  @apply backdrop-blur-lg backdrop-saturate-150;
 }
 
 [cmdk-dialog] {
@@ -51,7 +69,7 @@ a[href^="mailto:"] {
 [cmdk-root] {
   @apply relative;
   @apply bg-white/[.98];
-  @apply dark:bg-neutral-900/[.98];
+  @apply dark:bg-neutral-900;
   @apply border-transparent;
   @apply dark:border-neutral-800;
   @apply border;
@@ -125,11 +143,34 @@ a[href^="mailto:"] {
   @apply top-3;
   @apply right-3;
   @apply text-neutral-400 dark:text-neutral-600;
-  @apply animate-fadeIn;
 }
 
 [cmdk-loading] div {
   @apply flex;
+}
+
+[data-reach-dialog-overlay] {
+  @apply overflow-scroll scroll-smooth;
+  transform: translateZ(0);
+  @apply fixed left-0 top-0;
+  @apply h-full w-full;
+  @apply z-10;
+  @apply flex flex-col items-center;
+}
+
+[data-reach-dialog-content] {
+  @apply relative;
+  @apply order-2 grow w-full;
+  @apply relative;
+  @apply bg-white/[.98];
+  @apply dark:bg-neutral-900;
+  @apply border-transparent;
+  @apply dark:border-neutral-800;
+  @apply border;
+  @apply rounded-xl;
+  @apply shadow-fancy;
+  @apply dark:shadow-dark;
+  @apply min-h-screen;
 }
 
 /* Animations */
@@ -251,9 +292,7 @@ a[href^="mailto:"] {
   }
 
   .note {
-    @apply font-serif;
-    @apply [font-variation-settings:'opsz'_7,_'wght'_360];
-    @apply text-base-adjusted-sm;
+    @apply text-base;
     @apply leading-relaxed;
     @apply p-4;
     @apply bg-neutral-950;
@@ -406,5 +445,18 @@ a[href^="mailto:"] {
 
   .mask-gradient {
     mask-image: linear-gradient(to top, transparent 0%, rgba(0, 0, 0, 1) 90%);
+  }
+
+  .paragraph-lg {
+    @apply text-base sm:text-lg hyphens-auto sm:leading-golden leading-relaxed;
+    @apply [font-variation-settings:'opsz'_18,_'wght'_450];
+    @apply pb-12;
+    @apply m-0;
+    @apply text-neutral-800 dark:text-silver;
+  }
+
+  .paragraph-lg.first {
+    @apply pb-0;
+    /* @apply first-letter:text-6xl first-letter:float-left first-letter:mr-2 first-letter:leading-none; */
   }
 }

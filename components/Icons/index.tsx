@@ -165,3 +165,23 @@ export function CursorIcon({ size }) {
     />
   );
 }
+
+export function CloseIcon({ size }) {
+  return (
+    <PhosphorIcon
+      label="Close"
+      size={size}
+      path="M208.49,191.51a12,12,0,0,1-17,17L128,145,64.49,208.49a12,12,0,0,1-17-17L111,128,47.51,64.49a12,12,0,0,1,17-17L128,111l63.51-63.52a12,12,0,0,1,17,17L145,128Z"
+    />
+  );
+}
+
+export function PlusIcon({ size }) {
+  return (
+    <PhosphorIcon
+      label="Plus"
+      size={size}
+      path="M228,128a12,12,0,0,1-12,12H140v76a12,12,0,0,1-24,0V140H40a12,12,0,0,1,0-24h76V40a12,12,0,0,1,24,0v76h76A12,12,0,0,1,228,128Z"
+    />
+  );
+}
