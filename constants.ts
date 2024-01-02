@@ -11,6 +11,6 @@ export const PLAYLIST_IDS = [
   "5ELpvH94Dq0GuGLiqGVWEM", // 2021
   "0JTXCwse1adXIUppeiJny9", // 2020
   "7Dj8dS13NyO60tl3VRoI5V", // 2019
-  // "5RiBqFIoVt0VuIl3QdwbWF", // 2018
-  // "53dkKdbZ5EHilxdOB30i4X", // 2017
+  "5RiBqFIoVt0VuIl3QdwbWF", // 2018
+  "53dkKdbZ5EHilxdOB30i4X", // 2017
 ];
