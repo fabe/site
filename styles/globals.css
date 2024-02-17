@@ -4,7 +4,7 @@
 
 html,
 body {
-  @apply bg-gray-50 dark:bg-black;
+  @apply bg-gray-50 dark:bg-neutral-950;
   @apply text-neutral-800 dark:text-silver;
   @apply antialiased;
   @apply text-base;
@@ -352,10 +352,9 @@ blockquote span::after {
   .island {
     @apply bg-white/95;
     @apply dark:bg-neutral-900/95;
-    @apply border-transparent;
-    @apply dark:border-white/[.1];
+    @apply dark:outline dark:outline-1 dark:outline-white/10;
+    @apply box-content;
     @apply backdrop-blur-md;
-    @apply border;
     @apply dark:shadow-xl;
     @apply shadow-fancy;
     @apply h-12 w-12;

@@ -128,3 +128,15 @@ export const QUERY_PLACES = gql`
     }
   }
 `;
+
+export const QUERY_ALL_PHOTOS = gql`
+  query AllPhotosQuery {
+    photos {
+      url
+      exif
+      description
+      width
+      height
+    }
+  }
+`;

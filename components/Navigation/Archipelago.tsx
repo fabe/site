@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { Command } from "cmdk";
 import { useState, useEffect } from "react";
 import {
+  CameraIcon,
   CursorIcon,
   EmailIcon,
   GlobeIcon,
@@ -104,6 +105,12 @@ export default function Archipelago() {
               <div>
                 <GlobeIcon size={16} />
                 Globe
+              </div>
+            </Command.Item>
+            <Command.Item onSelect={() => navigate("/photos")}>
+              <div>
+                <CameraIcon size={16} />
+                Photos
               </div>
               <Badge border>Experimental</Badge>
             </Command.Item>

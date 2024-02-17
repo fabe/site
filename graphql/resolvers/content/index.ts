@@ -185,19 +185,18 @@ export async function getPhotos(
       query getAllPhotos($limit: Int) {
         photoCollection(limit: $limit) {
           items {
-            lens
-            camera
             location {
               lat
               lon
             }
             description
-            unsplashUrl
             asset {
               url
               width
               height
             }
+            exif
+            tags
           }
         }
       }
@@ -212,13 +211,15 @@ export async function getPhotos(
   }
 
   return response.data.photoCollection.items.map((photo: any) => ({
-    camera: photo.camera,
     description: photo.description,
+    exif: photo.exif,
     height: photo.asset.height,
-    lens: photo.lens,
     location: photo.location,
-    photoUrl: photo.asset.url,
-    unsplashUrl: photo.unsplashUrl,
+    url: photo.asset.url.replace(
+      "downloads.ctfassets.net",
+      "images.ctfassets.net",
+    ),
+    tags: photo.tags,
     width: photo.asset.width,
   }));
 }

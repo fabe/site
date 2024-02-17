@@ -95,13 +95,12 @@ export type Location = {
 
 export type Photo = {
   __typename?: 'Photo';
-  camera?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
+  exif?: Maybe<Scalars['JSON']>;
   height: Scalars['Int'];
-  lens?: Maybe<Scalars['String']>;
   location?: Maybe<Location>;
-  photoUrl: Scalars['String'];
-  unsplashUrl?: Maybe<Scalars['String']>;
+  tags?: Maybe<Array<Maybe<Scalars['String']>>>;
+  url: Scalars['String'];
   width: Scalars['Int'];
 };
 
@@ -273,6 +272,11 @@ export type PlacesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type PlacesQueryQuery = { __typename?: 'Query', places: Array<{ __typename?: 'Place', name: string, locationType: string, location: { __typename?: 'Location', lat?: number | null, lon?: number | null } } | null> };
+
+export type AllPhotosQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllPhotosQueryQuery = { __typename?: 'Query', photos: Array<{ __typename?: 'Photo', url: string, exif?: any | null, description?: string | null, width: number, height: number } | null> };
 
 export const SiteSettingsSharedFragmentDoc = gql`
     fragment SiteSettingsShared on SiteSettings {
@@ -604,3 +608,41 @@ export function usePlacesQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type PlacesQueryQueryHookResult = ReturnType<typeof usePlacesQueryQuery>;
 export type PlacesQueryLazyQueryHookResult = ReturnType<typeof usePlacesQueryLazyQuery>;
 export type PlacesQueryQueryResult = Apollo.QueryResult<PlacesQueryQuery, PlacesQueryQueryVariables>;
+export const AllPhotosQueryDocument = gql`
+    query AllPhotosQuery {
+  photos {
+    url
+    exif
+    description
+    width
+    height
+  }
+}
+    `;
+
+/**
+ * __useAllPhotosQueryQuery__
+ *
+ * To run a query within a React component, call `useAllPhotosQueryQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllPhotosQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllPhotosQueryQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllPhotosQueryQuery(baseOptions?: Apollo.QueryHookOptions<AllPhotosQueryQuery, AllPhotosQueryQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllPhotosQueryQuery, AllPhotosQueryQueryVariables>(AllPhotosQueryDocument, options);
+      }
+export function useAllPhotosQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllPhotosQueryQuery, AllPhotosQueryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllPhotosQueryQuery, AllPhotosQueryQueryVariables>(AllPhotosQueryDocument, options);
+        }
+export type AllPhotosQueryQueryHookResult = ReturnType<typeof useAllPhotosQueryQuery>;
+export type AllPhotosQueryLazyQueryHookResult = ReturnType<typeof useAllPhotosQueryLazyQuery>;
+export type AllPhotosQueryQueryResult = Apollo.QueryResult<AllPhotosQueryQuery, AllPhotosQueryQueryVariables>;

@@ -41,7 +41,7 @@ module.exports = {
       colors: {
         silver: "#DFDFDE",
         "silver-dark": "#9B9B9B",
-        "neutral-950": "#101010",
+        "neutral-950": "#010101",
         "neutral-850": "#1C1C1C",
       },
       textDecorationThickness: {

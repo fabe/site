@@ -17,7 +17,7 @@ function contentfulLoader({
   }
 
   return `${normalizeSrc(src)}?fm=webp&${params.join("&")}${
-    custom ? `&${custom.join("&")}` : null
+    custom ? `&${custom.join("&")}` : ""
   }`;
 }
 

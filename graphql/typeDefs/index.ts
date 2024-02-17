@@ -84,12 +84,11 @@ export const typeDefs = gql`
   }
 
   type Photo {
-    lens: String
-    camera: String
+    exif: JSON
+    tags: [String]
     location: Location
     description: String
-    unsplashUrl: String
-    photoUrl: String!
+    url: String!
     width: Int!
     height: Int!
   }
