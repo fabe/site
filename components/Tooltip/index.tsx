@@ -11,7 +11,7 @@ export function Tooltip({ open, children }) {
       {open ? (
         <div
           role="tooltip"
-          className="whitespace-nowrap rounded border border-transparent bg-neutral-900 px-1.5 py-0.5 text-center text-xs font-medium text-silver [font-variation-settings:'opsz'_12] dark:border-white/[.08] dark:bg-black/[.96] dark:text-silver-dark"
+          className="whitespace-nowrap rounded bg-neutral-900 px-1.5 py-0.5 text-center text-xs font-medium text-silver [font-variation-settings:'opsz'_12] dark:bg-neutral-800/60 backdrop-blur-sm shadow-fancy dark:shadow-fancyDark"
         >
           {children}
         </div>
