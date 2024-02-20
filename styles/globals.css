@@ -48,8 +48,8 @@ blockquote span::after {
 }
 
 [cmdk-overlay] {
-  @apply bg-neutral-950/[.40];
-  @apply dark:bg-black/[.40];
+  @apply bg-neutral-950/40;
+  @apply dark:bg-black/40;
   @apply fixed left-0 top-0;
   @apply h-full w-full;
   @apply z-20;
@@ -158,13 +158,10 @@ blockquote span::after {
 [data-reach-dialog-content] {
   @apply relative;
   @apply order-2 grow w-full;
-  @apply relative;
   @apply bg-white/[.98];
   @apply dark:bg-neutral-900;
   @apply border-transparent;
   @apply dark:border-neutral-800;
-  @apply border;
-  @apply rounded-xl;
   @apply shadow-fancy;
   @apply dark:shadow-dark;
   @apply min-h-screen;

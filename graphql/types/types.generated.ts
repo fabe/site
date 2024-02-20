@@ -98,6 +98,7 @@ export type Photo = {
   description?: Maybe<Scalars['String']>;
   exif?: Maybe<Scalars['JSON']>;
   height: Scalars['Int'];
+  id: Scalars['String'];
   location?: Maybe<Location>;
   tags?: Maybe<Array<Maybe<Scalars['String']>>>;
   url: Scalars['String'];
@@ -142,6 +143,7 @@ export type PostWithoutBody = {
 export type Query = {
   __typename?: 'Query';
   books: Array<Maybe<Book>>;
+  photo?: Maybe<Photo>;
   photos: Array<Maybe<Photo>>;
   places: Array<Maybe<Place>>;
   playlists: Array<Maybe<Playlist>>;
@@ -156,6 +158,11 @@ export type Query = {
 export type QueryBooksArgs = {
   collection?: InputMaybe<CollectionType>;
   limit?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type QueryPhotoArgs = {
+  id: Scalars['String'];
 };
 
 
@@ -276,7 +283,19 @@ export type PlacesQueryQuery = { __typename?: 'Query', places: Array<{ __typenam
 export type AllPhotosQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AllPhotosQueryQuery = { __typename?: 'Query', photos: Array<{ __typename?: 'Photo', url: string, exif?: any | null, description?: string | null, width: number, height: number } | null> };
+export type AllPhotosQueryQuery = { __typename?: 'Query', photos: Array<{ __typename?: 'Photo', id: string, url: string, exif?: any | null, description?: string | null, width: number, height: number } | null> };
+
+export type PhotoIdsQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type PhotoIdsQueryQuery = { __typename?: 'Query', photos: Array<{ __typename?: 'Photo', id: string } | null> };
+
+export type PhotoQueryQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type PhotoQueryQuery = { __typename?: 'Query', photo?: { __typename?: 'Photo', id: string, url: string, exif?: any | null, description?: string | null, width: number, height: number, tags?: Array<string | null> | null, location?: { __typename?: 'Location', lon?: number | null, lat?: number | null } | null } | null };
 
 export const SiteSettingsSharedFragmentDoc = gql`
     fragment SiteSettingsShared on SiteSettings {
@@ -611,6 +630,7 @@ export type PlacesQueryQueryResult = Apollo.QueryResult<PlacesQueryQuery, Places
 export const AllPhotosQueryDocument = gql`
     query AllPhotosQuery {
   photos {
+    id
     url
     exif
     description
@@ -646,3 +666,82 @@ export function useAllPhotosQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
 export type AllPhotosQueryQueryHookResult = ReturnType<typeof useAllPhotosQueryQuery>;
 export type AllPhotosQueryLazyQueryHookResult = ReturnType<typeof useAllPhotosQueryLazyQuery>;
 export type AllPhotosQueryQueryResult = Apollo.QueryResult<AllPhotosQueryQuery, AllPhotosQueryQueryVariables>;
+export const PhotoIdsQueryDocument = gql`
+    query PhotoIdsQuery {
+  photos {
+    id
+  }
+}
+    `;
+
+/**
+ * __usePhotoIdsQueryQuery__
+ *
+ * To run a query within a React component, call `usePhotoIdsQueryQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePhotoIdsQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePhotoIdsQueryQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function usePhotoIdsQueryQuery(baseOptions?: Apollo.QueryHookOptions<PhotoIdsQueryQuery, PhotoIdsQueryQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PhotoIdsQueryQuery, PhotoIdsQueryQueryVariables>(PhotoIdsQueryDocument, options);
+      }
+export function usePhotoIdsQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PhotoIdsQueryQuery, PhotoIdsQueryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PhotoIdsQueryQuery, PhotoIdsQueryQueryVariables>(PhotoIdsQueryDocument, options);
+        }
+export type PhotoIdsQueryQueryHookResult = ReturnType<typeof usePhotoIdsQueryQuery>;
+export type PhotoIdsQueryLazyQueryHookResult = ReturnType<typeof usePhotoIdsQueryLazyQuery>;
+export type PhotoIdsQueryQueryResult = Apollo.QueryResult<PhotoIdsQueryQuery, PhotoIdsQueryQueryVariables>;
+export const PhotoQueryDocument = gql`
+    query PhotoQuery($id: String!) {
+  photo(id: $id) {
+    id
+    url
+    exif
+    description
+    width
+    height
+    tags
+    location {
+      lon
+      lat
+    }
+  }
+}
+    `;
+
+/**
+ * __usePhotoQueryQuery__
+ *
+ * To run a query within a React component, call `usePhotoQueryQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePhotoQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePhotoQueryQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function usePhotoQueryQuery(baseOptions: Apollo.QueryHookOptions<PhotoQueryQuery, PhotoQueryQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PhotoQueryQuery, PhotoQueryQueryVariables>(PhotoQueryDocument, options);
+      }
+export function usePhotoQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PhotoQueryQuery, PhotoQueryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PhotoQueryQuery, PhotoQueryQueryVariables>(PhotoQueryDocument, options);
+        }
+export type PhotoQueryQueryHookResult = ReturnType<typeof usePhotoQueryQuery>;
+export type PhotoQueryLazyQueryHookResult = ReturnType<typeof usePhotoQueryLazyQuery>;
+export type PhotoQueryQueryResult = Apollo.QueryResult<PhotoQueryQuery, PhotoQueryQueryVariables>;

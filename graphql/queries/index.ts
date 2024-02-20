@@ -132,11 +132,38 @@ export const QUERY_PLACES = gql`
 export const QUERY_ALL_PHOTOS = gql`
   query AllPhotosQuery {
     photos {
+      id
       url
       exif
       description
       width
       height
+    }
+  }
+`;
+
+export const QUERY_PHOTO_IDS = gql`
+  query PhotoIdsQuery {
+    photos {
+      id
+    }
+  }
+`;
+
+export const QUERY_PHOTO = gql`
+  query PhotoQuery($id: String!) {
+    photo(id: $id) {
+      id
+      url
+      exif
+      description
+      width
+      height
+      tags
+      location {
+        lon
+        lat
+      }
     }
   }
 `;

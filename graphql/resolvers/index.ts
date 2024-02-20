@@ -1,5 +1,6 @@
 import { getBooks } from "./books";
 import {
+  getPhoto,
   getPhotos,
   getPlaces,
   getPlaylists,
@@ -12,6 +13,7 @@ import { getSpotifyPlaylist, getSpotifyStatus } from "./spotify";
 export const resolvers = {
   Query: {
     books: getBooks,
+    photo: getPhoto,
     photos: getPhotos,
     playlists: getPlaylists,
     post: getPost,

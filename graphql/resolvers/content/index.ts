@@ -9,6 +9,7 @@ import {
   Playlist,
   Post,
   PostWithoutBody,
+  QueryPhotoArgs,
   QueryPhotosArgs,
   QueryPlaylistsArgs,
   QueryPostArgs,
@@ -176,6 +177,58 @@ export async function getPost(
   }))[0];
 }
 
+export async function getPhoto(
+  _: any,
+  args: QueryPhotoArgs,
+): Promise<Photo | null> {
+  const response = await contentfulClient.query({
+    query: gql`
+      query getPhoto($id: String!) {
+        photo(id: $id) {
+          sys {
+            id
+          }
+          location {
+            lat
+            lon
+          }
+          description
+          asset {
+            url
+            width
+            height
+          }
+          exif
+          tags
+        }
+      }
+    `,
+    variables: {
+      id: args.id,
+    },
+  });
+
+  if (!response.data) {
+    return null;
+  }
+
+  const photo = response.data.photo;
+
+  return {
+    id: photo.sys.id,
+    description: photo.description,
+    exif: photo.exif,
+    height: photo.asset.height,
+    location: photo.location,
+    url: photo.asset.url.replace(
+      "downloads.ctfassets.net",
+      "images.ctfassets.net",
+    ),
+    tags: photo.tags,
+    width: photo.asset.width,
+  };
+}
+
 export async function getPhotos(
   _: any,
   args: QueryPhotosArgs,
@@ -185,6 +238,9 @@ export async function getPhotos(
       query getAllPhotos($limit: Int) {
         photoCollection(limit: $limit) {
           items {
+            sys {
+              id
+            }
             location {
               lat
               lon
@@ -211,6 +267,7 @@ export async function getPhotos(
   }
 
   return response.data.photoCollection.items.map((photo: any) => ({
+    id: photo.sys.id,
     description: photo.description,
     exif: photo.exif,
     height: photo.asset.height,

@@ -5,6 +5,7 @@ export const typeDefs = gql`
 
   type Query {
     books(limit: Int, collection: CollectionType): [Book]!
+    photo(id: String!): Photo
     photos(limit: Int): [Photo]!
     playlists(limit: Int): [Playlist]!
     post(slug: String!): Post
@@ -84,6 +85,7 @@ export const typeDefs = gql`
   }
 
   type Photo {
+    id: String!
     exif: JSON
     tags: [String]
     location: Location
