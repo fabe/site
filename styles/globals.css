@@ -53,13 +53,12 @@ blockquote span::after {
   @apply fixed left-0 top-0;
   @apply h-full w-full;
   @apply z-20;
-  @apply backdrop-blur-lg backdrop-saturate-150;
 }
 
 [cmdk-dialog] {
   @apply max-w-xl;
   @apply w-full;
-  @apply fixed left-1/2 top-[20%];
+  @apply fixed left-1/2 top-[15%];
   @apply flex items-start justify-center;
   @apply -translate-x-1/2;
   @apply z-20;
@@ -67,21 +66,21 @@ blockquote span::after {
 }
 
 [cmdk-root] {
+  @apply material-glass;
+  @apply bg-white/90;
+  @apply dark:bg-neutral-800/95;
   @apply relative;
-  @apply bg-white/[.98];
-  @apply dark:bg-neutral-900;
   @apply border-transparent;
   @apply dark:border-neutral-800;
   @apply border;
   @apply rounded-xl;
   @apply w-full;
-  @apply shadow-fancy dark:shadow-fancyDark;
 }
 
 [cmdk-input] {
   @apply appearance-none;
   @apply text-neutral-800 dark:text-silver;
-  @apply placeholder:text-neutral-400 dark:placeholder:text-neutral-600;
+  @apply placeholder:text-neutral-900/40 dark:placeholder:text-white/40;
   @apply bg-transparent;
   @apply w-full;
   @apply px-5 pt-5 pb-1;
@@ -112,7 +111,7 @@ blockquote span::after {
 }
 
 [cmdk-item][aria-selected] {
-  @apply bg-neutral-100 dark:bg-neutral-800;
+  @apply bg-neutral-700/10 dark:bg-white/10;
   @apply text-neutral-800 dark:text-silver;
 }
 
@@ -348,10 +347,7 @@ blockquote span::after {
   }
 
   .island {
-    @apply bg-white/75;
-    @apply dark:bg-neutral-800/75;
-    @apply shadow-fancy dark:shadow-fancyDark;
-    @apply backdrop-blur-xl backdrop-saturate-200;
+    @apply material-glass;
     @apply h-12 w-12;
     @apply rounded-full;
     @apply inline-flex items-center justify-center;
@@ -380,6 +376,13 @@ blockquote span::after {
 }
 
 @layer utilities {
+  .material-glass {
+    @apply bg-white/75;
+    @apply dark:bg-neutral-800/75;
+    @apply shadow-fancy dark:shadow-fancyDark;
+    @apply backdrop-blur-xl backdrop-saturate-200;
+  }
+
   .link-external,
   .link-back {
     @apply inline-flex;

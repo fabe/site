@@ -66,7 +66,7 @@ const Masonry = ({ photos }: MasonryProps) => {
                     })
                   }
                 />
-                <div className="absolute bottom-0 left-0 right-0 top-0 flex flex-col justify-end gap-1 bg-gradient-to-b from-transparent via-transparent via-50% to-black/60 px-4 pb-5 pt-0 text-white group-hover:opacity-100 opacity-0 transition-opacity">
+                <div className="absolute bottom-0 left-0 right-0 top-0 flex flex-col justify-end gap-1 bg-gradient-to-b from-transparent via-transparent via-50% to-black/60 px-4 pb-5 pt-0 text-white group-hover:opacity-100 opacity-0 transition-opacity cursor-default">
                   <div className="line-clamp-2 text-base">
                     {photo.description}
                   </div>

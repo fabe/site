@@ -5,7 +5,7 @@ import { initializeApollo } from "../../graphql/client";
 import { QUERY_ALL_PHOTOS, QUERY_POSTS } from "../../graphql/queries";
 import Footer from "../../components/Footer";
 import Masonry from "../../components/Layouts/Masonry";
-import Badge from "../../components/Badge";
+import { Container } from "../../components/Layouts";
 
 export default function Photos({ photos }) {
   return (
@@ -17,14 +17,13 @@ export default function Photos({ photos }) {
         }}
       />
 
-      <header className="text-center flex items-center flex-col py-20 sm:gap-4 gap-2">
-        <h1 className="text-3xl text-neutral-800 dark:text-white [font-variation-settings:'opsz'_60,_'wght'_700] sm:text-6xl tracking-tight text-balance">
-          Photos
-        </h1>
-        <span className="text-neutral-500 dark:text-silver-dark">
-          Just a testing ground, for now.
-        </span>
-      </header>
+      <Container>
+        <div className="flex items-center pb-6 sm:pb-12 gap-2">
+          <h1 className="text-2xl text-neutral-800 [font-variation-settings:'opsz'_32,_'wght'_500] dark:text-white sm:text-3xl">
+            Photos
+          </h1>
+        </div>
+      </Container>
 
       <div className="p-2">
         <Masonry photos={photos} />
