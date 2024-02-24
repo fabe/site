@@ -17,7 +17,7 @@ export default function Photo(props) {
         }}
       />
 
-      <div className="h-screen">
+      <div className="sm:h-screen">
         <LightboxPhoto photo={props.photo} />
       </div>
       <div className="flex justify-center px-4 pb-20 sm:pb-8">

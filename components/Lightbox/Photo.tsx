@@ -22,7 +22,7 @@ export default function LightboxPhoto({ photo }: LightboxPhotoProps) {
   const exif = photo.exif as EXIF;
 
   return (
-    <div className="flex flex-col sm:flex-row overflow-hidden h-full w-full">
+    <div className="flex flex-col sm:flex-row overflow-hidden h-full w-full bg-white dark:bg-neutral-950">
       <div className="relative flex grow-0 flex-auto">
         {loading && (
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
@@ -47,7 +47,7 @@ export default function LightboxPhoto({ photo }: LightboxPhotoProps) {
         />
       </div>
 
-      <div className="basis-[340px] bg-white dark:bg-neutral-950 shrink-0 flex-auto p-6 flex flex-col justify-between">
+      <div className="sm:basis-[400px] bg-white dark:bg-neutral-950 shrink-0 p-6 flex flex-col justify-between small:flex-initial flex-auto">
         <h1 className="[font-variation-settings:'wght'_550] text-neutral-800 dark:text-white text-2xl">
           {photo.description || "A photo"}
         </h1>
