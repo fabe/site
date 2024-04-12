@@ -10,7 +10,7 @@ export default function Writing() {
       <dd className="list-content">
         <div>
           <div>
-            <LinkExternal href="//contentful.com/blog/2021/08/20/forma36-design-system-color-update">
+            <LinkExternal href="//contentful.com/blog/forma-36-design-system-color-update">
               Creating an accessible color palette
             </LinkExternal>
           </div>
