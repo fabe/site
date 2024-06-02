@@ -230,10 +230,10 @@
   dependencies:
     node-fetch "^2.6.1"
 
-"@as-integrations/next@^1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@as-integrations/next/-/next-1.3.0.tgz#916a7c426f64c720156c452fe5b3ea2bd9b883d5"
-  integrity sha512-pO6XlPEX4P8gw9OIK1Fd3zkFY1lJfkc0uikQM9IeMcyB9WNwSyqlcqwiQk32sx0OVUXSiZT6sqRz9xrXVf81pQ==
+"@as-integrations/next@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@as-integrations/next/-/next-3.0.0.tgz#868d45da046164a97c4e267abdf6a4b76b9f87ff"
+  integrity sha512-FmqJjoH5XamyBZQVTnnG9ssE3ywf/TPIanFGwYjp3YFsX92F1lY7FDcrQJa/gCJQnb8gSZAdqAIgrWo4K325sA==
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.22.13":
   version "7.22.13"

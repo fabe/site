@@ -121,10 +121,8 @@ export const QUERY_PLACES = gql`
     places {
       name
       locationType
-      location {
-        lat
-        lon
-      }
+      lat
+      lon
     }
   }
 `;
