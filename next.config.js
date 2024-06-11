@@ -20,6 +20,10 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "assets-ol.literal.club",
+      },
+      {
+        protocol: "https",
         hostname: "**.spotifycdn.com",
       },
     ],
