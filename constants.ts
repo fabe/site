@@ -5,6 +5,7 @@ export const DATE_FORMAT: object = {
 };
 
 export const PLAYLIST_IDS = [
+  "4BWCzBOYFTgnkD2c00w9Si", // 2025
   "0bMTUisUt7pIiGQzguAETA", // 2024
   "7a2g42UzPgZoSvDYrsYY7M", // 2023
   "6jVpWQPYp1FwkZVwfRegha", // 2022
@@ -12,5 +13,5 @@ export const PLAYLIST_IDS = [
   "0JTXCwse1adXIUppeiJny9", // 2020
   "7Dj8dS13NyO60tl3VRoI5V", // 2019
   "5RiBqFIoVt0VuIl3QdwbWF", // 2018
-  "53dkKdbZ5EHilxdOB30i4X", // 2017
+  // "53dkKdbZ5EHilxdOB30i4X", // 2017
 ];
