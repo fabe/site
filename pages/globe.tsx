@@ -8,6 +8,9 @@ import { SEO } from "../components/SEO";
 import { initializeApollo } from "../graphql/client";
 import { QUERY_PLACES } from "../graphql/queries";
 import { PlacesQueryQuery } from "../graphql/types/types.generated";
+import Link from "next/link";
+import Badge from "../components/Badge";
+import { ExternalIcon } from "../components/Icons";
 
 const initialViewState = {
   latitude: 51.5,
@@ -98,11 +101,23 @@ export default function GlobePage({}) {
         <h1 className="dark:text-shadow pb-2 text-2xl text-neutral-800 [font-variation-settings:'opsz'_32,_'wght'_500] dark:text-white sm:text-3xl">
           Globe
         </h1>
-        <p className="dark:text-shadow text-neutral-500 dark:text-silver-dark">
-          Places I’ve been to. Inspired by conquer.earth
-        </p>
       </div>
-      <div className="min-h-[95vh]">
+      <div className="relative min-h-[95vh]">
+        <div className="absolute sm:w-auto w-11/12 left-1/2 bottom-24 -translate-x-1/2 z-10 text-sm p-3 rounded-2xl material-glass font-medium flex sm:flex-row flex-col gap-3 sm:gap-6 sm:items-center animate-bannerFadeIn opacity-0">
+          <div className="flex gap-2 items-center">
+            <Badge isFeatured>New</Badge>
+            Want your own globe?
+          </div>
+          <a
+            href="https://globe.gallery"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex gap-1 items-center justify-center px-3 py-2 leading-none bg-neutral-900 dark:bg-neutral-100 hover:bg-neutral-800 dark:hover:bg-white text-gray-50 dark:text-neutral-950 rounded-lg transition"
+          >
+            Visit Globe Gallery
+            <ExternalIcon size={16} />
+          </a>
+        </div>
         <Map
           ref={mapRef}
           onLoad={onMapLoad}
