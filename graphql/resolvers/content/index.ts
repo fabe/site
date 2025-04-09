@@ -4,13 +4,15 @@ import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
 import { Place } from "next-seo/lib/types";
 
 import {
-  Book,
   Photo,
+  PhotoSet,
   Playlist,
   Post,
   PostWithoutBody,
   QueryPhotoArgs,
   QueryPhotosArgs,
+  QueryPhotoSetArgs,
+  QueryPhotoSetsArgs,
   QueryPlaylistsArgs,
   QueryPostArgs,
   QueryPostsArgs,
@@ -339,6 +341,156 @@ export async function getPlaces(_: any): Promise<Place[]> {
     location: {
       lat: place.location.lat,
       lon: place.location.lon,
+    },
+  }));
+}
+
+export async function getPhotoSet(
+  _: any,
+  args: QueryPhotoSetArgs,
+): Promise<PhotoSet | null> {
+  const response = await contentfulClient.query({
+    query: gql`
+      query getPhotoSet($slug: String!) {
+        photoSetCollection(where: { slug: $slug }, limit: 1) {
+          items {
+            sys {
+              id
+            }
+            title
+            slug
+            description
+            featuredPhoto {
+              description
+              asset {
+                url
+                width
+                height
+              }
+            }
+            photosCollection {
+              items {
+                sys {
+                  id
+                }
+                location {
+                  lat
+                  lon
+                }
+                description
+                asset {
+                  url
+                  width
+                  height
+                }
+                exif
+                tags
+              }
+            }
+          }
+        }
+      }
+    `,
+    variables: {
+      slug: args.slug,
+    },
+  });
+
+  if (!response.data || !response.data.photoSetCollection.items.length) {
+    return null;
+  }
+
+  const photoSet = response.data.photoSetCollection.items[0];
+
+  return {
+    id: photoSet.sys.id,
+    title: photoSet.title,
+    slug: photoSet.slug,
+    description: photoSet.description,
+    featuredPhoto: photoSet.featuredPhoto
+      ? {
+          ...photoSet.featuredPhoto,
+          url: photoSet.featuredPhoto.asset.url.replace(
+            "downloads.ctfassets.net",
+            "images.ctfassets.net",
+          ),
+          width: photoSet.featuredPhoto.asset.width,
+          height: photoSet.featuredPhoto.asset.height,
+        }
+      : null,
+    photos: photoSet.photosCollection.items.map((photo) => ({
+      id: photo.sys.id,
+      description: photo.description,
+      url: photo.asset.url.replace(
+        "downloads.ctfassets.net",
+        "images.ctfassets.net",
+      ),
+      width: photo.asset.width,
+      height: photo.asset.height,
+      exif: photo.exif,
+      tags: photo.tags,
+      location: photo.location,
+    })),
+  };
+}
+
+export async function getPhotoSets(
+  _: any,
+  args: QueryPhotoSetsArgs,
+): Promise<PhotoSet[]> {
+  const response = await contentfulClient.query({
+    query: gql`
+      query getPhotoSets($limit: Int) {
+        photoSetCollection(limit: $limit) {
+          items {
+            sys {
+              id
+            }
+            title
+            slug
+            description
+            featuredPhoto {
+              asset {
+                url
+                width
+                height
+              }
+            }
+            photosCollection {
+              items {
+                sys {
+                  id
+                }
+              }
+            }
+          }
+        }
+      }
+    `,
+    variables: {
+      limit: args.limit,
+    },
+  });
+
+  if (!response.data) {
+    return [];
+  }
+
+  return response.data.photoSetCollection.items.map((photoSet) => ({
+    id: photoSet.sys.id,
+    title: photoSet.title,
+    slug: photoSet.slug,
+    description: photoSet.description,
+    photos: photoSet.photosCollection?.items?.map((photo) => ({
+      id: photo.sys.id,
+    })),
+    featuredPhoto: {
+      url: photoSet.featuredPhoto.asset.url.replace(
+        "downloads.ctfassets.net",
+        "images.ctfassets.net",
+      ),
+      width: photoSet.featuredPhoto.asset.width,
+      height: photoSet.featuredPhoto.asset.height,
     },
   }));
 }

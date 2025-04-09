@@ -2,24 +2,14 @@ import type { GetStaticProps } from "next";
 import React from "react";
 import { SEO } from "../../components/SEO";
 import { initializeApollo } from "../../graphql/client";
-import { QUERY_ALL_PHOTOS } from "../../graphql/queries";
+import { QUERY_PHOTO_SETS } from "../../graphql/queries";
 import Footer from "../../components/Footer";
-import Masonry from "../../components/Layouts/Masonry";
-import { Container } from "../../components/Layouts";
-import { useRouter } from "next/router";
-import dynamic from "next/dynamic";
-import Lightbox from "../../components/Lightbox";
-import LightboxPhoto from "../../components/Lightbox/Photo";
-import Badge from "../../components/Badge";
+import { Main } from "../../components/Layouts";
+import MediaCard from "../../components/MediaCard";
+import { PhotoSet } from "../../graphql/types/types.generated";
 
-const Dialog = dynamic(() => import("../../components/Dialog"), {
-  loading: () => null,
-  ssr: false,
-});
-
-export default function Photos({ photos }) {
-  const router = useRouter();
-
+export default function Photos({ photoSets }) {
+  console.log(photoSets);
   return (
     <>
       <SEO
@@ -28,52 +18,45 @@ export default function Photos({ photos }) {
           path: "/photos",
         }}
       />
-
-      <Container>
-        <div className="flex items-center justify-between pb-6 sm:pb-12 gap-2">
-          <h1 className="text-2xl text-neutral-800 [font-variation-settings:'opsz'_32,_'wght'_500] dark:text-white sm:text-3xl">
-            Photos
-          </h1>
-          <Badge>Work in Progress</Badge>
+      <Main>
+        <h1 className="pb-6 text-2xl text-neutral-800 [font-variation-settings:'opsz'_32,_'wght'_500] dark:text-white sm:pb-12 sm:text-3xl">
+          Photos
+        </h1>
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
+          {photoSets.map((photoSet: PhotoSet) => (
+            <MediaCard
+              key={photoSet.id}
+              title={photoSet.title}
+              subtitle={photoSet.description}
+              image={
+                photoSet.featuredPhoto && {
+                  alt: photoSet.title,
+                  title: photoSet.title,
+                  src: photoSet.featuredPhoto.url,
+                  width: 124,
+                  height: 124,
+                }
+              }
+              href={`/photos/${photoSet.slug}`}
+              borderTop
+            />
+          ))}
         </div>
-      </Container>
-
-      <Lightbox
-        isOpen={!!router.query.id}
-        onDismiss={() => router.push("/photos", undefined, { scroll: false })}
-      >
-        <LightboxPhoto
-          photo={photos?.find((photo) => photo.id === router.query.id)}
-        />
-      </Lightbox>
-
-      <div className="p-2">
-        <Masonry photos={photos} />
-      </div>
-
-      <div className="flex justify-center px-4 pb-20 sm:pb-8">
-        <div className="w-full max-w-main grow">
-          <Footer />
-        </div>
-      </div>
+      </Main>
     </>
   );
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async () => {
   const apolloClient = initializeApollo();
 
-  await apolloClient.query({
-    query: QUERY_ALL_PHOTOS,
-  });
-
-  const data = apolloClient.readQuery({
-    query: QUERY_ALL_PHOTOS,
+  const { data } = await apolloClient.query({
+    query: QUERY_PHOTO_SETS,
   });
 
   return {
     props: {
-      photos: data.photos,
+      photoSets: data.photoSets,
     },
   };
 };

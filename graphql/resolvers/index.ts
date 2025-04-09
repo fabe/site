@@ -2,6 +2,8 @@ import { getBooks } from "./books";
 import {
   getPhoto,
   getPhotos,
+  getPhotoSet,
+  getPhotoSets,
   getPlaces,
   getPlaylists,
   getPost,
@@ -15,6 +17,8 @@ export const resolvers = {
     books: getBooks,
     photo: getPhoto,
     photos: getPhotos,
+    photoSet: getPhotoSet,
+    photoSets: getPhotoSets,
     playlists: getPlaylists,
     post: getPost,
     posts: getPosts,

@@ -75,8 +75,8 @@ export default function MediaCard({
                 : "rounded"
             } bg-gray-200 dark:bg-zinc-600`}
             src={image?.src || FALLBACK_COVER}
-            width={image?.width}
-            height={image?.height}
+            width={image?.width || 112}
+            height={image?.height || 160}
             priority={false}
           />
         </div>
@@ -96,12 +96,15 @@ export default function MediaCard({
   }
 
   if (href) {
+    const isExternal = href.startsWith("http");
     return (
       <a
         href={href}
-        target="_blank"
+        {...(isExternal && {
+          target: "_blank",
+          rel: "noopener noreferrer",
+        })}
         title={hrefLabel}
-        rel="noopener noreferrer"
       >
         {cardComponent}
       </a>

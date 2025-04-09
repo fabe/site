@@ -7,6 +7,8 @@ export const typeDefs = gql`
     books(limit: Int, collection: CollectionType): [Book]!
     photo(id: String!): Photo
     photos(limit: Int): [Photo]!
+    photoSet(slug: String!): PhotoSet
+    photoSets(limit: Int): [PhotoSet]!
     playlists(limit: Int): [Playlist]!
     post(slug: String!): Post
     posts(limit: Int): [PostWithoutBody]!
@@ -93,6 +95,15 @@ export const typeDefs = gql`
     url: String!
     width: Int!
     height: Int!
+  }
+
+  type PhotoSet {
+    id: String!
+    title: String!
+    slug: String!
+    description: String
+    featuredPhoto: Photo!
+    photos: [Photo]
   }
 
   type SiteSettings {

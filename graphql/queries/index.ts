@@ -154,15 +154,67 @@ export const QUERY_PHOTO = gql`
   query PhotoQuery($id: String!) {
     photo(id: $id) {
       id
-      url
-      exif
       description
+      exif
       width
       height
+      url
       tags
       location {
-        lon
         lat
+        lon
+      }
+    }
+  }
+`;
+
+export const QUERY_PHOTO_SETS = gql`
+  query PhotoSetsQuery($limit: Int) {
+    photoSets(limit: $limit) {
+      id
+      title
+      slug
+      description
+      featuredPhoto {
+        description
+        url
+        width
+        height
+      }
+    }
+  }
+`;
+
+export const QUERY_PHOTO_SET = gql`
+  query PhotoSetQuery($slug: String!) {
+    photoSet(slug: $slug) {
+      id
+      title
+      slug
+      description
+      photos {
+        id
+        description
+        url
+        width
+        height
+        exif
+        tags
+        location {
+          lat
+          lon
+        }
+      }
+    }
+  }
+`;
+
+export const QUERY_PHOTO_SET_IDS = gql`
+  query PhotoSetIdsQuery {
+    photoSets {
+      slug
+      photos {
+        id
       }
     }
   }
