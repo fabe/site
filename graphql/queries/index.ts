@@ -186,12 +186,21 @@ export const QUERY_PHOTO_SETS = gql`
 `;
 
 export const QUERY_PHOTO_SET = gql`
+  ${FRAGMENT_SITE_SETTINGS_SHARED}
+
   query PhotoSetQuery($slug: String!) {
+    siteSettings {
+      avatar {
+        url
+      }
+      ...SiteSettingsShared
+    }
     photoSet(slug: $slug) {
       id
       title
       slug
       description
+      updatedAt
       photos {
         id
         description

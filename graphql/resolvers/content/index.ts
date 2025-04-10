@@ -356,6 +356,7 @@ export async function getPhotoSet(
           items {
             sys {
               id
+              publishedAt
             }
             title
             slug
@@ -404,6 +405,7 @@ export async function getPhotoSet(
 
   return {
     id: photoSet.sys.id,
+    updatedAt: photoSet.sys.publishedAt,
     title: photoSet.title,
     slug: photoSet.slug,
     description: photoSet.description,
@@ -445,6 +447,7 @@ export async function getPhotoSets(
           items {
             sys {
               id
+              publishedAt
             }
             title
             slug
@@ -478,6 +481,7 @@ export async function getPhotoSets(
 
   return response.data.photoSetCollection.items.map((photoSet) => ({
     id: photoSet.sys.id,
+    updatedAt: photoSet.sys.publishedAt,
     title: photoSet.title,
     slug: photoSet.slug,
     description: photoSet.description,

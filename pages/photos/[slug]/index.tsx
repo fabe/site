@@ -2,7 +2,7 @@ import type { GetStaticProps, GetStaticPaths } from "next";
 import React, { useCallback } from "react";
 import { QUERY_PHOTO_SET, QUERY_PHOTO_SET_IDS } from "../../../graphql/queries";
 import { initializeApollo } from "../../../graphql/client";
-import { SEO } from "../../../components/SEO";
+import { baseUrl, SEO } from "../../../components/SEO";
 import { Container } from "../../../components/Layouts";
 import Image from "next/image";
 import contentfulLoader from "../../../lib/contentfulLoader";
@@ -11,9 +11,16 @@ import Footer from "../../../components/Footer";
 import { useRouter } from "next/router";
 import Lightbox from "../../../components/Lightbox";
 import LightboxPhoto from "../../../components/Lightbox/Photo";
+import Badge from "../../../components/Badge";
+import { LinkShare } from "../../../components/Links";
+import formatDate from "../../../lib/formatDate";
 
-export default function PhotoSet({ photoSet }) {
+export default function PhotoSet({ photoSet, siteSettings }) {
   const router = useRouter();
+
+  // URL for sharing
+  const relativeUrl = `/photos/${photoSet.slug}`;
+  const url = `${baseUrl}${relativeUrl}`;
 
   // Check if we have an ID in the query parameters
   const selectedPhotoId = router.query.id;
@@ -39,15 +46,41 @@ export default function PhotoSet({ photoSet }) {
       />
 
       <Container>
-        <div className="pb-6 sm:pb-12">
-          <h1 className="text-2xl text-neutral-800 [font-variation-settings:'opsz'_32,_'wght'_500] dark:text-white sm:text-3xl">
-            {photoSet.title}
-          </h1>
-          {photoSet.description && (
-            <p className="mt-2 text-neutral-600 dark:text-neutral-400">
-              {photoSet.description}
-            </p>
-          )}
+        <div className="pb-3 sm:pb-6">
+          <header className="pb-5 sm:pb-16 text-center">
+            <h1 className="text-2xl text-neutral-800 [font-variation-settings:'opsz'_32,_'wght'_500] dark:text-white sm:text-3xl">
+              {photoSet.title}
+            </h1>
+            <div className="pt-2">
+              {photoSet.description && <p>{photoSet.description}</p>}
+            </div>
+          </header>
+
+          <div className="flex w-full flex-row justify-between mt-2">
+            <div className="flex flex-row items-center gap-2">
+              <Link
+                href="/"
+                className="flex flex-row items-center gap-2 [font-variation-settings:'wght'_450]"
+              >
+                <div>
+                  <Image
+                    alt={siteSettings.siteTitle}
+                    title={siteSettings.siteTitle}
+                    className="rounded-full bg-gray-200 dark:bg-neutral-600"
+                    src={siteSettings.avatar.url || ""}
+                    width={20}
+                    height={20}
+                  />
+                </div>
+              </Link>
+              <Badge>{formatDate(photoSet.updatedAt)}</Badge>
+            </div>
+            <div className="relative">
+              <LinkShare title={photoSet.title} url={url}>
+                Share
+              </LinkShare>
+            </div>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -61,14 +94,14 @@ export default function PhotoSet({ photoSet }) {
               as={`/photos/${photoSet.slug}/${photo.id}`}
               scroll={false}
               shallow
-              className="group relative aspect-square overflow-hidden bg-neutral-100 dark:bg-neutral-900"
+              className="group relative aspect-square overflow-hidden bg-neutral-100 dark:bg-neutral-900 sm:[&:nth-child(15n-12)]:col-span-2 sm:last:col-span-2 after:shadow-border dark:after:shadow-none after:absolute after:w-full after:h-full after:z-10"
             >
               <Image
                 src={photo.url}
                 alt={photo.description || ""}
-                className="object-cover transition-all group-hover:brightness-110 group-hover:saturate-110"
+                className="object-cover transition-all group-hover:brightness-110 group-hover:saturate-110 transform-gpu bg-gray-200 dark:bg-neutral-900"
                 fill
-                sizes="(min-width: 640px) min(50vw, 350px), min(100vw, 350px)"
+                sizes="(min-width: 640px) min(50vw, 700px), min(100vw, 700px)"
                 loader={contentfulLoader}
                 quality={75}
               />
@@ -122,6 +155,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   return {
     props: {
       photoSet: data.photoSet,
+      siteSettings: data.siteSettings,
     },
   };
 };

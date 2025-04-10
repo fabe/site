@@ -24,21 +24,12 @@ export function LinkShare({ title, url, children }) {
   const { copy } = useCopy(url);
 
   const onClick = async () => {
-    if (navigator.share) {
-      navigator
-        .share({
-          title,
-          url,
-        })
-        .catch(console.error);
-    } else {
-      await copy();
-      setTooltipOpen(true);
+    await copy();
+    setTooltipOpen(true);
 
-      setTimeout(() => {
-        setTooltipOpen(false);
-      }, 1000);
-    }
+    setTimeout(() => {
+      setTooltipOpen(false);
+    }, 1000);
   };
 
   return (

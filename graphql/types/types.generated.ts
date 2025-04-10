@@ -113,6 +113,7 @@ export type PhotoSet = {
   photos?: Maybe<Array<Maybe<Photo>>>;
   slug: Scalars['String'];
   title: Scalars['String'];
+  updatedAt: Scalars['String'];
 };
 
 export type Place = {
@@ -331,7 +332,7 @@ export type PhotoSetQueryQueryVariables = Exact<{
 }>;
 
 
-export type PhotoSetQueryQuery = { __typename?: 'Query', photoSet?: { __typename?: 'PhotoSet', id: string, title: string, slug: string, description?: string | null, photos?: Array<{ __typename?: 'Photo', id: string, description?: string | null, url: string, width: number, height: number, exif?: any | null, tags?: Array<string | null> | null, location?: { __typename?: 'Location', lat?: number | null, lon?: number | null } | null } | null> | null } | null };
+export type PhotoSetQueryQuery = { __typename?: 'Query', siteSettings: { __typename?: 'SiteSettings', siteTitle: string, metaDescription: string, avatar: { __typename?: 'Asset', url?: string | null } }, photoSet?: { __typename?: 'PhotoSet', id: string, title: string, slug: string, description?: string | null, photos?: Array<{ __typename?: 'Photo', id: string, description?: string | null, url: string, width: number, height: number, exif?: any | null, tags?: Array<string | null> | null, location?: { __typename?: 'Location', lat?: number | null, lon?: number | null } | null } | null> | null } | null };
 
 export type PhotoSetIdsQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -832,6 +833,12 @@ export type PhotoSetsQueryLazyQueryHookResult = ReturnType<typeof usePhotoSetsQu
 export type PhotoSetsQueryQueryResult = Apollo.QueryResult<PhotoSetsQueryQuery, PhotoSetsQueryQueryVariables>;
 export const PhotoSetQueryDocument = gql`
     query PhotoSetQuery($slug: String!) {
+  siteSettings {
+    avatar {
+      url
+    }
+    ...SiteSettingsShared
+  }
   photoSet(slug: $slug) {
     id
     title
@@ -852,7 +859,7 @@ export const PhotoSetQueryDocument = gql`
     }
   }
 }
-    `;
+    ${SiteSettingsSharedFragmentDoc}`;
 
 /**
  * __usePhotoSetQueryQuery__

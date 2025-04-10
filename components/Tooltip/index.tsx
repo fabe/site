@@ -3,7 +3,7 @@ import { CSSTransitionGroup } from "react-transition-group";
 export function Tooltip({ open, children }) {
   return (
     <CSSTransitionGroup
-      className="absolute bottom-auto left-1/2 top-0 -translate-x-1/2 translate-y-[calc(-100%-10px)] select-none pointer-coarse:hidden sm:bottom-0 sm:top-auto sm:-translate-y-[calc(-100%-10px)]"
+      className="absolute bottom-auto left-1/2 top-0 -translate-x-1/2 translate-y-[calc(-100%-10px)] select-none pointer-coarse:hidden sm:bottom-0 sm:top-auto sm:-translate-y-[calc(-100%-10px)] z-10"
       transitionName="tooltip"
       transitionEnterTimeout={200}
       transitionLeaveTimeout={200}

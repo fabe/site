@@ -101,6 +101,7 @@ module.exports = {
         },
       },
       boxShadow: {
+        border: "rgba(0, 0, 0, 0.05) 0px 0px 0px 1px inset",
         dark: "0 16px 70px rgb(0 0 0 / 20%)",
         fancy:
           "0px 0px 0px 1px rgba(25, 37, 50, 0.05), 0px 3px 7px -3px rgba(25, 37, 50, 0.1), 0px 6px 12px -2px rgba(25, 37, 50, 0.1), inset 0 0 0 1px rgba(255, 255, 255, .05)",

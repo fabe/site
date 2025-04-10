@@ -99,6 +99,7 @@ export const typeDefs = gql`
 
   type PhotoSet {
     id: String!
+    updatedAt: String!
     title: String!
     slug: String!
     description: String
