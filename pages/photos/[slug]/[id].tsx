@@ -18,11 +18,11 @@ export default function Photo({ photoSet, photo, siteSettings }) {
         }}
       />
 
-      <div className="sm:h-screen">
+      <div className="h-screen">
         <LightboxPhoto photo={photo} />
       </div>
 
-      <div className="flex justify-center px-4 pb-20 sm:pb-8">
+      <div className="flex justify-center px-4 pb-20 lg:pb-8">
         <div className="w-full max-w-main grow">
           <Footer />
         </div>

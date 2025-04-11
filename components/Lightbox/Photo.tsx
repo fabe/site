@@ -23,8 +23,8 @@ export default function LightboxPhoto({ photo }: LightboxPhotoProps) {
 
   return (
     <div className="w-full max-h-full h-full overflow-y-auto">
-      <div className="flex flex-col sm:flex-row w-full h-full bg-white dark:bg-neutral-950">
-        <div className="relative w-full sm:w-auto sm:flex-1 flex justify-center">
+      <div className="flex flex-col lg:flex-row w-full h-full bg-white dark:bg-neutral-950">
+        <div className="relative w-full h-full lg:w-auto lg:flex-1 flex justify-center">
           {loading && (
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
               <SpinnerIcon size={24} />
@@ -32,9 +32,8 @@ export default function LightboxPhoto({ photo }: LightboxPhotoProps) {
           )}
 
           <div
-            className="relative w-full"
+            className="relative w-full h-full bg-gray-200 dark:bg-neutral-900"
             style={{
-              aspectRatio: `${photo.width} / ${photo.height}`,
               maxHeight: "100vh",
             }}
           >
@@ -42,7 +41,12 @@ export default function LightboxPhoto({ photo }: LightboxPhotoProps) {
               src={photo.url}
               alt={photo.description}
               sizes="100vw"
-              className="bg-gray-200 dark:bg-neutral-900 object-contain"
+              style={{
+                aspectRatio: `${photo.width} / ${photo.height}`,
+              }}
+              className={`object-contain h-full w-full relative transition-opacity duration-300 ease-in-out ${
+                loading ? "opacity-0" : "opacity-100"
+              }`}
               fill
               onLoad={() => setLoading(false)}
               quality={90}
@@ -55,11 +59,11 @@ export default function LightboxPhoto({ photo }: LightboxPhotoProps) {
           </div>
         </div>
 
-        <div className="sm:basis-[400px] bg-white dark:bg-neutral-950 shrink-0 p-6 sm:flex sm:justify-between sm:flex-col">
+        <div className="lg:basis-[400px] bg-white dark:bg-neutral-950 shrink-0 p-6 lg:flex lg:justify-between lg:flex-col">
           <h1 className="[font-variation-settings:'wght'_550] text-neutral-800 dark:text-white text-2xl">
             {photo.description || "A photo"}
           </h1>
-          <ul className="text-neutral-500 dark:text-silver-dark flex flex-col gap-1 border-solid border-neutral-500/10 pt-6 dark:border-neutral-900 sm:border-t">
+          <ul className="text-neutral-500 dark:text-silver-dark flex flex-col gap-1 border-solid border-neutral-500/10 pt-6 dark:border-neutral-900 lg:border-t">
             {exif.Make && (
               <li className="flex gap-2">
                 <div className="flex-none flex pt-0.5">
