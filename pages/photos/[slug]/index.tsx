@@ -51,7 +51,7 @@ export default function PhotoSet({ photoSet, siteSettings }) {
             <h1 className="text-2xl text-neutral-800 [font-variation-settings:'opsz'_32,_'wght'_500] dark:text-white sm:text-3xl">
               {photoSet.title}
             </h1>
-            <div className="pt-2">
+            <div className="pt-1.5">
               {photoSet.description && <p>{photoSet.description}</p>}
             </div>
           </header>

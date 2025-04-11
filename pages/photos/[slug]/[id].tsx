@@ -18,14 +18,6 @@ export default function Photo({ photoSet, photo, siteSettings }) {
         }}
       />
 
-      <div className="container mx-auto max-w-main px-4 pb-6 pt-6 sm:pb-8 sm:pt-8">
-        <header className="mb-6 rounded-lg sm:mb-6">
-          <h1 className="pb-2 text-2xl text-neutral-800 [font-variation-settings:'opsz'_32,_'wght'_500] dark:text-white sm:pb-3 sm:text-3xl">
-            <Link href={`/photos/${photoSet.slug}`}>{photoSet.title}</Link>
-          </h1>
-        </header>
-      </div>
-
       <div className="sm:h-screen">
         <LightboxPhoto photo={photo} />
       </div>

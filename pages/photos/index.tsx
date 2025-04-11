@@ -51,10 +51,10 @@ export default function Photos({ photoSets }) {
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent"></div>
 
               {/* Progressive blur overlay - shorter height and fixed position */}
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[40%] sm:h-[30%] overflow-hidden">
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[50%] xs:h-[45%] sm:h-[30%] overflow-hidden">
                 {/* Single blur layer with consistent styling */}
                 <div
-                  className="absolute inset-0 backdrop-blur-[3px] backdrop-brightness-[.85] backdrop-saturate-[1.1]"
+                  className="absolute inset-0 backdrop-blur-[5px] backdrop-brightness-[.85] backdrop-saturate-[1.1]"
                   style={{
                     mask: "linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)",
                   }}
@@ -62,10 +62,10 @@ export default function Photos({ photoSets }) {
 
                 {/* Title and description container - centered and at bottom */}
                 <div className="absolute bottom-0 w-full px-4 pb-4 sm:pb-6 pt-8 text-center">
-                  <h2 className="text-xl sm:text-2xl font-medium text-white transition-transform duration-300 ease-out group-hover:translate-y-4">
+                  <h2 className="[font-variation-settings:'opsz'_32,_'wght'_500] text-2xl sm:text-3xl font-medium text-white transition-transform duration-300 ease-out group-hover:translate-y-4">
                     {photoSet.title}
                   </h2>
-                  <p className="mx-auto mt-1 sm:mt-2 max-w-md line-clamp-2 text-xs sm:text-sm text-white/80 transition-all duration-300 ease-out group-hover:opacity-0 group-hover:translate-y-2">
+                  <p className="mx-auto mt-1 sm:mt-1.5 max-w-md line-clamp-2 text-white/80 transition-all duration-300 ease-out group-hover:opacity-0 group-hover:translate-y-2">
                     {photoSet.description}
                   </p>
                 </div>
