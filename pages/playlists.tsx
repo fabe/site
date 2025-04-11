@@ -34,7 +34,7 @@ export default function Playlists({ playlists }) {
                   : ""
               }`}
               image={{
-                alt: playlist.name,
+                alt: `Playlist cover for ${playlist.name}`,
                 title: playlist.name,
                 src: playlist.coverUrl ? playlist.coverUrl : "",
                 width: 124,

@@ -37,10 +37,16 @@ export default function Patents() {
               <dd className="list-content border-none pb-4 pt-0 sm:pb-0">
                 <div>
                   {patent.pending ? (
-                    <span className="blur-sm select-none">{patent.title}</span>
+                    <div>
+                      <span className="sr-only">Confidential patent title</span>
+                      <span className="blur-sm select-none" aria-hidden="true">
+                        {patent.title}
+                      </span>
+                    </div>
                   ) : (
                     <LinkExternal
                       href={`//patents.google.com/patent/${patent.id}`}
+                      aria-label={`View patent ${patent.id}: ${patent.title}`}
                     >
                       {patent.title}
                     </LinkExternal>

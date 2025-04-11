@@ -56,6 +56,8 @@ export default function GlobePage({}) {
         >
           <div
             className={`h-4 w-4 cursor-pointer rounded-xl border-2 pin-${place.locationType.toLowerCase()} bg-clip-content p-0.5`}
+            aria-label={`${place.name}, ${place.locationType}`}
+            role="button"
           />
         </Marker>
       )),
@@ -113,9 +115,10 @@ export default function GlobePage({}) {
             target="_blank"
             rel="noopener noreferrer"
             className="flex gap-1 items-center justify-center px-3 py-2 leading-none bg-neutral-900 dark:bg-neutral-100 hover:bg-neutral-800 dark:hover:bg-white text-gray-50 dark:text-neutral-950 rounded-lg transition"
+            aria-label="Visit Globe Gallery website"
           >
             Visit Globe Gallery
-            <ExternalIcon size={16} />
+            <ExternalIcon size={16} aria-hidden="true" />
           </a>
         </div>
         <Map
@@ -139,10 +142,13 @@ export default function GlobePage({}) {
 
           {popupInfo && (
             <Popup
+              className="cursor-default"
               anchor="top"
               longitude={Number(popupInfo.location.lon)}
               latitude={Number(popupInfo.location.lat)}
               onClose={() => setPopupInfo(null)}
+              closeOnClick={false}
+              aria-label={`Details about ${popupInfo.name}`}
             >
               <div className="text-xs text-silver-dark">
                 {popupInfo.locationType}

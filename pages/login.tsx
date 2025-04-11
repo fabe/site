@@ -86,6 +86,8 @@ export default function Secret() {
             className={`form-input ${isInvalid ? "animate-shake" : ""} ${
               isLoading ? "animate-pulse" : ""
             }`}
+            aria-live="polite"
+            aria-busy={isLoading}
           >
             <AuthCode
               onChange={onChange}
@@ -99,6 +101,8 @@ export default function Secret() {
               placeholder=""
               disabled={isValid}
               autoFocus
+              aria-label="Secret code input"
+              aria-invalid={isInvalid}
             />
           </div>
 
