@@ -15,6 +15,7 @@ import Badge from "../../../components/Badge";
 import { LinkShare } from "../../../components/Links";
 import formatDate from "../../../lib/formatDate";
 import { ChevronLeft, CloseIcon } from "../../../components/Icons";
+import { useDrag } from "@use-gesture/react";
 
 export default function PhotoSet({ photoSet, siteSettings }) {
   const router = useRouter();
@@ -32,6 +33,35 @@ export default function PhotoSet({ photoSet, siteSettings }) {
     ? photoSet.photos?.find((photo) => photo.id === selectedPhotoId)
     : null;
 
+  // Navigation handlers
+  const navigateToNext = useCallback(() => {
+    if (selectedPhotoIndex < photoSet.photos.length - 1) {
+      const nextPhoto = photoSet.photos[selectedPhotoIndex + 1];
+      router.push(
+        {
+          pathname: router.pathname,
+          query: { slug: photoSet.slug, id: nextPhoto.id },
+        },
+        `/photos/${photoSet.slug}/${nextPhoto.id}`,
+        { scroll: false, shallow: true },
+      );
+    }
+  }, [router, photoSet.photos, photoSet.slug, selectedPhotoIndex]);
+
+  const navigateToPrevious = useCallback(() => {
+    if (selectedPhotoIndex > 0) {
+      const prevPhoto = photoSet.photos[selectedPhotoIndex - 1];
+      router.push(
+        {
+          pathname: router.pathname,
+          query: { slug: photoSet.slug, id: prevPhoto.id },
+        },
+        `/photos/${photoSet.slug}/${prevPhoto.id}`,
+        { scroll: false, shallow: true },
+      );
+    }
+  }, [router, photoSet.photos, photoSet.slug, selectedPhotoIndex]);
+
   // Handler for closing the lightbox
   const handleDismiss = useCallback(() => {
     router.push(`/photos/${photoSet.slug}`, undefined, {
@@ -46,38 +76,39 @@ export default function PhotoSet({ photoSet, siteSettings }) {
       // Only handle keyboard navigation when lightbox is open and not a repeat event
       if (!selectedPhotoId || e.repeat) return;
 
-      if (
-        e.key === "ArrowRight" &&
-        selectedPhotoIndex < photoSet.photos.length - 1
-      ) {
-        const nextPhoto = photoSet.photos[selectedPhotoIndex + 1];
-        router.push(
-          {
-            pathname: router.pathname,
-            query: { slug: photoSet.slug, id: nextPhoto.id },
-          },
-          `/photos/${photoSet.slug}/${nextPhoto.id}`,
-          { scroll: false, shallow: true },
-        );
-      } else if (e.key === "ArrowLeft" && selectedPhotoIndex > 0) {
-        const prevPhoto = photoSet.photos[selectedPhotoIndex - 1];
-        router.push(
-          {
-            pathname: router.pathname,
-            query: { slug: photoSet.slug, id: prevPhoto.id },
-          },
-          `/photos/${photoSet.slug}/${prevPhoto.id}`,
-          { scroll: false, shallow: true },
-        );
+      if (e.key === "ArrowRight") {
+        navigateToNext();
+      } else if (e.key === "ArrowLeft") {
+        navigateToPrevious();
       }
     },
-    [
-      router,
-      photoSet.slug,
-      photoSet.photos,
-      selectedPhotoId,
-      selectedPhotoIndex,
-    ],
+    [selectedPhotoId, navigateToNext, navigateToPrevious],
+  );
+
+  // Gesture handler for swipe navigation
+  const bindDragGesture = useDrag(
+    ({ active, movement: [mx], velocity: [vx], direction: [dx], cancel }) => {
+      const swipeThreshold = window.innerWidth * 0.3; // 30% of screen width
+
+      if (!active) {
+        // Only trigger when the gesture ends and we've moved enough or have sufficient velocity
+        if (Math.abs(mx) > swipeThreshold || Math.abs(vx) > 0.5) {
+          if (dx === 1) {
+            navigateToPrevious();
+          } else if (dx === -1) {
+            navigateToNext();
+          }
+        }
+      }
+    },
+    {
+      axis: "x",
+      filterTaps: true,
+      rubberband: true,
+      swipe: {
+        velocity: 0.5,
+      },
+    },
   );
 
   // Add event listener for keyboard navigation
@@ -156,7 +187,9 @@ export default function PhotoSet({ photoSet, siteSettings }) {
 
       {selectedPhoto && (
         <Lightbox isOpen={true} onDismiss={handleDismiss}>
-          <LightboxPhoto key={selectedPhoto.id} photo={selectedPhoto} />
+          <div {...bindDragGesture()} className="w-full h-full touch-pan-y">
+            <LightboxPhoto key={selectedPhoto.id} photo={selectedPhoto} />
+          </div>
         </Lightbox>
       )}
 

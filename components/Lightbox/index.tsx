@@ -19,7 +19,7 @@ export default function Lightbox({
       {isOpen && (
         <DialogOverlay isOpen onDismiss={onDismiss}>
           <div className="lg:px-8 lg:py-6 min-h-screen flex flex-col w-full items-center bg-neutral-950/40 dark:bg-neutral-800/40 backdrop-blur-lg backdrop-saturate-150 overflow-hidden">
-            <div className="flex flex-col items-center grow w-full max-w-7xl h-full lg:rounded-lg overflow-auto lg:shadow-2xl">
+            <div className="flex flex-col items-center grow w-full max-w-7xl h-full lg:rounded-lg overflow-auto lg:shadow-2xl overscroll-none">
               <DialogContent className="flex justify-center items-center">
                 {children}
               </DialogContent>

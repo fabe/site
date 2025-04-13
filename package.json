@@ -23,6 +23,7 @@
     "@mavrin/remark-typograf": "^2.2.0",
     "@reach/dialog": "^0.18.0",
     "@react-hook/copy": "^2.0.1",
+    "@use-gesture/react": "^10.3.1",
     "@vercel/og": "^0.5.20",
     "cmdk": "^0.2.0",
     "contentful": "^10.6.5",
