@@ -43,6 +43,9 @@ export function SEO({ seo }: { seo?: SEOProps }) {
             ...defaultSEO.openGraph,
             images: [{ url: seo.image, alt: seo.title }],
           },
+          twitter: {
+            ...defaultSEO.twitter,
+          },
           ...seo,
         }}
       />
@@ -77,7 +80,7 @@ export function SEO({ seo }: { seo?: SEOProps }) {
                 gender: "male",
                 image: defaultSEO.openGraph.images[0].url,
                 sameAs: [
-                  "https://twitter.com/fschultz_",
+                  "https://x.com/fschultz_",
                   "https://www.linkedin.com/in/fabian-schultz",
                 ],
               },

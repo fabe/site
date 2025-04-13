@@ -133,10 +133,9 @@ export default function Archipelago() {
           </Command.Group>
 
           <Command.Group heading="Contact">
-            <Command.Item onSelect={() => navigate("//twitter.com/fschultz_")}>
+            <Command.Item onSelect={() => navigate("//x.com/fschultz_")}>
               <div>
-                <TwitterIcon size={16} />
-                Twitter
+                <TwitterIcon size={16} />X
               </div>
             </Command.Item>
             <Command.Item

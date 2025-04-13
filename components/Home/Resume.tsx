@@ -13,7 +13,7 @@ export default function Resume() {
         </h3>
       </dt>
       <dd className="list-content">
-        <div>Sr. Product Designer, Collaboration & AI</div>
+        <div>Sr. Product Designer, AI</div>
         <div>
           <LinkExternal href="//contentful.com">Contentful</LinkExternal>
         </div>
