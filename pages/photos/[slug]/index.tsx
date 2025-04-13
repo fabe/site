@@ -25,6 +25,9 @@ export default function PhotoSet({ photoSet, siteSettings }) {
 
   // Check if we have an ID in the query parameters
   const selectedPhotoId = router.query.id;
+  const selectedPhotoIndex = photoSet.photos?.findIndex(
+    (photo) => photo.id === selectedPhotoId,
+  );
   const selectedPhoto = selectedPhotoId
     ? photoSet.photos?.find((photo) => photo.id === selectedPhotoId)
     : null;
@@ -36,6 +39,52 @@ export default function PhotoSet({ photoSet, siteSettings }) {
       shallow: true,
     });
   }, [router, photoSet.slug]);
+
+  // Handler for key navigation
+  const handleKeyDown = useCallback(
+    (e) => {
+      // Only handle keyboard navigation when lightbox is open and not a repeat event
+      if (!selectedPhotoId || e.repeat) return;
+
+      if (
+        e.key === "ArrowRight" &&
+        selectedPhotoIndex < photoSet.photos.length - 1
+      ) {
+        const nextPhoto = photoSet.photos[selectedPhotoIndex + 1];
+        router.push(
+          {
+            pathname: router.pathname,
+            query: { slug: photoSet.slug, id: nextPhoto.id },
+          },
+          `/photos/${photoSet.slug}/${nextPhoto.id}`,
+          { scroll: false, shallow: true },
+        );
+      } else if (e.key === "ArrowLeft" && selectedPhotoIndex > 0) {
+        const prevPhoto = photoSet.photos[selectedPhotoIndex - 1];
+        router.push(
+          {
+            pathname: router.pathname,
+            query: { slug: photoSet.slug, id: prevPhoto.id },
+          },
+          `/photos/${photoSet.slug}/${prevPhoto.id}`,
+          { scroll: false, shallow: true },
+        );
+      }
+    },
+    [
+      router,
+      photoSet.slug,
+      photoSet.photos,
+      selectedPhotoId,
+      selectedPhotoIndex,
+    ],
+  );
+
+  // Add event listener for keyboard navigation
+  React.useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [handleKeyDown]);
 
   return (
     <>
@@ -93,7 +142,7 @@ export default function PhotoSet({ photoSet, siteSettings }) {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {photoSet.photos?.map((photo) => (
             <PhotoThumbnail
               key={photo.id}
@@ -107,7 +156,7 @@ export default function PhotoSet({ photoSet, siteSettings }) {
 
       {selectedPhoto && (
         <Lightbox isOpen={true} onDismiss={handleDismiss}>
-          <LightboxPhoto photo={selectedPhoto} />
+          <LightboxPhoto key={selectedPhoto.id} photo={selectedPhoto} />
         </Lightbox>
       )}
 

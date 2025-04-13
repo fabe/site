@@ -43,7 +43,7 @@ function PhotoSetCard({ photoSet }: { photoSet: PhotoSet }) {
   return (
     <Link
       href={`/photos/${photoSet.slug}`}
-      className="group relative aspect-[21/9] w-full overflow-hidden rounded-lg bg-neutral-200 dark:bg-neutral-800"
+      className="group relative aspect-[21/9] w-full overflow-hidden rounded-lg bg-neutral-700 dark:bg-neutral-800"
     >
       {photoSet.featuredPhoto && (
         <Image
@@ -76,10 +76,10 @@ function PhotoSetCard({ photoSet }: { photoSet: PhotoSet }) {
 
         {/* Title and description container - centered and at bottom */}
         <div className="absolute bottom-0 w-full px-4 pb-4 sm:pb-6 pt-8 text-center">
-          <h2 className="[font-variation-settings:'opsz'_32,_'wght'_500] text-2xl sm:text-3xl font-medium text-white transition-transform duration-300 ease-out group-hover:translate-y-4">
+          <h2 className="[font-variation-settings:'opsz'_32,_'wght'_500] text-2xl sm:text-3xl font-medium text-white transition-transform duration-300 ease-out pointer-fine:group-hover:translate-y-4">
             {photoSet.title}
           </h2>
-          <p className="mx-auto mt-1 sm:mt-1.5 max-w-md line-clamp-2 text-white/80 transition-all duration-300 ease-out group-hover:opacity-0 group-hover:translate-y-2">
+          <p className="mx-auto mt-1 sm:mt-1.5 max-w-md line-clamp-2 text-white/80 transition-all duration-300 ease-out pointer-fine:group-hover:opacity-0 pointer-fine:group-hover:translate-y-2">
             {photoSet.description}
           </p>
         </div>

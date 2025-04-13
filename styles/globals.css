@@ -164,7 +164,6 @@ blockquote span::after {
   @apply dark:border-neutral-800;
   @apply shadow-fancy;
   @apply dark:shadow-dark;
-  @apply min-h-screen;
 }
 
 /* Animations */
