@@ -214,7 +214,7 @@ blockquote span::after {
   .code-input {
     @apply bg-white dark:bg-white/5;
     @apply border-neutral-200 dark:border-white/[.05] border;
-    @apply shadow-lg shadow-neutral-200 dark:shadow-neutral-950;
+    @apply shadow-md shadow-neutral-200 dark:shadow-neutral-950;
     @apply w-12 h-16;
     @apply text-center dark:text-white uppercase text-2xl [font-variation-settings:'opsz'_24,_'wght'_650];
     @apply outline-none;
@@ -230,7 +230,7 @@ blockquote span::after {
 
   .code-input:placeholder-shown {
     @apply border-neutral-200 dark:border-white/[.08];
-    @apply bg-white dark:bg-black/70;
+    @apply bg-white dark:bg-neutral-950 dark:shadow-white/5 dark:shadow-sm;
     @apply dark:border-t-0 dark:border-b dark:border-x-0;
   }
 

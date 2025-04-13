@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Script from "next/script";
 import { DefaultSeo } from "next-seo";
 
 export const baseUrl = "https://fabianschultz.com";
@@ -106,11 +107,11 @@ export function SEO({ seo }: { seo?: SEOProps }) {
           title="RSS feed"
           href={`${baseUrl}/posts/rss`}
         />
-        <script
+        <Script
           defer
           src="https://eu.umami.is/script.js"
           data-website-id="06795c3d-e407-438d-9ec4-1395a458e24f"
-        ></script>
+        />
       </Head>
     </>
   );

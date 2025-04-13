@@ -40,6 +40,7 @@ export default function LightboxPhoto({ photo }: LightboxPhotoProps) {
             <Image
               src={photo.url}
               alt={photo.description}
+              priority
               sizes="100vw"
               style={{
                 aspectRatio: `${photo.width} / ${photo.height}`,
