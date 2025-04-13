@@ -166,44 +166,6 @@ blockquote span::after {
   @apply dark:shadow-dark;
 }
 
-/* Animations */
-
-.island-enter {
-  @apply scale-50;
-}
-
-.island-enter.island-enter-active {
-  @apply scale-100;
-  @apply transition-all duration-500 ease-spring;
-}
-
-.island-leave {
-  @apply scale-100;
-}
-
-.island-leave.island-leave-active {
-  @apply scale-50;
-  @apply transition-all duration-300 ease-in-out;
-}
-
-.tooltip-enter {
-  @apply -translate-y-1 opacity-[.01];
-}
-
-.tooltip-enter.tooltip-enter-active {
-  @apply translate-y-0 opacity-100;
-  @apply transition-all duration-200 ease-in-out;
-}
-
-.tooltip-leave {
-  @apply translate-y-0 opacity-100;
-}
-
-.tooltip-leave.tooltip-leave-active {
-  @apply -translate-y-1 opacity-[.01];
-  @apply transition-all duration-200 ease-in-out;
-}
-
 .pin-city {
   @apply border-fuchsia-500/10;
   @apply bg-fuchsia-500/60;

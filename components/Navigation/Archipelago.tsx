@@ -15,7 +15,7 @@ import {
   SpinnerIcon,
   TwitterIcon,
 } from "../Icons";
-import { CSSTransitionGroup } from "react-transition-group";
+import { Transition } from "@headlessui/react";
 import { Tooltip } from "../Tooltip";
 import Badge from "../Badge";
 
@@ -157,13 +157,16 @@ export default function Archipelago() {
         } fixed bottom-6 left-6 top-auto z-10 md:bottom-auto md:left-8 md:top-8`}
       >
         <div>
-          <CSSTransitionGroup
-            className="relative flex h-12 gap-2"
-            transitionName="island"
-            transitionEnterTimeout={500}
-            transitionLeaveTimeout={300}
-          >
-            {!isHome ? (
+          <div className="relative flex h-12 gap-2">
+            <Transition
+              show={!isHome}
+              enter="transition-all duration-500 ease-spring"
+              enterFrom="opacity-0 scale-50"
+              enterTo="opacity-100 scale-100"
+              leave="transition-all duration-300 ease-in-out"
+              leaveFrom="opacity-100 scale-100"
+              leaveTo="opacity-0 scale-50"
+            >
               <div
                 className="absolute left-0 rounded-full"
                 onMouseEnter={() => setTooltip(TooltipState.HOME)}
@@ -175,7 +178,7 @@ export default function Archipelago() {
                   <HomeIcon size={20} />
                 </Link>
               </div>
-            ) : null}
+            </Transition>
             <div
               className={`duration-250 absolute rounded-full transition-all ease-out-expo ${
                 !isHome ? "delay-50 left-14" : "left-0 delay-300"
@@ -192,7 +195,7 @@ export default function Archipelago() {
                 <NavigationIcon size={20} />
               </button>
             </div>
-          </CSSTransitionGroup>
+          </div>
         </div>
       </nav>
     </>
