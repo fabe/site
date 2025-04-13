@@ -37,7 +37,7 @@ export default function PhotoSet({ photoSet, siteSettings }) {
   const navigateToNext = useCallback(() => {
     if (selectedPhotoIndex < photoSet.photos.length - 1) {
       const nextPhoto = photoSet.photos[selectedPhotoIndex + 1];
-      router.push(
+      router.replace(
         {
           pathname: router.pathname,
           query: { slug: photoSet.slug, id: nextPhoto.id },
@@ -51,7 +51,7 @@ export default function PhotoSet({ photoSet, siteSettings }) {
   const navigateToPrevious = useCallback(() => {
     if (selectedPhotoIndex > 0) {
       const prevPhoto = photoSet.photos[selectedPhotoIndex - 1];
-      router.push(
+      router.replace(
         {
           pathname: router.pathname,
           query: { slug: photoSet.slug, id: prevPhoto.id },
@@ -64,7 +64,7 @@ export default function PhotoSet({ photoSet, siteSettings }) {
 
   // Handler for closing the lightbox
   const handleDismiss = useCallback(() => {
-    router.push(`/photos/${photoSet.slug}`, undefined, {
+    router.replace(`/photos/${photoSet.slug}`, undefined, {
       scroll: false,
       shallow: true,
     });
@@ -214,6 +214,7 @@ function PhotoThumbnail({ photo, photoSet, router }) {
       as={`/photos/${photoSet.slug}/${photo.id}`}
       scroll={false}
       shallow
+      replace
       className="group relative aspect-square overflow-hidden bg-neutral-100 dark:bg-neutral-900 sm:[&:nth-child(15n-12)]:col-span-2 sm:last:col-span-2 after:shadow-border dark:after:shadow-none after:absolute after:w-full after:h-full after:z-10"
     >
       <Image

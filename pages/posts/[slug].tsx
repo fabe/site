@@ -13,11 +13,14 @@ import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemote } from "next-mdx-remote";
 import { mdxComponents } from "../../components/Prose";
 import formatDate from "../../lib/formatDate";
-import { Post, SiteSettings } from "../../graphql/types/types.generated";
+import {
+  Post as PostType,
+  SiteSettings,
+} from "../../graphql/types/types.generated";
 import contentfulLoader from "../../lib/contentfulLoader";
 
 interface PostProps {
-  post: Post;
+  post: PostType;
   siteSettings: SiteSettings;
 }
 

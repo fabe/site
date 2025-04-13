@@ -59,11 +59,11 @@ export default function LightboxPhoto({ photo }: LightboxPhotoProps) {
           </div>
         </div>
 
-        <div className="lg:basis-[400px] bg-white dark:bg-neutral-950 shrink-0 p-6 lg:flex lg:justify-between lg:flex-col">
+        <div className="lg:basis-[400px] bg-white dark:bg-neutral-800 shrink-0 p-6 lg:flex lg:justify-between lg:flex-col">
           <h1 className="[font-variation-settings:'wght'_550] text-neutral-800 dark:text-white text-2xl">
             {photo.description || "A photo"}
           </h1>
-          <ul className="text-neutral-500 dark:text-silver-dark flex flex-col gap-1 border-solid border-neutral-500/10 pt-6 dark:border-neutral-900 lg:border-t">
+          <ul className="text-neutral-500 dark:text-silver-dark flex flex-col gap-1 border-solid border-neutral-500/10 pt-6 dark:border-neutral-700 lg:border-t">
             {exif.Make && (
               <li className="flex gap-2">
                 <div className="flex-none flex pt-0.5">
