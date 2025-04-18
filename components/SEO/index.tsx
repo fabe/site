@@ -125,7 +125,7 @@ export function SEO({ seo }: { seo?: SEOProps }) {
       <Script
         defer
         src="https://track.withgaze.com/script.js"
-        data-website-id="FABIANTEST"
+        data-site-id="FABIANTEST"
       />
     </>
   );
