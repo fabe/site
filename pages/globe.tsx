@@ -111,13 +111,13 @@ export default function GlobePage({}) {
             Want your own globe?
           </div>
           <a
-            href="https://globe.gallery"
+            href="https://globe.cv"
             target="_blank"
             rel="noopener noreferrer"
             className="flex gap-1 items-center justify-center px-3 py-2 leading-none bg-neutral-900 dark:bg-neutral-100 hover:bg-neutral-800 dark:hover:bg-white text-gray-50 dark:text-neutral-950 rounded-lg transition"
-            aria-label="Visit Globe Gallery website"
+            aria-label="Visit Globe.cv website"
           >
-            Visit Globe Gallery
+            Visit Globe.cv
             <ExternalIcon size={16} aria-hidden="true" />
           </a>
         </div>

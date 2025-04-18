@@ -41,7 +41,12 @@ export function SEO({ seo }: { seo?: SEOProps }) {
           ...defaultSEO,
           openGraph: {
             ...defaultSEO.openGraph,
-            images: [{ url: seo.image, alt: seo.title }],
+            images: [
+              {
+                url: seo.image || defaultSEO.openGraph.images[0].url,
+                alt: seo.title,
+              },
+            ],
           },
           twitter: {
             ...defaultSEO.twitter,

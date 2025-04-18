@@ -12,9 +12,7 @@ export default function Projects() {
         <div>
           <div className="flex items-center gap-2">
             <Badge isFeatured>New</Badge>
-            <LinkExternal href="https://globe.gallery">
-              Globe Gallery
-            </LinkExternal>
+            <LinkExternal href="https://globe.cv">Globe.cv</LinkExternal>
           </div>
           <p className="pt-1 text-sm text-neutral-500 [font-variation-settings:'opsz'_14] dark:text-silver-dark">
             Your travels, at a glance.
