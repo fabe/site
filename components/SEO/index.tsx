@@ -121,12 +121,6 @@ export function SEO({ seo }: { seo?: SEOProps }) {
         src="https://eu.umami.is/script.js"
         data-website-id="06795c3d-e407-438d-9ec4-1395a458e24f"
       />
-      {/* Experimental */}
-      <Script
-        defer
-        src="https://track.withgaze.com/script.js"
-        data-site-id="FABIANTEST"
-      />
     </>
   );
 }
