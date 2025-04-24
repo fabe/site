@@ -20,8 +20,8 @@ export const defaultSEO = {
     ],
   },
   twitter: {
-    handle: "@fschultz_",
-    site: "@fschultz_",
+    handle: "@supfabian",
+    site: "@supfabian",
     cardType: "summary_large_image",
   },
 };
@@ -85,7 +85,7 @@ export function SEO({ seo }: { seo?: SEOProps }) {
                 gender: "male",
                 image: defaultSEO.openGraph.images[0].url,
                 sameAs: [
-                  "https://x.com/fschultz_",
+                  "https://x.com/supfabian",
                   "https://www.linkedin.com/in/fabian-schultz",
                 ],
               },
