@@ -31,10 +31,12 @@ export default function Secret() {
       setIsValid(true);
       playConfirmSound();
 
+      // Prefetch the work page, but don't wait for it to complete
+      router.prefetch("/work");
+
+      // Use a simple timeout for the redirect
       setTimeout(() => {
-        router.prefetch("/work").then(() => {
-          router.push("/work");
-        });
+        router.push("/work");
       }, 1500);
     } else {
       setIsInvalid(true);
