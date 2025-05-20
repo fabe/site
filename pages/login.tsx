@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Main } from "../components/Layouts";
 import { SEO } from "../components/SEO";
 import AuthCode from "react-auth-code-input";
@@ -15,7 +15,6 @@ export default function Secret() {
   const [isValid, setIsValid] = useState(false);
   const [isInvalid, setIsInvalid] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isRedirecting, setIsRedirecting] = useState(false);
   const playKeystrokeSound = useAudio(AUDIO_KEYSTROKE_URL);
   const playConfirmSound = useAudio(AUDIO_CONFIRM_URL);
   const router = useRouter();
@@ -31,29 +30,14 @@ export default function Secret() {
       setIsLoading(false);
       setIsValid(true);
       playConfirmSound();
-      setIsRedirecting(true);
 
-      setTimeout(async () => {
-        try {
-          await router.prefetch("/work");
-          await router.push("/work");
+      // Prefetch the work page, but don't wait for it to complete
+      router.prefetch("/work");
 
-          setTimeout(() => {
-            if (window.location.pathname === "/login") {
-              console.warn(
-                "Next.js router.push seemed to succeed but didn't navigate. Forcing window.location redirect.",
-              );
-              window.location.href = "/work";
-            }
-          }, 750);
-        } catch (e) {
-          console.error(
-            "Next.js navigation/prefetch failed, falling back to window.location:",
-            e,
-          );
-          window.location.href = "/work";
-        }
-      }, 1000);
+      // Use a simple timeout for the redirect
+      setTimeout(() => {
+        router.push("/work");
+      }, 1500);
     } else {
       setIsInvalid(true);
       setIsLoading(false);
@@ -64,7 +48,7 @@ export default function Secret() {
     setPassword(res);
     playKeystrokeSound();
 
-    if (res.length === CODE_LENGTH && !isRedirecting) {
+    if (res.length === CODE_LENGTH) {
       setIsLoading(true);
       handleSubmit(res);
     }
@@ -102,10 +86,10 @@ export default function Secret() {
           <div
             onAnimationEnd={() => setIsInvalid(false)}
             className={`form-input ${isInvalid ? "animate-shake" : ""} ${
-              isLoading || isRedirecting ? "animate-pulse" : ""
+              isLoading ? "animate-pulse" : ""
             }`}
             aria-live="polite"
-            aria-busy={isLoading || isRedirecting}
+            aria-busy={isLoading}
           >
             <AuthCode
               onChange={onChange}
@@ -117,7 +101,7 @@ export default function Secret() {
                   : null
               }`}
               placeholder=""
-              disabled={isValid || isRedirecting}
+              disabled={isValid}
               autoFocus
               aria-label="Secret code input"
               aria-invalid={isInvalid}
