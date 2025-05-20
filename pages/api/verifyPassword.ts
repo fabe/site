@@ -4,7 +4,15 @@ const handler = async function (req, res) {
   const { password } = req.body;
 
   if (password === process.env.PROTECTED_AREA_PASSWORD) {
-    res.setHeader("Set-Cookie", `password=${password}; Path=/; HttpOnly`);
+    const cookieName = "password";
+    const cookieValue = password;
+    let cookieString = `${cookieName}=${cookieValue}; Path=/; HttpOnly; SameSite=Lax`;
+
+    if (process.env.NODE_ENV === "production") {
+      cookieString += "; Secure";
+    }
+
+    res.setHeader("Set-Cookie", cookieString);
     res.status(200).end();
   } else {
     res.status(401).end();
