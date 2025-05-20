@@ -101,6 +101,10 @@ module.exports = {
         },
       },
       boxShadow: {
+        "elevation-sm":
+          "0px 0px 0px 1px rgba(0,0,0,0.02),0px 8px 24px 0px rgba(0,0,0,0.10)",
+        "elevation-md":
+          "0px 0px 0px 1px rgba(0,0,0,0.02),0px 4px 8px 0px rgba(0,0,0,0.08),0px 12px 30px 0px rgba(0,0,0,0.12)",
         border: "rgba(0, 0, 0, 0.05) 0px 0px 0px 1px inset",
         dark: "0 16px 70px rgb(0 0 0 / 20%)",
         fancy:

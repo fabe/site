@@ -7,13 +7,23 @@ import { Suspense } from "react";
 import localFont from "next/font/local";
 
 const sansFont = localFont({
-  src: "../public/inter.roman.var.woff2",
+  src: [
+    {
+      path: "../public/inter.roman.var.woff2",
+      style: "normal",
+    },
+    {
+      path: "../public/inter.italic.var.woff2",
+      style: "italic",
+    },
+  ],
+  preload: false,
   weight: "100 900",
   display: "swap",
 });
 
 const Archipelago = dynamic(
-  () => import("../components/Navigation/Archipelago")
+  () => import("../components/Navigation/Archipelago"),
 );
 
 type AppProps<P = any> = {

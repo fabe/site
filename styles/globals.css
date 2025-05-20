@@ -29,6 +29,10 @@ a[href^="mailto:"] {
   @apply cursor-alias;
 }
 
+hr {
+  @apply my-12 border-neutral-500/10 dark:border-neutral-900;
+}
+
 blockquote span::before {
   display: inline-block;
   width: 2em;

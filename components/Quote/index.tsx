@@ -5,11 +5,16 @@ interface QuoteProps {
 
 export default function Quote({ children, cite }: QuoteProps) {
   return (
-    <blockquote className="text-4xl [font-variation-settings:'opsz'_36,_'wght'_700] lg:-ml-40 lg:-mr-40 pb-12 text-center flex flex-col text-neutral-800 dark:text-white">
-      <span className="text-balance">{children}</span>
-      <cite className="not-italic text-base pt-4 [font-variation-settings:'opsz'_15,_'wght'_600] leading-normal text-neutral-800 dark:text-silver">
-        {cite}
-      </cite>
+    <blockquote className="flex flex-col my-8 pl-6 relative">
+      <div className="absolute left-0 top-0 bottom-0 w-1 bg-neutral-800/10 dark:bg-white/10 rounded-full"></div>
+      <span className="text-neutral-800 dark:text-white italic">
+        {children}
+      </span>
+      {cite && (
+        <cite className="text-sm pt-2 not-italic text-neutral-500 dark:text-silver-dark">
+          {cite}
+        </cite>
+      )}
     </blockquote>
   );
 }
