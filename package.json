@@ -45,6 +45,7 @@
     "react-auth-code-input": "^3.2.1",
     "react-dom": "^18.2.0",
     "react-map-gl": "^7.0.20",
+    "recharts": "^2.15.3",
     "rss-parser": "^3.12.0",
     "sharp": "^0.32.6",
     "uuid": "^9.0.0"

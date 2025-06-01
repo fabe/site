@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   MutedIcon,
   PauseIcon,
@@ -52,16 +53,17 @@ export const SimplePlayer: React.FC<PlayerProps> = ({
   };
 
   return (
-    <div className={`my-6 sm:my-12 ${wide ? "sm:-mx-24" : ""}`}>
+    <div className={`my-6 sm:my-12 sm:-mx-24`}>
       <div
-        className="relative w-full overflow-hidden rounded-xl sm:rounded-2xl select-none bg-gray-100 dark:bg-neutral-900/75"
+        className={`relative cursor-pointer w-full overflow-hidden rounded-xl sm:rounded-2xl select-none bg-gray-200 dark:bg-neutral-900/75 p-2 sm:p-12`}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
+        onClick={togglePlay}
       >
         <video
           ref={videoRef}
           src={src}
-          className="w-full h-auto"
+          className="w-full h-auto rounded-md sm:rounded-lg"
           autoPlay
           muted
           loop
@@ -70,16 +72,35 @@ export const SimplePlayer: React.FC<PlayerProps> = ({
 
         <button
           type="button"
-          className={`absolute top-3 right-3 transition-all duration-200 ease-out flex items-center justify-center rounded-full w-6 h-6 bg-black/40 text-white hover:bg-black/60 focus:outline-white ${
+          className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-200 ease-out flex items-center justify-center rounded-full w-16 h-16 bg-black/40 text-white focus:outline-white ${
             isHovering ? "opacity-100" : "opacity-0"
           }`}
           aria-label={isPlaying ? "Pause video" : "Play video"}
-          onClick={togglePlay}
         >
-          {isPlaying ? <PauseIcon size={12} /> : <PlayIcon size={12} />}
+          <AnimatePresence mode="wait" initial={false}>
+            {isPlaying ? (
+              <motion.div
+                key="pause"
+                initial={{ scale: 0.7, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.7, opacity: 0 }}
+                transition={{ duration: 0.12, ease: [0.25, 0.46, 0.45, 0.94] }}
+              >
+                <PauseIcon size={32} />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="play"
+                initial={{ scale: 0.7, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.7, opacity: 0 }}
+                transition={{ duration: 0.12, ease: [0.25, 0.46, 0.45, 0.94] }}
+              >
+                <PlayIcon size={32} />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </button>
-
-        <div className="absolute inset-0 pointer-events-none rounded-xl sm:rounded-2xl box-border border border-neutral-800/5 dark:border-white/5"></div>
       </div>
       <figcaption className="text-sm text-neutral-500 dark:text-silver-dark text-balance text-center pt-4">
         {title}
