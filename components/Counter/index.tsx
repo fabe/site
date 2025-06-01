@@ -73,7 +73,7 @@ export default function Counter({ value, label }: CounterProps) {
         </AnimatePresence>
 
         <motion.div
-          className="font-medium text-2xl sm:text-3xl text-neutral-900 dark:text-white"
+          className="font-semibold text-2xl sm:text-3xl text-neutral-900 dark:text-white"
           initial={{ y: 0 }}
           animate={
             isInView

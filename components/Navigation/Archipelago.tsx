@@ -153,7 +153,7 @@ export default function Archipelago() {
       <nav
         className={`${
           isHome ? "w-12" : "w-28"
-        } fixed bottom-6 left-6 top-auto z-10 md:bottom-auto md:left-8 md:top-8`}
+        } fixed bottom-6 left-6 top-auto z-10 md:bottom-auto md:left-8 md:top-8 print:hidden`}
       >
         <div>
           <div className="relative flex h-12 gap-2">

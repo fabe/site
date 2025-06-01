@@ -10,9 +10,14 @@ import {
 interface PlayerProps {
   src: string;
   title?: string;
+  wide?: boolean;
 }
 
-export const SimplePlayer: React.FC<PlayerProps> = ({ src, title }) => {
+export const SimplePlayer: React.FC<PlayerProps> = ({
+  src,
+  title,
+  wide = false,
+}) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isHovering, setIsHovering] = useState(false);
@@ -46,7 +51,7 @@ export const SimplePlayer: React.FC<PlayerProps> = ({ src, title }) => {
   };
 
   return (
-    <div className="my-6">
+    <div className={`my-6 sm:my-12 ${wide ? "sm:-mx-24" : ""}`}>
       <div
         className="relative w-full overflow-hidden rounded-2xl select-none bg-gray-100 dark:bg-neutral-900/75"
         onMouseEnter={() => setIsHovering(true)}
@@ -75,7 +80,7 @@ export const SimplePlayer: React.FC<PlayerProps> = ({ src, title }) => {
 
         <div className="absolute inset-0 pointer-events-none rounded-2xl box-border border border-neutral-800/5 dark:border-white/5"></div>
       </div>
-      <figcaption className="text-sm text-neutral-500 dark:text-silver-dark text-balance text-center py-4">
+      <figcaption className="text-sm text-neutral-500 dark:text-silver-dark text-balance text-center pt-4">
         {title}
       </figcaption>
     </div>
@@ -242,7 +247,7 @@ export const Player: React.FC<PlayerProps> = ({ src, title }) => {
             </p>
 
             <div
-              className="flex-1 h-1 bg-white/30 rounded-full cursor-pointer mx-2"
+              className="flex-1 h-1 bg-white/30 rounded-full cursor-pointer mx-2 sm:opacity-100 opacity-0"
               onClick={handleProgressClick}
             >
               <div
@@ -270,7 +275,7 @@ export const Player: React.FC<PlayerProps> = ({ src, title }) => {
           </div>
         </div>
       </div>
-      <figcaption className="text-sm text-neutral-500 dark:text-silver-dark text-balance text-center py-4">
+      <figcaption className="text-sm text-neutral-500 dark:text-silver-dark text-balance text-center pt-4">
         {title}
       </figcaption>
     </div>
