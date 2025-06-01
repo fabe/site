@@ -149,7 +149,7 @@ export const Player: React.FC<PlayerProps> = ({ src, title, poster }) => {
       video.removeEventListener("loadedmetadata", updateDuration);
       video.removeEventListener("durationchange", updateDuration);
     };
-  }, []);
+  }, [playbackRate]);
 
   const togglePlay = () => {
     if (!videoRef.current) return;
