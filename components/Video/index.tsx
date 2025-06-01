@@ -11,6 +11,7 @@ interface PlayerProps {
   src: string;
   title?: string;
   wide?: boolean;
+  poster?: string;
 }
 
 export const SimplePlayer: React.FC<PlayerProps> = ({
@@ -53,7 +54,7 @@ export const SimplePlayer: React.FC<PlayerProps> = ({
   return (
     <div className={`my-6 sm:my-12 ${wide ? "sm:-mx-24" : ""}`}>
       <div
-        className="relative w-full overflow-hidden rounded-2xl select-none bg-gray-100 dark:bg-neutral-900/75"
+        className="relative w-full overflow-hidden rounded-xl sm:rounded-2xl select-none bg-gray-100 dark:bg-neutral-900/75"
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
@@ -78,7 +79,7 @@ export const SimplePlayer: React.FC<PlayerProps> = ({
           {isPlaying ? <PauseIcon size={12} /> : <PlayIcon size={12} />}
         </button>
 
-        <div className="absolute inset-0 pointer-events-none rounded-2xl box-border border border-neutral-800/5 dark:border-white/5"></div>
+        <div className="absolute inset-0 pointer-events-none rounded-xl sm:rounded-2xl box-border border border-neutral-800/5 dark:border-white/5"></div>
       </div>
       <figcaption className="text-sm text-neutral-500 dark:text-silver-dark text-balance text-center pt-4">
         {title}
@@ -87,7 +88,7 @@ export const SimplePlayer: React.FC<PlayerProps> = ({
   );
 };
 
-export const Player: React.FC<PlayerProps> = ({ src, title }) => {
+export const Player: React.FC<PlayerProps> = ({ src, title, poster }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
@@ -205,7 +206,7 @@ export const Player: React.FC<PlayerProps> = ({ src, title }) => {
   return (
     <div className="sm:-mx-24 sm:my-12 my-6">
       <div
-        className="relative w-full overflow-hidden rounded-2xl bg-gray-100 dark:bg-neutral-900/75 select-none"
+        className="relative w-full overflow-hidden rounded-xl sm:rounded-2xl bg-gray-100 dark:bg-neutral-900/75 select-none"
         onMouseEnter={showControls}
         onMouseLeave={hideControls}
         onMouseMove={showControls}
@@ -213,11 +214,12 @@ export const Player: React.FC<PlayerProps> = ({ src, title }) => {
         <video
           ref={videoRef}
           src={src}
+          poster={poster}
           className="w-full h-auto"
           onClick={togglePlay}
         />
 
-        <div className="absolute inset-0 pointer-events-none rounded-2xl box-border border border-neutral-800/5 dark:border-white/5"></div>
+        <div className="absolute inset-0 pointer-events-none rounded-xl sm:rounded-2xl box-border border border-neutral-800/5 dark:border-white/5"></div>
 
         {/* Controls */}
         <div

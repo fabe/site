@@ -101,6 +101,7 @@ export default function Secret() {
               disabled={isValid}
               autoFocus
               aria-label="Secret code input"
+              allowedCharacters="numeric"
               aria-invalid={isInvalid}
             />
           </div>
