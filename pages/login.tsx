@@ -38,6 +38,12 @@ export default function Secret() {
     } else {
       setIsInvalid(true);
       setIsLoading(false);
+
+      if (response.status === 423) {
+        alert(
+          "Access blocked. Contact me if you need access, my email is desk@fabianschultz.com",
+        );
+      }
     }
   };
 
