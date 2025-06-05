@@ -55,7 +55,7 @@ export const SimplePlayer: React.FC<PlayerProps> = ({
   return (
     <div className={`my-6 sm:my-12 sm:-mx-24`}>
       <div
-        className={`relative cursor-pointer w-full overflow-hidden rounded-xl sm:rounded-2xl select-none bg-gray-200 dark:bg-neutral-900/75 p-2 sm:p-12`}
+        className={`relative cursor-pointer w-full overflow-hidden rounded-xl sm:rounded-2xl select-none bg-gray-200 dark:bg-neutral-800/75 p-2 sm:p-12`}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
         onClick={togglePlay}
@@ -115,7 +115,7 @@ export const Player: React.FC<PlayerProps> = ({ src, title, poster }) => {
   const [isMuted, setIsMuted] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [playbackRate, setPlaybackRate] = useState(1.25);
+  const [playbackRate, setPlaybackRate] = useState(1);
   const [isControlsVisible, setIsControlsVisible] = useState(true);
   const hideControlsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -281,6 +281,8 @@ export const Player: React.FC<PlayerProps> = ({ src, title, poster }) => {
 
             <button
               type="button"
+              title="Set playback rate"
+              aria-label="Set playback rate"
               className="flex-shrink-0 transition duration-200 flex items-center justify-center rounded-full px-2 py-0.5 text-sm font-medium text-white hover:opacity-60 focus:outline-white tabular-nums w-[42px] text-shadow-sm"
               onClick={cyclePlaybackRate}
             >

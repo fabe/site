@@ -1,13 +1,14 @@
 import React from "react";
+import { ProseCaption } from "../../pages/work";
 
 // Color schemes for before/after
 const colorSchemes = {
   before: {
     info: {
-      bg: "#EDF4FB",
-      border: "#84B9F5",
+      bg: "#e2ecf6",
+      border: "#78adea",
       text: "#414E63",
-      icon: "#2D64B4",
+      icon: "#2e5ea5",
     },
     success: {
       bg: "#D9F2E3",
@@ -146,53 +147,56 @@ export function NoteComparison() {
   };
 
   return (
-    <div className="bg-gray-100 dark:bg-neutral-800 border border-neutral-800/5 dark:border-white/5 rounded-2xl my-6 sm:my-12 py-4 sm:py-6 px-8 sm:px-12 pb-10 sm:pb-6 relative">
-      {/* Centered container */}
-      <div className="flex justify-center items-center min-h-[300px]">
-        <div className="relative w-full max-w-xs bg-gray-100 p-4 rounded-3xl">
-          {/* Before state - baseline layer */}
-          <div className="space-y-4">
-            {noteTypes.map((note) => (
-              <Note
-                key={`before-${note.type}`}
-                type={note.type}
-                icon={note.icon}
-                text={note.text}
-                colors={colorSchemes.before[note.type]}
-              />
-            ))}
-          </div>
+    <div className="my-6 sm:my-12">
+      <div className="bg-gray-100 border border-neutral-800/5 dark:border-white/5 rounded-2xl py-4 sm:py-6 px-8 sm:px-12 pb-10 sm:pb-6 relative">
+        {/* Centered container */}
+        <div className="flex justify-center items-center min-h-[300px]">
+          <div className="relative w-full max-w-xs p-4 rounded-3xl">
+            {/* Before state - baseline layer */}
+            <div className="space-y-4">
+              {noteTypes.map((note) => (
+                <Note
+                  key={`before-${note.type}`}
+                  type={note.type}
+                  icon={note.icon}
+                  text={note.text}
+                  colors={colorSchemes.before[note.type]}
+                />
+              ))}
+            </div>
 
-          {/* After state - overlay with clip-path */}
-          <div
-            className="absolute top-0 left-0 bg-gray-100 p-4 rounded-3xl w-full space-y-4 transition-all duration-500 cubic-bezier(0.34, 1.56, 0.64, 1)"
-            style={{
-              clipPath: showAfter ? "inset(0 0 0 0)" : "inset(0 100% 0 0)",
-            }}
-          >
-            {noteTypes.map((note) => (
-              <Note
-                key={`after-${note.type}`}
-                type={note.type}
-                icon={note.icon}
-                text={note.text}
-                colors={colorSchemes.after[note.type]}
-              />
-            ))}
+            {/* After state - overlay with clip-path */}
+            <div
+              className="absolute top-0 left-0 p-4 rounded-3xl w-full space-y-4 transition-all duration-500 cubic-bezier(0.34, 1.56, 0.64, 1)"
+              style={{
+                clipPath: showAfter ? "inset(0 0 0 0)" : "inset(0 100% 0 0)",
+              }}
+            >
+              {noteTypes.map((note) => (
+                <Note
+                  key={`after-${note.type}`}
+                  type={note.type}
+                  icon={note.icon}
+                  text={note.text}
+                  colors={colorSchemes.after[note.type]}
+                />
+              ))}
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Toggle button in bottom right corner */}
-      <button
-        onClick={toggleState}
-        className="absolute bottom-4 right-4 group isolate flex items-center leading-tight gap-1 text-sm px-2 py-1.5"
-      >
-        <span className="absolute inset-0 rounded-lg bg-white transition-all duration-100 ease-out-expo dark:bg-neutral-700 group-hover:scale-x-[1.03] group-hover:scale-y-[1.08] z-0" />
-        <span className="relative z-10 flex items-center justify-center w-24 [font-variation-settings:'opsz'_14,'wght'_500] text-neutral-700 dark:text-white">
-          {showAfter ? "View before" : "View after"}
-        </span>
-      </button>
+        {/* Toggle button in bottom right corner */}
+        <button
+          onClick={toggleState}
+          className="absolute bottom-4 right-4 group isolate flex items-center leading-tight gap-1 text-sm px-2 py-1.5"
+        >
+          <span className="absolute inset-0 rounded-lg bg-white transition-all duration-100 ease-out-expo group-hover:scale-x-[1.03] group-hover:scale-y-[1.08] z-0" />
+          <span className="relative z-10 flex items-center justify-center w-24 [font-variation-settings:'opsz'_14,'wght'_500] text-neutral-700">
+            {showAfter ? "View before" : "View after"}
+          </span>
+        </button>
+      </div>
+      <ProseCaption>Testing the palette in real-world scenarios.</ProseCaption>
     </div>
   );
 }

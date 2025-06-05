@@ -88,12 +88,7 @@ export function ColorPalette() {
     hex: string;
     row: number;
     col: number;
-  }>({
-    name: "blue-500",
-    hex: "#6BADFF",
-    row: 0,
-    col: 4,
-  });
+  }>(null);
 
   const [selectorPosition, setSelectorPosition] = React.useState<{
     x: number;
@@ -136,28 +131,6 @@ export function ColorPalette() {
       });
     }
   };
-
-  // Set initial position for blue-500 on mount
-  React.useEffect(() => {
-    const timer = setTimeout(() => {
-      const swatchElement = swatchRefs.current["0-4"]; // blue-500
-      const gridElement = gridRef.current;
-
-      if (swatchElement && gridElement) {
-        const swatchRect = swatchElement.getBoundingClientRect();
-        const gridRect = gridElement.getBoundingClientRect();
-
-        setSelectorPosition({
-          x: swatchRect.left - gridRect.left,
-          y: swatchRect.top - gridRect.top,
-          width: swatchRect.width,
-          height: swatchRect.height,
-        });
-      }
-    }, 100);
-
-    return () => clearTimeout(timer);
-  }, []);
 
   // Recalculate selector position on window resize
   React.useEffect(() => {
@@ -282,12 +255,18 @@ export function ColorPalette() {
             </motion.div>
           ) : (
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="text-sm text-neutral-500 dark:text-neutral-400"
+              initial={{ opacity: 0, y: 5 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -5 }}
+              transition={{
+                duration: 0.25,
+                ease: [0.4, 0, 0.2, 1],
+              }}
             >
-              Click on any color to see its details
+              <div className="font-medium">The full color palette</div>
+              <div className="font-mono text-xs text-neutral-500 dark:text-neutral-400 uppercase">
+                Click to see details
+              </div>
             </motion.div>
           )}
         </AnimatePresence>

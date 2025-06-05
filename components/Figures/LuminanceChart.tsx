@@ -11,6 +11,7 @@ import {
   Legend,
 } from "recharts";
 import { colorPalette } from "./ColorPalette";
+import { ProseCaption } from "../../pages/work";
 
 // Enhanced hex to LCH conversion for both luminance and chroma
 function hexToLch(hex: string) {
@@ -128,98 +129,103 @@ export function LuminanceChart() {
   }, [hasStarted]);
 
   return (
-    <div
-      ref={containerRef}
-      className="bg-gray-100 dark:bg-neutral-800 border border-neutral-800/5 dark:border-white/5 rounded-2xl my-6 sm:my-12 py-6 sm:py-8 px-6 sm:px-8"
-    >
-      {/* Legend */}
-      <CustomLegend />
+    <div className="my-6 sm:my-12">
+      <div
+        ref={containerRef}
+        className="bg-gray-100 dark:bg-neutral-800 border border-neutral-800/5 dark:border-white/5 rounded-2xl py-6 sm:py-8 px-6 sm:px-8"
+      >
+        {/* Legend */}
+        <CustomLegend />
 
-      {/* Combined chart container */}
-      <div className="h-60 sm:h-96 w-full">
-        <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart
-            data={currentColor.data}
-            margin={{ top: 20, right: 20, left: 0, bottom: 20 }}
-          >
-            <XAxis
-              dataKey="shade"
-              axisLine={false}
-              tickLine={false}
-              tick={{
-                fill: "currentColor",
-                fontSize: 12,
-                className: "text-neutral-600 dark:text-neutral-400",
-              }}
-              tickFormatter={(value) => `${value}`}
-            />
-            <YAxis
-              yAxisId="left"
-              domain={[0, 100]}
-              axisLine={false}
-              tickLine={false}
-              width={30}
-              tick={{
-                fill: "currentColor",
-                fontSize: 12,
-                className: "text-neutral-600 dark:text-neutral-400",
-              }}
-              tickFormatter={(value) => `${value}`}
-            />
-            <YAxis
-              yAxisId="right"
-              domain={[0, 150]}
-              axisLine={false}
-              tickLine={false}
-              width={0}
-              tick={false}
-            />
-            <Bar
-              yAxisId="right"
-              dataKey="chroma"
-              animationDuration={400}
-              animationEasing="ease-in-out"
-              isAnimationActive={true}
-              radius={[6, 6, 0, 0]}
+        {/* Combined chart container */}
+        <div className="h-60 sm:h-96 w-full">
+          <ResponsiveContainer width="100%" height="100%">
+            <ComposedChart
+              data={currentColor.data}
+              margin={{ top: 20, right: 20, left: 0, bottom: 20 }}
             >
-              {currentColor.data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={entry.hex} />
-              ))}
-            </Bar>
-            <Line
-              yAxisId="left"
-              type="natural"
-              dataKey="luminance"
-              strokeWidth={6}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              activeDot={false}
-              dot={false}
-              stroke={null}
-              className="stroke-gray-100 dark:stroke-neutral-800"
-              animationDuration={400}
-              animationEasing="ease-in-out"
-              connectNulls={false}
-              isAnimationActive={true}
-            />
-            <Line
-              yAxisId="left"
-              type="natural"
-              dataKey="luminance"
-              stroke={currentColor.color}
-              strokeWidth={3}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              activeDot={false}
-              dot={false}
-              animationDuration={400}
-              animationEasing="ease-in-out"
-              connectNulls={false}
-              isAnimationActive={true}
-            />
-          </ComposedChart>
-        </ResponsiveContainer>
+              <XAxis
+                dataKey="shade"
+                axisLine={false}
+                tickLine={false}
+                tick={{
+                  fill: "currentColor",
+                  fontSize: 12,
+                  className: "text-neutral-600 dark:text-neutral-400",
+                }}
+                tickFormatter={(value) => `${value}`}
+              />
+              <YAxis
+                yAxisId="left"
+                domain={[0, 100]}
+                axisLine={false}
+                tickLine={false}
+                width={30}
+                tick={{
+                  fill: "currentColor",
+                  fontSize: 12,
+                  className: "text-neutral-600 dark:text-neutral-400",
+                }}
+                tickFormatter={(value) => `${value}`}
+              />
+              <YAxis
+                yAxisId="right"
+                domain={[0, 150]}
+                axisLine={false}
+                tickLine={false}
+                width={0}
+                tick={false}
+              />
+              <Bar
+                yAxisId="right"
+                dataKey="chroma"
+                animationDuration={400}
+                animationEasing="ease-in-out"
+                isAnimationActive={true}
+                radius={[6, 6, 0, 0]}
+              >
+                {currentColor.data.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={entry.hex} />
+                ))}
+              </Bar>
+              <Line
+                yAxisId="left"
+                type="natural"
+                dataKey="luminance"
+                strokeWidth={6}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                activeDot={false}
+                dot={false}
+                stroke={null}
+                className="stroke-gray-100 dark:stroke-neutral-800"
+                animationDuration={400}
+                animationEasing="ease-in-out"
+                connectNulls={false}
+                isAnimationActive={true}
+              />
+              <Line
+                yAxisId="left"
+                type="natural"
+                dataKey="luminance"
+                stroke={currentColor.color}
+                strokeWidth={3}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                activeDot={false}
+                dot={false}
+                animationDuration={400}
+                animationEasing="ease-in-out"
+                connectNulls={false}
+                isAnimationActive={true}
+              />
+            </ComposedChart>
+          </ResponsiveContainer>
+        </div>
       </div>
+      <ProseCaption>
+        The luminance and contrast ratios stay cosistent across hues
+      </ProseCaption>
     </div>
   );
 }
