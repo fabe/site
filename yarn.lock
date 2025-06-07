@@ -7003,6 +7003,11 @@ react-map-gl@^7.0.20:
     "@maplibre/maplibre-gl-style-spec" "^19.2.1"
     "@types/mapbox-gl" ">=1.0.0"
 
+react-next-tilt@^0.4.3:
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/react-next-tilt/-/react-next-tilt-0.4.3.tgz#c76d01529c56f994eb37de4b3e806abeef4ee384"
+  integrity sha512-zvvYa0g1xRGEAE2q7HHbQ68NCShrbhsKkczQ2IsoQulgXxbEIN9GILzGv4KvqvvCN/cZlSv8k9phpsG27RmSoQ==
+
 react-remove-scroll-bar@^2.1.0, react-remove-scroll-bar@^2.3.3:
   version "2.3.4"
   resolved "https://registry.npmjs.org/react-remove-scroll-bar/-/react-remove-scroll-bar-2.3.4.tgz"

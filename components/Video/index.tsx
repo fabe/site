@@ -13,16 +13,19 @@ interface PlayerProps {
   title?: string;
   wide?: boolean;
   poster?: string;
+  slowmo?: boolean;
 }
 
 export const SimplePlayer: React.FC<PlayerProps> = ({
   src,
   title,
   wide = false,
+  slowmo = false,
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isHovering, setIsHovering] = useState(false);
+  const [playbackSpeed, setPlaybackSpeed] = useState(1);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -52,10 +55,21 @@ export const SimplePlayer: React.FC<PlayerProps> = ({
     setIsPlaying(!isPlaying);
   };
 
+  const toggleSpeed = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent triggering the video play/pause
+    if (!videoRef.current) return;
+
+    const newSpeed = playbackSpeed === 1 ? 0.5 : 1;
+    videoRef.current.playbackRate = newSpeed;
+    setPlaybackSpeed(newSpeed);
+  };
+
   return (
     <div className={`my-6 sm:my-12 sm:-mx-24`}>
       <div
-        className={`relative cursor-pointer w-full overflow-hidden rounded-xl sm:rounded-2xl select-none bg-gray-200 dark:bg-neutral-800/75 p-2 sm:p-12`}
+        className={`relative cursor-pointer w-full overflow-hidden rounded-xl sm:rounded-2xl select-none bg-gray-200/50 dark:bg-neutral-900/75 ${
+          title ? "pt-2 pb-3 px-2 sm:pt-12 sm:pb-6 sm:px-12" : "p-2 sm:p-12"
+        }`}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
         onClick={togglePlay}
@@ -101,10 +115,39 @@ export const SimplePlayer: React.FC<PlayerProps> = ({
             )}
           </AnimatePresence>
         </button>
+
+        {slowmo && (
+          <motion.button
+            type="button"
+            className={`absolute top-4 right-4 leading-none text-xs duration-200 ease-out flex items-center justify-center rounded-full px-2 py-1.5 bg-black/40 text-white font-medium focus:outline-white tabular-nums transition-colors overflow-hidden ${
+              isHovering ? "opacity-100" : "opacity-0"
+            }`}
+            aria-label={`Set playback speed to ${
+              playbackSpeed === 1 ? "0.5x" : "1x"
+            }`}
+            onClick={toggleSpeed}
+            animate={{ width: playbackSpeed === 1 ? "2rem" : "2.75rem" }}
+            transition={{ duration: 0.1, ease: "easeInOut" }}
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.span
+                key={playbackSpeed}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.1, ease: "easeInOut" }}
+              >
+                {playbackSpeed}&times;
+              </motion.span>
+            </AnimatePresence>
+          </motion.button>
+        )}
+        {title && (
+          <figcaption className="text-sm text-neutral-500 dark:text-silver-dark text-balance text-center pt-3 sm:pt-6 px-4">
+            {title}
+          </figcaption>
+        )}
       </div>
-      <figcaption className="text-sm text-neutral-500 dark:text-silver-dark text-balance text-center pt-4">
-        {title}
-      </figcaption>
     </div>
   );
 };
