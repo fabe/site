@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { RESUME_URL } from "../../pages/work";
 
-export function BioHeader({ backButton = false, resumeUrl }) {
+export function BioHeader({ backButton = false }) {
   return (
     <header className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
       <div className="flex items-center gap-3">
