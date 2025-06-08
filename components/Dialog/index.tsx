@@ -40,7 +40,7 @@ export default function Dialog({ children, isOpen, onDismiss }: DialogProps) {
             <div className="fixed top-0 right-0 m-4 z-[60]">
               <button
                 onClick={onDismiss}
-                className="transition-all duration-200 ease-out flex items-center justify-center rounded-full w-8 h-8 bg-neutral-900/40 hover:bg-neutral-900/60 dark:bg-white/15 dark:hover:bg-white/20 text-white focus:outline-white backdrop-blur-xl transform-gpu"
+                className="transition-all duration-200 ease-out flex items-center justify-center rounded-full w-8 h-8 bg-neutral-900/40 hover:bg-neutral-900/60 dark:bg-white/15 dark:hover:bg-white/20 text-white backdrop-blur-xl transform-gpu"
               >
                 <CloseIcon size={18} />
               </button>

@@ -3,8 +3,9 @@ import { LinkButton, LinkExternal } from "../Links";
 import { ArrowLeftIcon, DocumentIcon } from "../Icons";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { RESUME_URL } from "../../pages/work";
 
-export function BioHeader({ backButton = false }) {
+export function BioHeader({ backButton = false, resumeUrl }) {
   return (
     <header className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
       <div className="flex items-center gap-3">
@@ -57,7 +58,9 @@ export function BioHeader({ backButton = false }) {
         </div>
       </div>
       <LinkButton
-        href="/resume.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        href={RESUME_URL}
         className="self-start sm:self-center hidden sm:block"
       >
         <DocumentIcon size={16} />

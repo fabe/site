@@ -190,7 +190,7 @@ export function NoteComparison() {
           onClick={toggleState}
           className="absolute bottom-4 right-4 group isolate flex items-center leading-tight gap-1 text-sm px-2 py-1.5"
         >
-          <span className="absolute inset-0 rounded-lg bg-white transition-all duration-100 ease-out-expo group-hover:scale-x-[1.03] group-hover:scale-y-[1.08] z-0" />
+          <span className="absolute inset-0 rounded-lg bg-white border border-neutral-800/10 dark:border-white/5 transition-all duration-100 ease-out-expo group-hover:scale-x-[1.03] group-hover:scale-y-[1.08] z-0" />
           <span className="relative z-10 flex items-center justify-center w-24 [font-variation-settings:'opsz'_14,'wght'_500] text-neutral-700">
             {showAfter ? "View before" : "View after"}
           </span>

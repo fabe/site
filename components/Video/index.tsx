@@ -65,7 +65,7 @@ export const SimplePlayer: React.FC<PlayerProps> = ({
   };
 
   return (
-    <div className={`my-6 sm:my-12 sm:-mx-24`}>
+    <div className={`my-8 sm:my-16 sm:-mx-24`}>
       <div
         className={`relative cursor-pointer w-full overflow-hidden rounded-xl sm:rounded-2xl select-none bg-gray-200/50 dark:bg-neutral-900/75 ${
           title ? "pt-2 pb-3 px-2 sm:pt-12 sm:pb-6 sm:px-12" : "p-2 sm:p-12"
@@ -86,7 +86,7 @@ export const SimplePlayer: React.FC<PlayerProps> = ({
 
         <button
           type="button"
-          className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-200 ease-out flex items-center justify-center rounded-full w-16 h-16 bg-black/40 text-white focus:outline-white ${
+          className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-200 ease-out flex items-center justify-center rounded-full w-16 h-16 bg-black/40 text-white ${
             isHovering ? "opacity-100" : "opacity-0"
           }`}
           aria-label={isPlaying ? "Pause video" : "Play video"}
@@ -119,7 +119,7 @@ export const SimplePlayer: React.FC<PlayerProps> = ({
         {slowmo && (
           <motion.button
             type="button"
-            className={`absolute top-4 right-4 leading-none text-xs duration-200 ease-out flex items-center justify-center rounded-full px-2 py-1.5 bg-black/40 text-white font-medium focus:outline-white tabular-nums transition-colors overflow-hidden ${
+            className={`absolute top-4 right-4 sm:top-16 sm:right-16 leading-none text-xs duration-200 ease-out flex items-center justify-center rounded-full px-2 py-1.5 bg-black/40 text-white font-medium tabular-nums transition-colors overflow-hidden ${
               isHovering ? "opacity-100" : "opacity-0"
             }`}
             aria-label={`Set playback speed to ${
@@ -298,7 +298,7 @@ export const Player: React.FC<PlayerProps> = ({ src, title, poster }) => {
           <div className="flex w-full items-center justify-start gap-3">
             <button
               type="button"
-              className="flex-shrink-0 transition duration-200 flex items-center justify-center rounded-full w-[24px] h-[24px] text-white hover:opacity-60 focus:outline-white"
+              className="flex-shrink-0 transition duration-200 flex items-center justify-center rounded-full w-[24px] h-[24px] text-white hover:opacity-60"
               aria-label={isPlaying ? "Pause video" : "Play video"}
               onClick={togglePlay}
             >
@@ -326,7 +326,7 @@ export const Player: React.FC<PlayerProps> = ({ src, title, poster }) => {
               type="button"
               title="Set playback rate"
               aria-label="Set playback rate"
-              className="flex-shrink-0 transition duration-200 flex items-center justify-center rounded-full px-2 py-0.5 text-sm font-medium text-white hover:opacity-60 focus:outline-white tabular-nums w-[42px] text-shadow-sm"
+              className="flex-shrink-0 transition duration-200 flex items-center justify-center rounded-full px-2 py-0.5 text-sm font-medium text-white hover:opacity-60 tabular-nums w-[42px] text-shadow-sm"
               onClick={cyclePlaybackRate}
             >
               {playbackRate}&times;
@@ -334,7 +334,7 @@ export const Player: React.FC<PlayerProps> = ({ src, title, poster }) => {
 
             <button
               type="button"
-              className="flex-shrink-0 transition duration-200 flex items-center justify-center rounded-full w-[24px] h-[24px] text-white hover:opacity-60 focus:outline-white"
+              className="flex-shrink-0 transition duration-200 flex items-center justify-center rounded-full w-[24px] h-[24px] text-white hover:opacity-60"
               aria-label={isMuted ? "Unmute" : "Mute"}
               onClick={toggleMute}
             >

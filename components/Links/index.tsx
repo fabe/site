@@ -50,11 +50,12 @@ export function LinkShare({ title, url, children }) {
   );
 }
 
-export function LinkButton({ href, children, className = "" }) {
+export function LinkButton({ href, children, className = "", ...props }) {
   return (
     <Link
       href={href}
       className={`group relative isolate flex items-center leading-tight gap-1 text-sm px-2 py-1.5 ${className}`}
+      {...props}
     >
       <span className="absolute inset-0 rounded-lg bg-neutral-200/60 transition-all duration-100 ease-out-expo dark:bg-neutral-900 dark:group-hover:bg-neutral-800 group-hover:bg-neutral-200 group-hover:scale-x-[1.03] group-hover:scale-y-[1.08] z-0" />
       <span className="relative z-10 flex items-center gap-1 [font-variation-settings:'opsz'_14,'wght'_500] text-neutral-700 dark:text-silver-dark">

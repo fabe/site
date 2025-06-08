@@ -34,7 +34,7 @@ export default function Secret() {
       // Use a simple timeout for the redirect
       setTimeout(() => {
         window.location.href = "/work";
-      }, 500);
+      }, 1380);
     } else {
       setIsInvalid(true);
       setIsLoading(false);
