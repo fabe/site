@@ -172,7 +172,7 @@ export function ColorPalette() {
                     swatchRefs.current[`${rowIndex}-${colIndex}`] = el;
                   }}
                   onClick={() => handleColorSelect(color, rowIndex, colIndex)}
-                  className="aspect-square"
+                  className="aspect-square hover:brightness-90 transition-all duration-100 ease-out"
                   style={{
                     backgroundColor: color.hex,
                     width: "calc(11.11%)", // (100% - 8*1%) / 9 = 10.22%, but using 11.11% - gap adjustment
@@ -185,7 +185,7 @@ export function ColorPalette() {
                     borderBottomRightRadius:
                       colIndex === 8 && rowIndex === 6 ? "0.5rem" : "0",
                   }}
-                  title={`${color.name}: ${color.hex}`}
+                  aria-label={`${color.name}: ${color.hex}`}
                 />
               ))}
             </div>

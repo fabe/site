@@ -224,7 +224,7 @@ export function LuminanceChart() {
         </div>
       </div>
       <ProseCaption>
-        The luminance and contrast ratios stay cosistent across hues
+        The luminance and contrast ratios stay consistent across hues
       </ProseCaption>
     </div>
   );

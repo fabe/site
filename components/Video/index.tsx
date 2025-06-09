@@ -68,58 +68,66 @@ export const SimplePlayer: React.FC<PlayerProps> = ({
     <div className={`my-8 sm:my-16 sm:-mx-24`}>
       <div
         className={`relative cursor-pointer w-full overflow-hidden rounded-xl sm:rounded-2xl select-none bg-gray-200/50 dark:bg-neutral-900/75 ${
-          title ? "pt-2 pb-3 px-2 sm:pt-12 sm:pb-6 sm:px-12" : "p-2 sm:p-12"
+          title ? "pt-2 pb-3 px-2 sm:pt-6 sm:pb-6 sm:px-6" : "p-2 sm:p-6"
         }`}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
         onClick={togglePlay}
       >
-        <video
-          ref={videoRef}
-          src={src}
-          className="w-full h-auto rounded-md sm:rounded-lg"
-          autoPlay
-          muted
-          loop
-          playsInline
-        />
-
-        <button
-          type="button"
-          className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-200 ease-out flex items-center justify-center rounded-full w-16 h-16 bg-black/40 text-white ${
-            isHovering ? "opacity-100" : "opacity-0"
-          }`}
-          aria-label={isPlaying ? "Pause video" : "Play video"}
-        >
-          <AnimatePresence mode="wait" initial={false}>
-            {isPlaying ? (
-              <motion.div
-                key="pause"
-                initial={{ scale: 0.7, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.7, opacity: 0 }}
-                transition={{ duration: 0.12, ease: [0.25, 0.46, 0.45, 0.94] }}
-              >
-                <PauseIcon size={32} />
-              </motion.div>
-            ) : (
-              <motion.div
-                key="play"
-                initial={{ scale: 0.7, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.7, opacity: 0 }}
-                transition={{ duration: 0.12, ease: [0.25, 0.46, 0.45, 0.94] }}
-              >
-                <PlayIcon size={32} />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </button>
+        <div className="relative">
+          <video
+            ref={videoRef}
+            src={src}
+            className="w-full h-auto rounded-md sm:rounded-lg"
+            autoPlay
+            muted
+            loop
+            playsInline
+          />
+          <div className="absolute inset-0 pointer-events-none rounded-md sm:rounded-lg box-border border border-neutral-800/5 dark:border-white/5"></div>
+          <button
+            type="button"
+            className={`absolute backdrop-blur-sm saturate-150 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-200 ease-out flex items-center justify-center rounded-full w-16 h-16 bg-black/40 text-white ${
+              isHovering ? "opacity-100" : "opacity-0"
+            }`}
+            aria-label={isPlaying ? "Pause video" : "Play video"}
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              {isPlaying ? (
+                <motion.div
+                  key="pause"
+                  initial={{ scale: 0.7, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.7, opacity: 0 }}
+                  transition={{
+                    duration: 0.12,
+                    ease: [0.25, 0.46, 0.45, 0.94],
+                  }}
+                >
+                  <PauseIcon size={32} />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="play"
+                  initial={{ scale: 0.7, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.7, opacity: 0 }}
+                  transition={{
+                    duration: 0.12,
+                    ease: [0.25, 0.46, 0.45, 0.94],
+                  }}
+                >
+                  <PlayIcon size={32} />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </button>
+        </div>
 
         {slowmo && (
           <motion.button
             type="button"
-            className={`absolute top-4 right-4 sm:top-16 sm:right-16 leading-none text-xs duration-200 ease-out flex items-center justify-center rounded-full px-2 py-1.5 bg-black/40 text-white font-medium tabular-nums transition-colors overflow-hidden ${
+            className={`absolute backdrop-blur-sm saturate-150 top-4 right-4 sm:top-10 sm:right-10 leading-none text-xs duration-200 ease-out flex items-center justify-center rounded-full px-2 py-1.5 bg-black/40 text-white font-medium tabular-nums transition-colors overflow-hidden ${
               isHovering ? "opacity-100" : "opacity-0"
             }`}
             aria-label={`Set playback speed to ${
