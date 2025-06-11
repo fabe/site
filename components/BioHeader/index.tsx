@@ -1,11 +1,26 @@
+import React from "react";
 import Image from "next/image";
 import { LinkButton, LinkExternal } from "../Links";
 import { ArrowLeftIcon, DocumentIcon } from "../Icons";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { RESUME_URL } from "../../pages/work";
+import {
+  RESUME_URL,
+  getPersonalizedResumeURL,
+  getPersonalizationFromCookies,
+} from "../../pages/work";
 
-export function BioHeader({ backButton = false }) {
+interface BioHeaderProps {
+  backButton?: boolean;
+}
+
+export function BioHeader({ backButton = false }: BioHeaderProps) {
+  const [resumeURL, setResumeURL] = React.useState(RESUME_URL);
+
+  React.useEffect(() => {
+    const personalization = getPersonalizationFromCookies();
+    setResumeURL(getPersonalizedResumeURL(personalization));
+  }, []);
   return (
     <header className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
       <div className="flex items-center gap-3">
@@ -60,7 +75,7 @@ export function BioHeader({ backButton = false }) {
       <LinkButton
         target="_blank"
         rel="noopener noreferrer"
-        href={RESUME_URL}
+        href={resumeURL}
         className="self-start sm:self-center hidden sm:block"
       >
         <DocumentIcon size={16} />
