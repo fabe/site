@@ -5,6 +5,28 @@ const failedAttempts = new Map();
 const MAX_FAILED_ATTEMPTS = 10;
 const RESET_TIME = 60 * 60 * 1000;
 
+// Parse personalized codes from environment variable
+const parsePersonalizedCodes = () => {
+  const codes: { [key: string]: string } = {};
+  const defaultPassword = process.env.PROTECTED_AREA_PASSWORD;
+
+  if (defaultPassword) {
+    codes.default = defaultPassword;
+  }
+
+  const personalizedCodes = process.env.PERSONALIZED_CODES;
+  if (personalizedCodes) {
+    personalizedCodes.split(",").forEach((entry) => {
+      const [identifier, code] = entry.split(":").map((s) => s.trim());
+      if (identifier && code) {
+        codes[identifier] = code;
+      }
+    });
+  }
+
+  return codes;
+};
+
 const getClientIP = (req) => {
   return (
     req.headers["x-forwarded-for"]?.split(",")[0]?.trim() ||
@@ -62,14 +84,38 @@ const handler = async function (req, res) {
     });
   }
 
-  if (password === process.env.PROTECTED_AREA_PASSWORD) {
+  const validCodes = parsePersonalizedCodes();
+  let matchedIdentifier = null;
+
+  // Check if password matches any valid code
+  for (const [identifier, code] of Object.entries(validCodes)) {
+    if (password === code) {
+      matchedIdentifier = identifier;
+      break;
+    }
+  }
+
+  if (matchedIdentifier) {
     // Reset failed attempts on successful login
     failedAttempts.delete(clientIP);
-    res.setHeader(
-      "Set-Cookie",
+
+    // Set cookies
+    const cookiesToSet = [
       `password=${password}; Path=/; HttpOnly; SameSite=Strict`,
-    );
-    res.status(200).end();
+    ];
+
+    // Add personalization cookie if it's not the default password (not HttpOnly so JS can read it)
+    if (matchedIdentifier !== "default") {
+      cookiesToSet.push(
+        `personalization=${matchedIdentifier}; Path=/; SameSite=Strict`,
+      );
+    }
+
+    res.setHeader("Set-Cookie", cookiesToSet);
+    res.status(200).json({
+      personalization:
+        matchedIdentifier !== "default" ? matchedIdentifier : null,
+    });
   } else {
     // Record failed attempt
     recordFailedAttempt(clientIP);
