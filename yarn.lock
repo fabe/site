@@ -6953,11 +6953,6 @@ rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-auth-code-input@^3.2.1:
-  version "3.2.1"
-  resolved "https://registry.npmjs.org/react-auth-code-input/-/react-auth-code-input-3.2.1.tgz"
-  integrity sha512-oWWKbxDLU5g46gvE1DIvNFHsDx37JSAfB6WX8luG6TWZB3iDfKMjQnhUgb+0imL/6ykGVMqdZ426tQW1uj25kg==
-
 react-clientside-effect@^1.2.5:
   version "1.2.6"
   resolved "https://registry.npmjs.org/react-clientside-effect/-/react-clientside-effect-1.2.6.tgz"
@@ -7007,6 +7002,11 @@ react-next-tilt@^0.4.3:
   version "0.4.3"
   resolved "https://registry.yarnpkg.com/react-next-tilt/-/react-next-tilt-0.4.3.tgz#c76d01529c56f994eb37de4b3e806abeef4ee384"
   integrity sha512-zvvYa0g1xRGEAE2q7HHbQ68NCShrbhsKkczQ2IsoQulgXxbEIN9GILzGv4KvqvvCN/cZlSv8k9phpsG27RmSoQ==
+
+react-otp-input@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/react-otp-input/-/react-otp-input-3.1.1.tgz#910169629812c40a614e6c175cc2c5f36102bb61"
+  integrity sha512-bjPavgJ0/Zmf/AYi4onj8FbH93IjeD+e8pWwxIJreDEWsU1ILR5fs8jEJmMGWSBe/yyvPP6X/W6Mk9UkOCkTPw==
 
 react-remove-scroll-bar@^2.1.0, react-remove-scroll-bar@^2.3.3:
   version "2.3.4"

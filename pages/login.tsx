@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Main } from "../components/Layouts";
 import { SEO } from "../components/SEO";
-import AuthCode from "react-auth-code-input";
+import OTPInput from "react-otp-input";
 import Head from "next/head";
 import { useAudio } from "../lib/useAudio";
 import { useRouter } from "next/router";
@@ -11,13 +11,29 @@ const AUDIO_CONFIRM_URL = "/confirm.webm";
 const CODE_LENGTH = 4;
 
 export default function Secret() {
-  const [_, setPassword] = useState("");
+  const [password, setPassword] = useState("");
   const [isValid, setIsValid] = useState(false);
   const [isInvalid, setIsInvalid] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const playKeystrokeSound = useAudio(AUDIO_KEYSTROKE_URL);
   const playConfirmSound = useAudio(AUDIO_CONFIRM_URL);
   const router = useRouter();
+
+  useEffect(() => {
+    const codeParam =
+      typeof router.query.code === "string"
+        ? router.query.code
+        : router.query.code && Array.isArray(router.query.code)
+        ? router.query.code[0]
+        : "";
+    if (codeParam) {
+      setPassword(codeParam);
+      if (codeParam.length === CODE_LENGTH) {
+        setIsLoading(true);
+        handleSubmit(codeParam);
+      }
+    }
+  }, [router.query.code]);
 
   const handleSubmit = async (pw) => {
     const response = await fetch("/api/verifyPassword", {
@@ -94,21 +110,27 @@ export default function Secret() {
             aria-live="polite"
             aria-busy={isLoading}
           >
-            <AuthCode
+            <OTPInput
+              value={password}
               onChange={onChange}
-              length={CODE_LENGTH}
-              containerClassName="flex gap-4"
-              inputClassName={`code-input ${
-                isValid
-                  ? `outline-2 outline-green-500 shadow-lg dark:shadow-green-950 shadow-green-200`
-                  : null
-              }`}
-              placeholder=""
-              disabled={isValid}
-              autoFocus
-              aria-label="Secret code input"
-              allowedCharacters="numeric"
-              aria-invalid={isInvalid}
+              skipDefaultStyles
+              numInputs={CODE_LENGTH}
+              inputType="tel"
+              shouldAutoFocus={true}
+              containerStyle="flex gap-4"
+              renderInput={(props) => (
+                <input
+                  {...props}
+                  className={`code-input !w-12  ${
+                    isValid
+                      ? `outline-2 outline-green-500 shadow-lg dark:shadow-green-950 shadow-green-200`
+                      : ""
+                  }`}
+                  disabled={isValid}
+                  aria-label="Secret code input"
+                  aria-invalid={isInvalid}
+                />
+              )}
             />
           </div>
 

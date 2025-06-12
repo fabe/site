@@ -10,7 +10,9 @@ export const useAudio = (url) => {
 
   const play = () => {
     if (audio) {
-      audio.play();
+      audio.play().catch(() => {
+        console.log("Audio playback failed");
+      });
     }
   };
 

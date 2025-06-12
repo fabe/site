@@ -26,9 +26,14 @@ const parsePersonalizedCodes = () => {
 export function middleware(request: NextRequest) {
   const { cookies } = request;
   const password = cookies.get("password")?.value;
-
   if (!password) {
-    return NextResponse.redirect(new URL("/login", request.url));
+    const url = new URL(request.url);
+    const code = url.searchParams.get("code");
+    const loginUrl = new URL("/login", request.url);
+    if (code) {
+      loginUrl.searchParams.set("code", code);
+    }
+    return NextResponse.redirect(loginUrl);
   }
 
   const validCodes = parsePersonalizedCodes();
