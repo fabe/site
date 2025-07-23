@@ -14,6 +14,8 @@ interface PlayerProps {
   wide?: boolean;
   poster?: string;
   slowmo?: boolean;
+  noMargin?: boolean;
+  noPadding?: boolean;
 }
 
 export const SimplePlayer: React.FC<PlayerProps> = ({
@@ -21,6 +23,8 @@ export const SimplePlayer: React.FC<PlayerProps> = ({
   title,
   wide = false,
   slowmo = false,
+  noMargin = false,
+  noPadding = false,
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);
@@ -65,10 +69,14 @@ export const SimplePlayer: React.FC<PlayerProps> = ({
   };
 
   return (
-    <div className={`my-8 sm:my-16 sm:-mx-24`}>
+    <div className={noMargin ? "" : "my-8 sm:my-16 sm:-mx-24"}>
       <div
         className={`relative cursor-pointer w-full overflow-hidden rounded-xl sm:rounded-2xl select-none bg-gray-200/50 dark:bg-neutral-900/75 ${
-          title ? "pt-2 pb-3 px-2 sm:pt-6 sm:pb-6 sm:px-6" : "p-2 sm:p-6"
+          noPadding
+            ? ""
+            : title
+            ? "pt-2 pb-3 px-2 sm:pt-6 sm:pb-6 sm:px-6"
+            : "p-2 sm:p-6"
         }`}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}

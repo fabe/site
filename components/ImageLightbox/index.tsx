@@ -13,6 +13,7 @@ interface ImageLightboxProps {
   title?: string;
   noMargin?: boolean;
   zoomDisabled?: boolean;
+  lazy?: boolean;
 }
 
 export default function ImageLightbox({
@@ -23,6 +24,7 @@ export default function ImageLightbox({
   title = "",
   noMargin = false,
   zoomDisabled = false,
+  lazy = false,
 }: ImageLightboxProps) {
   // All hooks must be called before any conditional logic
   const [isOpen, setIsOpen] = useState(false);
@@ -70,6 +72,7 @@ export default function ImageLightbox({
             width={width}
             height={height}
             className="w-full h-auto"
+            loading={lazy ? "lazy" : "eager"}
           />
           <div className="absolute inset-0 pointer-events-none rounded-xl sm:rounded-2xl box-border border border-neutral-800/5 dark:border-white/5"></div>
         </div>
@@ -100,9 +103,9 @@ export default function ImageLightbox({
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
 
-    // Calculate maximum dimensions for lightbox (1024px max width, with padding)
-    const maxWidth = Math.min(1024, viewportWidth - 64);
-    const maxHeight = viewportHeight - 64;
+    // Calculate maximum dimensions for lightbox (1600px max width, with padding)
+    const maxWidth = Math.min(1600, viewportWidth - 32);
+    const maxHeight = viewportHeight - 32;
 
     // Calculate aspect ratio
     const imageAspectRatio = width / height;
@@ -216,6 +219,7 @@ export default function ImageLightbox({
             width={width}
             height={height}
             className="w-full h-auto"
+            loading={lazy ? "lazy" : "eager"}
           />
           <div className="absolute inset-0 pointer-events-none rounded-xl sm:rounded-2xl box-border border border-neutral-800/5 dark:border-white/5"></div>
         </div>
