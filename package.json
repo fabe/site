@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "next dev --turbopack",
+    "build": "next build --turbopack",
     "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "next lint",
@@ -37,7 +37,7 @@
     "mapbox-gl": "^2.11.1",
     "marked": "^4.0.18",
     "micro": "^9.4.1",
-    "next": "^14.1.0",
+    "next": "^15.4.5",
     "next-mdx-remote": "^4.1.0",
     "next-seo": "^6.1.0",
     "next-sitemap": "^4.2.3",
@@ -58,13 +58,13 @@
     "@graphql-codegen/typescript": "2.8.1",
     "@graphql-codegen/typescript-operations": "2.5.6",
     "@graphql-codegen/typescript-react-apollo": "3.3.6",
-    "@next/bundle-analyzer": "^13.0.3",
+    "@next/bundle-analyzer": "^15.4.5",
     "@tailwindcss/typography": "^0.5.4",
     "@types/node": "^20.8.9",
     "@types/react": "^18.0.15",
     "autoprefixer": "^10.4.16",
     "eslint": "8.52.0",
-    "eslint-config-next": "^14.0.0",
+    "eslint-config-next": "^15.4.5",
     "postcss": "^8.4.32",
     "prettier": "^3.0.3",
     "prettier-plugin-tailwindcss": "^0.5.6",
@@ -72,5 +72,8 @@
     "tailwindcss-touch": "^1.0.1",
     "typescript": "^5.2.2"
   },
-  "packageManager": "yarn@1.22.19+sha1.4ba7fc5c6e704fce2066ecbfb0b0d8976fe62447"
+  "packageManager": "yarn@1.22.19+sha1.4ba7fc5c6e704fce2066ecbfb0b0d8976fe62447",
+  "engines": {
+    "node": ">=20.0.0"
+  }
 }
