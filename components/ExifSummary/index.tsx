@@ -22,8 +22,8 @@ export default function ExifSummary({ exif }: ExifSummaryProps) {
 export function ExifSummaryExposure({ exif }: ExifSummaryProps) {
   return (
     <span>
-      {exif.FocalLength}mm ({exif.FocalLengthIn35mmFormat}mm), ƒ
-      {exif.FNumber.toFixed(1)},{" "}
+      {Math.round(exif.FocalLength)}mm (
+      {Math.round(exif.FocalLengthIn35mmFormat)}mm), ƒ{exif.FNumber.toFixed(1)},{" "}
       {exif.ExposureTime < 1 ? (
         <span className="diagonal-fractions">
           1/{Math.round(1 / exif.ExposureTime)}

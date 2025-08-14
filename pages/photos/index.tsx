@@ -25,7 +25,6 @@ export default function Photos({ photoSets }) {
           <h1 className="text-2xl text-neutral-800 [font-variation-settings:'opsz'_32,_'wght'_500] dark:text-white sm:text-3xl">
             Photos
           </h1>
-          <Badge>Work in Progress</Badge>
         </div>
         <div className="flex flex-col gap-8">
           {photoSets.map((photoSet: PhotoSet) => (

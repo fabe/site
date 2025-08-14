@@ -112,7 +112,6 @@ export default function Archipelago() {
                 <CameraIcon size={16} />
                 Photos
               </div>
-              <Badge border>Experimental</Badge>
             </Command.Item>
           </Command.Group>
 
