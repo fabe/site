@@ -16,8 +16,27 @@ import { LinkButton, LinkShare } from "../../../components/Links";
 import formatDate from "../../../lib/formatDate";
 import { ChevronLeft, CloseIcon } from "../../../components/Icons";
 import { useDrag } from "@use-gesture/react";
+import { extractColorsFromImage, ColorData } from "../../../lib/colorExtractor";
+import {
+  Photo as GqlPhoto,
+  PhotoSet as GqlPhotoSet,
+} from "../../../graphql/types/types.generated";
 
-export default function PhotoSet({ photoSet, siteSettings }) {
+interface PhotoWithColors extends GqlPhoto {
+  colors?: ColorData;
+}
+
+interface PhotoSetWithColors extends GqlPhotoSet {
+  photos?: (PhotoWithColors | null)[];
+}
+
+export default function PhotoSet({
+  photoSet,
+  siteSettings,
+}: {
+  photoSet: PhotoSetWithColors;
+  siteSettings: any;
+}) {
   const router = useRouter();
 
   // URL for sharing
@@ -202,7 +221,15 @@ export default function PhotoSet({ photoSet, siteSettings }) {
   );
 }
 
-function PhotoThumbnail({ photo, photoSet, router }) {
+function PhotoThumbnail({
+  photo,
+  photoSet,
+  router,
+}: {
+  photo: PhotoWithColors;
+  photoSet: PhotoSetWithColors;
+  router: any;
+}) {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
@@ -215,7 +242,13 @@ function PhotoThumbnail({ photo, photoSet, router }) {
       scroll={false}
       shallow
       replace
-      className="group relative aspect-square overflow-hidden bg-neutral-100 dark:bg-neutral-900 sm:[&:nth-child(15n-12)]:col-span-2 sm:last:col-span-2 after:shadow-border dark:after:shadow-none after:absolute after:w-full after:h-full after:z-10"
+      className="group relative aspect-square overflow-hidden sm:[&:nth-child(15n-12)]:col-span-2 sm:last:col-span-2 after:shadow-border dark:after:shadow-none after:absolute after:w-full after:h-full after:z-10"
+      style={{
+        backgroundColor:
+          photo.colors?.dominant ||
+          `hsl(${(photo.id.charCodeAt(0) * 137.5) % 360}, 40%, 50%)`,
+        background: photo.colors?.gradient || undefined,
+      }}
     >
       <Image
         src={photo.url}
@@ -260,9 +293,34 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     },
   });
 
+  // Extract colors for each photo in the set at build time (limited concurrency)
+  const photos = data.photoSet.photos || [];
+  const concurrency = 10;
+  const photosWithColors: (PhotoWithColors | null)[] = [];
+  for (let i = 0; i < photos.length; i += concurrency) {
+    const chunk = photos.slice(i, i + concurrency);
+    const processed = await Promise.all(
+      chunk.map(async (p: GqlPhoto | null) => {
+        if (!p?.url) return p as any;
+        try {
+          const colors = await extractColorsFromImage(p.url);
+          return { ...p, colors } as PhotoWithColors;
+        } catch {
+          return p as any;
+        }
+      }),
+    );
+    photosWithColors.push(...processed);
+  }
+
+  const photoSetWithColors: PhotoSetWithColors = {
+    ...data.photoSet,
+    photos: photosWithColors,
+  };
+
   return {
     props: {
-      photoSet: data.photoSet,
+      photoSet: photoSetWithColors,
       siteSettings: data.siteSettings,
     },
   };

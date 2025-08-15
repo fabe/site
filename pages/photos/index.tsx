@@ -132,41 +132,28 @@ export const getStaticProps: GetStaticProps = async () => {
     query: QUERY_PHOTO_SETS,
   });
 
-  console.log(`🔍 Found ${data.photoSets.length} photo sets`);
-
-  // Extract colors from featured images during build time
-  const photoSetsWithColors: PhotoSetWithColors[] = await Promise.all(
-    data.photoSets.map(async (photoSet: PhotoSet) => {
-      console.log(`📷 Processing: ${photoSet.title}`);
-      console.log(`🔗 Featured photo URL: ${photoSet.featuredPhoto?.url}`);
-
-      if (photoSet.featuredPhoto?.url) {
-        try {
-          console.log(`🎨 Extracting colors for ${photoSet.title}...`);
-          const colors = await extractColorsFromImage(
-            photoSet.featuredPhoto.url,
-          );
-          console.log(
-            `✅ Colors extracted for ${photoSet.title}: ${colors.dominant}`,
-          );
-          return { ...photoSet, colors };
-        } catch (error) {
-          console.error(
-            `❌ Failed to extract colors for ${photoSet.title}:`,
-            error,
-          );
-          return photoSet;
+  // Extract colors from featured images during build time (limited concurrency)
+  const concurrency = 6;
+  const photoSetsWithColors: PhotoSetWithColors[] = [];
+  for (let i = 0; i < data.photoSets.length; i += concurrency) {
+    const chunk = data.photoSets.slice(i, i + concurrency);
+    const processed = await Promise.all(
+      chunk.map(async (photoSet: PhotoSet) => {
+        if (photoSet.featuredPhoto?.url) {
+          try {
+            const colors = await extractColorsFromImage(
+              photoSet.featuredPhoto.url,
+            );
+            return { ...photoSet, colors } as PhotoSetWithColors;
+          } catch {
+            return photoSet as PhotoSetWithColors;
+          }
         }
-      } else {
-        console.warn(`⚠️ No featured photo URL for ${photoSet.title}`);
-      }
-      return photoSet;
-    }),
-  );
-
-  console.log(
-    `🎯 Returning ${photoSetsWithColors.length} photo sets with color data`,
-  );
+        return photoSet as PhotoSetWithColors;
+      }),
+    );
+    photoSetsWithColors.push(...processed);
+  }
 
   return {
     props: {
