@@ -12,6 +12,7 @@ import {
 } from "./content";
 import { getSpotifyPlaylist, getSpotifyStatus } from "./spotify";
 import { getLastfmStatus } from "./lastfm";
+import { MUSIC_STATUS_MODE } from "../../constants";
 
 export const resolvers = {
   Query: {
@@ -28,7 +29,11 @@ export const resolvers = {
     spotifyStatus: getSpotifyStatus,
     lastfmStatus: getLastfmStatus,
     musicStatus: async () => {
-      // Prefer Spotify live; if not live, compare timestamps with Last.fm
+      if (MUSIC_STATUS_MODE === "SPOTIFY_ONLY") {
+        return getSpotifyStatus();
+      }
+
+      // PREFER_SPOTIFY
       const [spotify, lastfm] = await Promise.all([
         getSpotifyStatus(),
         getLastfmStatus(),

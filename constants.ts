@@ -15,3 +15,8 @@ export const PLAYLIST_IDS = [
   "5RiBqFIoVt0VuIl3QdwbWF", // 2018
   // "53dkKdbZ5EHilxdOB30i4X", // 2017
 ];
+
+export type MusicMode = "SPOTIFY_ONLY" | "PREFER_SPOTIFY";
+
+export const MUSIC_STATUS_MODE: MusicMode =
+  (process.env.NEXT_PUBLIC_MUSIC_STATUS_MODE as MusicMode) || "SPOTIFY_ONLY";
