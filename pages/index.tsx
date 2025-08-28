@@ -5,10 +5,10 @@ import { Main } from "../components/Layouts";
 import { SEO } from "../components/SEO";
 import { initializeApollo } from "../graphql/client";
 import type { GetStaticProps } from "next";
-import { QUERY_PAGE_HOME, QUERY_SPOTIFY_STATUS } from "../graphql/queries";
+import { QUERY_PAGE_HOME, QUERY_MUSIC_STATUS } from "../graphql/queries";
 import {
   PageHomeQueryQuery,
-  SpotifyStatusQueryQuery,
+  MusicStatusQueryQuery,
 } from "../graphql/types/types.generated";
 import { useQuery } from "@apollo/client";
 import NowReading from "../components/Home/NowReading";
@@ -27,7 +27,7 @@ export default function Home({ intro }) {
     stopPolling,
     refetch,
     loading,
-  } = useQuery<SpotifyStatusQueryQuery>(QUERY_SPOTIFY_STATUS, {
+  } = useQuery<MusicStatusQueryQuery>(QUERY_MUSIC_STATUS, {
     ssr: false,
     fetchPolicy: "network-only",
   });
@@ -55,7 +55,7 @@ export default function Home({ intro }) {
         <Posts posts={data.posts} />
         <Projects />
         <Writing />
-        <NowPlaying spotifyStatus={liveData?.spotifyStatus} loading={loading} />
+        <NowPlaying spotifyStatus={liveData?.musicStatus} loading={loading} />
         <NowReading books={data.books} />
       </Main>
     </>

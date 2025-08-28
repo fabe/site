@@ -45,6 +45,38 @@ export const QUERY_SPOTIFY_STATUS = gql`
   }
 `;
 
+export const QUERY_LASTFM_STATUS = gql`
+  query LastfmStatusQuery {
+    lastfmStatus {
+      timestamp
+      isPlaying
+      song {
+        albumImageUrl
+        artist
+        title
+        spotifyUrl
+        album
+      }
+    }
+  }
+`;
+
+export const QUERY_MUSIC_STATUS = gql`
+  query MusicStatusQuery {
+    musicStatus {
+      timestamp
+      isPlaying
+      song {
+        albumImageUrl
+        artist
+        title
+        spotifyUrl
+        album
+      }
+    }
+  }
+`;
+
 export const QUERY_POST = gql`
   ${FRAGMENT_SITE_SETTINGS_SHARED}
 

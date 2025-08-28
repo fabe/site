@@ -15,6 +15,8 @@ export const typeDefs = gql`
     places: [Place]!
     siteSettings: SiteSettings!
     spotifyStatus: SpotifyStatus!
+    lastfmStatus: SpotifyStatus!
+    musicStatus: SpotifyStatus!
     spotifyPlaylist(id: String!): SpotifyPlaylist!
   }
 

@@ -154,6 +154,8 @@ export type PostWithoutBody = {
 export type Query = {
   __typename?: 'Query';
   books: Array<Maybe<Book>>;
+  lastfmStatus: SpotifyStatus;
+  musicStatus: SpotifyStatus;
   photo?: Maybe<Photo>;
   photoSet?: Maybe<PhotoSet>;
   photoSets: Array<Maybe<PhotoSet>>;
@@ -269,6 +271,16 @@ export type SpotifyStatusQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type SpotifyStatusQueryQuery = { __typename?: 'Query', spotifyStatus: { __typename?: 'SpotifyStatus', timestamp?: string | null, isPlaying: boolean, song?: { __typename?: 'Song', albumImageUrl?: string | null, artist?: string | null, title?: string | null, spotifyUrl?: string | null, album?: string | null } | null } };
 
+export type LastfmStatusQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type LastfmStatusQueryQuery = { __typename?: 'Query', lastfmStatus: { __typename?: 'SpotifyStatus', timestamp?: string | null, isPlaying: boolean, song?: { __typename?: 'Song', albumImageUrl?: string | null, artist?: string | null, title?: string | null, spotifyUrl?: string | null, album?: string | null } | null } };
+
+export type MusicStatusQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MusicStatusQueryQuery = { __typename?: 'Query', musicStatus: { __typename?: 'SpotifyStatus', timestamp?: string | null, isPlaying: boolean, song?: { __typename?: 'Song', albumImageUrl?: string | null, artist?: string | null, title?: string | null, spotifyUrl?: string | null, album?: string | null } | null } };
+
 export type PostQueryQueryVariables = Exact<{
   slug: Scalars['String'];
 }>;
@@ -332,7 +344,7 @@ export type PhotoSetQueryQueryVariables = Exact<{
 }>;
 
 
-export type PhotoSetQueryQuery = { __typename?: 'Query', siteSettings: { __typename?: 'SiteSettings', siteTitle: string, metaDescription: string, avatar: { __typename?: 'Asset', url?: string | null } }, photoSet?: { __typename?: 'PhotoSet', id: string, title: string, slug: string, description?: string | null, photos?: Array<{ __typename?: 'Photo', id: string, description?: string | null, url: string, width: number, height: number, exif?: any | null, tags?: Array<string | null> | null, location?: { __typename?: 'Location', lat?: number | null, lon?: number | null } | null } | null> | null } | null };
+export type PhotoSetQueryQuery = { __typename?: 'Query', siteSettings: { __typename?: 'SiteSettings', siteTitle: string, metaDescription: string, avatar: { __typename?: 'Asset', url?: string | null } }, photoSet?: { __typename?: 'PhotoSet', id: string, title: string, slug: string, description?: string | null, updatedAt: string, photos?: Array<{ __typename?: 'Photo', id: string, description?: string | null, url: string, width: number, height: number, exif?: any | null, tags?: Array<string | null> | null, location?: { __typename?: 'Location', lat?: number | null, lon?: number | null } | null } | null> | null } | null };
 
 export type PhotoSetIdsQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -433,6 +445,90 @@ export function useSpotifyStatusQueryLazyQuery(baseOptions?: Apollo.LazyQueryHoo
 export type SpotifyStatusQueryQueryHookResult = ReturnType<typeof useSpotifyStatusQueryQuery>;
 export type SpotifyStatusQueryLazyQueryHookResult = ReturnType<typeof useSpotifyStatusQueryLazyQuery>;
 export type SpotifyStatusQueryQueryResult = Apollo.QueryResult<SpotifyStatusQueryQuery, SpotifyStatusQueryQueryVariables>;
+export const LastfmStatusQueryDocument = gql`
+    query LastfmStatusQuery {
+  lastfmStatus {
+    timestamp
+    isPlaying
+    song {
+      albumImageUrl
+      artist
+      title
+      spotifyUrl
+      album
+    }
+  }
+}
+    `;
+
+/**
+ * __useLastfmStatusQueryQuery__
+ *
+ * To run a query within a React component, call `useLastfmStatusQueryQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLastfmStatusQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLastfmStatusQueryQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useLastfmStatusQueryQuery(baseOptions?: Apollo.QueryHookOptions<LastfmStatusQueryQuery, LastfmStatusQueryQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<LastfmStatusQueryQuery, LastfmStatusQueryQueryVariables>(LastfmStatusQueryDocument, options);
+      }
+export function useLastfmStatusQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<LastfmStatusQueryQuery, LastfmStatusQueryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<LastfmStatusQueryQuery, LastfmStatusQueryQueryVariables>(LastfmStatusQueryDocument, options);
+        }
+export type LastfmStatusQueryQueryHookResult = ReturnType<typeof useLastfmStatusQueryQuery>;
+export type LastfmStatusQueryLazyQueryHookResult = ReturnType<typeof useLastfmStatusQueryLazyQuery>;
+export type LastfmStatusQueryQueryResult = Apollo.QueryResult<LastfmStatusQueryQuery, LastfmStatusQueryQueryVariables>;
+export const MusicStatusQueryDocument = gql`
+    query MusicStatusQuery {
+  musicStatus {
+    timestamp
+    isPlaying
+    song {
+      albumImageUrl
+      artist
+      title
+      spotifyUrl
+      album
+    }
+  }
+}
+    `;
+
+/**
+ * __useMusicStatusQueryQuery__
+ *
+ * To run a query within a React component, call `useMusicStatusQueryQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMusicStatusQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMusicStatusQueryQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useMusicStatusQueryQuery(baseOptions?: Apollo.QueryHookOptions<MusicStatusQueryQuery, MusicStatusQueryQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MusicStatusQueryQuery, MusicStatusQueryQueryVariables>(MusicStatusQueryDocument, options);
+      }
+export function useMusicStatusQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MusicStatusQueryQuery, MusicStatusQueryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MusicStatusQueryQuery, MusicStatusQueryQueryVariables>(MusicStatusQueryDocument, options);
+        }
+export type MusicStatusQueryQueryHookResult = ReturnType<typeof useMusicStatusQueryQuery>;
+export type MusicStatusQueryLazyQueryHookResult = ReturnType<typeof useMusicStatusQueryLazyQuery>;
+export type MusicStatusQueryQueryResult = Apollo.QueryResult<MusicStatusQueryQuery, MusicStatusQueryQueryVariables>;
 export const PostQueryDocument = gql`
     query PostQuery($slug: String!) {
   siteSettings {
@@ -844,6 +940,7 @@ export const PhotoSetQueryDocument = gql`
     title
     slug
     description
+    updatedAt
     photos {
       id
       description

@@ -13,6 +13,8 @@ rules:
   - types:
       Query:
         - spotifyStatus
+        - lastfmStatus
+        - musicStatus
     maxAge: 180
     swr: 604800
     description: Close-to-live data

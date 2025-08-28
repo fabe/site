@@ -56,16 +56,21 @@ export default function MediaCard({
     </div>
   );
 
+  // Remove hover effects if href is not set
   const cardComponent = (
     <div
-      className={`group flex items-center gap-4 ${
+      className={`flex items-center gap-4 ${href ? "group" : ""} ${
         borderTop
           ? `border-t border-solid border-neutral-500/10 pt-4 dark:border-neutral-900`
           : null
       }`}
     >
       <div className="relative">
-        <div className="relative z-10 origin-center drop-shadow-md transition-transform group-hover:scale-110">
+        <div
+          className={`relative z-10 origin-center drop-shadow-md transition-transform${
+            href ? " group-hover:scale-110" : ""
+          }`}
+        >
           <Image
             alt={image?.alt || ""}
             title={title}
@@ -82,7 +87,11 @@ export default function MediaCard({
         </div>
       </div>
 
-      <div className="w-full truncate transition-transform group-hover:translate-x-0.5">
+      <div
+        className={`w-full truncate transition-transform${
+          href ? " group-hover:translate-x-0.5" : ""
+        }`}
+      >
         <div className="truncate">{title}</div>
         <div className="truncate text-sm slashed-zero text-neutral-500 [font-variation-settings:'opsz'_14] dark:text-silver-dark">
           {subtitle}

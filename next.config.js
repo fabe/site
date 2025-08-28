@@ -4,7 +4,7 @@ const nextConfig = {
   swcMinify: true,
   images: {
     formats: ["image/avif", "image/webp"],
-    domains: ["images.ctfassets.net", "i.scdn.co"],
+    domains: ["images.ctfassets.net", "i.scdn.co", "lastfm.freetls.fastly.net"],
     remotePatterns: [
       {
         protocol: "https",
