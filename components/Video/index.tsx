@@ -170,13 +170,15 @@ export const SimplePlayer: React.FC<PlayerProps> = ({
 
 export const Player: React.FC<PlayerProps> = ({ src, title, poster }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const progressRef = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [playbackRate, setPlaybackRate] = useState(1);
   const [isControlsVisible, setIsControlsVisible] = useState(true);
-  const hideControlsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [isProgressHovering, setIsProgressHovering] = useState(false);
+  const [progressHoverRatio, setProgressHoverRatio] = useState(0);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -217,15 +219,12 @@ export const Player: React.FC<PlayerProps> = ({ src, title, poster }) => {
       videoRef.current.pause();
     } else {
       videoRef.current.play();
-      if (hideControlsTimeoutRef.current) {
-        clearTimeout(hideControlsTimeoutRef.current);
-      }
-      hideControlsTimeoutRef.current = setTimeout(() => {
-        setIsControlsVisible(false);
-      }, 3000);
     }
 
     setIsPlaying(!isPlaying);
+    if (!isPlaying) {
+      setIsControlsVisible(true);
+    }
   };
 
   const toggleMute = () => {
@@ -244,13 +243,11 @@ export const Player: React.FC<PlayerProps> = ({ src, title, poster }) => {
   };
 
   const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!videoRef.current) return;
-
-    const progressBar = e.currentTarget;
-    const rect = progressBar.getBoundingClientRect();
+    if (!videoRef.current || !progressRef.current) return;
+    const rect = progressRef.current.getBoundingClientRect();
     const pos = (e.clientX - rect.left) / rect.width;
-
-    videoRef.current.currentTime = pos * duration;
+    const clamped = Math.min(Math.max(pos, 0), 1);
+    videoRef.current.currentTime = clamped * duration;
   };
 
   const cyclePlaybackRate = () => {
@@ -266,22 +263,26 @@ export const Player: React.FC<PlayerProps> = ({ src, title, poster }) => {
   };
 
   const showControls = () => {
-    if (!isPlaying) return;
-
     setIsControlsVisible(true);
-
-    if (hideControlsTimeoutRef.current) {
-      clearTimeout(hideControlsTimeoutRef.current);
-    }
   };
 
   const hideControls = () => {
-    if (!isPlaying) return;
-
-    hideControlsTimeoutRef.current = setTimeout(() => {
+    if (isPlaying) {
       setIsControlsVisible(false);
-    }, 3000);
+    }
   };
+
+  const handleProgressMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!progressRef.current) return;
+    const rect = progressRef.current.getBoundingClientRect();
+    const ratio = (e.clientX - rect.left) / rect.width;
+    setProgressHoverRatio(Math.min(Math.max(ratio, 0), 1));
+  };
+
+  const hoverTimeSeconds = duration * progressHoverRatio;
+  const hoverTimeFormatted = formatTime(
+    isFinite(hoverTimeSeconds) ? hoverTimeSeconds : 0,
+  );
 
   return (
     <div className="sm:-mx-24 sm:my-12 my-6">
@@ -301,15 +302,20 @@ export const Player: React.FC<PlayerProps> = ({ src, title, poster }) => {
 
         <div className="absolute inset-0 pointer-events-none rounded-xl sm:rounded-2xl box-border border border-neutral-800/5 dark:border-white/5"></div>
 
-        {/* Controls */}
+        {/* Full overlay with reduced opacity & snappier transition */}
         <div
-          className={`p-5 text-white absolute bottom-0 left-0 right-0 z-[1] transition-opacity duration-500 ease-in-out ${
+          className={`absolute inset-0 transition-opacity duration-150 ease-out pointer-events-none ${
             isControlsVisible ? "opacity-100" : "opacity-0"
           }`}
-          style={{
-            background:
-              "linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.494) 8.1%, rgba(0, 0, 0, 0.475) 15.5%, rgba(0, 0, 0, 0.447) 22.5%, rgba(0, 0, 0, 0.41) 29%, rgba(0, 0, 0, 0.373) 35.3%, rgba(0, 0, 0, 0.325) 41.2%, rgba(0, 0, 0, 0.275) 47.1%, rgba(0, 0, 0, 0.224) 52.9%, rgba(0, 0, 0, 0.176) 58.8%, rgba(0, 0, 0, 0.13) 64.7%, rgba(0, 0, 0, 0.086) 71%, rgba(0, 0, 0, 0.05) 77.5%, rgba(0, 0, 0, 0.024) 84.5%, rgba(0, 0, 0, 0.008) 91.9%, rgba(0, 0, 0, 0) 100%)",
-          }}
+        >
+          <div className="absolute inset-0 bg-black/20" />
+        </div>
+
+        {/* Controls with snappier animation */}
+        <div
+          className={`p-5 text-white absolute bottom-0 left-0 right-0 z-[1] transition-opacity duration-150 ease-out-expo ${
+            isControlsVisible ? "opacity-100" : "opacity-0"
+          }`}
         >
           <div className="flex w-full items-center justify-start gap-3">
             <button
@@ -321,7 +327,7 @@ export const Player: React.FC<PlayerProps> = ({ src, title, poster }) => {
               {isPlaying ? <PauseIcon size={16} /> : <PlayIcon size={16} />}
             </button>
 
-            <p className="flex-shrink-0 text-white font-medium tabular-nums slashed-zero text-sm text-shadow-sm">
+            <p className="flex-shrink-0 text-white font-medium tabular-nums slashed-zero text-sm">
               {formatTime(currentTime)}
               <span className="ml-1 before:mr-1 before:content-['·']">
                 {formatTime(duration)}
@@ -329,20 +335,53 @@ export const Player: React.FC<PlayerProps> = ({ src, title, poster }) => {
             </p>
 
             <div
-              className="flex-1 h-1 bg-white/30 rounded-full cursor-pointer mx-2 sm:opacity-100 opacity-0"
+              ref={progressRef}
+              className="relative flex-1 mx-2 sm:opacity-100 opacity-0 cursor-crosshair select-none overflow-visible"
+              style={{ height: "40px" }}
               onClick={handleProgressClick}
+              onMouseEnter={() => setIsProgressHovering(true)}
+              onMouseLeave={() => setIsProgressHovering(false)}
+              onMouseMove={handleProgressMouseMove}
             >
+              {/* visible slim bar */}
+              <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-1 bg-white/30 rounded-full">
+                <div
+                  className="h-full bg-white rounded-full"
+                  style={{
+                    width: duration
+                      ? `${(currentTime / duration) * 100}%`
+                      : "0%",
+                  }}
+                />
+              </div>
+              {/* floating vertical guide line (fades in/out) */}
               <div
-                className="h-full bg-white rounded-full"
-                style={{ width: `${(currentTime / duration) * 100}%` }}
+                className={`pointer-events-none absolute top-[6px] bottom-[6px] w-px bg-white/80 transition-opacity duration-150 ${
+                  isProgressHovering ? "opacity-100" : "opacity-0"
+                }`}
+                style={{ left: `${progressHoverRatio * 100}%` }}
               />
+              {/* hover timestamp label (no background, above line, inside hit area) */}
+              <div
+                className={`pointer-events-none absolute top-0 -translate-y-full pb-1 -translate-x-1/2 whitespace-nowrap flex items-baseline gap-0.5 transition-opacity duration-150 z-10 text-shadow-lg ${
+                  isProgressHovering ? "opacity-100" : "opacity-0"
+                }`}
+                style={{ left: `${progressHoverRatio * 100}%` }}
+              >
+                <span className="text-white font-medium tabular-nums slashed-zero text-sm">
+                  {hoverTimeFormatted}
+                </span>
+                <span className="text-white/60 font-medium tabular-nums slashed-zero text-sm">
+                  / {formatTime(duration)}
+                </span>
+              </div>
             </div>
 
             <button
               type="button"
               title="Set playback rate"
               aria-label="Set playback rate"
-              className="flex-shrink-0 transition duration-200 flex items-center justify-center rounded-full px-2 py-0.5 text-sm font-medium text-white hover:opacity-60 tabular-nums w-[42px] text-shadow-sm"
+              className="flex-shrink-0 transition duration-200 flex items-center justify-center rounded-full px-2 py-0.5 text-sm font-medium text-white hover:opacity-60 tabular-nums w-[42px]"
               onClick={cyclePlaybackRate}
             >
               {playbackRate}&times;
