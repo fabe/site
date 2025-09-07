@@ -66,7 +66,7 @@ function PhotoSetCard({ photoSet }: { photoSet: PhotoSetWithColors }) {
   return (
     <Link
       href={`/photos/${photoSet.slug}`}
-      className="group relative aspect-[21/9] w-full overflow-hidden rounded-lg transition-all duration-300 ease-in-out"
+      className="group relative aspect-[3/2] w-full overflow-hidden rounded-lg transition-all duration-300 ease-in-out"
       style={{
         backgroundColor: computedBackgroundColor,
         background: computedBackground,
