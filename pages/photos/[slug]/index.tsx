@@ -192,7 +192,7 @@ export default function PhotoSet({
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-px">
           {photoSet.photos?.map((photo) => (
             <PhotoThumbnail
               key={photo.id}
@@ -242,7 +242,7 @@ function PhotoThumbnail({
       scroll={false}
       shallow
       replace
-      className="group relative aspect-square overflow-hidden sm:[&:nth-child(15n-12)]:col-span-2 sm:last:col-span-2 after:shadow-border dark:after:shadow-none after:absolute after:w-full after:h-full after:z-10"
+      className="group relative aspect-[3/4] overflow-hidden sm:[&:nth-child(15n-12)]:col-span-2 sm:last:col-span-2 after:shadow-border dark:after:shadow-none after:absolute after:w-full after:h-full after:z-10"
       style={{
         backgroundColor:
           photo.colors?.dominant ||
@@ -253,9 +253,9 @@ function PhotoThumbnail({
       <Image
         src={photo.url}
         alt={photo.description || ""}
-        className={`object-cover transition-all group-hover:brightness-110 group-hover:saturate-110 transform-gpu bg-gray-200 dark:bg-neutral-900 ${
+        className={`object-cover transition-all group-hover:brightness-75 group-hover:saturate-120 transform-gpu bg-gray-200 dark:bg-neutral-900 ${
           imageLoaded ? "opacity-100" : "opacity-0"
-        } transition-all duration-300`}
+        } transition-all duration-150`}
         fill
         sizes="(min-width: 640px) min(50vw, 700px), min(100vw, 700px)"
         loader={contentfulLoader}
