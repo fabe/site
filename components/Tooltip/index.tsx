@@ -6,11 +6,11 @@ export function Tooltip({ open, children }) {
       <Transition
         show={open}
         enter="transition-all duration-200"
-        enterFrom="opacity-0 -translate-y-1 scale-95"
-        enterTo="opacity-100 translate-y-0 scale-100"
+        enterFrom="opacity-0 -translate-y-1 scale-95 blur-sm"
+        enterTo="opacity-100 translate-y-0 scale-100 blur-0"
         leave="transition-all duration-200"
-        leaveFrom="opacity-100 translate-y-0 scale-100"
-        leaveTo="opacity-0 -translate-y-1 scale-95"
+        leaveFrom="opacity-100 translate-y-0 scale-100 blur-0"
+        leaveTo="opacity-0 -translate-y-1 scale-95 blur-sm"
       >
         <div
           role="tooltip"

@@ -71,7 +71,7 @@ export const SimplePlayer: React.FC<PlayerProps> = ({
   return (
     <div className={noMargin ? "" : "my-8 sm:my-16 sm:-mx-24"}>
       <div
-        className={`relative cursor-pointer w-full overflow-hidden rounded-xl sm:rounded-2xl select-none bg-gray-200/50 dark:bg-neutral-900/75 ${
+        className={`relative cursor-pointer w-full overflow-hidden rounded-xl sm:rounded-2xl select-none bg-gray-200/50 dark:bg-neutral-800/75 ${
           noPadding
             ? ""
             : title
@@ -287,7 +287,7 @@ export const Player: React.FC<PlayerProps> = ({ src, title, poster }) => {
   return (
     <div className="sm:-mx-24 sm:my-12 my-6">
       <div
-        className="relative w-full overflow-hidden rounded-xl sm:rounded-2xl bg-gray-100 dark:bg-neutral-900/75 select-none"
+        className="relative w-full overflow-hidden rounded-xl sm:rounded-2xl bg-gray-100 dark:bg-neutral-800/75 select-none"
         onMouseEnter={showControls}
         onMouseLeave={hideControls}
         onMouseMove={showControls}

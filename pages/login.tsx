@@ -135,8 +135,8 @@ export default function Secret() {
           </div>
 
           <p className="text-xs text-neutral-500 [font-variation-settings:'opsz'_12] dark:text-silver-dark pt-6 sm:pt-8 text-center max-w-xs">
-            My projects are currently locked behind a secret code. This may or
-            may not change in the future.
+            My work is currently locked behind a secret code. This may or may
+            not change in the future.
           </p>
         </div>
       </Main>

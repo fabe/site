@@ -101,7 +101,7 @@ export function SEO({ seo }: { seo?: SEOProps }) {
         />
         <meta
           name="theme-color"
-          content="#000"
+          content="#171717"
           media="(prefers-color-scheme: dark)"
         />
         <meta

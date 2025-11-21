@@ -119,7 +119,7 @@ export default function Archipelago() {
             <Command.Item onSelect={() => navigate("/work")}>
               <div>
                 <CursorIcon size={16} />
-                Projects
+                Work
               </div>
               <Badge border>Private</Badge>
             </Command.Item>
@@ -159,11 +159,11 @@ export default function Archipelago() {
             <Transition
               show={!isHome}
               enter="transition-all duration-500 ease-spring"
-              enterFrom="opacity-0 scale-50"
-              enterTo="opacity-100 scale-100"
+              enterFrom="opacity-0 scale-50 blur-md"
+              enterTo="opacity-100 scale-100 blur-0"
               leave="transition-all duration-300 ease-in-out"
-              leaveFrom="opacity-100 scale-100"
-              leaveTo="opacity-0 scale-50"
+              leaveFrom="opacity-100 scale-100 blur-0"
+              leaveTo="opacity-0 scale-50 blur-md"
             >
               <div
                 className="absolute left-0 rounded-full"

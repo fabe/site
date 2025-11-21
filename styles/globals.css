@@ -4,7 +4,7 @@
 
 html,
 body {
-  @apply bg-gray-50 dark:bg-neutral-950;
+  @apply bg-gray-50 dark:bg-neutral-900;
   @apply text-neutral-800 dark:text-silver;
   @apply antialiased;
   @apply text-base;
@@ -19,6 +19,12 @@ body {
   font-variation-settings: "opsz" 15;
 }
 
+body,
+html,
+#__next {
+  @apply h-full;
+}
+
 p {
   @apply mb-6;
   @apply last-of-type:mb-0;
@@ -30,7 +36,7 @@ a[href^="mailto:"] {
 }
 
 hr {
-  @apply my-12 border-neutral-500/10 dark:border-neutral-900;
+  @apply my-12 border-neutral-500/10 dark:border-white/10;
 }
 
 blockquote span::before {
@@ -163,9 +169,9 @@ blockquote span::after {
   @apply relative;
   @apply order-2 grow w-full;
   @apply bg-white/[.98];
-  @apply dark:bg-neutral-900;
+  @apply dark:bg-neutral-800;
   @apply border-transparent;
-  @apply dark:border-neutral-800;
+  @apply dark:border-neutral-700;
   @apply shadow-fancy;
   @apply dark:shadow-dark;
 }
@@ -234,7 +240,7 @@ blockquote span::after {
 
   .code-input:placeholder-shown {
     @apply border-neutral-200 dark:border-white/[.08];
-    @apply bg-white dark:bg-neutral-950 dark:shadow-white/5 dark:shadow-sm;
+    @apply bg-white dark:bg-neutral-900 dark:shadow-white/5 dark:shadow-sm;
     @apply dark:border-t-0 dark:border-b dark:border-x-0;
   }
 
@@ -287,7 +293,7 @@ blockquote span::after {
   }
 
   .badge {
-    @apply inline-flex items-center gap-1 rounded-xl bg-gray-200 px-1.5 py-0.5 text-xs font-medium text-neutral-600 [font-variation-settings:'opsz'_12] dark:bg-neutral-900 dark:text-silver-dark;
+    @apply inline-flex items-center gap-1 rounded-xl bg-gray-200 px-1.5 py-0.5 text-xs font-medium text-neutral-600 [font-variation-settings:'opsz'_12] dark:bg-neutral-800 dark:text-silver-dark;
     @apply slashed-zero;
     @apply decoration-neutral-600;
   }
@@ -301,11 +307,11 @@ blockquote span::after {
   }
 
   .list-title {
-    @apply col-span-12 border-t border-solid border-neutral-500/10 pt-4 dark:border-neutral-900 sm:col-span-4;
+    @apply col-span-12 border-t border-solid border-neutral-500/10 pt-4 dark:border-white/5 sm:col-span-4;
   }
 
   .list-content {
-    @apply col-span-12 border-solid border-neutral-500/10 pt-4 dark:border-neutral-900 sm:col-span-8 sm:border-t;
+    @apply col-span-12 border-solid border-neutral-500/10 pt-4 dark:border-white/5 sm:col-span-8 sm:border-t;
   }
 
   .island {
@@ -322,17 +328,17 @@ blockquote span::after {
   .prose-custom {
     @apply prose-a:link;
     @apply prose-a:[font-variation-settings:'opsz'_15,_'wght'_450];
-    @apply prose-p:first:mt-0;
+    @apply prose-p:m-0 prose-p:hyphens-auto;
     @apply prose-p:leading-relaxed sm:prose-p:leading-golden;
-    @apply prose prose-neutral dark:prose-invert;
+    @apply prose prose-neutral dark:prose-invert max-w-none;
     @apply prose-p:text-neutral-800 dark:prose-p:text-silver;
     @apply prose-headings:font-normal prose-headings:[font-variation-settings:'wght'_500];
     @apply prose-strong:font-normal prose-strong:[font-variation-settings:'wght'_500];
     @apply prose-em:not-italic prose-em:underline prose-em:decoration-neutral-300 prose-em:decoration-wavy dark:prose-em:decoration-neutral-700;
     @apply prose-code:rounded prose-code:font-normal prose-code:text-neutral-800 dark:prose-code:text-silver-dark;
-    @apply prose-pre:overflow-auto prose-pre:whitespace-pre prose-pre:border prose-pre:border-neutral-200 prose-pre:bg-transparent prose-pre:p-4 prose-pre:text-sm dark:prose-pre:border-neutral-900 sm:prose-pre:-ml-4 sm:prose-pre:-mr-4;
+    @apply prose-pre:overflow-auto prose-pre:whitespace-pre prose-pre:border prose-pre:border-neutral-200 prose-pre:bg-transparent prose-pre:p-4 prose-pre:text-sm dark:prose-pre:border-white/5 sm:prose-pre:-ml-4 sm:prose-pre:-mr-4;
     @apply prose-img:rounded-lg;
-    @apply prose-hr:my-6 prose-hr:h-[2px] prose-hr:border-none prose-hr:bg-neutral-200 dark:prose-hr:bg-neutral-900 sm:prose-hr:my-10;
+    @apply prose-hr:my-6 prose-hr:w-16 prose-hr:mx-auto prose-hr:h-px prose-hr:border-none prose-hr:bg-neutral-200 dark:prose-hr:bg-neutral-800 sm:prose-hr:my-12;
     @apply prose-blockquote:border-0 prose-blockquote:p-0 prose-blockquote:not-italic prose-blockquote:text-neutral-600 dark:prose-blockquote:text-silver-dark;
   }
 }
@@ -359,7 +365,7 @@ blockquote span::after {
     @apply gap-1;
     @apply text-sm;
     @apply px-2 py-1.5;
-    @apply rounded-lg bg-gray-200 text-neutral-700 transition-colors [font-variation-settings:'opsz'_14,'wght'_400] hover:bg-gray-300 dark:bg-neutral-900 dark:text-silver-dark dark:hover:bg-neutral-800;
+    @apply rounded-lg bg-gray-200 text-neutral-700 transition-colors [font-variation-settings:'opsz'_14,'wght'_400] hover:bg-gray-300 dark:bg-neutral-800 dark:text-silver-dark dark:hover:bg-neutral-700;
   }
 
   .link-external svg {

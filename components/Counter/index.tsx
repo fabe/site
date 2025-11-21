@@ -46,7 +46,7 @@ export default function Counter({ value, label }: CounterProps) {
   return (
     <div
       ref={ref}
-      className="col-span-1 rounded-2xl bg-gray-100 dark:bg-neutral-900/75 p-4 text-center"
+      className="col-span-1 rounded-2xl bg-gray-100 dark:bg-neutral-800/75 p-4 text-center"
       role="group"
       aria-labelledby={`counter-label-${value}`}
     >
@@ -55,14 +55,14 @@ export default function Counter({ value, label }: CounterProps) {
           {isTransitioning && (
             <>
               <motion.div
-                className="absolute left-0 right-0 top-0 h-4 bg-gradient-to-b from-gray-100 dark:from-neutral-900/50 to-transparent z-10 dark:mix-blend-darken"
+                className="absolute left-0 right-0 top-0 h-4 bg-gradient-to-b from-gray-100 dark:from-neutral-800/50 to-transparent z-10 dark:mix-blend-darken"
                 initial={{ opacity: 1 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
               />
               <motion.div
-                className="absolute left-0 right-0 bottom-0 h-4 bg-gradient-to-t from-gray-100 dark:from-neutral-900/75 to-transparent z-10 dark:mix-blend-darken"
+                className="absolute left-0 right-0 bottom-0 h-4 bg-gradient-to-t from-gray-100 dark:from-neutral-800/75 to-transparent z-10 dark:mix-blend-darken"
                 initial={{ opacity: 1 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}

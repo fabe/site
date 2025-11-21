@@ -37,7 +37,7 @@ export function BioHeader({ backButton = false }: BioHeaderProps) {
                 href="/work"
                 className="group relative isolate flex items-center justify-center w-9 h-9"
               >
-                <span className="absolute inset-0 rounded-full bg-neutral-200/60 transition-all duration-100 ease-out-expo dark:bg-neutral-900 dark:group-hover:bg-neutral-800 group-hover:bg-neutral-200 group-hover:scale-[1.05] z-0" />
+                <span className="absolute inset-0 rounded-full bg-neutral-200/60 transition-all duration-100 ease-out-expo dark:bg-neutral-800/75 dark:group-hover:bg-neutral-700/50 group-hover:bg-neutral-200 group-hover:scale-[1.05] z-0" />
                 <span className="relative z-10 flex items-center justify-center">
                   <ArrowLeftIcon size={16} />
                 </span>

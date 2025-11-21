@@ -34,7 +34,7 @@ export default function Dialog({ children, isOpen, onDismiss }: DialogProps) {
             className="fixed inset-0 z-50 flex flex-col"
           >
             {/* Base overlay that covers viewport */}
-            <div className="fixed inset-0 bg-gray-50/80 dark:bg-neutral-950/80 transform-gpu backdrop-blur-[50px] backdrop-saturate-[2]"></div>
+            <div className="fixed inset-0 bg-gray-50/80 dark:bg-neutral-900/80 transform-gpu backdrop-blur-[50px] backdrop-saturate-[2]"></div>
 
             {/* Close button - always visible */}
             <div className="fixed top-0 right-0 m-4 z-[60]">
@@ -53,7 +53,7 @@ export default function Dialog({ children, isOpen, onDismiss }: DialogProps) {
               style={{ background: "transparent" }}
             >
               <div className="min-h-screen py-16">
-                <div className="bg-gray-50/80 dark:bg-neutral-950/80 backdrop-blur-[50px] backdrop-saturate-[2] absolute inset-0 -z-10"></div>
+                <div className="bg-gray-50/80 dark:bg-neutral-900/80 backdrop-blur-[50px] backdrop-saturate-[2] absolute inset-0 -z-10"></div>
                 <div className="flex justify-center relative">
                   <div className="w-full max-w-2xl px-4">{children}</div>
                 </div>

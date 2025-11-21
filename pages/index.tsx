@@ -54,7 +54,6 @@ export default function Home({ intro }) {
         <Resume />
         <Posts posts={data.posts} />
         <Projects />
-        <Writing />
         <NowPlaying spotifyStatus={liveData?.musicStatus} loading={loading} />
         <NowReading books={data.books} />
       </Main>

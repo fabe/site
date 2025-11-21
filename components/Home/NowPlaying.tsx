@@ -2,6 +2,7 @@ import { formatDistanceToNowStrict } from "date-fns";
 import { SpotifyStatus } from "../../graphql/types/types.generated";
 import Badge from "../Badge";
 import MediaCard from "../MediaCard";
+import { useEffect, useState } from "react";
 
 interface NowPlayingProps {
   spotifyStatus: SpotifyStatus;

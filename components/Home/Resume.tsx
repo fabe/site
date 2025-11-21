@@ -26,7 +26,7 @@ export default function Resume() {
         <h3 className="text-neutral-500 dark:text-silver-dark">2019</h3>
       </dt>
       <dd className="list-content border-none pt-0">
-        <div>Sr. Product Designer, Extensibility & Core Experience</div>
+        <div>Sr. Product Designer, Extensibility</div>
         <div>
           <LinkExternal href="//contentful.com">Contentful</LinkExternal>
         </div>

@@ -23,7 +23,7 @@ export default function LightboxPhoto({ photo }: LightboxPhotoProps) {
 
   return (
     <div className="w-full max-h-full h-full overflow-y-auto">
-      <div className="flex flex-col lg:flex-row w-full h-full bg-white dark:bg-neutral-950">
+      <div className="flex flex-col lg:flex-row w-full h-full bg-white dark:bg-neutral-900">
         <div className="relative w-full h-full lg:w-auto lg:flex-1 flex justify-center">
           {loading && (
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
@@ -60,7 +60,7 @@ export default function LightboxPhoto({ photo }: LightboxPhotoProps) {
           </div>
         </div>
 
-        <div className="lg:basis-[400px] bg-white dark:bg-neutral-800 shrink-0 p-6 lg:flex lg:justify-between lg:flex-col">
+        <div className="lg:basis-[400px] bg-white dark:bg-neutral-800 shrink-0 p-6 lg:flex lg:justify-between lg:flex-col tabular-nums">
           <h1 className="[font-variation-settings:'wght'_550] text-neutral-800 dark:text-white text-2xl">
             {photo.description || "A photo"}
           </h1>

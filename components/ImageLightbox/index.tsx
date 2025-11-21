@@ -64,7 +64,7 @@ export default function ImageLightbox({
     return (
       <div className={`${noMargin ? "" : "my-6 sm:my-12"}`}>
         <div
-          className={`relative rounded-xl sm:rounded-2xl overflow-hidden bg-gray-100 dark:bg-neutral-900/75`}
+          className={`relative rounded-xl sm:rounded-2xl overflow-hidden bg-gray-100 dark:bg-neutral-800/75`}
         >
           <Image
             src={src}
@@ -155,7 +155,7 @@ export default function ImageLightbox({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 bg-gray-50/80 dark:bg-neutral-950/80 backdrop-blur-[50px] backdrop-saturate-[2] z-40"
+            className="fixed inset-0 bg-gray-50/80 dark:bg-neutral-900/80 backdrop-blur-[50px] backdrop-saturate-[2] z-40"
             onClick={closeLightbox}
             role="dialog"
             aria-modal="true"
@@ -164,7 +164,7 @@ export default function ImageLightbox({
 
           {/* Animated image clone */}
           <motion.div
-            className="fixed rounded-xl sm:rounded-2xl overflow-hidden bg-gray-100 dark:bg-neutral-900/75 cursor-zoom-out z-50"
+            className="fixed rounded-xl sm:rounded-2xl overflow-hidden bg-gray-100 dark:bg-neutral-800/75 cursor-zoom-out z-50"
             onClick={closeLightbox}
             initial={{
               left: imageRect.left,
@@ -208,7 +208,7 @@ export default function ImageLightbox({
       <div className={`${noMargin ? "" : "my-6 sm:my-12"}`}>
         <div
           ref={imageRef}
-          className={`relative rounded-xl sm:rounded-2xl overflow-hidden bg-gray-100 dark:bg-neutral-900/75 cursor-zoom-in transition-opacity duration-200 ${
+          className={`relative rounded-xl sm:rounded-2xl overflow-hidden bg-gray-100 dark:bg-neutral-800/75 cursor-zoom-in transition-opacity duration-200 ${
             isOpen ? "opacity-0" : "opacity-100"
           }`}
           onClick={openLightbox}

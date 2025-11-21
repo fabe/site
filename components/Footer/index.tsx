@@ -3,10 +3,10 @@ import { GithubIcon } from "../Icons";
 
 export default function Footer() {
   return (
-    <footer className="sm:px-0 flex w-full justify-center pt-12 sm:pt-20">
-      <div className="max-w-main w-full">
-        <div className="flex h-full w-full items-end justify-between border-t border-solid border-neutral-500/10 pt-4 sm:pt-8 dark:border-neutral-900">
-          <div className="flex w-full flex-col sm:flex-row sm:justify-between sm:pb-6 gap-4 sm:gap-0">
+    <footer className="flex w-full justify-center">
+      <div className="w-full">
+        <div className="flex px-6 sm:h-[4.5rem] h-[5.75rem] w-full items-end justify-between border-t border-solid border-neutral-500/10 py-4 sm:py-6 dark:border-white/5 box-border">
+          <div className="flex w-full flex-col sm:flex-row sm:justify-between items-end sm:items-start gap-3 sm:gap-0">
             <ul className="flex gap-4 sm:mb-0">
               <li>
                 <Link href="/" className="link-fade">

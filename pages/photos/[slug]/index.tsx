@@ -150,7 +150,7 @@ export default function PhotoSet({
           <div className="top-0 left-0 flex flex-row items-center mb-7 sm:mb-14">
             <LinkButton
               href="/photos"
-              className="px-2 py-1.5 text-sm gap-1 items-center flex rounded-lg bg-gray-200 text-neutral-700 transition-colors [font-variation-settings:'opsz'_14,'wght'_400] hover:bg-gray-300 dark:bg-neutral-900 dark:text-silver-dark dark:hover:bg-neutral-800"
+              className="px-2 py-1.5 text-sm gap-1 items-center flex rounded-lg bg-gray-200 text-neutral-700 transition-colors [font-variation-settings:'opsz'_14,'wght'_400] hover:bg-gray-300 dark:bg-neutral-800 dark:text-silver-dark dark:hover:bg-neutral-700"
             >
               <ChevronLeft size={12} />
               Photos
@@ -185,9 +185,7 @@ export default function PhotoSet({
               <Badge>{formatDate(photoSet.updatedAt)}</Badge>
             </div>
             <div className="relative">
-              <LinkShare title={photoSet.title} url={url}>
-                Share
-              </LinkShare>
+              <LinkShare url={url}>Copy link</LinkShare>
             </div>
           </div>
         </div>
