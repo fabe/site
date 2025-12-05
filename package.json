@@ -37,7 +37,7 @@
     "mapbox-gl": "^2.11.1",
     "marked": "^4.0.18",
     "micro": "^9.4.1",
-    "next": "^15.4.5",
+    "next": "^15.5.7",
     "next-mdx-remote": "^4.1.0",
     "next-seo": "^6.1.0",
     "next-sitemap": "^4.2.3",
