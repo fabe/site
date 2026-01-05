@@ -7,15 +7,15 @@ export default function Resume() {
       <dt className="list-title">
         <h3 className="text-neutral-500 dark:text-silver-dark">
           <div className="flex items-center gap-2">
-            2025
+            2026
             <Badge>Present</Badge>
           </div>
         </h3>
       </dt>
       <dd className="list-content">
-        <div>Staff Product Designer, AI</div>
+        <div>Senior Product Designer</div>
         <div>
-          <LinkExternal href="//contentful.com">Contentful</LinkExternal>
+          <LinkExternal href="//github.com">GitHub</LinkExternal>
         </div>
         <div className="pt-1 text-sm text-neutral-500 [font-variation-settings:'opsz'_14] dark:text-silver-dark">
           London, UK
@@ -23,15 +23,15 @@ export default function Resume() {
       </dd>
 
       <dt className="list-title mt-4 border-none pt-0 sm:mt-0">
-        <h3 className="text-neutral-500 dark:text-silver-dark">2019</h3>
+        <h3 className="text-neutral-500 dark:text-silver-dark">2025</h3>
       </dt>
       <dd className="list-content border-none pt-0">
-        <div>Sr. Product Designer, Extensibility</div>
+        <div>Senior &rarr; Staff Product Designer</div>
         <div>
           <LinkExternal href="//contentful.com">Contentful</LinkExternal>
         </div>
         <div className="pt-1 text-sm text-neutral-500 [font-variation-settings:'opsz'_14] dark:text-silver-dark">
-          Berlin, Germany
+          London, UK
         </div>
       </dd>
 

@@ -14,7 +14,7 @@ export function LinkExternal({ href, children }) {
     >
       <span style={{ wordBreak: "break-word" }}>
         {children}
-        <ExternalIcon size={16} className="align-text-bottom inline ml-0.5" />
+        <ExternalIcon size={16} className="inline ml-0.5 mb-0.5" />
       </span>
     </a>
   );
