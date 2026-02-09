@@ -19,45 +19,52 @@ import {
   SiteSettings,
 } from "../../types/types.generated";
 
-const {
-  CONTENTFUL_SPACE_ID,
-  CONTENTFUL_DELIVERY,
-  GLOBE_CONTENTFUL_SPACE_ID,
-  GLOBE_CONTENTFUL_DELIVERY,
-} = process.env;
 const SITE_SETTINGS_ENTRY_ID = "4VjpvaxnxzRE0XPfQjwHQK";
-const BASE_URL = `https://graphql.contentful.com/content/v1/spaces/${CONTENTFUL_SPACE_ID}`;
-const GLOBE_BASE_URL = `https://graphql.contentful.com/content/v1/spaces/${GLOBE_CONTENTFUL_SPACE_ID}`;
 
-export const contentfulClient = new ApolloClient({
-  ssrMode: true,
-  link: createHttpLink({
-    uri: BASE_URL,
-    credentials: "same-origin",
-    headers: {
-      Authorization: `Bearer ${CONTENTFUL_DELIVERY}`,
-    },
-  }),
-  cache: new InMemoryCache(),
-});
+let _contentfulClient: ApolloClient<any> | null = null;
+let _contentfulGlobeClient: ApolloClient<any> | null = null;
 
-export const contentfulGlobeClient = new ApolloClient({
-  ssrMode: true,
-  link: createHttpLink({
-    uri: GLOBE_BASE_URL,
-    credentials: "same-origin",
-    headers: {
-      Authorization: `Bearer ${GLOBE_CONTENTFUL_DELIVERY}`,
-    },
-  }),
-  cache: new InMemoryCache(),
-});
+export function getContentfulClient() {
+  if (!_contentfulClient) {
+    const BASE_URL = `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`;
+    _contentfulClient = new ApolloClient({
+      ssrMode: true,
+      link: createHttpLink({
+        uri: BASE_URL,
+        credentials: "same-origin",
+        headers: {
+          Authorization: `Bearer ${process.env.CONTENTFUL_DELIVERY}`,
+        },
+      }),
+      cache: new InMemoryCache(),
+    });
+  }
+  return _contentfulClient;
+}
+
+export function getContentfulGlobeClient() {
+  if (!_contentfulGlobeClient) {
+    const GLOBE_BASE_URL = `https://graphql.contentful.com/content/v1/spaces/${process.env.GLOBE_CONTENTFUL_SPACE_ID}`;
+    _contentfulGlobeClient = new ApolloClient({
+      ssrMode: true,
+      link: createHttpLink({
+        uri: GLOBE_BASE_URL,
+        credentials: "same-origin",
+        headers: {
+          Authorization: `Bearer ${process.env.GLOBE_CONTENTFUL_DELIVERY}`,
+        },
+      }),
+      cache: new InMemoryCache(),
+    });
+  }
+  return _contentfulGlobeClient;
+}
 
 export async function getPlaylists(
   _: any,
   args: QueryPlaylistsArgs,
 ): Promise<Playlist[]> {
-  const response = await contentfulClient.query({
+  const response = await getContentfulClient().query({
     query: gql`
       query getAllPlaylists($limit: Int) {
         playlistCollection(limit: $limit) {
@@ -97,7 +104,7 @@ export async function getPosts(
   _: any,
   args: QueryPostsArgs,
 ): Promise<PostWithoutBody[]> {
-  const response = await contentfulClient.query({
+  const response = await getContentfulClient().query({
     query: gql`
       query getAllPosts($limit: Int) {
         postCollection(
@@ -139,7 +146,7 @@ export async function getPost(
   _: any,
   args: QueryPostArgs,
 ): Promise<Post | null> {
-  const response = await contentfulClient.query({
+  const response = await getContentfulClient().query({
     query: gql`
       query getPost($slug: String!) {
         postCollection(where: { slug: $slug }, limit: 1) {
@@ -183,7 +190,7 @@ export async function getPhoto(
   _: any,
   args: QueryPhotoArgs,
 ): Promise<Photo | null> {
-  const response = await contentfulClient.query({
+  const response = await getContentfulClient().query({
     query: gql`
       query getPhoto($id: String!) {
         photo(id: $id) {
@@ -235,7 +242,7 @@ export async function getPhotos(
   _: any,
   args: QueryPhotosArgs,
 ): Promise<Photo[]> {
-  const response = await contentfulClient.query({
+  const response = await getContentfulClient().query({
     query: gql`
       query getAllPhotos($limit: Int) {
         photoCollection(limit: $limit) {
@@ -284,7 +291,7 @@ export async function getPhotos(
 }
 
 export async function getSiteSettings(): Promise<SiteSettings | null> {
-  const response = await contentfulClient.query({
+  const response = await getContentfulClient().query({
     query: gql`
       query getSiteSettings($id: String!) {
         siteSettings(id: $id) {
@@ -311,7 +318,7 @@ export async function getSiteSettings(): Promise<SiteSettings | null> {
 }
 
 export async function getPlaces(_: any): Promise<Place[]> {
-  const response = await contentfulGlobeClient.query({
+  const response = await getContentfulGlobeClient().query({
     query: gql`
       query getAllPlaces {
         placeCollection(limit: 500, where: { bucketList_not: true }) {
@@ -349,7 +356,7 @@ export async function getPhotoSet(
   _: any,
   args: QueryPhotoSetArgs,
 ): Promise<PhotoSet | null> {
-  const response = await contentfulClient.query({
+  const response = await getContentfulClient().query({
     query: gql`
       query getPhotoSet($slug: String!) {
         photoSetCollection(where: { slug: $slug }, limit: 1) {
@@ -440,7 +447,7 @@ export async function getPhotoSets(
   _: any,
   args: QueryPhotoSetsArgs,
 ): Promise<PhotoSet[]> {
-  const response = await contentfulClient.query({
+  const response = await getContentfulClient().query({
     query: gql`
       query getPhotoSets($limit: Int) {
         photoSetCollection(limit: $limit) {

@@ -20,3 +20,8 @@ export type MusicMode = "SPOTIFY_ONLY" | "PREFER_SPOTIFY";
 
 export const MUSIC_STATUS_MODE: MusicMode =
   (process.env.NEXT_PUBLIC_MUSIC_STATUS_MODE as MusicMode) || "SPOTIFY_ONLY";
+
+export type BookSource = "LITERAL" | "GOODREADS";
+
+export const BOOK_SOURCE: BookSource =
+  (process.env.BOOK_SOURCE as BookSource) || "LITERAL";

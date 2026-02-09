@@ -1,7 +1,5 @@
 import { SpotifyStatus } from "../../types/types.generated";
 
-const { LASTFM_API_KEY: apiKey, LASTFM_USERNAME: username } = process.env;
-
 const LASTFM_RECENT_ENDPOINT = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&format=json&limit=1`;
 
 function normalizeImage(
@@ -14,6 +12,7 @@ function normalizeImage(
 }
 
 export async function getLastfmStatus(): Promise<SpotifyStatus> {
+  const { LASTFM_API_KEY: apiKey, LASTFM_USERNAME: username } = process.env;
   if (!apiKey || !username) {
     return { isPlaying: false } as SpotifyStatus;
   }

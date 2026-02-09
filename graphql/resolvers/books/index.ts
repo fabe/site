@@ -10,16 +10,10 @@ import {
   CollectionType,
   QueryBooksArgs,
 } from "../../types/types.generated";
+import Parser from "rss-parser";
+import { BOOK_SOURCE } from "../../../constants";
 
-const {
-  LITERAL_EMAIL,
-  LITERAL_PASSWORD,
-  LITERAL_TOKEN,
-  LITERAL_USER_ID,
-  LITERAL_USER_HANDLE,
-} = process.env;
-
-const LITERAL_BASE_URL = "https://literal.club/graphql/";
+const LITERAL_BASE_URL = "https://api.literal.club/";
 
 // No need for auth at the moment
 //
@@ -33,22 +27,29 @@ const LITERAL_BASE_URL = "https://literal.club/graphql/";
 //   };
 // });
 
-export const literalClient = new ApolloClient({
-  ssrMode: true,
-  link: createHttpLink({
-    uri: LITERAL_BASE_URL,
-    credentials: "same-origin",
-  }),
-  cache: new InMemoryCache(),
-});
+let _literalClient: ApolloClient<any> | null = null;
+
+function getLiteralClient() {
+  if (!_literalClient) {
+    _literalClient = new ApolloClient({
+      ssrMode: true,
+      link: createHttpLink({
+        uri: LITERAL_BASE_URL,
+        credentials: "same-origin",
+      }),
+      cache: new InMemoryCache(),
+    });
+  }
+  return _literalClient;
+}
 
 const getLiteralToken = async (email: String, password: String) => {
-  if (LITERAL_TOKEN) return LITERAL_TOKEN;
+  if (process.env.LITERAL_TOKEN) return process.env.LITERAL_TOKEN;
 
   const query = JSON.stringify({
     query: `
         mutation {
-          login(email: "${LITERAL_EMAIL}", password: "${LITERAL_PASSWORD}") {
+          login(email: "${process.env.LITERAL_EMAIL}", password: "${process.env.LITERAL_PASSWORD}") {
             token
             email
             languages
@@ -82,10 +83,18 @@ export async function getBooks(_: any, args: QueryBooksArgs): Promise<Book[]> {
 
   switch (args.collection) {
     case CollectionType.Reading:
-      books = await getReading();
+      if (BOOK_SOURCE === "GOODREADS") {
+        books = await getReadingFromGoodreads();
+      } else {
+        books = await getReadingFromLiteral();
+      }
       break;
     default:
-      books = await getReading();
+      if (BOOK_SOURCE === "GOODREADS") {
+        books = await getReadingFromGoodreads();
+      } else {
+        books = await getReadingFromLiteral();
+      }
       break;
   }
 
@@ -96,8 +105,8 @@ export async function getBooks(_: any, args: QueryBooksArgs): Promise<Book[]> {
   return books;
 }
 
-async function getReading(): Promise<Book[]> {
-  const response = await literalClient.query({
+async function getReadingFromLiteral(): Promise<Book[]> {
+  const response = await getLiteralClient().query({
     query: gql`
       query booksByReadingStateAndProfile($profileId: String!) {
         booksByReadingStateAndProfile(
@@ -119,7 +128,7 @@ async function getReading(): Promise<Book[]> {
       }
     `,
     variables: {
-      profileId: LITERAL_USER_ID,
+      profileId: process.env.LITERAL_USER_ID,
     },
   });
 
@@ -134,11 +143,77 @@ async function getReading(): Promise<Book[]> {
         return a.name;
       })
       .join(", "),
-    url: `https://literal.club/${LITERAL_USER_HANDLE}/book/${book.slug}`,
+    url: `https://literal.club/${process.env.LITERAL_USER_HANDLE}/book/${book.slug}`,
     coverUrl: book.cover,
     readingDate: book.publishedDate,
     fallbackColors: book.gradientColors,
   }));
 
   return books;
+}
+
+/**
+ * Cleans Goodreads book titles by removing common patterns:
+ * - Series info in parentheses: "(Series Name #1)"
+ * - Subtitles after colons: "Title: Subtitle"
+ * - Extra whitespace
+ */
+function cleanGoodreadsTitle(title: string): string {
+  if (!title) return title;
+
+  let cleaned = title;
+
+  // Remove series info in parentheses at the end (e.g., "(Harry Potter #1)")
+  cleaned = cleaned.replace(/\s*\([^)]*#\d+[^)]*\)$/, "");
+
+  // Remove any remaining parenthetical info at the end
+  cleaned = cleaned.replace(/\s*\([^)]*\)$/, "");
+
+  // Remove subtitle (everything after colon)
+  cleaned = cleaned.split(":")[0];
+
+  // Remove extra whitespace
+  cleaned = cleaned.trim();
+
+  return cleaned;
+}
+
+async function getReadingFromGoodreads(): Promise<Book[]> {
+  const parser = new Parser({
+    customFields: {
+      item: [
+        ["book_id", "bookId"],
+        ["book_large_image_url", "bookLargeImageUrl"],
+        ["author_name", "authorName"],
+      ],
+    },
+  });
+
+  const goodreadsUserId = process.env.GOODREADS_USER_ID;
+  if (!goodreadsUserId) {
+    console.error("GOODREADS_USER_ID environment variable not set");
+    return [];
+  }
+
+  const rssUrl = `https://www.goodreads.com/review/list_rss/${goodreadsUserId}?shelf=currently-reading`;
+
+  try {
+    const feed = await parser.parseURL(rssUrl);
+
+    if (!feed.items || feed.items.length === 0) return [];
+
+    const books = feed.items.map((item: any) => ({
+      title: cleanGoodreadsTitle(item.title || ""),
+      author: item.authorName || "",
+      url: `https://www.goodreads.com/book/show/${item.bookId}`,
+      coverUrl: item.bookLargeImageUrl || "",
+      readingDate: item.pubDate || null,
+      fallbackColors: null,
+    }));
+
+    return books;
+  } catch (error) {
+    console.error("Error fetching Goodreads RSS feed:", error);
+    return [];
+  }
 }
