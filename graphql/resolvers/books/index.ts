@@ -11,7 +11,6 @@ import {
   QueryBooksArgs,
 } from "../../types/types.generated";
 import Parser from "rss-parser";
-import { BOOK_SOURCE } from "../../../constants";
 
 const LITERAL_BASE_URL = "https://api.literal.club/";
 
@@ -78,22 +77,25 @@ const getLiteralToken = async (email: String, password: String) => {
 };
 
 export async function getBooks(_: any, args: QueryBooksArgs): Promise<Book[]> {
-  const { limit } = args;
+  const { limit, source } = args;
   let books = [];
+
+  // Default to GOODREADS if no source specified
+  const bookSource = source || "GOODREADS";
 
   switch (args.collection) {
     case CollectionType.Reading:
-      if (BOOK_SOURCE === "GOODREADS") {
-        books = await getReadingFromGoodreads();
-      } else {
+      if (bookSource === "LITERAL") {
         books = await getReadingFromLiteral();
+      } else {
+        books = await getReadingFromGoodreads();
       }
       break;
     default:
-      if (BOOK_SOURCE === "GOODREADS") {
-        books = await getReadingFromGoodreads();
-      } else {
+      if (bookSource === "LITERAL") {
         books = await getReadingFromLiteral();
+      } else {
+        books = await getReadingFromGoodreads();
       }
       break;
   }

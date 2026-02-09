@@ -50,6 +50,11 @@ export type Book = {
   url: Scalars['String'];
 };
 
+export enum BookSource {
+  Goodreads = 'GOODREADS',
+  Literal = 'LITERAL'
+}
+
 export enum CollectionType {
   Reading = 'READING'
 }
@@ -173,6 +178,7 @@ export type Query = {
 export type QueryBooksArgs = {
   collection?: InputMaybe<CollectionType>;
   limit?: InputMaybe<Scalars['Int']>;
+  source?: InputMaybe<BookSource>;
 };
 
 

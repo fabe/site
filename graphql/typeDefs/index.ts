@@ -4,7 +4,7 @@ export const typeDefs = gql`
   scalar JSON
 
   type Query {
-    books(limit: Int, collection: CollectionType): [Book]!
+    books(limit: Int, collection: CollectionType, source: BookSource): [Book]!
     photo(id: String!): Photo
     photos(limit: Int): [Photo]!
     photoSet(slug: String!): PhotoSet
@@ -22,6 +22,11 @@ export const typeDefs = gql`
 
   enum CollectionType {
     READING
+  }
+
+  enum BookSource {
+    LITERAL
+    GOODREADS
   }
 
   type SpotifyStatus {
