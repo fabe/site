@@ -17,10 +17,14 @@ export default function Lightbox({
   return (
     <>
       {isOpen && (
-        <DialogOverlay isOpen onDismiss={onDismiss}>
-          <div className="lg:px-8 lg:py-6 min-h-screen flex flex-col w-full items-center bg-neutral-950/40 dark:bg-neutral-800/40 backdrop-blur-lg backdrop-saturate-150 overflow-hidden overscroll-none">
-            <div className="flex flex-col items-center grow w-full max-w-7xl h-full lg:rounded-lg overflow-auto lg:shadow-2xl overscroll-none">
-              <DialogContent className="flex justify-center items-center overscroll-none">
+        <DialogOverlay
+          isOpen
+          onDismiss={onDismiss}
+          style={{ overflow: "hidden" }}
+        >
+          <div className="lg:px-8 lg:py-6 h-screen flex flex-col w-full items-center bg-neutral-950/40 dark:bg-neutral-800/40 backdrop-blur-lg backdrop-saturate-150 overflow-hidden overscroll-none">
+            <div className="flex flex-col items-center grow w-full max-w-7xl h-full lg:rounded-lg overflow-hidden lg:shadow-2xl overscroll-none">
+              <DialogContent className="flex justify-center items-center overscroll-none w-full h-full !m-0 !p-0 !bg-transparent">
                 {children}
               </DialogContent>
               <div className="sticky top-0 self-end h-0 z-10 order-1">

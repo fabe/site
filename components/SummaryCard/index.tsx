@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Plus } from "../Button";
 
 interface SummaryCardProps {
@@ -23,7 +22,7 @@ export default function SummaryCard({
     >
       {imageSrc ? (
         <div className="origin-center drop-shadow-md transition-transform shrink-0 sm:block hidden">
-          <Image
+          <img
             className="w-32 h-32 rounded"
             src={imageSrc}
             alt={imageAlt}

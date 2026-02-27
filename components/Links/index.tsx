@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { ExternalIcon, CopyIcon } from "../Icons";
 import { Tooltip } from "../Tooltip";
@@ -53,7 +53,7 @@ export function LinkShare({ url, children, className = "" }) {
 export function LinkButton({ href, children, className = "", ...props }) {
   return (
     <Link
-      href={href}
+      to={href}
       className={`group relative isolate flex items-center leading-tight gap-1 text-sm px-2 py-1.5 ${className}`}
       {...props}
     >

@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { createPortal } from "react-dom";
-import Image from "next/image";
 
 interface ImageLightboxProps {
   src: string;
@@ -66,8 +65,8 @@ export default function ImageLightbox({
         <div
           className={`relative rounded-xl sm:rounded-2xl overflow-hidden bg-gray-100 dark:bg-neutral-800/75`}
         >
-          <Image
-            src={src}
+          <img
+            src={`${src}?w=1600&fm=webp`}
             alt={alt}
             width={width}
             height={height}
@@ -187,13 +186,12 @@ export default function ImageLightbox({
               duration: 0.4,
             }}
           >
-            <Image
-              src={src}
+            <img
+              src={`${src}?w=1600&fm=webp`}
               alt={alt}
               width={width}
               height={height}
               className="w-full h-full object-cover"
-              priority
             />
             <div className="absolute inset-0 pointer-events-none rounded-xl sm:rounded-2xl box-border border border-neutral-800/5 dark:border-white/5"></div>
           </motion.div>
@@ -213,8 +211,8 @@ export default function ImageLightbox({
           }`}
           onClick={openLightbox}
         >
-          <Image
-            src={src}
+          <img
+            src={`${src}?w=1600&fm=webp`}
             alt={alt}
             width={width}
             height={height}

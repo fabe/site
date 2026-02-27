@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
+import { Link, useLocation, useRouter } from "@tanstack/react-router";
 import { Command } from "cmdk";
 import { useState, useEffect } from "react";
 import {
@@ -25,14 +24,15 @@ enum TooltipState {
 }
 
 export default function Archipelago() {
+  const location = useLocation();
   const router = useRouter();
-  const currentRoute = router.pathname;
+  const currentRoute = location.pathname;
   const isHome = currentRoute === "/";
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [tooltip, setTooltip] = useState<TooltipState>(undefined);
+  const [tooltip, setTooltip] = useState<TooltipState | undefined>(undefined);
 
-  const navigate = async (href) => {
+  const navigate = async (href: string) => {
     if (!href) return;
     setLoading(true);
 
@@ -40,10 +40,8 @@ export default function Archipelago() {
       window.location.href = href;
     } else if (href.includes("//")) {
       window.open(href, "_blank", "noopener,noreferrer");
-    } else if (href === currentRoute) {
-      await router.replace(href);
     } else {
-      await router.push(href);
+      await router.navigate({ to: href });
     }
 
     setLoading(false);
@@ -51,11 +49,8 @@ export default function Archipelago() {
   };
 
   useEffect(() => {
-    // Prefetch menu
-    router.prefetch("/posts");
-
     // Toggle the menu when ⌘K is pressed
-    const down = (e) => {
+    const down = (e: KeyboardEvent) => {
       if (e.keyCode === 75 && (e.ctrlKey || e.metaKey)) {
         e.preventDefault();
         setOpen((open) => !open);
@@ -64,7 +59,7 @@ export default function Archipelago() {
 
     document.addEventListener("keydown", down);
     return () => document.removeEventListener("keydown", down);
-  }, [router]);
+  }, []);
 
   return (
     <>
@@ -171,7 +166,7 @@ export default function Archipelago() {
                 onMouseLeave={() => setTooltip(undefined)}
               >
                 <Tooltip open={tooltip === TooltipState.HOME}>Home</Tooltip>
-                <Link href="/" className="island">
+                <Link to="/" className="island">
                   <span className="sr-only">Go home</span>
                   <HomeIcon size={20} />
                 </Link>

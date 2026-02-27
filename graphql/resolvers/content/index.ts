@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
-import { Place } from "next-seo/lib/types";
+import { Place } from "../../types/types.generated";
 
 import {
   Photo,

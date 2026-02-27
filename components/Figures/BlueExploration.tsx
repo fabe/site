@@ -1,6 +1,6 @@
 import React from "react";
 import { Tooltip } from "../Tooltip";
-import { ProseCaption } from "../../pages/work";
+import { ProseCaption } from "../Prose";
 
 export function BlueExploration() {
   // 5 different shades of blue representing the exploration process

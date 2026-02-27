@@ -16,7 +16,7 @@ export function Main({ children, slim = false }) {
 export function Container({ children }) {
   return (
     <>
-      <main className="m:px-0 flex justify-center px-6 pt-8 sm:pt-32">
+      <main className="m:px-0 flex justify-center px-6 pb-8 pt-8 sm:pb-32 sm:pt-32">
         <article className="w-full max-w-main grow">{children}</article>
       </main>
     </>

@@ -3,6 +3,7 @@ import { SpotifyStatus } from "../../graphql/types/types.generated";
 import Badge from "../Badge";
 import MediaCard from "../MediaCard";
 import { useEffect, useState } from "react";
+import HomeSection from "./Section";
 
 interface NowPlayingProps {
   spotifyStatus: SpotifyStatus;
@@ -12,16 +13,16 @@ interface NowPlayingProps {
 export default function NowPlayingWidget(props: NowPlayingProps) {
   if (props.loading) {
     return (
-      <dl className="list-container">
-        <dt className="list-title">
+      <HomeSection
+        title={
           <h3 className="text-neutral-500 dark:text-silver-dark">
             <div className="flex items-center gap-2">Listening</div>
           </h3>
-        </dt>
-        <dd className="list-content animate-pulse">
-          <MediaCard loading={true} />
-        </dd>
-      </dl>
+        }
+        ddClassName="animate-pulse"
+      >
+        <MediaCard loading={true} />
+      </HomeSection>
     );
   }
 
@@ -33,8 +34,8 @@ export default function NowPlayingWidget(props: NowPlayingProps) {
   const { album, albumImageUrl, title, artist, spotifyUrl } = song;
 
   return (
-    <dl className="list-container">
-      <dt className="list-title">
+    <HomeSection
+      title={
         <h3 className="text-neutral-500 dark:text-silver-dark">
           <div className="flex items-center gap-2">
             Listening
@@ -49,23 +50,21 @@ export default function NowPlayingWidget(props: NowPlayingProps) {
             )}
           </div>
         </h3>
-      </dt>
-
-      <dd className="list-content">
-        <MediaCard
-          title={title}
-          subtitle={`${artist}${album ? ` · ${album}` : null}`}
-          image={{
-            alt: album ? album : "Album cover",
-            title: album ? album : null,
-            src: albumImageUrl ? albumImageUrl : "",
-            width: 56,
-            height: 56,
-          }}
-          href={spotifyUrl}
-          hrefLabel="View on Spotify"
-        />
-      </dd>
-    </dl>
+      }
+    >
+      <MediaCard
+        title={title}
+        subtitle={`${artist}${album ? ` · ${album}` : null}`}
+        image={{
+          alt: album ? album : "Album cover",
+          title: album ? album : null,
+          src: albumImageUrl ? albumImageUrl : "",
+          width: 56,
+          height: 56,
+        }}
+        href={spotifyUrl}
+        hrefLabel="View on Spotify"
+      />
+    </HomeSection>
   );
 }

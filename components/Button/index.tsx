@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { PlusIcon } from "../Icons";
 
 interface RichButtonProps {
@@ -32,7 +31,7 @@ export function RichButton({
       <span className="line-clamp-1">{children}</span>
       <span className="flex">
         {imageSrc ? (
-          <Image
+          <img
             className="rounded-full -mr-2"
             width={32}
             height={32}

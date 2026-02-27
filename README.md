@@ -9,5 +9,5 @@ This is the source code of [my website](https://fabianschultz.com).
 
     $ git clone git@github.com:fabe/site.git
     $ cd site
-    $ yarn
-    $ yarn dev
+    $ pnpm install
+    $ pnpm dev

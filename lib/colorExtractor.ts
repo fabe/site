@@ -1,5 +1,3 @@
-import sharp from "sharp";
-
 export interface ColorData {
   dominant: string;
   palette: string[];
@@ -10,6 +8,7 @@ export async function extractColorsFromImage(
   imageUrl: string,
 ): Promise<ColorData> {
   try {
+    const sharp = (await import("sharp")).default;
     // Prefer fetching a small, compressed Contentful rendition
     const makeSmallContentfulUrl = (url: string) => {
       try {

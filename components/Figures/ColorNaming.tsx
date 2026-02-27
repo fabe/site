@@ -1,7 +1,7 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { colorPalette } from "./ColorPalette";
-import { ProseCaption } from "../../pages/work";
+import { ProseCaption } from "../Prose";
 
 // Helper function to find the hex color for a given color name
 const getColorHex = (colorName: string, phase: string): string => {

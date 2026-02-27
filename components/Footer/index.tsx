@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@tanstack/react-router";
 import { GithubIcon } from "../Icons";
 
 export default function Footer() {
@@ -9,29 +9,29 @@ export default function Footer() {
           <div className="flex w-full flex-col sm:flex-row sm:justify-between items-end sm:items-start gap-3 sm:gap-0">
             <ul className="flex gap-4 sm:mb-0">
               <li>
-                <Link href="/" className="link-fade">
+                <Link to="/" className="link-fade">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/posts" className="link-fade">
+                <Link to="/posts" className="link-fade">
                   Posts
                 </Link>
               </li>
               <li>
-                <Link href="/playlists" className="link-fade">
+                <Link to="/playlists" className="link-fade">
                   Playlists
                 </Link>
               </li>
               <li>
-                <Link href="/globe" className="link-fade">
+                <Link to="/globe" className="link-fade">
                   Globe
                 </Link>
               </li>
             </ul>
             <ul className="flex items-center gap-4">
               <li>
-                <Link href="/colophon" className="link-fade">
+                <Link to="/colophon" className="link-fade">
                   Colophon
                 </Link>
               </li>
@@ -51,7 +51,7 @@ export default function Footer() {
                     site
                     <span className="hidden text-sm text-neutral-500/[.5] dark:text-silver-dark/[.5] sm:inline slashed-zero">
                       #
-                      {process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA?.slice(
+                      {import.meta.env.VITE_VERCEL_GIT_COMMIT_SHA?.slice(
                         0,
                         7,
                       ) || "97540ec"}

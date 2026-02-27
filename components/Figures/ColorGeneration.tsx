@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 
 import React from "react";
-import { ProseCaption } from "../../pages/work";
+import { ProseCaption } from "../Prose";
 
 export function ColorGeneration() {
   return (

@@ -1,6 +1,4 @@
 import { useMemo } from "react";
-import { IncomingMessage, ServerResponse } from "http";
-
 import {
   ApolloClient,
   HttpLink,
@@ -8,58 +6,66 @@ import {
   NormalizedCacheObject,
 } from "@apollo/client";
 import { GRAPHQL_BASE_URL } from "./constants";
+
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined;
 
-export type ResolverContext = {
-  req?: IncomingMessage;
-  res?: ServerResponse;
-};
-
-function createIsomorphLink(context: ResolverContext = {}) {
-  if (typeof window === "undefined") {
-    const { SchemaLink } = require("@apollo/client/link/schema");
-    const { schema } = require("./schema");
-
-    console.log(`🌐 Using schema link on server.`);
-    return new SchemaLink({ schema, context });
-  }
-
-  return new HttpLink({
-    uri: GRAPHQL_BASE_URL,
-    credentials: "same-origin",
-  });
-}
-
-function createApolloClient(context?: ResolverContext) {
+/**
+ * Create an Apollo client for use in the browser.
+ * Uses HttpLink (no schema import needed).
+ */
+function createClientApolloClient() {
   return new ApolloClient({
-    ssrMode: typeof window === "undefined",
-    link: createIsomorphLink(context),
+    ssrMode: false,
+    link: new HttpLink({
+      uri: GRAPHQL_BASE_URL,
+      credentials: "same-origin",
+    }),
     cache: new InMemoryCache(),
   });
 }
 
-export function initializeApollo(
+/**
+ * Get or create the Apollo client for client-side use (synchronous).
+ * Used in React components (e.g. ApolloProvider in the root layout).
+ */
+export function getClientApollo(
   initialState: any = null,
-  // Pages with Next.js data fetching methods, like `getStaticProps`, can send
-  // a custom context which will be used by `SchemaLink` to server render pages
-  context?: ResolverContext
-) {
-  const _apolloClient = apolloClient ?? createApolloClient(context);
-
-  // If your page has Next.js data fetching methods that use Apollo Client, the initial state
-  // get hydrated here
-  if (initialState) {
-    _apolloClient.cache.restore(initialState);
+): ApolloClient<NormalizedCacheObject> {
+  if (!apolloClient) {
+    apolloClient = createClientApolloClient();
   }
-  // For SSG and SSR always create a new Apollo Client
-  if (typeof window === "undefined") return _apolloClient;
-  // Create the Apollo Client once in the client
-  if (!apolloClient) apolloClient = _apolloClient;
+  if (initialState) {
+    apolloClient.cache.restore(initialState);
+  }
+  return apolloClient;
+}
 
-  return _apolloClient;
+/**
+ * Initialize an Apollo client for server-side use (async).
+ * Dynamically imports the schema and SchemaLink to avoid pulling
+ * server-only code (resolvers, rss-parser, sharp, etc.) into the
+ * client bundle.
+ */
+export async function initializeApollo(
+  initialState: any = null,
+): Promise<ApolloClient<NormalizedCacheObject>> {
+  const { SchemaLink } = await import("@apollo/client/link/schema");
+  const { schema } = await import("./schema");
+
+  const client = new ApolloClient({
+    ssrMode: true,
+    link: new SchemaLink({ schema }),
+    cache: new InMemoryCache(),
+  });
+
+  if (initialState) {
+    client.cache.restore(initialState);
+  }
+
+  return client;
 }
 
 export function useApollo(initialState: any) {
-  const store = useMemo(() => initializeApollo(initialState), [initialState]);
+  const store = useMemo(() => getClientApollo(initialState), [initialState]);
   return store;
 }

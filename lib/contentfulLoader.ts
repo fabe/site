@@ -1,4 +1,9 @@
-import { ImageLoaderProps } from "next/image";
+interface ContentfulLoaderProps {
+  src: string;
+  width: number;
+  quality?: number;
+  custom?: string[];
+}
 
 function normalizeSrc(src: string) {
   return src[0] === "/" ? src.slice(1) : src;
@@ -9,7 +14,7 @@ function contentfulLoader({
   quality = 75,
   width,
   custom,
-}: ImageLoaderProps & { custom?: string[] }): string {
+}: ContentfulLoaderProps): string {
   const params = ["w=" + Math.floor(width)];
 
   if (quality) {

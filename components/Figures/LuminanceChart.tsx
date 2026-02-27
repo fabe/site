@@ -11,7 +11,7 @@ import {
   Legend,
 } from "recharts";
 import { colorPalette } from "./ColorPalette";
-import { ProseCaption } from "../../pages/work";
+import { ProseCaption } from "../Prose";
 
 // Enhanced hex to LCH conversion for both luminance and chroma
 function hexToLch(hex: string) {
