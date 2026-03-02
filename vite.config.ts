@@ -25,11 +25,15 @@ export default defineConfig({
     exclude: ["sharp", "rss-parser"],
   },
   ssr: {
-    // Force Vite to bundle these CJS packages so named imports work
+    // Force Vite to bundle these CJS packages so named imports work.
+    // "graphql" must be included because @apollo/server's CJS files
+    // require("graphql"), which Rollup converts to a default import —
+    // but graphql's ESM entry has no default export.
     noExternal: [
       "@apollo/client",
       "@apollo/server",
       "@apollo/server-plugin-landing-page-graphql-playground",
+      "graphql",
     ],
   },
 });
