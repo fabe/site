@@ -9,8 +9,11 @@ export default defineConfig({
     tanstackStart({
       srcDirectory: "app",
       prerender: {
-        enabled: true,
+        enabled: !!process.env.PRERENDER,
         crawlLinks: true,
+        // Ignore protocol-relative URLs (//github.com, //patents.google.com)
+        // that the crawler misinterprets as local paths
+        filter: (page) => !page.path.startsWith("//"),
       },
       sitemap: {
         enabled: true,
@@ -25,14 +28,15 @@ export default defineConfig({
     exclude: ["sharp", "rss-parser"],
   },
   ssr: {
-    // Force Vite to bundle these CJS packages so named imports work.
-    // "graphql" must be included because @apollo/server's CJS files
-    // require("graphql"), which Rollup converts to a default import —
-    // but graphql's ESM entry has no default export.
+    // Bundle all GraphQL/Apollo packages into the SSR build so they
+    // share a single copy of the "graphql" module. Without this,
+    // external packages resolve their own copy of "graphql" at runtime,
+    // causing dual-package hazard (instanceof GraphQLSchema fails).
     noExternal: [
       "@apollo/client",
       "@apollo/server",
       "@apollo/server-plugin-landing-page-graphql-playground",
+      "@graphql-tools/schema",
       "graphql",
     ],
   },

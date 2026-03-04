@@ -1,3 +1,4 @@
+import { GraphQLScalarType } from "graphql";
 import { getBooks } from "./books";
 import {
   getPhoto,
@@ -14,7 +15,17 @@ import { getSpotifyPlaylist, getSpotifyStatus } from "./spotify";
 import { getLastfmStatus } from "./lastfm";
 import { MUSIC_STATUS_MODE } from "../../constants";
 
+const identityScalar = (name: string) =>
+  new GraphQLScalarType({
+    name,
+    serialize: (value) => value,
+    parseValue: (value) => value,
+    parseLiteral: (ast) => (ast as any).value,
+  });
+
 export const resolvers = {
+  JSON: identityScalar("JSON"),
+  Freeform: identityScalar("Freeform"),
   Query: {
     books: getBooks,
     photo: getPhoto,
