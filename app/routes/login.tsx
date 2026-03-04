@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Main } from "@/components/Layouts";
 import { useAudio } from "@/lib/useAudio";
 import OTPInput from "react-otp-input";
+import { useHaptics } from "@/lib/useHaptics";
 import { baseUrl } from "./__root";
 
 const AUDIO_KEYSTROKE_URL = "/keystroke.webm";
@@ -44,6 +45,7 @@ function LoginComponent() {
   const [isLoading, setIsLoading] = useState(false);
   const playKeystrokeSound = useAudio(AUDIO_KEYSTROKE_URL);
   const playConfirmSound = useAudio(AUDIO_CONFIRM_URL);
+  const { trigger: haptic } = useHaptics();
   const { code } = Route.useSearch();
 
   useEffect(() => {
@@ -67,6 +69,7 @@ function LoginComponent() {
       setIsLoading(false);
       setIsValid(true);
       playConfirmSound();
+      haptic("success");
 
       setTimeout(() => {
         window.location.href = "/work";
@@ -74,6 +77,7 @@ function LoginComponent() {
     } else {
       setIsInvalid(true);
       setIsLoading(false);
+      haptic("error");
 
       if (response.status === 423) {
         alert(
@@ -86,6 +90,7 @@ function LoginComponent() {
   const onChange = (res: string) => {
     setPassword(res);
     playKeystrokeSound();
+    haptic("light");
 
     if (res.length === CODE_LENGTH) {
       setIsLoading(true);

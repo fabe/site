@@ -12,6 +12,7 @@ import { LinkButton, LinkShare } from "@/components/Links";
 import formatDate from "@/lib/formatDate";
 import { ChevronLeft } from "@/components/Icons";
 import { useDrag } from "@use-gesture/react";
+import { useHaptics } from "@/lib/useHaptics";
 import type { ColorData } from "@/lib/colorExtractor";
 import type {
   Photo as GqlPhoto,
@@ -93,6 +94,7 @@ function PhotoSetComponent() {
   const { photoSet, siteSettings } = Route.useLoaderData();
   const { id: selectedPhotoId } = Route.useSearch();
   const navigate = useNavigate();
+  const { trigger: haptic } = useHaptics();
 
   const relativeUrl = `/photos/${photoSet.slug}`;
   const url = `${baseUrl}${relativeUrl}`;
@@ -111,6 +113,7 @@ function PhotoSetComponent() {
     ) {
       const nextPhoto = photoSet.photos[selectedPhotoIndex + 1];
       if (nextPhoto) {
+        haptic("selection");
         navigate({
           to: "/photos/$slug",
           params: { slug: photoSet.slug },
@@ -130,6 +133,7 @@ function PhotoSetComponent() {
     if (photoSet.photos && selectedPhotoIndex > 0) {
       const prevPhoto = photoSet.photos[selectedPhotoIndex - 1];
       if (prevPhoto) {
+        haptic("selection");
         navigate({
           to: "/photos/$slug",
           params: { slug: photoSet.slug },
@@ -146,6 +150,7 @@ function PhotoSetComponent() {
   }, [navigate, photoSet.photos, photoSet.slug, selectedPhotoIndex]);
 
   const handleDismiss = useCallback(() => {
+    haptic("light");
     navigate({
       to: "/photos/$slug",
       params: { slug: photoSet.slug },
@@ -279,10 +284,12 @@ function PhotoThumbnail({
 }) {
   const [imageLoaded, setImageLoaded] = useState(false);
   const navigate = useNavigate();
+  const { trigger: haptic } = useHaptics();
 
   return (
     <button
-      onClick={() =>
+      onClick={() => {
+        haptic("light");
         navigate({
           to: "/photos/$slug",
           params: { slug: photoSet.slug },
@@ -293,8 +300,8 @@ function PhotoThumbnail({
             params: { slug: photoSet.slug, id: photo.id },
             unmaskOnReload: true,
           },
-        })
-      }
+        });
+      }}
       className="group relative aspect-[3/4] overflow-hidden sm:[&:nth-child(15n-12)]:col-span-2 sm:last:col-span-2 after:shadow-border dark:after:shadow-none after:absolute after:w-full after:h-full after:z-10 cursor-pointer outline-none focus-visible:outline-none"
       style={{
         backgroundColor:

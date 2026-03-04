@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { createPortal } from "react-dom";
 import { withImageParams } from "@/lib/imageProxy";
+import { useHaptics } from "@/lib/useHaptics";
 
 interface ImageLightboxProps {
   src: string;
@@ -31,6 +32,7 @@ export default function ImageLightbox({
   const [mounted, setMounted] = useState(false);
   const [imageRect, setImageRect] = useState<DOMRect | null>(null);
   const imageRef = useRef<HTMLDivElement>(null);
+  const { trigger: haptic } = useHaptics();
 
   useEffect(() => {
     setMounted(true);
@@ -87,6 +89,7 @@ export default function ImageLightbox({
 
   const openLightbox = () => {
     if (imageRef.current) {
+      haptic("light");
       document.body.style.overflow = "hidden";
       const rect = imageRef.current.getBoundingClientRect();
       setImageRect(rect);
@@ -94,7 +97,10 @@ export default function ImageLightbox({
     }
   };
 
-  const closeLightbox = () => setIsOpen(false);
+  const closeLightbox = () => {
+    haptic("light");
+    setIsOpen(false);
+  };
 
   // Calculate the final dimensions and position for lightbox
   const calculateFinalTransform = () => {

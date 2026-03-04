@@ -44,7 +44,8 @@
     "rss-parser": "^3.12.0",
     "satori": "^0.12.1",
     "sharp": "^0.32.6",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "web-haptics": "^0.0.6"
   },
   "devDependencies": {
     "@apollo/server-plugin-landing-page-graphql-playground": "^4.0.0",

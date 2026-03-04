@@ -1,6 +1,7 @@
 import { Link, useLocation, useRouter } from "@tanstack/react-router";
 import { Command } from "cmdk";
 import { useState, useEffect } from "react";
+import { useHaptics } from "../../lib/useHaptics";
 import {
   CameraIcon,
   CursorIcon,
@@ -31,10 +32,12 @@ export default function Archipelago() {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [tooltip, setTooltip] = useState<TooltipState | undefined>(undefined);
+  const { trigger: haptic } = useHaptics();
 
   const navigate = async (href: string) => {
     if (!href) return;
     setLoading(true);
+    haptic("selection");
 
     if (href.includes("mailto:")) {
       window.location.href = href;
@@ -53,6 +56,7 @@ export default function Archipelago() {
     const down = (e: KeyboardEvent) => {
       if (e.keyCode === 75 && (e.ctrlKey || e.metaKey)) {
         e.preventDefault();
+        haptic("light");
         setOpen((open) => !open);
       }
     };
@@ -63,7 +67,7 @@ export default function Archipelago() {
 
   return (
     <>
-      <Command.Dialog open={open} onOpenChange={setOpen}>
+      <Command.Dialog open={open} onOpenChange={setOpen} onValueChange={() => haptic("selection")}>
         <Command.Input placeholder="Go to..." />
 
         <Command.List>
@@ -166,7 +170,7 @@ export default function Archipelago() {
                 onMouseLeave={() => setTooltip(undefined)}
               >
                 <Tooltip open={tooltip === TooltipState.HOME}>Home</Tooltip>
-                <Link to="/" className="island">
+                <Link to="/" className="island" onClick={() => haptic("light")}>
                   <span className="sr-only">Go home</span>
                   <HomeIcon size={20} />
                 </Link>
@@ -182,7 +186,10 @@ export default function Archipelago() {
               <Tooltip open={tooltip === TooltipState.MENU}>Menu</Tooltip>
               <button
                 className="island"
-                onClick={() => setOpen((open) => !open)}
+                onClick={() => {
+                  haptic("light");
+                  setOpen((open) => !open);
+                }}
               >
                 <span className="sr-only">Open menu</span>
                 <NavigationIcon size={20} />

@@ -1,4 +1,5 @@
 import { Plus } from "../Button";
+import { useHaptics } from "../../lib/useHaptics";
 
 interface SummaryCardProps {
   imageSrc?: string;
@@ -15,9 +16,14 @@ export default function SummaryCard({
   imageAlt = "",
   onClick,
 }: SummaryCardProps) {
+  const { trigger: haptic } = useHaptics();
+
   return (
     <button
-      onClick={onClick}
+      onClick={() => {
+        haptic("light");
+        onClick?.();
+      }}
       className="group/card text-left flex items-center py-6 gap-6 border-b border-solid border-neutral-500/10 dark:border-neutral-900 group-hover/cards:opacity-50 hover:!opacity-100 transition-opacity focus-visible:outline outline-2 outline-indigo-500 outline-offset-2 rounded"
     >
       {imageSrc ? (

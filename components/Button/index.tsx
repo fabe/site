@@ -1,4 +1,5 @@
 import { PlusIcon } from "../Icons";
+import { useHaptics } from "../../lib/useHaptics";
 
 interface RichButtonProps {
   imageSrc?: string;
@@ -23,10 +24,15 @@ export function RichButton({
   imageSrc,
   imageAlt = "",
 }: RichButtonProps) {
+  const { trigger: haptic } = useHaptics();
+
   return (
     <button
       className="group rounded-full inline-flex items-center justify-between gap-4 pl-6 pr-2 py-2 text-sm sm:text-base text-neutral-800 [font-variation-settings:'opsz'_15,_'wght'_600] dark:text-white dark:bg-neutral-800/75 dark:hover:bg-neutral-700/50 bg-gray-200/70 outline-2 outline-indigo-500 outline-offset-2 focus-visible:outline"
-      onClick={onClick}
+      onClick={() => {
+        haptic("light");
+        onClick();
+      }}
     >
       <span className="line-clamp-1">{children}</span>
       <span className="flex">

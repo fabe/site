@@ -2,6 +2,7 @@
 
 import { DialogContent, DialogOverlay } from "@reach/dialog";
 import { CloseIcon } from "../Icons";
+import { useHaptics } from "../../lib/useHaptics";
 
 interface LightboxProps {
   children: JSX.Element | string;
@@ -14,10 +15,10 @@ export default function Lightbox({
   isOpen,
   onDismiss,
 }: LightboxProps) {
-  return (
-    <>
-      {isOpen && (
-        <DialogOverlay
+  const LightboxContent = () => {
+    const { trigger: haptic } = useHaptics();
+    return (
+      <DialogOverlay
           isOpen
           onDismiss={onDismiss}
           style={{ overflow: "hidden" }}
@@ -29,7 +30,10 @@ export default function Lightbox({
               </DialogContent>
               <div className="sticky top-0 self-end h-0 z-10 order-1">
                 <button
-                  onClick={onDismiss}
+                  onClick={() => {
+                    haptic("light");
+                    onDismiss();
+                  }}
                   className="w-9 h-9 flex justify-center items-center sticky top-4 mr-5 mt-5 rounded-full dark:bg-neutral-700 bg-neutral-700 text-white outline-offset-2 dark:opacity-80 opacity-90 hover:opacity-100 transition-opacity"
                 >
                   <CloseIcon size={20} />
@@ -38,7 +42,12 @@ export default function Lightbox({
             </div>
           </div>
         </DialogOverlay>
-      )}
+    );
+  };
+
+  return (
+    <>
+      {isOpen && <LightboxContent />}
     </>
   );
 }

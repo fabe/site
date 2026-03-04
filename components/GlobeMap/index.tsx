@@ -7,6 +7,7 @@ import React, {
   useState,
 } from "react";
 import Map, { Marker, Popup } from "react-map-gl";
+import { useHaptics } from "../../lib/useHaptics";
 
 interface Place {
   name: string;
@@ -32,6 +33,7 @@ export default function GlobeMap({ places, initialViewState }: GlobeMapProps) {
   const [popupInfo, setPopupInfo] = useState<Place | null>(null);
   const [mode, setMode] = useState("light");
   const mapRef = useRef<any>(null);
+  const { trigger: haptic } = useHaptics();
 
   const [settings] = useState({
     scrollZoom: true,
@@ -58,6 +60,7 @@ export default function GlobeMap({ places, initialViewState }: GlobeMapProps) {
           anchor="bottom"
           onClick={(e) => {
             e.originalEvent.stopPropagation();
+            haptic("selection");
             setPopupInfo(place);
           }}
         >
