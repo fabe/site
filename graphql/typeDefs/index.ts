@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const typeDefs = gql`
+export const typeDefsString = `
   scalar JSON
 
   type Query {
@@ -181,3 +181,5 @@ export const typeDefs = gql`
     lon: Float
   }
 `;
+
+export const typeDefs = gql`${typeDefsString}`;

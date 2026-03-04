@@ -1,6 +1,7 @@
 import { Post, SiteSettings } from "../graphql/types/types.generated";
 import { Feed as RSSFeed } from "feed";
-import { baseUrl } from "../components/SEO";
+
+const baseUrl = "https://fabianschultz.com";
 
 export default function (posts: Post[], siteSettings: SiteSettings) {
   const date = new Date();
@@ -34,7 +35,7 @@ export default function (posts: Post[], siteSettings: SiteSettings) {
       title: post.title,
       id: url,
       link: url,
-      description: post.metaDescription,
+      description: post.metaDescription ?? undefined,
       author: [author],
       contributor: [author],
       date: new Date(post.publishedDate),

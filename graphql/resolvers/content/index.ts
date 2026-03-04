@@ -1,7 +1,11 @@
 import { gql } from "@apollo/client";
 
 import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
-import { Place } from "next-seo/lib/types";
+import { Place } from "../../types/types.generated";
+import { proxiedImageUrl } from "../../../lib/imageProxy";
+
+const proxyContentfulUrl = (url: string) =>
+  proxiedImageUrl(url.replace("downloads.ctfassets.net", "images.ctfassets.net"));
 
 import {
   Photo,
@@ -94,7 +98,7 @@ export async function getPlaylists(
       spotifyUrl: string;
     }) => ({
       title: playlist.title,
-      coverUrl: playlist.cover.url,
+      coverUrl: proxiedImageUrl(playlist.cover.url),
       spotifyUrl: playlist.spotifyUrl,
     }),
   );
@@ -136,7 +140,7 @@ export async function getPosts(
   return response.data.postCollection.items.map((post: any) => ({
     title: post.title,
     slug: post.slug,
-    coverUrl: post.cover?.url,
+    coverUrl: proxiedImageUrl(post.cover?.url),
     publishedDate: post.publishedDate,
     metaDescription: post.metaDescription,
   }));
@@ -177,7 +181,7 @@ export async function getPost(
   return response.data.postCollection.items.map((post: any) => ({
     title: post.title,
     slug: post.slug,
-    coverUrl: post.coverImage?.url,
+    coverUrl: proxiedImageUrl(post.coverImage?.url),
     coverAlt: post.coverImage?.description,
     publishedDate: post.publishedDate,
     body: post.body,
@@ -229,10 +233,7 @@ export async function getPhoto(
     exif: photo.exif,
     height: photo.asset.height,
     location: photo.location,
-    url: photo.asset.url.replace(
-      "downloads.ctfassets.net",
-      "images.ctfassets.net",
-    ),
+    url: proxyContentfulUrl(photo.asset.url),
     tags: photo.tags,
     width: photo.asset.width,
   };
@@ -281,10 +282,7 @@ export async function getPhotos(
     exif: photo.exif,
     height: photo.asset.height,
     location: photo.location,
-    url: photo.asset.url.replace(
-      "downloads.ctfassets.net",
-      "images.ctfassets.net",
-    ),
+    url: proxyContentfulUrl(photo.asset.url),
     tags: photo.tags,
     width: photo.asset.width,
   }));
@@ -419,10 +417,7 @@ export async function getPhotoSet(
     featuredPhoto: photoSet.featuredPhoto
       ? {
           ...photoSet.featuredPhoto,
-          url: photoSet.featuredPhoto.asset.url.replace(
-            "downloads.ctfassets.net",
-            "images.ctfassets.net",
-          ),
+          url: proxyContentfulUrl(photoSet.featuredPhoto.asset.url),
           width: photoSet.featuredPhoto.asset.width,
           height: photoSet.featuredPhoto.asset.height,
         }
@@ -430,10 +425,7 @@ export async function getPhotoSet(
     photos: photoSet.photosCollection.items.map((photo) => ({
       id: photo.sys.id,
       description: photo.description,
-      url: photo.asset.url.replace(
-        "downloads.ctfassets.net",
-        "images.ctfassets.net",
-      ),
+      url: proxyContentfulUrl(photo.asset.url),
       width: photo.asset.width,
       height: photo.asset.height,
       exif: photo.exif,
@@ -496,10 +488,7 @@ export async function getPhotoSets(
       id: photo.sys.id,
     })),
     featuredPhoto: {
-      url: photoSet.featuredPhoto.asset.url.replace(
-        "downloads.ctfassets.net",
-        "images.ctfassets.net",
-      ),
+      url: proxyContentfulUrl(photoSet.featuredPhoto.asset.url),
       width: photoSet.featuredPhoto.asset.width,
       height: photoSet.featuredPhoto.asset.height,
     },

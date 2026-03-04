@@ -1,7 +1,10 @@
-import { ImageLoaderProps } from "next/image";
+import { withImageParams } from "./imageProxy";
 
-function normalizeSrc(src: string) {
-  return src[0] === "/" ? src.slice(1) : src;
+interface ContentfulLoaderProps {
+  src: string;
+  width: number;
+  quality?: number;
+  custom?: string[];
 }
 
 function contentfulLoader({
@@ -9,16 +12,24 @@ function contentfulLoader({
   quality = 75,
   width,
   custom,
-}: ImageLoaderProps & { custom?: string[] }): string {
-  const params = ["w=" + Math.floor(width)];
+}: ContentfulLoaderProps): string {
+  const params: Record<string, string | number> = {
+    fm: "webp",
+    w: Math.floor(width),
+  };
 
   if (quality) {
-    params.push("q=" + quality);
+    params.q = quality;
   }
 
-  return `${normalizeSrc(src)}?fm=webp&${params.join("&")}${
-    custom ? `&${custom.join("&")}` : ""
-  }`;
+  if (custom) {
+    for (const c of custom) {
+      const [k, v] = c.split("=");
+      if (k && v) params[k] = v;
+    }
+  }
+
+  return withImageParams(src, params);
 }
 
 export default contentfulLoader;

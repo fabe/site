@@ -1,5 +1,5 @@
 import React from "react";
-import { ProseCaption } from "../../pages/work";
+import { ProseCaption } from "../Prose";
 
 // Color schemes for before/after
 const colorSchemes = {

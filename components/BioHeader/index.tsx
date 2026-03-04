@@ -1,14 +1,13 @@
 import React from "react";
-import Image from "next/image";
+import { Link } from "@tanstack/react-router";
 import { LinkButton, LinkExternal } from "../Links";
 import { ArrowLeftIcon, DocumentIcon } from "../Icons";
-import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   RESUME_URL,
   getPersonalizedResumeURL,
   getPersonalizationFromCookies,
-} from "../../pages/work";
+} from "../../app/routes/work/-work-data";
 
 interface BioHeaderProps {
   backButton?: boolean;
@@ -34,7 +33,7 @@ export function BioHeader({ backButton = false }: BioHeaderProps) {
               transition={{ duration: 0.25, ease: "easeOut" }}
             >
               <Link
-                href="/work"
+                to="/work"
                 className="group relative isolate flex items-center justify-center w-9 h-9"
               >
                 <span className="absolute inset-0 rounded-full bg-neutral-200/60 transition-all duration-100 ease-out-expo dark:bg-neutral-800/75 dark:group-hover:bg-neutral-700/50 group-hover:bg-neutral-200 group-hover:scale-[1.05] z-0" />
@@ -51,7 +50,7 @@ export function BioHeader({ backButton = false }: BioHeaderProps) {
               exit={{ opacity: 0, scale: 0.8 }}
               transition={{ duration: 0.25, ease: "easeOut" }}
             >
-              <Image
+              <img
                 src="https://images.ctfassets.net/zgqdqhjfxb5o/7EvkFEIlCs1AZcwe0l6G2p/f72c3d9f3ab3393a9aee3d527918e6af/v3.5_blue_small.jpg?w=72&h=72"
                 alt="Work"
                 width={36}

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Transition } from "@headlessui/react";
 
 export enum MediaCardImageRadius {
@@ -72,7 +71,7 @@ export default function MediaCard({
             href ? " group-hover:scale-110" : ""
           }`}
         >
-          <Image
+          <img
             alt={image?.alt || ""}
             title={title}
             className={`truncate ${
@@ -83,7 +82,7 @@ export default function MediaCard({
             src={image?.src || FALLBACK_COVER}
             width={image?.width || 112}
             height={image?.height || 160}
-            priority={false}
+            loading="lazy"
           />
         </div>
       </div>

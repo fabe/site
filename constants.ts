@@ -18,5 +18,4 @@ export const PLAYLIST_IDS = [
 
 export type MusicMode = "SPOTIFY_ONLY" | "PREFER_SPOTIFY";
 
-export const MUSIC_STATUS_MODE: MusicMode =
-  (process.env.NEXT_PUBLIC_MUSIC_STATUS_MODE as MusicMode) || "SPOTIFY_ONLY";
+export const MUSIC_STATUS_MODE: MusicMode = "SPOTIFY_ONLY";

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export const useAudio = (url) => {
+export const useAudio = (url: string) => {
   const [audio] = useState(() => {
     if (typeof Audio !== "undefined") {
       return new Audio(url);

@@ -3,7 +3,8 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { createPortal } from "react-dom";
-import Image from "next/image";
+import { withImageParams } from "@/lib/imageProxy";
+import { useHaptics } from "@/lib/useHaptics";
 
 interface ImageLightboxProps {
   src: string;
@@ -31,6 +32,7 @@ export default function ImageLightbox({
   const [mounted, setMounted] = useState(false);
   const [imageRect, setImageRect] = useState<DOMRect | null>(null);
   const imageRef = useRef<HTMLDivElement>(null);
+  const { trigger: haptic } = useHaptics();
 
   useEffect(() => {
     setMounted(true);
@@ -66,8 +68,8 @@ export default function ImageLightbox({
         <div
           className={`relative rounded-xl sm:rounded-2xl overflow-hidden bg-gray-100 dark:bg-neutral-800/75`}
         >
-          <Image
-            src={src}
+          <img
+            src={withImageParams(src, { w: 1600, fm: "webp" })}
             alt={alt}
             width={width}
             height={height}
@@ -87,6 +89,7 @@ export default function ImageLightbox({
 
   const openLightbox = () => {
     if (imageRef.current) {
+      haptic("light");
       document.body.style.overflow = "hidden";
       const rect = imageRef.current.getBoundingClientRect();
       setImageRect(rect);
@@ -94,7 +97,10 @@ export default function ImageLightbox({
     }
   };
 
-  const closeLightbox = () => setIsOpen(false);
+  const closeLightbox = () => {
+    haptic("light");
+    setIsOpen(false);
+  };
 
   // Calculate the final dimensions and position for lightbox
   const calculateFinalTransform = () => {
@@ -187,13 +193,12 @@ export default function ImageLightbox({
               duration: 0.4,
             }}
           >
-            <Image
-              src={src}
+            <img
+              src={withImageParams(src, { w: 1600, fm: "webp" })}
               alt={alt}
               width={width}
               height={height}
               className="w-full h-full object-cover"
-              priority
             />
             <div className="absolute inset-0 pointer-events-none rounded-xl sm:rounded-2xl box-border border border-neutral-800/5 dark:border-white/5"></div>
           </motion.div>
@@ -213,8 +218,8 @@ export default function ImageLightbox({
           }`}
           onClick={openLightbox}
         >
-          <Image
-            src={src}
+          <img
+            src={withImageParams(src, { w: 1600, fm: "webp" })}
             alt={alt}
             width={width}
             height={height}

@@ -8,12 +8,19 @@
 # testing
 /coverage
 
-# next.js
-/.next/
-/out/
+# tanstack start / nitro
+.tanstack/
+.output/
+.nitro/
+.vinxi/
+app/routeTree.gen.ts
+
+# vite
+.vite/
 
 # production
 /build
+/dist
 
 # misc
 .DS_Store
@@ -33,6 +40,5 @@ yarn-error.log*
 .vercel
 
 # sitemaps
-robots.txt
 sitemap.xml
 sitemap-*.xml

@@ -1,8 +1,9 @@
-import Link from "next/link";
+import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { ExternalIcon, CopyIcon } from "../Icons";
 import { Tooltip } from "../Tooltip";
 import useCopy from "@react-hook/copy";
+import { useHaptics } from "../../lib/useHaptics";
 
 export function LinkExternal({ href, children }) {
   return (
@@ -23,9 +24,11 @@ export function LinkExternal({ href, children }) {
 export function LinkShare({ url, children, className = "" }) {
   const [tooltipOpen, setTooltipOpen] = useState(false);
   const { copy } = useCopy(url);
+  const { trigger: haptic } = useHaptics();
 
   const onClick = async () => {
     await copy();
+    haptic("success");
     setTooltipOpen(true);
 
     setTimeout(() => {
@@ -53,7 +56,7 @@ export function LinkShare({ url, children, className = "" }) {
 export function LinkButton({ href, children, className = "", ...props }) {
   return (
     <Link
-      href={href}
+      to={href}
       className={`group relative isolate flex items-center leading-tight gap-1 text-sm px-2 py-1.5 ${className}`}
       {...props}
     >
