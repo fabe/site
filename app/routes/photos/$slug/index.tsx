@@ -119,6 +119,7 @@ function PhotoSetComponent() {
           params: { slug: photoSet.slug },
           search: { id: nextPhoto.id },
           replace: true,
+          resetScroll: false,
           mask: {
             to: "/photos/$slug/$id",
             params: { slug: photoSet.slug, id: nextPhoto.id },
@@ -139,6 +140,7 @@ function PhotoSetComponent() {
           params: { slug: photoSet.slug },
           search: { id: prevPhoto.id },
           replace: true,
+          resetScroll: false,
           mask: {
             to: "/photos/$slug/$id",
             params: { slug: photoSet.slug, id: prevPhoto.id },
@@ -156,6 +158,7 @@ function PhotoSetComponent() {
       params: { slug: photoSet.slug },
       search: { id: undefined },
       replace: true,
+      resetScroll: false,
     });
   }, [navigate, photoSet.slug]);
 
@@ -295,6 +298,7 @@ function PhotoThumbnail({
           params: { slug: photoSet.slug },
           search: { id: photo.id },
           replace: true,
+          resetScroll: false,
           mask: {
             to: "/photos/$slug/$id",
             params: { slug: photoSet.slug, id: photo.id },
