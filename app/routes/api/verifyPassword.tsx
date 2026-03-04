@@ -100,12 +100,12 @@ export const Route = createFileRoute("/api/verifyPassword")({
           failedAttempts.delete(clientIP);
 
           const cookies = [
-            `password=${password}; Path=/; HttpOnly; SameSite=Strict`,
+            `password=${password}; Path=/; HttpOnly; Secure; SameSite=Strict`,
           ];
 
           if (matchedIdentifier !== "default") {
             cookies.push(
-              `personalization=${matchedIdentifier}; Path=/; SameSite=Strict`,
+              `personalization=${matchedIdentifier}; Path=/; Secure; SameSite=Strict`,
             );
           }
 

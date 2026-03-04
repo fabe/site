@@ -1,7 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-const { CONTENTFUL_SPACE_ID } = process.env;
-
 export const Route = createFileRoute("/api/og")({
   server: {
     handlers: {
@@ -12,6 +10,7 @@ export const Route = createFileRoute("/api/og")({
           const { readFile } = await import("node:fs/promises");
           const { join } = await import("node:path");
 
+          const CONTENTFUL_SPACE_ID = process.env.CONTENTFUL_SPACE_ID;
           const { searchParams } = new URL(request.url);
 
           // Read font file

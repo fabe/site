@@ -64,9 +64,6 @@ module.exports = {
       width: {
         main: "46rem",
       },
-      animation: {
-        "spin-slow": "spin 10s linear infinite",
-      },
       letterSpacing: {
         xs: "-.000490774em",
         sm: "-.00622354em",
@@ -74,6 +71,7 @@ module.exports = {
         zero: "0",
       },
       animation: {
+        "spin-slow": "spin 10s linear infinite",
         scale: "scale .4s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards",
         fadeIn: "fadeIn .3s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards",
         shake: "shake .2s ease-in-out 0s 2",
