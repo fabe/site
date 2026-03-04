@@ -15,10 +15,6 @@ export default defineConfig({
         // that the crawler misinterprets as local paths
         filter: (page) => !page.path.startsWith("//"),
       },
-      sitemap: {
-        enabled: true,
-        host: "https://fabianschultz.com",
-      },
     }),
     nitro(),
   ],

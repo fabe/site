@@ -10,4 +10,4 @@ Disallow: /login
 Host: https://fabianschultz.com
 
 # Sitemaps
-Sitemap: https://fabianschultz.com/sitemap.xml
+Sitemap: https://fabianschultz.com/api/sitemap
