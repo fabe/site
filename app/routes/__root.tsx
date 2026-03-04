@@ -76,9 +76,7 @@ export const Route = createRootRoute({
       {
         src: "https://eu.umami.is/script.js",
         defer: true,
-        attrs: {
-          "data-website-id": "06795c3d-e407-438d-9ec4-1395a458e24f",
-        },
+        "data-website-id": "06795c3d-e407-438d-9ec4-1395a458e24f",
       },
     ],
   }),
