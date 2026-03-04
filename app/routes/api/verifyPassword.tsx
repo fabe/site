@@ -99,12 +99,18 @@ export const Route = createFileRoute("/api/verifyPassword")({
         if (matchedIdentifier) {
           failedAttempts.delete(clientIP);
 
-          const cookies = [
+          const headers = new Headers({
+            "Content-Type": "application/json",
+          });
+
+          headers.append(
+            "Set-Cookie",
             `password=${password}; Path=/; HttpOnly; Secure; SameSite=Strict`,
-          ];
+          );
 
           if (matchedIdentifier !== "default") {
-            cookies.push(
+            headers.append(
+              "Set-Cookie",
               `personalization=${matchedIdentifier}; Path=/; Secure; SameSite=Strict`,
             );
           }
@@ -116,10 +122,7 @@ export const Route = createFileRoute("/api/verifyPassword")({
             }),
             {
               status: 200,
-              headers: {
-                "Content-Type": "application/json",
-                "Set-Cookie": cookies.join(", "),
-              },
+              headers,
             },
           );
         } else {

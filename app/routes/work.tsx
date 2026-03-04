@@ -28,22 +28,31 @@ const validateWorkAuth = createServerFn({ method: "GET" }).handler(async () => {
   const password = getCookie("password");
 
   if (!password) {
-    throw redirect({ to: "/login" });
+    return { authenticated: false };
   }
 
   const validCodes = parsePersonalizedCodes();
   const isValidPassword = Object.values(validCodes).includes(password);
 
   if (!isValidPassword) {
-    throw redirect({ to: "/login" });
+    return { authenticated: false };
   }
 
   return { authenticated: true };
 });
 
 export const Route = createFileRoute("/work")({
-  beforeLoad: async () => {
-    await validateWorkAuth();
+  validateSearch: (search: Record<string, unknown>) => ({
+    code: (search.code as string) || undefined,
+  }),
+  beforeLoad: async ({ search }) => {
+    const { authenticated } = await validateWorkAuth();
+    if (!authenticated) {
+      throw redirect({
+        to: "/login",
+        search: search.code ? { code: search.code } : undefined,
+      });
+    }
   },
   component: WorkLayout,
 });

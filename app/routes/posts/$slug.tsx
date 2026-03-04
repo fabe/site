@@ -89,11 +89,6 @@ export const Route = createFileRoute("/posts/$slug")({
   head: ({ loaderData }) => {
     if (!loaderData?.post) return {};
     const { title, metaDescription, coverUrl } = loaderData.post;
-    const slug = loaderData.post.title
-      ? `/posts/${encodeURIComponent(loaderData.post.title)}`
-      : "/posts";
-    const relativeUrl = `/posts/${encodeURIComponent(title)}`;
-
     const ogImage = `${baseUrl}/api/og?title=${encodeURIComponent(title)}${
       coverUrl
         ? `&bg=${encodeURI(

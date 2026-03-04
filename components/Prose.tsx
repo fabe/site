@@ -3,6 +3,8 @@ import { Link } from "@tanstack/react-router";
 import { LinkExternal } from "./Links";
 import { ExternalIcon } from "./Icons";
 import ImageLightbox from "./ImageLightbox";
+
+export { mdxComponents } from "./Prose/index";
 import { withImageParams } from "@/lib/imageProxy";
 
 // Prose components
