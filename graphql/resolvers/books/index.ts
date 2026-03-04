@@ -11,6 +11,7 @@ import {
   QueryBooksArgs,
 } from "../../types/types.generated";
 import Parser from "rss-parser";
+import { proxiedImageUrl } from "../../../lib/imageProxy";
 
 const LITERAL_BASE_URL = "https://api.literal.club/";
 
@@ -146,7 +147,7 @@ async function getReadingFromLiteral(): Promise<Book[]> {
       })
       .join(", "),
     url: `https://literal.club/${process.env.LITERAL_USER_HANDLE}/book/${book.slug}`,
-    coverUrl: book.cover,
+    coverUrl: proxiedImageUrl(book.cover),
     readingDate: book.publishedDate,
     fallbackColors: book.gradientColors,
   }));
@@ -208,7 +209,7 @@ async function getReadingFromGoodreads(): Promise<Book[]> {
       title: cleanGoodreadsTitle(item.title || ""),
       author: item.authorName || "",
       url: `https://www.goodreads.com/book/show/${item.bookId}`,
-      coverUrl: item.bookLargeImageUrl || "",
+      coverUrl: proxiedImageUrl(item.bookLargeImageUrl || ""),
       readingDate: item.pubDate || null,
       fallbackColors: null,
     }));

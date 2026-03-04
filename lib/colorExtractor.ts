@@ -9,6 +9,8 @@ export async function extractColorsFromImage(
 ): Promise<ColorData> {
   try {
     const sharp = (await import("sharp")).default;
+    const { unwrapProxiedUrl } = await import("./imageProxy");
+
     // Prefer fetching a small, compressed Contentful rendition
     const makeSmallContentfulUrl = (url: string) => {
       try {
@@ -28,7 +30,7 @@ export async function extractColorsFromImage(
       }
     };
 
-    const response = await fetch(makeSmallContentfulUrl(imageUrl));
+    const response = await fetch(makeSmallContentfulUrl(unwrapProxiedUrl(imageUrl)));
     const buffer = await response.arrayBuffer();
 
     // Read a small sRGB image and analyze raw pixels

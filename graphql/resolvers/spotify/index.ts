@@ -5,6 +5,7 @@ import {
   SpotifyPlaylist,
   SpotifyStatus,
 } from "../../types/types.generated";
+import { proxiedImageUrl } from "../../../lib/imageProxy";
 
 const NOW_PLAYING_ENDPOINT = `https://api.spotify.com/v1/me/player/currently-playing`;
 const RECENTLY_PLAYED_ENDPOINT = `https://api.spotify.com/v1/me/player/recently-played`;
@@ -80,7 +81,7 @@ export async function getSpotifyStatus(): Promise<SpotifyStatus> {
       .map((_artist: any) => _artist.name)
       .join(", ");
     const album = song.track.album.name;
-    const albumImageUrl = song.track.album.images[0].url;
+    const albumImageUrl = proxiedImageUrl(song.track.album.images[0].url);
     const spotifyUrl = song.track.external_urls.spotify;
 
     return {
@@ -108,7 +109,7 @@ export async function getSpotifyStatus(): Promise<SpotifyStatus> {
     .map((_artist: any) => _artist.name)
     .join(", ");
   const album = song.item.album.name;
-  const albumImageUrl = song.item.album.images[0].url;
+  const albumImageUrl = proxiedImageUrl(song.item.album.images[0].url);
   const spotifyUrl = song.item.external_urls.spotify;
 
   return {
@@ -138,7 +139,7 @@ export async function getSpotifyPlaylist(
 
   return {
     name: playlist.name,
-    coverUrl: playlist.images[0]?.url,
+    coverUrl: proxiedImageUrl(playlist.images[0]?.url),
     trackCount: playlist.tracks.total,
     followerCount: playlist.followers.total,
     spotifyUrl: playlist.external_urls.spotify,

@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { createPortal } from "react-dom";
+import { withImageParams } from "@/lib/imageProxy";
 
 interface ImageLightboxProps {
   src: string;
@@ -66,7 +67,7 @@ export default function ImageLightbox({
           className={`relative rounded-xl sm:rounded-2xl overflow-hidden bg-gray-100 dark:bg-neutral-800/75`}
         >
           <img
-            src={`${src}?w=1600&fm=webp`}
+            src={withImageParams(src, { w: 1600, fm: "webp" })}
             alt={alt}
             width={width}
             height={height}
@@ -187,7 +188,7 @@ export default function ImageLightbox({
             }}
           >
             <img
-              src={`${src}?w=1600&fm=webp`}
+              src={withImageParams(src, { w: 1600, fm: "webp" })}
               alt={alt}
               width={width}
               height={height}
@@ -212,7 +213,7 @@ export default function ImageLightbox({
           onClick={openLightbox}
         >
           <img
-            src={`${src}?w=1600&fm=webp`}
+            src={withImageParams(src, { w: 1600, fm: "webp" })}
             alt={alt}
             width={width}
             height={height}

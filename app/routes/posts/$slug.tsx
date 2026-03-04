@@ -5,6 +5,7 @@ import { Main } from "@/components/Layouts";
 import { QUERY_POST } from "@/graphql/queries";
 import formatDate from "@/lib/formatDate";
 import contentfulLoader from "@/lib/contentfulLoader";
+import { unwrapProxiedUrl } from "@/lib/imageProxy";
 import { ChevronLeft } from "@/components/Icons";
 import { LinkButton, LinkShare } from "@/components/Links";
 import type { PostQueryQuery } from "@/graphql/types/types.generated";
@@ -96,7 +97,7 @@ export const Route = createFileRoute("/posts/$slug")({
     const ogImage = `${baseUrl}/api/og?title=${encodeURIComponent(title)}${
       coverUrl
         ? `&bg=${encodeURI(
-            new URL(coverUrl).pathname.split("/").slice(2).join("/"),
+            new URL(unwrapProxiedUrl(coverUrl)).pathname.split("/").slice(2).join("/"),
           )}`
         : ""
     }`;

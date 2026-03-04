@@ -5,6 +5,7 @@ import { QUERY_PHOTO_SET } from "@/graphql/queries";
 import LightboxPhoto from "@/components/Lightbox/Photo";
 import Footer from "@/components/Footer";
 import { baseUrl } from "../../__root";
+import { withImageParams } from "@/lib/imageProxy";
 
 const fetchPhotoDetail = createServerFn()
   .inputValidator((d: { slug: string; id: string }) => d)
@@ -49,7 +50,7 @@ export const Route = createFileRoute("/photos/$slug/$id")({
         },
         {
           property: "og:image",
-          content: `${photo.url}?w=1024&h=1024&fit=fill`,
+          content: withImageParams(photo.url, { w: 1024, h: 1024, fit: "fill" }),
         },
         { property: "og:image:alt", content: title },
       ],

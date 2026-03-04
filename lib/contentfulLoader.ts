@@ -1,12 +1,10 @@
+import { withImageParams } from "./imageProxy";
+
 interface ContentfulLoaderProps {
   src: string;
   width: number;
   quality?: number;
   custom?: string[];
-}
-
-function normalizeSrc(src: string) {
-  return src[0] === "/" ? src.slice(1) : src;
 }
 
 function contentfulLoader({
@@ -15,15 +13,23 @@ function contentfulLoader({
   width,
   custom,
 }: ContentfulLoaderProps): string {
-  const params = ["w=" + Math.floor(width)];
+  const params: Record<string, string | number> = {
+    fm: "webp",
+    w: Math.floor(width),
+  };
 
   if (quality) {
-    params.push("q=" + quality);
+    params.q = quality;
   }
 
-  return `${normalizeSrc(src)}?fm=webp&${params.join("&")}${
-    custom ? `&${custom.join("&")}` : ""
-  }`;
+  if (custom) {
+    for (const c of custom) {
+      const [k, v] = c.split("=");
+      if (k && v) params[k] = v;
+    }
+  }
+
+  return withImageParams(src, params);
 }
 
 export default contentfulLoader;

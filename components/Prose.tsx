@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { LinkExternal } from "./Links";
 import { ExternalIcon } from "./Icons";
 import ImageLightbox from "./ImageLightbox";
+import { withImageParams } from "@/lib/imageProxy";
 
 // Prose components
 export const ProseImage = ({
@@ -101,7 +102,7 @@ export const ProseImageToggle = ({
       <div className={`${noMargin ? "" : "my-6 sm:my-12"} relative`}>
         <div className="relative rounded-xl sm:rounded-2xl overflow-hidden bg-gray-100 dark:bg-neutral-800/75">
           <img
-            src={`${lightSrc}?w=1600&fm=webp`}
+            src={withImageParams(lightSrc, { w: 1600, fm: "webp" })}
             alt={alt}
             width={width}
             height={height}
@@ -118,7 +119,7 @@ export const ProseImageToggle = ({
     <div className={`${noMargin ? "" : "my-6 sm:my-12"} relative group`}>
       <div className="relative rounded-xl sm:rounded-2xl overflow-hidden bg-gray-100 dark:bg-neutral-800/75">
         <img
-          src={`${lightSrc}?w=1600&fm=webp`}
+          src={withImageParams(lightSrc, { w: 1600, fm: "webp" })}
           alt={alt}
           width={width}
           height={height}
@@ -136,7 +137,7 @@ export const ProseImageToggle = ({
           }}
         >
           <img
-            src={`${darkSrc}?w=1600&fm=webp`}
+            src={withImageParams(darkSrc, { w: 1600, fm: "webp" })}
             alt={alt}
             width={width}
             height={height}
@@ -327,7 +328,7 @@ export const ProjectCard = ({
         </div>
         <div className="relative rounded-2xl overflow-hidden z-0">
           <img
-            src={`${image}?w=1024&fm=webp`}
+            src={withImageParams(image, { w: 1024, fm: "webp" })}
             alt={`${title} cover image`}
             width={2048}
             height={1200}
