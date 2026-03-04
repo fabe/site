@@ -1,4 +1,4 @@
-import { Link, useLocation, useRouter } from "@tanstack/react-router";
+import { Link, useLocation, useRouter, useRouterState } from "@tanstack/react-router";
 import { Command } from "cmdk";
 import { useState, useEffect } from "react";
 import { useHaptics } from "../../lib/useHaptics";
@@ -29,10 +29,22 @@ export default function Archipelago() {
   const router = useRouter();
   const currentRoute = location.pathname;
   const isHome = currentRoute === "/";
+  const isTransitioning = useRouterState({ select: (s) => s.isTransitioning });
+  const [showHomeButton, setShowHomeButton] = useState(!isHome && !isTransitioning);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [tooltip, setTooltip] = useState<TooltipState | undefined>(undefined);
   const { trigger: haptic } = useHaptics();
+
+  useEffect(() => {
+    const shouldShow = !isHome && !isTransitioning;
+    if (!shouldShow) {
+      setShowHomeButton(false);
+      return;
+    }
+    const timeout = setTimeout(() => setShowHomeButton(true), 300);
+    return () => clearTimeout(timeout);
+  }, [isHome, isTransitioning]);
 
   const navigate = async (href: string) => {
     if (!href) return;
@@ -150,13 +162,13 @@ export default function Archipelago() {
 
       <nav
         className={`${
-          isHome ? "w-12" : "w-28"
+          showHomeButton ? "w-28" : "w-12"
         } fixed bottom-6 left-6 top-auto z-10 md:bottom-auto md:left-8 md:top-8 print:hidden`}
       >
         <div>
           <div className="relative flex h-12 gap-2">
             <Transition
-              show={!isHome}
+              show={showHomeButton}
               enter="transition-all duration-500 ease-spring"
               enterFrom="opacity-0 scale-50 blur-md"
               enterTo="opacity-100 scale-100 blur-0"
@@ -178,7 +190,7 @@ export default function Archipelago() {
             </Transition>
             <div
               className={`duration-250 absolute rounded-full transition-all ease-out-expo ${
-                !isHome ? "delay-50 left-14" : "left-0 delay-300"
+                showHomeButton ? "delay-50 left-14" : "left-0 delay-300"
               }`}
               onMouseEnter={() => setTooltip(TooltipState.MENU)}
               onMouseLeave={() => setTooltip(undefined)}
