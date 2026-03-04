@@ -40,6 +40,5 @@ yarn-error.log*
 .vercel
 
 # sitemaps
-robots.txt
 sitemap.xml
 sitemap-*.xml

@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev",
-    "build": "vite build",
+    "build": "PRERENDER=1 vite build",
     "start": "node .output/server/index.mjs",
     "lint": "eslint .",
     "generate": "graphql-codegen --config codegen.yml",

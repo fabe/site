@@ -1,0 +1,13 @@
+# *
+User-agent: *
+Allow: /
+
+# *
+User-agent: *
+Disallow: /login
+
+# Host
+Host: https://fabianschultz.com
+
+# Sitemaps
+Sitemap: https://fabianschultz.com/sitemap.xml
