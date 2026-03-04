@@ -1,6 +1,6 @@
 import { Photo } from "../../graphql/types/types.generated";
 import contentfulLoader from "../../lib/contentfulLoader";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import {
   ApertureIcon,
   CalendarIcon,
@@ -18,6 +18,11 @@ interface LightboxPhotoProps {
 
 export default function LightboxPhoto({ photo }: LightboxPhotoProps) {
   const [loading, setLoading] = useState(true);
+  const imgRef = useCallback((node: HTMLImageElement | null) => {
+    if (node && node.complete && node.naturalWidth > 0) {
+      setLoading(false);
+    }
+  }, []);
   const exif = photo.exif as EXIF;
 
   return (
@@ -32,6 +37,7 @@ export default function LightboxPhoto({ photo }: LightboxPhotoProps) {
 
           <div className="relative w-full h-full bg-gray-200 dark:bg-neutral-900">
             <img
+              ref={imgRef}
               src={contentfulLoader({
                 src: photo.url,
                 width: 1600,
