@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.0",
-    "@apollo/server": "^4.7.1",
+    "@apollo/server": "^5.5.0",
     "@graphql-tools/schema": "^9.0.4",
     "@headlessui/react": "^2.2.1",
     "@mavrin/remark-typograf": "^2.2.0",
