@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 const ALLOWED_HOSTS = new Set([
-  "i.scdn.co",
   "images.ctfassets.net",
   "i.gr-assets.com",
   "assets.literal.club",
@@ -13,6 +12,7 @@ const ALLOWED_HOSTS = new Set([
 const ALLOWED_SUFFIX_PATTERNS = [
   ".digitaloceanspaces.com",
   ".spotifycdn.com",
+  ".scdn.co",
 ];
 
 function isHostAllowed(hostname: string): boolean {

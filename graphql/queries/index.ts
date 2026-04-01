@@ -66,6 +66,11 @@ export const QUERY_MUSIC_STATUS = gql`
     musicStatus {
       timestamp
       isPlaying
+      playlist {
+        name
+        coverUrl
+        spotifyUrl
+      }
       song {
         albumImageUrl
         artist

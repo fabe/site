@@ -1,6 +1,7 @@
 import { formatDistanceToNowStrict } from "date-fns";
 import { SpotifyStatus } from "../../graphql/types/types.generated";
 import Badge from "../Badge";
+import { LinkExternal } from "../Links";
 import MediaCard from "../MediaCard";
 import { useEffect, useState } from "react";
 import HomeSection from "./Section";
@@ -30,7 +31,7 @@ export default function NowPlayingWidget(props: NowPlayingProps) {
     return null;
   }
 
-  const { song, isPlaying, timestamp } = props.spotifyStatus;
+  const { song, isPlaying, timestamp, playlist } = props.spotifyStatus;
   const { album, albumImageUrl, title, artist, spotifyUrl } = song;
 
   return (
@@ -52,6 +53,29 @@ export default function NowPlayingWidget(props: NowPlayingProps) {
         </h3>
       }
     >
+      {playlist && (
+        <div className="mb-3 inline-flex max-w-full items-center gap-2 rounded-lg bg-gray-100 pl-1 pr-2 py-1 dark:bg-neutral-800">
+          <img
+            src={playlist.coverUrl}
+            alt={`${playlist.name} playlist cover`}
+            title={playlist.name}
+            width={20}
+            height={20}
+            className="flex-shrink-0 rounded-[5px]"
+          />
+          <span className="flex min-w-0 items-baseline gap-1 text-sm text-neutral-500 dark:text-silver-dark [font-variation-settings:'opsz'_14]">
+            <span className="flex-shrink-0">Listening via</span>
+            <LinkExternal
+              href={playlist.spotifyUrl}
+              iconSize={14}
+              className="min-w-0"
+              contentClassName="block min-w-0 max-w-full overflow-hidden text-ellipsis whitespace-nowrap"
+            >
+              {playlist.name}
+            </LinkExternal>
+          </span>
+        </div>
+      )}
       <MediaCard
         title={title}
         subtitle={`${artist}${album ? ` · ${album}` : null}`}

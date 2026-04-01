@@ -251,6 +251,7 @@ export type SpotifyPlaylist = {
 export type SpotifyStatus = {
   __typename?: 'SpotifyStatus';
   isPlaying: Scalars['Boolean'];
+  playlist?: Maybe<SpotifyPlaylist>;
   song?: Maybe<Song>;
   timestamp?: Maybe<Scalars['String']>;
 };
@@ -285,7 +286,7 @@ export type LastfmStatusQueryQuery = { __typename?: 'Query', lastfmStatus: { __t
 export type MusicStatusQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MusicStatusQueryQuery = { __typename?: 'Query', musicStatus: { __typename?: 'SpotifyStatus', timestamp?: string | null, isPlaying: boolean, song?: { __typename?: 'Song', albumImageUrl?: string | null, artist?: string | null, title?: string | null, spotifyUrl?: string | null, album?: string | null } | null } };
+export type MusicStatusQueryQuery = { __typename?: 'Query', musicStatus: { __typename?: 'SpotifyStatus', timestamp?: string | null, isPlaying: boolean, playlist?: { __typename?: 'SpotifyPlaylist', name: string, coverUrl: string, spotifyUrl: string } | null, song?: { __typename?: 'Song', albumImageUrl?: string | null, artist?: string | null, title?: string | null, spotifyUrl?: string | null, album?: string | null } | null } };
 
 export type PostQueryQueryVariables = Exact<{
   slug: Scalars['String'];
@@ -498,6 +499,11 @@ export const MusicStatusQueryDocument = gql`
   musicStatus {
     timestamp
     isPlaying
+    playlist {
+      name
+      coverUrl
+      spotifyUrl
+    }
     song {
       albumImageUrl
       artist

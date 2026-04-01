@@ -5,17 +5,26 @@ import { Tooltip } from "../Tooltip";
 import useCopy from "@react-hook/copy";
 import { useHaptics } from "../../lib/useHaptics";
 
-export function LinkExternal({ href, children }) {
+export function LinkExternal({
+  href,
+  children,
+  iconSize = 16,
+  className = "",
+  contentClassName = "",
+}) {
   return (
     <a
-      className="link link-external"
+      className={`link link-external ${className}`.trim()}
       href={href}
       target="_blank"
       rel="noopener noreferrer"
     >
-      <span style={{ wordBreak: "break-word" }}>
+      <span
+        className={contentClassName}
+        style={{ wordBreak: contentClassName ? undefined : "break-word" }}
+      >
         {children}
-        <ExternalIcon size={16} className="inline ml-0.5 mb-0.5" />
+        <ExternalIcon size={iconSize} className="inline ml-0.5 mb-0.5" />
       </span>
     </a>
   );

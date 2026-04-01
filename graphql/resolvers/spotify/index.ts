@@ -111,6 +111,27 @@ export async function getSpotifyStatus(): Promise<SpotifyStatus> {
   const album = song.item.album.name;
   const albumImageUrl = proxiedImageUrl(song.item.album.images[0].url);
   const spotifyUrl = song.item.external_urls.spotify;
+  const contextType = song.context?.type ?? null;
+
+  let playlist = null;
+  if (contextType === "playlist" && song.context?.uri) {
+    const playlistId = song.context.uri.split(":").pop();
+    if (playlistId) {
+      try {
+        const res = await getPlaylist(access_token, playlistId);
+        if (res.status <= 200) {
+          const p = await res.json();
+          playlist = {
+            name: p.name,
+            coverUrl: proxiedImageUrl(p.images[0]?.url),
+            trackCount: p.tracks.total,
+            followerCount: p.followers.total,
+            spotifyUrl: p.external_urls.spotify,
+          };
+        }
+      } catch {}
+    }
+  }
 
   return {
     isPlaying,
@@ -121,6 +142,7 @@ export async function getSpotifyStatus(): Promise<SpotifyStatus> {
       albumImageUrl,
       spotifyUrl,
     },
+    playlist,
   };
 }
 

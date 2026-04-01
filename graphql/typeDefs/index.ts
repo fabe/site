@@ -33,6 +33,7 @@ export const typeDefsString = `
     timestamp: String
     isPlaying: Boolean!
     song: Song
+    playlist: SpotifyPlaylist
   }
 
   type SpotifyPlaylist {
