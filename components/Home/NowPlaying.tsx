@@ -63,17 +63,14 @@ export default function NowPlayingWidget(props: NowPlayingProps) {
             height={20}
             className="flex-shrink-0 rounded-[5px]"
           />
-          <span className="flex min-w-0 items-baseline gap-1 text-sm text-neutral-500 dark:text-silver-dark [font-variation-settings:'opsz'_14]">
-            <span className="flex-shrink-0">Listening via</span>
-            <LinkExternal
-              href={playlist.spotifyUrl}
-              iconSize={14}
-              className="min-w-0"
-              contentClassName="block min-w-0 max-w-full overflow-hidden text-ellipsis whitespace-nowrap"
-            >
-              {playlist.name}
-            </LinkExternal>
-          </span>
+          <LinkExternal
+            href={playlist.spotifyUrl}
+            iconSize={14}
+            className="min-w-0 text-sm text-neutral-500 dark:text-silver-dark [font-variation-settings:'opsz'_14]"
+            contentClassName="block min-w-0 max-w-full overflow-hidden text-ellipsis whitespace-nowrap"
+          >
+            {playlist.name}
+          </LinkExternal>
         </div>
       )}
       <MediaCard
