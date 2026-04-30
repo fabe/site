@@ -3,18 +3,31 @@ interface ExifSummaryProps {
 }
 
 export function ExifSummaryExposure({ exif }: ExifSummaryProps) {
+  const { FNumber, ExposureTime, FocalLength, FocalLengthIn35mmFormat, ISO } =
+    exif;
+
+  if (
+    !FNumber ||
+    !ExposureTime ||
+    !FocalLength ||
+    !FocalLengthIn35mmFormat ||
+    !ISO
+  ) {
+    return null;
+  }
+
   return (
     <span>
-      {Math.round(exif.FocalLength)}mm (
-      {Math.round(exif.FocalLengthIn35mmFormat)}mm), ƒ{exif.FNumber.toFixed(1)},{" "}
-      {exif.ExposureTime < 1 ? (
+      {Math.round(FocalLength)}mm ({Math.round(FocalLengthIn35mmFormat)}mm), ƒ
+      {FNumber.toFixed(1)},{" "}
+      {ExposureTime < 1 ? (
         <span className="diagonal-fractions">
-          1/{Math.round(1 / exif.ExposureTime)}
+          1/{Math.round(1 / ExposureTime)}
         </span>
       ) : (
-        exif.ExposureTime
+        ExposureTime
       )}{" "}
-      sec, ISO {exif.ISO}
+      sec, ISO {ISO}
     </span>
   );
 }

@@ -1,21 +1,33 @@
-import { Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { Link, type LinkProps } from "@tanstack/react-router";
+import { type ReactNode, useState } from "react";
 import { ExternalIcon, CopyIcon } from "../Icons";
 import { Tooltip } from "../Tooltip";
 import useCopy from "@react-hook/copy";
 import { useHaptics } from "../../lib/useHaptics";
 import { cn } from "../../lib/cn";
 
-function ActionButtonContent({ children }) {
+type ActionButtonContentProps = {
+  children: ReactNode;
+};
+
+function ActionButtonContent({ children }: ActionButtonContentProps) {
   return (
     <>
       <span className="absolute inset-0 z-0 rounded-lg bg-surface-raised/60 transition-all duration-100 ease-out-expo group-hover:scale-x-[1.03] group-hover:scale-y-[1.08] group-hover:bg-surface-raised dark:bg-surface/75 dark:group-hover:bg-surface" />
-      <span className="relative z-10 flex items-center gap-1 text-neutral-700 [font-variation-settings:'opsz'_14,'wght'_550] dark:text-muted">
+      <span className="relative z-10 flex items-center gap-1 text-neutral-700 font-ui-label dark:text-muted">
         {children}
       </span>
     </>
   );
 }
+
+type LinkExternalProps = {
+  href: string;
+  children: ReactNode;
+  iconSize?: number;
+  className?: string;
+  contentClassName?: string;
+};
 
 export function LinkExternal({
   href,
@@ -23,7 +35,7 @@ export function LinkExternal({
   iconSize = 16,
   className = "",
   contentClassName = "",
-}) {
+}: LinkExternalProps) {
   return (
     <a
       className={cn("link link-external", className)}
@@ -42,7 +54,13 @@ export function LinkExternal({
   );
 }
 
-export function LinkShare({ url, children, className = "" }) {
+type LinkShareProps = {
+  url: string;
+  children: ReactNode;
+  className?: string;
+};
+
+export function LinkShare({ url, children, className = "" }: LinkShareProps) {
   const [tooltipOpen, setTooltipOpen] = useState(false);
   const { copy } = useCopy(url);
   const { trigger: haptic } = useHaptics();
@@ -76,7 +94,18 @@ export function LinkShare({ url, children, className = "" }) {
   );
 }
 
-export function LinkButton({ href, children, className = "", ...props }) {
+type LinkButtonProps = Omit<LinkProps, "to"> & {
+  href: LinkProps["to"];
+  children: ReactNode;
+  className?: string;
+};
+
+export function LinkButton({
+  href,
+  children,
+  className = "",
+  ...props
+}: LinkButtonProps) {
   return (
     <Link
       to={href}

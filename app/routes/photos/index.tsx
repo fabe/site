@@ -95,7 +95,9 @@ function PhotoSetCard({ photoSet }: { photoSet: PhotoSetWithColors }) {
 
   return (
     <Link
-      to={`/photos/${photoSet.slug}`}
+      to="/photos/$slug"
+      params={{ slug: photoSet.slug }}
+      search={{ id: undefined }}
       className="group relative aspect-[3/2] w-full overflow-hidden rounded-lg transition-all duration-300 ease-in-out dark:shadow-2xl"
       style={{
         backgroundColor: computedBackgroundColor,
@@ -141,7 +143,7 @@ function PhotoSetCard({ photoSet }: { photoSet: PhotoSetWithColors }) {
         ></div>
 
         <div className="absolute bottom-0 w-full px-4 pb-4 sm:pb-6 pt-8 text-center">
-          <h2 className="[font-variation-settings:'opsz'_32,_'wght'_500] text-2xl sm:text-3xl font-medium text-white transition-transform duration-300 ease-out pointer-fine:group-hover:translate-y-4">
+          <h2 className="font-ui-title text-2xl sm:text-3xl font-medium text-white transition-transform duration-300 ease-out pointer-fine:group-hover:translate-y-4">
             {photoSet.title}
           </h2>
           <p className="mx-auto mt-1 sm:mt-1.5 max-w-md line-clamp-2 text-white/80 transition-all duration-300 ease-out pointer-fine:group-hover:opacity-0 pointer-fine:group-hover:translate-y-2">

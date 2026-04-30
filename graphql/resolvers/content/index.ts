@@ -27,6 +27,30 @@ import {
 
 const SITE_SETTINGS_ENTRY_ID = "4VjpvaxnxzRE0XPfQjwHQK";
 
+type ContentfulAsset = {
+  url: string;
+  width: number;
+  height: number;
+};
+
+type ContentfulPhoto = {
+  sys: { id: string };
+  description?: string | null;
+  asset: ContentfulAsset;
+  exif?: EXIF | null;
+  tags?: string[] | null;
+  location?: Place["location"] | null;
+};
+
+type ContentfulPhotoSet = {
+  sys: { id: string; publishedAt: string };
+  title: string;
+  slug: string;
+  description?: string | null;
+  featuredPhoto: { asset: ContentfulAsset };
+  photosCollection?: { items: Array<{ sys: { id: string } }> };
+};
+
 let _contentfulClient: ApolloClient<any> | null = null;
 let _contentfulGlobeClient: ApolloClient<any> | null = null;
 
@@ -67,7 +91,7 @@ function getContentfulGlobeClient() {
 }
 
 export async function getPlaylists(
-  _: any,
+  _: unknown,
   args: QueryPlaylistsArgs,
 ): Promise<Playlist[]> {
   const response = await getContentfulClient().query({
@@ -107,7 +131,7 @@ export async function getPlaylists(
 }
 
 export async function getPosts(
-  _: any,
+  _: unknown,
   args: QueryPostsArgs,
 ): Promise<PostWithoutBody[]> {
   const response = await getContentfulClient().query({
@@ -149,7 +173,7 @@ export async function getPosts(
 }
 
 export async function getPost(
-  _: any,
+  _: unknown,
   args: QueryPostArgs,
 ): Promise<Post | null> {
   const response = await getContentfulClient().query({
@@ -193,7 +217,7 @@ export async function getPost(
 }
 
 export async function getPhoto(
-  _: any,
+  _: unknown,
   args: QueryPhotoArgs,
 ): Promise<Photo | null> {
   const response = await getContentfulClient().query({
@@ -242,7 +266,7 @@ export async function getPhoto(
 }
 
 export async function getPhotos(
-  _: any,
+  _: unknown,
   args: QueryPhotosArgs,
 ): Promise<Photo[]> {
   const response = await getContentfulClient().query({
@@ -317,7 +341,7 @@ export async function getSiteSettings(): Promise<SiteSettings | null> {
   return response.data.siteSettings;
 }
 
-export async function getPlaces(_: any): Promise<Place[]> {
+export async function getPlaces(_: unknown): Promise<Place[]> {
   const response = await getContentfulGlobeClient().query({
     query: gql`
       query getAllPlaces {
@@ -353,7 +377,7 @@ export async function getPlaces(_: any): Promise<Place[]> {
 }
 
 export async function getPhotoSet(
-  _: any,
+  _: unknown,
   args: QueryPhotoSetArgs,
 ): Promise<PhotoSet | null> {
   const response = await getContentfulClient().query({
@@ -424,7 +448,7 @@ export async function getPhotoSet(
           height: photoSet.featuredPhoto.asset.height,
         }
       : null,
-    photos: photoSet.photosCollection.items.map((photo) => ({
+    photos: photoSet.photosCollection.items.map((photo: ContentfulPhoto) => ({
       id: photo.sys.id,
       description: photo.description,
       url: proxyContentfulUrl(photo.asset.url),
@@ -438,7 +462,7 @@ export async function getPhotoSet(
 }
 
 export async function getPhotoSets(
-  _: any,
+  _: unknown,
   args: QueryPhotoSetsArgs,
 ): Promise<PhotoSet[]> {
   const response = await getContentfulClient().query({
@@ -480,19 +504,21 @@ export async function getPhotoSets(
     return [];
   }
 
-  return response.data.photoSetCollection.items.map((photoSet) => ({
-    id: photoSet.sys.id,
-    updatedAt: photoSet.sys.publishedAt,
-    title: photoSet.title,
-    slug: photoSet.slug,
-    description: photoSet.description,
-    photos: photoSet.photosCollection?.items?.map((photo) => ({
-      id: photo.sys.id,
-    })),
-    featuredPhoto: {
-      url: proxyContentfulUrl(photoSet.featuredPhoto.asset.url),
-      width: photoSet.featuredPhoto.asset.width,
-      height: photoSet.featuredPhoto.asset.height,
-    },
-  }));
+  return response.data.photoSetCollection.items.map(
+    (photoSet: ContentfulPhotoSet) => ({
+      id: photoSet.sys.id,
+      updatedAt: photoSet.sys.publishedAt,
+      title: photoSet.title,
+      slug: photoSet.slug,
+      description: photoSet.description,
+      photos: photoSet.photosCollection?.items?.map((photo) => ({
+        id: photo.sys.id,
+      })),
+      featuredPhoto: {
+        url: proxyContentfulUrl(photoSet.featuredPhoto.asset.url),
+        width: photoSet.featuredPhoto.asset.width,
+        height: photoSet.featuredPhoto.asset.height,
+      },
+    }),
+  );
 }

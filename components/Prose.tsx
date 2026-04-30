@@ -164,7 +164,7 @@ export const ProseImageToggle = ({
           }`}
         />
         <span
-          className={`relative z-10 flex items-center justify-center w-28 [font-variation-settings:'opsz'_14,'wght'_500] ${
+          className={`relative z-10 flex items-center justify-center w-28 font-ui-label-medium ${
             !showDark ? "text-white" : "text-neutral-700"
           }`}
         >
@@ -200,7 +200,7 @@ export const ProseHeading = ({
     <h3
       className={`mb-6 text-xl text-heading sm:mb-8 ${
         lessMargin ? "mt-8 sm:mt-16" : "mt-12 sm:mt-20"
-      } [font-variation-settings:'opsz'_36,_'wght'_500]`}
+      } font-ui-heading`}
     >
       {children}
     </h3>
@@ -261,7 +261,7 @@ export const ProjectHeader = ({
   return (
     <div className="mt-6 sm:mt-12">
       <div className="sm:text-center text-left sm:text-balance text-pretty">
-        <h1 className="pb-4 pt-2 text-3xl tracking-tight text-heading [font-variation-settings:'opsz'_48,_'wght'_550] sm:text-5xl">
+        <h1 className="pb-4 pt-2 text-3xl tracking-tight text-heading font-ui-display sm:text-5xl">
           {title}
         </h1>
         <p className="text-muted sm:pb-12 pb-6">{renderDescription()}</p>

@@ -164,7 +164,7 @@ blockquote span::after {
   @apply cursor-pointer;
   @apply text-muted;
   @apply transition-colors;
-  @apply [font-variation-settings:'wght'_420];
+  @apply font-ui-muted-control;
 }
 
 [cmdk-item] > div {
@@ -183,7 +183,7 @@ blockquote span::after {
 
 [cmdk-empty] {
   @apply px-3 py-3;
-  @apply text-sm font-medium text-muted [font-variation-settings:'opsz'_12];
+  @apply text-sm font-medium text-muted font-ui-xs;
 }
 
 [cmdk-separator] {
@@ -193,7 +193,7 @@ blockquote span::after {
 
 [cmdk-group-heading] {
   @apply px-3 pb-2 pt-4;
-  @apply text-xs font-medium text-muted [font-variation-settings:'opsz'_12];
+  @apply text-xs font-medium text-muted font-ui-xs;
 }
 
 [cmdk-loading] {
@@ -268,7 +268,7 @@ blockquote span::after {
 }
 
 .mapboxgl-popup-content {
-  @apply rounded border border-transparent bg-neutral-800 px-3 py-3 font-sans text-base font-medium text-silver [font-variation-settings:'opsz'_15,_'wght'_500] dark:border-white/[.08] dark:bg-black/[.96] dark:text-silver !important;
+  @apply rounded border border-transparent bg-neutral-800 px-3 py-3 font-sans text-base font-medium text-silver font-ui-popup dark:border-white/[.08] dark:bg-black/[.96] dark:text-silver !important;
 }
 
 @layer components {
@@ -277,7 +277,7 @@ blockquote span::after {
     @apply border-neutral-200 dark:border-white/[.05] border;
     @apply shadow-md shadow-neutral-200 dark:shadow-neutral-950;
     @apply w-12 h-16;
-    @apply text-center dark:text-white uppercase text-2xl [font-variation-settings:'opsz'_24,_'wght'_650];
+    @apply text-center dark:text-white uppercase text-2xl font-ui-input;
     @apply outline-none;
     @apply rounded-lg;
     @apply transition-shadow duration-100;
@@ -321,7 +321,7 @@ blockquote span::after {
 
   .note b,
   .note strong {
-    @apply [font-variation-settings:'opsz'_7,_'wght'_500];
+    @apply font-ui-note-strong;
   }
 
   .note .time,
@@ -334,17 +334,17 @@ blockquote span::after {
     @apply block;
     @apply text-sm;
     @apply text-muted;
-    @apply [font-variation-settings:'opsz'_14];
+    @apply font-ui-sm;
     @apply slashed-zero tabular-nums;
   }
 
   .time-lg {
     @apply text-base;
-    @apply [font-variation-settings:'opsz'_15];
+    @apply font-ui-base;
   }
 
   .badge {
-    @apply inline-flex items-center gap-1 rounded-xl bg-surface-raised px-1.5 py-0.5 text-xs font-medium text-muted [font-variation-settings:'opsz'_12];
+    @apply inline-flex items-center gap-1 rounded-xl bg-surface-raised px-1.5 py-0.5 text-xs font-medium text-muted font-ui-xs;
     @apply slashed-zero;
     @apply decoration-neutral-600;
   }
@@ -382,14 +382,18 @@ blockquote span::after {
     @apply prose-p:leading-relaxed sm:prose-p:leading-golden;
     @apply prose prose-neutral dark:prose-invert max-w-none;
     @apply prose-p:text-fg;
-    @apply prose-headings:font-normal prose-headings:[font-variation-settings:'wght'_500];
-    @apply prose-strong:font-normal prose-strong:[font-variation-settings:'wght'_500];
+    @apply prose-headings:font-normal;
+    @apply prose-strong:font-normal;
     @apply prose-em:not-italic prose-em:underline prose-em:decoration-neutral-300 prose-em:decoration-wavy dark:prose-em:decoration-neutral-700;
     @apply prose-code:rounded prose-code:font-normal prose-code:text-fg;
     @apply prose-pre:overflow-auto prose-pre:whitespace-pre prose-pre:border prose-pre:border-neutral-200 prose-pre:bg-transparent prose-pre:p-4 prose-pre:text-sm dark:prose-pre:border-white/5 sm:prose-pre:-ml-4 sm:prose-pre:-mr-4;
     @apply prose-img:rounded-lg;
     @apply prose-hr:my-6 prose-hr:w-16 prose-hr:mx-auto prose-hr:h-px prose-hr:border-none prose-hr:bg-neutral-200 dark:prose-hr:bg-neutral-800 sm:prose-hr:my-12;
     @apply prose-blockquote:border-0 prose-blockquote:p-0 prose-blockquote:not-italic prose-blockquote:text-muted;
+  }
+
+  .prose-custom :where(h1, h2, h3, h4, h5, h6, strong) {
+    font-variation-settings: "wght" 500;
   }
 
   .prose-custom a {
@@ -404,6 +408,74 @@ blockquote span::after {
     @apply dark:bg-neutral-800/75;
     @apply shadow-fancy dark:shadow-fancyDark;
     @apply backdrop-blur-xl backdrop-saturate-200;
+  }
+
+  .font-ui-xs {
+    font-variation-settings: "opsz" 12;
+  }
+
+  .font-ui-sm {
+    font-variation-settings: "opsz" 14;
+  }
+
+  .font-ui-base {
+    font-variation-settings: "opsz" 15;
+  }
+
+  .font-ui-title {
+    font-variation-settings:
+      "opsz" 32,
+      "wght" 500;
+  }
+
+  .font-ui-display {
+    font-variation-settings:
+      "opsz" 48,
+      "wght" 550;
+  }
+
+  .font-ui-heading {
+    font-variation-settings:
+      "opsz" 36,
+      "wght" 500;
+  }
+
+  .font-ui-label {
+    font-variation-settings:
+      "opsz" 14,
+      "wght" 550;
+  }
+
+  .font-ui-label-medium {
+    font-variation-settings:
+      "opsz" 14,
+      "wght" 500;
+  }
+
+  .font-ui-strong {
+    font-variation-settings: "wght" 550;
+  }
+
+  .font-ui-input {
+    font-variation-settings:
+      "opsz" 24,
+      "wght" 650;
+  }
+
+  .font-ui-muted-control {
+    font-variation-settings: "wght" 420;
+  }
+
+  .font-ui-popup {
+    font-variation-settings:
+      "opsz" 15,
+      "wght" 500;
+  }
+
+  .font-ui-note-strong {
+    font-variation-settings:
+      "opsz" 7,
+      "wght" 500;
   }
 
   .link-external {
@@ -425,7 +497,7 @@ blockquote span::after {
     @apply text-muted;
     @apply decoration-neutral-300 dark:decoration-neutral-700;
     @apply hover:decoration-neutral-400 dark:hover:decoration-neutral-600;
-    @apply [font-variation-settings:'opsz'_12];
+    @apply font-ui-xs;
   }
 
   .link-fade {
@@ -436,7 +508,7 @@ blockquote span::after {
   }
 
   .text-meta {
-    @apply text-sm text-muted [font-variation-settings:'opsz'_14];
+    @apply text-sm text-muted font-ui-sm;
   }
 
   .text-shadow {

@@ -197,7 +197,7 @@ export function LuminanceChart() {
                 strokeLinejoin="round"
                 activeDot={false}
                 dot={false}
-                stroke={null}
+                stroke="currentColor"
                 className="stroke-gray-100 dark:stroke-neutral-800"
                 animationDuration={400}
                 animationEasing="ease-in-out"

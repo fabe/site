@@ -1,5 +1,5 @@
 import { formatDistanceToNowStrict } from "date-fns";
-import { SpotifyStatus } from "../../graphql/types/types.generated";
+import type { MusicStatusQueryQuery } from "../../graphql/types/types.generated";
 import Badge from "../Badge";
 import { LinkExternal } from "../Links";
 import MediaCard from "../MediaCard";
@@ -7,8 +7,10 @@ import { useEffect, useState } from "react";
 import { SectionTitle } from "../Typography";
 import HomeSection from "./Section";
 
+type MusicStatus = MusicStatusQueryQuery["musicStatus"];
+
 interface NowPlayingProps {
-  spotifyStatus: SpotifyStatus;
+  spotifyStatus?: MusicStatus | null;
   loading?: boolean;
 }
 
@@ -43,13 +45,13 @@ export default function NowPlayingWidget(props: NowPlayingProps) {
             Listening
             {isPlaying ? (
               <Badge isLive>Live</Badge>
-            ) : (
+            ) : timestamp ? (
               <Badge>
                 {formatDistanceToNowStrict(new Date(timestamp), {
                   addSuffix: true,
                 })}
               </Badge>
-            )}
+            ) : null}
           </div>
         </SectionTitle>
       }
@@ -75,16 +77,18 @@ export default function NowPlayingWidget(props: NowPlayingProps) {
         </div>
       )}
       <MediaCard
-        title={title}
-        subtitle={album ? `${artist} · ${album}` : artist}
+        title={title ?? undefined}
+        subtitle={
+          artist ? (album ? `${artist} · ${album}` : artist) : undefined
+        }
         image={{
           alt: album ? album : "Album cover",
-          title: album ? album : null,
-          src: albumImageUrl ? albumImageUrl : "",
+          title: album ?? undefined,
+          src: albumImageUrl ?? "",
           width: 56,
           height: 56,
         }}
-        href={spotifyUrl}
+        href={spotifyUrl ?? undefined}
         hrefLabel="View on Spotify"
       />
     </HomeSection>

@@ -15,19 +15,19 @@ import { ChevronLeft } from "@/components/Icons";
 import { useDrag } from "@use-gesture/react";
 import { useHaptics } from "@/lib/useHaptics";
 import type { ColorData } from "@/lib/colorExtractor";
-import type {
-  Photo as GqlPhoto,
-  PhotoSet as GqlPhotoSet,
-} from "@/graphql/types/types.generated";
+import type { PhotoSetQueryQuery } from "@/graphql/types/types.generated";
 import { baseUrl } from "../../__root";
 
-interface PhotoWithColors extends GqlPhoto {
-  colors?: ColorData;
-}
+type PhotoSetData = NonNullable<PhotoSetQueryQuery["photoSet"]>;
+type PhotoData = NonNullable<NonNullable<PhotoSetData["photos"]>[number]>;
 
-interface PhotoSetWithColors extends GqlPhotoSet {
-  photos?: (PhotoWithColors | null)[];
-}
+type PhotoWithColors = PhotoData & {
+  colors?: ColorData;
+};
+
+type PhotoSetWithColors = Omit<PhotoSetData, "photos"> & {
+  photos: PhotoWithColors[];
+};
 
 const fetchPhotoSet = createServerFn()
   .inputValidator((d: { slug: string }) => d)
@@ -36,25 +36,31 @@ const fetchPhotoSet = createServerFn()
     const { extractColorsFromImage } = await import("@/lib/colorExtractor");
 
     const apolloClient = await initializeApollo();
-    const { data } = await apolloClient.query({
+    const { data } = await apolloClient.query<PhotoSetQueryQuery>({
       query: QUERY_PHOTO_SET,
       variables: { slug },
     });
 
+    if (!data.photoSet) {
+      throw new Error("Photo set not found");
+    }
+
     // Extract colors for each photo at load time
-    const photos = data.photoSet.photos || [];
+    const photos =
+      data.photoSet.photos?.filter((photo): photo is PhotoData =>
+        Boolean(photo),
+      ) ?? [];
     const concurrency = 10;
-    const photosWithColors: (PhotoWithColors | null)[] = [];
+    const photosWithColors: PhotoWithColors[] = [];
     for (let i = 0; i < photos.length; i += concurrency) {
       const chunk = photos.slice(i, i + concurrency);
       const processed = await Promise.all(
-        chunk.map(async (p: GqlPhoto | null) => {
-          if (!p?.url) return p as any;
+        chunk.map(async (photo) => {
           try {
-            const colors = await extractColorsFromImage(p.url);
-            return { ...p, colors } as PhotoWithColors;
+            const colors = await extractColorsFromImage(photo.url);
+            return { ...photo, colors };
           } catch {
-            return p as any;
+            return photo;
           }
         }),
       );
@@ -224,7 +230,7 @@ function PhotoSetComponent() {
             <div className="flex flex-row items-center gap-2">
               <Link
                 to="/"
-                className="flex flex-row items-center gap-2 [font-variation-settings:'wght'_450]"
+                className="flex flex-row items-center gap-2 font-medium"
               >
                 <div>
                   <img
@@ -261,10 +267,7 @@ function PhotoSetComponent() {
       {selectedPhoto && (
         <Lightbox isOpen={true} onDismiss={handleDismiss}>
           <div {...bindDragGesture()} className="w-full h-full touch-pan-y">
-            <LightboxPhoto
-              key={selectedPhoto.id}
-              photo={selectedPhoto as any}
-            />
+            <LightboxPhoto key={selectedPhoto.id} photo={selectedPhoto} />
           </div>
         </Lightbox>
       )}

@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import React from "react";
 import { QUERY_PHOTO_SET } from "@/graphql/queries";
+import type { PhotoSetQueryQuery } from "@/graphql/types/types.generated";
 import LightboxPhoto from "@/components/Lightbox/Photo";
 import Footer from "@/components/Footer";
 import { baseUrl } from "../../__root";
@@ -13,12 +14,16 @@ const fetchPhotoDetail = createServerFn()
     const { initializeApollo } = await import("@/graphql/client");
     const apolloClient = await initializeApollo();
 
-    const { data } = await apolloClient.query({
+    const { data } = await apolloClient.query<PhotoSetQueryQuery>({
       query: QUERY_PHOTO_SET,
       variables: { slug },
     });
 
-    const photo = data.photoSet.photos.find((p: any) => p.id === id);
+    if (!data.photoSet) {
+      throw new Error("Photo set not found");
+    }
+
+    const photo = data.photoSet.photos?.find((p) => p?.id === id);
 
     if (!photo) {
       throw new Error("Photo not found");
@@ -50,7 +55,11 @@ export const Route = createFileRoute("/photos/$slug/$id")({
         },
         {
           property: "og:image",
-          content: withImageParams(photo.url, { w: 1024, h: 1024, fit: "fill" }),
+          content: withImageParams(photo.url, {
+            w: 1024,
+            h: 1024,
+            fit: "fill",
+          }),
         },
         { property: "og:image:alt", content: title },
       ],
@@ -60,7 +69,7 @@ export const Route = createFileRoute("/photos/$slug/$id")({
 });
 
 function PhotoDetailComponent() {
-  const { photo, photoSet } = Route.useLoaderData();
+  const { photo } = Route.useLoaderData();
 
   return (
     <>

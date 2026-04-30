@@ -82,13 +82,19 @@ export const colorPalette = [
   ],
 ];
 
+type PaletteColor = {
+  name: string;
+  hex: string;
+};
+
+type SelectedColor = PaletteColor & {
+  row: number;
+  col: number;
+};
+
 export function ColorPalette() {
-  const [selectedColor, setSelectedColor] = React.useState<{
-    name: string;
-    hex: string;
-    row: number;
-    col: number;
-  }>(null);
+  const [selectedColor, setSelectedColor] =
+    React.useState<SelectedColor | null>(null);
 
   const [selectorPosition, setSelectorPosition] = React.useState<{
     x: number;
@@ -103,7 +109,7 @@ export function ColorPalette() {
   );
 
   const handleColorSelect = (
-    color: any,
+    color: PaletteColor,
     rowIndex: number,
     colIndex: number,
   ) => {

@@ -1,16 +1,20 @@
 import { Link } from "@tanstack/react-router";
+import type { PageHomeQueryQuery } from "@/graphql/types/types.generated";
 import formatDate from "../../lib/formatDate";
 import { FeedIcon, NoteIcon } from "../Icons";
 import HomeSection from "./Section";
 
-export default function Posts({ posts }: { posts: any[] }) {
+type HomePost = NonNullable<PageHomeQueryQuery["posts"][number]>;
+
+export default function Posts({ posts }: { posts: HomePost[] }) {
   return (
     <HomeSection title="Posts">
       {posts.map((post) => (
         <div key={post.slug} className="pb-2 last-of-type:pb-0">
           <div>
             <Link
-              to={`/posts/${post.slug}`}
+              to="/posts/$slug"
+              params={{ slug: post.slug }}
               className="link inline-flex items-center gap-1"
             >
               <div className="opacity-20 dark:opacity-30">

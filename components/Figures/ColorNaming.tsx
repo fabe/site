@@ -203,7 +203,7 @@ export function ColorNamingAnimation() {
             title="Replay animation"
           >
             <span className="absolute inset-0 rounded-lg bg-white transition-all duration-100 ease-out-expo dark:bg-neutral-700 group-hover:scale-x-[1.03] group-hover:scale-y-[1.08] z-0" />
-            <span className="relative z-10 flex items-center gap-1 text-heading [font-variation-settings:'opsz'_14,'wght'_500]">
+            <span className="relative z-10 flex items-center gap-1 text-heading font-ui-label-medium">
               Replay
             </span>
           </motion.button>

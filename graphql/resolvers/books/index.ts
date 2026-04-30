@@ -15,6 +15,23 @@ import { proxiedImageUrl } from "../../../lib/imageProxy";
 
 const LITERAL_BASE_URL = "https://api.literal.club/";
 
+type LiteralBook = {
+  slug: string;
+  title: string;
+  publishedDate?: string | null;
+  cover?: string | null;
+  authors: Array<{ name: string }>;
+  gradientColors?: Array<string | null> | null;
+};
+
+type GoodreadsItem = {
+  title?: string;
+  authorName?: string;
+  bookId?: string;
+  bookLargeImageUrl?: string;
+  pubDate?: string;
+};
+
 // No need for auth at the moment
 //
 // const authLink = setContext(async (_, { headers }) => {
@@ -77,9 +94,12 @@ const getLiteralToken = async (email: String, password: String) => {
   return json.data.login.token;
 };
 
-export async function getBooks(_: any, args: QueryBooksArgs): Promise<Book[]> {
+export async function getBooks(
+  _: unknown,
+  args: QueryBooksArgs,
+): Promise<Book[]> {
   const { limit, source } = args;
-  let books = [];
+  let books: Book[] = [];
 
   // Default to GOODREADS if no source specified
   const bookSource = source || "GOODREADS";
@@ -101,7 +121,7 @@ export async function getBooks(_: any, args: QueryBooksArgs): Promise<Book[]> {
       break;
   }
 
-  if (books.length > limit) {
+  if (limit != null && books.length > limit) {
     books = books.slice(0, limit);
   }
 
@@ -135,7 +155,9 @@ async function getReadingFromLiteral(): Promise<Book[]> {
     },
   });
 
-  const isReading = response.data.booksByReadingStateAndProfile;
+  const isReading = response.data.booksByReadingStateAndProfile as
+    | LiteralBook[]
+    | undefined;
 
   if (!isReading) return [];
 
@@ -205,7 +227,7 @@ async function getReadingFromGoodreads(): Promise<Book[]> {
 
     if (!feed.items || feed.items.length === 0) return [];
 
-    const books = feed.items.map((item: any) => ({
+    const books = feed.items.map((item: GoodreadsItem) => ({
       title: cleanGoodreadsTitle(item.title || ""),
       author: item.authorName || "",
       url: `https://www.goodreads.com/book/show/${item.bookId}`,

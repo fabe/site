@@ -96,7 +96,7 @@ export default function MediaCard({
         )}
       >
         <div className="truncate min-w-0">{title}</div>
-        <div className="min-w-0 truncate pr-4 text-sm text-muted slashed-zero [font-variation-settings:'opsz'_14]">
+        <div className="min-w-0 truncate pr-4 text-sm text-muted slashed-zero font-ui-sm">
           {subtitle}
         </div>
       </div>

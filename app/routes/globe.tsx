@@ -22,7 +22,12 @@ const fetchPlaces = createServerFn().handler(async () => {
   const { data } = await apolloClient.query<PlacesQueryQuery>({
     query: QUERY_PLACES,
   });
-  return { places: data.places };
+  return {
+    places: data.places.filter(
+      (place): place is NonNullable<typeof place> =>
+        place?.location.lat != null && place.location.lon != null,
+    ),
+  };
 });
 
 export const Route = createFileRoute("/globe")({
@@ -54,7 +59,7 @@ function GlobeComponent() {
     <>
       <div className="mask-gradient pointer-events-none absolute left-0 top-0 z-10 h-32 w-full bg-gradient-to-t from-white/0 to-white backdrop-blur-lg dark:from-neutral-900/0 dark:to-neutral-900 sm:h-48"></div>
       <div className="absolute left-4 top-4 z-20 md:left-1/2 md:top-8 md:-translate-x-1/2 md:text-center">
-        <h1 className="pb-2 text-2xl text-heading [font-variation-settings:'opsz'_32,_'wght'_500] dark:text-shadow sm:text-3xl">
+        <h1 className="pb-2 text-2xl text-heading font-ui-title dark:text-shadow sm:text-3xl">
           Globe
         </h1>
       </div>

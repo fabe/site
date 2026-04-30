@@ -67,13 +67,13 @@ function AuthorLink({
           height={20}
         />
 
-        <span className="text-sm text-muted [font-variation-settings:'opsz'_14,'wght'_550] dark:group-hover:text-silver-dark transition-colors">
+        <span className="text-sm text-muted font-ui-label dark:group-hover:text-silver-dark transition-colors">
           {siteSettings.siteTitle}
         </span>
       </span>
 
       <span className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <span className="inline-flex items-center gap-1 transform-gpu text-sm text-muted [font-variation-settings:'opsz'_14,'wght'_550] dark:group-hover:text-silver-dark transition-all duration-300 ease-out opacity-0 translate-y-3 blur-[2px] scale-90 group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100 group-hover:blur-none">
+        <span className="inline-flex items-center gap-1 transform-gpu text-sm text-muted font-ui-label dark:group-hover:text-silver-dark transition-all duration-300 ease-out opacity-0 translate-y-3 blur-[2px] scale-90 group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100 group-hover:blur-none">
           <ChevronLeft size={12} />
           See all posts
         </span>
@@ -140,13 +140,13 @@ function PostComponent() {
   return (
     <Main slim>
       <header className="relative flex flex-col gap-4 py-6 sm:pt-0 sm:pb-12 text-center text-balance">
-        <div className="flex flex-row gap-2 items-center justify-center text-sm [font-variation-settings:'opsz'_14,'wght'_550] text-muted">
+        <div className="flex flex-row gap-2 items-center justify-center text-sm font-ui-label text-muted">
           <time dateTime={publishedDate} className="text-muted capitalize">
             {formatDate(publishedDate)}
           </time>
         </div>
 
-        <h1 className="text-4xl/[1.1] tracking-tight text-heading [font-variation-settings:'opsz'_48,_'wght'_550] sm:text-5xl/[1.1]">
+        <h1 className="text-4xl/[1.1] tracking-tight text-heading font-ui-display sm:text-5xl/[1.1]">
           {title}
         </h1>
 

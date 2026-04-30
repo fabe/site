@@ -11,7 +11,7 @@ export default function Intro({ introHtml }: IntroProps) {
       title={
         <>
           <h1 className="flex items-center gap-1 text-heading">
-            <Link to="/" className="[font-variation-settings:'wght'_550]">
+            <Link to="/" className="font-ui-strong">
               Fabian Schultz
             </Link>
           </h1>

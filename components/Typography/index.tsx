@@ -11,7 +11,7 @@ export function PageTitle({
   return (
     <h1
       className={cn(
-        "pb-6 text-2xl text-heading [font-variation-settings:'opsz'_32,_'wght'_500] sm:pb-12 sm:text-3xl",
+        "pb-6 text-2xl text-heading font-ui-title sm:pb-12 sm:text-3xl",
         className,
       )}
     >

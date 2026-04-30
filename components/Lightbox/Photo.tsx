@@ -1,4 +1,4 @@
-import { Photo } from "../../graphql/types/types.generated";
+import type { Photo } from "../../graphql/types/types.generated";
 import contentfulLoader from "../../lib/contentfulLoader";
 import { useCallback, useState } from "react";
 import {
@@ -23,7 +23,7 @@ export default function LightboxPhoto({ photo }: LightboxPhotoProps) {
       setLoading(false);
     }
   }, []);
-  const exif = photo.exif as EXIF;
+  const exif = photo.exif as EXIF | null | undefined;
 
   return (
     <div className="w-full h-full overflow-hidden">
@@ -56,11 +56,11 @@ export default function LightboxPhoto({ photo }: LightboxPhotoProps) {
         </div>
 
         <div className="lg:basis-[400px] bg-surface dark:bg-surface shrink-0 p-6 lg:flex lg:justify-between lg:flex-col tabular-nums overflow-y-auto">
-          <h1 className="[font-variation-settings:'wght'_550] text-heading text-2xl">
+          <h1 className="font-ui-strong text-heading text-2xl">
             {photo.description || "A photo"}
           </h1>
           <ul className="flex flex-col gap-1 border-solid border-line/10 pt-6 text-muted dark:border-neutral-700 lg:border-t">
-            {exif.Make && (
+            {exif?.Make && (
               <li className="flex gap-2">
                 <div className="flex-none flex pt-0.5">
                   <CameraIcon size={16} />
@@ -70,7 +70,7 @@ export default function LightboxPhoto({ photo }: LightboxPhotoProps) {
                 </span>
               </li>
             )}
-            {exif.LensModel && (
+            {exif?.LensModel && (
               <li className="flex gap-2">
                 <div className="flex-none flex pt-0.5">
                   <ApertureIcon size={16} />
@@ -78,7 +78,7 @@ export default function LightboxPhoto({ photo }: LightboxPhotoProps) {
                 <span className="break-words">{exif.LensModel}</span>
               </li>
             )}
-            {exif.ISO && (
+            {exif?.ISO && (
               <li className="flex gap-2">
                 <div className="flex-none flex pt-0.5">
                   <SunIcon size={16} />
@@ -86,7 +86,7 @@ export default function LightboxPhoto({ photo }: LightboxPhotoProps) {
                 <ExifSummaryExposure exif={exif} />
               </li>
             )}
-            {exif.DateTimeOriginal && (
+            {exif?.DateTimeOriginal && (
               <li className="flex gap-2">
                 <div className="flex-none flex pt-0.5">
                   <CalendarIcon size={16} />

@@ -1,4 +1,15 @@
-export function PhosphorIcon({ label, path, size, ...rest }) {
+import type { SVGProps } from "react";
+
+type IconProps = { size: number };
+type PhosphorIconProps = SVGProps<SVGSVGElement> &
+  IconProps & { label: string; path: string };
+
+export function PhosphorIcon({
+  label,
+  path,
+  size,
+  ...rest
+}: PhosphorIconProps) {
   return (
     <svg
       aria-label={label}
@@ -14,7 +25,7 @@ export function PhosphorIcon({ label, path, size, ...rest }) {
   );
 }
 
-export function HomeIcon({ size }) {
+export function HomeIcon({ size }: IconProps) {
   return (
     <PhosphorIcon
       label="Home"
@@ -24,7 +35,7 @@ export function HomeIcon({ size }) {
   );
 }
 
-export function NavigationIcon({ size }) {
+export function NavigationIcon({ size }: IconProps) {
   return (
     <PhosphorIcon
       label="Menu"
@@ -34,7 +45,7 @@ export function NavigationIcon({ size }) {
   );
 }
 
-export function NoteIcon({ size }) {
+export function NoteIcon({ size }: IconProps) {
   return (
     <PhosphorIcon
       label="Note"
@@ -44,7 +55,7 @@ export function NoteIcon({ size }) {
   );
 }
 
-export function TwitterIcon({ size }) {
+export function TwitterIcon({ size }: IconProps) {
   return (
     <PhosphorIcon
       label="X logo"
@@ -54,7 +65,7 @@ export function TwitterIcon({ size }) {
   );
 }
 
-export function EmailIcon({ size }) {
+export function EmailIcon({ size }: IconProps) {
   return (
     <PhosphorIcon
       label="Email"
@@ -64,7 +75,7 @@ export function EmailIcon({ size }) {
   );
 }
 
-export function SpinnerIcon({ size }) {
+export function SpinnerIcon({ size }: IconProps) {
   return (
     <div className="inline-flex animate-spin">
       <PhosphorIcon
@@ -76,7 +87,7 @@ export function SpinnerIcon({ size }) {
   );
 }
 
-export function FeedIcon({ size }) {
+export function FeedIcon({ size }: IconProps) {
   return (
     <PhosphorIcon
       label="Feed"
@@ -86,7 +97,10 @@ export function FeedIcon({ size }) {
   );
 }
 
-export function ExternalIcon({ size, ...rest }) {
+export function ExternalIcon({
+  size,
+  ...rest
+}: IconProps & SVGProps<SVGSVGElement>) {
   return (
     <PhosphorIcon
       label="Open in new tab"
@@ -97,7 +111,7 @@ export function ExternalIcon({ size, ...rest }) {
   );
 }
 
-export function GithubIcon({ size }) {
+export function GithubIcon({ size }: IconProps) {
   return (
     <PhosphorIcon
       label="GitHub"
@@ -107,7 +121,7 @@ export function GithubIcon({ size }) {
   );
 }
 
-export function MusicIcon({ size }) {
+export function MusicIcon({ size }: IconProps) {
   return (
     <PhosphorIcon
       label="Music note"
@@ -117,7 +131,7 @@ export function MusicIcon({ size }) {
   );
 }
 
-export function GlobeIcon({ size }) {
+export function GlobeIcon({ size }: IconProps) {
   return (
     <PhosphorIcon
       label="Globe"
@@ -127,7 +141,7 @@ export function GlobeIcon({ size }) {
   );
 }
 
-export function ShieldIcon({ size }) {
+export function ShieldIcon({ size }: IconProps) {
   return (
     <PhosphorIcon
       label="Shield"
@@ -137,7 +151,7 @@ export function ShieldIcon({ size }) {
   );
 }
 
-export function LockIcon({ size }) {
+export function LockIcon({ size }: IconProps) {
   return (
     <PhosphorIcon
       label="Lock"
@@ -147,7 +161,7 @@ export function LockIcon({ size }) {
   );
 }
 
-export function CursorIcon({ size }) {
+export function CursorIcon({ size }: IconProps) {
   return (
     <PhosphorIcon
       label="CursorClick"
@@ -157,7 +171,7 @@ export function CursorIcon({ size }) {
   );
 }
 
-export function CloseIcon({ size }) {
+export function CloseIcon({ size }: IconProps) {
   return (
     <PhosphorIcon
       label="Close"
@@ -167,7 +181,7 @@ export function CloseIcon({ size }) {
   );
 }
 
-export function PlusIcon({ size }) {
+export function PlusIcon({ size }: IconProps) {
   return (
     <PhosphorIcon
       label="Plus"
@@ -177,7 +191,7 @@ export function PlusIcon({ size }) {
   );
 }
 
-export function CameraIcon({ size }) {
+export function CameraIcon({ size }: IconProps) {
   return (
     <PhosphorIcon
       label="Camera"
@@ -187,7 +201,7 @@ export function CameraIcon({ size }) {
   );
 }
 
-export function ApertureIcon({ size }) {
+export function ApertureIcon({ size }: IconProps) {
   return (
     <PhosphorIcon
       label="Aperture"
@@ -197,7 +211,7 @@ export function ApertureIcon({ size }) {
   );
 }
 
-export function SunIcon({ size }) {
+export function SunIcon({ size }: IconProps) {
   return (
     <PhosphorIcon
       label="Sun"
@@ -207,7 +221,7 @@ export function SunIcon({ size }) {
   );
 }
 
-export function CalendarIcon({ size }) {
+export function CalendarIcon({ size }: IconProps) {
   return (
     <PhosphorIcon
       label="Calendar"
@@ -217,7 +231,7 @@ export function CalendarIcon({ size }) {
   );
 }
 
-export function TagIcon({ size }) {
+export function TagIcon({ size }: IconProps) {
   return (
     <PhosphorIcon
       label="Tag"
@@ -227,7 +241,7 @@ export function TagIcon({ size }) {
   );
 }
 
-export function ChevronLeft({ size }) {
+export function ChevronLeft({ size }: IconProps) {
   return (
     <PhosphorIcon
       label="ChevronLeft"
@@ -237,7 +251,7 @@ export function ChevronLeft({ size }) {
   );
 }
 
-export function DocumentIcon({ size }) {
+export function DocumentIcon({ size }: IconProps) {
   return (
     <PhosphorIcon
       label="Document"
@@ -247,7 +261,7 @@ export function DocumentIcon({ size }) {
   );
 }
 
-export function PlugsIcon({ size }) {
+export function PlugsIcon({ size }: IconProps) {
   return (
     <PhosphorIcon
       label="Plugs"
@@ -257,7 +271,7 @@ export function PlugsIcon({ size }) {
   );
 }
 
-export function HeadCircuitIcon({ size }) {
+export function HeadCircuitIcon({ size }: IconProps) {
   return (
     <PhosphorIcon
       label="HeadCircuit"
@@ -267,7 +281,7 @@ export function HeadCircuitIcon({ size }) {
   );
 }
 
-export function ArrowLeftIcon({ size }) {
+export function ArrowLeftIcon({ size }: IconProps) {
   return (
     <PhosphorIcon
       label="ArrowLeft"
@@ -277,7 +291,7 @@ export function ArrowLeftIcon({ size }) {
   );
 }
 
-export function PlayIcon({ size }) {
+export function PlayIcon({ size }: IconProps) {
   return (
     <PhosphorIcon
       label="Play"
@@ -287,7 +301,7 @@ export function PlayIcon({ size }) {
   );
 }
 
-export function PauseIcon({ size }) {
+export function PauseIcon({ size }: IconProps) {
   return (
     <PhosphorIcon
       label="Pause"
@@ -297,7 +311,7 @@ export function PauseIcon({ size }) {
   );
 }
 
-export function MutedIcon({ size }) {
+export function MutedIcon({ size }: IconProps) {
   return (
     <PhosphorIcon
       label="Muted"
@@ -307,7 +321,7 @@ export function MutedIcon({ size }) {
   );
 }
 
-export function UnmutedIcon({ size }) {
+export function UnmutedIcon({ size }: IconProps) {
   return (
     <PhosphorIcon
       label="Unmuted"
@@ -317,7 +331,7 @@ export function UnmutedIcon({ size }) {
   );
 }
 
-export function CopyIcon({ size }) {
+export function CopyIcon({ size }: IconProps) {
   return (
     <PhosphorIcon
       label="Copy"

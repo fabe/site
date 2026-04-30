@@ -13,8 +13,8 @@ interface Place {
   name: string;
   locationType: string;
   location: {
-    lat: number;
-    lon: number;
+    lat?: number | null;
+    lon?: number | null;
   };
 }
 
@@ -52,25 +52,29 @@ export default function GlobeMap({ places, initialViewState }: GlobeMapProps) {
 
   const pins = useMemo(
     () =>
-      places.map((place, index) => (
-        <Marker
-          key={`marker-${index}`}
-          longitude={place.location.lon}
-          latitude={place.location.lat}
-          anchor="bottom"
-          onClick={(e) => {
-            e.originalEvent.stopPropagation();
-            haptic("selection");
-            setPopupInfo(place);
-          }}
-        >
-          <div
-            className={`h-4 w-4 cursor-pointer rounded-xl border-2 pin-${place.locationType.toLowerCase()} bg-clip-content p-0.5`}
-            aria-label={`${place.name}, ${place.locationType}`}
-            role="button"
-          />
-        </Marker>
-      )),
+      places.flatMap((place, index) => {
+        if (place.location.lat == null || place.location.lon == null) return [];
+
+        return (
+          <Marker
+            key={`marker-${index}`}
+            longitude={place.location.lon}
+            latitude={place.location.lat}
+            anchor="bottom"
+            onClick={(e: { originalEvent: MouseEvent }) => {
+              e.originalEvent.stopPropagation();
+              haptic("selection");
+              setPopupInfo(place);
+            }}
+          >
+            <div
+              className={`h-4 w-4 cursor-pointer rounded-xl border-2 pin-${place.locationType.toLowerCase()} bg-clip-content p-0.5`}
+              aria-label={`${place.name}, ${place.locationType}`}
+              role="button"
+            />
+          </Marker>
+        );
+      }),
     [places],
   );
 
