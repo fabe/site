@@ -2,6 +2,8 @@ import React, { type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { LinkExternal } from "./Links";
 import { ExternalIcon } from "./Icons";
+import Caption from "./Caption";
+import { MediaBorder, MediaFrame } from "./Frame";
 import ImageLightbox from "./ImageLightbox";
 
 export { mdxComponents } from "./Prose/index";
@@ -102,7 +104,7 @@ export const ProseImageToggle = ({
   if (!isClient) {
     return (
       <div className={`${noMargin ? "" : "my-6 sm:my-12"} relative`}>
-        <div className="relative rounded-xl sm:rounded-2xl overflow-hidden bg-gray-100 dark:bg-neutral-800/75">
+        <MediaFrame>
           <img
             src={withImageParams(lightSrc, { w: 1600, fm: "webp" })}
             alt={alt}
@@ -110,8 +112,8 @@ export const ProseImageToggle = ({
             height={height}
             className="w-full h-auto"
           />
-          <div className="absolute inset-0 pointer-events-none rounded-xl sm:rounded-2xl box-border border border-neutral-800/5 dark:border-white/5" />
-        </div>
+          <MediaBorder />
+        </MediaFrame>
         {title && <ProseCaption>{title}</ProseCaption>}
       </div>
     );
@@ -119,7 +121,7 @@ export const ProseImageToggle = ({
 
   return (
     <div className={`${noMargin ? "" : "my-6 sm:my-12"} relative group`}>
-      <div className="relative rounded-xl sm:rounded-2xl overflow-hidden bg-gray-100 dark:bg-neutral-800/75">
+      <MediaFrame>
         <img
           src={withImageParams(lightSrc, { w: 1600, fm: "webp" })}
           alt={alt}
@@ -147,8 +149,8 @@ export const ProseImageToggle = ({
           />
         </div>
 
-        <div className="absolute inset-0 pointer-events-none rounded-xl sm:rounded-2xl box-border border border-neutral-800/5 dark:border-white/5" />
-      </div>
+        <MediaBorder />
+      </MediaFrame>
 
       <button
         onClick={toggleMode}
@@ -207,9 +209,7 @@ export const ProseHeading = ({
 
 export const ProseCaption = ({ children }: { children: ReactNode }) => {
   return (
-    <figcaption className="text-sm text-neutral-500 dark:text-silver-dark text-balance text-center pt-4">
-      {children}
-    </figcaption>
+    <Caption>{children}</Caption>
   );
 };
 

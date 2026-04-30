@@ -7,6 +7,8 @@ import {
   PlayIcon,
   UnmutedIcon,
 } from "../Icons";
+import Caption from "../Caption";
+import { MediaBorder } from "../Frame";
 
 interface PlayerProps {
   src: string;
@@ -92,7 +94,7 @@ export const SimplePlayer: React.FC<PlayerProps> = ({
             loop
             playsInline
           />
-          <div className="absolute inset-0 pointer-events-none rounded-md sm:rounded-lg box-border border border-neutral-800/5 dark:border-white/5"></div>
+          <div className="absolute inset-0 pointer-events-none rounded-md sm:rounded-lg box-border border border-neutral-800/5 dark:border-white/5" />
           <button
             type="button"
             className={`absolute backdrop-blur-sm saturate-150 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-200 ease-out flex items-center justify-center rounded-full w-16 h-16 bg-black/40 text-white ${
@@ -159,9 +161,7 @@ export const SimplePlayer: React.FC<PlayerProps> = ({
           </motion.button>
         )}
         {title && (
-          <figcaption className="text-sm text-neutral-500 dark:text-silver-dark text-balance text-center pt-3 sm:pt-6 px-4">
-            {title}
-          </figcaption>
+          <Caption className="pt-3 sm:pt-6 px-4">{title}</Caption>
         )}
       </div>
     </div>
@@ -300,7 +300,7 @@ export const Player: React.FC<PlayerProps> = ({ src, title, poster }) => {
           onClick={togglePlay}
         />
 
-        <div className="absolute inset-0 pointer-events-none rounded-xl sm:rounded-2xl box-border border border-neutral-800/5 dark:border-white/5"></div>
+        <MediaBorder />
 
         {/* Full overlay with reduced opacity & snappier transition */}
         <div
@@ -398,9 +398,7 @@ export const Player: React.FC<PlayerProps> = ({ src, title, poster }) => {
           </div>
         </div>
       </div>
-      <figcaption className="text-sm text-neutral-500 dark:text-silver-dark text-balance text-center pt-4">
-        {title}
-      </figcaption>
+      <Caption>{title}</Caption>
     </div>
   );
 };
