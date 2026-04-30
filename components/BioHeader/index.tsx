@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "@tanstack/react-router";
-import { LinkButton, LinkExternal } from "../Links";
+import { LinkExternal } from "../Links";
 import { ArrowLeftIcon, DocumentIcon } from "../Icons";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -34,6 +34,7 @@ export function BioHeader({ backButton = false }: BioHeaderProps) {
             >
               <Link
                 to="/work"
+                search={{ code: undefined }}
                 className="group relative isolate flex items-center justify-center w-9 h-9"
               >
                 <span className="absolute inset-0 rounded-full bg-neutral-200/60 transition-all duration-100 ease-out-expo dark:bg-neutral-800/75 dark:group-hover:bg-neutral-700/50 group-hover:bg-neutral-200 group-hover:scale-[1.05] z-0" />
@@ -71,15 +72,18 @@ export function BioHeader({ backButton = false }: BioHeaderProps) {
           </span>
         </div>
       </div>
-      <LinkButton
+      <a
         target="_blank"
         rel="noopener noreferrer"
         href={resumeURL}
-        className="self-start sm:self-center hidden sm:block"
+        className="group relative isolate hidden items-center gap-1 self-start px-2 py-1.5 text-sm leading-tight sm:flex sm:self-center"
       >
-        <DocumentIcon size={16} />
-        Download resume
-      </LinkButton>
+        <span className="absolute inset-0 z-0 rounded-lg bg-surface-raised/60 transition-all duration-100 ease-out-expo group-hover:scale-x-[1.03] group-hover:scale-y-[1.08] group-hover:bg-surface-raised dark:bg-surface/75 dark:group-hover:bg-surface" />
+        <span className="relative z-10 flex items-center gap-1 text-neutral-700 font-ui-label dark:text-muted">
+          <DocumentIcon size={16} />
+          Download resume
+        </span>
+      </a>
     </header>
   );
 }

@@ -50,7 +50,7 @@ export const Route = createFileRoute("/work")({
     if (!authenticated) {
       throw redirect({
         to: "/login",
-        search: search.code ? { code: search.code } : undefined,
+        search: { code: search.code },
       });
     }
   },
