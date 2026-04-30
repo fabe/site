@@ -77,8 +77,8 @@ export const SimplePlayer: React.FC<PlayerProps> = ({
           noPadding
             ? ""
             : title
-            ? "pt-2 pb-3 px-2 sm:pt-6 sm:pb-6 sm:px-6"
-            : "p-2 sm:p-6"
+              ? "pt-2 pb-3 px-2 sm:pt-6 sm:pb-6 sm:px-6"
+              : "p-2 sm:p-6"
         }`}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
@@ -94,7 +94,7 @@ export const SimplePlayer: React.FC<PlayerProps> = ({
             loop
             playsInline
           />
-          <div className="absolute inset-0 pointer-events-none rounded-md sm:rounded-lg box-border border border-neutral-800/5 dark:border-white/5" />
+          <div className="absolute inset-0 pointer-events-none rounded-md sm:rounded-lg box-border border border-line/5" />
           <button
             type="button"
             className={`absolute backdrop-blur-sm saturate-150 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-200 ease-out flex items-center justify-center rounded-full w-16 h-16 bg-black/40 text-white ${
@@ -160,9 +160,7 @@ export const SimplePlayer: React.FC<PlayerProps> = ({
             </AnimatePresence>
           </motion.button>
         )}
-        {title && (
-          <Caption className="pt-3 sm:pt-6 px-4">{title}</Caption>
-        )}
+        {title && <Caption className="pt-3 sm:pt-6 px-4">{title}</Caption>}
       </div>
     </div>
   );
@@ -287,7 +285,7 @@ export const Player: React.FC<PlayerProps> = ({ src, title, poster }) => {
   return (
     <div className="sm:-mx-24 sm:my-12 my-6">
       <div
-        className="relative w-full overflow-hidden rounded-xl sm:rounded-2xl bg-gray-100 dark:bg-neutral-800/75 select-none"
+        className="relative w-full overflow-hidden rounded-xl sm:rounded-2xl bg-surface-muted dark:bg-surface/75 select-none"
         onMouseEnter={showControls}
         onMouseLeave={hideControls}
         onMouseMove={showControls}

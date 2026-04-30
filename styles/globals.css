@@ -28,12 +28,35 @@
 
 :root {
   --sans-font: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --color-canvas: 249 250 251;
+  --color-fg: 38 38 38;
+  --color-heading: 38 38 38;
+  --color-muted: 115 115 115;
+  --color-subtle: 163 163 163;
+  --color-surface: 255 255 255;
+  --color-surface-muted: 243 244 246;
+  --color-surface-raised: 229 231 235;
+  --color-line: 23 23 23;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-canvas: 23 23 23;
+    --color-fg: 223 223 222;
+    --color-heading: 255 255 255;
+    --color-muted: 155 155 155;
+    --color-subtle: 82 82 82;
+    --color-surface: 38 38 38;
+    --color-surface-muted: 38 38 38;
+    --color-surface-raised: 38 38 38;
+    --color-line: 255 255 255;
+  }
 }
 
 html,
 body {
-  @apply bg-gray-50 dark:bg-neutral-900;
-  @apply text-neutral-800 dark:text-silver;
+  @apply bg-canvas;
+  @apply text-fg;
   @apply antialiased;
   @apply text-base;
 
@@ -117,7 +140,7 @@ blockquote span::after {
 
 [cmdk-input] {
   @apply appearance-none;
-  @apply text-neutral-800 dark:text-silver;
+  @apply text-fg;
   @apply placeholder:text-neutral-900/40 dark:placeholder:text-white/40;
   @apply bg-transparent;
   @apply w-full;
@@ -139,7 +162,7 @@ blockquote span::after {
   @apply px-3 py-2;
   @apply rounded-md;
   @apply cursor-pointer;
-  @apply text-neutral-600 dark:text-silver-dark;
+  @apply text-muted;
   @apply transition-colors;
   @apply [font-variation-settings:'wght'_420];
 }
@@ -150,17 +173,17 @@ blockquote span::after {
 
 [cmdk-item][aria-selected] {
   @apply bg-neutral-700/10 dark:bg-white/10;
-  @apply text-neutral-800 dark:text-silver;
+  @apply text-fg;
 }
 
 [cmdk-item]:active {
   @apply bg-neutral-200/[.9] dark:bg-neutral-700;
-  @apply text-neutral-800 dark:text-silver;
+  @apply text-fg;
 }
 
 [cmdk-empty] {
   @apply px-3 py-3;
-  @apply text-sm font-medium text-neutral-600 [font-variation-settings:'opsz'_12] dark:text-silver-dark;
+  @apply text-sm font-medium text-muted [font-variation-settings:'opsz'_12];
 }
 
 [cmdk-separator] {
@@ -170,7 +193,7 @@ blockquote span::after {
 
 [cmdk-group-heading] {
   @apply px-3 pb-2 pt-4;
-  @apply text-xs font-medium text-neutral-600 [font-variation-settings:'opsz'_12] dark:text-silver-dark;
+  @apply text-xs font-medium text-muted [font-variation-settings:'opsz'_12];
 }
 
 [cmdk-loading] {
@@ -310,7 +333,7 @@ blockquote span::after {
     @apply font-sans;
     @apply block;
     @apply text-sm;
-    @apply text-neutral-500 dark:text-silver-dark;
+    @apply text-muted;
     @apply [font-variation-settings:'opsz'_14];
     @apply slashed-zero tabular-nums;
   }
@@ -321,7 +344,7 @@ blockquote span::after {
   }
 
   .badge {
-    @apply inline-flex items-center gap-1 rounded-xl bg-gray-200 px-1.5 py-0.5 text-xs font-medium text-neutral-600 [font-variation-settings:'opsz'_12] dark:bg-neutral-800 dark:text-silver-dark;
+    @apply inline-flex items-center gap-1 rounded-xl bg-surface-raised px-1.5 py-0.5 text-xs font-medium text-muted [font-variation-settings:'opsz'_12];
     @apply slashed-zero;
     @apply decoration-neutral-600;
   }
@@ -335,11 +358,11 @@ blockquote span::after {
   }
 
   .list-title {
-    @apply col-span-12 border-t border-solid border-neutral-500/10 pt-4 dark:border-white/5 sm:col-span-4;
+    @apply col-span-12 border-t border-solid border-line/10 pt-4 dark:border-line/5 sm:col-span-4;
   }
 
   .list-content {
-    @apply col-span-12 border-solid border-neutral-500/10 pt-4 dark:border-white/5 sm:col-span-8 sm:border-t;
+    @apply col-span-12 border-solid border-line/10 pt-4 dark:border-line/5 sm:col-span-8 sm:border-t;
   }
 
   .nav-island {
@@ -358,15 +381,15 @@ blockquote span::after {
     @apply prose-p:m-0;
     @apply prose-p:leading-relaxed sm:prose-p:leading-golden;
     @apply prose prose-neutral dark:prose-invert max-w-none;
-    @apply prose-p:text-neutral-800 dark:prose-p:text-silver;
+    @apply prose-p:text-fg;
     @apply prose-headings:font-normal prose-headings:[font-variation-settings:'wght'_500];
     @apply prose-strong:font-normal prose-strong:[font-variation-settings:'wght'_500];
     @apply prose-em:not-italic prose-em:underline prose-em:decoration-neutral-300 prose-em:decoration-wavy dark:prose-em:decoration-neutral-700;
-    @apply prose-code:rounded prose-code:font-normal prose-code:text-neutral-800 dark:prose-code:text-silver-dark;
+    @apply prose-code:rounded prose-code:font-normal prose-code:text-fg;
     @apply prose-pre:overflow-auto prose-pre:whitespace-pre prose-pre:border prose-pre:border-neutral-200 prose-pre:bg-transparent prose-pre:p-4 prose-pre:text-sm dark:prose-pre:border-white/5 sm:prose-pre:-ml-4 sm:prose-pre:-mr-4;
     @apply prose-img:rounded-lg;
     @apply prose-hr:my-6 prose-hr:w-16 prose-hr:mx-auto prose-hr:h-px prose-hr:border-none prose-hr:bg-neutral-200 dark:prose-hr:bg-neutral-800 sm:prose-hr:my-12;
-    @apply prose-blockquote:border-0 prose-blockquote:p-0 prose-blockquote:not-italic prose-blockquote:text-neutral-600 dark:prose-blockquote:text-silver-dark;
+    @apply prose-blockquote:border-0 prose-blockquote:p-0 prose-blockquote:not-italic prose-blockquote:text-muted;
   }
 
   .prose-custom a {
@@ -392,14 +415,14 @@ blockquote span::after {
 
   .link-external svg {
     @apply decoration-transparent;
-    @apply text-neutral-400 dark:text-silver-dark;
+    @apply text-subtle dark:text-muted;
   }
 
   .link-sm {
     @apply text-xs;
     @apply decoration-1.5;
     @apply underline-offset-1.5;
-    @apply text-neutral-500 dark:text-silver-dark;
+    @apply text-muted;
     @apply decoration-neutral-300 dark:decoration-neutral-700;
     @apply hover:decoration-neutral-400 dark:hover:decoration-neutral-600;
     @apply [font-variation-settings:'opsz'_12];
@@ -407,9 +430,13 @@ blockquote span::after {
 
   .link-fade {
     @apply text-sm;
-    @apply text-neutral-500 dark:text-silver-dark;
-    @apply hover:text-neutral-800 dark:hover:text-silver;
+    @apply text-muted;
+    @apply hover:text-fg;
     @apply transition-colors;
+  }
+
+  .text-meta {
+    @apply text-sm text-muted [font-variation-settings:'opsz'_14];
   }
 
   .text-shadow {
@@ -419,5 +446,4 @@ blockquote span::after {
   .mask-gradient {
     mask-image: linear-gradient(to top, transparent 0%, rgba(0, 0, 0, 1) 90%);
   }
-
 }

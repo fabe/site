@@ -24,7 +24,7 @@ export default function SummaryCard({
         haptic("light");
         onClick?.();
       }}
-      className="group/card text-left flex items-center py-6 gap-6 border-b border-solid border-neutral-500/10 dark:border-neutral-900 group-hover/cards:opacity-50 hover:!opacity-100 transition-opacity focus-visible:outline outline-2 outline-indigo-500 outline-offset-2 rounded"
+      className="group/card flex items-center gap-6 rounded border-b border-solid border-line/10 py-6 text-left outline-2 outline-offset-2 outline-indigo-500 transition-opacity hover:!opacity-100 focus-visible:outline group-hover/cards:opacity-50 dark:border-neutral-900"
     >
       {imageSrc ? (
         <div className="origin-center drop-shadow-md transition-transform shrink-0 sm:block hidden">
@@ -38,7 +38,7 @@ export default function SummaryCard({
         </div>
       ) : null}
       <div className="grow">
-        <h3 className="text-base sm:text-lg [font-variation-settings:'opsz'_18,_'wght'_700] text-neutral-800 dark:text-white pb-1">
+        <h3 className="text-base sm:text-lg [font-variation-settings:'opsz'_18,_'wght'_700] text-heading pb-1">
           {title}
         </h3>
         <p className="text-sm sm:text-base leading-normal">{subtitle}</p>

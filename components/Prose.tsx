@@ -198,7 +198,7 @@ export const ProseHeading = ({
 }) => {
   return (
     <h3
-      className={`text-xl sm:mb-8 mb-6 text-neutral-900 dark:text-white ${
+      className={`mb-6 text-xl text-heading sm:mb-8 ${
         lessMargin ? "mt-8 sm:mt-16" : "mt-12 sm:mt-20"
       } [font-variation-settings:'opsz'_36,_'wght'_500]`}
     >
@@ -208,16 +208,14 @@ export const ProseHeading = ({
 };
 
 export const ProseCaption = ({ children }: { children: ReactNode }) => {
-  return (
-    <Caption>{children}</Caption>
-  );
+  return <Caption>{children}</Caption>;
 };
 
 export const ProseSubHeading = ({ children }: { children: ReactNode }) => {
   return (
-    <h4 className="mt-8 sm:mt-12 sm:mb-6 mb-4 text-neutral-900 dark:text-white font-medium flex items-center">
+    <h4 className="mb-4 mt-8 flex items-center font-medium text-heading sm:mb-6 sm:mt-12">
       {children}
-      <span className="ml-4 flex-grow border-t border-neutral-500/10 dark:border-neutral-800/75" />
+      <span className="ml-4 flex-grow border-t border-line/10 dark:border-neutral-800/75" />
     </h4>
   );
 };
@@ -263,22 +261,18 @@ export const ProjectHeader = ({
   return (
     <div className="mt-6 sm:mt-12">
       <div className="sm:text-center text-left sm:text-balance text-pretty">
-        <h1 className="text-3xl sm:text-5xl text-neutral-800 [font-variation-settings:'opsz'_48,_'wght'_550] dark:text-white pb-4 tracking-tight pt-2">
+        <h1 className="pb-4 pt-2 text-3xl tracking-tight text-heading [font-variation-settings:'opsz'_48,_'wght'_550] sm:text-5xl">
           {title}
         </h1>
-        <p className="dark:text-silver-dark text-neutral-500 sm:pb-12 pb-6">
-          {renderDescription()}
-        </p>
+        <p className="text-muted sm:pb-12 pb-6">{renderDescription()}</p>
         {Object.keys(details).length > 0 && (
           <div className="grid grid-cols-3 gap-4 mb-4">
             {Object.entries(details).map(([key, value]) => (
               <dl
                 key={key}
-                className="col-span-3 sm:col-span-1 rounded-2xl bg-gray-100 dark:bg-neutral-800/75 p-4"
+                className="col-span-3 sm:col-span-1 rounded-2xl bg-surface-muted dark:bg-surface/75 p-4"
               >
-                <dt className="text-neutral-500 dark:text-silver-dark text-sm capitalize">
-                  {key}
-                </dt>
+                <dt className="text-muted text-sm capitalize">{key}</dt>
                 <dd className="font-medium">{String(value)}</dd>
               </dl>
             ))}
@@ -321,7 +315,7 @@ export const ProjectCard = ({
       to={link as any}
       className="group relative flex flex-col sm:grid sm:grid-cols-12 p-2 sm:pr-8 sm:gap-4 gap-2 rounded-3xl isolate sm:items-center"
     >
-      <span className="absolute inset-0 rounded-3xl group-hover:rounded-[1.5rem] bg-white/80 dark:bg-neutral-800/75 dark:group-hover:bg-neutral-700/50 transition-all duration-200 ease-out-expo shadow-elevation-sm group-hover:scale-x-[1.01] group-hover:scale-y-[1.04] z-0" />
+      <span className="absolute inset-0 z-0 rounded-3xl bg-surface/80 shadow-elevation-sm transition-all duration-200 ease-out-expo group-hover:scale-x-[1.01] group-hover:scale-y-[1.04] group-hover:rounded-[1.5rem] dark:bg-surface/75 dark:group-hover:bg-neutral-700/50" />
       <div className="relative sm:col-span-5 rounded-2xl">
         <div className="absolute top-3 left-3 z-10">
           <div className="badge bg-transparent text-white backdrop-blur-sm backdrop-saturate-150 backdrop-brightness-75">
@@ -337,16 +331,14 @@ export const ProjectCard = ({
             className="w-full h-auto"
             loading="lazy"
           />
-          <div className="absolute inset-0 pointer-events-none rounded-2xl box-border border border-neutral-800/5 dark:border-white/5" />
+          <div className="absolute inset-0 pointer-events-none rounded-2xl box-border border border-line/5" />
         </div>
       </div>
 
       <div className="flex flex-col justify-center sm:h-full sm:col-span-7 p-2 relative z-10">
         <div className="flex flex-col gap-1">
           <span className="font-medium">{title}</span>
-          <p className="text-sm text-neutral-500 dark:text-silver-dark text-pretty">
-            {description}
-          </p>
+          <p className="text-sm text-muted text-pretty">{description}</p>
         </div>
       </div>
     </Link>

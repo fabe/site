@@ -28,7 +28,7 @@ export function RichButton({
 
   return (
     <button
-      className="group rounded-full inline-flex items-center justify-between gap-4 pl-6 pr-2 py-2 text-sm sm:text-base text-neutral-800 [font-variation-settings:'opsz'_15,_'wght'_600] dark:text-white dark:bg-neutral-800/75 dark:hover:bg-neutral-700/50 bg-gray-200/70 outline-2 outline-indigo-500 outline-offset-2 focus-visible:outline"
+      className="group inline-flex items-center justify-between gap-4 rounded-full bg-surface-raised/70 py-2 pl-6 pr-2 text-sm text-heading outline-2 outline-offset-2 outline-indigo-500 [font-variation-settings:'opsz'_15,_'wght'_600] focus-visible:outline dark:bg-surface/75 dark:hover:bg-neutral-700/50 sm:text-base"
       onClick={() => {
         haptic("light");
         onClick();

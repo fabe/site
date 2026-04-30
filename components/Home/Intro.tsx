@@ -10,14 +10,12 @@ export default function Intro({ introHtml }: IntroProps) {
     <HomeSection
       title={
         <>
-          <h1 className="flex items-center gap-1 text-neutral-800 dark:text-white">
+          <h1 className="flex items-center gap-1 text-heading">
             <Link to="/" className="[font-variation-settings:'wght'_550]">
               Fabian Schultz
             </Link>
           </h1>
-          <h2 className="text-neutral-500 dark:text-silver-dark">
-            Product Designer
-          </h2>
+          <h2 className="text-muted">Product Designer</h2>
         </>
       }
       dtClassName="border-none pb-4 pt-0 leading-relaxed sm:pb-0"

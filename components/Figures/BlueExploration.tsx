@@ -16,7 +16,7 @@ export function BlueExploration() {
 
   return (
     <div className="my-6 sm:my-12">
-      <div className="bg-gray-100 dark:bg-neutral-800 border border-neutral-800/5 dark:border-white/5 rounded-2xl py-10 sm:py-16 px-6 sm:px-8 relative overflow-hidden">
+      <div className="bg-surface-muted dark:bg-surface border border-line/5 rounded-2xl py-10 sm:py-16 px-6 sm:px-8 relative overflow-hidden">
         {/* Dot grid pattern */}
         <div
           className="absolute inset-0 opacity-40 dark:opacity-15"

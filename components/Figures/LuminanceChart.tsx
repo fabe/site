@@ -132,7 +132,7 @@ export function LuminanceChart() {
     <div className="my-6 sm:my-12">
       <div
         ref={containerRef}
-        className="bg-gray-100 dark:bg-neutral-800 border border-neutral-800/5 dark:border-white/5 rounded-2xl py-6 sm:py-8 px-6 sm:px-8"
+        className="bg-surface-muted dark:bg-surface border border-line/5 rounded-2xl py-6 sm:py-8 px-6 sm:px-8"
       >
         {/* Legend */}
         <CustomLegend />

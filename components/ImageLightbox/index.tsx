@@ -4,12 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { createPortal } from "react-dom";
 import Caption from "@/components/Caption";
-import {
-  MediaBorder,
-  MediaFrame,
-  frameClass,
-  glassBackdropClass,
-} from "@/components/Frame";
+import { MediaBorder, MediaFrame } from "@/components/Frame";
 import { cn } from "@/lib/cn";
 import { withImageParams } from "@/lib/imageProxy";
 import { useHaptics } from "@/lib/useHaptics";
@@ -163,7 +158,7 @@ export default function ImageLightbox({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className={cn("fixed inset-0 z-40", glassBackdropClass)}
+            className="fixed inset-0 z-40 bg-gray-50/80 backdrop-blur-[50px] backdrop-saturate-[2] dark:bg-neutral-900/80"
             onClick={closeLightbox}
             role="dialog"
             aria-modal="true"
@@ -172,7 +167,7 @@ export default function ImageLightbox({
 
           {/* Animated image clone */}
           <motion.div
-            className={cn("fixed cursor-zoom-out z-50", frameClass)}
+            className="fixed z-50 cursor-zoom-out overflow-hidden rounded-xl bg-surface-muted sm:rounded-2xl dark:bg-surface/75"
             onClick={closeLightbox}
             initial={{
               left: imageRect.left,

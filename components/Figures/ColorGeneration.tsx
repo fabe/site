@@ -12,7 +12,7 @@ export function ColorGeneration() {
         height="350"
         fill="none"
         viewBox="0 0 650 350"
-        className="rounded-2xl border border-neutral-800/5 dark:border-white/5 bg-gray-100 dark:bg-neutral-800 w-full h-auto max-w-full"
+        className="rounded-2xl border border-line/5 bg-surface-muted dark:bg-surface w-full h-auto max-w-full"
         preserveAspectRatio="xMidYMid meet"
       >
         <defs>

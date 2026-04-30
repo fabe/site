@@ -1,5 +1,4 @@
 import { Transition } from "@headlessui/react";
-import { smallMutedTextClass } from "@/components/Typography";
 import { cn } from "@/lib/cn";
 
 export enum MediaCardImageRadius {
@@ -26,12 +25,6 @@ interface MediaCardProps {
 
 const FALLBACK_COVER =
   "data:image/svg+xml,%0A%3Csvg fill='none' height='112' viewBox='0 0 112 112' width='112' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m0 0h112v112h-112z' fill='%2318181b'/%3E%3Cg fill='%23e2e8f0' fill-opacity='.15'%3E%3Ccircle cx='56' cy='56' r='28'/%3E%3C/g%3E%3C/svg%3E";
-const cardRowClass = "flex items-center gap-4";
-const borderTopClass =
-  "border-t border-solid border-neutral-500/10 pt-4 dark:border-white/5";
-const skeletonClass =
-  "block rounded bg-gray-200 opacity-70 dark:bg-neutral-800 dark:opacity-100 animate-pulse";
-
 export default function MediaCard({
   title,
   subtitle,
@@ -44,21 +37,21 @@ export default function MediaCard({
   const loadingComponent = (
     <div
       className={cn(
-        cardRowClass,
+        "flex items-center gap-4",
         borderTop &&
-          "border-t border-solid border-neutral-800/10 pt-4 dark:border-white/5",
+          "border-t border-solid border-line/10 pt-4 dark:border-line/5",
       )}
       title="Loading..."
     >
       <div className="relative flex-shrink-0">
         <div className="relative w-12 h-12">
-          <span className={cn(skeletonClass, "h-full w-full")}></span>
+          <span className="block h-full w-full animate-pulse rounded bg-surface-raised opacity-70 dark:opacity-100"></span>
         </div>
       </div>
 
       <div className="min-w-0 flex-1 flex flex-col justify-center gap-2 py-0.5">
-        <span className={cn(skeletonClass, "h-5 w-1/2")}></span>
-        <span className={cn(skeletonClass, "h-4 w-1/3")}></span>
+        <span className="block h-5 w-1/2 animate-pulse rounded bg-surface-raised opacity-70 dark:opacity-100"></span>
+        <span className="block h-4 w-1/3 animate-pulse rounded bg-surface-raised opacity-70 dark:opacity-100"></span>
       </div>
     </div>
   );
@@ -66,7 +59,12 @@ export default function MediaCard({
   // Remove hover effects if href is not set
   const cardComponent = (
     <div
-      className={cn(cardRowClass, "min-w-0", href && "group", borderTop && borderTopClass)}
+      className={cn(
+        "flex min-w-0 items-center gap-4",
+        href && "group",
+        borderTop &&
+          "border-t border-solid border-line/10 pt-4 dark:border-line/5",
+      )}
     >
       <div className="relative flex-shrink-0">
         <div
@@ -79,7 +77,7 @@ export default function MediaCard({
             alt={image?.alt || ""}
             title={title}
             className={cn(
-              "truncate bg-gray-200 dark:bg-zinc-600 w-12",
+              "w-12 truncate bg-surface-raised dark:bg-zinc-600",
               image?.radius === MediaCardImageRadius.Book
                 ? "rounded-l-sm rounded-r"
                 : "rounded",
@@ -99,7 +97,7 @@ export default function MediaCard({
         )}
       >
         <div className="truncate min-w-0">{title}</div>
-        <div className={cn("truncate min-w-0 slashed-zero pr-4", smallMutedTextClass)}>
+        <div className="min-w-0 truncate pr-4 text-sm text-muted slashed-zero [font-variation-settings:'opsz'_14]">
           {subtitle}
         </div>
       </div>

@@ -101,7 +101,7 @@ function LoginComponent() {
   return (
     <Main>
       <div className="flex flex-col items-center rounded-lg p-8 bg-gray-100 sm:p-20 dark:bg-white/[.08]">
-        <h1 className="text-2xl text-neutral-800 [font-variation-settings:'opsz'_32,_'wght'_500] dark:text-white sm:text-3xl pb-6 sm:pb-8">
+        <h1 className="pb-6 text-2xl text-heading [font-variation-settings:'opsz'_32,_'wght'_500] sm:pb-8 sm:text-3xl">
           Secret Code
         </h1>
 
@@ -137,7 +137,7 @@ function LoginComponent() {
           />
         </div>
 
-        <p className="text-xs text-neutral-500 [font-variation-settings:'opsz'_12] dark:text-silver-dark pt-6 sm:pt-8 text-center max-w-xs">
+        <p className="max-w-xs pt-6 text-center text-xs text-muted [font-variation-settings:'opsz'_12] sm:pt-8">
           My work is currently locked behind a secret code. This may or may not
           change in the future.
         </p>

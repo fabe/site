@@ -47,6 +47,9 @@ importers:
       '@use-gesture/react':
         specifier: ^10.3.1
         version: 10.3.1(react@18.3.1)
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
       cmdk:
         specifier: ^0.2.0
         version: 0.2.1(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -101,6 +104,9 @@ importers:
       sharp:
         specifier: ^0.32.6
         version: 0.32.6
+      tailwind-merge:
+        specifier: ^3.5.0
+        version: 3.5.0
       uuid:
         specifier: ^9.0.0
         version: 9.0.1
@@ -4784,6 +4790,9 @@ packages:
 
   tabbable@6.4.0:
     resolution: {integrity: sha512-05PUHKSNE8ou2dwIxTngl4EzcnsCDZGJ/iCLtDflR/SHB/ny14rXc+qU5P4mG9JkusiV7EivzY9Mhm55AzAvCg==}
+
+  tailwind-merge@3.5.0:
+    resolution: {integrity: sha512-I8K9wewnVDkL1NTGoqWmVEIlUcB9gFriAEkXkfCjX5ib8ezGxtR3xD7iZIxrfArjEsH7F1CHD4RFUtxefdqV/A==}
 
   tailwindcss-touch@1.0.1:
     resolution: {integrity: sha512-h8A/S9+Mk2rnnaOB/NGCE7CxDhtGKbsAWf8Y2tCO6Zf381Y8dKcygPl1OXkFDnWXkL+FfHxmrGpwculDWAumbA==}
@@ -10737,6 +10746,8 @@ snapshots:
   symbol-observable@4.0.0: {}
 
   tabbable@6.4.0: {}
+
+  tailwind-merge@3.5.0: {}
 
   tailwindcss-touch@1.0.1: {}
 

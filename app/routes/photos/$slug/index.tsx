@@ -3,7 +3,7 @@ import { createServerFn } from "@tanstack/react-start";
 import React, { useCallback, useState } from "react";
 import { QUERY_PHOTO_SET } from "@/graphql/queries";
 import { Container } from "@/components/Layouts";
-import { pageTitleClass } from "@/components/Typography";
+import { PageTitle } from "@/components/Typography";
 import Footer from "@/components/Footer";
 import contentfulLoader from "@/lib/contentfulLoader";
 import Lightbox from "@/components/Lightbox";
@@ -214,7 +214,7 @@ function PhotoSetComponent() {
             </LinkButton>
           </div>
           <header className="pb-5 sm:pb-16 text-center">
-            <h1 className={pageTitleClass}>{photoSet.title}</h1>
+            <PageTitle className="pb-0 sm:pb-0">{photoSet.title}</PageTitle>
             <div className="pt-1.5">
               {photoSet.description && <p>{photoSet.description}</p>}
             </div>

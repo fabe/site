@@ -4,7 +4,7 @@ import Badge from "../Badge";
 import { LinkExternal } from "../Links";
 import MediaCard from "../MediaCard";
 import { useEffect, useState } from "react";
-import { SectionTitle, smallMutedTextClass } from "../Typography";
+import { SectionTitle } from "../Typography";
 import HomeSection from "./Section";
 
 interface NowPlayingProps {
@@ -55,7 +55,7 @@ export default function NowPlayingWidget(props: NowPlayingProps) {
       }
     >
       {playlist && (
-        <div className="mb-3 inline-flex max-w-full items-center gap-2 rounded-lg bg-gray-100 pl-1 pr-2 py-1 dark:bg-neutral-800">
+        <div className="mb-3 inline-flex max-w-full items-center gap-2 rounded-lg bg-surface-muted py-1 pl-1 pr-2 dark:bg-surface">
           <img
             src={playlist.coverUrl}
             alt={`${playlist.name} playlist cover`}
@@ -67,7 +67,7 @@ export default function NowPlayingWidget(props: NowPlayingProps) {
           <LinkExternal
             href={playlist.spotifyUrl}
             iconSize={14}
-            className={`min-w-0 ${smallMutedTextClass}`}
+            className="min-w-0 text-meta"
             contentClassName="block min-w-0 max-w-full overflow-hidden text-ellipsis whitespace-nowrap"
           >
             {playlist.name}

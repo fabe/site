@@ -46,7 +46,7 @@ export default function Counter({ value, label }: CounterProps) {
   return (
     <div
       ref={ref}
-      className="col-span-1 rounded-2xl bg-gray-100 dark:bg-neutral-800/75 p-4 text-center"
+      className="col-span-1 rounded-2xl bg-surface-muted dark:bg-surface/75 p-4 text-center"
       role="group"
       aria-labelledby={`counter-label-${value}`}
     >
@@ -73,7 +73,7 @@ export default function Counter({ value, label }: CounterProps) {
         </AnimatePresence>
 
         <motion.div
-          className="font-semibold text-2xl sm:text-3xl text-neutral-900 dark:text-white"
+          className="text-2xl font-semibold text-heading sm:text-3xl"
           initial={{ y: 0 }}
           animate={
             isInView
@@ -108,10 +108,7 @@ export default function Counter({ value, label }: CounterProps) {
         {currentNumber} {label}
       </div>
 
-      <div
-        id={`counter-label-${value}`}
-        className="text-neutral-500 dark:text-silver-dark text-sm mt-1"
-      >
+      <div id={`counter-label-${value}`} className="text-muted text-sm mt-1">
         {label}
       </div>
     </div>
