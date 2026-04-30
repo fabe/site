@@ -363,7 +363,7 @@ export const Player: React.FC<PlayerProps> = ({ src, title, poster }) => {
               />
               {/* hover timestamp label (no background, above line, inside hit area) */}
               <div
-                className={`pointer-events-none absolute top-0 -translate-y-full pb-1 -translate-x-1/2 whitespace-nowrap flex items-baseline gap-0.5 transition-opacity duration-150 z-10 text-shadow-lg ${
+                className={`pointer-events-none absolute top-0 -translate-y-full pb-1 -translate-x-1/2 whitespace-nowrap flex items-baseline gap-0.5 transition-opacity duration-150 z-10 ${
                   isProgressHovering ? "opacity-100" : "opacity-0"
                 }`}
                 style={{ left: `${progressHoverRatio * 100}%` }}

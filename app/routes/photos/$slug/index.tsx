@@ -321,7 +321,7 @@ function PhotoThumbnail({
           quality: 80,
         })}
         alt={photo.description || ""}
-        className={`absolute inset-0 w-full h-full object-cover transition-all group-hover:brightness-75 group-hover:saturate-120 transform-gpu bg-gray-200 dark:bg-neutral-900 ${
+        className={`absolute inset-0 w-full h-full object-cover group-hover:brightness-75 transform-gpu bg-gray-200 dark:bg-neutral-900 ${
           imageLoaded ? "opacity-100" : "opacity-0"
         } transition-all duration-150`}
         onLoad={() => setImageLoaded(true)}

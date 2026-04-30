@@ -129,7 +129,7 @@ export const ProseImageToggle = ({
         />
 
         <div
-          className="absolute transition-all duration-500 cubic-bezier(0.34, 1.56, 0.64, 1)"
+          className="absolute transition-all duration-500"
           style={{
             top: "-1px",
             left: "-1px",
@@ -324,7 +324,7 @@ export const ProjectCard = ({
       <span className="absolute inset-0 rounded-3xl group-hover:rounded-[1.5rem] bg-white/80 dark:bg-neutral-800/75 dark:group-hover:bg-neutral-700/50 transition-all duration-200 ease-out-expo shadow-elevation-sm group-hover:scale-x-[1.01] group-hover:scale-y-[1.04] z-0" />
       <div className="relative sm:col-span-5 rounded-2xl">
         <div className="absolute top-3 left-3 z-10">
-          <div className="badge bg-transparent text-white backdrop-blur-sm text-shadow-xs backdrop-saturate-150 backdrop-brightness-75">
+          <div className="badge bg-transparent text-white backdrop-blur-sm backdrop-saturate-150 backdrop-brightness-75">
             {category}
           </div>
         </div>

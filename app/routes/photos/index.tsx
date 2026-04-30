@@ -129,7 +129,7 @@ function PhotoSetCard({ photoSet }: { photoSet: PhotoSetWithColors }) {
       ></div>
 
       {/* Progressive blur overlay */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[50%] xs:h-[45%] sm:h-[30%] overflow-hidden">
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[50%] sm:h-[30%] overflow-hidden">
         <div
           className={`absolute inset-0 ${
             imageLoaded

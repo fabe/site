@@ -167,7 +167,7 @@ export function NoteComparison() {
 
             {/* After state - overlay with clip-path */}
             <div
-              className="absolute top-0 left-0 p-4 rounded-3xl w-full space-y-4 transition-all duration-500 cubic-bezier(0.34, 1.56, 0.64, 1)"
+              className="absolute top-0 left-0 p-4 rounded-3xl w-full space-y-4 transition-all duration-500"
               style={{
                 clipPath: showAfter ? "inset(0 0 0 0)" : "inset(0 100% 0 0)",
               }}
