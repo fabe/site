@@ -2,7 +2,6 @@ import { Transition } from "@headlessui/react";
 import { cn } from "@/lib/cn";
 
 export enum MediaCardImageRadius {
-  Default = "default",
   Book = "book",
 }
 

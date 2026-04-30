@@ -5,7 +5,9 @@ import { Place } from "../../types/types.generated";
 import { proxiedImageUrl } from "../../../lib/imageProxy";
 
 const proxyContentfulUrl = (url: string) =>
-  proxiedImageUrl(url.replace("downloads.ctfassets.net", "images.ctfassets.net"));
+  proxiedImageUrl(
+    url.replace("downloads.ctfassets.net", "images.ctfassets.net"),
+  );
 
 import {
   Photo,
@@ -28,7 +30,7 @@ const SITE_SETTINGS_ENTRY_ID = "4VjpvaxnxzRE0XPfQjwHQK";
 let _contentfulClient: ApolloClient<any> | null = null;
 let _contentfulGlobeClient: ApolloClient<any> | null = null;
 
-export function getContentfulClient() {
+function getContentfulClient() {
   if (!_contentfulClient) {
     const BASE_URL = `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`;
     _contentfulClient = new ApolloClient({
@@ -46,7 +48,7 @@ export function getContentfulClient() {
   return _contentfulClient;
 }
 
-export function getContentfulGlobeClient() {
+function getContentfulGlobeClient() {
   if (!_contentfulGlobeClient) {
     const GLOBE_BASE_URL = `https://graphql.contentful.com/content/v1/spaces/${process.env.GLOBE_CONTENTFUL_SPACE_ID}`;
     _contentfulGlobeClient = new ApolloClient({

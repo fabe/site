@@ -32,7 +32,6 @@ export default defineConfig({
       "@apollo/client",
       "@apollo/server",
       "@apollo/server-plugin-landing-page-graphql-playground",
-      "@graphql-tools/schema",
       "graphql",
     ],
   },

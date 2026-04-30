@@ -30,7 +30,9 @@ export async function extractColorsFromImage(
       }
     };
 
-    const response = await fetch(makeSmallContentfulUrl(unwrapProxiedUrl(imageUrl)));
+    const response = await fetch(
+      makeSmallContentfulUrl(unwrapProxiedUrl(imageUrl)),
+    );
     const buffer = await response.arrayBuffer();
 
     // Read a small sRGB image and analyze raw pixels
@@ -189,31 +191,4 @@ export async function extractColorsFromImage(
         "linear-gradient(135deg, rgb(100, 100, 100), rgb(120, 120, 120))",
     };
   }
-}
-
-export async function extractColorsForPhotoSets(
-  photoSets: any[],
-): Promise<Map<string, ColorData>> {
-  const colorMap = new Map<string, ColorData>();
-
-  // Process images in parallel with a concurrency limit
-  const concurrency = 5;
-  const chunks = [];
-
-  for (let i = 0; i < photoSets.length; i += concurrency) {
-    chunks.push(photoSets.slice(i, i + concurrency));
-  }
-
-  for (const chunk of chunks) {
-    const promises = chunk.map(async (photoSet) => {
-      if (photoSet.featuredPhoto?.url) {
-        const colors = await extractColorsFromImage(photoSet.featuredPhoto.url);
-        colorMap.set(photoSet.id, colors);
-      }
-    });
-
-    await Promise.all(promises);
-  }
-
-  return colorMap;
 }

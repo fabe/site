@@ -5,7 +5,8 @@
     "app/router.tsx",
     "app/routes/**/*.{ts,tsx}",
     "graphql/typeDefs/index.ts",
-    "graphql/resolvers/index.ts"
+    "graphql/resolvers/index.ts",
+    "graphql/types/types.generated.ts"
   ],
   "project": [
     "app/**/*.{ts,tsx}",

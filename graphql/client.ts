@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import {
   ApolloClient,
   HttpLink,
@@ -63,9 +62,4 @@ export async function initializeApollo(
   }
 
   return client;
-}
-
-export function useApollo(initialState: any) {
-  const store = useMemo(() => getClientApollo(initialState), [initialState]);
-  return store;
 }

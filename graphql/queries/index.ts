@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const FRAGMENT_SITE_SETTINGS_SHARED = gql`
+const FRAGMENT_SITE_SETTINGS_SHARED = gql`
   fragment SiteSettingsShared on SiteSettings {
     siteTitle
     metaDescription
@@ -25,38 +25,6 @@ export const QUERY_PAGE_HOME = gql`
       author
       url
       coverUrl
-    }
-  }
-`;
-
-export const QUERY_SPOTIFY_STATUS = gql`
-  query SpotifyStatusQuery {
-    spotifyStatus {
-      timestamp
-      isPlaying
-      song {
-        albumImageUrl
-        artist
-        title
-        spotifyUrl
-        album
-      }
-    }
-  }
-`;
-
-export const QUERY_LASTFM_STATUS = gql`
-  query LastfmStatusQuery {
-    lastfmStatus {
-      timestamp
-      isPlaying
-      song {
-        albumImageUrl
-        artist
-        title
-        spotifyUrl
-        album
-      }
     }
   }
 `;
@@ -158,45 +126,6 @@ export const QUERY_PLACES = gql`
     places {
       name
       locationType
-      location {
-        lat
-        lon
-      }
-    }
-  }
-`;
-
-export const QUERY_ALL_PHOTOS = gql`
-  query AllPhotosQuery {
-    photos {
-      id
-      url
-      exif
-      description
-      width
-      height
-    }
-  }
-`;
-
-export const QUERY_PHOTO_IDS = gql`
-  query PhotoIdsQuery {
-    photos {
-      id
-    }
-  }
-`;
-
-export const QUERY_PHOTO = gql`
-  query PhotoQuery($id: String!) {
-    photo(id: $id) {
-      id
-      description
-      exif
-      width
-      height
-      url
-      tags
       location {
         lat
         lon

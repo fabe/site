@@ -1,5 +1,4 @@
-export const IS_PROD = process.env.NODE_ENV === "production";
-export const IS_DEV = process.env.NODE_ENV === "development";
+const IS_PROD = process.env.NODE_ENV === "production";
 
 // In dev, use a relative URL so the browser resolves it against whatever port
 // the dev server is actually running on (5173, 5174, etc.).
