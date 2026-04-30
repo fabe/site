@@ -4,6 +4,7 @@ import Badge from "../Badge";
 import { LinkExternal } from "../Links";
 import MediaCard from "../MediaCard";
 import { useEffect, useState } from "react";
+import { smallMutedTextClass } from "../Typography";
 import HomeSection from "./Section";
 
 interface NowPlayingProps {
@@ -66,7 +67,7 @@ export default function NowPlayingWidget(props: NowPlayingProps) {
           <LinkExternal
             href={playlist.spotifyUrl}
             iconSize={14}
-            className="min-w-0 text-sm text-neutral-500 dark:text-silver-dark [font-variation-settings:'opsz'_14]"
+            className={`min-w-0 ${smallMutedTextClass}`}
             contentClassName="block min-w-0 max-w-full overflow-hidden text-ellipsis whitespace-nowrap"
           >
             {playlist.name}
@@ -75,7 +76,7 @@ export default function NowPlayingWidget(props: NowPlayingProps) {
       )}
       <MediaCard
         title={title}
-        subtitle={`${artist}${album ? ` · ${album}` : null}`}
+        subtitle={album ? `${artist} · ${album}` : artist}
         image={{
           alt: album ? album : "Album cover",
           title: album ? album : null,

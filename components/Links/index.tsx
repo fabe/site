@@ -4,6 +4,23 @@ import { ExternalIcon, CopyIcon } from "../Icons";
 import { Tooltip } from "../Tooltip";
 import useCopy from "@react-hook/copy";
 import { useHaptics } from "../../lib/useHaptics";
+import { cn } from "../../lib/cn";
+
+const actionButtonClass =
+  "group relative isolate flex items-center leading-tight gap-1 text-sm px-2 py-1.5";
+const actionButtonBackgroundClass =
+  "absolute inset-0 rounded-lg bg-neutral-200/60 transition-all duration-100 ease-out-expo dark:bg-neutral-800/75 dark:group-hover:bg-neutral-800 group-hover:bg-neutral-200 group-hover:scale-x-[1.03] group-hover:scale-y-[1.08] z-0";
+const actionButtonContentClass =
+  "relative z-10 flex items-center gap-1 [font-variation-settings:'opsz'_14,'wght'_550] text-neutral-700 dark:text-silver-dark";
+
+function ActionButtonContent({ children }) {
+  return (
+    <>
+      <span className={actionButtonBackgroundClass} />
+      <span className={actionButtonContentClass}>{children}</span>
+    </>
+  );
+}
 
 export function LinkExternal({
   href,
@@ -14,7 +31,7 @@ export function LinkExternal({
 }) {
   return (
     <a
-      className={`link link-external ${className}`.trim()}
+      className={cn("link link-external", className)}
       href={href}
       target="_blank"
       rel="noopener noreferrer"
@@ -48,15 +65,11 @@ export function LinkShare({ url, children, className = "" }) {
   return (
     <div className="relative">
       <Tooltip open={tooltipOpen}>Link copied!</Tooltip>
-      <button
-        className={`group relative isolate flex items-center leading-tight gap-1 text-sm px-2 py-1.5 ${className}`}
-        onClick={onClick}
-      >
-        <span className="absolute inset-0 rounded-lg bg-neutral-200/60 transition-all duration-100 ease-out-expo dark:bg-neutral-800/75 dark:group-hover:bg-neutral-800 group-hover:bg-neutral-200 group-hover:scale-x-[1.03] group-hover:scale-y-[1.08] z-0" />
-        <span className="relative z-10 flex items-center gap-1 [font-variation-settings:'opsz'_14,'wght'_550] text-neutral-700 dark:text-silver-dark">
+      <button className={cn(actionButtonClass, className)} onClick={onClick}>
+        <ActionButtonContent>
           <CopyIcon size={16} />
           {children}
-        </span>
+        </ActionButtonContent>
       </button>
     </div>
   );
@@ -64,15 +77,8 @@ export function LinkShare({ url, children, className = "" }) {
 
 export function LinkButton({ href, children, className = "", ...props }) {
   return (
-    <Link
-      to={href}
-      className={`group relative isolate flex items-center leading-tight gap-1 text-sm px-2 py-1.5 ${className}`}
-      {...props}
-    >
-      <span className="absolute inset-0 rounded-lg bg-neutral-200/60 transition-all duration-100 ease-out-expo dark:bg-neutral-800/75 dark:group-hover:bg-neutral-800 group-hover:bg-neutral-200 group-hover:scale-x-[1.03] group-hover:scale-y-[1.08] z-0" />
-      <span className="relative z-10 flex items-center gap-1 [font-variation-settings:'opsz'_14,'wght'_550] text-neutral-700 dark:text-silver-dark">
-        {children}
-      </span>
+    <Link to={href} className={cn(actionButtonClass, className)} {...props}>
+      <ActionButtonContent>{children}</ActionButtonContent>
     </Link>
   );
 }

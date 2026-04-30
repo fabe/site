@@ -3,6 +3,7 @@ import { createServerFn } from "@tanstack/react-start";
 import React, { useCallback, useState } from "react";
 import { QUERY_PHOTO_SET } from "@/graphql/queries";
 import { Container } from "@/components/Layouts";
+import { pageTitleClass } from "@/components/Typography";
 import Footer from "@/components/Footer";
 import contentfulLoader from "@/lib/contentfulLoader";
 import Lightbox from "@/components/Lightbox";
@@ -207,18 +208,13 @@ function PhotoSetComponent() {
       <Container>
         <div className="pb-3 sm:pb-6 relative">
           <div className="top-0 left-0 flex flex-row items-center mb-7 sm:mb-14">
-            <LinkButton
-              href="/photos"
-              className="px-2 py-1.5 text-sm gap-1 items-center flex rounded-lg bg-gray-200 text-neutral-700 transition-colors [font-variation-settings:'opsz'_14,'wght'_400] hover:bg-gray-300 dark:bg-neutral-800 dark:text-silver-dark dark:hover:bg-neutral-700"
-            >
+            <LinkButton href="/photos">
               <ChevronLeft size={12} />
               Photos
             </LinkButton>
           </div>
           <header className="pb-5 sm:pb-16 text-center">
-            <h1 className="text-2xl text-neutral-800 [font-variation-settings:'opsz'_32,_'wght'_500] dark:text-white sm:text-3xl">
-              {photoSet.title}
-            </h1>
+            <h1 className={pageTitleClass}>{photoSet.title}</h1>
             <div className="pt-1.5">
               {photoSet.description && <p>{photoSet.description}</p>}
             </div>

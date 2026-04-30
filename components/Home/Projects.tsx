@@ -1,6 +1,6 @@
-import formatDate from "../../lib/formatDate";
 import Badge from "../Badge";
 import { LinkExternal } from "../Links";
+import { smallMutedTextClass } from "../Typography";
 import HomeSection from "./Section";
 
 export default function Projects() {
@@ -11,7 +11,7 @@ export default function Projects() {
           <Badge isFeatured>New</Badge>
           <LinkExternal href="https://globe.cv">Globe.cv</LinkExternal>
         </div>
-        <p className="pt-1 text-sm text-neutral-500 [font-variation-settings:'opsz'_14] dark:text-silver-dark">
+        <p className={`pt-1 ${smallMutedTextClass}`}>
           Your travels, at a glance.
         </p>
       </div>

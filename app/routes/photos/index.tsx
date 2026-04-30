@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import React, { useState } from "react";
 import { Main } from "@/components/Layouts";
+import { PageTitle } from "@/components/Typography";
 import { QUERY_PHOTO_SETS } from "@/graphql/queries";
 import contentfulLoader from "@/lib/contentfulLoader";
 import type { ColorData } from "@/lib/colorExtractor";
@@ -69,10 +70,8 @@ function PhotosComponent() {
 
   return (
     <Main>
-      <div className="flex items-center justify-between pb-6 sm:pb-12 gap-2">
-        <h1 className="text-2xl text-neutral-800 [font-variation-settings:'opsz'_32,_'wght'_500] dark:text-white sm:text-3xl">
-          Photos
-        </h1>
+      <div className="flex items-center justify-between gap-2">
+        <PageTitle>Photos</PageTitle>
       </div>
       <div className="flex flex-col gap-8">
         {photoSets.map((photoSet: PhotoSetWithColors) => (

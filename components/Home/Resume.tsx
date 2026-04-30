@@ -1,5 +1,6 @@
 import Badge from "../Badge";
 import { LinkExternal } from "../Links";
+import { smallMutedTextClass } from "../Typography";
 
 export default function Resume() {
   return (
@@ -17,7 +18,7 @@ export default function Resume() {
         <div>
           <LinkExternal href="//github.com">GitHub</LinkExternal>
         </div>
-        <div className="pt-1 text-sm text-neutral-500 [font-variation-settings:'opsz'_14] dark:text-silver-dark">
+        <div className={`pt-1 ${smallMutedTextClass}`}>
           London, UK
         </div>
       </dd>
@@ -30,7 +31,7 @@ export default function Resume() {
         <div>
           <LinkExternal href="//contentful.com">Contentful</LinkExternal>
         </div>
-        <div className="pt-1 text-sm text-neutral-500 [font-variation-settings:'opsz'_14] dark:text-silver-dark">
+        <div className={`pt-1 ${smallMutedTextClass}`}>
           London, UK
         </div>
       </dd>
@@ -43,7 +44,7 @@ export default function Resume() {
         <div>
           <LinkExternal href="//stinkstudios.com">Stink Studios</LinkExternal>
         </div>
-        <div className="pt-1 text-sm text-neutral-500 [font-variation-settings:'opsz'_14] dark:text-silver-dark">
+        <div className={`pt-1 ${smallMutedTextClass}`}>
           Brooklyn, NY
         </div>
       </dd>

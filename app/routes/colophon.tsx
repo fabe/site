@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import React from "react";
 import { Main } from "@/components/Layouts";
+import { PageTitle, SectionTitle } from "@/components/Typography";
 import { baseUrl } from "./__root";
 
 export const Route = createFileRoute("/colophon")({
@@ -18,12 +19,10 @@ export const Route = createFileRoute("/colophon")({
 function ColophonComponent() {
   return (
     <Main>
-      <h1 className="pb-6 text-2xl text-neutral-800 [font-variation-settings:'opsz'_32,_'wght'_500] dark:text-white sm:pb-12 sm:text-3xl">
-        Colophon
-      </h1>
+      <PageTitle>Colophon</PageTitle>
       <dl className="list-container">
         <dt className="list-title">
-          <h3 className="text-neutral-500 dark:text-silver-dark">Typography</h3>
+          <SectionTitle>Typography</SectionTitle>
         </dt>
         <dd className="list-content">
           <p>
@@ -42,7 +41,7 @@ function ColophonComponent() {
       </dl>
       <dl className="list-container">
         <dt className="list-title">
-          <h3 className="text-neutral-500 dark:text-silver-dark">Technology</h3>
+          <SectionTitle>Technology</SectionTitle>
         </dt>
         <dd className="list-content">
           <p>
@@ -110,9 +109,7 @@ function ColophonComponent() {
       </dl>
       <dl className="list-container">
         <dt className="list-title">
-          <h3 className="text-neutral-500 dark:text-silver-dark">
-            Open Source
-          </h3>
+          <SectionTitle>Open Source</SectionTitle>
         </dt>
         <dd className="list-content">
           <p>

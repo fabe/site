@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import React from "react";
 import { Main } from "@/components/Layouts";
 import { LinkExternal } from "@/components/Links";
+import { PageTitle } from "@/components/Typography";
 import { baseUrl } from "./__root";
 
 const PATENTS = [
@@ -29,9 +30,7 @@ export const Route = createFileRoute("/patents")({
 function PatentsComponent() {
   return (
     <Main>
-      <h1 className="pb-6 text-2xl text-neutral-800 [font-variation-settings:'opsz'_32,_'wght'_500] dark:text-white sm:pb-12 sm:text-3xl">
-        Patents
-      </h1>
+      <PageTitle>Patents</PageTitle>
       <dl className="list-container items-top gap-4">
         {PATENTS.map((patent) => (
           <React.Fragment key={patent.id}>

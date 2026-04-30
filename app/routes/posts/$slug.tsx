@@ -176,10 +176,7 @@ function PostComponent() {
         />
 
         <div className="mt-10 flex justify-between">
-          <LinkButton
-            href="/posts"
-            className="-ml-2 px-2 py-1.5 text-sm gap-1 items-center flex rounded-lg bg-gray-200 text-neutral-700 transition-colors [font-variation-settings:'opsz'_14,'wght'_400] hover:bg-gray-300 dark:bg-neutral-800 dark:text-silver-dark dark:hover:bg-neutral-700"
-          >
+          <LinkButton href="/posts" className="-ml-2">
             <ChevronLeft size={12} />
             Posts
           </LinkButton>
