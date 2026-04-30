@@ -1,0 +1,26 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "entry": [
+    "app/client.tsx",
+    "app/router.tsx",
+    "app/routes/**/*.{ts,tsx}",
+    "graphql/typeDefs/index.ts",
+    "graphql/resolvers/index.ts"
+  ],
+  "project": [
+    "app/**/*.{ts,tsx}",
+    "components/**/*.{ts,tsx}",
+    "graphql/**/*.{ts,tsx}",
+    "lib/**/*.{ts,tsx}",
+    "styles/**/*.css",
+    "*.{ts,tsx,js,cjs,mjs}"
+  ],
+  "paths": {
+    "@/*": ["./*"],
+    "~/*": ["./app/*"]
+  },
+  "ignoreExportsUsedInFile": {
+    "interface": true,
+    "type": true
+  }
+}
