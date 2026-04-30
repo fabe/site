@@ -59,7 +59,7 @@ function GlobeComponent() {
         </h1>
       </div>
       <div className="relative min-h-[95vh]">
-        <div className="absolute sm:w-auto w-11/12 left-1/2 bottom-24 -translate-x-1/2 z-10 text-sm p-3 rounded-2xl material-glass font-medium flex sm:flex-row flex-col gap-3 sm:gap-6 sm:items-center animate-bannerFadeIn opacity-0">
+        <div className="absolute sm:w-auto w-11/12 left-1/2 bottom-24 -translate-x-1/2 z-10 text-sm p-3 rounded-2xl glass-panel font-medium flex sm:flex-row flex-col gap-3 sm:gap-6 sm:items-center animate-bannerFadeIn opacity-0">
           <div className="flex gap-2 items-center">
             <Badge isFeatured>New</Badge>
             Want your own globe?
