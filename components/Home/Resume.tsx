@@ -1,17 +1,17 @@
 import Badge from "../Badge";
 import { LinkExternal } from "../Links";
-import { smallMutedTextClass } from "../Typography";
+import { SectionTitle, smallMutedTextClass } from "../Typography";
 
 export default function Resume() {
   return (
     <dl className="list-container">
       <dt className="list-title">
-        <h3 className="text-neutral-500 dark:text-silver-dark">
+        <SectionTitle>
           <div className="flex items-center gap-2">
             2026
             <Badge>Present</Badge>
           </div>
-        </h3>
+        </SectionTitle>
       </dt>
       <dd className="list-content">
         <div>Senior Product Designer</div>
@@ -24,7 +24,7 @@ export default function Resume() {
       </dd>
 
       <dt className="list-title mt-4 border-none pt-0 sm:mt-0">
-        <h3 className="text-neutral-500 dark:text-silver-dark">2025</h3>
+        <SectionTitle>2025</SectionTitle>
       </dt>
       <dd className="list-content border-none pt-0">
         <div>Senior &rarr; Staff Product Designer</div>
@@ -37,7 +37,7 @@ export default function Resume() {
       </dd>
 
       <dt className="list-title mt-4 border-none pt-0 sm:mt-0">
-        <h3 className="text-neutral-500 dark:text-silver-dark">2018</h3>
+        <SectionTitle>2018</SectionTitle>
       </dt>
       <dd className="list-content border-none pt-0">
         <div>Technology Intern</div>

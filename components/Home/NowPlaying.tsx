@@ -4,7 +4,7 @@ import Badge from "../Badge";
 import { LinkExternal } from "../Links";
 import MediaCard from "../MediaCard";
 import { useEffect, useState } from "react";
-import { smallMutedTextClass } from "../Typography";
+import { SectionTitle, smallMutedTextClass } from "../Typography";
 import HomeSection from "./Section";
 
 interface NowPlayingProps {
@@ -17,9 +17,9 @@ export default function NowPlayingWidget(props: NowPlayingProps) {
     return (
       <HomeSection
         title={
-          <h3 className="text-neutral-500 dark:text-silver-dark">
+          <SectionTitle>
             <div className="flex items-center gap-2">Listening</div>
-          </h3>
+          </SectionTitle>
         }
         ddClassName="animate-pulse"
       >
@@ -38,7 +38,7 @@ export default function NowPlayingWidget(props: NowPlayingProps) {
   return (
     <HomeSection
       title={
-        <h3 className="text-neutral-500 dark:text-silver-dark">
+        <SectionTitle>
           <div className="flex items-center gap-2">
             Listening
             {isPlaying ? (
@@ -51,7 +51,7 @@ export default function NowPlayingWidget(props: NowPlayingProps) {
               </Badge>
             )}
           </div>
-        </h3>
+        </SectionTitle>
       }
     >
       {playlist && (
