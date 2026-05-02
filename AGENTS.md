@@ -4,6 +4,9 @@
 Use **pnpm**: `pnpm install`, `pnpm dev`, `pnpm build`, `pnpm lint`, `pnpm typecheck`, `pnpm generate`, `pnpm knip`
 
 ## Commits
+- Always commit changes before handing work back.
+- Keep each commit scoped to one coherent change.
+- Use conventional prefixes: `feat:`, `fix:`, `chore:`.
 - Commit messages should be full lowercase unless casing is contextually important.
 
 ## Key Conventions
