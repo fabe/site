@@ -3,6 +3,10 @@
 ## Package Manager
 Use **pnpm**: `pnpm install`, `pnpm dev`, `pnpm build`, `pnpm lint`, `pnpm typecheck`, `pnpm generate`, `pnpm knip`
 
+## Dev Server
+- The dev server is always running at `http://localhost:3000`.
+- Do not start or restart the dev server.
+
 ## Commits
 - Always commit changes before handing work back.
 - Keep each commit scoped to one coherent change.
