@@ -94,6 +94,36 @@ export function LinkShare({ url, children, className = "" }: LinkShareProps) {
   );
 }
 
+type ActionAnchorProps = {
+  href: string;
+  children: ReactNode;
+  className?: string;
+  target?: string;
+  rel?: string;
+};
+
+export function ActionAnchor({
+  href,
+  children,
+  className = "",
+  target,
+  rel,
+}: ActionAnchorProps) {
+  return (
+    <a
+      href={href}
+      target={target}
+      rel={rel}
+      className={cn(
+        "group relative isolate flex items-center gap-1 px-2 py-1.5 text-sm leading-tight",
+        className,
+      )}
+    >
+      <ActionButtonContent>{children}</ActionButtonContent>
+    </a>
+  );
+}
+
 type LinkButtonProps = Omit<LinkProps, "to"> & {
   href: LinkProps["to"];
   children: ReactNode;
