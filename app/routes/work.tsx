@@ -42,15 +42,14 @@ const validateWorkAuth = createServerFn({ method: "GET" }).handler(async () => {
 });
 
 export const Route = createFileRoute("/work")({
-  validateSearch: (search: Record<string, unknown>) => ({
-    code: (search.code as string) || undefined,
-  }),
-  beforeLoad: async ({ search }) => {
+  beforeLoad: async ({ location }) => {
     const { authenticated } = await validateWorkAuth();
     if (!authenticated) {
+      const code =
+        new URLSearchParams(location.searchStr).get("code") ?? undefined;
       throw redirect({
         to: "/login",
-        search: { code: search.code },
+        search: { code },
       });
     }
   },
