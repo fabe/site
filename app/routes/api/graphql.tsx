@@ -46,9 +46,13 @@ function getCacheControl(request: Request, operationName?: string) {
 function applyCacheHeaders(
   responseHeaders: Headers,
   request: Request,
+  status: number,
   operationName?: string,
 ) {
-  const cacheControl = getCacheControl(request, operationName);
+  const cacheControl =
+    status >= 200 && status < 300
+      ? getCacheControl(request, operationName)
+      : "no-store";
 
   responseHeaders.set("Cache-Control", cacheControl);
   responseHeaders.set("CDN-Cache-Control", cacheControl);
@@ -62,6 +66,7 @@ async function getServer() {
     schema,
     introspection: true,
     cache: "bounded",
+    csrfPrevention: false,
     plugins: [
       process.env.NODE_ENV === "production"
         ? ApolloServerPluginLandingPageDisabled()
@@ -108,11 +113,12 @@ async function handleGraphQLRequest(request: Request): Promise<Response> {
   for (const [key, value] of result.headers) {
     responseHeaders.set(key, value);
   }
-  applyCacheHeaders(responseHeaders, request, operationName);
+  const status = result.status || 200;
+  applyCacheHeaders(responseHeaders, request, status, operationName);
 
   if (result.body.kind === "complete") {
     return new Response(result.body.string, {
-      status: result.status || 200,
+      status,
       headers: responseHeaders,
     });
   }
@@ -129,7 +135,7 @@ async function handleGraphQLRequest(request: Request): Promise<Response> {
   });
 
   return new Response(stream, {
-    status: result.status || 200,
+    status,
     headers: responseHeaders,
   });
 }
