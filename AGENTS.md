@@ -6,8 +6,10 @@ Use **pnpm**: `pnpm install`, `pnpm dev`, `pnpm build`, `pnpm lint`, `pnpm typec
 ## Commits
 - Always commit changes before handing work back.
 - Keep each commit scoped to one coherent change.
-- Use conventional prefixes: `feat:`, `fix:`, `chore:`.
-- Commit messages should be full lowercase unless casing is contextually important.
+- Use semantic commit messages: `<type>(<scope>): <subject>`; scope is optional.
+- Use present-tense, lowercase subjects unless casing is contextually important.
+- Types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`.
+- Examples: `feat: add playlist filters`, `fix(api): cache graphql explorer separately`, `docs: update agent instructions`.
 
 ## Key Conventions
 - Vite + TanStack Start React app; file routes live in `app/routes`.
