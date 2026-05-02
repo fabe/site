@@ -18,6 +18,7 @@ function createClientApolloClient() {
     link: new HttpLink({
       uri: GRAPHQL_BASE_URL,
       credentials: "same-origin",
+      useGETForQueries: true,
     }),
     cache: new InMemoryCache(),
   });
