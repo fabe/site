@@ -70,11 +70,7 @@ function ColophonComponent() {
           </p>
           <p>
             The custom{" "}
-            <a
-              className="link"
-              target="_blank"
-              href="https://graphql.fabianschultz.com"
-            >
+            <a className="link" href="/api/graphql">
               GraphQL API
             </a>{" "}
             used to fetch content and live data is built with{" "}
@@ -85,11 +81,7 @@ function ColophonComponent() {
             >
               Apollo
             </a>{" "}
-            and cached by{" "}
-            <a className="link" target="_blank" href="https://stellate.co">
-              Stellate
-            </a>
-            .
+            and cached at the edge by Vercel.
           </p>
           <p>
             The interactive globe runs on{" "}

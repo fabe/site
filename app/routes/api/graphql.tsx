@@ -6,6 +6,55 @@ import { schema } from "@/graphql/schema";
 
 let serverInstance: ApolloServer | null = null;
 
+const ONE_DAY = 60 * 60 * 24;
+const ONE_WEEK = ONE_DAY * 7;
+
+const MUSIC_OPERATIONS = new Set([
+  "MusicStatusQuery",
+  "SpotifyStatusQuery",
+  "LastfmStatusQuery",
+]);
+
+function extractOperationName(
+  request: Request,
+  searchParams: URLSearchParams,
+  body?: Record<string, unknown>,
+) {
+  const explicitOperationName =
+    typeof body?.operationName === "string"
+      ? body.operationName
+      : searchParams.get("operationName");
+
+  if (explicitOperationName) return explicitOperationName;
+
+  const query =
+    typeof body?.query === "string" ? body.query : searchParams.get("query");
+
+  return query?.match(/\b(?:query|mutation|subscription)\s+(\w+)/)?.[1];
+}
+
+function getCacheControl(request: Request, operationName?: string) {
+  if (request.method !== "GET") return "no-store";
+
+  if (operationName && MUSIC_OPERATIONS.has(operationName)) {
+    return "public, s-maxage=15, stale-while-revalidate=60";
+  }
+
+  return `public, s-maxage=${ONE_DAY}, stale-while-revalidate=${ONE_WEEK}`;
+}
+
+function applyCacheHeaders(
+  responseHeaders: Headers,
+  request: Request,
+  operationName?: string,
+) {
+  const cacheControl = getCacheControl(request, operationName);
+
+  responseHeaders.set("Cache-Control", cacheControl);
+  responseHeaders.set("CDN-Cache-Control", cacheControl);
+  responseHeaders.set("Vercel-CDN-Cache-Control", cacheControl);
+}
+
 async function getServer() {
   if (serverInstance) return serverInstance;
 
@@ -38,6 +87,8 @@ async function handleGraphQLRequest(request: Request): Promise<Response> {
     }
   }
 
+  const operationName = extractOperationName(request, url.searchParams, body);
+
   const headers = new HeaderMap();
   for (const [key, value] of request.headers.entries()) {
     headers.set(key, value);
@@ -57,6 +108,7 @@ async function handleGraphQLRequest(request: Request): Promise<Response> {
   for (const [key, value] of result.headers) {
     responseHeaders.set(key, value);
   }
+  applyCacheHeaders(responseHeaders, request, operationName);
 
   if (result.body.kind === "complete") {
     return new Response(result.body.string, {
