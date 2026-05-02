@@ -1,4 +1,4 @@
-import * as Dialog from "@radix-ui/react-dialog";
+import { Dialog } from "@base-ui/react/dialog";
 import {
   Link,
   useLocation,
@@ -89,8 +89,8 @@ export default function Archipelago() {
     <>
       <Dialog.Root open={open} onOpenChange={setOpen}>
         <Dialog.Portal>
-          <Dialog.Overlay cmdk-overlay="" />
-          <Dialog.Content cmdk-dialog="">
+          <Dialog.Backdrop cmdk-overlay="" />
+          <Dialog.Popup cmdk-dialog="">
             <Dialog.Title className="sr-only">Navigation menu</Dialog.Title>
             <Dialog.Description className="sr-only">
               Search and navigate to pages, portfolio items, and contact links.
@@ -178,7 +178,7 @@ export default function Archipelago() {
                 </Command.Group>
               </Command.List>
             </Command>
-          </Dialog.Content>
+          </Dialog.Popup>
         </Dialog.Portal>
       </Dialog.Root>
 
