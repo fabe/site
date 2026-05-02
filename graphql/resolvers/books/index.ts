@@ -44,7 +44,7 @@ type GoodreadsItem = {
 //   };
 // });
 
-let _literalClient: ApolloClient<any> | null = null;
+let _literalClient: ApolloClient | null = null;
 
 function getLiteralClient() {
   if (!_literalClient) {

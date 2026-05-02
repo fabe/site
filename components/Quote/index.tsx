@@ -1,5 +1,6 @@
+import React from "react";
 interface QuoteProps {
-  children: JSX.Element | string;
+  children: React.ReactNode | string;
   cite?: string;
 }
 

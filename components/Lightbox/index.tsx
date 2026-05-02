@@ -1,3 +1,4 @@
+import React from "react";
 "use client";
 
 import { DialogContent, DialogOverlay } from "@reach/dialog";
@@ -5,7 +6,7 @@ import { CloseIcon } from "../Icons";
 import { useHaptics } from "../../lib/useHaptics";
 
 interface LightboxProps {
-  children: JSX.Element | string;
+  children: React.ReactNode | string;
   isOpen: boolean;
   onDismiss: () => void;
 }

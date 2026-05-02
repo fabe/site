@@ -1,3 +1,4 @@
+import React from "react";
 import { cn } from "@/lib/cn";
 import { LockIcon } from "../Icons";
 
@@ -5,7 +6,7 @@ interface BadgeProps {
   isLive?: boolean;
   isPrivate?: boolean;
   isFeatured?: boolean;
-  children: JSX.Element | string;
+  children: React.ReactNode | string;
   border?: boolean;
 }
 

@@ -51,8 +51,8 @@ type ContentfulPhotoSet = {
   photosCollection?: { items: Array<{ sys: { id: string } }> };
 };
 
-let _contentfulClient: ApolloClient<any> | null = null;
-let _contentfulGlobeClient: ApolloClient<any> | null = null;
+let _contentfulClient: ApolloClient | null = null;
+let _contentfulGlobeClient: ApolloClient | null = null;
 
 function getContentfulClient() {
   if (!_contentfulClient) {

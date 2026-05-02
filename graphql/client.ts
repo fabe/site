@@ -6,7 +6,7 @@ import {
 } from "@apollo/client";
 import { GRAPHQL_BASE_URL } from "./constants";
 
-let apolloClient: ApolloClient<NormalizedCacheObject> | undefined;
+let apolloClient: ApolloClient | undefined;
 
 /**
  * Create an Apollo client for use in the browser.
@@ -30,7 +30,7 @@ function createClientApolloClient() {
  */
 export function getClientApollo(
   initialState: NormalizedCacheObject | null = null,
-): ApolloClient<NormalizedCacheObject> {
+): ApolloClient {
   if (!apolloClient) {
     apolloClient = createClientApolloClient();
   }
@@ -48,7 +48,7 @@ export function getClientApollo(
  */
 export async function initializeApollo(
   initialState: NormalizedCacheObject | null = null,
-): Promise<ApolloClient<NormalizedCacheObject>> {
+): Promise<ApolloClient> {
   const { SchemaLink } = await import("@apollo/client/link/schema");
   const { schema } = await import("./schema");
 
