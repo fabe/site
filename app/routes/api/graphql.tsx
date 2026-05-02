@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ApolloServer, HeaderMap } from "@apollo/server";
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "@apollo/server-plugin-landing-page-graphql-playground";
-import { ApolloServerPluginLandingPageDisabled } from "@apollo/server/plugin/disabled";
 import { schema } from "@/graphql/schema";
 
 let serverInstance: ApolloServer | null = null;
@@ -33,8 +32,18 @@ function extractOperationName(
   return query?.match(/\b(?:query|mutation|subscription)\s+(\w+)/)?.[1];
 }
 
+function isLandingPageRequest(request: Request) {
+  const url = new URL(request.url);
+
+  return (
+    request.method === "GET" &&
+    !url.searchParams.has("query") &&
+    request.headers.get("accept")?.includes("text/html")
+  );
+}
+
 function getCacheControl(request: Request, operationName?: string) {
-  if (request.method !== "GET") return "no-store";
+  if (request.method !== "GET" || isLandingPageRequest(request)) return "no-store";
 
   if (operationName && MUSIC_OPERATIONS.has(operationName)) {
     return "public, s-maxage=15, stale-while-revalidate=60";
@@ -67,11 +76,7 @@ async function getServer() {
     introspection: true,
     cache: "bounded",
     csrfPrevention: false,
-    plugins: [
-      process.env.NODE_ENV === "production"
-        ? ApolloServerPluginLandingPageDisabled()
-        : ApolloServerPluginLandingPageGraphQLPlayground(),
-    ],
+    plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
   });
 
   await serverInstance.start();
