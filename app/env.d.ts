@@ -9,6 +9,11 @@ interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
 
+declare module "*.graphql?raw" {
+  const content: string;
+  export default content;
+}
+
 declare module "@mavrin/remark-typograf" {
   const remarkTypograf: any;
   export default remarkTypograf;
