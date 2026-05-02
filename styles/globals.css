@@ -171,7 +171,8 @@ blockquote span::after {
   @apply flex items-center gap-2;
 }
 
-[cmdk-item][aria-selected] {
+[cmdk-item]:hover,
+[cmdk-item][aria-selected="true"] {
   @apply bg-neutral-700/10 dark:bg-white/10;
   @apply text-fg;
 }
