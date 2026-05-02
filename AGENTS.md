@@ -9,6 +9,7 @@ Use **pnpm**: `pnpm install`, `pnpm dev`, `pnpm build`, `pnpm lint`, `pnpm typec
 
 ## Commits
 - Always commit changes before handing work back.
+- Amend the previous commit when new changes make it not worthwhile to keep as a separate commit.
 - Keep each commit scoped to one coherent change.
 - Use semantic commit messages: `<type>(<scope>): <subject>`; scope is optional.
 - Use present-tense, lowercase subjects unless casing is contextually important.
