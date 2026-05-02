@@ -63,7 +63,7 @@
     "eslint-plugin-react-hooks": "4.6.2",
     "knip": "^6.9.0",
     "nitro": "3.0.1-alpha.2",
-    "postcss": "^8.4.32",
+    "postcss": "^8.5.10",
     "prettier": "^3.0.3",
     "prettier-plugin-tailwindcss": "^0.5.6",
     "tailwindcss": "^3.4.0",
