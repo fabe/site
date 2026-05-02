@@ -1,8 +1,8 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import React, { useState, useEffect } from "react";
+import { OTPFieldPreview as OTPField } from "@base-ui/react/otp-field";
+import { createFileRoute } from "@tanstack/react-router";
+import React, { useEffect, useState } from "react";
 import { Main } from "@/components/Layouts";
 import { useAudio } from "@/lib/useAudio";
-import OTPInput from "react-otp-input";
 import { useHaptics } from "@/lib/useHaptics";
 import { baseUrl } from "./__root";
 
@@ -91,19 +91,22 @@ function LoginComponent() {
     setPassword(res);
     playKeystrokeSound();
     haptic("light");
+  };
 
-    if (res.length === CODE_LENGTH) {
-      setIsLoading(true);
-      handleSubmit(res);
-    }
+  const onComplete = (res: string) => {
+    setIsLoading(true);
+    handleSubmit(res);
   };
 
   return (
     <Main>
       <div className="flex flex-col items-center rounded-lg p-8 bg-gray-100 sm:p-20 dark:bg-white/[.08]">
-        <h1 className="pb-6 text-2xl text-heading font-ui-title sm:pb-8 sm:text-3xl">
+        <label
+          htmlFor="secret-code"
+          className="pb-6 text-2xl text-heading font-ui-title sm:pb-8 sm:text-3xl"
+        >
           Secret Code
-        </h1>
+        </label>
 
         <div
           onAnimationEnd={() => setIsInvalid(false)}
@@ -113,28 +116,29 @@ function LoginComponent() {
           aria-live="polite"
           aria-busy={isLoading}
         >
-          <OTPInput
+          <OTPField.Root
+            id="secret-code"
             value={password}
-            onChange={onChange}
-            skipDefaultStyles
-            numInputs={CODE_LENGTH}
-            inputType="tel"
-            shouldAutoFocus={true}
-            containerStyle="flex gap-4"
-            renderInput={(props) => (
-              <input
-                {...props}
+            onValueChange={onChange}
+            onValueComplete={onComplete}
+            length={CODE_LENGTH}
+            inputMode="tel"
+            disabled={isValid}
+            className="flex gap-4"
+          >
+            {Array.from({ length: CODE_LENGTH }, (_, index) => (
+              <OTPField.Input
+                key={index}
                 className={`code-input !w-12  ${
                   isValid
                     ? `outline-2 outline-green-500 shadow-lg dark:shadow-green-950 shadow-green-200`
                     : ""
                 }`}
-                disabled={isValid}
-                aria-label="Secret code input"
+                autoFocus={index === 0}
                 aria-invalid={isInvalid}
               />
-            )}
-          />
+            ))}
+          </OTPField.Root>
         </div>
 
         <p className="max-w-xs pt-6 text-center text-xs text-muted font-ui-xs sm:pt-8">
