@@ -1,3 +1,4 @@
+import { cn } from "@/lib/cn";
 import { LockIcon } from "../Icons";
 
 interface BadgeProps {
@@ -17,15 +18,14 @@ export default function Badge({
 }: BadgeProps) {
   return (
     <div
-      className={`badge ${
-        border && `border border-gray-900/5 bg-transparent dark:border-white/10`
-      } ${
+      className={cn(
+        "badge",
+        border && "border border-gray-900/5 bg-transparent dark:border-white/10",
         isPrivate &&
-        `dark:bg-orange-500 bg-orange-200 dark:text-white text-orange-800`
-      } ${
+          "dark:bg-orange-500 bg-orange-200 dark:text-white text-orange-800",
         isFeatured &&
-        `bg-amber-500 dark:bg-amber-500/15 dark:text-amber-500 text-white`
-      }`}
+          "bg-amber-500 dark:bg-amber-500/15 dark:text-amber-500 text-white",
+      )}
     >
       {isPrivate ? <LockIcon size={12}></LockIcon> : null}
       {isLive ? (

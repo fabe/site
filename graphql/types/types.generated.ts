@@ -273,16 +273,6 @@ export type PageHomeQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type PageHomeQueryQuery = { __typename?: 'Query', siteSettings: { __typename?: 'SiteSettings', intro: string, siteTitle: string, metaDescription: string }, posts: Array<{ __typename?: 'PostWithoutBody', publishedDate: string, title: string, slug: string } | null>, books: Array<{ __typename?: 'Book', title: string, author: string, url: string, coverUrl?: string | null } | null> };
 
-export type SpotifyStatusQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type SpotifyStatusQueryQuery = { __typename?: 'Query', spotifyStatus: { __typename?: 'SpotifyStatus', timestamp?: string | null, isPlaying: boolean, song?: { __typename?: 'Song', albumImageUrl?: string | null, artist?: string | null, title?: string | null, spotifyUrl?: string | null, album?: string | null } | null } };
-
-export type LastfmStatusQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type LastfmStatusQueryQuery = { __typename?: 'Query', lastfmStatus: { __typename?: 'SpotifyStatus', timestamp?: string | null, isPlaying: boolean, song?: { __typename?: 'Song', albumImageUrl?: string | null, artist?: string | null, title?: string | null, spotifyUrl?: string | null, album?: string | null } | null } };
-
 export type MusicStatusQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -322,23 +312,6 @@ export type PlacesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type PlacesQueryQuery = { __typename?: 'Query', places: Array<{ __typename?: 'Place', name: string, locationType: string, location: { __typename?: 'Location', lat?: number | null, lon?: number | null } } | null> };
 
-export type AllPhotosQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type AllPhotosQueryQuery = { __typename?: 'Query', photos: Array<{ __typename?: 'Photo', id: string, url: string, exif?: any | null, description?: string | null, width: number, height: number } | null> };
-
-export type PhotoIdsQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type PhotoIdsQueryQuery = { __typename?: 'Query', photos: Array<{ __typename?: 'Photo', id: string } | null> };
-
-export type PhotoQueryQueryVariables = Exact<{
-  id: Scalars['String'];
-}>;
-
-
-export type PhotoQueryQuery = { __typename?: 'Query', photo?: { __typename?: 'Photo', id: string, description?: string | null, exif?: any | null, width: number, height: number, url: string, tags?: Array<string | null> | null, location?: { __typename?: 'Location', lat?: number | null, lon?: number | null } | null } | null };
-
 export type PhotoSetsQueryQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']>;
 }>;
@@ -375,7 +348,7 @@ export const PageHomeQueryDocument = gql`
     title
     slug
   }
-  books: books(limit: 3, collection: READING) {
+  books: books(limit: 3, collection: READING, source: GOODREADS) {
     title
     author
     url
@@ -410,90 +383,6 @@ export function usePageHomeQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
 export type PageHomeQueryQueryHookResult = ReturnType<typeof usePageHomeQueryQuery>;
 export type PageHomeQueryLazyQueryHookResult = ReturnType<typeof usePageHomeQueryLazyQuery>;
 export type PageHomeQueryQueryResult = Apollo.QueryResult<PageHomeQueryQuery, PageHomeQueryQueryVariables>;
-export const SpotifyStatusQueryDocument = gql`
-    query SpotifyStatusQuery {
-  spotifyStatus {
-    timestamp
-    isPlaying
-    song {
-      albumImageUrl
-      artist
-      title
-      spotifyUrl
-      album
-    }
-  }
-}
-    `;
-
-/**
- * __useSpotifyStatusQueryQuery__
- *
- * To run a query within a React component, call `useSpotifyStatusQueryQuery` and pass it any options that fit your needs.
- * When your component renders, `useSpotifyStatusQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useSpotifyStatusQueryQuery({
- *   variables: {
- *   },
- * });
- */
-export function useSpotifyStatusQueryQuery(baseOptions?: Apollo.QueryHookOptions<SpotifyStatusQueryQuery, SpotifyStatusQueryQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<SpotifyStatusQueryQuery, SpotifyStatusQueryQueryVariables>(SpotifyStatusQueryDocument, options);
-      }
-export function useSpotifyStatusQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SpotifyStatusQueryQuery, SpotifyStatusQueryQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<SpotifyStatusQueryQuery, SpotifyStatusQueryQueryVariables>(SpotifyStatusQueryDocument, options);
-        }
-export type SpotifyStatusQueryQueryHookResult = ReturnType<typeof useSpotifyStatusQueryQuery>;
-export type SpotifyStatusQueryLazyQueryHookResult = ReturnType<typeof useSpotifyStatusQueryLazyQuery>;
-export type SpotifyStatusQueryQueryResult = Apollo.QueryResult<SpotifyStatusQueryQuery, SpotifyStatusQueryQueryVariables>;
-export const LastfmStatusQueryDocument = gql`
-    query LastfmStatusQuery {
-  lastfmStatus {
-    timestamp
-    isPlaying
-    song {
-      albumImageUrl
-      artist
-      title
-      spotifyUrl
-      album
-    }
-  }
-}
-    `;
-
-/**
- * __useLastfmStatusQueryQuery__
- *
- * To run a query within a React component, call `useLastfmStatusQueryQuery` and pass it any options that fit your needs.
- * When your component renders, `useLastfmStatusQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useLastfmStatusQueryQuery({
- *   variables: {
- *   },
- * });
- */
-export function useLastfmStatusQueryQuery(baseOptions?: Apollo.QueryHookOptions<LastfmStatusQueryQuery, LastfmStatusQueryQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<LastfmStatusQueryQuery, LastfmStatusQueryQueryVariables>(LastfmStatusQueryDocument, options);
-      }
-export function useLastfmStatusQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<LastfmStatusQueryQuery, LastfmStatusQueryQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<LastfmStatusQueryQuery, LastfmStatusQueryQueryVariables>(LastfmStatusQueryDocument, options);
-        }
-export type LastfmStatusQueryQueryHookResult = ReturnType<typeof useLastfmStatusQueryQuery>;
-export type LastfmStatusQueryLazyQueryHookResult = ReturnType<typeof useLastfmStatusQueryLazyQuery>;
-export type LastfmStatusQueryQueryResult = Apollo.QueryResult<LastfmStatusQueryQuery, LastfmStatusQueryQueryVariables>;
 export const MusicStatusQueryDocument = gql`
     query MusicStatusQuery {
   musicStatus {
@@ -777,124 +666,6 @@ export function usePlacesQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type PlacesQueryQueryHookResult = ReturnType<typeof usePlacesQueryQuery>;
 export type PlacesQueryLazyQueryHookResult = ReturnType<typeof usePlacesQueryLazyQuery>;
 export type PlacesQueryQueryResult = Apollo.QueryResult<PlacesQueryQuery, PlacesQueryQueryVariables>;
-export const AllPhotosQueryDocument = gql`
-    query AllPhotosQuery {
-  photos {
-    id
-    url
-    exif
-    description
-    width
-    height
-  }
-}
-    `;
-
-/**
- * __useAllPhotosQueryQuery__
- *
- * To run a query within a React component, call `useAllPhotosQueryQuery` and pass it any options that fit your needs.
- * When your component renders, `useAllPhotosQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useAllPhotosQueryQuery({
- *   variables: {
- *   },
- * });
- */
-export function useAllPhotosQueryQuery(baseOptions?: Apollo.QueryHookOptions<AllPhotosQueryQuery, AllPhotosQueryQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<AllPhotosQueryQuery, AllPhotosQueryQueryVariables>(AllPhotosQueryDocument, options);
-      }
-export function useAllPhotosQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllPhotosQueryQuery, AllPhotosQueryQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<AllPhotosQueryQuery, AllPhotosQueryQueryVariables>(AllPhotosQueryDocument, options);
-        }
-export type AllPhotosQueryQueryHookResult = ReturnType<typeof useAllPhotosQueryQuery>;
-export type AllPhotosQueryLazyQueryHookResult = ReturnType<typeof useAllPhotosQueryLazyQuery>;
-export type AllPhotosQueryQueryResult = Apollo.QueryResult<AllPhotosQueryQuery, AllPhotosQueryQueryVariables>;
-export const PhotoIdsQueryDocument = gql`
-    query PhotoIdsQuery {
-  photos {
-    id
-  }
-}
-    `;
-
-/**
- * __usePhotoIdsQueryQuery__
- *
- * To run a query within a React component, call `usePhotoIdsQueryQuery` and pass it any options that fit your needs.
- * When your component renders, `usePhotoIdsQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = usePhotoIdsQueryQuery({
- *   variables: {
- *   },
- * });
- */
-export function usePhotoIdsQueryQuery(baseOptions?: Apollo.QueryHookOptions<PhotoIdsQueryQuery, PhotoIdsQueryQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PhotoIdsQueryQuery, PhotoIdsQueryQueryVariables>(PhotoIdsQueryDocument, options);
-      }
-export function usePhotoIdsQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PhotoIdsQueryQuery, PhotoIdsQueryQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PhotoIdsQueryQuery, PhotoIdsQueryQueryVariables>(PhotoIdsQueryDocument, options);
-        }
-export type PhotoIdsQueryQueryHookResult = ReturnType<typeof usePhotoIdsQueryQuery>;
-export type PhotoIdsQueryLazyQueryHookResult = ReturnType<typeof usePhotoIdsQueryLazyQuery>;
-export type PhotoIdsQueryQueryResult = Apollo.QueryResult<PhotoIdsQueryQuery, PhotoIdsQueryQueryVariables>;
-export const PhotoQueryDocument = gql`
-    query PhotoQuery($id: String!) {
-  photo(id: $id) {
-    id
-    description
-    exif
-    width
-    height
-    url
-    tags
-    location {
-      lat
-      lon
-    }
-  }
-}
-    `;
-
-/**
- * __usePhotoQueryQuery__
- *
- * To run a query within a React component, call `usePhotoQueryQuery` and pass it any options that fit your needs.
- * When your component renders, `usePhotoQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = usePhotoQueryQuery({
- *   variables: {
- *      id: // value for 'id'
- *   },
- * });
- */
-export function usePhotoQueryQuery(baseOptions: Apollo.QueryHookOptions<PhotoQueryQuery, PhotoQueryQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PhotoQueryQuery, PhotoQueryQueryVariables>(PhotoQueryDocument, options);
-      }
-export function usePhotoQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PhotoQueryQuery, PhotoQueryQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PhotoQueryQuery, PhotoQueryQueryVariables>(PhotoQueryDocument, options);
-        }
-export type PhotoQueryQueryHookResult = ReturnType<typeof usePhotoQueryQuery>;
-export type PhotoQueryLazyQueryHookResult = ReturnType<typeof usePhotoQueryLazyQuery>;
-export type PhotoQueryQueryResult = Apollo.QueryResult<PhotoQueryQuery, PhotoQueryQueryVariables>;
 export const PhotoSetsQueryDocument = gql`
     query PhotoSetsQuery($limit: Int) {
   photoSets(limit: $limit) {

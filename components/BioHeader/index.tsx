@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "@tanstack/react-router";
-import { LinkButton, LinkExternal } from "../Links";
+import { ActionAnchor, LinkExternal } from "../Links";
 import { ArrowLeftIcon, DocumentIcon } from "../Icons";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -71,15 +71,15 @@ export function BioHeader({ backButton = false }: BioHeaderProps) {
           </span>
         </div>
       </div>
-      <LinkButton
+      <ActionAnchor
         target="_blank"
         rel="noopener noreferrer"
         href={resumeURL}
-        className="self-start sm:self-center hidden sm:block"
+        className="hidden self-start sm:flex sm:self-center"
       >
         <DocumentIcon size={16} />
         Download resume
-      </LinkButton>
+      </ActionAnchor>
     </header>
   );
 }

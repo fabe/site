@@ -82,13 +82,19 @@ export const colorPalette = [
   ],
 ];
 
+type PaletteColor = {
+  name: string;
+  hex: string;
+};
+
+type SelectedColor = PaletteColor & {
+  row: number;
+  col: number;
+};
+
 export function ColorPalette() {
-  const [selectedColor, setSelectedColor] = React.useState<{
-    name: string;
-    hex: string;
-    row: number;
-    col: number;
-  }>(null);
+  const [selectedColor, setSelectedColor] =
+    React.useState<SelectedColor | null>(null);
 
   const [selectorPosition, setSelectorPosition] = React.useState<{
     x: number;
@@ -103,7 +109,7 @@ export function ColorPalette() {
   );
 
   const handleColorSelect = (
-    color: any,
+    color: PaletteColor,
     rowIndex: number,
     colIndex: number,
   ) => {
@@ -159,7 +165,7 @@ export function ColorPalette() {
   }, [selectedColor]);
 
   return (
-    <div className="bg-gray-100 relative dark:bg-neutral-800 border border-neutral-800/5 dark:border-white/5 rounded-2xl my-6 sm:my-12 py-6 sm:py-8 px-6 sm:px-8">
+    <div className="relative my-6 rounded-2xl border border-line/5 bg-surface-muted px-6 py-6 dark:bg-surface sm:my-12 sm:px-8 sm:py-8">
       {/* Color grid */}
       <div ref={gridRef} className="relative w-full rounded-lg">
         <div className="">
@@ -190,7 +196,7 @@ export function ColorPalette() {
               ))}
             </div>
           ))}
-          <div className="absolute inset-0 pointer-events-none rounded-lg box-border border border-neutral-800/5 dark:border-white/5"></div>
+          <div className="absolute inset-0 pointer-events-none rounded-lg box-border border border-line/5"></div>
         </div>
 
         {/* Floating white border selector */}

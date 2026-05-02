@@ -1,9 +1,11 @@
-import { Book } from "../../graphql/types/types.generated";
+import type { PageHomeQueryQuery } from "../../graphql/types/types.generated";
 import MediaCard, { MediaCardImageRadius } from "../MediaCard";
 import HomeSection from "./Section";
 
+type HomeBook = NonNullable<PageHomeQueryQuery["books"][number]>;
+
 interface NowReadingProps {
-  books: Book[];
+  books: HomeBook[];
 }
 
 export default function NowReading({ books }: NowReadingProps) {
@@ -25,7 +27,7 @@ export default function NowReading({ books }: NowReadingProps) {
             subtitle={author}
             image={{
               alt: title && author ? `${title} by ${author}` : "Book cover",
-              title: title && author ? `${title} by ${author}` : null,
+              title: title && author ? `${title} by ${author}` : undefined,
               src: coverUrl ? coverUrl : "",
               width: 56,
               height: 80,

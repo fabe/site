@@ -1,9 +1,3 @@
-export const DATE_FORMAT: object = {
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-};
-
 export const PLAYLIST_IDS = [
   "4BWCzBOYFTgnkD2c00w9Si", // 2025
   "0bMTUisUt7pIiGQzguAETA", // 2024

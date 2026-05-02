@@ -1,5 +1,5 @@
 overwrite: true
-schema: "./graphql/typeDefs/index.ts"
+schema: "./graphql/typeDefs/schema.graphql"
 documents: "./graphql/queries/*.{tsx,ts}"
 hooks:
   afterOneFileWrite:

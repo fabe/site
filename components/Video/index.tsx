@@ -7,6 +7,8 @@ import {
   PlayIcon,
   UnmutedIcon,
 } from "../Icons";
+import Caption from "../Caption";
+import { MediaBorder } from "../Frame";
 
 interface PlayerProps {
   src: string;
@@ -75,8 +77,8 @@ export const SimplePlayer: React.FC<PlayerProps> = ({
           noPadding
             ? ""
             : title
-            ? "pt-2 pb-3 px-2 sm:pt-6 sm:pb-6 sm:px-6"
-            : "p-2 sm:p-6"
+              ? "pt-2 pb-3 px-2 sm:pt-6 sm:pb-6 sm:px-6"
+              : "p-2 sm:p-6"
         }`}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
@@ -92,7 +94,7 @@ export const SimplePlayer: React.FC<PlayerProps> = ({
             loop
             playsInline
           />
-          <div className="absolute inset-0 pointer-events-none rounded-md sm:rounded-lg box-border border border-neutral-800/5 dark:border-white/5"></div>
+          <div className="absolute inset-0 pointer-events-none rounded-md sm:rounded-lg box-border border border-line/5" />
           <button
             type="button"
             className={`absolute backdrop-blur-sm saturate-150 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-200 ease-out flex items-center justify-center rounded-full w-16 h-16 bg-black/40 text-white ${
@@ -158,11 +160,7 @@ export const SimplePlayer: React.FC<PlayerProps> = ({
             </AnimatePresence>
           </motion.button>
         )}
-        {title && (
-          <figcaption className="text-sm text-neutral-500 dark:text-silver-dark text-balance text-center pt-3 sm:pt-6 px-4">
-            {title}
-          </figcaption>
-        )}
+        {title && <Caption className="pt-3 sm:pt-6 px-4">{title}</Caption>}
       </div>
     </div>
   );
@@ -287,7 +285,7 @@ export const Player: React.FC<PlayerProps> = ({ src, title, poster }) => {
   return (
     <div className="sm:-mx-24 sm:my-12 my-6">
       <div
-        className="relative w-full overflow-hidden rounded-xl sm:rounded-2xl bg-gray-100 dark:bg-neutral-800/75 select-none"
+        className="relative w-full overflow-hidden rounded-xl sm:rounded-2xl bg-surface-muted dark:bg-surface/75 select-none"
         onMouseEnter={showControls}
         onMouseLeave={hideControls}
         onMouseMove={showControls}
@@ -300,7 +298,7 @@ export const Player: React.FC<PlayerProps> = ({ src, title, poster }) => {
           onClick={togglePlay}
         />
 
-        <div className="absolute inset-0 pointer-events-none rounded-xl sm:rounded-2xl box-border border border-neutral-800/5 dark:border-white/5"></div>
+        <MediaBorder />
 
         {/* Full overlay with reduced opacity & snappier transition */}
         <div
@@ -363,7 +361,7 @@ export const Player: React.FC<PlayerProps> = ({ src, title, poster }) => {
               />
               {/* hover timestamp label (no background, above line, inside hit area) */}
               <div
-                className={`pointer-events-none absolute top-0 -translate-y-full pb-1 -translate-x-1/2 whitespace-nowrap flex items-baseline gap-0.5 transition-opacity duration-150 z-10 text-shadow-lg ${
+                className={`pointer-events-none absolute top-0 -translate-y-full pb-1 -translate-x-1/2 whitespace-nowrap flex items-baseline gap-0.5 transition-opacity duration-150 z-10 ${
                   isProgressHovering ? "opacity-100" : "opacity-0"
                 }`}
                 style={{ left: `${progressHoverRatio * 100}%` }}
@@ -398,9 +396,7 @@ export const Player: React.FC<PlayerProps> = ({ src, title, poster }) => {
           </div>
         </div>
       </div>
-      <figcaption className="text-sm text-neutral-500 dark:text-silver-dark text-balance text-center pt-4">
-        {title}
-      </figcaption>
+      <Caption>{title}</Caption>
     </div>
   );
 };

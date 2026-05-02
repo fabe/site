@@ -3,6 +3,9 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { createPortal } from "react-dom";
+import Caption from "@/components/Caption";
+import { MediaBorder, MediaFrame } from "@/components/Frame";
+import { cn } from "@/lib/cn";
 import { withImageParams } from "@/lib/imageProxy";
 import { useHaptics } from "@/lib/useHaptics";
 
@@ -64,10 +67,8 @@ export default function ImageLightbox({
   // If zoom is disabled, render simple image without lightbox functionality
   if (zoomDisabled) {
     return (
-      <div className={`${noMargin ? "" : "my-6 sm:my-12"}`}>
-        <div
-          className={`relative rounded-xl sm:rounded-2xl overflow-hidden bg-gray-100 dark:bg-neutral-800/75`}
-        >
+      <div className={cn(!noMargin && "my-6 sm:my-12")}>
+        <MediaFrame>
           <img
             src={withImageParams(src, { w: 1600, fm: "webp" })}
             alt={alt}
@@ -76,13 +77,9 @@ export default function ImageLightbox({
             className="w-full h-auto"
             loading={lazy ? "lazy" : "eager"}
           />
-          <div className="absolute inset-0 pointer-events-none rounded-xl sm:rounded-2xl box-border border border-neutral-800/5 dark:border-white/5"></div>
-        </div>
-        {title && (
-          <figcaption className="text-sm text-neutral-500 dark:text-silver-dark text-balance text-center pt-4">
-            {title}
-          </figcaption>
-        )}
+          <MediaBorder />
+        </MediaFrame>
+        {title && <Caption>{title}</Caption>}
       </div>
     );
   }
@@ -161,7 +158,7 @@ export default function ImageLightbox({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 bg-gray-50/80 dark:bg-neutral-900/80 backdrop-blur-[50px] backdrop-saturate-[2] z-40"
+            className="fixed inset-0 z-40 bg-gray-50/80 backdrop-blur-[50px] backdrop-saturate-[2] dark:bg-neutral-900/80"
             onClick={closeLightbox}
             role="dialog"
             aria-modal="true"
@@ -170,7 +167,7 @@ export default function ImageLightbox({
 
           {/* Animated image clone */}
           <motion.div
-            className="fixed rounded-xl sm:rounded-2xl overflow-hidden bg-gray-100 dark:bg-neutral-800/75 cursor-zoom-out z-50"
+            className="fixed z-50 cursor-zoom-out overflow-hidden rounded-xl bg-surface-muted sm:rounded-2xl dark:bg-surface/75"
             onClick={closeLightbox}
             initial={{
               left: imageRect.left,
@@ -200,7 +197,7 @@ export default function ImageLightbox({
               height={height}
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 pointer-events-none rounded-xl sm:rounded-2xl box-border border border-neutral-800/5 dark:border-white/5"></div>
+            <MediaBorder />
           </motion.div>
         </>
       )}
@@ -210,12 +207,13 @@ export default function ImageLightbox({
   return (
     <>
       {/* Original Image - stays in place */}
-      <div className={`${noMargin ? "" : "my-6 sm:my-12"}`}>
-        <div
+      <div className={cn(!noMargin && "my-6 sm:my-12")}>
+        <MediaFrame
           ref={imageRef}
-          className={`relative rounded-xl sm:rounded-2xl overflow-hidden bg-gray-100 dark:bg-neutral-800/75 cursor-zoom-in transition-opacity duration-200 ${
-            isOpen ? "opacity-0" : "opacity-100"
-          }`}
+          className={cn(
+            "cursor-zoom-in transition-opacity duration-200",
+            isOpen ? "opacity-0" : "opacity-100",
+          )}
           onClick={openLightbox}
         >
           <img
@@ -226,13 +224,9 @@ export default function ImageLightbox({
             className="w-full h-auto"
             loading={lazy ? "lazy" : "eager"}
           />
-          <div className="absolute inset-0 pointer-events-none rounded-xl sm:rounded-2xl box-border border border-neutral-800/5 dark:border-white/5"></div>
-        </div>
-        {title && (
-          <figcaption className="text-sm text-neutral-500 dark:text-silver-dark text-balance text-center pt-4">
-            {title}
-          </figcaption>
-        )}
+          <MediaBorder />
+        </MediaFrame>
+        {title && <Caption>{title}</Caption>}
       </div>
 
       {/* Render lightbox in portal */}

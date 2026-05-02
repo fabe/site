@@ -148,7 +148,7 @@ export function NoteComparison() {
 
   return (
     <div className="my-6 sm:my-12">
-      <div className="bg-gray-100 border border-neutral-800/5 dark:border-white/5 rounded-2xl py-4 sm:py-6 px-8 sm:px-12 pb-10 sm:pb-6 relative">
+      <div className="bg-gray-100 border border-line/5 rounded-2xl py-4 sm:py-6 px-8 sm:px-12 pb-10 sm:pb-6 relative">
         {/* Centered container */}
         <div className="flex justify-center items-center min-h-[300px]">
           <div className="relative w-full max-w-xs p-4 rounded-3xl">
@@ -167,7 +167,7 @@ export function NoteComparison() {
 
             {/* After state - overlay with clip-path */}
             <div
-              className="absolute top-0 left-0 p-4 rounded-3xl w-full space-y-4 transition-all duration-500 cubic-bezier(0.34, 1.56, 0.64, 1)"
+              className="absolute top-0 left-0 p-4 rounded-3xl w-full space-y-4 transition-all duration-500"
               style={{
                 clipPath: showAfter ? "inset(0 0 0 0)" : "inset(0 100% 0 0)",
               }}
@@ -190,8 +190,8 @@ export function NoteComparison() {
           onClick={toggleState}
           className="absolute bottom-4 right-4 group isolate flex items-center leading-tight gap-1 text-sm px-2 py-1.5"
         >
-          <span className="absolute inset-0 rounded-lg bg-white border border-neutral-800/10 dark:border-white/5 transition-all duration-100 ease-out-expo group-hover:scale-x-[1.03] group-hover:scale-y-[1.08] z-0" />
-          <span className="relative z-10 flex items-center justify-center w-24 [font-variation-settings:'opsz'_14,'wght'_500] text-neutral-700">
+          <span className="absolute inset-0 z-0 rounded-lg border border-line/10 bg-surface transition-all duration-100 ease-out-expo group-hover:scale-x-[1.03] group-hover:scale-y-[1.08] dark:border-line/5" />
+          <span className="relative z-10 flex items-center justify-center w-24 font-ui-label-medium text-neutral-700">
             {showAfter ? "View before" : "View after"}
           </span>
         </button>

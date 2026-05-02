@@ -28,12 +28,35 @@
 
 :root {
   --sans-font: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --color-canvas: 249 250 251;
+  --color-fg: 38 38 38;
+  --color-heading: 38 38 38;
+  --color-muted: 115 115 115;
+  --color-subtle: 163 163 163;
+  --color-surface: 255 255 255;
+  --color-surface-muted: 243 244 246;
+  --color-surface-raised: 229 231 235;
+  --color-line: 23 23 23;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-canvas: 23 23 23;
+    --color-fg: 223 223 222;
+    --color-heading: 255 255 255;
+    --color-muted: 155 155 155;
+    --color-subtle: 82 82 82;
+    --color-surface: 38 38 38;
+    --color-surface-muted: 38 38 38;
+    --color-surface-raised: 38 38 38;
+    --color-line: 255 255 255;
+  }
 }
 
 html,
 body {
-  @apply bg-gray-50 dark:bg-neutral-900;
-  @apply text-neutral-800 dark:text-silver;
+  @apply bg-canvas;
+  @apply text-fg;
   @apply antialiased;
   @apply text-base;
 
@@ -104,7 +127,7 @@ blockquote span::after {
 }
 
 [cmdk-root] {
-  @apply material-glass;
+  @apply glass-panel;
   @apply bg-white/90;
   @apply dark:bg-neutral-800/95;
   @apply relative;
@@ -117,7 +140,7 @@ blockquote span::after {
 
 [cmdk-input] {
   @apply appearance-none;
-  @apply text-neutral-800 dark:text-silver;
+  @apply text-fg;
   @apply placeholder:text-neutral-900/40 dark:placeholder:text-white/40;
   @apply bg-transparent;
   @apply w-full;
@@ -139,9 +162,9 @@ blockquote span::after {
   @apply px-3 py-2;
   @apply rounded-md;
   @apply cursor-pointer;
-  @apply text-neutral-600 dark:text-silver-dark;
+  @apply text-muted;
   @apply transition-colors;
-  @apply [font-variation-settings:'wght'_420];
+  @apply font-ui-muted-control;
 }
 
 [cmdk-item] > div {
@@ -150,17 +173,17 @@ blockquote span::after {
 
 [cmdk-item][aria-selected] {
   @apply bg-neutral-700/10 dark:bg-white/10;
-  @apply text-neutral-800 dark:text-silver;
+  @apply text-fg;
 }
 
 [cmdk-item]:active {
   @apply bg-neutral-200/[.9] dark:bg-neutral-700;
-  @apply text-neutral-800 dark:text-silver;
+  @apply text-fg;
 }
 
 [cmdk-empty] {
   @apply px-3 py-3;
-  @apply text-sm font-medium text-neutral-600 [font-variation-settings:'opsz'_12] dark:text-silver-dark;
+  @apply text-sm font-medium text-muted font-ui-xs;
 }
 
 [cmdk-separator] {
@@ -170,7 +193,7 @@ blockquote span::after {
 
 [cmdk-group-heading] {
   @apply px-3 pb-2 pt-4;
-  @apply text-xs font-medium text-neutral-600 [font-variation-settings:'opsz'_12] dark:text-silver-dark;
+  @apply text-xs font-medium text-muted font-ui-xs;
 }
 
 [cmdk-loading] {
@@ -245,7 +268,7 @@ blockquote span::after {
 }
 
 .mapboxgl-popup-content {
-  @apply rounded border border-transparent bg-neutral-800 px-3 py-3 font-sans text-base font-medium text-silver [font-variation-settings:'opsz'_15,_'wght'_500] dark:border-white/[.08] dark:bg-black/[.96] dark:text-silver !important;
+  @apply rounded border border-transparent bg-neutral-800 px-3 py-3 font-sans text-base font-medium text-silver font-ui-popup dark:border-white/[.08] dark:bg-black/[.96] dark:text-silver !important;
 }
 
 @layer components {
@@ -254,7 +277,7 @@ blockquote span::after {
     @apply border-neutral-200 dark:border-white/[.05] border;
     @apply shadow-md shadow-neutral-200 dark:shadow-neutral-950;
     @apply w-12 h-16;
-    @apply text-center dark:text-white uppercase text-2xl [font-variation-settings:'opsz'_24,_'wght'_650];
+    @apply text-center dark:text-white uppercase text-2xl font-ui-input;
     @apply outline-none;
     @apply rounded-lg;
     @apply transition-shadow duration-100;
@@ -298,7 +321,7 @@ blockquote span::after {
 
   .note b,
   .note strong {
-    @apply [font-variation-settings:'opsz'_7,_'wght'_500];
+    @apply font-ui-note-strong;
   }
 
   .note .time,
@@ -310,18 +333,18 @@ blockquote span::after {
     @apply font-sans;
     @apply block;
     @apply text-sm;
-    @apply text-neutral-500 dark:text-silver-dark;
-    @apply [font-variation-settings:'opsz'_14];
+    @apply text-muted;
+    @apply font-ui-sm;
     @apply slashed-zero tabular-nums;
   }
 
   .time-lg {
     @apply text-base;
-    @apply [font-variation-settings:'opsz'_15];
+    @apply font-ui-base;
   }
 
   .badge {
-    @apply inline-flex items-center gap-1 rounded-xl bg-gray-200 px-1.5 py-0.5 text-xs font-medium text-neutral-600 [font-variation-settings:'opsz'_12] dark:bg-neutral-800 dark:text-silver-dark;
+    @apply inline-flex items-center gap-1 rounded-xl bg-surface-raised px-1.5 py-0.5 text-xs font-medium text-muted font-ui-xs;
     @apply slashed-zero;
     @apply decoration-neutral-600;
   }
@@ -335,15 +358,15 @@ blockquote span::after {
   }
 
   .list-title {
-    @apply col-span-12 border-t border-solid border-neutral-500/10 pt-4 dark:border-white/5 sm:col-span-4;
+    @apply col-span-12 border-t border-solid border-line/10 pt-4 dark:border-line/5 sm:col-span-4;
   }
 
   .list-content {
-    @apply col-span-12 border-solid border-neutral-500/10 pt-4 dark:border-white/5 sm:col-span-8 sm:border-t;
+    @apply col-span-12 border-solid border-line/10 pt-4 dark:border-line/5 sm:col-span-8 sm:border-t;
   }
 
-  .island {
-    @apply material-glass;
+  .nav-island {
+    @apply glass-panel;
     @apply h-12 w-12;
     @apply rounded-full;
     @apply inline-flex items-center justify-center;
@@ -358,15 +381,19 @@ blockquote span::after {
     @apply prose-p:m-0;
     @apply prose-p:leading-relaxed sm:prose-p:leading-golden;
     @apply prose prose-neutral dark:prose-invert max-w-none;
-    @apply prose-p:text-neutral-800 dark:prose-p:text-silver;
-    @apply prose-headings:font-normal prose-headings:[font-variation-settings:'wght'_500];
-    @apply prose-strong:font-normal prose-strong:[font-variation-settings:'wght'_500];
+    @apply prose-p:text-fg;
+    @apply prose-headings:font-normal;
+    @apply prose-strong:font-normal;
     @apply prose-em:not-italic prose-em:underline prose-em:decoration-neutral-300 prose-em:decoration-wavy dark:prose-em:decoration-neutral-700;
-    @apply prose-code:rounded prose-code:font-normal prose-code:text-neutral-800 dark:prose-code:text-silver-dark;
+    @apply prose-code:rounded prose-code:font-normal prose-code:text-fg;
     @apply prose-pre:overflow-auto prose-pre:whitespace-pre prose-pre:border prose-pre:border-neutral-200 prose-pre:bg-transparent prose-pre:p-4 prose-pre:text-sm dark:prose-pre:border-white/5 sm:prose-pre:-ml-4 sm:prose-pre:-mr-4;
     @apply prose-img:rounded-lg;
     @apply prose-hr:my-6 prose-hr:w-16 prose-hr:mx-auto prose-hr:h-px prose-hr:border-none prose-hr:bg-neutral-200 dark:prose-hr:bg-neutral-800 sm:prose-hr:my-12;
-    @apply prose-blockquote:border-0 prose-blockquote:p-0 prose-blockquote:not-italic prose-blockquote:text-neutral-600 dark:prose-blockquote:text-silver-dark;
+    @apply prose-blockquote:border-0 prose-blockquote:p-0 prose-blockquote:not-italic prose-blockquote:text-muted;
+  }
+
+  .prose-custom :where(h1, h2, h3, h4, h5, h6, strong) {
+    font-variation-settings: "wght" 500;
   }
 
   .prose-custom a {
@@ -376,65 +403,112 @@ blockquote span::after {
 }
 
 @layer utilities {
-  .material-glass {
+  .glass-panel {
     @apply bg-white/75;
     @apply dark:bg-neutral-800/75;
     @apply shadow-fancy dark:shadow-fancyDark;
     @apply backdrop-blur-xl backdrop-saturate-200;
   }
 
-  .link-external,
-  .link-back {
+  .font-ui-xs {
+    font-variation-settings: "opsz" 12;
+  }
+
+  .font-ui-sm {
+    font-variation-settings: "opsz" 14;
+  }
+
+  .font-ui-base {
+    font-variation-settings: "opsz" 15;
+  }
+
+  .font-ui-title {
+    font-variation-settings:
+      "opsz" 32,
+      "wght" 500;
+  }
+
+  .font-ui-display {
+    font-variation-settings:
+      "opsz" 48,
+      "wght" 550;
+  }
+
+  .font-ui-heading {
+    font-variation-settings:
+      "opsz" 36,
+      "wght" 500;
+  }
+
+  .font-ui-label {
+    font-variation-settings:
+      "opsz" 14,
+      "wght" 550;
+  }
+
+  .font-ui-label-medium {
+    font-variation-settings:
+      "opsz" 14,
+      "wght" 500;
+  }
+
+  .font-ui-strong {
+    font-variation-settings: "wght" 550;
+  }
+
+  .font-ui-input {
+    font-variation-settings:
+      "opsz" 24,
+      "wght" 650;
+  }
+
+  .font-ui-muted-control {
+    font-variation-settings: "wght" 420;
+  }
+
+  .font-ui-popup {
+    font-variation-settings:
+      "opsz" 15,
+      "wght" 500;
+  }
+
+  .font-ui-note-strong {
+    font-variation-settings:
+      "opsz" 7,
+      "wght" 500;
+  }
+
+  .link-external {
     @apply inline-flex;
     @apply max-w-none;
     @apply items-center;
     @apply gap-0.5;
   }
 
-  .link-share {
-    @apply inline-flex;
-    @apply items-center;
-    @apply gap-1;
-    @apply text-sm;
-    @apply px-2 py-1.5;
-    @apply rounded-lg bg-gray-200 text-neutral-700 transition-colors [font-variation-settings:'opsz'_14,'wght'_400] hover:bg-gray-300 dark:bg-neutral-800 dark:text-silver-dark dark:hover:bg-neutral-700;
-  }
-
   .link-external svg {
     @apply decoration-transparent;
-    @apply text-neutral-400 dark:text-silver-dark;
-  }
-
-  .link-back:hover svg {
-    @apply -translate-x-0.5;
-  }
-
-  .link-back svg {
-    @apply decoration-transparent;
-    @apply -ml-6;
-    @apply mr-1;
-    @apply mb-0.5;
-    @apply text-silver-dark;
-    @apply motion-safe:transition;
-    @apply duration-150;
-    @apply ease-out-expo;
+    @apply text-subtle dark:text-muted;
   }
 
   .link-sm {
     @apply text-xs;
     @apply decoration-1.5;
     @apply underline-offset-1.5;
-    @apply text-neutral-500 dark:text-silver-dark;
+    @apply text-muted;
     @apply decoration-neutral-300 dark:decoration-neutral-700;
     @apply hover:decoration-neutral-400 dark:hover:decoration-neutral-600;
-    @apply [font-variation-settings:'opsz'_12];
+    @apply font-ui-xs;
   }
 
   .link-fade {
     @apply text-sm;
-    @apply text-neutral-500 dark:text-silver-dark;
-    @apply hover:text-neutral-800 dark:hover:text-silver;
+    @apply text-muted;
+    @apply hover:text-fg;
     @apply transition-colors;
+  }
+
+  .text-meta {
+    @apply text-sm text-muted font-ui-sm;
   }
 
   .text-shadow {
@@ -443,18 +517,5 @@ blockquote span::after {
 
   .mask-gradient {
     mask-image: linear-gradient(to top, transparent 0%, rgba(0, 0, 0, 1) 90%);
-  }
-
-  .paragraph-lg {
-    @apply text-base sm:text-lg sm:leading-golden leading-relaxed;
-    @apply [font-variation-settings:'opsz'_18,_'wght'_450];
-    @apply pb-12;
-    @apply m-0;
-    @apply text-neutral-800 dark:text-silver;
-  }
-
-  .paragraph-lg.first {
-    @apply pb-0;
-    /* @apply first-letter:text-6xl first-letter:float-left first-letter:mr-2 first-letter:leading-none; */
   }
 }

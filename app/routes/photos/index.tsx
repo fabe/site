@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import React, { useState } from "react";
 import { Main } from "@/components/Layouts";
+import { PageTitle } from "@/components/Typography";
 import { QUERY_PHOTO_SETS } from "@/graphql/queries";
 import contentfulLoader from "@/lib/contentfulLoader";
 import type { ColorData } from "@/lib/colorExtractor";
@@ -69,10 +70,8 @@ function PhotosComponent() {
 
   return (
     <Main>
-      <div className="flex items-center justify-between pb-6 sm:pb-12 gap-2">
-        <h1 className="text-2xl text-neutral-800 [font-variation-settings:'opsz'_32,_'wght'_500] dark:text-white sm:text-3xl">
-          Photos
-        </h1>
+      <div className="flex items-center justify-between gap-2">
+        <PageTitle>Photos</PageTitle>
       </div>
       <div className="flex flex-col gap-8">
         {photoSets.map((photoSet: PhotoSetWithColors) => (
@@ -96,7 +95,9 @@ function PhotoSetCard({ photoSet }: { photoSet: PhotoSetWithColors }) {
 
   return (
     <Link
-      to={`/photos/${photoSet.slug}`}
+      to="/photos/$slug"
+      params={{ slug: photoSet.slug }}
+      search={{ id: undefined }}
       className="group relative aspect-[3/2] w-full overflow-hidden rounded-lg transition-all duration-300 ease-in-out dark:shadow-2xl"
       style={{
         backgroundColor: computedBackgroundColor,
@@ -129,7 +130,7 @@ function PhotoSetCard({ photoSet }: { photoSet: PhotoSetWithColors }) {
       ></div>
 
       {/* Progressive blur overlay */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[50%] xs:h-[45%] sm:h-[30%] overflow-hidden">
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[50%] sm:h-[30%] overflow-hidden">
         <div
           className={`absolute inset-0 ${
             imageLoaded
@@ -142,7 +143,7 @@ function PhotoSetCard({ photoSet }: { photoSet: PhotoSetWithColors }) {
         ></div>
 
         <div className="absolute bottom-0 w-full px-4 pb-4 sm:pb-6 pt-8 text-center">
-          <h2 className="[font-variation-settings:'opsz'_32,_'wght'_500] text-2xl sm:text-3xl font-medium text-white transition-transform duration-300 ease-out pointer-fine:group-hover:translate-y-4">
+          <h2 className="font-ui-title text-2xl sm:text-3xl font-medium text-white transition-transform duration-300 ease-out pointer-fine:group-hover:translate-y-4">
             {photoSet.title}
           </h2>
           <p className="mx-auto mt-1 sm:mt-1.5 max-w-md line-clamp-2 text-white/80 transition-all duration-300 ease-out pointer-fine:group-hover:opacity-0 pointer-fine:group-hover:translate-y-2">

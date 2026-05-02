@@ -1,9 +1,8 @@
-import { useMemo } from "react";
 import {
   ApolloClient,
   HttpLink,
   InMemoryCache,
-  NormalizedCacheObject,
+  type NormalizedCacheObject,
 } from "@apollo/client";
 import { GRAPHQL_BASE_URL } from "./constants";
 
@@ -29,7 +28,7 @@ function createClientApolloClient() {
  * Used in React components (e.g. ApolloProvider in the root layout).
  */
 export function getClientApollo(
-  initialState: any = null,
+  initialState: NormalizedCacheObject | null = null,
 ): ApolloClient<NormalizedCacheObject> {
   if (!apolloClient) {
     apolloClient = createClientApolloClient();
@@ -47,7 +46,7 @@ export function getClientApollo(
  * client bundle.
  */
 export async function initializeApollo(
-  initialState: any = null,
+  initialState: NormalizedCacheObject | null = null,
 ): Promise<ApolloClient<NormalizedCacheObject>> {
   const { SchemaLink } = await import("@apollo/client/link/schema");
   const { schema } = await import("./schema");
@@ -63,9 +62,4 @@ export async function initializeApollo(
   }
 
   return client;
-}
-
-export function useApollo(initialState: any) {
-  const store = useMemo(() => getClientApollo(initialState), [initialState]);
-  return store;
 }

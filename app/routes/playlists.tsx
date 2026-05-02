@@ -3,6 +3,7 @@ import { createServerFn } from "@tanstack/react-start";
 import React from "react";
 import { Main } from "@/components/Layouts";
 import MediaCard from "@/components/MediaCard";
+import { PageTitle } from "@/components/Typography";
 import { PLAYLIST_IDS } from "@/constants";
 import { QUERY_PLAYLIST } from "@/graphql/queries";
 import type { SpotifyPlaylist } from "@/graphql/types/types.generated";
@@ -46,9 +47,7 @@ function PlaylistsComponent() {
 
   return (
     <Main>
-      <h1 className="pb-6 text-2xl text-neutral-800 [font-variation-settings:'opsz'_32,_'wght'_500] dark:text-white sm:pb-12 sm:text-3xl">
-        Playlists
-      </h1>
+      <PageTitle>Playlists</PageTitle>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
         {playlists.map((playlist: SpotifyPlaylist) => (
           <MediaCard

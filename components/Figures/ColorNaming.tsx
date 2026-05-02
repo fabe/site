@@ -125,7 +125,7 @@ export function ColorNamingAnimation() {
     <div className="my-6 sm:my-12">
       <div
         ref={containerRef}
-        className="bg-gray-100 dark:bg-neutral-800 border border-neutral-800/5 dark:border-white/5 rounded-2xl py-4 sm:py-6 px-8 sm:px-12 relative"
+        className="bg-surface-muted dark:bg-surface border border-line/5 rounded-2xl py-4 sm:py-6 px-8 sm:px-12 relative"
       >
         {/* Left-aligned content with padding */}
         <div>
@@ -203,7 +203,7 @@ export function ColorNamingAnimation() {
             title="Replay animation"
           >
             <span className="absolute inset-0 rounded-lg bg-white transition-all duration-100 ease-out-expo dark:bg-neutral-700 group-hover:scale-x-[1.03] group-hover:scale-y-[1.08] z-0" />
-            <span className="relative z-10 flex items-center gap-1 [font-variation-settings:'opsz'_14,'wght'_500] text-neutral-700 dark:text-white">
+            <span className="relative z-10 flex items-center gap-1 text-heading font-ui-label-medium">
               Replay
             </span>
           </motion.button>

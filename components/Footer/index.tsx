@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="flex w-full justify-center">
       <div className="w-full">
-        <div className="flex px-6 sm:h-[4.5rem] h-[5.75rem] w-full items-end justify-between border-t border-solid border-neutral-500/10 py-4 sm:py-6 dark:border-white/5 box-border">
+        <div className="box-border flex h-[5.75rem] w-full items-end justify-between border-t border-solid border-line/10 px-6 py-4 dark:border-line/5 sm:h-[4.5rem] sm:py-6">
           <div className="flex w-full flex-col sm:flex-row sm:justify-between items-end sm:items-start gap-3 sm:gap-0">
             <ul className="flex gap-4 sm:mb-0">
               <li>
@@ -45,11 +45,9 @@ export default function Footer() {
                   <GithubIcon size={12} />
                   <span>
                     fabe
-                    <span className="text-neutral-500/[.5] dark:text-silver-dark/[.5]">
-                      /
-                    </span>
+                    <span className="text-muted/50">/</span>
                     site
-                    <span className="hidden text-sm text-neutral-500/[.5] dark:text-silver-dark/[.5] sm:inline slashed-zero">
+                    <span className="hidden text-sm text-muted/50 slashed-zero sm:inline">
                       #
                       {import.meta.env.VITE_VERCEL_GIT_COMMIT_SHA?.slice(
                         0,

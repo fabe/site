@@ -1,4 +1,3 @@
-import formatDate from "../../lib/formatDate";
 import Badge from "../Badge";
 import { LinkExternal } from "../Links";
 import HomeSection from "./Section";
@@ -11,9 +10,7 @@ export default function Projects() {
           <Badge isFeatured>New</Badge>
           <LinkExternal href="https://globe.cv">Globe.cv</LinkExternal>
         </div>
-        <p className="pt-1 text-sm text-neutral-500 [font-variation-settings:'opsz'_14] dark:text-silver-dark">
-          Your travels, at a glance.
-        </p>
+        <p className="pt-1 text-meta">Your travels, at a glance.</p>
       </div>
     </HomeSection>
   );

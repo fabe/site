@@ -3,6 +3,7 @@ import { createServerFn } from "@tanstack/react-start";
 import React, { useCallback, useState } from "react";
 import { QUERY_PHOTO_SET } from "@/graphql/queries";
 import { Container } from "@/components/Layouts";
+import { PageTitle } from "@/components/Typography";
 import Footer from "@/components/Footer";
 import contentfulLoader from "@/lib/contentfulLoader";
 import Lightbox from "@/components/Lightbox";
@@ -14,19 +15,19 @@ import { ChevronLeft } from "@/components/Icons";
 import { useDrag } from "@use-gesture/react";
 import { useHaptics } from "@/lib/useHaptics";
 import type { ColorData } from "@/lib/colorExtractor";
-import type {
-  Photo as GqlPhoto,
-  PhotoSet as GqlPhotoSet,
-} from "@/graphql/types/types.generated";
+import type { PhotoSetQueryQuery } from "@/graphql/types/types.generated";
 import { baseUrl } from "../../__root";
 
-interface PhotoWithColors extends GqlPhoto {
-  colors?: ColorData;
-}
+type PhotoSetData = NonNullable<PhotoSetQueryQuery["photoSet"]>;
+type PhotoData = NonNullable<NonNullable<PhotoSetData["photos"]>[number]>;
 
-interface PhotoSetWithColors extends GqlPhotoSet {
-  photos?: (PhotoWithColors | null)[];
-}
+type PhotoWithColors = PhotoData & {
+  colors?: ColorData;
+};
+
+type PhotoSetWithColors = Omit<PhotoSetData, "photos"> & {
+  photos: PhotoWithColors[];
+};
 
 const fetchPhotoSet = createServerFn()
   .inputValidator((d: { slug: string }) => d)
@@ -35,25 +36,31 @@ const fetchPhotoSet = createServerFn()
     const { extractColorsFromImage } = await import("@/lib/colorExtractor");
 
     const apolloClient = await initializeApollo();
-    const { data } = await apolloClient.query({
+    const { data } = await apolloClient.query<PhotoSetQueryQuery>({
       query: QUERY_PHOTO_SET,
       variables: { slug },
     });
 
+    if (!data.photoSet) {
+      throw new Error("Photo set not found");
+    }
+
     // Extract colors for each photo at load time
-    const photos = data.photoSet.photos || [];
+    const photos =
+      data.photoSet.photos?.filter((photo): photo is PhotoData =>
+        Boolean(photo),
+      ) ?? [];
     const concurrency = 10;
-    const photosWithColors: (PhotoWithColors | null)[] = [];
+    const photosWithColors: PhotoWithColors[] = [];
     for (let i = 0; i < photos.length; i += concurrency) {
       const chunk = photos.slice(i, i + concurrency);
       const processed = await Promise.all(
-        chunk.map(async (p: GqlPhoto | null) => {
-          if (!p?.url) return p as any;
+        chunk.map(async (photo) => {
           try {
-            const colors = await extractColorsFromImage(p.url);
-            return { ...p, colors } as PhotoWithColors;
+            const colors = await extractColorsFromImage(photo.url);
+            return { ...photo, colors };
           } catch {
-            return p as any;
+            return photo;
           }
         }),
       );
@@ -207,18 +214,13 @@ function PhotoSetComponent() {
       <Container>
         <div className="pb-3 sm:pb-6 relative">
           <div className="top-0 left-0 flex flex-row items-center mb-7 sm:mb-14">
-            <LinkButton
-              href="/photos"
-              className="px-2 py-1.5 text-sm gap-1 items-center flex rounded-lg bg-gray-200 text-neutral-700 transition-colors [font-variation-settings:'opsz'_14,'wght'_400] hover:bg-gray-300 dark:bg-neutral-800 dark:text-silver-dark dark:hover:bg-neutral-700"
-            >
+            <LinkButton href="/photos">
               <ChevronLeft size={12} />
               Photos
             </LinkButton>
           </div>
           <header className="pb-5 sm:pb-16 text-center">
-            <h1 className="text-2xl text-neutral-800 [font-variation-settings:'opsz'_32,_'wght'_500] dark:text-white sm:text-3xl">
-              {photoSet.title}
-            </h1>
+            <PageTitle className="pb-0 sm:pb-0">{photoSet.title}</PageTitle>
             <div className="pt-1.5">
               {photoSet.description && <p>{photoSet.description}</p>}
             </div>
@@ -228,7 +230,7 @@ function PhotoSetComponent() {
             <div className="flex flex-row items-center gap-2">
               <Link
                 to="/"
-                className="flex flex-row items-center gap-2 [font-variation-settings:'wght'_450]"
+                className="flex flex-row items-center gap-2 font-medium"
               >
                 <div>
                   <img
@@ -265,10 +267,7 @@ function PhotoSetComponent() {
       {selectedPhoto && (
         <Lightbox isOpen={true} onDismiss={handleDismiss}>
           <div {...bindDragGesture()} className="w-full h-full touch-pan-y">
-            <LightboxPhoto
-              key={selectedPhoto.id}
-              photo={selectedPhoto as any}
-            />
+            <LightboxPhoto key={selectedPhoto.id} photo={selectedPhoto} />
           </div>
         </Lightbox>
       )}
@@ -321,7 +320,7 @@ function PhotoThumbnail({
           quality: 80,
         })}
         alt={photo.description || ""}
-        className={`absolute inset-0 w-full h-full object-cover transition-all group-hover:brightness-75 group-hover:saturate-120 transform-gpu bg-gray-200 dark:bg-neutral-900 ${
+        className={`absolute inset-0 w-full h-full object-cover group-hover:brightness-75 transform-gpu bg-gray-200 dark:bg-neutral-900 ${
           imageLoaded ? "opacity-100" : "opacity-0"
         } transition-all duration-150`}
         onLoad={() => setImageLoaded(true)}

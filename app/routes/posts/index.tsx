@@ -54,7 +54,7 @@ function PostsComponent() {
               </dt>
               <dd className="list-content border-none pb-4 pt-0 sm:pb-0">
                 <div>
-                  <Link to={`/posts/${slug}`} className="link">
+                  <Link to="/posts/$slug" params={{ slug }} className="link">
                     {title}
                   </Link>
                 </div>

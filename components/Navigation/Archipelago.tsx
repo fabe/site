@@ -182,22 +182,22 @@ export default function Archipelago() {
                 onMouseLeave={() => setTooltip(undefined)}
               >
                 <Tooltip open={tooltip === TooltipState.HOME}>Home</Tooltip>
-                <Link to="/" className="island" onClick={() => haptic("light")}>
+                <Link to="/" className="nav-island" onClick={() => haptic("light")}>
                   <span className="sr-only">Go home</span>
                   <HomeIcon size={20} />
                 </Link>
               </div>
             </Transition>
             <div
-              className={`duration-250 absolute rounded-full transition-all ease-out-expo ${
-                showHomeButton ? "delay-50 left-14" : "left-0 delay-300"
+              className={`absolute rounded-full transition-all ease-out-expo ${
+                showHomeButton ? "left-14" : "left-0 delay-300"
               }`}
               onMouseEnter={() => setTooltip(TooltipState.MENU)}
               onMouseLeave={() => setTooltip(undefined)}
             >
               <Tooltip open={tooltip === TooltipState.MENU}>Menu</Tooltip>
               <button
-                className="island"
+                className="nav-island"
                 onClick={() => {
                   haptic("light");
                   setOpen((open) => !open);

@@ -147,9 +147,9 @@ export async function getSpotifyStatus(): Promise<SpotifyStatus> {
 }
 
 export async function getSpotifyPlaylist(
-  _: any,
+  _: unknown,
   args: QuerySpotifyPlaylistArgs,
-): Promise<SpotifyPlaylist> {
+): Promise<SpotifyPlaylist | null> {
   const { access_token } = await getAccessToken();
   const playlistResponse = await getPlaylist(access_token, args.id);
 

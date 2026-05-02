@@ -97,17 +97,26 @@ function HomeComponent() {
     },
   );
 
+  const posts = initialData.posts.filter(
+    (post): post is NonNullable<PageHomeQueryQuery["posts"][number]> =>
+      Boolean(post),
+  );
+  const books = initialData.books.filter(
+    (book): book is NonNullable<PageHomeQueryQuery["books"][number]> =>
+      Boolean(book),
+  );
+
   return (
     <Main>
       <Intro introHtml={introHtml} />
       <Resume />
-      <Posts posts={initialData.posts} />
+      <Posts posts={posts} />
       <Projects />
       <NowPlaying
-        spotifyStatus={liveData?.musicStatus as any}
+        spotifyStatus={liveData?.musicStatus}
         loading={!mounted || loading}
       />
-      <NowReading books={(initialData.books ?? []).filter(Boolean) as any} />
+      <NowReading books={books} />
     </Main>
   );
 }
