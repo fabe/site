@@ -76,6 +76,17 @@ export const Route = createFileRoute("/")({
           "Product Designer",
       },
       { property: "og:url", content: baseUrl },
+      {
+        name: "twitter:title",
+        content:
+          loaderData?.initialData?.siteSettings?.siteTitle || "Fabian Schultz",
+      },
+      {
+        name: "twitter:description",
+        content:
+          loaderData?.initialData?.siteSettings?.metaDescription ||
+          "Product Designer",
+      },
     ],
     links: [{ rel: "canonical", href: baseUrl }],
   }),

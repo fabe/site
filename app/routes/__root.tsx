@@ -16,6 +16,9 @@ export const baseUrl = "https://fabianschultz.com";
 const defaultSEO = {
   title: "Fabian Schultz",
   description: "Product Designer",
+  image: `${baseUrl}/social.png`,
+  imageWidth: "1024",
+  imageHeight: "548",
 };
 
 export const Route = createRootRoute({
@@ -46,12 +49,22 @@ export const Route = createRootRoute({
       { property: "og:locale", content: "en_US" },
       { property: "og:url", content: baseUrl },
       { property: "og:site_name", content: defaultSEO.title },
-      { property: "og:image", content: `${baseUrl}/social.png` },
+      { property: "og:title", content: defaultSEO.title },
+      { property: "og:description", content: defaultSEO.description },
+      { property: "og:image", content: defaultSEO.image },
+      { property: "og:image:secure_url", content: defaultSEO.image },
+      { property: "og:image:type", content: "image/png" },
+      { property: "og:image:width", content: defaultSEO.imageWidth },
+      { property: "og:image:height", content: defaultSEO.imageHeight },
       { property: "og:image:alt", content: defaultSEO.title },
-      // Twitter
+      // Twitter / X
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@supfabian" },
       { name: "twitter:creator", content: "@supfabian" },
+      { name: "twitter:title", content: defaultSEO.title },
+      { name: "twitter:description", content: defaultSEO.description },
+      { name: "twitter:image", content: defaultSEO.image },
+      { name: "twitter:image:alt", content: defaultSEO.title },
     ],
     links: [
       { rel: "icon", href: "/favicon.ico", sizes: "any" },
@@ -96,7 +109,7 @@ function RootDocument({ children }: { children: ReactNode }) {
               "@type": "WebSite",
               name: defaultSEO.title,
               url: baseUrl,
-              image: `${baseUrl}/social.png`,
+              image: defaultSEO.image,
               author: {
                 "@context": "http://schema.org",
                 "@type": "Person",
@@ -105,7 +118,7 @@ function RootDocument({ children }: { children: ReactNode }) {
                 jobTitle: "Product Designer",
                 alumniOf: "University of Applied Sciences Potsdam",
                 gender: "male",
-                image: `${baseUrl}/social.png`,
+                image: defaultSEO.image,
                 sameAs: [
                   "https://x.com/supfabian",
                   "https://www.linkedin.com/in/fabian-schultz",

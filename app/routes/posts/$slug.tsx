@@ -101,7 +101,17 @@ export const Route = createFileRoute("/posts/$slug")({
           ? [{ property: "og:description", content: metaDescription }]
           : []),
         { property: "og:image", content: ogImage },
+        { property: "og:image:secure_url", content: ogImage },
+        { property: "og:image:type", content: "image/png" },
+        { property: "og:image:width", content: "1200" },
+        { property: "og:image:height", content: "630" },
         { property: "og:image:alt", content: title },
+        { name: "twitter:title", content: title },
+        ...(metaDescription
+          ? [{ name: "twitter:description", content: metaDescription }]
+          : []),
+        { name: "twitter:image", content: ogImage },
+        { name: "twitter:image:alt", content: title },
       ],
     };
   },

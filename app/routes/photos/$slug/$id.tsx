@@ -44,8 +44,13 @@ export const Route = createFileRoute("/photos/$slug/$id")({
   },
   head: ({ loaderData }) => {
     if (!loaderData?.photo) return {};
-    const { photo, photoSet } = loaderData;
+    const { photo } = loaderData;
     const title = photo.description || "A photo";
+    const image = withImageParams(photo.url, {
+      w: 1200,
+      h: 630,
+      fit: "fill",
+    });
     return {
       meta: [
         { title: `${title} — Fabian Schultz` },
@@ -53,15 +58,14 @@ export const Route = createFileRoute("/photos/$slug/$id")({
           property: "og:title",
           content: `${title} — Fabian Schultz`,
         },
-        {
-          property: "og:image",
-          content: withImageParams(photo.url, {
-            w: 1024,
-            h: 1024,
-            fit: "fill",
-          }),
-        },
+        { property: "og:image", content: image },
+        { property: "og:image:secure_url", content: image },
+        { property: "og:image:width", content: "1200" },
+        { property: "og:image:height", content: "630" },
         { property: "og:image:alt", content: title },
+        { name: "twitter:title", content: `${title} — Fabian Schultz` },
+        { name: "twitter:image", content: image },
+        { name: "twitter:image:alt", content: title },
       ],
     };
   },
