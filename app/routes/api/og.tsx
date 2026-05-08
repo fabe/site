@@ -8,18 +8,20 @@ export const Route = createFileRoute("/api/og")({
         try {
           const satori = (await import("satori")).default;
           const sharp = (await import("sharp")).default;
-          const { readFile } = await import("node:fs/promises");
-          const { join } = await import("node:path");
-
           const CONTENTFUL_SPACE_ID = process.env.CONTENTFUL_SPACE_ID;
-          const { searchParams } = new URL(request.url);
+          const requestUrl = new URL(request.url);
+          const { searchParams } = requestUrl;
 
-          const fontPath = join(
-            process.cwd(),
-            "public",
-            "inter.display.medium.ttf",
-          );
-          const fontData = await readFile(fontPath);
+          const fontUrl = new URL("/inter.display.medium.ttf", requestUrl);
+          const fontResponse = await fetch(fontUrl);
+
+          if (!fontResponse.ok) {
+            throw new Error(
+              `Failed to load OG font from ${fontUrl}: ${fontResponse.status}`,
+            );
+          }
+
+          const fontData = await fontResponse.arrayBuffer();
 
           const hasTitle = searchParams.has("title");
           const title = hasTitle
