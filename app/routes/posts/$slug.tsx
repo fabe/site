@@ -4,7 +4,6 @@ import React from "react";
 import { Main } from "@/components/Layouts";
 import { QUERY_POST } from "@/graphql/queries";
 import formatDate from "@/lib/formatDate";
-import { unwrapProxiedUrl } from "@/lib/imageProxy";
 import { ChevronLeft } from "@/components/Icons";
 import { LinkButton, LinkShare } from "@/components/Links";
 import { PostCover } from "@/components/PostCover";
@@ -46,7 +45,7 @@ const fetchPost = createServerFn()
     );
 
     return {
-      post: { ...data.post, bodyHtml },
+      post: { ...data.post, bodyHtml, slug },
       siteSettings: data.siteSettings,
     };
   });
@@ -88,17 +87,8 @@ export const Route = createFileRoute("/posts/$slug")({
   },
   head: ({ loaderData }) => {
     if (!loaderData?.post) return {};
-    const { title, metaDescription, coverUrl } = loaderData.post;
-    const ogImage = `${baseUrl}/api/og?title=${encodeURIComponent(title)}${
-      coverUrl
-        ? `&bg=${encodeURI(
-            new URL(unwrapProxiedUrl(coverUrl)).pathname
-              .split("/")
-              .slice(2)
-              .join("/"),
-          )}`
-        : ""
-    }`;
+    const { title, metaDescription } = loaderData.post;
+    const ogImage = `${baseUrl}/api/og?slug=${encodeURIComponent(loaderData.post.slug)}`;
 
     return {
       meta: [

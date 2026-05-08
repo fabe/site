@@ -1,10 +1,9 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
-const pixel = 2;
-const dot = Math.max(1, Math.round(pixel * 0.8));
-const rounded = false;
-const width = 576;
-const height = 298;
+export const pixel = 2;
+export const dot = Math.max(1, Math.round(pixel * 0.8));
+export const width = 576;
+export const height = 298;
 
 const bayer = [
   0, 48, 12, 60, 3, 51, 15, 63, 32, 16, 44, 28, 35, 19, 47, 31, 8, 56, 4, 52,
@@ -187,52 +186,80 @@ function edgeMask(x: number, y: number, p: Params, w: number, h: number) {
   );
 }
 
-function opticalAlignDots(d: number[][], h: number) {
+function opticalAlignDots(
+  d: number[][],
+  w: number,
+  h: number,
+  pixel: number,
+  dot: number,
+) {
   if (!d.length) return d;
-  const rows = new Map<number, number>();
-  let minY = Infinity,
-    maxY = -Infinity,
-    total = 0,
-    weighted = 0;
-  for (const [, y] of d) {
-    const key = Math.round((y + dot * 0.5) / pixel);
-    rows.set(key, (rows.get(key) || 0) + 1);
-    minY = Math.min(minY, y);
-    maxY = Math.max(maxY, y + dot);
-  }
-  const sorted = [...rows.entries()].sort((a, b) => a[0] - b[0]);
-  for (const [key, count] of sorted) {
-    total += count;
-    weighted += key * pixel * count;
-  }
-  const q = (pct: number) => {
-    const target = total * pct;
-    let acc = 0;
-    for (const [key, count] of sorted) {
-      acc += count;
-      if (acc >= target) return key * pixel;
+
+  const shiftForAxis = (axis: 0 | 1, size: number) => {
+    const lines = new Map<number, number>();
+    let min = Infinity,
+      max = -Infinity,
+      total = 0,
+      weighted = 0;
+
+    for (const point of d) {
+      const position = point[axis];
+      const key = Math.round((position + dot * 0.5) / pixel);
+      lines.set(key, (lines.get(key) || 0) + 1);
+      min = Math.min(min, position);
+      max = Math.max(max, position + dot);
     }
-    return sorted[sorted.length - 1][0] * pixel;
+
+    const sorted = [...lines.entries()].sort((a, b) => a[0] - b[0]);
+
+    for (const [key, count] of sorted) {
+      total += count;
+      weighted += key * pixel * count;
+    }
+
+    const q = (pct: number) => {
+      const target = total * pct;
+      let acc = 0;
+      for (const [key, count] of sorted) {
+        acc += count;
+        if (acc >= target) return key * pixel;
+      }
+      return sorted[sorted.length - 1][0] * pixel;
+    };
+
+    const opticalCenter = (q(0.03) + q(0.97)) * 0.4 + (weighted / total) * 0.2;
+    const minShift = Math.ceil(-min / pixel) * pixel;
+    const maxShift = Math.floor((size - max) / pixel) * pixel;
+    const shift = Math.round((size * 0.5 - opticalCenter) / pixel) * pixel;
+
+    return Math.max(minShift, Math.min(maxShift, shift));
   };
-  const opticalCenter = (q(0.03) + q(0.97)) * 0.4 + (weighted / total) * 0.2;
-  const minDy = Math.ceil(-minY / pixel) * pixel;
-  const maxDy = Math.floor((h - maxY) / pixel) * pixel;
-  let dy = Math.round((h * 0.5 - opticalCenter) / pixel) * pixel;
-  dy = Math.max(minDy, Math.min(maxDy, dy));
-  return Math.abs(dy) < 0.5 ? d : d.map(([x, y]) => [x, y + dy]);
+
+  const dx = shiftForAxis(0, w);
+  const dy = shiftForAxis(1, h);
+
+  return Math.abs(dx) < 0.5 && Math.abs(dy) < 0.5
+    ? d
+    : d.map(([x, y]) => [x + dx, y + dy]);
 }
 
-function dots(w: number, h: number, seed: string) {
+export function postCoverDots(
+  w: number,
+  h: number,
+  seed: string,
+  pixelSize = pixel,
+  dotSize = dot,
+) {
   const p = makeParams(seed, w, h);
   const out: number[][] = [],
     ar = w / h;
-  for (let yi = 0, y = 0; y < h; yi++, y += pixel) {
+  for (let yi = 0, y = 0; y < h; yi++, y += pixelSize) {
     const by = (yi & 7) * 8;
-    for (let xi = 0, x = 0; x < w; xi++, x += pixel) {
+    for (let xi = 0, x = 0; x < w; xi++, x += pixelSize) {
       const threshold = bayer[by + (xi & 7)] + 0.45;
       if (threshold >= 1) continue;
       if (
-        edgeMask(x + pixel * 0.5, y + pixel * 0.5, p, w, h) <=
+        edgeMask(x + pixelSize * 0.5, y + pixelSize * 0.5, p, w, h) <=
         dotNoise(xi, yi, p)
       )
         continue;
@@ -241,7 +268,7 @@ function dots(w: number, h: number, seed: string) {
       if (field(nx, ny, p) > threshold) out.push([x, y]);
     }
   }
-  return opticalAlignDots(out, h);
+  return opticalAlignDots(out, w, h, pixelSize, dotSize);
 }
 
 export function PostCover({ seed }: { seed: string }) {
@@ -251,32 +278,73 @@ export function PostCover({ seed }: { seed: string }) {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const render = () => {
-      const dpr = Math.max(1, window.devicePixelRatio || 1);
-      canvas.width = Math.round(width * dpr);
-      canvas.height = Math.round(height * dpr);
+    const dpr = Math.max(1, window.devicePixelRatio || 1);
+    canvas.width = Math.round(width * dpr);
+    canvas.height = Math.round(height * dpr);
 
-      const ctx = canvas.getContext("2d");
-      if (!ctx) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const dots = postCoverDots(width, height, seed);
+    const color = getComputedStyle(canvas).color;
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    const draw = (x: number, y: number) => {
+      ctx.fillRect(x, y, dot, dot);
+    };
+
+    const scrollCutoff = () => {
+      if (reduceMotion) return null;
+
+      const rect = canvas.getBoundingClientRect();
+      const fadeAhead = 20;
+      const progress = Math.max(
+        0,
+        Math.min(1, (fadeAhead - rect.top) / (rect.height + fadeAhead)),
+      );
+
+      return progress > 0 ? progress * (height + fadeAhead) : null;
+    };
+
+    const shouldHideDot = (x: number, y: number, cutoff: number) => {
+      const band = 32;
+      const noise = fract(
+        Math.sin(x * 12.9898 + y * 78.233 + seed.length * 37.719) * 43758.5453,
+      );
+
+      return y < cutoff + (noise - 0.5) * band;
+    };
+
+    const render = () => {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, width, height);
-      ctx.fillStyle = getComputedStyle(canvas).color;
+      ctx.fillStyle = color;
 
-      const draw = (x: number, y: number) => {
-        if (rounded) {
-          ctx.beginPath();
-          ctx.arc(x + dot / 2, y + dot / 2, dot / 2, 0, Math.PI * 2);
-          ctx.fill();
-        } else {
-          ctx.fillRect(x, y, dot, dot);
-        }
-      };
+      const cutoff = scrollCutoff();
 
-      for (const [x, y] of dots(width, height, seed)) draw(x, y);
+      for (const [x, y] of dots) {
+        if (cutoff !== null && shouldHideDot(x, y, cutoff)) continue;
+        draw(x, y);
+      }
+
       canvas.dataset.rendered = "true";
     };
 
+    const handleScroll = () => render();
+
     render();
+
+    if (reduceMotion) return;
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
   }, [seed]);
 
   return (
