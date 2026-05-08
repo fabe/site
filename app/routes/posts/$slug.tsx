@@ -4,10 +4,10 @@ import React from "react";
 import { Main } from "@/components/Layouts";
 import { QUERY_POST } from "@/graphql/queries";
 import formatDate from "@/lib/formatDate";
-import contentfulLoader from "@/lib/contentfulLoader";
 import { unwrapProxiedUrl } from "@/lib/imageProxy";
 import { ChevronLeft } from "@/components/Icons";
 import { LinkButton, LinkShare } from "@/components/Links";
+import { PostCover } from "@/components/PostCover";
 import type { PostQueryQuery } from "@/graphql/types/types.generated";
 import { baseUrl } from "../__root";
 
@@ -126,20 +126,14 @@ export const Route = createFileRoute("/posts/$slug")({
 function PostComponent() {
   const { post, siteSettings } = Route.useLoaderData();
 
-  const {
-    title,
-    metaDescription,
-    publishedDate,
-    coverUrl,
-    coverAlt,
-    bodyHtml,
-  } = post;
-  const relativeUrl = `/posts/${Route.useParams().slug}`;
+  const { title, publishedDate, bodyHtml } = post;
+  const { slug } = Route.useParams();
+  const relativeUrl = `/posts/${slug}`;
   const url = `${baseUrl}${relativeUrl}`;
 
   return (
     <Main slim>
-      <header className="relative flex flex-col gap-4 py-6 sm:pt-0 sm:pb-12 text-center text-balance">
+      <header className="relative flex flex-col gap-4 py-6 sm:pt-0 sm:pb-8 text-center text-balance">
         <div className="flex flex-row gap-2 items-center justify-center text-sm font-ui-label text-muted">
           <time dateTime={publishedDate} className="text-muted capitalize">
             {formatDate(publishedDate)}
@@ -156,20 +150,7 @@ function PostComponent() {
       </header>
 
       <div className="rounded-lg p-0">
-        {coverUrl ? (
-          <img
-            height={400}
-            width={700}
-            alt={coverAlt || `Cover image for post: ${title}`}
-            src={contentfulLoader({
-              src: coverUrl,
-              width: 700,
-              custom: ["fit=crop", "f=center"],
-            })}
-            className="bg-gray-200 dark:bg-zinc-900 dark:opacity-100 rounded-lg sm:rounded-t-lg sm:rounded-b-none object-cover mb-4 sm:mb-14 h-40 sm:h-80 sm:-ml-20 sm:-mt-20 w-full sm:w-[calc(100%+5rem*2)] max-w-none"
-            loading="lazy"
-          />
-        ) : null}
+        <PostCover seed={slug} />
         <div
           className="prose-custom prose-quotefix"
           dangerouslySetInnerHTML={{ __html: bodyHtml }}
