@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-export const pixel = 2;
+export const pixel = 3;
 export const dot = Math.max(1, Math.round(pixel * 0.8));
 export const width = 576;
 export const height = 298;
