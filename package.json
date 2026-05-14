@@ -33,6 +33,7 @@
     "framer-motion": "^12.38.0",
     "graphql": "^16.13.2",
     "mapbox-gl": "^3.23.0",
+    "next": "16.2.6",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "react-map-gl": "^7.1.9",
