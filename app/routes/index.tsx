@@ -5,6 +5,7 @@ import Intro from "@/components/Home/Intro";
 import Resume from "@/components/Home/Resume";
 import Posts from "@/components/Home/Posts";
 import Projects from "@/components/Home/Projects";
+import GitHubRepos from "@/components/Home/GitHubRepos";
 import NowPlaying from "@/components/Home/NowPlaying";
 import NowReading from "@/components/Home/NowReading";
 import { Main } from "@/components/Layouts";
@@ -173,7 +174,7 @@ export const Route = createFileRoute("/")({
 });
 
 function HomeComponent() {
-  const { introHtml, initialData } = Route.useLoaderData();
+  const { githubRepos, introHtml, initialData } = Route.useLoaderData();
 
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
@@ -201,6 +202,7 @@ function HomeComponent() {
       <Intro introHtml={introHtml} />
       <Resume />
       <Posts posts={posts} />
+      <GitHubRepos repos={githubRepos} />
       <Projects />
       <NowPlaying
         spotifyStatus={liveData?.musicStatus}
