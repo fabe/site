@@ -16,6 +16,81 @@ import type {
 import { useEffect, useState } from "react";
 import { baseUrl } from "./__root";
 
+const githubReposUrl =
+  "https://api.github.com/users/fabe/repos?sort=pushed&per_page=3";
+
+type GithubApiRepo = {
+  name: string;
+  description: string | null;
+  html_url: string;
+  language: string | null;
+  stargazers_count: number;
+  pushed_at: string;
+  fork: boolean;
+};
+
+export type GithubRepo = {
+  name: string;
+  description: string | null;
+  htmlUrl: string;
+  primaryLanguage: string | null;
+  starCount: number;
+  pushedAt: string;
+};
+
+function isGithubApiRepo(repo: unknown): repo is GithubApiRepo {
+  if (!repo || typeof repo !== "object") {
+    return false;
+  }
+
+  const candidate = repo as Record<string, unknown>;
+
+  return (
+    typeof candidate.name === "string" &&
+    (typeof candidate.description === "string" ||
+      candidate.description === null) &&
+    typeof candidate.html_url === "string" &&
+    (typeof candidate.language === "string" || candidate.language === null) &&
+    typeof candidate.stargazers_count === "number" &&
+    typeof candidate.pushed_at === "string" &&
+    typeof candidate.fork === "boolean"
+  );
+}
+
+async function fetchGithubRepos(): Promise<GithubRepo[]> {
+  try {
+    const response = await fetch(githubReposUrl, {
+      headers: {
+        Accept: "application/vnd.github+json",
+      },
+    });
+
+    if (!response.ok) {
+      return [];
+    }
+
+    const repos: unknown = await response.json();
+
+    if (!Array.isArray(repos)) {
+      return [];
+    }
+
+    return repos
+      .filter(isGithubApiRepo)
+      .filter((repo) => !repo.fork)
+      .map((repo) => ({
+        name: repo.name,
+        description: repo.description,
+        htmlUrl: repo.html_url,
+        primaryLanguage: repo.language,
+        starCount: repo.stargazers_count,
+        pushedAt: repo.pushed_at,
+      }));
+  } catch {
+    return [];
+  }
+}
+
 const fetchHomeData = createServerFn().handler(async () => {
   const { initializeApollo } = await import("@/graphql/client");
   const { createElement } = await import("react");
@@ -24,9 +99,12 @@ const fetchHomeData = createServerFn().handler(async () => {
   const jsxRuntime = await import("react/jsx-runtime");
 
   const apolloClient = await initializeApollo();
-  const { data } = await apolloClient.query<PageHomeQueryQuery>({
-    query: QUERY_PAGE_HOME,
-  });
+  const [githubRepos, { data }] = await Promise.all([
+    fetchGithubRepos(),
+    apolloClient.query<PageHomeQueryQuery>({
+      query: QUERY_PAGE_HOME,
+    }),
+  ]);
 
   // Compile MDX intro to HTML
   const code = await compile(data.siteSettings.intro, {
@@ -43,6 +121,7 @@ const fetchHomeData = createServerFn().handler(async () => {
   );
 
   return {
+    githubRepos,
     introHtml,
     initialData: data,
   };
