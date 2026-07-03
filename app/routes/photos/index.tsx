@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Main } from "@/components/Layouts";
 import { PageTitle } from "@/components/Typography";
 import { QUERY_PHOTO_SETS } from "@/graphql/queries";
@@ -84,6 +84,11 @@ function PhotosComponent() {
 
 function PhotoSetCard({ photoSet }: { photoSet: PhotoSetWithColors }) {
   const [imageLoaded, setImageLoaded] = useState(false);
+  const imageRef = useCallback((node: HTMLImageElement | null) => {
+    if (node?.complete && node.naturalWidth > 0) {
+      setImageLoaded(true);
+    }
+  }, []);
 
   const fallbackColor = `hsl(${
     (photoSet.id.charCodeAt(0) * 137.5) % 360
@@ -108,10 +113,11 @@ function PhotoSetCard({ photoSet }: { photoSet: PhotoSetWithColors }) {
         <img
           alt={photoSet.title}
           title={photoSet.title}
+          ref={imageRef}
           src={photoImageLoader({
             src: photoSet.featuredPhoto.url,
-            width: 1400,
-            quality: 90,
+            width: 2200,
+            quality: 95,
           })}
           className={`absolute inset-0 w-full h-full object-cover will-change-transform group-hover:scale-[1.04] transition-all duration-300 ease-in-out ${
             imageLoaded ? "opacity-100" : "opacity-0"

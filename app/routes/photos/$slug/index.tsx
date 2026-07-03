@@ -285,6 +285,11 @@ function PhotoThumbnail({
   photoSet: PhotoSetWithColors;
 }) {
   const [imageLoaded, setImageLoaded] = useState(false);
+  const imageRef = useCallback((node: HTMLImageElement | null) => {
+    if (node?.complete && node.naturalWidth > 0) {
+      setImageLoaded(true);
+    }
+  }, []);
   const navigate = useNavigate();
   const { trigger: haptic } = useHaptics();
 
@@ -314,10 +319,11 @@ function PhotoThumbnail({
       }}
     >
       <img
+        ref={imageRef}
         src={photoImageLoader({
           src: photo.url,
-          width: 1000,
-          quality: 80,
+          width: 1600,
+          quality: 85,
         })}
         alt={photo.description || ""}
         className={`absolute inset-0 w-full h-full object-cover group-hover:brightness-75 transform-gpu bg-gray-200 dark:bg-neutral-900 ${
