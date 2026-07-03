@@ -5,7 +5,7 @@ import { QUERY_PHOTO_SET } from "@/graphql/queries";
 import { Container } from "@/components/Layouts";
 import { PageTitle } from "@/components/Typography";
 import Footer from "@/components/Footer";
-import contentfulLoader from "@/lib/contentfulLoader";
+import photoImageLoader from "@/lib/photoImageLoader";
 import Lightbox from "@/components/Lightbox";
 import LightboxPhoto from "@/components/Lightbox/Photo";
 import Badge from "@/components/Badge";
@@ -314,7 +314,7 @@ function PhotoThumbnail({
       }}
     >
       <img
-        src={contentfulLoader({
+        src={photoImageLoader({
           src: photo.url,
           width: 1000,
           quality: 80,

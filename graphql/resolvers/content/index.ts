@@ -33,9 +33,20 @@ type ContentfulAsset = {
   height: number;
 };
 
+type CloudinaryAsset = {
+  secure_url?: string;
+  url?: string;
+  original_secure_url?: string;
+  original_url?: string;
+  width?: number;
+  height?: number;
+  public_id?: string;
+};
+
 type ContentfulPhoto = {
   sys: { id: string };
   description?: string | null;
+  cloudinaryImage?: CloudinaryAsset[] | CloudinaryAsset | null;
   asset: ContentfulAsset;
   exif?: EXIF | null;
   tags?: string[] | null;
@@ -47,9 +58,36 @@ type ContentfulPhotoSet = {
   title: string;
   slug: string;
   description?: string | null;
-  featuredPhoto: { asset: ContentfulAsset };
+  featuredPhoto: ContentfulPhoto;
   photosCollection?: { items: Array<{ sys: { id: string } }> };
 };
+
+function getCloudinaryAsset(
+  cloudinaryImage: ContentfulPhoto["cloudinaryImage"],
+): CloudinaryAsset | null {
+  if (Array.isArray(cloudinaryImage)) return cloudinaryImage[0] ?? null;
+  return cloudinaryImage ?? null;
+}
+
+function getPhotoImageUrl(photo: ContentfulPhoto): string {
+  const cloudinaryAsset = getCloudinaryAsset(photo.cloudinaryImage);
+  const url =
+    cloudinaryAsset?.original_secure_url ??
+    cloudinaryAsset?.original_url ??
+    cloudinaryAsset?.secure_url ??
+    cloudinaryAsset?.url;
+
+  if (url) return url.replace(/^http:/, "https:");
+  return proxyContentfulUrl(photo.asset.url);
+}
+
+function getPhotoWidth(photo: ContentfulPhoto): number {
+  return getCloudinaryAsset(photo.cloudinaryImage)?.width ?? photo.asset.width;
+}
+
+function getPhotoHeight(photo: ContentfulPhoto): number {
+  return getCloudinaryAsset(photo.cloudinaryImage)?.height ?? photo.asset.height;
+}
 
 let _contentfulClient: ApolloClient | null = null;
 let _contentfulGlobeClient: ApolloClient | null = null;
@@ -232,6 +270,7 @@ export async function getPhoto(
             lon
           }
           description
+          cloudinaryImage
           asset {
             url
             width
@@ -257,11 +296,11 @@ export async function getPhoto(
     id: photo.sys.id,
     description: photo.description,
     exif: photo.exif,
-    height: photo.asset.height,
+    height: getPhotoHeight(photo),
     location: photo.location,
-    url: proxyContentfulUrl(photo.asset.url),
+    url: getPhotoImageUrl(photo),
     tags: photo.tags,
-    width: photo.asset.width,
+    width: getPhotoWidth(photo),
   };
 }
 
@@ -282,6 +321,7 @@ export async function getPhotos(
               lon
             }
             description
+            cloudinaryImage
             asset {
               url
               width
@@ -302,15 +342,15 @@ export async function getPhotos(
     return [];
   }
 
-  return response.data.photoCollection.items.map((photo: any) => ({
+  return response.data.photoCollection.items.map((photo: ContentfulPhoto) => ({
     id: photo.sys.id,
     description: photo.description,
     exif: photo.exif,
-    height: photo.asset.height,
+    height: getPhotoHeight(photo),
     location: photo.location,
-    url: proxyContentfulUrl(photo.asset.url),
+    url: getPhotoImageUrl(photo),
     tags: photo.tags,
-    width: photo.asset.width,
+    width: getPhotoWidth(photo),
   }));
 }
 
@@ -394,6 +434,7 @@ export async function getPhotoSet(
             description
             featuredPhoto {
               description
+              cloudinaryImage
               asset {
                 url
                 width
@@ -410,6 +451,7 @@ export async function getPhotoSet(
                   lon
                 }
                 description
+                cloudinaryImage
                 asset {
                   url
                   width
@@ -443,17 +485,17 @@ export async function getPhotoSet(
     featuredPhoto: photoSet.featuredPhoto
       ? {
           ...photoSet.featuredPhoto,
-          url: proxyContentfulUrl(photoSet.featuredPhoto.asset.url),
-          width: photoSet.featuredPhoto.asset.width,
-          height: photoSet.featuredPhoto.asset.height,
+          url: getPhotoImageUrl(photoSet.featuredPhoto),
+          width: getPhotoWidth(photoSet.featuredPhoto),
+          height: getPhotoHeight(photoSet.featuredPhoto),
         }
       : null,
     photos: photoSet.photosCollection.items.map((photo: ContentfulPhoto) => ({
       id: photo.sys.id,
       description: photo.description,
-      url: proxyContentfulUrl(photo.asset.url),
-      width: photo.asset.width,
-      height: photo.asset.height,
+      url: getPhotoImageUrl(photo),
+      width: getPhotoWidth(photo),
+      height: getPhotoHeight(photo),
       exif: photo.exif,
       tags: photo.tags,
       location: photo.location,
@@ -478,6 +520,7 @@ export async function getPhotoSets(
             slug
             description
             featuredPhoto {
+              cloudinaryImage
               asset {
                 url
                 width
@@ -515,9 +558,9 @@ export async function getPhotoSets(
         id: photo.sys.id,
       })),
       featuredPhoto: {
-        url: proxyContentfulUrl(photoSet.featuredPhoto.asset.url),
-        width: photoSet.featuredPhoto.asset.width,
-        height: photoSet.featuredPhoto.asset.height,
+        url: getPhotoImageUrl(photoSet.featuredPhoto),
+        width: getPhotoWidth(photoSet.featuredPhoto),
+        height: getPhotoHeight(photoSet.featuredPhoto),
       },
     }),
   );

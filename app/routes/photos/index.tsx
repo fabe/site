@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Main } from "@/components/Layouts";
 import { PageTitle } from "@/components/Typography";
 import { QUERY_PHOTO_SETS } from "@/graphql/queries";
-import contentfulLoader from "@/lib/contentfulLoader";
+import photoImageLoader from "@/lib/photoImageLoader";
 import type { ColorData } from "@/lib/colorExtractor";
 import type { PhotoSet } from "@/graphql/types/types.generated";
 import { baseUrl } from "../__root";
@@ -108,7 +108,7 @@ function PhotoSetCard({ photoSet }: { photoSet: PhotoSetWithColors }) {
         <img
           alt={photoSet.title}
           title={photoSet.title}
-          src={contentfulLoader({
+          src={photoImageLoader({
             src: photoSet.featuredPhoto.url,
             width: 1400,
             quality: 90,

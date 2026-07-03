@@ -1,5 +1,5 @@
 import type { Photo } from "../../graphql/types/types.generated";
-import contentfulLoader from "../../lib/contentfulLoader";
+import photoImageLoader from "../../lib/photoImageLoader";
 import { useCallback, useState } from "react";
 import {
   ApertureIcon,
@@ -38,7 +38,7 @@ export default function LightboxPhoto({ photo }: LightboxPhotoProps) {
           <div className="relative w-full h-full bg-gray-200 dark:bg-neutral-900">
             <img
               ref={imgRef}
-              src={contentfulLoader({
+              src={photoImageLoader({
                 src: photo.url,
                 width: 1600,
                 quality: 90,

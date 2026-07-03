@@ -11,16 +11,23 @@ export async function extractColorsFromImage(
     const sharp = (await import("sharp")).default;
     const { unwrapProxiedUrl } = await import("./imageProxy");
 
-    // Prefer fetching a small, compressed Contentful rendition
-    const makeSmallContentfulUrl = (url: string) => {
+    const makeSmallImageUrl = (url: string) => {
       try {
         const u = new URL(url);
-        // Only modify Contentful image hosts
+        const isCloudinary =
+          u.hostname === "res.cloudinary.com" && u.pathname.includes("/image/upload/");
+        if (isCloudinary) {
+          return url.replace(
+            "/image/upload/",
+            "/image/upload/f_auto,q_60,w_320,c_limit/",
+          );
+        }
+
         const isContentful =
           /ctfassets\.net$/.test(u.hostname) ||
           u.hostname.includes("images.ctfassets.net");
         if (!isContentful) return url;
-        // Merge/override sizing and format params
+
         if (!u.searchParams.has("w")) u.searchParams.set("w", "320");
         u.searchParams.set("q", "60");
         u.searchParams.set("fm", "webp");
@@ -30,9 +37,7 @@ export async function extractColorsFromImage(
       }
     };
 
-    const response = await fetch(
-      makeSmallContentfulUrl(unwrapProxiedUrl(imageUrl)),
-    );
+    const response = await fetch(makeSmallImageUrl(unwrapProxiedUrl(imageUrl)));
     const buffer = await response.arrayBuffer();
 
     // Read a small sRGB image and analyze raw pixels
