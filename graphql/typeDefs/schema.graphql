@@ -108,6 +108,7 @@ scalar JSON
     title: String!
     slug: String!
     description: String
+    unlisted: Boolean
     featuredPhoto: Photo!
     photos: [Photo]
   }

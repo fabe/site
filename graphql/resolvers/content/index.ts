@@ -510,7 +510,7 @@ export async function getPhotoSets(
   const response = await getContentfulClient().query({
     query: gql`
       query getPhotoSets($limit: Int) {
-        photoSetCollection(limit: $limit) {
+        photoSetCollection(limit: $limit, where: { unlisted_not: true }) {
           items {
             sys {
               id

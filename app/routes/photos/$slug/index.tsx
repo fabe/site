@@ -1,20 +1,19 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, redirect } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
-import React, { useCallback, useState } from "react";
 import { QUERY_PHOTO_SET } from "@/graphql/queries";
 import { Container } from "@/components/Layouts";
 import { PageTitle } from "@/components/Typography";
 import Footer from "@/components/Footer";
-import photoImageLoader, { photoImageSrcSet } from "@/lib/photoImageLoader";
-import Lightbox from "@/components/Lightbox";
-import LightboxPhoto from "@/components/Lightbox/Photo";
 import Badge from "@/components/Badge";
 import { LinkButton, LinkShare } from "@/components/Links";
 import formatDate from "@/lib/formatDate";
 import { ChevronLeft } from "@/components/Icons";
-import { useDrag } from "@use-gesture/react";
-import { useHaptics } from "@/lib/useHaptics";
+import LightboxPhoto from "@/components/Lightbox/Photo";
+import { PhotoGrid } from "@/components/Photos/PhotoGrid";
+import { PhotoLightbox } from "@/components/Photos/PhotoLightbox";
 import type { ColorData } from "@/lib/colorExtractor";
+import { PHOTO_FEED_SLUG } from "@/lib/photoFeed";
+import photoImageLoader from "@/lib/photoImageLoader";
 import type { PhotoSetQueryQuery } from "@/graphql/types/types.generated";
 import { baseUrl } from "../../__root";
 
@@ -42,10 +41,12 @@ const fetchPhotoSet = createServerFn()
     });
 
     if (!data.photoSet) {
-      throw new Error("Photo set not found");
+      return {
+        photoSet: null,
+        siteSettings: data.siteSettings,
+      };
     }
 
-    // Extract colors for each photo at load time
     const photos =
       data.photoSet.photos?.filter((photo): photo is PhotoData =>
         Boolean(photo),
@@ -83,10 +84,64 @@ export const Route = createFileRoute("/photos/$slug/")({
     id: (search.id as string) || undefined,
   }),
   loader: async ({ params }) => {
-    return await fetchPhotoSet({ data: { slug: params.slug } });
+    if (params.slug === PHOTO_FEED_SLUG) {
+      throw redirect({ to: "/photos", search: { id: undefined } });
+    }
+
+    const data = await fetchPhotoSet({ data: { slug: params.slug } });
+
+    if (!data.photoSet) {
+      const feedData = await fetchPhotoSet({ data: { slug: PHOTO_FEED_SLUG } });
+      if (!feedData.photoSet) {
+        throw new Error("Photo set not found");
+      }
+
+      const photo = feedData.photoSet.photos.find(
+        (photo) => photo.id === params.slug,
+      );
+
+      if (!photo) {
+        throw new Error("Photo set not found");
+      }
+
+      return { ...feedData, feedPhotoId: params.slug };
+    }
+
+    return { ...data, feedPhotoId: undefined };
   },
   head: ({ loaderData }) => {
-    const title = loaderData?.photoSet?.title || "Photo Set";
+    const photo = loaderData?.feedPhotoId
+      ? loaderData.photoSet.photos.find(
+          (photo) => photo.id === loaderData.feedPhotoId,
+        )
+      : null;
+    const title =
+      photo?.description || loaderData?.photoSet?.title || "Photo Set";
+
+    if (photo) {
+      const image = photoImageLoader({
+        src: photo.url,
+        width: 1200,
+        quality: 90,
+        custom: ["h=630", "fit=fill"],
+      });
+
+      return {
+        meta: [
+          { title: `${title} — Fabian Schultz` },
+          { property: "og:title", content: `${title} — Fabian Schultz` },
+          { property: "og:image", content: image },
+          { property: "og:image:secure_url", content: image },
+          { property: "og:image:width", content: "1200" },
+          { property: "og:image:height", content: "630" },
+          { property: "og:image:alt", content: title },
+          { name: "twitter:title", content: `${title} — Fabian Schultz` },
+          { name: "twitter:image", content: image },
+          { name: "twitter:image:alt", content: title },
+        ],
+      };
+    }
+
     return {
       meta: [
         { title: `${title} — Fabian Schultz` },
@@ -98,116 +153,30 @@ export const Route = createFileRoute("/photos/$slug/")({
 });
 
 function PhotoSetComponent() {
-  const { photoSet, siteSettings } = Route.useLoaderData();
-  const { id: selectedPhotoId } = Route.useSearch();
-  const navigate = useNavigate();
-  const { trigger: haptic } = useHaptics();
+  const { photoSet, siteSettings, feedPhotoId } = Route.useLoaderData();
+  const { id } = Route.useSearch();
+  const selectedPhotoId = feedPhotoId || id;
 
   const relativeUrl = `/photos/${photoSet.slug}`;
   const url = `${baseUrl}${relativeUrl}`;
 
-  const selectedPhotoIndex =
-    photoSet.photos?.findIndex((photo) => photo?.id === selectedPhotoId) ?? -1;
-  const selectedPhoto = selectedPhotoId
-    ? photoSet.photos?.find((photo) => photo?.id === selectedPhotoId)
-    : null;
+  if (feedPhotoId) {
+    const photo = photoSet.photos.find((photo) => photo.id === feedPhotoId);
 
-  const navigateToNext = useCallback(() => {
-    if (
-      photoSet.photos &&
-      selectedPhotoIndex >= 0 &&
-      selectedPhotoIndex < photoSet.photos.length - 1
-    ) {
-      const nextPhoto = photoSet.photos[selectedPhotoIndex + 1];
-      if (nextPhoto) {
-        haptic("selection");
-        navigate({
-          to: "/photos/$slug",
-          params: { slug: photoSet.slug },
-          search: { id: nextPhoto.id },
-          replace: true,
-          resetScroll: false,
-          mask: {
-            to: "/photos/$slug/$id",
-            params: { slug: photoSet.slug, id: nextPhoto.id },
-            unmaskOnReload: true,
-          },
-        });
-      }
+    if (!photo) {
+      throw new Error("Photo not found");
     }
-  }, [navigate, photoSet.photos, photoSet.slug, selectedPhotoIndex]);
 
-  const navigateToPrevious = useCallback(() => {
-    if (photoSet.photos && selectedPhotoIndex > 0) {
-      const prevPhoto = photoSet.photos[selectedPhotoIndex - 1];
-      if (prevPhoto) {
-        haptic("selection");
-        navigate({
-          to: "/photos/$slug",
-          params: { slug: photoSet.slug },
-          search: { id: prevPhoto.id },
-          replace: true,
-          resetScroll: false,
-          mask: {
-            to: "/photos/$slug/$id",
-            params: { slug: photoSet.slug, id: prevPhoto.id },
-            unmaskOnReload: true,
-          },
-        });
-      }
-    }
-  }, [navigate, photoSet.photos, photoSet.slug, selectedPhotoIndex]);
+    return (
+      <>
+        <div className="h-screen">
+          <LightboxPhoto photo={photo} />
+        </div>
 
-  const handleDismiss = useCallback(() => {
-    haptic("light");
-    navigate({
-      to: "/photos/$slug",
-      params: { slug: photoSet.slug },
-      search: { id: undefined },
-      replace: true,
-      resetScroll: false,
-    });
-  }, [navigate, photoSet.slug]);
-
-  const handleKeyDown = useCallback(
-    (e: KeyboardEvent) => {
-      if (!selectedPhotoId || e.repeat) return;
-      if (e.key === "ArrowRight") {
-        navigateToNext();
-      } else if (e.key === "ArrowLeft") {
-        navigateToPrevious();
-      }
-    },
-    [selectedPhotoId, navigateToNext, navigateToPrevious],
-  );
-
-  const bindDragGesture = useDrag(
-    ({ active, movement: [mx], velocity: [vx], direction: [dx] }) => {
-      const swipeThreshold = window.innerWidth * 0.3;
-      if (!active) {
-        if (Math.abs(mx) > swipeThreshold || Math.abs(vx) > 0.5) {
-          if (dx === 1) {
-            navigateToPrevious();
-          } else if (dx === -1) {
-            navigateToNext();
-          }
-        }
-      }
-    },
-    {
-      axis: "x",
-      filterTaps: true,
-      rubberband: true,
-      swipe: {
-        velocity: 0.5,
-      },
-    },
-  );
-
-  React.useEffect(() => {
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [handleKeyDown]);
+        <Footer />
+      </>
+    );
+  }
 
   return (
     <>
@@ -251,94 +220,17 @@ function PhotoSetComponent() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-px">
-          {photoSet.photos?.map((photo) =>
-            photo ? (
-              <PhotoThumbnail
-                key={photo.id}
-                photo={photo}
-                photoSet={photoSet}
-              />
-            ) : null,
-          )}
-        </div>
+        <PhotoGrid photos={photoSet.photos} photoSet={photoSet} mode="set" />
       </Container>
 
-      {selectedPhoto && (
-        <Lightbox isOpen={true} onDismiss={handleDismiss}>
-          <div {...bindDragGesture()} className="w-full h-full touch-pan-y">
-            <LightboxPhoto key={selectedPhoto.id} photo={selectedPhoto} />
-          </div>
-        </Lightbox>
-      )}
+      <PhotoLightbox
+        photos={photoSet.photos}
+        selectedPhotoId={selectedPhotoId}
+        photoSet={photoSet}
+        mode={feedPhotoId ? "feed" : "set"}
+      />
 
       <Footer />
     </>
-  );
-}
-
-function PhotoThumbnail({
-  photo,
-  photoSet,
-}: {
-  photo: PhotoWithColors;
-  photoSet: PhotoSetWithColors;
-}) {
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const imageRef = useCallback((node: HTMLImageElement | null) => {
-    if (node?.complete && node.naturalWidth > 0) {
-      setImageLoaded(true);
-    }
-  }, []);
-  const navigate = useNavigate();
-  const { trigger: haptic } = useHaptics();
-
-  return (
-    <button
-      onClick={() => {
-        haptic("light");
-        navigate({
-          to: "/photos/$slug",
-          params: { slug: photoSet.slug },
-          search: { id: photo.id },
-          replace: true,
-          resetScroll: false,
-          mask: {
-            to: "/photos/$slug/$id",
-            params: { slug: photoSet.slug, id: photo.id },
-            unmaskOnReload: true,
-          },
-        });
-      }}
-      className="group relative aspect-[3/4] overflow-hidden sm:[&:nth-child(15n-12)]:col-span-2 sm:last:col-span-2 after:absolute after:left-0 after:top-0 after:z-10 after:h-full after:w-full after:shadow-border dark:after:shadow-none cursor-pointer outline-none focus-visible:outline-none"
-      style={{
-        backgroundColor:
-          photo.colors?.dominant ||
-          `hsl(${(photo.id.charCodeAt(0) * 137.5) % 360}, 40%, 50%)`,
-        background: photo.colors?.gradient || undefined,
-      }}
-    >
-      <img
-        ref={imageRef}
-        src={photoImageLoader({
-          src: photo.url,
-          width: 2200,
-          quality: 88,
-        })}
-        srcSet={photoImageSrcSet({
-          src: photo.url,
-          widths: [720, 960, 1280, 1600, 2200, 2600],
-          quality: 88,
-        })}
-        sizes="(min-width: 640px) 50vw, 100vw"
-        loading="lazy"
-        decoding="async"
-        alt={photo.description || ""}
-        className={`absolute inset-0 w-full h-full object-cover group-hover:brightness-75 transform-gpu bg-gray-200 dark:bg-neutral-900 ${
-          imageLoaded ? "opacity-100" : "opacity-0"
-        } transition-all duration-150`}
-        onLoad={() => setImageLoaded(true)}
-      />
-    </button>
   );
 }

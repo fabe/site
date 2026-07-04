@@ -119,6 +119,7 @@ export type PhotoSet = {
   photos?: Maybe<Array<Maybe<Photo>>>;
   slug: Scalars['String']['output'];
   title: Scalars['String']['output'];
+  unlisted?: Maybe<Scalars['Boolean']['output']>;
   updatedAt: Scalars['String']['output'];
 };
 
