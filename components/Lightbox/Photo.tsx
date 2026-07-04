@@ -40,13 +40,13 @@ export default function LightboxPhoto({ photo }: LightboxPhotoProps) {
               ref={imgRef}
               src={photoImageLoader({
                 src: photo.url,
-                width: 2200,
-                quality: 90,
+                width: 2800,
+                quality: 92,
               })}
               srcSet={photoImageSrcSet({
                 src: photo.url,
-                widths: [800, 1200, 1600, 2200, 2800],
-                quality: 90,
+                widths: [1200, 1600, 2200, 2800, 3200, 3840],
+                quality: 92,
               })}
               sizes="100vw"
               decoding="async"

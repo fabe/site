@@ -322,15 +322,15 @@ function PhotoThumbnail({
         ref={imageRef}
         src={photoImageLoader({
           src: photo.url,
-          width: 1600,
-          quality: 85,
+          width: 2200,
+          quality: 88,
         })}
         srcSet={photoImageSrcSet({
           src: photo.url,
-          widths: [480, 720, 960, 1280, 1600],
-          quality: 85,
+          widths: [720, 960, 1280, 1600, 2200, 2600],
+          quality: 88,
         })}
-        sizes="(min-width: 640px) 33vw, 100vw"
+        sizes="(min-width: 640px) 50vw, 100vw"
         loading="lazy"
         decoding="async"
         alt={photo.description || ""}

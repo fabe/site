@@ -116,13 +116,13 @@ function PhotoSetCard({ photoSet }: { photoSet: PhotoSetWithColors }) {
           ref={imageRef}
           src={photoImageLoader({
             src: photoSet.featuredPhoto.url,
-            width: 2200,
+            width: 2600,
             quality: 95,
           })}
           srcSet={photoImageSrcSet({
             src: photoSet.featuredPhoto.url,
-            widths: [640, 960, 1280, 1600, 2200],
-            quality: 90,
+            widths: [960, 1280, 1600, 2200, 2600, 3200],
+            quality: 92,
           })}
           sizes="(min-width: 1024px) 768px, 100vw"
           loading="lazy"
