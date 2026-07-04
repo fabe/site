@@ -8,8 +8,6 @@ type Photo = {
   id: string;
   description?: string | null;
   url: string;
-  width: number;
-  height: number;
   colors?: ColorData;
 };
 
@@ -67,8 +65,6 @@ function PhotoThumbnail({
   const navigate = useNavigate();
   const { trigger: haptic } = useHaptics();
 
-  const isWiderThanCell = photo.width / photo.height >= 3 / 4;
-
   return (
     <button
       onClick={() => {
@@ -104,48 +100,39 @@ function PhotoThumbnail({
           },
         });
       }}
-      className={`group relative aspect-[3/4] overflow-hidden bg-canvas cursor-pointer outline-none focus-visible:outline-none ${
+      className={`group relative aspect-[3/4] overflow-hidden after:absolute after:left-0 after:top-0 after:z-10 after:h-full after:w-full after:shadow-border dark:after:shadow-none cursor-pointer outline-none focus-visible:outline-none ${
         mode === "set"
           ? "sm:[&:nth-child(15n-12)]:col-span-2 sm:last:col-span-2"
           : ""
       }`}
+      style={{
+        backgroundColor:
+          photo.colors?.dominant ||
+          `hsl(${(photo.id.charCodeAt(0) * 137.5) % 360}, 40%, 50%)`,
+        background: photo.colors?.gradient || undefined,
+      }}
     >
-      <div
-        className={`absolute bottom-0 left-0 max-h-full max-w-full shadow-border group-hover:brightness-75 transform-gpu ${
-          isWiderThanCell ? "h-auto w-full" : "h-full w-auto"
-        }`}
-        style={{
-          aspectRatio: `${photo.width} / ${photo.height}`,
-          backgroundColor:
-            photo.colors?.dominant ||
-            `hsl(${(photo.id.charCodeAt(0) * 137.5) % 360}, 40%, 50%)`,
-          background: photo.colors?.gradient || undefined,
-        }}
-      >
-        <img
-          ref={imageRef}
-          src={photoImageLoader({
-            src: photo.url,
-            width: 2200,
-            quality: 88,
-          })}
-          srcSet={photoImageSrcSet({
-            src: photo.url,
-            widths: [720, 960, 1280, 1600, 2200, 2600],
-            quality: 88,
-          })}
-          sizes="(min-width: 640px) 50vw, 100vw"
-          width={photo.width}
-          height={photo.height}
-          loading="lazy"
-          decoding="async"
-          alt={photo.description || ""}
-          className={`h-full w-full object-cover ${
-            imageLoaded ? "opacity-100" : "opacity-0"
-          } transition-opacity duration-150`}
-          onLoad={() => setImageLoaded(true)}
-        />
-      </div>
+      <img
+        ref={imageRef}
+        src={photoImageLoader({
+          src: photo.url,
+          width: 2200,
+          quality: 88,
+        })}
+        srcSet={photoImageSrcSet({
+          src: photo.url,
+          widths: [720, 960, 1280, 1600, 2200, 2600],
+          quality: 88,
+        })}
+        sizes="(min-width: 640px) 50vw, 100vw"
+        loading="lazy"
+        decoding="async"
+        alt={photo.description || ""}
+        className={`absolute inset-0 w-full h-full object-cover group-hover:brightness-75 transform-gpu bg-gray-200 dark:bg-neutral-900 ${
+          imageLoaded ? "opacity-100" : "opacity-0"
+        } transition-all duration-150`}
+        onLoad={() => setImageLoaded(true)}
+      />
     </button>
   );
 }
