@@ -40,7 +40,6 @@ export async function extractColorsFromImage(
     const response = await fetch(makeSmallImageUrl(unwrapProxiedUrl(imageUrl)));
     const buffer = await response.arrayBuffer();
 
-    // Read a small sRGB image and analyze raw pixels
     const processed = sharp(Buffer.from(buffer))
       .toColourspace("srgb")
       .resize(160, 160, { fit: "inside" });
@@ -172,7 +171,6 @@ export async function extractColorsFromImage(
     const light = toRgb(lR, lG, lB);
 
     const palette = [base, dark, light];
-    // Soft three-stop gradient (dark -> base -> light)
     const gradient = `linear-gradient(135deg, ${dark}, ${base}, ${light})`;
 
     return {
@@ -180,9 +178,7 @@ export async function extractColorsFromImage(
       palette,
       gradient,
     };
-  } catch (error) {
-    console.error("Error extracting colors from image:", error);
-    // Fallback to neutral colors
+  } catch {
     return {
       dominant: "rgb(100, 100, 100)",
       palette: [
