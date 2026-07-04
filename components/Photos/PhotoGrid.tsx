@@ -100,7 +100,7 @@ function PhotoThumbnail({
           },
         });
       }}
-      className={`group relative aspect-[3/4] overflow-hidden after:absolute after:left-0 after:top-0 after:z-10 after:h-full after:w-full after:shadow-border dark:after:shadow-none cursor-pointer outline-none focus-visible:outline-none ${
+      className={`group relative aspect-[3/4] overflow-hidden cursor-pointer outline-none focus-visible:outline-none ${
         mode === "set"
           ? "sm:[&:nth-child(15n-12)]:col-span-2 sm:last:col-span-2"
           : ""
@@ -128,7 +128,7 @@ function PhotoThumbnail({
         loading="lazy"
         decoding="async"
         alt={photo.description || ""}
-        className={`absolute inset-0 w-full h-full object-cover group-hover:brightness-75 transform-gpu bg-gray-200 dark:bg-neutral-900 ${
+        className={`absolute left-1/2 top-1/2 max-h-full max-w-full -translate-x-1/2 -translate-y-1/2 object-contain shadow-border group-hover:brightness-75 transform-gpu bg-gray-200 dark:bg-neutral-900 ${
           imageLoaded ? "opacity-100" : "opacity-0"
         } transition-all duration-150`}
         onLoad={() => setImageLoaded(true)}
