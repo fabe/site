@@ -94,7 +94,11 @@ function PhotoThumbnail({
           },
         });
       }}
-      className="group relative aspect-[3/4] overflow-hidden sm:[&:nth-child(15n-12)]:col-span-2 sm:last:col-span-2 after:absolute after:left-0 after:top-0 after:z-10 after:h-full after:w-full after:shadow-border dark:after:shadow-none cursor-pointer outline-none focus-visible:outline-none"
+      className={`group relative aspect-[3/4] overflow-hidden after:absolute after:left-0 after:top-0 after:z-10 after:h-full after:w-full after:shadow-border dark:after:shadow-none cursor-pointer outline-none focus-visible:outline-none ${
+        mode === "set"
+          ? "sm:[&:nth-child(15n-12)]:col-span-2 sm:last:col-span-2"
+          : ""
+      }`}
       style={{
         backgroundColor:
           photo.colors?.dominant ||
