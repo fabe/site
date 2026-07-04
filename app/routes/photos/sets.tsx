@@ -77,7 +77,7 @@ function PhotoSetsComponent() {
           label="Photo view"
           value="sets"
           onChange={(value) => {
-            if (value === "feed") navigate({ to: "/photos" });
+            if (value === "feed") navigate({ to: "/photos/feed" });
           }}
           items={[
             { value: "feed", label: "Feed" },
