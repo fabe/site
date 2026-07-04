@@ -37,6 +37,12 @@ export function PhotoGrid(props: PhotoGridProps) {
           mode={props.mode}
         />
       ))}
+      {props.mode === "feed" && props.photos.length % 2 === 1 && (
+        <div
+          aria-hidden="true"
+          className="hidden sm:block aspect-[3/4] bg-surface/30 dark:bg-white/[0.015]"
+        />
+      )}
     </div>
   );
 }
