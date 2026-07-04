@@ -48,7 +48,7 @@ export function Filter<Value extends string = string>({
             className={cn(
               "group relative isolate flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm leading-tight font-ui-label-medium transition-colors duration-150 ease-out-expo",
               "disabled:pointer-events-none disabled:opacity-40",
-              selected ? "text-fg" : "text-muted hover:text-fg",
+              selected ? "text-fg" : "text-muted",
             )}
           >
             <span
