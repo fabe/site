@@ -28,7 +28,7 @@ export function Filter<Value extends string = string>({
     <div
       role="radiogroup"
       aria-label={label}
-      className={cn("inline-flex items-center gap-1", className)}
+      className={cn("inline-flex items-center gap-1.5", className)}
     >
       {items.map((item) => {
         const selected = item.value === value;
@@ -46,7 +46,7 @@ export function Filter<Value extends string = string>({
               onChange?.(item.value);
             }}
             className={cn(
-              "group relative isolate flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm leading-tight transition-[color,font-variation-settings] duration-150 ease-out-expo",
+              "group relative isolate flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm leading-tight transition-[color,font-variation-settings] duration-150 ease-out-expo",
               "disabled:pointer-events-none disabled:opacity-40",
               selected
                 ? "text-fg font-ui-label"
@@ -55,7 +55,7 @@ export function Filter<Value extends string = string>({
           >
             <span
               className={cn(
-                "absolute inset-0 z-0 rounded-lg transition-all duration-150 ease-out-expo",
+                "absolute inset-0 z-0 rounded-full transition-all duration-150 ease-out-expo",
                 selected
                   ? "bg-surface-raised dark:bg-surface"
                   : "bg-surface-raised/35 group-hover:bg-surface-raised/60 dark:bg-surface/35 dark:group-hover:bg-surface/75",
