@@ -7,9 +7,36 @@ interface PhotoImageLoaderProps {
   custom?: string[];
 }
 
-function cloudinaryLoader(src: string, width: number, quality: number): string {
-  const transform = `f_auto,q_${quality},w_${Math.floor(width)},c_limit`;
-  return src.replace("/image/upload/", `/image/upload/${transform}/`);
+function cloudinaryLoader(
+  src: string,
+  width: number,
+  quality: number,
+  custom?: string[],
+): string {
+  const transforms: string[] = [
+    "f_auto",
+    `q_${quality}`,
+    `w_${Math.floor(width)}`,
+  ];
+
+  if (custom) {
+    for (const c of custom) {
+      const [key, value] = c.split("=");
+      if (!key || !value) continue;
+      if (key === "h") transforms.push(`h_${value}`);
+      if (key === "fit")
+        transforms.push(value === "fill" ? "c_fill" : `c_${value}`);
+    }
+  }
+
+  if (!transforms.some((transform) => transform.startsWith("c_"))) {
+    transforms.push("c_limit");
+  }
+
+  return src.replace(
+    "/image/upload/",
+    `/image/upload/${transforms.join(",")}/`,
+  );
 }
 
 export function isCloudinaryImageUrl(src: string): boolean {
@@ -25,7 +52,7 @@ export function photoImageLoader({
   if (!src) return "";
 
   if (isCloudinaryImageUrl(src)) {
-    return cloudinaryLoader(src, width, quality);
+    return cloudinaryLoader(src, width, quality, custom);
   }
 
   const params: Record<string, string | number> = {

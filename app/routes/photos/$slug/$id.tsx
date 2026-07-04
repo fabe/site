@@ -6,7 +6,7 @@ import type { PhotoSetQueryQuery } from "@/graphql/types/types.generated";
 import LightboxPhoto from "@/components/Lightbox/Photo";
 import Footer from "@/components/Footer";
 import { baseUrl } from "../../__root";
-import { withImageParams } from "@/lib/imageProxy";
+import photoImageLoader from "@/lib/photoImageLoader";
 
 const fetchPhotoDetail = createServerFn()
   .inputValidator((d: { slug: string; id: string }) => d)
@@ -46,10 +46,11 @@ export const Route = createFileRoute("/photos/$slug/$id")({
     if (!loaderData?.photo) return {};
     const { photo } = loaderData;
     const title = photo.description || "A photo";
-    const image = withImageParams(photo.url, {
-      w: 1200,
-      h: 630,
-      fit: "fill",
+    const image = photoImageLoader({
+      src: photo.url,
+      width: 1200,
+      quality: 90,
+      custom: ["h=630", "fit=fill"],
     });
     return {
       meta: [
