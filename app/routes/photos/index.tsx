@@ -37,9 +37,7 @@ function PhotosComponent() {
           ]}
         />
       </div>
-      <div className="rounded-lg border border-line/10 bg-surface/40 px-6 py-12 text-center dark:border-line/5">
-        <p className="m-0 text-sm text-muted font-ui-sm">No photos yet.</p>
-      </div>
+      <p className="m-0 text-sm text-muted font-ui-sm">No photos yet.</p>
     </Main>
   );
 }
