@@ -58,7 +58,7 @@ export function Filter<Value extends string = string>({
                 "absolute inset-0 z-0 rounded-lg transition-all duration-150 ease-out-expo",
                 selected
                   ? "bg-surface-raised dark:bg-surface"
-                  : "bg-surface-raised/0 group-hover:bg-surface-raised/60 dark:group-hover:bg-surface/75",
+                  : "bg-surface-raised/35 group-hover:bg-surface-raised/60 dark:bg-surface/35 dark:group-hover:bg-surface/75",
               )}
             />
             {item.icon && (
