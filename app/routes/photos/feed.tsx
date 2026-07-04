@@ -23,8 +23,8 @@ function PhotosComponent() {
 
   return (
     <Main>
-      <div className="flex items-center justify-between gap-2">
-        <PageTitle>Photos</PageTitle>
+      <div className="mb-6 flex items-center justify-between gap-2 sm:mb-12">
+        <PageTitle className="pb-0 sm:pb-0">Photos</PageTitle>
         <Filter
           label="Photo view"
           value="feed"
