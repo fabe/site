@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import React, { useCallback, useState } from "react";
+import { Filter } from "@/components/Filter";
 import { Main } from "@/components/Layouts";
 import { PageTitle } from "@/components/Typography";
 import { QUERY_PHOTO_SETS } from "@/graphql/queries";
@@ -67,11 +68,21 @@ export const Route = createFileRoute("/photos/")({
 
 function PhotosComponent() {
   const { photoSets } = Route.useLoaderData();
+  const [photoFilter, setPhotoFilter] = useState("sets");
 
   return (
     <Main>
       <div className="flex items-center justify-between gap-2">
         <PageTitle>Photos</PageTitle>
+        <Filter
+          label="Photo view"
+          value={photoFilter}
+          onChange={setPhotoFilter}
+          items={[
+            { value: "sets", label: "Sets" },
+            { value: "map", label: "Map" },
+          ]}
+        />
       </div>
       <div className="flex flex-col gap-8">
         {photoSets.map((photoSet: PhotoSetWithColors) => (
