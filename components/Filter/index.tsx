@@ -46,11 +46,9 @@ export function Filter<Value extends string = string>({
               onChange?.(item.value);
             }}
             className={cn(
-              "group relative isolate flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm leading-tight transition-[color,font-variation-settings] duration-150 ease-out-expo",
+              "group relative isolate flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm leading-tight font-ui-label-medium transition-colors duration-150 ease-out-expo",
               "disabled:pointer-events-none disabled:opacity-40",
-              selected
-                ? "text-fg font-ui-label"
-                : "text-muted font-ui-muted-control hover:text-fg",
+              selected ? "text-fg" : "text-muted hover:text-fg",
             )}
           >
             <span
