@@ -1,5 +1,6 @@
 import { useNavigate } from "@tanstack/react-router";
 import { useCallback, useState } from "react";
+import { getFocalPointObjectPosition } from "@/lib/focalPointPosition";
 import photoImageLoader, { photoImageSrcSet } from "@/lib/photoImageLoader";
 import { useHaptics } from "@/lib/useHaptics";
 import type { ColorData } from "@/lib/colorExtractor";
@@ -7,7 +8,10 @@ import type { ColorData } from "@/lib/colorExtractor";
 type Photo = {
   id: string;
   description?: string | null;
+  focalPoint?: { x: number; y: number } | null;
   url: string;
+  width?: number;
+  height?: number;
   colors?: ColorData;
 };
 
@@ -64,6 +68,7 @@ function PhotoThumbnail({
   }, []);
   const navigate = useNavigate();
   const { trigger: haptic } = useHaptics();
+  const objectPosition = getFocalPointObjectPosition(photo, 3 / 4);
 
   return (
     <button
@@ -128,9 +133,10 @@ function PhotoThumbnail({
         loading="lazy"
         decoding="async"
         alt={photo.description || ""}
-        className={`absolute inset-0 w-full h-full object-cover group-hover:brightness-75 transform-gpu bg-gray-200 dark:bg-neutral-900 ${
+        className={`absolute inset-0 w-full h-full object-cover group-hover:brightness-75 transform-gpu ${
           imageLoaded ? "opacity-100" : "opacity-0"
-        } transition-all duration-150`}
+        } transition-opacity duration-300 ease-out`}
+        style={{ objectPosition }}
         onLoad={() => setImageLoaded(true)}
       />
     </button>

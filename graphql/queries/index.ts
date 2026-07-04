@@ -143,6 +143,10 @@ export const QUERY_PHOTO_SETS = gql`
       description
       featuredPhoto {
         description
+        focalPoint {
+          x
+          y
+        }
         url
         width
         height
@@ -171,6 +175,10 @@ export const QUERY_PHOTO_SET = gql`
         id
         description
         publishedAt
+        focalPoint {
+          x
+          y
+        }
         url
         width
         height

@@ -91,6 +91,11 @@ scalar JSON
     location: Location!
   }
 
+  type FocalPoint {
+    x: Int!
+    y: Int!
+  }
+
   type Photo {
     id: String!
     exif: JSON
@@ -98,6 +103,7 @@ scalar JSON
     location: Location
     description: String
     publishedAt: String
+    focalPoint: FocalPoint
     url: String!
     width: Int!
     height: Int!

@@ -82,6 +82,12 @@ export type Flag = {
   value: Scalars['String']['output'];
 };
 
+export type FocalPoint = {
+  __typename?: 'FocalPoint';
+  x: Scalars['Int']['output'];
+  y: Scalars['Int']['output'];
+};
+
 export type ImageTransformOptions = {
   backgroundColor?: InputMaybe<Scalars['String']['input']>;
   cornerRadius?: InputMaybe<Scalars['Int']['input']>;
@@ -103,6 +109,7 @@ export type Photo = {
   __typename?: 'Photo';
   description?: Maybe<Scalars['String']['output']>;
   exif?: Maybe<Scalars['JSON']['output']>;
+  focalPoint?: Maybe<FocalPoint>;
   height: Scalars['Int']['output'];
   id: Scalars['String']['output'];
   location?: Maybe<Location>;
@@ -320,14 +327,14 @@ export type PhotoSetsQueryQueryVariables = Exact<{
 }>;
 
 
-export type PhotoSetsQueryQuery = { photoSets: Array<{ id: string, title: string, slug: string, description: string | null, featuredPhoto: { description: string | null, url: string, width: number, height: number } } | null> };
+export type PhotoSetsQueryQuery = { photoSets: Array<{ id: string, title: string, slug: string, description: string | null, featuredPhoto: { description: string | null, url: string, width: number, height: number, focalPoint: { x: number, y: number } | null } } | null> };
 
 export type PhotoSetQueryQueryVariables = Exact<{
   slug: string;
 }>;
 
 
-export type PhotoSetQueryQuery = { siteSettings: { siteTitle: string, metaDescription: string, avatar: { url: string | null } }, photoSet: { id: string, title: string, slug: string, description: string | null, updatedAt: string, photos: Array<{ id: string, description: string | null, publishedAt: string | null, url: string, width: number, height: number, exif: any, tags: Array<string | null> | null, location: { lat: number | null, lon: number | null } | null } | null> | null } | null };
+export type PhotoSetQueryQuery = { siteSettings: { siteTitle: string, metaDescription: string, avatar: { url: string | null } }, photoSet: { id: string, title: string, slug: string, description: string | null, updatedAt: string, photos: Array<{ id: string, description: string | null, publishedAt: string | null, url: string, width: number, height: number, exif: any, tags: Array<string | null> | null, focalPoint: { x: number, y: number } | null, location: { lat: number | null, lon: number | null } | null } | null> | null } | null };
 
 export type PhotoSetIdsQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -742,6 +749,10 @@ export const PhotoSetsQueryDocument = gql`
     description
     featuredPhoto {
       description
+      focalPoint {
+        x
+        y
+      }
       url
       width
       height
@@ -803,6 +814,10 @@ export const PhotoSetQueryDocument = gql`
       id
       description
       publishedAt
+      focalPoint {
+        x
+        y
+      }
       url
       width
       height

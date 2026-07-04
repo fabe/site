@@ -5,6 +5,7 @@ import { Filter } from "@/components/Filter";
 import { Main } from "@/components/Layouts";
 import { PageTitle } from "@/components/Typography";
 import { QUERY_PHOTO_SETS } from "@/graphql/queries";
+import { getFocalPointObjectPosition } from "@/lib/focalPointPosition";
 import photoImageLoader, { photoImageSrcSet } from "@/lib/photoImageLoader";
 import type { ColorData } from "@/lib/colorExtractor";
 import type { PhotoSet } from "@/graphql/types/types.generated";
@@ -110,6 +111,10 @@ function PhotoSetCard({ photoSet }: { photoSet: PhotoSetWithColors }) {
 
   const computedBackgroundColor = photoSet.colors?.dominant || fallbackColor;
   const computedBackground = photoSet.colors?.gradient || fallbackGradient;
+  const objectPosition = getFocalPointObjectPosition(
+    photoSet.featuredPhoto,
+    3 / 2,
+  );
 
   return (
     <Link
@@ -140,28 +145,19 @@ function PhotoSetCard({ photoSet }: { photoSet: PhotoSetWithColors }) {
           sizes="(min-width: 1024px) 768px, 100vw"
           loading="lazy"
           decoding="async"
-          className={`absolute inset-0 w-full h-full object-cover will-change-transform group-hover:scale-[1.04] transition-all duration-300 ease-in-out ${
+          className={`absolute inset-0 w-full h-full object-cover will-change-transform group-hover:scale-[1.04] transition-[opacity,transform] duration-300 ease-out ${
             imageLoaded ? "opacity-100" : "opacity-0"
           }`}
+          style={{ objectPosition }}
           onLoad={() => setImageLoaded(true)}
         />
       )}
 
-      <div
-        className={`pointer-events-none absolute inset-0 bg-gradient-to-t ${
-          imageLoaded
-            ? "from-black/60 via-black/30"
-            : "from-black/20 via-black/10"
-        } to-transparent`}
-      />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />
 
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[50%] sm:h-[30%] overflow-hidden">
         <div
-          className={`absolute inset-0 ${
-            imageLoaded
-              ? "backdrop-blur-[5px] backdrop-brightness-[.85] backdrop-saturate-[1.1]"
-              : "backdrop-blur-[2px] backdrop-brightness-[1] backdrop-saturate-[1.2]"
-          }`}
+          className="absolute inset-0 backdrop-blur-[5px] backdrop-brightness-[.85] backdrop-saturate-[1.1]"
           style={{
             mask: "linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)",
           }}

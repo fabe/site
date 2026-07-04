@@ -43,9 +43,17 @@ type CloudinaryAsset = {
   public_id?: string;
 };
 
+type ContentfulFocalPoint = {
+  focalPoint?: {
+    x?: number | null;
+    y?: number | null;
+  } | null;
+};
+
 type ContentfulPhoto = {
   sys: { id: string; publishedAt?: string | null };
   description?: string | null;
+  focalPoint?: ContentfulFocalPoint | null;
   cloudinaryImage?: CloudinaryAsset[] | CloudinaryAsset | null;
   asset: ContentfulAsset;
   exif?: EXIF | null;
@@ -87,6 +95,15 @@ function getPhotoWidth(photo: ContentfulPhoto): number {
 
 function getPhotoHeight(photo: ContentfulPhoto): number {
   return getCloudinaryAsset(photo.cloudinaryImage)?.height ?? photo.asset.height;
+}
+
+function getPhotoFocalPoint(photo: ContentfulPhoto): Photo["focalPoint"] {
+  const x = photo.focalPoint?.focalPoint?.x;
+  const y = photo.focalPoint?.focalPoint?.y;
+
+  if (typeof x !== "number" || typeof y !== "number") return null;
+
+  return { x, y };
 }
 
 let _contentfulClient: ApolloClient | null = null;
@@ -271,6 +288,7 @@ export async function getPhoto(
             lon
           }
           description
+          focalPoint
           cloudinaryImage
           asset {
             url
@@ -297,6 +315,7 @@ export async function getPhoto(
     id: photo.sys.id,
     description: photo.description,
     publishedAt: photo.sys.publishedAt,
+    focalPoint: getPhotoFocalPoint(photo),
     exif: photo.exif,
     height: getPhotoHeight(photo),
     location: photo.location,
@@ -324,6 +343,7 @@ export async function getPhotos(
               lon
             }
             description
+            focalPoint
             cloudinaryImage
             asset {
               url
@@ -349,6 +369,7 @@ export async function getPhotos(
     id: photo.sys.id,
     description: photo.description,
     publishedAt: photo.sys.publishedAt,
+    focalPoint: getPhotoFocalPoint(photo),
     exif: photo.exif,
     height: getPhotoHeight(photo),
     location: photo.location,
@@ -438,6 +459,7 @@ export async function getPhotoSet(
             description
             featuredPhoto {
               description
+              focalPoint
               cloudinaryImage
               asset {
                 url
@@ -456,6 +478,7 @@ export async function getPhotoSet(
                   lon
                 }
                 description
+                focalPoint
                 cloudinaryImage
                 asset {
                   url
@@ -491,6 +514,7 @@ export async function getPhotoSet(
       ? {
           ...photoSet.featuredPhoto,
           url: getPhotoImageUrl(photoSet.featuredPhoto),
+          focalPoint: getPhotoFocalPoint(photoSet.featuredPhoto),
           width: getPhotoWidth(photoSet.featuredPhoto),
           height: getPhotoHeight(photoSet.featuredPhoto),
         }
@@ -500,6 +524,7 @@ export async function getPhotoSet(
       description: photo.description,
       publishedAt: photo.sys.publishedAt,
       url: getPhotoImageUrl(photo),
+      focalPoint: getPhotoFocalPoint(photo),
       width: getPhotoWidth(photo),
       height: getPhotoHeight(photo),
       exif: photo.exif,
@@ -516,7 +541,11 @@ export async function getPhotoSets(
   const response = await getContentfulClient().query({
     query: gql`
       query getPhotoSets($limit: Int) {
-        photoSetCollection(limit: $limit, where: { unlisted_not: true }) {
+        photoSetCollection(
+          limit: $limit
+          where: { unlisted_not: true }
+          order: sys_publishedAt_DESC
+        ) {
           items {
             sys {
               id
@@ -526,6 +555,7 @@ export async function getPhotoSets(
             slug
             description
             featuredPhoto {
+              focalPoint
               cloudinaryImage
               asset {
                 url
@@ -565,6 +595,7 @@ export async function getPhotoSets(
       })),
       featuredPhoto: {
         url: getPhotoImageUrl(photoSet.featuredPhoto),
+        focalPoint: getPhotoFocalPoint(photoSet.featuredPhoto),
         width: getPhotoWidth(photoSet.featuredPhoto),
         height: getPhotoHeight(photoSet.featuredPhoto),
       },
