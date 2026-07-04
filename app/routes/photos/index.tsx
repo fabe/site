@@ -22,6 +22,14 @@ type PhotoSetWithColors = Omit<PhotoSetData, "photos"> & {
   photos: PhotoWithColors[];
 };
 
+function parsePhotoDate(photo: PhotoData) {
+  const exif = photo.exif as { DateTimeOriginal?: string } | null | undefined;
+  const value = exif?.DateTimeOriginal || photo.publishedAt;
+  if (!value) return 0;
+
+  return new Date(value.replace(/^(\d{4}):(\d{2}):(\d{2})/, "$1-$2-$3")).getTime();
+}
+
 const fetchPhotoFeed = createServerFn().handler(async () => {
   const { initializeApollo } = await import("@/graphql/client");
   const { extractColorsFromImage } = await import("@/lib/colorExtractor");
@@ -36,10 +44,11 @@ const fetchPhotoFeed = createServerFn().handler(async () => {
     throw new Error("Photo feed not found");
   }
 
-  const photos =
-    data.photoSet.photos?.filter((photo): photo is PhotoData =>
+  const photos = [
+    ...(data.photoSet.photos?.filter((photo): photo is PhotoData =>
       Boolean(photo),
-    ) ?? [];
+    ) ?? []),
+  ].sort((a, b) => parsePhotoDate(b) - parsePhotoDate(a));
   const concurrency = 10;
   const photosWithColors: PhotoWithColors[] = [];
   for (let i = 0; i < photos.length; i += concurrency) {

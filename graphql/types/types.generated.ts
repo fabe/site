@@ -106,6 +106,7 @@ export type Photo = {
   height: Scalars['Int']['output'];
   id: Scalars['String']['output'];
   location?: Maybe<Location>;
+  publishedAt?: Maybe<Scalars['String']['output']>;
   tags?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   url: Scalars['String']['output'];
   width: Scalars['Int']['output'];
@@ -326,7 +327,7 @@ export type PhotoSetQueryQueryVariables = Exact<{
 }>;
 
 
-export type PhotoSetQueryQuery = { siteSettings: { siteTitle: string, metaDescription: string, avatar: { url: string | null } }, photoSet: { id: string, title: string, slug: string, description: string | null, updatedAt: string, photos: Array<{ id: string, description: string | null, url: string, width: number, height: number, exif: any, tags: Array<string | null> | null, location: { lat: number | null, lon: number | null } | null } | null> | null } | null };
+export type PhotoSetQueryQuery = { siteSettings: { siteTitle: string, metaDescription: string, avatar: { url: string | null } }, photoSet: { id: string, title: string, slug: string, description: string | null, updatedAt: string, photos: Array<{ id: string, description: string | null, publishedAt: string | null, url: string, width: number, height: number, exif: any, tags: Array<string | null> | null, location: { lat: number | null, lon: number | null } | null } | null> | null } | null };
 
 export type PhotoSetIdsQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -801,6 +802,7 @@ export const PhotoSetQueryDocument = gql`
     photos {
       id
       description
+      publishedAt
       url
       width
       height

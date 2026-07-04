@@ -170,6 +170,7 @@ export const QUERY_PHOTO_SET = gql`
       photos {
         id
         description
+        publishedAt
         url
         width
         height

@@ -44,7 +44,7 @@ type CloudinaryAsset = {
 };
 
 type ContentfulPhoto = {
-  sys: { id: string };
+  sys: { id: string; publishedAt?: string | null };
   description?: string | null;
   cloudinaryImage?: CloudinaryAsset[] | CloudinaryAsset | null;
   asset: ContentfulAsset;
@@ -264,6 +264,7 @@ export async function getPhoto(
         photo(id: $id) {
           sys {
             id
+            publishedAt
           }
           location {
             lat
@@ -295,6 +296,7 @@ export async function getPhoto(
   return {
     id: photo.sys.id,
     description: photo.description,
+    publishedAt: photo.sys.publishedAt,
     exif: photo.exif,
     height: getPhotoHeight(photo),
     location: photo.location,
@@ -315,6 +317,7 @@ export async function getPhotos(
           items {
             sys {
               id
+              publishedAt
             }
             location {
               lat
@@ -345,6 +348,7 @@ export async function getPhotos(
   return response.data.photoCollection.items.map((photo: ContentfulPhoto) => ({
     id: photo.sys.id,
     description: photo.description,
+    publishedAt: photo.sys.publishedAt,
     exif: photo.exif,
     height: getPhotoHeight(photo),
     location: photo.location,
@@ -445,6 +449,7 @@ export async function getPhotoSet(
               items {
                 sys {
                   id
+                  publishedAt
                 }
                 location {
                   lat
@@ -493,6 +498,7 @@ export async function getPhotoSet(
     photos: photoSet.photosCollection.items.map((photo: ContentfulPhoto) => ({
       id: photo.sys.id,
       description: photo.description,
+      publishedAt: photo.sys.publishedAt,
       url: getPhotoImageUrl(photo),
       width: getPhotoWidth(photo),
       height: getPhotoHeight(photo),

@@ -97,6 +97,7 @@ scalar JSON
     tags: [String]
     location: Location
     description: String
+    publishedAt: String
     url: String!
     width: Int!
     height: Int!
