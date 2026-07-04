@@ -28,7 +28,10 @@ export function Filter<Value extends string = string>({
     <div
       role="radiogroup"
       aria-label={label}
-      className={cn("inline-flex items-center gap-1", className)}
+      className={cn(
+        "inline-flex items-center gap-0.5 rounded-lg bg-surface-raised/60 p-0.5 dark:bg-surface/60",
+        className,
+      )}
     >
       {items.map((item) => {
         const selected = item.value === value;
@@ -46,20 +49,19 @@ export function Filter<Value extends string = string>({
               onChange?.(item.value);
             }}
             className={cn(
-              "group relative isolate flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm leading-tight transition-all duration-100 ease-out-expo",
+              "group relative isolate flex items-center gap-1.5 rounded-md px-2.5 py-1 text-sm leading-tight transition-all duration-100 ease-out-expo",
               "disabled:pointer-events-none disabled:opacity-40",
               selected
                 ? "text-fg font-ui-label"
                 : "text-muted font-ui-muted-control hover:text-fg",
             )}
           >
-            {/* background pill — matches ActionButtonContent pattern */}
             <span
               className={cn(
-                "absolute inset-0 z-0 rounded-lg transition-all duration-100 ease-out-expo",
+                "absolute inset-0 z-0 rounded-md transition-all duration-100 ease-out-expo",
                 selected
-                  ? "bg-surface-raised dark:bg-surface"
-                  : "bg-surface-raised/0 group-hover:bg-surface-raised/60 dark:group-hover:bg-surface/75",
+                  ? "bg-surface shadow-sm dark:bg-surface-raised"
+                  : "bg-transparent group-hover:bg-surface-raised/40 dark:group-hover:bg-surface-raised/40",
               )}
             />
             {item.icon && (
