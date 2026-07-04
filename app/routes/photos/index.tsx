@@ -103,7 +103,7 @@ function PhotoSetCard({ photoSet }: { photoSet: PhotoSetWithColors }) {
       to="/photos/$slug"
       params={{ slug: photoSet.slug }}
       search={{ id: undefined }}
-      className="group relative isolate aspect-[3/2] w-full overflow-hidden rounded-lg transition-all duration-300 ease-in-out dark:shadow-2xl"
+      className="group relative aspect-[3/2] w-full overflow-hidden rounded-lg transition-all duration-300 ease-in-out dark:shadow-2xl"
       style={{
         backgroundColor: computedBackgroundColor,
         background: computedBackground,
@@ -166,7 +166,10 @@ function PhotoSetCard({ photoSet }: { photoSet: PhotoSetWithColors }) {
         </div>
       </div>
 
-      <div className="pointer-events-none absolute inset-0 z-10 rounded-lg ring-1 ring-inset ring-black/10 dark:ring-white/20" />
+      {/* White border on dark mode */}
+      <div
+        className={`pointer-events-none absolute inset-0 bg-transparent dark:border border-white/25 mix-blend-overlay rounded-lg`}
+      ></div>
     </Link>
   );
 }
