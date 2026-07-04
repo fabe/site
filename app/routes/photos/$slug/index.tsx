@@ -5,7 +5,7 @@ import { QUERY_PHOTO_SET } from "@/graphql/queries";
 import { Container } from "@/components/Layouts";
 import { PageTitle } from "@/components/Typography";
 import Footer from "@/components/Footer";
-import photoImageLoader from "@/lib/photoImageLoader";
+import photoImageLoader, { photoImageSrcSet } from "@/lib/photoImageLoader";
 import Lightbox from "@/components/Lightbox";
 import LightboxPhoto from "@/components/Lightbox/Photo";
 import Badge from "@/components/Badge";
@@ -325,6 +325,14 @@ function PhotoThumbnail({
           width: 1600,
           quality: 85,
         })}
+        srcSet={photoImageSrcSet({
+          src: photo.url,
+          widths: [480, 720, 960, 1280, 1600],
+          quality: 85,
+        })}
+        sizes="(min-width: 640px) 33vw, 100vw"
+        loading="lazy"
+        decoding="async"
         alt={photo.description || ""}
         className={`absolute inset-0 w-full h-full object-cover group-hover:brightness-75 transform-gpu bg-gray-200 dark:bg-neutral-900 ${
           imageLoaded ? "opacity-100" : "opacity-0"

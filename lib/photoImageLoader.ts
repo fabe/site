@@ -74,4 +74,18 @@ export function photoImageLoader({
   return withImageParams(src, params);
 }
 
+export function photoImageSrcSet({
+  src,
+  quality,
+  widths,
+  custom,
+}: Omit<PhotoImageLoaderProps, "width"> & { widths: number[] }): string {
+  return widths
+    .map(
+      (width) =>
+        `${photoImageLoader({ src, width, quality, custom })} ${Math.floor(width)}w`,
+    )
+    .join(", ");
+}
+
 export default photoImageLoader;

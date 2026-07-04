@@ -1,5 +1,5 @@
 import type { Photo } from "../../graphql/types/types.generated";
-import photoImageLoader from "../../lib/photoImageLoader";
+import photoImageLoader, { photoImageSrcSet } from "../../lib/photoImageLoader";
 import { useCallback, useState } from "react";
 import {
   ApertureIcon,
@@ -40,9 +40,16 @@ export default function LightboxPhoto({ photo }: LightboxPhotoProps) {
               ref={imgRef}
               src={photoImageLoader({
                 src: photo.url,
-                width: 1600,
+                width: 2200,
                 quality: 90,
               })}
+              srcSet={photoImageSrcSet({
+                src: photo.url,
+                widths: [800, 1200, 1600, 2200, 2800],
+                quality: 90,
+              })}
+              sizes="100vw"
+              decoding="async"
               alt={photo.description || ""}
               style={{
                 aspectRatio: `${photo.width} / ${photo.height}`,

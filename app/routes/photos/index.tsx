@@ -4,7 +4,7 @@ import React, { useCallback, useState } from "react";
 import { Main } from "@/components/Layouts";
 import { PageTitle } from "@/components/Typography";
 import { QUERY_PHOTO_SETS } from "@/graphql/queries";
-import photoImageLoader from "@/lib/photoImageLoader";
+import photoImageLoader, { photoImageSrcSet } from "@/lib/photoImageLoader";
 import type { ColorData } from "@/lib/colorExtractor";
 import type { PhotoSet } from "@/graphql/types/types.generated";
 import { baseUrl } from "../__root";
@@ -119,6 +119,14 @@ function PhotoSetCard({ photoSet }: { photoSet: PhotoSetWithColors }) {
             width: 2200,
             quality: 95,
           })}
+          srcSet={photoImageSrcSet({
+            src: photoSet.featuredPhoto.url,
+            widths: [640, 960, 1280, 1600, 2200],
+            quality: 90,
+          })}
+          sizes="(min-width: 1024px) 768px, 100vw"
+          loading="lazy"
+          decoding="async"
           className={`absolute inset-0 w-full h-full object-cover will-change-transform group-hover:scale-[1.04] transition-all duration-300 ease-in-out ${
             imageLoaded ? "opacity-100" : "opacity-0"
           }`}
