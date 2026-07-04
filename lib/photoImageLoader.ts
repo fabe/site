@@ -35,7 +35,7 @@ function cloudinaryLoader(
 
   return src.replace(
     "/image/upload/",
-    `/image/upload/${transforms.join(",")}/`,
+    `/image/upload/${transforms.join("/")}/`,
   );
 }
 
