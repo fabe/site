@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
+import { useHaptics } from "@/lib/useHaptics";
 
 export type FilterItem<Value extends string = string> = {
   value: Value;
@@ -24,6 +25,8 @@ export function Filter<Value extends string = string>({
   label = "Filter",
   className,
 }: FilterProps<Value>) {
+  const { trigger: haptic } = useHaptics();
+
   return (
     <div
       role="radiogroup"
@@ -42,6 +45,7 @@ export function Filter<Value extends string = string>({
             disabled={item.disabled}
             onClick={() => {
               if (item.disabled) return;
+              haptic("light");
               item.onClick?.(item.value);
               onChange?.(item.value);
             }}

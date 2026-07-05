@@ -133,7 +133,7 @@ function PhotoThumbnail({
         loading="lazy"
         decoding="async"
         alt={photo.description || ""}
-        className={`absolute inset-0 w-full h-full object-cover group-hover:brightness-75 transform-gpu ${
+        className={`absolute inset-0 w-full h-full object-cover pointer-fine:group-hover:brightness-75 transform-gpu ${
           imageLoaded ? "opacity-100" : "opacity-0"
         } transition-opacity duration-300 ease-out`}
         style={{ objectPosition }}
