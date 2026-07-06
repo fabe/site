@@ -24,6 +24,7 @@ type PhotoLightboxProps = {
   photos: Photo[];
   selectedPhotoId?: string;
   photoSet?: PhotoSet;
+  thumbnailSrcById?: Record<string, string>;
   mode: "feed" | "set";
 };
 
@@ -31,6 +32,7 @@ export function PhotoLightbox({
   photos,
   selectedPhotoId,
   photoSet,
+  thumbnailSrcById,
   mode,
 }: PhotoLightboxProps) {
   const navigate = useNavigate();
@@ -150,7 +152,11 @@ export function PhotoLightbox({
   return (
     <Lightbox isOpen={true} onDismiss={handleDismiss}>
       <div {...bindDragGesture()} className="w-full h-full touch-pan-y">
-        <LightboxPhoto key={selectedPhoto.id} photo={selectedPhoto} />
+        <LightboxPhoto
+          key={selectedPhoto.id}
+          photo={selectedPhoto}
+          thumbnailSrc={thumbnailSrcById?.[selectedPhoto.id]}
+        />
       </div>
     </Lightbox>
   );

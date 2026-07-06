@@ -1,5 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
+import { useCallback, useState } from "react";
 import { Filter } from "@/components/Filter";
 import { Main } from "@/components/Layouts";
 import { PageTitle } from "@/components/Typography";
@@ -27,7 +28,9 @@ function parsePhotoDate(photo: PhotoData) {
   const value = exif?.DateTimeOriginal || photo.publishedAt;
   if (!value) return 0;
 
-  return new Date(value.replace(/^(\d{4}):(\d{2}):(\d{2})/, "$1-$2-$3")).getTime();
+  return new Date(
+    value.replace(/^(\d{4}):(\d{2}):(\d{2})/, "$1-$2-$3"),
+  ).getTime();
 }
 
 const fetchPhotoFeed = createServerFn().handler(async () => {
@@ -98,6 +101,14 @@ function PhotosComponent() {
   const navigate = useNavigate();
   const { photoSet } = Route.useLoaderData();
   const { id: selectedPhotoId } = Route.useSearch();
+  const [thumbnailSrcById, setThumbnailSrcById] = useState<
+    Record<string, string>
+  >({});
+  const handleThumbnailLoad = useCallback((photoId: string, src: string) => {
+    setThumbnailSrcById((current) =>
+      current[photoId] === src ? current : { ...current, [photoId]: src },
+    );
+  }, []);
 
   return (
     <>
@@ -116,12 +127,17 @@ function PhotosComponent() {
             ]}
           />
         </div>
-        <PhotoGrid photos={photoSet.photos} mode="feed" />
+        <PhotoGrid
+          photos={photoSet.photos}
+          mode="feed"
+          onThumbnailLoad={handleThumbnailLoad}
+        />
       </Main>
 
       <PhotoLightbox
         photos={photoSet.photos}
         selectedPhotoId={selectedPhotoId}
+        thumbnailSrcById={thumbnailSrcById}
         mode="feed"
       />
     </>

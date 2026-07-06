@@ -14,9 +14,13 @@ import formatDate from "../../lib/formatDate";
 
 interface LightboxPhotoProps {
   photo: Photo;
+  thumbnailSrc?: string;
 }
 
-export default function LightboxPhoto({ photo }: LightboxPhotoProps) {
+export default function LightboxPhoto({
+  photo,
+  thumbnailSrc,
+}: LightboxPhotoProps) {
   const [loading, setLoading] = useState(true);
   const imgRef = useCallback((node: HTMLImageElement | null) => {
     if (node && node.complete && node.naturalWidth > 0) {
@@ -24,18 +28,37 @@ export default function LightboxPhoto({ photo }: LightboxPhotoProps) {
     }
   }, []);
   const exif = photo.exif as EXIF | null | undefined;
+  const aspect = photo.width / photo.height;
+  const aspectRatio = `${photo.width} / ${photo.height}`;
 
   return (
     <div className="w-full h-full overflow-hidden">
       <div className="flex flex-col lg:flex-row w-full h-full bg-white dark:bg-neutral-900">
         <div className="relative w-full lg:w-auto lg:flex-1 flex justify-center min-h-0 flex-1">
-          {loading && (
+          {loading && !thumbnailSrc && (
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
               <SpinnerIcon size={24} />
             </div>
           )}
 
-          <div className="relative w-full h-full bg-gray-200 dark:bg-neutral-900">
+          <div className="relative w-full h-full bg-gray-200 dark:bg-neutral-900 overflow-hidden [container-type:size]">
+            {loading && thumbnailSrc && (
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute left-1/2 top-1/2 overflow-hidden -translate-x-1/2 -translate-y-1/2"
+                style={{
+                  aspectRatio,
+                  width: `min(100cqw, calc(100cqh * ${aspect}))`,
+                  height: `min(100cqh, calc(100cqw / ${aspect}))`,
+                }}
+              >
+                <img
+                  src={thumbnailSrc}
+                  alt=""
+                  className="h-full w-full scale-110 object-cover blur-2xl transform-gpu"
+                />
+              </div>
+            )}
             <img
               ref={imgRef}
               src={photoImageLoader({
@@ -52,7 +75,7 @@ export default function LightboxPhoto({ photo }: LightboxPhotoProps) {
               decoding="async"
               alt={photo.description || ""}
               style={{
-                aspectRatio: `${photo.width} / ${photo.height}`,
+                aspectRatio,
               }}
               className={`object-contain h-full w-full relative transition-opacity duration-300 ease-in-out ${
                 loading ? "opacity-0" : "opacity-100"

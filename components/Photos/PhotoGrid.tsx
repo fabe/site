@@ -23,11 +23,13 @@ type PhotoGridProps =
   | {
       photos: Photo[];
       mode: "feed";
+      onThumbnailLoad?: (photoId: string, src: string) => void;
     }
   | {
       photos: Photo[];
       photoSet: PhotoSet;
       mode: "set";
+      onThumbnailLoad?: (photoId: string, src: string) => void;
     };
 
 export function PhotoGrid(props: PhotoGridProps) {
@@ -39,6 +41,7 @@ export function PhotoGrid(props: PhotoGridProps) {
           photo={photo}
           photoSet={props.mode === "set" ? props.photoSet : undefined}
           mode={props.mode}
+          onThumbnailLoad={props.onThumbnailLoad}
         />
       ))}
       {props.mode === "feed" && props.photos.length % 2 === 1 && (
@@ -55,24 +58,35 @@ function PhotoThumbnail({
   photo,
   photoSet,
   mode,
+  onThumbnailLoad,
 }: {
   photo: Photo;
   photoSet?: PhotoSet;
   mode: "feed" | "set";
+  onThumbnailLoad?: (photoId: string, src: string) => void;
 }) {
   const [imageLoaded, setImageLoaded] = useState(false);
-  const imageRef = useCallback((node: HTMLImageElement | null) => {
-    if (node?.complete && node.naturalWidth > 0) {
-      setImageLoaded(true);
-    }
-  }, []);
+  const imageRef = useCallback(
+    (node: HTMLImageElement | null) => {
+      if (node?.complete && node.naturalWidth > 0) {
+        setImageLoaded(true);
+        onThumbnailLoad?.(photo.id, node.currentSrc || node.src);
+      }
+    },
+    [onThumbnailLoad, photo.id],
+  );
   const navigate = useNavigate();
   const { trigger: haptic } = useHaptics();
   const objectPosition = getFocalPointObjectPosition(photo, 3 / 4);
 
   return (
     <button
-      onClick={() => {
+      onClick={(event) => {
+        const image = event.currentTarget.querySelector("img");
+        if (image?.complete && image.naturalWidth > 0) {
+          onThumbnailLoad?.(photo.id, image.currentSrc || image.src);
+        }
+
         haptic("light");
         if (mode === "feed") {
           navigate({
@@ -137,7 +151,13 @@ function PhotoThumbnail({
           imageLoaded ? "opacity-100" : "opacity-0"
         } transition-opacity duration-300 ease-out`}
         style={{ objectPosition }}
-        onLoad={() => setImageLoaded(true)}
+        onLoad={(event) => {
+          setImageLoaded(true);
+          onThumbnailLoad?.(
+            photo.id,
+            event.currentTarget.currentSrc || event.currentTarget.src,
+          );
+        }}
       />
     </button>
   );

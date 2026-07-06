@@ -1,4 +1,5 @@
 import { createFileRoute, Link, redirect } from "@tanstack/react-router";
+import { useCallback, useState } from "react";
 import { createServerFn } from "@tanstack/react-start";
 import { QUERY_PHOTO_SET } from "@/graphql/queries";
 import { Container } from "@/components/Layouts";
@@ -156,6 +157,14 @@ function PhotoSetComponent() {
   const { photoSet, siteSettings, feedPhotoId } = Route.useLoaderData();
   const { id } = Route.useSearch();
   const selectedPhotoId = feedPhotoId || id;
+  const [thumbnailSrcById, setThumbnailSrcById] = useState<
+    Record<string, string>
+  >({});
+  const handleThumbnailLoad = useCallback((photoId: string, src: string) => {
+    setThumbnailSrcById((current) =>
+      current[photoId] === src ? current : { ...current, [photoId]: src },
+    );
+  }, []);
 
   const relativeUrl = `/photos/${photoSet.slug}`;
   const url = `${baseUrl}${relativeUrl}`;
@@ -220,13 +229,19 @@ function PhotoSetComponent() {
           </div>
         </div>
 
-        <PhotoGrid photos={photoSet.photos} photoSet={photoSet} mode="set" />
+        <PhotoGrid
+          photos={photoSet.photos}
+          photoSet={photoSet}
+          mode="set"
+          onThumbnailLoad={handleThumbnailLoad}
+        />
       </Container>
 
       <PhotoLightbox
         photos={photoSet.photos}
         selectedPhotoId={selectedPhotoId}
         photoSet={photoSet}
+        thumbnailSrcById={thumbnailSrcById}
         mode={feedPhotoId ? "feed" : "set"}
       />
 
