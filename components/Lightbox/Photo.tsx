@@ -22,6 +22,7 @@ export default function LightboxPhoto({
   thumbnailSrc,
 }: LightboxPhotoProps) {
   const [loading, setLoading] = useState(true);
+  const [showPlaceholder, setShowPlaceholder] = useState(true);
   const imgRef = useCallback((node: HTMLImageElement | null) => {
     if (node && node.complete && node.naturalWidth > 0) {
       setLoading(false);
@@ -42,10 +43,12 @@ export default function LightboxPhoto({
           )}
 
           <div className="relative w-full h-full bg-gray-200 dark:bg-neutral-900 overflow-hidden [container-type:size]">
-            {loading && thumbnailSrc && (
+            {thumbnailSrc && showPlaceholder && (
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute left-1/2 top-1/2 overflow-hidden -translate-x-1/2 -translate-y-1/2"
+                className={`pointer-events-none absolute left-1/2 top-1/2 overflow-hidden -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300 ease-in-out ${
+                  loading ? "opacity-100" : "opacity-0"
+                }`}
                 style={{
                   aspectRatio,
                   width: `min(100cqw, calc(100cqh * ${aspect}))`,
@@ -81,6 +84,9 @@ export default function LightboxPhoto({
                 loading ? "opacity-0" : "opacity-100"
               }`}
               onLoad={() => setLoading(false)}
+              onTransitionEnd={() => {
+                if (!loading) setShowPlaceholder(false);
+              }}
             />
           </div>
         </div>
