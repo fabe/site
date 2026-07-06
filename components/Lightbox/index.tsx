@@ -17,35 +17,30 @@ export default function Lightbox({
   isOpen,
   onDismiss,
 }: LightboxProps) {
-  const LightboxContent = () => {
-    const { trigger: haptic } = useHaptics();
-    return (
-      <DialogOverlay
-        isOpen
-        onDismiss={onDismiss}
-        style={{ overflow: "hidden" }}
-      >
-        <div className="lg:px-8 lg:py-6 h-screen flex flex-col w-full items-center bg-neutral-950/40 dark:bg-neutral-800/40 backdrop-blur-lg backdrop-saturate-150 overflow-hidden overscroll-none">
-          <div className="relative flex flex-col items-center grow w-full max-w-7xl h-full lg:rounded-lg overflow-hidden lg:shadow-2xl overscroll-none after:pointer-events-none after:absolute after:inset-0 after:bg-transparent dark:after:border after:border-white/25 after:mix-blend-overlay after:lg:rounded-lg">
-            <DialogContent className="flex justify-center items-center overscroll-none w-full h-full !m-0 !p-0 !bg-transparent">
-              {children}
-            </DialogContent>
-            <div className="sticky top-0 self-end h-0 z-10 order-1">
-              <button
-                onClick={() => {
-                  haptic("light");
-                  onDismiss();
-                }}
-                className="w-9 h-9 flex justify-center items-center sticky top-4 mr-5 mt-5 rounded-full dark:bg-neutral-700 bg-neutral-700 text-white outline-offset-2 dark:opacity-80 opacity-90 hover:opacity-100 transition-opacity"
-              >
-                <CloseIcon size={20} />
-              </button>
-            </div>
+  const { trigger: haptic } = useHaptics();
+
+  if (!isOpen) return null;
+
+  return (
+    <DialogOverlay isOpen onDismiss={onDismiss} style={{ overflow: "hidden" }}>
+      <div className="lg:px-8 lg:py-6 h-screen flex flex-col w-full items-center bg-neutral-950/40 dark:bg-neutral-800/40 backdrop-blur-lg backdrop-saturate-150 overflow-hidden overscroll-none">
+        <div className="relative flex flex-col items-center grow w-full max-w-7xl h-full lg:rounded-lg overflow-hidden lg:shadow-2xl overscroll-none after:pointer-events-none after:absolute after:inset-0 after:bg-transparent dark:after:border after:border-white/25 after:mix-blend-overlay after:lg:rounded-lg">
+          <DialogContent className="flex justify-center items-center overscroll-none w-full h-full !m-0 !p-0 !bg-transparent">
+            {children}
+          </DialogContent>
+          <div className="sticky top-0 self-end h-0 z-10 order-1">
+            <button
+              onClick={() => {
+                haptic("light");
+                onDismiss();
+              }}
+              className="w-9 h-9 flex justify-center items-center sticky top-4 mr-5 mt-5 rounded-full dark:bg-neutral-700 bg-neutral-700 text-white outline-offset-2 dark:opacity-80 opacity-90 hover:opacity-100 transition-opacity"
+            >
+              <CloseIcon size={20} />
+            </button>
           </div>
         </div>
-      </DialogOverlay>
-    );
-  };
-
-  return <>{isOpen && <LightboxContent />}</>;
+      </div>
+    </DialogOverlay>
+  );
 }
