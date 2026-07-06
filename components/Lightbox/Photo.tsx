@@ -35,8 +35,8 @@ export default function LightboxPhoto({
     <div className="w-full h-full overflow-hidden">
       <div className="flex flex-col lg:flex-row w-full h-full bg-white dark:bg-neutral-900">
         <div className="relative w-full lg:w-auto lg:flex-1 flex justify-center min-h-0 flex-1">
-          {loading && !thumbnailSrc && (
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+          {loading && (
+            <div className="absolute top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 text-white">
               <SpinnerIcon size={24} />
             </div>
           )}
@@ -55,7 +55,7 @@ export default function LightboxPhoto({
                 <img
                   src={thumbnailSrc}
                   alt=""
-                  className="h-full w-full scale-110 object-cover blur-2xl transform-gpu"
+                  className="h-full w-full scale-110 object-cover blur-2xl brightness-75 transform-gpu"
                 />
               </div>
             )}
