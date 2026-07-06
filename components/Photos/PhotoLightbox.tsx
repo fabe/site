@@ -50,7 +50,6 @@ export function PhotoLightbox({
         navigate({
           to: "/photos",
           search: { id },
-          replace: true,
           resetScroll: false,
           ...(id
             ? {
@@ -72,7 +71,6 @@ export function PhotoLightbox({
         to: "/photos/$slug",
         params: { slug: photoSet.slug },
         search: { id },
-        replace: true,
         resetScroll: false,
         ...(id
           ? {

@@ -92,7 +92,6 @@ function PhotoThumbnail({
           navigate({
             to: "/photos",
             search: { id: photo.id },
-            replace: true,
             resetScroll: false,
             mask: {
               to: "/photos/$slug",
@@ -110,7 +109,6 @@ function PhotoThumbnail({
           to: "/photos/$slug",
           params: { slug: photoSet.slug },
           search: { id: photo.id },
-          replace: true,
           resetScroll: false,
           mask: {
             to: "/photos/$slug/$id",
