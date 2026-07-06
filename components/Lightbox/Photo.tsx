@@ -22,6 +22,7 @@ export default function LightboxPhoto({
   thumbnailSrc,
 }: LightboxPhotoProps) {
   const [loading, setLoading] = useState(true);
+  const [showSpinner, setShowSpinner] = useState(true);
   const imgRef = useCallback((node: HTMLImageElement | null) => {
     if (node && node.complete && node.naturalWidth > 0) {
       setLoading(false);
@@ -35,7 +36,7 @@ export default function LightboxPhoto({
     <div className="w-full h-full overflow-hidden">
       <div className="flex flex-col lg:flex-row w-full h-full bg-white dark:bg-neutral-900">
         <div className="relative w-full lg:w-auto lg:flex-1 flex justify-center min-h-0 flex-1">
-          {loading && (
+          {showSpinner && (
             <div className="absolute top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 text-white">
               <SpinnerIcon size={24} />
             </div>
@@ -81,6 +82,11 @@ export default function LightboxPhoto({
                 loading ? "opacity-0" : "opacity-100"
               }`}
               onLoad={() => setLoading(false)}
+              onTransitionEnd={(event) => {
+                if (event.propertyName === "opacity" && !loading) {
+                  setShowSpinner(false);
+                }
+              }}
             />
           </div>
         </div>
