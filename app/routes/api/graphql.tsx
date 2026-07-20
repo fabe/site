@@ -57,9 +57,10 @@ function applyCacheHeaders(
   request: Request,
   status: number,
   operationName?: string,
+  hasErrors = false,
 ) {
   const cacheControl =
-    status >= 200 && status < 300
+    status >= 200 && status < 300 && !hasErrors
       ? getCacheControl(request, operationName)
       : "no-store";
 
@@ -119,9 +120,17 @@ async function handleGraphQLRequest(request: Request): Promise<Response> {
     responseHeaders.set(key, value);
   }
   const status = result.status || 200;
-  applyCacheHeaders(responseHeaders, request, status, operationName);
 
   if (result.body.kind === "complete") {
+    const body = JSON.parse(result.body.string) as { errors?: unknown[] };
+    applyCacheHeaders(
+      responseHeaders,
+      request,
+      status,
+      operationName,
+      Boolean(body.errors?.length),
+    );
+
     return new Response(result.body.string, {
       status,
       headers: responseHeaders,
@@ -129,6 +138,7 @@ async function handleGraphQLRequest(request: Request): Promise<Response> {
   }
 
   // Streaming response
+  applyCacheHeaders(responseHeaders, request, status, operationName);
   const asyncIter = result.body.asyncIterator;
   const stream = new ReadableStream({
     async start(controller) {

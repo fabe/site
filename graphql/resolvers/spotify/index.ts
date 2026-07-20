@@ -12,9 +12,37 @@ const RECENTLY_PLAYED_ENDPOINT = `https://api.spotify.com/v1/me/player/recently-
 const PLAYLIST_ENDPOINT = `https://api.spotify.com/v1/playlists`;
 const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
 
+type SpotifyTokenResponse = {
+  access_token?: string;
+  error?: string;
+  error_description?: string;
+};
+
+type SpotifyPlaylistResponse = {
+  name?: string;
+  images?: Array<{ url?: string }>;
+  items?: { total?: number };
+  tracks?: { total?: number };
+  followers?: { total?: number };
+  external_urls?: { spotify?: string };
+};
+
+async function getSpotifyError(response: Response) {
+  const body = (await response.json().catch(() => null)) as {
+    error?: { message?: string };
+  } | null;
+
+  return body?.error?.message;
+}
+
 const getAccessToken = async () => {
   const { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REFRESH_TOKEN } =
     process.env;
+
+  if (!SPOTIFY_CLIENT_ID || !SPOTIFY_CLIENT_SECRET || !SPOTIFY_REFRESH_TOKEN) {
+    throw new Error("Spotify credentials are not configured");
+  }
+
   const basic = Buffer.from(
     `${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`,
   ).toString("base64");
@@ -31,7 +59,16 @@ const getAccessToken = async () => {
     }),
   });
 
-  return response.json();
+  const token = (await response.json()) as SpotifyTokenResponse;
+
+  if (!response.ok || !token.access_token) {
+    const message = token.error_description ?? token.error ?? "Unknown error";
+    throw new Error(
+      `Spotify token request failed (${response.status}): ${message}`,
+    );
+  }
+
+  return token.access_token;
 };
 
 const getNowPlaying = async (access_token: string) => {
@@ -58,16 +95,47 @@ const getPlaylist = async (access_token: string, playlistId: string) => {
   });
 };
 
+function formatPlaylist(playlist: SpotifyPlaylistResponse): SpotifyPlaylist {
+  const trackCount = playlist.items?.total ?? playlist.tracks?.total;
+  const spotifyUrl = playlist.external_urls?.spotify;
+
+  if (!playlist.name || trackCount === undefined || !spotifyUrl) {
+    throw new Error("Spotify returned incomplete playlist metadata");
+  }
+
+  return {
+    name: playlist.name,
+    coverUrl: proxiedImageUrl(playlist.images?.[0]?.url),
+    trackCount,
+    followerCount: playlist.followers?.total ?? 0,
+    spotifyUrl,
+  };
+}
+
 export async function getSpotifyStatus(): Promise<SpotifyStatus> {
-  const { access_token } = await getAccessToken();
+  const access_token = await getAccessToken();
   const nowPlayingResponse = await getNowPlaying(access_token);
 
-  if (nowPlayingResponse.status > 204) {
-    return { isPlaying: false };
+  if (!nowPlayingResponse.ok) {
+    const message =
+      (await getSpotifyError(nowPlayingResponse)) ?? "Unknown upstream error";
+    throw new Error(
+      `Spotify now-playing request failed (${nowPlayingResponse.status}): ${message}`,
+    );
   }
 
   if (nowPlayingResponse.status === 204) {
     const recentlyPlayedResponse = await getRecentlyPlayed(access_token);
+
+    if (!recentlyPlayedResponse.ok) {
+      const message =
+        (await getSpotifyError(recentlyPlayedResponse)) ??
+        "Unknown upstream error";
+      throw new Error(
+        `Spotify recently-played request failed (${recentlyPlayedResponse.status}): ${message}`,
+      );
+    }
+
     const songs = await recentlyPlayedResponse.json();
     const song = songs.items[0];
 
@@ -119,17 +187,13 @@ export async function getSpotifyStatus(): Promise<SpotifyStatus> {
     if (playlistId) {
       try {
         const res = await getPlaylist(access_token, playlistId);
-        if (res.status <= 200) {
-          const p = await res.json();
-          playlist = {
-            name: p.name,
-            coverUrl: proxiedImageUrl(p.images[0]?.url),
-            trackCount: p.tracks.total,
-            followerCount: p.followers.total,
-            spotifyUrl: p.external_urls.spotify,
-          };
+        if (res.ok) {
+          const p = (await res.json()) as SpotifyPlaylistResponse;
+          playlist = formatPlaylist(p);
         }
-      } catch {}
+      } catch (error) {
+        console.error("Failed to load the current Spotify playlist", error);
+      }
     }
   }
 
@@ -149,21 +213,19 @@ export async function getSpotifyStatus(): Promise<SpotifyStatus> {
 export async function getSpotifyPlaylist(
   _: unknown,
   args: QuerySpotifyPlaylistArgs,
-): Promise<SpotifyPlaylist | null> {
-  const { access_token } = await getAccessToken();
+): Promise<SpotifyPlaylist> {
+  const access_token = await getAccessToken();
   const playlistResponse = await getPlaylist(access_token, args.id);
 
-  if (playlistResponse.status > 200) {
-    return null;
+  if (!playlistResponse.ok) {
+    const message =
+      (await getSpotifyError(playlistResponse)) ?? "Unknown upstream error";
+    throw new Error(
+      `Spotify playlist request failed (${playlistResponse.status}): ${message}`,
+    );
   }
 
-  const playlist = await playlistResponse.json();
-
-  return {
-    name: playlist.name,
-    coverUrl: proxiedImageUrl(playlist.images[0]?.url),
-    trackCount: playlist.tracks.total,
-    followerCount: playlist.followers.total,
-    spotifyUrl: playlist.external_urls.spotify,
-  };
+  const playlist =
+    (await playlistResponse.json()) as SpotifyPlaylistResponse;
+  return formatPlaylist(playlist);
 }
