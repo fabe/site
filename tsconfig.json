@@ -28,6 +28,7 @@
     "graphql/**/*.tsx",
     "lib/**/*.ts",
     "lib/**/*.tsx",
+    "scripts/**/*.ts",
     "constants.ts"
   ],
   "exclude": ["node_modules"]

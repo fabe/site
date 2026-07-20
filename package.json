@@ -12,6 +12,7 @@
     "knip": "knip",
     "photos:migrate-cloudinary": "tsx scripts/migratePhotosToCloudinary.ts",
     "photos:migrate-cloudinary:dry": "tsx scripts/migratePhotosToCloudinary.ts --dry-run",
+    "spotify:reauthorize": "tsx scripts/reauthorizeSpotify.ts",
     "generate": "graphql-codegen --config codegen.yml",
     "generate:watch": "graphql-codegen --watch 'graphql/**/*.ts'",
     "format": "prettier --write ."

@@ -1,0 +1,84 @@
+name: Spotify reauthorization reminder
+
+on:
+  schedule:
+    - cron: "0 9 1 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create reauthorization issue when due
+        uses: actions/github-script@v8
+        env:
+          AUTHORIZED_AT: ${{ vars.SPOTIFY_AUTHORIZED_AT }}
+        with:
+          script: |
+            const title = "Reauthorize Spotify access";
+            const authorizedAt = process.env.AUTHORIZED_AT;
+            const authorizedDate = new Date(`${authorizedAt}T00:00:00Z`);
+            const hasValidDate =
+              Boolean(authorizedAt) && !Number.isNaN(authorizedDate.getTime());
+            let deadline;
+
+            if (hasValidDate) {
+              const reminderDate = new Date(authorizedDate);
+              reminderDate.setUTCDate(reminderDate.getUTCDate() + 150);
+              const expirationDate = new Date(authorizedDate);
+              expirationDate.setUTCDate(expirationDate.getUTCDate() + 180);
+              deadline = expirationDate.toISOString().slice(0, 10);
+
+              if (Date.now() < reminderDate.getTime()) {
+                core.info(
+                  `Spotify reauthorization is not due until ${reminderDate
+                    .toISOString()
+                    .slice(0, 10)}.`,
+                );
+                return;
+              }
+            } else {
+              core.warning(
+                "SPOTIFY_AUTHORIZED_AT is missing or invalid; creating a reminder now.",
+              );
+            }
+
+            const openIssues = await github.paginate(
+              github.rest.issues.listForRepo,
+              {
+                ...context.repo,
+                state: "open",
+                per_page: 100,
+              },
+            );
+            if (openIssues.some((issue) => issue.title === title)) {
+              core.info("The Spotify reauthorization issue is already open.");
+              return;
+            }
+
+            const expiryMessage = deadline
+              ? `Spotify's refresh token expires on **${deadline}**.`
+              : "The Spotify authorization date is unknown, so its refresh token may be near expiry.";
+            await github.rest.issues.create({
+              ...context.repo,
+              title,
+              assignees: [context.repo.owner],
+              body: [
+                expiryMessage,
+                "",
+                "Reauthorize it locally before that date:",
+                "",
+                "```bash",
+                "git switch main",
+                "git pull",
+                "pnpm install",
+                "pnpm spotify:reauthorize",
+                "```",
+                "",
+                "The command opens Spotify in your browser, validates the new token, updates Vercel, redeploys production, verifies the site, updates the reminder date, and closes this issue.",
+              ].join("\n"),
+            });
