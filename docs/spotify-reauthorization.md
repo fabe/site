@@ -1,6 +1,6 @@
 # Spotify reauthorization
 
-Spotify refresh tokens expire 180 days after authorization. A monthly GitHub
+Spotify refresh tokens expire 180 days after authorization. A weekly GitHub
 Actions workflow creates an assigned reminder issue after 150 days.
 
 Reauthorize the production integration from a linked local checkout:
