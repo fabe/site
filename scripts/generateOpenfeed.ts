@@ -1,36 +1,22 @@
 #!/usr/bin/env tsx
 import { mkdir, writeFile } from "node:fs/promises";
 import { loadEnvFile } from "node:process";
-import exifr from "exifr";
 
 const baseUrl = "https://fabianschultz.com";
 const photoFeedSlug = "feed";
 const siteSettingsId = "4VjpvaxnxzRE0XPfQjwHQK";
 const outputDirectory = new URL("../public/photo", import.meta.url);
 const outputPath = new URL("./feed.json", outputDirectory);
-const exifFields = [
-  "Make",
-  "Model",
-  "LensModel",
-  "ExposureTime",
-  "FNumber",
-  "ISO",
-  "ISOSpeedRatings",
-  "FocalLength",
-  "DateTimeOriginal",
-] as const;
 
 type Photo = {
   sys: {
     id: string;
-    publishedAt?: string | null;
+    firstPublishedAt?: string | null;
   };
   asset: {
-    sys: {
-      publishedAt?: string | null;
-    };
     url: string;
   };
+  exif?: ParsedExif | null;
 };
 
 type ContentfulResponse = {
@@ -60,7 +46,6 @@ type ParsedExif = {
   ISO?: number;
   ISOSpeedRatings?: number;
   FocalLength?: number;
-  DateTimeOriginal?: Date | string;
 };
 
 type OpenfeedExif = Partial<
@@ -110,59 +95,24 @@ function formatExif(exif: ParsedExif): OpenfeedExif | undefined {
   return entries.length ? Object.fromEntries(entries) : undefined;
 }
 
-function formatPublishedDate(
-  value: ParsedExif["DateTimeOriginal"],
-  fallback: string | null | undefined,
-): string {
-  if (value instanceof Date && !Number.isNaN(value.getTime())) {
-    return value.toISOString();
-  }
-
-  if (typeof value === "string") {
-    const normalized = value.replace(/^(\d{4}):(\d{2}):(\d{2})/, "$1-$2-$3");
-    const date = new Date(normalized);
-    if (!Number.isNaN(date.getTime())) return date.toISOString();
-  }
-
-  if (!fallback) throw new Error("Photo has no EXIF or file publication date");
-  const date = new Date(fallback);
+function formatPublishedDate(value: string | null | undefined): string {
+  if (!value) throw new Error("Photo has no first publication date");
+  const date = new Date(value);
   if (Number.isNaN(date.getTime())) {
-    throw new Error(`Invalid photo publication date: ${fallback}`);
+    throw new Error(`Invalid photo publication date: ${value}`);
   }
   return date.toISOString();
 }
 
-async function readOriginalExif(photo: Photo): Promise<ParsedExif> {
-  const response = await fetch(getOriginalUrl(photo.asset.url));
-  if (!response.ok) {
-    throw new Error(
-      `Failed to fetch original image ${photo.sys.id}: ${response.status}`,
-    );
-  }
-
-  const buffer = Buffer.from(await response.arrayBuffer());
-  return (
-    (await exifr.parse(buffer, {
-      pick: [...exifFields],
-      translateValues: true,
-      reviveValues: true,
-    })) ?? {}
-  );
-}
-
-async function buildItem(photo: Photo) {
-  const exif = await readOriginalExif(photo);
+function buildItem(photo: Photo) {
   const permalink = `${baseUrl}/photos/${photo.sys.id}`;
-  const formattedExif = formatExif(exif);
+  const formattedExif = photo.exif ? formatExif(photo.exif) : undefined;
 
   return {
     id: permalink,
     url: permalink,
     image: getOriginalUrl(photo.asset.url),
-    date_published: formatPublishedDate(
-      exif.DateTimeOriginal,
-      photo.asset.sys.publishedAt ?? photo.sys.publishedAt,
-    ),
+    date_published: formatPublishedDate(photo.sys.firstPublishedAt),
     ...(formattedExif && { _photoring: { exif: formattedExif } }),
   };
 }
@@ -203,14 +153,12 @@ async function fetchPhotoFeed() {
                   items {
                     sys {
                       id
-                      publishedAt
+                      firstPublishedAt
                     }
                     asset {
-                      sys {
-                        publishedAt
-                      }
                       url
                     }
+                    exif
                   }
                 }
               }
@@ -247,15 +195,7 @@ async function main() {
   if (!photos.length) throw new Error("Photo feed not found or empty");
   if (!avatar) throw new Error("Site avatar not found");
 
-  const items = [];
-  const concurrency = 4;
-  for (let index = 0; index < photos.length; index += concurrency) {
-    items.push(
-      ...(await Promise.all(
-        photos.slice(index, index + concurrency).map(buildItem),
-      )),
-    );
-  }
+  const items = photos.map(buildItem);
   items.sort(
     (a, b) =>
       new Date(b.date_published).getTime() -
