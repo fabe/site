@@ -5,8 +5,8 @@ import { loadEnvFile } from "node:process";
 const baseUrl = "https://fabianschultz.com";
 const photoFeedSlug = "feed";
 const siteSettingsId = "4VjpvaxnxzRE0XPfQjwHQK";
-const outputDirectory = new URL("../public/photo", import.meta.url);
-const outputPath = new URL("./feed.json", outputDirectory);
+const outputDirectory = new URL("../public/photo/", import.meta.url);
+const outputPath = new URL("feed.json", outputDirectory);
 
 type Photo = {
   sys: {
