@@ -42,3 +42,6 @@ yarn-error.log*
 # sitemaps
 sitemap.xml
 sitemap-*.xml
+
+# generated feeds
+public/photo/feed.json
