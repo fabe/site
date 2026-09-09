@@ -26,6 +26,26 @@ export const QUERY_PAGE_HOME = gql`
       url
       coverUrl
     }
+    photoSet(slug: "feed") {
+      photos {
+        id
+        description
+        publishedAt
+        exif
+        focalPoint {
+          x
+          y
+        }
+        url
+        width
+        height
+        tags
+        location {
+          lat
+          lon
+        }
+      }
+    }
   }
 `;
 

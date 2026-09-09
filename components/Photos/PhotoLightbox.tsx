@@ -25,7 +25,7 @@ type PhotoLightboxProps = {
   selectedPhotoId?: string;
   photoSet?: PhotoSet;
   thumbnailSrcById?: Record<string, string>;
-  mode: "feed" | "set";
+  mode: "feed" | "home" | "set";
 };
 
 export function PhotoLightbox({
@@ -46,6 +46,25 @@ export function PhotoLightbox({
 
   const navigateToPhoto = useCallback(
     (id?: string) => {
+      if (mode === "home") {
+        navigate({
+          to: "/",
+          search: { id },
+          resetScroll: false,
+          ...(id
+            ? {
+                mask: {
+                  to: "/photos/$slug",
+                  params: { slug: id },
+                  search: { id: undefined },
+                  unmaskOnReload: true,
+                },
+              }
+            : {}),
+        });
+        return;
+      }
+
       if (mode === "feed") {
         navigate({
           to: "/photos",
