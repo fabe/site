@@ -3,11 +3,7 @@ import { gql } from "@apollo/client";
 import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
 import { Place } from "../../types/types.generated";
 import { proxiedImageUrl } from "../../../lib/imageProxy";
-
-const proxyContentfulUrl = (url: string) =>
-  proxiedImageUrl(
-    url.replace("downloads.ctfassets.net", "images.ctfassets.net"),
-  );
+import { isCloudinaryImageUrl } from "../../../lib/photoImageLoader";
 
 import {
   Photo,
@@ -26,12 +22,6 @@ import {
 } from "../../types/types.generated";
 
 const SITE_SETTINGS_ENTRY_ID = "4VjpvaxnxzRE0XPfQjwHQK";
-
-type ContentfulAsset = {
-  url: string;
-  width: number;
-  height: number;
-};
 
 type CloudinaryAsset = {
   secure_url?: string;
@@ -55,7 +45,6 @@ type ContentfulPhoto = {
   description?: string | null;
   focalPoint?: ContentfulFocalPoint | null;
   cloudinaryImage?: CloudinaryAsset[] | CloudinaryAsset | null;
-  asset: ContentfulAsset;
   exif?: EXIF | null;
   tags?: string[] | null;
   location?: Place["location"] | null;
@@ -66,8 +55,8 @@ type ContentfulPhotoSet = {
   title: string;
   slug: string;
   description?: string | null;
-  featuredPhoto: ContentfulPhoto;
-  photosCollection?: { items: Array<{ sys: { id: string } }> };
+  featuredPhoto?: ContentfulPhoto | null;
+  photosCollection?: { items: ContentfulPhoto[] };
 };
 
 function getCloudinaryAsset(
@@ -77,24 +66,26 @@ function getCloudinaryAsset(
   return cloudinaryImage ?? null;
 }
 
-function getPhotoImageUrl(photo: ContentfulPhoto): string {
+function toPhoto(photo: ContentfulPhoto): Photo | null {
   const cloudinaryAsset = getCloudinaryAsset(photo.cloudinaryImage);
-  const url =
-    cloudinaryAsset?.original_secure_url ??
-    cloudinaryAsset?.original_url ??
-    cloudinaryAsset?.secure_url ??
-    cloudinaryAsset?.url;
+  const url = cloudinaryAsset?.secure_url ?? cloudinaryAsset?.url;
+  const width = cloudinaryAsset?.width;
+  const height = cloudinaryAsset?.height;
 
-  if (url) return url.replace(/^http:/, "https:");
-  return proxyContentfulUrl(photo.asset.url);
-}
+  if (!url || !width || !height || !isCloudinaryImageUrl(url)) return null;
 
-function getPhotoWidth(photo: ContentfulPhoto): number {
-  return getCloudinaryAsset(photo.cloudinaryImage)?.width ?? photo.asset.width;
-}
-
-function getPhotoHeight(photo: ContentfulPhoto): number {
-  return getCloudinaryAsset(photo.cloudinaryImage)?.height ?? photo.asset.height;
+  return {
+    id: photo.sys.id,
+    description: photo.description,
+    publishedAt: photo.sys.publishedAt,
+    focalPoint: getPhotoFocalPoint(photo),
+    exif: photo.exif,
+    height,
+    location: photo.location,
+    url: url.replace(/^http:/, "https:"),
+    tags: photo.tags,
+    width,
+  };
 }
 
 function getPhotoFocalPoint(photo: ContentfulPhoto): Photo["focalPoint"] {
@@ -290,11 +281,6 @@ export async function getPhoto(
           description
           focalPoint
           cloudinaryImage
-          asset {
-            url
-            width
-            height
-          }
           exif
           tags
         }
@@ -309,20 +295,8 @@ export async function getPhoto(
     return null;
   }
 
-  const photo = response.data.photo;
-
-  return {
-    id: photo.sys.id,
-    description: photo.description,
-    publishedAt: photo.sys.publishedAt,
-    focalPoint: getPhotoFocalPoint(photo),
-    exif: photo.exif,
-    height: getPhotoHeight(photo),
-    location: photo.location,
-    url: getPhotoImageUrl(photo),
-    tags: photo.tags,
-    width: getPhotoWidth(photo),
-  };
+  const photo = response.data.photo as ContentfulPhoto | null;
+  return photo ? toPhoto(photo) : null;
 }
 
 export async function getPhotos(
@@ -345,11 +319,6 @@ export async function getPhotos(
             description
             focalPoint
             cloudinaryImage
-            asset {
-              url
-              width
-              height
-            }
             exif
             tags
           }
@@ -365,18 +334,9 @@ export async function getPhotos(
     return [];
   }
 
-  return response.data.photoCollection.items.map((photo: ContentfulPhoto) => ({
-    id: photo.sys.id,
-    description: photo.description,
-    publishedAt: photo.sys.publishedAt,
-    focalPoint: getPhotoFocalPoint(photo),
-    exif: photo.exif,
-    height: getPhotoHeight(photo),
-    location: photo.location,
-    url: getPhotoImageUrl(photo),
-    tags: photo.tags,
-    width: getPhotoWidth(photo),
-  }));
+  return response.data.photoCollection.items
+    .map((photo: ContentfulPhoto) => toPhoto(photo))
+    .filter((photo: Photo | null): photo is Photo => Boolean(photo));
 }
 
 export async function getSiteSettings(): Promise<SiteSettings | null> {
@@ -458,14 +418,13 @@ export async function getPhotoSet(
             slug
             description
             featuredPhoto {
+              sys {
+                id
+                publishedAt
+              }
               description
               focalPoint
               cloudinaryImage
-              asset {
-                url
-                width
-                height
-              }
             }
             photosCollection {
               items {
@@ -480,11 +439,6 @@ export async function getPhotoSet(
                 description
                 focalPoint
                 cloudinaryImage
-                asset {
-                  url
-                  width
-                  height
-                }
                 exif
                 tags
               }
@@ -502,7 +456,13 @@ export async function getPhotoSet(
     return null;
   }
 
-  const photoSet = response.data.photoSetCollection.items[0];
+  const photoSet = response.data.photoSetCollection
+    .items[0] as ContentfulPhotoSet;
+  const featuredPhoto = photoSet.featuredPhoto
+    ? toPhoto(photoSet.featuredPhoto)
+    : null;
+
+  if (!featuredPhoto) return null;
 
   return {
     id: photoSet.sys.id,
@@ -510,27 +470,10 @@ export async function getPhotoSet(
     title: photoSet.title,
     slug: photoSet.slug,
     description: photoSet.description,
-    featuredPhoto: photoSet.featuredPhoto
-      ? {
-          ...photoSet.featuredPhoto,
-          url: getPhotoImageUrl(photoSet.featuredPhoto),
-          focalPoint: getPhotoFocalPoint(photoSet.featuredPhoto),
-          width: getPhotoWidth(photoSet.featuredPhoto),
-          height: getPhotoHeight(photoSet.featuredPhoto),
-        }
-      : null,
-    photos: photoSet.photosCollection.items.map((photo: ContentfulPhoto) => ({
-      id: photo.sys.id,
-      description: photo.description,
-      publishedAt: photo.sys.publishedAt,
-      url: getPhotoImageUrl(photo),
-      focalPoint: getPhotoFocalPoint(photo),
-      width: getPhotoWidth(photo),
-      height: getPhotoHeight(photo),
-      exif: photo.exif,
-      tags: photo.tags,
-      location: photo.location,
-    })),
+    featuredPhoto,
+    photos: (photoSet.photosCollection?.items ?? [])
+      .map(toPhoto)
+      .filter((photo): photo is Photo => Boolean(photo)),
   };
 }
 
@@ -555,19 +498,28 @@ export async function getPhotoSets(
             slug
             description
             featuredPhoto {
+              sys {
+                id
+                publishedAt
+              }
               focalPoint
               cloudinaryImage
-              asset {
-                url
-                width
-                height
-              }
             }
             photosCollection {
               items {
                 sys {
                   id
+                  publishedAt
                 }
+                location {
+                  lat
+                  lon
+                }
+                description
+                focalPoint
+                cloudinaryImage
+                exif
+                tags
               }
             }
           }
@@ -583,22 +535,27 @@ export async function getPhotoSets(
     return [];
   }
 
-  return response.data.photoSetCollection.items.map(
-    (photoSet: ContentfulPhotoSet) => ({
-      id: photoSet.sys.id,
-      updatedAt: photoSet.sys.publishedAt,
-      title: photoSet.title,
-      slug: photoSet.slug,
-      description: photoSet.description,
-      photos: photoSet.photosCollection?.items?.map((photo) => ({
-        id: photo.sys.id,
-      })),
-      featuredPhoto: {
-        url: getPhotoImageUrl(photoSet.featuredPhoto),
-        focalPoint: getPhotoFocalPoint(photoSet.featuredPhoto),
-        width: getPhotoWidth(photoSet.featuredPhoto),
-        height: getPhotoHeight(photoSet.featuredPhoto),
-      },
-    }),
-  );
+  return response.data.photoSetCollection.items
+    .map((photoSet: ContentfulPhotoSet) => {
+      const featuredPhoto = photoSet.featuredPhoto
+        ? toPhoto(photoSet.featuredPhoto)
+        : null;
+
+      if (!featuredPhoto) return null;
+
+      return {
+        id: photoSet.sys.id,
+        updatedAt: photoSet.sys.publishedAt,
+        title: photoSet.title,
+        slug: photoSet.slug,
+        description: photoSet.description,
+        photos: (photoSet.photosCollection?.items ?? [])
+          .map(toPhoto)
+          .filter((photo: Photo | null): photo is Photo => Boolean(photo)),
+        featuredPhoto,
+      };
+    })
+    .filter((photoSet: PhotoSet | null): photoSet is PhotoSet =>
+      Boolean(photoSet),
+    );
 }

@@ -1,5 +1,3 @@
-import { withImageParams } from "./imageProxy";
-
 interface PhotoImageLoaderProps {
   src: string;
   width: number;
@@ -40,7 +38,16 @@ function cloudinaryLoader(
 }
 
 export function isCloudinaryImageUrl(src: string): boolean {
-  return src.includes("res.cloudinary.com") && src.includes("/image/upload/");
+  try {
+    const url = new URL(src);
+    return (
+      url.protocol === "https:" &&
+      url.hostname === "res.cloudinary.com" &&
+      url.pathname.includes("/image/upload/")
+    );
+  } catch {
+    return false;
+  }
 }
 
 export function photoImageLoader({
@@ -51,27 +58,9 @@ export function photoImageLoader({
 }: PhotoImageLoaderProps): string {
   if (!src) return "";
 
-  if (isCloudinaryImageUrl(src)) {
-    return cloudinaryLoader(src, width, quality, custom);
-  }
+  if (!isCloudinaryImageUrl(src)) return "";
 
-  const params: Record<string, string | number> = {
-    fm: "webp",
-    w: Math.floor(width),
-  };
-
-  if (quality) {
-    params.q = quality;
-  }
-
-  if (custom) {
-    for (const c of custom) {
-      const [k, v] = c.split("=");
-      if (k && v) params[k] = v;
-    }
-  }
-
-  return withImageParams(src, params);
+  return cloudinaryLoader(src, width, quality, custom);
 }
 
 export function photoImageSrcSet({
