@@ -46,7 +46,7 @@
     "recharts": "^3.8.1",
     "rss-parser": "^3.13.0",
     "satori": "^0.26.0",
-    "sharp": "^0.34.5",
+    "sharp": "^0.35.0",
     "tailwind-merge": "^3.5.0",
     "web-haptics": "^0.0.6"
   },
