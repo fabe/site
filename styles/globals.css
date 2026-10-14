@@ -3,19 +3,21 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "Inter";
+  font-family: "Mona UI";
   font-style: normal;
-  font-weight: 100 900;
+  font-weight: 200 900;
+  font-stretch: 75% 125%;
   font-display: swap;
-  src: url("/inter.roman.var.woff2") format("woff2");
+  src: url("/MonaUI-VF.woff2") format("woff2");
 }
 
 @font-face {
-  font-family: "Inter";
+  font-family: "Mona UI";
   font-style: italic;
-  font-weight: 100 900;
+  font-weight: 200 900;
+  font-stretch: 75% 125%;
   font-display: swap;
-  src: url("/inter.italic.var.woff2") format("woff2");
+  src: url("/MonaUI-VF.woff2") format("woff2");
 }
 
 @font-face {
@@ -27,7 +29,7 @@
 }
 
 :root {
-  --sans-font: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --sans-font: "Mona UI", ui-sans-serif, system-ui, -apple-system, sans-serif;
   --color-canvas: 249 250 251;
   --color-fg: 38 38 38;
   --color-heading: 38 38 38;
@@ -64,9 +66,7 @@ body {
   text-rendering: optimizeLegibility;
   font-feature-settings:
     "kern" on,
-    "liga" on,
-    "cv05" on,
-    "cv10" on;
+    "liga" on;
   font-variation-settings: "opsz" 15;
 }
 

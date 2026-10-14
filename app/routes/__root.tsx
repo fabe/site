@@ -72,7 +72,7 @@ export const Route = createRootRoute({
       { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
       {
         rel: "preload",
-        href: "/inter.roman.var.woff2",
+        href: "/MonaUI-VF.woff2",
         as: "font",
         type: "font/woff2",
         crossOrigin: "anonymous",
