@@ -20,7 +20,7 @@ export function Tooltip({ open, children }: TooltipProps) {
       >
         <div
           role="tooltip"
-          className="whitespace-nowrap rounded bg-neutral-900 px-1.5 py-0.5 text-center text-xs font-medium text-silver font-ui-xs dark:bg-neutral-800/60 backdrop-blur-sm shadow-fancy dark:shadow-fancyDark"
+          className="whitespace-nowrap rounded bg-neutral-900 px-1.5 py-0.5 text-center text-xs font-medium text-silver dark:bg-neutral-800/60 backdrop-blur-sm shadow-fancy dark:shadow-fancyDark"
         >
           {children}
         </div>

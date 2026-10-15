@@ -26,16 +26,15 @@ function ColophonComponent() {
         </dt>
         <dd className="list-content">
           <p>
-            The site features the{" "}
-            <a className="link" target="_blank" href="https://rsms.me/inter/">
-              Inter
+            The site is set in FS UI, a custom version of GitHub&apos;s{" "}
+            <a
+              className="link"
+              target="_blank"
+              href="https://github.com/github/mona-sans"
+            >
+              Mona Sans
             </a>{" "}
-            typeface, a variable font family carefully crafted & designed for
-            computer screens, designed by{" "}
-            <a className="link" target="_blank" href="https://rsms.me">
-              Rasmus Andersson
-            </a>
-            . I like the typeface.
+            tuned for quieter, more legible text at small interface sizes.
           </p>
         </dd>
       </dl>

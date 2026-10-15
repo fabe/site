@@ -141,7 +141,7 @@ function LoginComponent() {
           </OTPField.Root>
         </div>
 
-        <p className="max-w-xs pt-6 text-center text-xs text-muted font-ui-xs sm:pt-8">
+        <p className="max-w-xs pt-6 text-center text-xs text-muted sm:pt-8">
           My work is currently locked behind a secret code. This may or may not
           change in the future.
         </p>

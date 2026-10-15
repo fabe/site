@@ -35,7 +35,7 @@ export default function Archipelago() {
   const router = useRouter();
   const currentRoute = location.pathname;
   const isHome = currentRoute === "/";
-  const isTransitioning = useRouterState({ select: (s) => s.isTransitioning });
+  const isTransitioning = useRouterState({ select: (s) => s.status === "pending" });
   const [showHomeButton, setShowHomeButton] = useState(
     !isHome && !isTransitioning,
   );

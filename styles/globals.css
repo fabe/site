@@ -3,19 +3,11 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "Inter";
+  font-family: "FS UI";
   font-style: normal;
-  font-weight: 100 900;
+  font-weight: 200 900;
   font-display: swap;
-  src: url("/inter.roman.var.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Inter";
-  font-style: italic;
-  font-weight: 100 900;
-  font-display: swap;
-  src: url("/inter.italic.var.woff2") format("woff2");
+  src: url("/FSUI-VF.woff2") format("woff2");
 }
 
 @font-face {
@@ -27,7 +19,7 @@
 }
 
 :root {
-  --sans-font: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --sans-font: "FS UI", ui-sans-serif, system-ui, -apple-system, sans-serif;
   --color-canvas: 249 250 251;
   --color-fg: 38 38 38;
   --color-heading: 38 38 38;
@@ -65,9 +57,7 @@ body {
   font-feature-settings:
     "kern" on,
     "liga" on,
-    "cv05" on,
-    "cv10" on;
-  font-variation-settings: "opsz" 15;
+    "dlig" on;
 }
 
 body,
@@ -184,7 +174,7 @@ blockquote span::after {
 
 [cmdk-empty] {
   @apply px-3 py-3;
-  @apply text-sm font-medium text-muted font-ui-xs;
+  @apply text-sm font-medium text-muted;
 }
 
 [cmdk-separator] {
@@ -194,7 +184,7 @@ blockquote span::after {
 
 [cmdk-group-heading] {
   @apply px-3 pb-2 pt-4;
-  @apply text-xs font-medium text-muted font-ui-xs;
+  @apply text-xs font-medium text-muted;
 }
 
 [cmdk-loading] {
@@ -335,17 +325,15 @@ blockquote span::after {
     @apply block;
     @apply text-sm;
     @apply text-muted;
-    @apply font-ui-sm;
     @apply slashed-zero tabular-nums;
   }
 
   .time-lg {
     @apply text-base;
-    @apply font-ui-base;
   }
 
   .badge {
-    @apply inline-flex items-center gap-1 rounded-xl bg-surface-raised px-1.5 py-0.5 text-xs font-medium text-muted font-ui-xs;
+    @apply inline-flex items-center gap-1 rounded-xl bg-surface-raised px-1.5 py-0.5 text-xs font-medium text-muted;
     @apply slashed-zero;
     @apply decoration-neutral-600;
   }
@@ -411,46 +399,24 @@ blockquote span::after {
     @apply backdrop-blur-xl backdrop-saturate-200;
   }
 
-  .font-ui-xs {
-    font-variation-settings: "opsz" 12;
-  }
-
-  .font-ui-sm {
-    font-variation-settings: "opsz" 14;
-  }
-
-  .font-ui-base {
-    font-variation-settings: "opsz" 15;
-  }
-
   .font-ui-title {
-    font-variation-settings:
-      "opsz" 32,
-      "wght" 500;
+    font-variation-settings: "wght" 500;
   }
 
   .font-ui-display {
-    font-variation-settings:
-      "opsz" 48,
-      "wght" 550;
+    font-variation-settings: "wght" 550;
   }
 
   .font-ui-heading {
-    font-variation-settings:
-      "opsz" 36,
-      "wght" 500;
+    font-variation-settings: "wght" 500;
   }
 
   .font-ui-label {
-    font-variation-settings:
-      "opsz" 14,
-      "wght" 550;
+    font-variation-settings: "wght" 550;
   }
 
   .font-ui-label-medium {
-    font-variation-settings:
-      "opsz" 14,
-      "wght" 500;
+    font-variation-settings: "wght" 500;
   }
 
   .font-ui-strong {
@@ -458,9 +424,7 @@ blockquote span::after {
   }
 
   .font-ui-input {
-    font-variation-settings:
-      "opsz" 24,
-      "wght" 650;
+    font-variation-settings: "wght" 650;
   }
 
   .font-ui-muted-control {
@@ -468,15 +432,11 @@ blockquote span::after {
   }
 
   .font-ui-popup {
-    font-variation-settings:
-      "opsz" 15,
-      "wght" 500;
+    font-variation-settings: "wght" 500;
   }
 
   .font-ui-note-strong {
-    font-variation-settings:
-      "opsz" 7,
-      "wght" 500;
+    font-variation-settings: "wght" 500;
   }
 
   .link-external {
@@ -498,7 +458,6 @@ blockquote span::after {
     @apply text-muted;
     @apply decoration-neutral-300 dark:decoration-neutral-700;
     @apply hover:decoration-neutral-400 dark:hover:decoration-neutral-600;
-    @apply font-ui-xs;
   }
 
   .link-fade {
@@ -509,7 +468,7 @@ blockquote span::after {
   }
 
   .text-meta {
-    @apply text-sm text-muted font-ui-sm;
+    @apply text-sm text-muted;
   }
 
   .text-shadow {

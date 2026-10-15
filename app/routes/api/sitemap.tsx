@@ -12,7 +12,7 @@ const staticPaths = [
   "/globe",
 ];
 
-export const Route = createFileRoute("/api/sitemap" as any)({
+export const Route = createFileRoute("/api/sitemap")({
   server: {
     handlers: {
       GET: async () => {
