@@ -208,6 +208,7 @@ function PhotoSetComponent() {
             <div className="flex flex-row items-center gap-2">
               <Link
                 to="/"
+                search={{ id: undefined }}
                 className="flex flex-row items-center gap-2 font-medium"
               >
                 <div>

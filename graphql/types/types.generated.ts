@@ -281,7 +281,7 @@ export type SiteSettingsSharedFragment = { siteTitle: string, metaDescription: s
 export type PageHomeQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type PageHomeQueryQuery = { siteSettings: { intro: string, siteTitle: string, metaDescription: string }, posts: Array<{ publishedDate: string, title: string, slug: string } | null>, books: Array<{ title: string, author: string, url: string, coverUrl: string | null } | null> };
+export type PageHomeQueryQuery = { siteSettings: { intro: string, siteTitle: string, metaDescription: string }, posts: Array<{ publishedDate: string, title: string, slug: string } | null>, books: Array<{ title: string, author: string, url: string, coverUrl: string | null } | null>, photoSet: { photos: Array<{ id: string, description: string | null, publishedAt: string | null, exif: any, url: string, width: number, height: number, tags: Array<string | null> | null, focalPoint: { x: number, y: number } | null, location: { lat: number | null, lon: number | null } | null } | null> | null } | null };
 
 export type MusicStatusQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -363,6 +363,26 @@ export const PageHomeQueryDocument = gql`
     author
     url
     coverUrl
+  }
+  photoSet(slug: "feed") {
+    photos {
+      id
+      description
+      publishedAt
+      exif
+      focalPoint {
+        x
+        y
+      }
+      url
+      width
+      height
+      tags
+      location {
+        lat
+        lon
+      }
+    }
   }
 }
     ${SiteSettingsSharedFragmentDoc}`;

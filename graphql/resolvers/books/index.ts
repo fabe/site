@@ -10,8 +10,8 @@ import {
   CollectionType,
   QueryBooksArgs,
 } from "../../types/types.generated";
-import Parser from "rss-parser";
 import { proxiedImageUrl } from "../../../lib/imageProxy";
+import { getReadingFromGoodreads } from "./goodreads";
 
 const LITERAL_BASE_URL = "https://api.literal.club/";
 
@@ -22,14 +22,6 @@ type LiteralBook = {
   cover?: string | null;
   authors: Array<{ name: string }>;
   gradientColors?: Array<string | null> | null;
-};
-
-type GoodreadsItem = {
-  title?: string;
-  authorName?: string;
-  bookId?: string;
-  bookLargeImageUrl?: string;
-  pubDate?: string;
 };
 
 // No need for auth at the moment
@@ -175,70 +167,4 @@ async function getReadingFromLiteral(): Promise<Book[]> {
   }));
 
   return books;
-}
-
-/**
- * Cleans Goodreads book titles by removing common patterns:
- * - Series info in parentheses: "(Series Name #1)"
- * - Subtitles after colons: "Title: Subtitle"
- * - Extra whitespace
- */
-function cleanGoodreadsTitle(title: string): string {
-  if (!title) return title;
-
-  let cleaned = title;
-
-  // Remove series info in parentheses at the end (e.g., "(Harry Potter #1)")
-  cleaned = cleaned.replace(/\s*\([^)]*#\d+[^)]*\)$/, "");
-
-  // Remove any remaining parenthetical info at the end
-  cleaned = cleaned.replace(/\s*\([^)]*\)$/, "");
-
-  // Remove subtitle (everything after colon)
-  cleaned = cleaned.split(":")[0];
-
-  // Remove extra whitespace
-  cleaned = cleaned.trim();
-
-  return cleaned;
-}
-
-async function getReadingFromGoodreads(): Promise<Book[]> {
-  const parser = new Parser({
-    customFields: {
-      item: [
-        ["book_id", "bookId"],
-        ["book_large_image_url", "bookLargeImageUrl"],
-        ["author_name", "authorName"],
-      ],
-    },
-  });
-
-  const goodreadsUserId = process.env.GOODREADS_USER_ID;
-  if (!goodreadsUserId) {
-    console.error("GOODREADS_USER_ID environment variable not set");
-    return [];
-  }
-
-  const rssUrl = `https://www.goodreads.com/review/list_rss/${goodreadsUserId}?shelf=currently-reading`;
-
-  try {
-    const feed = await parser.parseURL(rssUrl);
-
-    if (!feed.items || feed.items.length === 0) return [];
-
-    const books = feed.items.map((item: GoodreadsItem) => ({
-      title: cleanGoodreadsTitle(item.title || ""),
-      author: item.authorName || "",
-      url: `https://www.goodreads.com/book/show/${item.bookId}`,
-      coverUrl: proxiedImageUrl(item.bookLargeImageUrl || ""),
-      readingDate: item.pubDate || null,
-      fallbackColors: null,
-    }));
-
-    return books;
-  } catch (error) {
-    console.error("Error fetching Goodreads RSS feed:", error);
-    return [];
-  }
 }

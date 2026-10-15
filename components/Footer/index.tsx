@@ -8,14 +8,23 @@ export default function Footer() {
         <div className="box-border flex h-[5.75rem] w-full items-end justify-between border-t border-solid border-line/10 px-6 py-4 dark:border-line/5 sm:h-[4.5rem] sm:py-6">
           <div className="flex w-full flex-col sm:flex-row sm:justify-between items-end sm:items-start gap-3 sm:gap-0">
             <ul className="flex gap-4 sm:mb-0">
-              <li>
-                <Link to="/" className="link-fade">
+              <li className="hidden sm:list-item">
+                <Link to="/" search={{ id: undefined }} className="link-fade">
                   Home
                 </Link>
               </li>
               <li>
                 <Link to="/posts" className="link-fade">
                   Posts
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/photos"
+                  search={{ id: undefined }}
+                  className="link-fade"
+                >
+                  Photos
                 </Link>
               </li>
               <li>

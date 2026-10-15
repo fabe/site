@@ -206,6 +206,7 @@ export default function Archipelago() {
                 <Tooltip open={tooltip === TooltipState.HOME}>Home</Tooltip>
                 <Link
                   to="/"
+                  search={{ id: undefined }}
                   className="nav-island"
                   onClick={() => haptic("light")}
                 >

@@ -84,6 +84,12 @@ export const Route = createRootRoute({
         title: "RSS feed",
         href: `${baseUrl}/posts/rss`,
       },
+      {
+        rel: "alternate",
+        type: "application/feed+json",
+        title: "Photo feed",
+        href: `${baseUrl}/photo/feed.json`,
+      },
     ],
     scripts: [
       {
