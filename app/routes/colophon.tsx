@@ -26,7 +26,15 @@ function ColophonComponent() {
         </dt>
         <dd className="list-content">
           <p>
-            The site is set in FS UI, a custom version of GitHub&apos;s{" "}
+            The site is set in{" "}
+            <a
+              className="link"
+              target="_blank"
+              href="https://github.com/fabe/FS-UI"
+            >
+              FS UI
+            </a>
+            , a custom derivative of GitHub&apos;s{" "}
             <a
               className="link"
               target="_blank"
@@ -34,7 +42,13 @@ function ColophonComponent() {
             >
               Mona Sans
             </a>
-            .
+            , tuned for small text.
+          </p>
+          <p>
+            It keeps Mona&apos;s character, with larger lowercase letters,
+            reinforced thin joins, and clearer separation between weights.
+            Simpler letterforms and more open spacing at small optical sizes give
+            it a quieter feel for interfaces.
           </p>
         </dd>
       </dl>
