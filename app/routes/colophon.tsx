@@ -26,7 +26,7 @@ function ColophonComponent() {
         </dt>
         <dd className="list-content">
           <p>
-            The site is set in Mona UI, a custom version of GitHub&apos;s{" "}
+            The site is set in FS UI, a custom version of GitHub&apos;s{" "}
             <a
               className="link"
               target="_blank"

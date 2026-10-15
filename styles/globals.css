@@ -3,21 +3,11 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "Mona UI";
+  font-family: "FS UI";
   font-style: normal;
   font-weight: 200 900;
-  font-stretch: 75% 125%;
   font-display: swap;
-  src: url("/MonaUI-VF.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Mona UI";
-  font-style: italic;
-  font-weight: 200 900;
-  font-stretch: 75% 125%;
-  font-display: swap;
-  src: url("/MonaUI-VF.woff2") format("woff2");
+  src: url("/FSUI-VF.woff2") format("woff2");
 }
 
 @font-face {
@@ -29,7 +19,7 @@
 }
 
 :root {
-  --sans-font: "Mona UI", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --sans-font: "FS UI", ui-sans-serif, system-ui, -apple-system, sans-serif;
   --color-canvas: 249 250 251;
   --color-fg: 38 38 38;
   --color-heading: 38 38 38;
