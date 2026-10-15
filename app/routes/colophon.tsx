@@ -34,21 +34,15 @@ function ColophonComponent() {
             >
               FS UI
             </a>
-            , a custom derivative of GitHub&apos;s{" "}
+            , a custom version of GitHub&apos;s{" "}
             <a
               className="link"
               target="_blank"
               href="https://github.com/github/mona-sans"
             >
               Mona Sans
-            </a>
-            , tuned for small text.
-          </p>
-          <p>
-            It keeps Mona&apos;s character, with larger lowercase letters,
-            reinforced thin joins, and clearer separation between weights.
-            Simpler letterforms and more open spacing at small optical sizes give
-            it a quieter feel for interfaces.
+            </a>{" "}
+            with simpler letterforms and more open spacing for small text.
           </p>
         </dd>
       </dl>
