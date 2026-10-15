@@ -34,8 +34,7 @@ function ColophonComponent() {
             >
               Mona Sans
             </a>{" "}
-            that keeps its character while making it quieter and more legible at
-            small interface sizes.
+            tuned for quieter, more legible text at small interface sizes.
           </p>
         </dd>
       </dl>
