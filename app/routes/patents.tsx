@@ -8,10 +8,9 @@ import { baseUrl } from "./__root";
 const PATENTS = [
   { id: "US11809918B1", title: "App actions in a content management system" },
   {
-    id: "Pending",
+    id: "US12664357B1",
     title:
-      "Trakvopniz ulfretapoz zqplxermt jskdqpwz in vrmpwglux qmalpwnzox in a frlqvext znuxqetvnt jxqplor",
-    pending: true,
+      "Incorporating artificial intelligence actions in workflows implemented in a content management system",
   },
 ];
 
@@ -39,20 +38,11 @@ function PatentsComponent() {
             </dt>
             <dd className="list-content border-none pb-4 pt-0 sm:pb-0">
               <div>
-                {patent.pending ? (
-                  <div>
-                    <span className="sr-only">Confidential patent title</span>
-                    <span className="blur-sm select-none" aria-hidden="true">
-                      {patent.title}
-                    </span>
-                  </div>
-                ) : (
-                  <LinkExternal
-                    href={`//patents.google.com/patent/${patent.id}`}
-                  >
-                    {patent.title}
-                  </LinkExternal>
-                )}
+                <LinkExternal
+                  href={`https://patents.google.com/patent/${patent.id}`}
+                >
+                  {patent.title}
+                </LinkExternal>
               </div>
             </dd>
           </React.Fragment>
